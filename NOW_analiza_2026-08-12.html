@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOW — ServiceNow | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#052e22 0%,#0f1117 50%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.buy { background:rgba(76,175,80,0.15); border:2px solid var(--buy); color:var(--buy); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.strong-buy { color:var(--strong-buy); } .rating-box .rating-text.neutral { color:var(--neutral); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--strong-buy); } .bear-box ul li::before { color:var(--strong-sell); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .alert-danger { background:rgba(213,0,0,0.10); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(0,200,83,.15); color:#00c853; border:1px solid rgba(0,200,83,.4); }
+  .ck.no  { background:rgba(213,0,0,.13);  color:#ff6b6b; border:1px solid rgba(213,0,0,.35); }
+  .ck.wait{ background:rgba(255,215,64,.13);color:#ffd740; border:1px solid rgba(255,215,64,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#00c853; } .mon-dot.y { background:#ffd740; } .mon-dot.r { background:#ff6d00; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+  .cmp-then { color:var(--text-muted); }
+  .cmp-now { color:var(--accent2); font-weight:700; }
+  .verdict-final.rev { border-left-color:var(--neutral); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: NOW</div>
+    <div class="company-name">ServiceNow, Inc.</div>
+    <div class="company-sub">Platforma workflow dla przedsiębiorstw · AI ACV powyżej $1 mld · RPO $29 mld · Armis w konsolidacji · Santa Clara, Kalifornia</div>
+    <div class="header-meta">
+      <div class="rating-badge buy">📈 KUPNO</div>
+      <span class="meta-tag">Enterprise SaaS</span>
+      <span class="meta-tag">Ofiara „SaaSpocalypse"</span>
+      <span class="meta-tag">Wzrost +24% r/r</span>
+      <span class="meta-tag">Wycena historycznie niska</span>
+      <div class="price-display">
+        <div class="price-main">$126</div>
+        <div class="price-sub">12.08.2026 | 52W: $81,24–$194,73</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">vs 9 czerwca</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (12.08.2026)</div><div class="metric-value">$126</div><div class="metric-detail">-35% od szczytu 52W | +55% od dna $81,24</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$120 mld</div><div class="metric-detail">-45% w skali 52 tygodni</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">$3,99 mld</div><div class="metric-detail">+24% r/r | subskrypcje $3,877 mld (+23%)</div></div>
+    <div class="metric-card"><div class="metric-label">AI ACV</div><div class="metric-value em">ponad $1 mld</div><div class="metric-detail">Pierwszorazowi nabywcy AI +45% r/r</div></div>
+    <div class="metric-card"><div class="metric-label">RPO / cRPO</div><div class="metric-value">$29 / $13,2 mld</div><div class="metric-detail">+21% r/r | cRPO 200 bp powyżej prognozy</div></div>
+    <div class="metric-card"><div class="metric-label">Forward P/E (FY2026)</div><div class="metric-value yellow">~30×</div><div class="metric-detail">Konsensus EPS $4,17 | FY27 spada ku ~23×</div></div>
+    <div class="metric-card"><div class="metric-label">Marża FCF (prognoza FY26)</div><div class="metric-value green">35%</div><div class="metric-detail">Marża operacyjna non-GAAP 31,5%</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus analityków</div><div class="metric-value green">$140–147</div><div class="metric-detail">49 firm: 44 kupuj / 3 trzymaj / 2 sprzedaj</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest ServiceNow?</h3>
+      <p>ServiceNow (NYSE: NOW) dostarcza chmurową platformę do automatyzacji przepływów pracy w dużych organizacjach — od zarządzania incydentami IT, przez procesy kadrowe i obsługę klienta, po bezpieczeństwo. Spółkę założył w 2004 roku Fred Luddy, siedziba mieści się w Santa Clara w Kalifornii, a od 2019 roku kieruje nią Bill McDermott, wcześniej prezes SAP. Debiut na NYSE nastąpił w 2012 roku.</p>
+      <p>To jeden z najwyżej ocenianych operacyjnie biznesów w amerykańskim oprogramowaniu: <strong>wzrost przychodów 24% rok do roku przy marży wolnych przepływów planowanej na 35%</strong> i marży brutto na subskrypcjach 81%. A mimo to kurs jest 35% poniżej rocznego szczytu, a w skali dwunastu miesięcy stracił 45%.</p>
+      <h3>Dlaczego kurs jest tam, gdzie jest — „SaaSpocalypse"</h3>
+      <p>Tego roku nie da się opisać bez jednego wydarzenia. W lutym 2026 rynek oprogramowania przeszedł przecenę, którą media finansowe nazwały <strong>„SaaSpocalypse"</strong>. Bezpośrednim zapalnikiem była premiera platformy Claude Cowork firmy Anthropic, po której inwestorzy zaczęli masowo zadawać pytanie: jeśli agent AI wykonuje pracę pięciu osób, to czy firma nie kupi jednej licencji zamiast pięciu?</p>
+      <p>Uderzenie było gwałtowne. W pierwszej fali z wycen spółek software'owych wyparowało około <strong>285 miliardów dolarów</strong>, a szacunki dla całego kwartału mówiły o skali sięgającej biliona dolarów i więcej. ServiceNow spadł o mniej więcej 40% od początku roku i dotknął dna 52-tygodniowego na poziomie <strong>$81,24</strong>. Mnożnik wyceny zszedł do najniższego poziomu w historii notowań spółki.</p>
+      <div class="alert alert-info"><strong>Kluczowe napięcie tej analizy:</strong> rynek wycenia ServiceNow jako <em>ofiarę</em> agentycznej AI. Dane operacyjne mówią coś odwrotnego — <strong>AI ACV przekroczyło miliard dolarów, a liczba klientów kupujących AI po raz pierwszy wzrosła o ponad 45% rok do roku</strong>. Cała teza inwestycyjna sprowadza się do pytania, która z tych dwóch narracji okaże się prawdziwa.</p></div>
+      <h3>Kluczowe wydarzenia ostatnich miesięcy</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>Luty 2026</td><td><strong>„SaaSpocalypse"</strong> — przecena sektora po premierze Claude Cowork</td><td style="color:var(--strong-sell)">↓↓ Kompresja mnożników</td></tr>
+          <tr><td>22 kwietnia 2026</td><td>Wyniki Q1 — kurs spada o 14%, przychody subskrypcyjne odczuwają skutki wojny z Iranem</td><td style="color:var(--sell)">↓ Zakłócenie geograficzne</td></tr>
+          <tr><td><strong>20 kwietnia 2026</strong></td><td><strong>Zamknięcie przejęcia Armis za $7,75 mld</strong> — największa akwizycja w historii spółki</td><td style="color:var(--neutral)">↔ Wzrost vs marża</td></tr>
+          <tr><td>Maj 2026</td><td>Emisja obligacji $4,0 mld (kupony 4,25%–6,30%) na refinansowanie długu z Armis</td><td style="color:var(--sell)">↓ Koniec ery bez dźwigni</td></tr>
+          <tr><td><strong>22 lipca 2026</strong></td><td><strong>Q2: przychody $3,99 mld (+24%), AI ACV powyżej $1 mld, marża 300 bp powyżej prognozy</strong></td><td style="color:var(--strong-buy)">↑↑ Wyniki lepsze od oczekiwań</td></tr>
+          <tr><td>Lipiec 2026</td><td>Prognoza na II półrocze obniżona o $44,5 mln; marża brutto na subskrypcjach w dół o 50 bp do 81%</td><td style="color:var(--neutral)">↔ Koszt hyperscalerów</td></tr>
+          <tr><td>Sierpień 2026</td><td>Kurs ~$126 — odbicie o 55% od dna, wciąż 35% poniżej szczytu</td><td style="color:var(--neutral)">Odbudowa w toku</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Opis</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ITSM</strong></td><td>Zarządzanie incydentami, zmianami i problemami w IT — historyczny rdzeń</td><td>Lider Gartner MQ, fundament relacji z klientem</td></tr>
+          <tr><td><strong>ITOM / AIOps</strong></td><td>Monitorowanie infrastruktury, automatyczna diagnostyka</td><td>Naturalny upsell do ITSM</td></tr>
+          <tr><td><strong>HR i CSM</strong></td><td>Procesy kadrowe oraz obsługa klienta — wejście na teren Salesforce</td><td>Rozszerzenie rynku adresowalnego</td></tr>
+          <tr><td><strong>Now Assist / agentic AI</strong></td><td>Agenci AI działający na danych klienta wewnątrz platformy</td><td>🔥 AI ACV ponad $1 mld</td></tr>
+          <tr><td><strong>Bezpieczeństwo (z Armis)</strong></td><td>Widoczność i ochrona urządzeń IT, OT i medycznych</td><td>Nowa noga po akwizycji za $7,75 mld</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — dane i osadzenie, nie funkcje</h3>
+      <p>Przewaga ServiceNow nie leży w pojedynczych funkcjach, tylko w <strong>CMDB — bazie wszystkich zasobów, procesów i zależności w organizacji klienta</strong>. Ta baza powstaje latami i jest wprost proporcjonalna do wartości platformy. Konkurent może zbudować lepszy moduł zgłoszeń, ale nie odtworzy mapy tego, jak firma naprawdę działa.</p>
+      <p>To ma bezpośrednie przełożenie na erę AI. Agent bez kontekstu jest chatbotem; agent osadzony w CMDB wie, który system, który właściciel i która procedura odpowiada za dany proces. <strong>Właśnie dlatego argument o „śmierci licencji na stanowisko" niekoniecznie działa przeciwko ServiceNow</strong> — to spółka posiadająca dane, na których agenci muszą działać.</p>
+      <div class="alert alert-warn"><strong>Kontrargument, którego nie należy lekceważyć:</strong> ta sama warstwa danych może zostać udostępniona przez API konkurencyjnym agentom. Jeśli wartość przeniesie się z interfejsu do modelu, ServiceNow ryzykuje pozycję dostawcy zaplecza — z niższymi marżami i słabszą pozycją cenową.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Rozszerzony rynek adresowalny:</strong> spółka podaje wartość rzędu $600 mld po wejściu w CSM, bezpieczeństwo i rozwiązania branżowe — liczbę należy traktować jako ambicję, nie fakt</li>
+        <li><strong>Przełom w modelu rozliczeń:</strong> po „SaaSpocalypse" branża odchodzi od licencji na stanowisko ku rozliczeniom za jednostki pracy wykonanej przez agentów — kto pierwszy przestawi cennik, ten kontroluje narrację</li>
+        <li><strong>Sektor publiczny:</strong> silny popyt federalny w USA był jedną z przyczyn nadwyżki w Q2, choć częściowo dzięki przesunięciu przychodów z Q3</li>
+        <li><strong>Ryzyko geopolityczne:</strong> wojna z Iranem realnie uderzyła w przychody subskrypcyjne w Q1 — dowód, że nawet globalny SaaS nie jest od tego wolny</li>
+        <li><strong>Presja kosztowa AI:</strong> obciążenia inferencyjne przenoszą się na infrastrukturę hyperscalerów, obniżając marżę brutto całej branży</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <p>Model jest w pełni korporacyjny: kilkuletnie umowy z największymi organizacjami świata, sprzedawane bezpośrednio i przez integratorów. Rozproszenie klientów jest wysokie — żaden pojedynczy nie ma znaczącego udziału, co czyni ten biznes znacznie bezpieczniejszym niż spółki infrastrukturalne uzależnione od kilku najemców.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Q2 2026</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td>RPO (całość zobowiązań)</td><td><strong>$29 mld</strong> (+21% r/r)</td><td>Widoczność przychodów na lata</td></tr>
+          <tr><td>cRPO (do rozliczenia w 12 mies.)</td><td><strong>$13,2 mld</strong> (+21,5%)</td><td style="color:var(--buy)">200 bp powyżej prognozy</td></tr>
+          <tr><td>AI ACV</td><td>ponad <strong>$1 mld</strong></td><td style="color:var(--strong-buy)">Cel: 30% ACV z AI do 2030</td></tr>
+          <tr><td>Pierwszorazowi nabywcy AI</td><td>+45% r/r</td><td style="color:var(--strong-buy)">Rozszerzanie bazy, nie tylko dosprzedaż</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Najmocniejszy pojedynczy argument przeciwko tezie o zagładzie SaaS:</strong> cRPO, czyli zakontraktowane przychody do rozliczenia w najbliższych dwunastu miesiącach, <strong>rośnie o 21,5% i przebija własne prognozy spółki</strong>. Gdyby klienci faktycznie ograniczali licencje z powodu agentów AI, ta liczba załamałaby się jako pierwsza. Nie załamała się.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Przychody</th><th>Subskrypcje</th><th>Marża oper. non-GAAP</th></tr></thead>
+        <tbody>
+          <tr><td>Q1 2026</td><td>$3,77 mld</td><td>—</td><td>32,0%</td></tr>
+          <tr><td><strong>Q2 2026</strong></td><td><strong>$3,99 mld (+24% r/r)</strong></td><td><strong>$3,877 mld (+23%)</strong></td><td>29,5%</td></tr>
+          <tr><td>Q3 2026 (prognoza)</td><td>—</td><td>—</td><td>31,0%</td></tr>
+          <tr><td><strong>FY2026 (prognoza)</strong></td><td>~$16,0 mld</td><td><strong>$15,755–15,770 mld (+21% cc)</strong></td><td><strong>31,5%</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p>Przychody są niemal w całości subskrypcyjne i powtarzalne. Zysk na akcję w ujęciu non-GAAP wyniósł w Q2 <strong>$0,90 wobec oczekiwanych $0,86</strong>, a przychody przebiły konsensus ($3,99 mld wobec $3,93 mld).</p>
+      <div class="alert alert-warn"><strong>Rysa na obrazie:</strong> prognoza przychodów subskrypcyjnych na II półrocze została obniżona o <strong>$44,5 mln</strong> względem wcześniejszych oczekiwań. Kwota jest w skali spółki symboliczna — to jedna czwarta procenta rocznych przychodów — ale rynek odczytał ją jako sygnał, że tempo słabnie. Do tego dochodzi około $35 mln negatywnego wpływu kursowego na cRPO w Q3 oraz fakt, że część przychodów federalnych przesunęła się z Q3 do Q2, co sztucznie podniosło jeden kwartał kosztem następnego.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $126</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>~$120 mld</td><td>-45% w 52 tygodnie</td></tr>
+          <tr><td>P/S (FY2026E $15,99 mld)</td><td>~7,5×</td><td style="color:var(--buy)">Nisko jak na 21% wzrostu</td></tr>
+          <tr><td>P/FCF (TTM, FCF $4,58 mld)</td><td>~26×</td><td style="color:var(--buy)">Mediana 10-letnia: ~59×</td></tr>
+          <tr><td><strong>P/FCF (FY2026E ~$5,6 mld)</strong></td><td><strong>~21×</strong></td><td style="color:var(--strong-buy)">✅ Kluczowa miara dla tej spółki</td></tr>
+          <tr><td>EV/EBITDA</td><td>~32×</td><td style="color:var(--neutral)">Spadło z ~39× w czerwcu</td></tr>
+          <tr><td>EV/FCF</td><td>~24×</td><td style="color:var(--buy)">Historycznie nisko</td></tr>
+          <tr><td>PEG</td><td>~0,95</td><td style="color:var(--buy)">Poniżej 1,0</td></tr>
+          <tr><td>Konsensus (49 analityków)</td><td>mediana $140 · średnia ~$147</td><td style="color:var(--buy)">44 kupuj / 3 trzymaj / 2 sprzedaj</td></tr>
+          <tr><td>Rozrzut celów</td><td>$72 – $248</td><td style="color:var(--sell)">Skrajna niezgoda co do przyszłości</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM, GAAP)</td><td>~66×</td><td style="color:var(--sell)">Mocno zniekształcone — amortyzacja z Armis i koszty transakcji</td></tr>
+          <tr><td><strong>Forward P/E (FY2026)</strong></td><td><strong>~30×</strong></td><td>Konsensus EPS non-GAAP <strong>$4,17</strong> przy przychodach $15,99 mld</td></tr>
+          <tr><td><strong>Forward P/E (FY2027)</strong></td><td><strong>~23×</strong></td><td>Zakłada odbicie marży do 31,5%+ i wygaśnięcie jednorazowych kosztów Armis</td></tr>
+          <tr><td>PEG (forward)</td><td>~0,95</td><td>&lt; 1,0 = wzrost tańszy niż sugeruje mnożnik</td></tr>
+          <tr><td>Mediana historyczna spółki</td><td>znacznie wyżej</td><td style="color:var(--buy)">P/FCF 26× wobec mediany 10-letniej ~59×</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> uwaga na dwie pułapki. Po pierwsze, <strong>P/E w ujęciu GAAP jest tu bezużyteczne</strong> — 66× odzwierciedla amortyzację wartości niematerialnych z przejęcia Armis za $7,75 mld, a nie zdolność zarobkową biznesu. Po drugie, przy spółce o marży wolnych przepływów 35% <strong>właściwym miernikiem jest P/FCF, nie P/E</strong>. I ten wskaźnik, na poziomie około 21× wobec prognozy FY26, znajduje się w okolicach historycznego minimum — mediana z dekady wynosi blisko 59×.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$145 – $175</div><div class="fair-value-note">Baza: FY27E FCF ok. $6,8–7,2 mld przy mnożniku 22–26× | Konsensus 49 analityków: mediana $140, średnia ~$147 | Scenariusz negatywny (teza o zagładzie SaaS się potwierdza, wzrost poniżej 15%): $90–100 (cel UBS) | Scenariusz pozytywny (AI jako motor, powrót do 30× FCF): $200–220 | Przy $126 potencjał od -25% do +75%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Q1 2026</th><th>Q2 2026</th><th>Prognoza FY26</th></tr></thead>
+        <tbody>
+          <tr><td>Marża operacyjna non-GAAP</td><td>32,0%</td><td>29,5%</td><td style="color:var(--buy)"><strong>31,5%</strong></td></tr>
+          <tr><td>Marża operacyjna GAAP</td><td>13,5%</td><td style="color:var(--sell)">4,0%</td><td>—</td></tr>
+          <tr><td>Marża brutto na subskrypcjach</td><td>—</td><td>—</td><td>81% <span style="color:var(--sell)">(obniżona o 50 bp)</span></td></tr>
+          <tr><td>Marża wolnych przepływów</td><td>—</td><td>—</td><td style="color:var(--strong-buy)"><strong>35%</strong></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Trzy przyczyny spadku marży kwartał do kwartału</h3>
+      <p><strong>1. Armis.</strong> Przejęcie zamknęło się 20 kwietnia, czyli 10 dni po rozpoczęciu Q2. Pierwszy kwartał nie zawierał Armis w ogóle, drugi zawierał go przez około 70 z 91 dni — cały efekt akwizycji spadł na jeden przeskok. Wpływ na marżę operacyjną Q2: około <strong>125 punktów bazowych</strong>. W skali roku: -75 bp na marży operacyjnej i aż <strong>-200 bp na marży wolnych przepływów</strong>.</p>
+      <p><strong>2. Koszty hyperscalerów.</strong> ServiceNow historycznie utrzymywał własne centra danych, co dawało nietypowo wysoką marżę brutto. Obciążenia AI są jednak skokowe i wymagają GPU, więc trafiają na infrastrukturę zewnętrzną. Prognoza marży brutto na subskrypcjach zeszła z 81,5% do 81%. Paradoks polega na tym, że <strong>to presja marżowa wynikająca z tego, że produkt sprzedaje się szybciej od oczekiwań</strong>.</p>
+      <p><strong>3. Sezonowość.</strong> Q1 jest u ServiceNow strukturalnie najlepszym kwartałem marżowym — koszty narastają w ciągu roku, przychody rosną równomiernie.</p>
+      <div class="alert alert-success"><strong>Kontekst, który łatwo przeoczyć:</strong> marża 29,5% była o <strong>300 punktów bazowych powyżej prognozy zarządu</strong>. Spółka spodziewała się gorszego kwartału, niż dostarczyła. Prognoza na Q3 to 31%, a na cały rok 31,5% — żeby średnia się zgodziła, <strong>Q4 musi dać około 33,5%</strong>. To konkretna, weryfikowalna obietnica.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Obligacje zabezpieczone</td><td><strong>$4,0 mld</strong></td><td>Pięć transz, kupony 4,25%–6,30%</td></tr>
+          <tr><td>Papiery komercyjne</td><td>$2,1 mld</td><td>Program o limicie $3,0 mld</td></tr>
+          <tr><td>Linia kredytowa</td><td>$3,0 mld</td><td>Rezerwa płynnościowa</td></tr>
+          <tr><td>Przepływy operacyjne (TTM)</td><td>$5,31 mld</td><td style="color:var(--buy)">Silne</td></tr>
+          <tr><td>Nakłady inwestycyjne (TTM)</td><td>$728 mln</td><td>Niskie — model bez ciężkiego capexu</td></tr>
+          <tr><td><strong>Wolne przepływy (TTM)</strong></td><td><strong>$4,58 mld</strong></td><td style="color:var(--strong-buy)">Marża FCF ok. 30%, cel 35%</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Zmiana charakteru bilansu.</strong> ServiceNow przez lata był wzorem spółki technologicznej praktycznie bez długu. Sfinansowanie Armis kwotą $7,75 mld gotówką — częściowo z kredytu, potem zrefinansowanego obligacjami — to zerwanie z tą tradycją. Koszt obsługi około $200 mln rocznie plus utracone odsetki od wydanej gotówki to grubo ponad $350 mln, które nie widać w marży operacyjnej, bo siedzą poniżej linii operacyjnej. Przy przepływach rzędu $5 mld rocznie dług nie zagraża spółce, ale <strong>zabiera część elastyczności, którą miała jeszcze rok temu</strong>.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🤖</div><div class="catalyst-body"><h4>AI ACV przekroczyło miliard dolarów</h4><p>Cel spółki to 30% całkowitego ACV z AI do 2030 roku. Liczba pierwszorazowych nabywców AI rosnąca o ponad 45% rok do roku pokazuje, że to nie jest dosprzedaż do garstki entuzjastów, lecz rozszerzanie bazy.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Wycena w okolicach historycznego minimum</h4><p>P/FCF około 26× wobec mediany dziesięcioletniej blisko 59×. PEG poniżej jedności. Rynek płaci dziś za ServiceNow mniej niż kiedykolwiek w historii notowań, mimo wzrostu 24%.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📊</div><div class="catalyst-body"><h4>cRPO rosnące o 21,5%, ponad prognozą</h4><p>Zakontraktowane przychody na najbliższe 12 miesięcy to najczulszy wskaźnik popytu. Gdyby agenci AI faktycznie zjadali licencje, ta liczba pękłaby pierwsza. Zamiast tego przebiła prognozę o 200 punktów bazowych.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔐</div><div class="catalyst-body"><h4>Armis jako nowa noga wzrostu</h4><p>ARR $340 mln przy tempie powyżej 50% rocznie, do tego dostęp do budżetów bezpieczeństwa w bazie ServiceNow. Jeśli cross-sell zadziała, cena $7,75 mld okaże się rozsądna.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔄</div><div class="catalyst-body"><h4>Nowy model rozliczeń zamiast licencji na stanowisko</h4><p>Branża przechodzi na rozliczanie jednostek pracy wykonanej przez agentów. ServiceNow, siedzący na danych procesowych klienta, jest lepiej ustawiony do takiej zmiany niż większość konkurencji.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">⚠️</div><div class="catalyst-body"><h4>Teza o zagładzie SaaS może być trafna, tylko wcześnie</h4><p>Umowy wieloletnie opóźniają skutki. Klient, który dziś odkryje, że agent zastępuje trzy stanowiska, zredukuje licencje dopiero przy odnowieniu za dwa lata. cRPO może więc wyglądać zdrowo jeszcze długo po tym, jak popyt realnie się zmieni.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💸</div><div class="catalyst-body"><h4>Trwała erozja marży brutto</h4><p>Jeśli koszt inferencji nie spadnie tak, jak zakłada zarząd, marża brutto na subskrypcjach osiądzie poniżej 80%. Dla spółki wycenianej przez pryzmat przepływów to bezpośrednie uderzenie w wycenę.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏢</div><div class="catalyst-body"><h4>Microsoft i pakietowanie</h4><p>Copilot Studio z Power Automate w ramach umowy Enterprise Agreement pozwala budować przepływy AI bez ServiceNow. Klient płacący już Microsoftowi ma wbudowaną zachętę, by spróbować rozwiązania „wystarczająco dobrego".</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Ryzyko integracji Armis</h4><p>$7,75 mld to około 20–23× ARR i 27% premii ponad wycenę prywatną sprzed pięciu miesięcy. Nieudana integracja będzie widoczna w wynikach latami, a spółka nie ma doświadczenia w akwizycjach tej skali.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🌍</div><div class="catalyst-body"><h4>Wrażliwość na czynniki zewnętrzne</h4><p>Wojna z Iranem odbiła się na przychodach subskrypcyjnych w Q1, a kurs walutowy zabiera około $35 mln z cRPO w Q3. Prognoza na II półrocze została obniżona o $44,5 mln.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>Pozycja</th><th>Relacja do ServiceNow</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ServiceNow</strong></td><td>Lider ITSM i workflow korporacyjnych</td><td>Wzrost 24%, marża FCF 35%, AI ACV ponad $1 mld</td></tr>
+          <tr><td><strong>Microsoft</strong></td><td>Copilot Studio, Power Platform</td><td style="color:var(--sell)">Największe zagrożenie — konkuruje pakietem, nie produktem</td></tr>
+          <tr><td><strong>Salesforce</strong></td><td>Lider CRM, Agentforce</td><td>Wzajemne wejście na swoje terytoria; obie spółki przecenione przez „SaaSpocalypse"</td></tr>
+          <tr><td><strong>Atlassian</strong></td><td>ITSM i narzędzia deweloperskie</td><td>Rynek średni — rzadka bezpośrednia kolizja</td></tr>
+          <tr><td><strong>Systemy legacy</strong></td><td>BMC Remedy, HP Service Manager</td><td style="color:var(--buy)">Główne źródło migracji na korzyść NOW</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Rzeczywistym konkurentem przestała być inna platforma workflow.</strong> Nowym punktem odniesienia jest pytanie, czy ogólny agent AI z dostępem do firmowych danych nie zastąpi wyspecjalizowanej platformy. To dlatego przecena objęła cały sektor naraz — Salesforce i ServiceNow spadały razem, mimo że konkurują ze sobą. Rynek przestał wyceniać pozycję konkurencyjną, a zaczął wyceniać przetrwanie kategorii.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Dno 52-tygodniowe</td><td>$81,24</td><td>Panika po „SaaSpocalypse"</td></tr>
+          <tr><td>Szczyt 52-tygodniowy</td><td>$194,73</td><td>Zszedł z $211,48 — szczyt wypada z okna</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$126</strong></td><td>+55% od dna, -35% od szczytu</td></tr>
+          <tr><td>Opór R1</td><td><strong>$125–130</strong></td><td style="color:var(--neutral)">⚠️ Jesteśmy dokładnie w tej strefie</td></tr>
+          <tr><td>Opór R2</td><td>$140–147</td><td>Konsensus analityków</td></tr>
+          <tr><td>Wsparcie S1</td><td>$105–112</td><td>Poziom z czerwcowej analizy</td></tr>
+          <tr><td>Wsparcie S2</td><td>$90–95</td><td>Cel UBS, okolice SMA200</td></tr>
+          <tr><td>Stop techniczny</td><td>&lt; $81</td><td>Przebicie dna = teza niedźwiedzia wygrywa</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Wybicie ponad $130 z wolumenem</li><li>Q3 z cRPO powyżej 21% i marżą 31%</li><li>Ruch ku $140–147</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Odbicie od $130 i powrót do $112</li><li>Spowolnienie cRPO poniżej 18%</li><li>Ponowny test $95–105</li></ul></div>
+      </div>
+      <div class="alert alert-warn"><strong>Uwaga na moment.</strong> W analizie z 9 czerwca wskazałem opór na poziomie $125–130. Kurs dotarł dokładnie tam. To najgorszy z możliwych punktów na wejście całą pozycją — sensowniej poczekać albo na potwierdzone wybicie, albo na cofnięcie w okolice $112.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Kurs w strefie oporu $125–130. Q3 obciążony przesunięciem przychodów federalnych do Q2 i $35 mln wpływu kursowego na cRPO. Trudny kwartał do pobicia.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">P/FCF ~21× wobec prognozy FY26 przy wzroście 21% i marży FCF 35%. Konsensus $140–147. Warunek: Q4 z marżą operacyjną ok. 33,5%.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Obniżam z „Mocne kupno" z czerwca. Fundamenty się nie pogorszyły — pogorszyła się moja pewność co do tego, jak agentyczna AI przekształci ekonomikę SaaS.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia wejścia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji:</strong> 3–6% portfela — spółka wysokiej jakości, ale z nierozstrzygniętym ryzykiem kategorii</li>
+        <li><strong>Pierwsza transza:</strong> $112–120, czyli na cofnięciu, a nie w strefie oporu</li>
+        <li><strong>Druga transza:</strong> $95–105 przy ponownym ataku niedźwiedzi</li>
+        <li><strong>Wejście momentum:</strong> potwierdzone wybicie ponad $130 na wolumenie</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $145–155, reszta powyżej $175</li>
+        <li><strong>Wyjście z tezy:</strong> cRPO poniżej 18% przez dwa kwartały z rzędu albo marża brutto na subskrypcjach poniżej 79%</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$145 – $175</div><div class="fair-value-note">Scenariusz negatywny: $90–100 | Scenariusz pozytywny: $200–220 | Konsensus: $140–147</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Dane przeczą narracji.</strong> Rynek wycenia ServiceNow jako ofiarę AI, a spółka raportuje wzrost 24%, cRPO +21,5% powyżej prognozy i AI ACV ponad $1 mld</li>
+          <li><strong>Wycena w okolicach historycznego minimum.</strong> P/FCF ~26× wobec mediany dziesięcioletniej blisko 59×, PEG poniżej 1,0, prognozowane P/FCF ~21×</li>
+          <li><strong>Jakość biznesu bez zmian.</strong> Marża FCF 35%, marża brutto 81%, RPO $29 mld, rozproszona baza klientów korporacyjnych</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Pytanie o kategorię pozostaje otwarte.</strong> Umowy wieloletnie mogą maskować spadek popytu przez wiele kwartałów — cRPO to wskaźnik opóźniony</li>
+          <li><strong>Marża pod presją z dwóch stron naraz.</strong> Armis odbiera 200 bp z marży FCF, a koszty hyperscalerów obniżyły prognozę marży brutto</li>
+          <li><strong>Kurs w strefie oporu $125–130</strong>, po odbiciu o 55% od dna. Moment na wejście jest niekorzystny nawet przy słusznej tezie</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> cRPO poniżej 18% przez dwa kwartały z rzędu lub marża brutto na subskrypcjach poniżej 79% → potwierdzenie tezy o strukturalnym zagrożeniu, powrót w okolice $90–100.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> Q4 z marżą operacyjną około 33,5%, cRPO powyżej 21% i AI ACV zmierzające ku $1,5 mld → re-rating ku $150–175.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">ServiceNow jest dziś najczystszym przykładem spółki, w której <strong>narracja rynkowa i dane operacyjne mówią coś dokładnie przeciwnego</strong>. Rynek, po lutowej przecenie nazwanej „SaaSpocalypse", wycenia ją jako ofiarę agentycznej sztucznej inteligencji — kurs spadł o 45% w skali roku, mnożnik zszedł do najniższego poziomu w historii notowań, a rozrzut celów analityków od $72 do $248 pokazuje, że nikt nie wie, co z tym zrobić. Tymczasem sama spółka raportuje przychody rosnące o 24%, zakontraktowane przychody na najbliższe dwanaście miesięcy w górę o 21,5% powyżej własnej prognozy, oraz <strong>AI ACV, które przekroczyło miliard dolarów</strong>.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Uczciwie trzeba jednak dodać, dlaczego nie jest to oczywista okazja. Umowy w tym modelu zawierane są na kilka lat, więc <strong>klient, który dziś odkryje, że agent AI zastępuje trzy stanowiska, zredukuje licencje dopiero przy odnowieniu</strong>. Wskaźnik cRPO, mój główny argument obrony, jest z natury opóźniony — może wyglądać zdrowo jeszcze długo po tym, jak popyt realnie się zmieni. Do tego marża jest ściskana z dwóch stron naraz: przez przejęcie Armis, które odbiera 200 punktów bazowych z marży wolnych przepływów, i przez koszty infrastruktury hyperscalerów, rosnące właśnie dlatego, że klienci wdrażają AI szybciej od planu.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Wzrost się utrzymuje.</strong> Przychody +24% r/r, subskrypcje +23%, cRPO +21,5% — wszystko powyżej prognoz spółki.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>AI realnie sprzedaje.</strong> AI ACV przekroczyło $1 mld, liczba pierwszorazowych nabywców wzrosła o ponad 45% r/r.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Wycena daje margines bezpieczeństwa.</strong> P/FCF ~21× wobec prognozy FY26, przy medianie dziesięcioletniej bliskiej 59×.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Odbudowa marży w Q4.</strong> Żeby roczne 31,5% się zgadzało, czwarty kwartał musi dać około 33,5%. Deklaracja konkretna i rozliczalna.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Integracja Armis.</strong> $7,75 mld przy 20–23× ARR i 27% premii ponad wycenę prywatną sprzed pięciu miesięcy. Największa akwizycja w historii spółki, bez doświadczenia w tej skali.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Rozstrzygnięcie pytania o kategorię.</strong> Czy agentyczna AI powiększa, czy niszczy rynek oprogramowania korporacyjnego — tego nie wiadomo i nie będzie wiadomo przez kilka kwartałów.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Październik 2026</strong></td><td>Wyniki Q3 2026</td><td>Kwartał trudny: przesunięcie przychodów federalnych do Q2 i $35 mln wpływu kursowego na cRPO</td></tr>
+            <tr><td><strong>Styczeń 2027</strong></td><td>Wyniki Q4 i całego roku</td><td>Test obietnicy marży ~33,5% i rocznego 31,5%</td></tr>
+            <tr><td>Na bieżąco</td><td>Tempo AI ACV wobec celu $1,5 mld</td><td>Główny dowód w sporze o przyszłość kategorii</td></tr>
+            <tr><td>2027</td><td>Pierwsze duże odnowienia umów po erze agentów</td><td>Moment prawdy dla tezy o „śmierci licencji na stanowisko"</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Wzrost cRPO</td><td>+21,5% r/r</td><td>&lt; 18% przez dwa kwartały</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża brutto na subskrypcjach</td><td>81% (obniżona o 50 bp)</td><td>&lt; 79%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Marża operacyjna non-GAAP</td><td>29,5% w Q2, cel roczny 31,5%</td><td>Q4 poniżej 32%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Marża wolnych przepływów</td><td>cel 35%</td><td>&lt; 30%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>AI ACV</td><td>ponad $1 mld</td><td>zatrzymanie wzrostu</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Zadłużenie</td><td>$4,0 mld obligacji + $2,1 mld CP</td><td>dalsze duże akwizycje na dług</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji:</strong> 3–6% portfela — jakość uzasadnia solidną pozycję, nierozstrzygnięte ryzyko kategorii nie pozwala na więcej</li>
+          <li><strong>Nie kupować całością w strefie $125–130</strong> — to opór wskazany już w czerwcowej analizie, kurs jest dokładnie w nim</li>
+          <li><strong>Pierwsza transza:</strong> $112–120 na cofnięciu, ewentualnie po potwierdzonym wybiciu ponad $130</li>
+          <li><strong>Druga transza:</strong> $95–105 przy powrocie paniki wokół AI</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> wzrost cRPO w każdym raporcie kwartalnym — to najczulszy dostępny wskaźnik odpowiedzi na pytanie, czy agenci AI zjadają ten biznes</li>
+          <li><strong>Wyjście z tezy:</strong> cRPO poniżej 18% dwa kwartały z rzędu albo marża brutto poniżej 79%</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--buy)">📈 KUPNO — dobra spółka wyceniana jak zagrożony gatunek</div>
+        <p>Kupno w średnim i długim terminie, neutralnie w krótkim. Powód jest prosty: płacisz około 21-krotność prognozowanych wolnych przepływów za biznes rosnący w tempie 21%, z marżą przepływów 35%, portfelem zamówień na $29 miliardów i miliardem dolarów ACV z AI. Historycznie ta spółka kosztowała blisko sześćdziesięciokrotność przepływów. Rynek nie przecenił jej dlatego, że wyniki się pogorszyły, lecz dlatego, że <strong>przestraszył się o istnienie całej kategorii</strong>.</p>
+        <p>Nie twierdzę, że ten strach jest bezpodstawny — <strong>obniżam ocenę długoterminową z „Mocne kupno" z czerwca właśnie dlatego, że nie jest</strong>. Pytanie, czy agentyczna AI powiększy rynek oprogramowania korporacyjnego, czy go zje, pozostaje otwarte, a umowy wieloletnie sprawiają, że odpowiedź poznamy z opóźnieniem. Ale między „to ryzyko istnieje" a „ta spółka jest skończona" jest przepaść, a dzisiejsza wycena stoi bliżej drugiej z tych tez niż uzasadniają to jakiekolwiek dane. Kupować stopniowo, nie w oporze, i patrzeć na cRPO.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$145–175</b></div>
+          <div><span>Scenariusz negatywny</span><b>$90–100</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$200–220</b></div>
+          <div><span>Sugerowana pozycja</span><b>3–6% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3 — październik</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">PORÓWNANIE Z ANALIZĄ Z 9 CZERWCA 2026</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+
+      <p class="sum-lead">Poprzednia analiza powstała <strong>9 czerwca 2026 przy cenie $112</strong> z oceną „Kupno" i fair value $140–165. Od tego czasu kurs wzrósł do $126, czyli o <strong>12,5%</strong>. Wynik zgodny z kierunkiem tezy — ale poniżej wskazuję trzy rzeczy, które przewidziałem dobrze, dwie, w których się pomyliłem, i jedną, którą <strong>całkowicie przeoczyłem</strong>.</p>
+
+      <div class="sum-block">
+        <h4>Zestawienie liczb</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Parametr</th><th>9 czerwca 2026</th><th>12 sierpnia 2026</th><th>Zmiana</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Cena</strong></td><td class="cmp-then">$112</td><td class="cmp-now">$126</td><td style="color:var(--buy)">+12,5%</td></tr>
+            <tr><td>Kapitalizacja</td><td class="cmp-then">~$116 mld</td><td class="cmp-now">~$120 mld</td><td>+3%</td></tr>
+            <tr><td>Wzrost przychodów</td><td class="cmp-then">+20,9% r/r</td><td class="cmp-now">+24% r/r</td><td style="color:var(--buy)">Przyspieszenie</td></tr>
+            <tr><td>Forward P/E</td><td class="cmp-then">~26×</td><td class="cmp-now">~30× (FY26) / ~23× (FY27)</td><td style="color:var(--neutral)">Zmiana bazy</td></tr>
+            <tr><td>EV/EBITDA</td><td class="cmp-then">~39×</td><td class="cmp-now">~32×</td><td style="color:var(--buy)">Taniej</td></tr>
+            <tr><td>P/S</td><td class="cmp-then">~8,7×</td><td class="cmp-now">~7,5×</td><td style="color:var(--buy)">Taniej</td></tr>
+            <tr><td>Marża FCF</td><td class="cmp-then">34,6%</td><td class="cmp-now">cel 35%</td><td>Stabilnie</td></tr>
+            <tr><td>RPO</td><td class="cmp-then">$23,9 mld</td><td class="cmp-now">$29 mld</td><td style="color:var(--buy)">+21%</td></tr>
+            <tr><td>AI / Now Assist ACV</td><td class="cmp-then">ponad $750 mln</td><td class="cmp-now">ponad $1 mld</td><td style="color:var(--buy)">Zgodnie z planem</td></tr>
+            <tr><td>Szczyt 52-tygodniowy</td><td class="cmp-then">$211,48</td><td class="cmp-now">$194,73</td><td style="color:var(--sell)">Szczyt wypada z okna</td></tr>
+            <tr><td><strong>Fair value</strong></td><td class="cmp-then">$140–165</td><td class="cmp-now">$145–175</td><td>Nieznacznie w górę</td></tr>
+            <tr><td>Ocena — krótki termin</td><td class="cmp-then">Neutralna</td><td class="cmp-now">Neutralna</td><td>Bez zmian</td></tr>
+            <tr><td>Ocena — średni termin</td><td class="cmp-then">Kupno</td><td class="cmp-now">Kupno</td><td>Bez zmian</td></tr>
+            <tr><td><strong>Ocena — długi termin</strong></td><td class="cmp-then">Mocne kupno</td><td class="cmp-now" style="color:var(--neutral)">Kupno</td><td style="color:var(--sell)">⬇ Obniżenie</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Co się sprawdziło</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Kierunek i wycena.</strong> Argument o „historycznie taniej wycenie przy solidnych fundamentach" okazał się trafny — kurs wzrósł o 12,5%, a spółka nie zawiodła operacyjnie.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Monetyzacja AI.</strong> W czerwcu pisałem o ACV $750 mln zmierzającym do $1,5 mld w 2026. Dziś jest ponad $1 mld — trajektoria zgodna z założeniem.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Poziom oporu.</strong> Wskazałem strefę $125–130 jako pierwszy opór. Kurs dotarł dokładnie tam i właśnie tam się zatrzymał. To akurat argument, żeby dziś <em>nie</em> kupować całością.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Gdzie się pomyliłem</h4>
+        <ul class="check-list">
+          <li><span class="ck no">✗</span><div><strong>cRPO poniżej mojego progu.</strong> W czerwcu napisałem, że kluczowym testem Q2 będzie utrzymanie wzrostu cRPO na poziomie „25%+". Wyszło <strong>21,5%</strong>. Spółka pobiła własną prognozę, ale nie moją — mój próg był po prostu zbyt wysoki i gdybym trzymał się go dosłownie, wyciągnąłbym błędny wniosek z dobrego kwartału.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Ryzyko utożsamione z Microsoftem.</strong> Za główne zagrożenie uznałem pakietowanie Copilota. Realnym ciosem w 2026 roku okazało się coś innego: <strong>strach przed śmiercią całej kategorii</strong>, wywołany premierą Claude Cowork. To nie była walka o udziały rynkowe, tylko przecena istnienia rynku — Salesforce i ServiceNow spadały ramię w ramię, choć konkurują ze sobą.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Czego nie zauważyłem w ogóle</h4>
+        <div class="alert alert-danger" style="margin-top:0"><strong>Przejęcie Armis za $7,75 mld.</strong> W czerwcowej analizie wymieniłem w sekcji o wydarzeniach „przejęcie Maverick" na podstawie zgłoszenia SEC, a <strong>nie wspomniałem o Armis ani słowem</strong> — mimo że transakcja została ogłoszona w grudniu 2025, była największą akwizycją w historii spółki i zamknęła się 20 kwietnia 2026, czyli <em>siedem tygodni przed moją analizą</em>.<br><br>To istotne przeoczenie, bo Armis odpowiada dziś za większość tego, co inwestorzy odczytali jako pogorszenie marż: <strong>-75 bp marży operacyjnej i -200 bp marży wolnych przepływów w skali roku</strong>, plus $4 mld długu obligacyjnego, który zakończył erę ServiceNow jako spółki bez dźwigni. Gdybym uwzględnił to w czerwcu, prognoza marż na 2026 rok byłaby ostrożniejsza, a bilans nie wyglądałby tak nieskazitelnie, jak go wtedy opisałem.</div>
+      </div>
+
+      <div class="verdict-final rev">
+        <h4>Wniosek z porównania</h4>
+        <div class="vf-rating" style="color:var(--neutral)">Teza się broniła, ale z innych powodów, niż zakładałem</div>
+        <p>Czerwcowa rekomendacja zarobiła 12,5% w dwa miesiące i pod tym względem była trafna. Uczciwość każe jednak przyznać, że <strong>zadziałała mimo dwóch błędów, a nie dzięki precyzji analizy</strong>. Postawiłem na tanią wycenę i monetyzację AI — jedno i drugie się potwierdziło. Ale ryzyko zdefiniowałem niecelnie, próg cRPO ustawiłem za wysoko, a największą transakcję w historii spółki zwyczajnie pominąłem.</p>
+        <p>Dlatego jedyną zmianą oceny jest <strong>obniżenie perspektywy długoterminowej z „Mocne kupno" do „Kupno"</strong>. Nie dlatego, że spółka jest słabsza — operacyjnie jest wyraźnie mocniejsza niż w czerwcu, z przychodami rosnącymi o 24% zamiast 21% i AI ACV ponad miliardem. Powód jest inny: <strong>wzrósł rozrzut możliwych scenariuszy</strong>. Cele analityków rozciągają się dziś od $72 do $248, a to uczciwe odzwierciedlenie faktu, że pytanie o wpływ agentycznej AI na oprogramowanie korporacyjne pozostaje nierozstrzygnięte. W czerwcu pisałem o tym ryzyku jednym akapitem o Microsofcie. Dziś jest to główna oś sporu o tę spółkę.</p>
+        <div class="vf-meta">
+          <div><span>Wynik rekomendacji</span><b style="color:var(--buy)">+12,5%</b></div>
+          <div><span>Trafione</span><b>3 z 3 tez byczych</b></div>
+          <div><span>Chybione</span><b>2 (próg cRPO, definicja ryzyka)</b></div>
+          <div><span>Pominięte</span><b style="color:var(--sell)">Armis ($7,75 mld)</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 12 sierpnia 2026 | Cena od użytkownika: ~$126 | Poprzednia wersja: 9 czerwca 2026 ($112) | Dane: ServiceNow IR (Q2 2026, 22 lipca), SEC, StockAnalysis, GuruFocus, konsensus 49 analityków | P/E GAAP zniekształcone przez amortyzację z przejęcia Armis — patrz sekcja 6 | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
