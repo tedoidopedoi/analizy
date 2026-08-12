@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BE — Bloom Energy | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#84cc16; --accent2:#bef264; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#0d1a05 0%,#0f1117 50%,#0c1608 100%); border-bottom:1px solid var(--border); padding:32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(132,204,22,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#000; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.neutral { background:rgba(255,215,64,0.12); border:2px solid var(--neutral); color:var(--neutral); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.lime { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#000; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.lime { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); } .chip.red { border-color:var(--sell); color:var(--sell); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.neutral { color:var(--neutral); } .rating-box .rating-text.sell { color:var(--sell); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--strong-buy); } .bear-box ul li::before { color:var(--strong-sell); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(132,204,22,0.08),rgba(190,242,100,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(132,204,22,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .alert-danger { background:rgba(213,0,0,0.08); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(0,200,83,.15); color:#00c853; border:1px solid rgba(0,200,83,.4); }
+  .ck.no  { background:rgba(213,0,0,.13);  color:#ff6b6b; border:1px solid rgba(213,0,0,.35); }
+  .ck.wait{ background:rgba(255,215,64,.13);color:#ffd740; border:1px solid rgba(255,215,64,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#00c853; } .mon-dot.y { background:#ffd740; } .mon-dot.r { background:#ff6d00; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: BE</div>
+    <div class="company-name">Bloom Energy Corporation</div>
+    <div class="company-sub">Ogniwa paliwowe SOFC (Energy Server) · Zasilanie centrów danych AI „za licznikiem" · Backlog ok. 20 mld USD · Nebius, EdgeMode · San Jose, CA</div>
+    <div class="header-meta">
+      <div class="rating-badge neutral">⚖️ NEUTRALNA — fundamenty świetne, wycena wciąż napięta</div>
+      <span class="meta-tag">Energia dla AI</span>
+      <span class="meta-tag">Ogniwa paliwowe</span>
+      <span class="meta-tag">Rekordowy kwartał</span>
+      <span class="meta-tag">Wysoka zmienność</span>
+      <div class="price-display">
+        <div class="price-main">$213</div>
+        <div class="price-sub">7.08.2026 | 52W: $32,52–$351,28</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (07.08.2026)</div><div class="metric-value">$213</div><div class="metric-detail">-39% od ATH $351,28 | +555% od dna</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$58 mld</div><div class="metric-detail">Spadek o 4% od analizy z 30 lipca</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">$1,065 mld</div><div class="metric-detail">+166% r/r | pierwszy kwartał ponad miliard</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody z produktów</div><div class="metric-value green">$935,4 mln</div><div class="metric-detail">+215% r/r — to napędza wynik</div></div>
+    <div class="metric-card"><div class="metric-label">Forward P/E (FY2026)</div><div class="metric-value red">~79×</div><div class="metric-detail">Non-GAAP EPS $2,55–2,85 (prognoza)</div></div>
+    <div class="metric-card"><div class="metric-label">Zysk operacyjny Q2</div><div class="metric-value green">$182,2 mln</div><div class="metric-detail">Rok wcześniej strata $3,5 mln</div></div>
+    <div class="metric-card"><div class="metric-label">Prognoza 2026 ↑</div><div class="metric-value green">$3,9–4,2 mld</div><div class="metric-detail">~100% wzrostu | op. income $800–900 mln</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value green">$273,51</div><div class="metric-detail">+28% | 29 analityków, Buy</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest Bloom Energy?</h3>
+      <p>Bloom Energy produkuje <strong>stałotlenkowe ogniwa paliwowe</strong> — szafy o nazwie Energy Server, które wytwarzają prąd elektrochemicznie z gazu ziemnego, biogazu lub wodoru, bez spalania. Kluczowa cecha: instalacja <strong>na terenie klienta, z pominięciem sieci energetycznej</strong>. Założona w 2001 roku, debiut giełdowy w 2018, siedziba w San Jose.</p>
+      <p>Przez większość swojej historii spółka była postrzegana jako ambitny projekt „czystej energii", który nie zarabia. To skończyło się w 2026 roku, gdy okazało się, że wąskim gardłem budowy centrów danych AI przestały być procesory, a stał się <strong>prąd</strong>. Podłączenie do sieci w USA trwa dziś od czterech do siedmiu lat. Bloom dostarcza energię w kilka miesięcy — i na tym polega cała teza inwestycyjna.</p>
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>2025</td><td>Kurs w okolicach $32,52 — spółka wyceniana jako nierentowny projekt zielonej energii</td><td style="color:var(--sell)">Dno</td></tr>
+          <tr><td>2025/26</td><td>Seria kontraktów na zasilanie centrów danych AI — wcześniejsze umowy o wartości ok. $2,6 mld</td><td style="color:var(--buy)">↑ Zwrot narracji</td></tr>
+          <tr><td>21 lipca 2026</td><td><strong>Projekt $1,7 mld z Nebius</strong> — dziesięcioletnia umowa na dostawę ogniw, finansowanie Oaktree i IDF</td><td style="color:var(--strong-buy)">↑↑ Mega-kontrakt</td></tr>
+          <tr><td>Lipiec 2026</td><td>Raport short-sellera odparty publicznie przez Morgan Stanley, UBS i RBC</td><td style="color:var(--neutral)">Kontrowersja zażegnana</td></tr>
+          <tr><td><strong>28 lipca 2026</strong></td><td><strong>Q2: przychody $1,065 mld (+166%), produkty +215%, zysk operacyjny $182,2 mln wobec straty rok wcześniej, prognoza podniesiona do $3,9–4,2 mld</strong></td><td style="color:var(--strong-buy)">↑↑ Przełom</td></tr>
+          <tr><td>Przełom lipca i sierpnia</td><td>Mizuho podnosi rekomendację do Buy (kurs +27%); <strong>Wells Fargo tnie cel do $176</strong>, Truist do $218</td><td style="color:var(--neutral)">Rozjazd opinii</td></tr>
+          <tr><td><strong>7 sierpnia 2026</strong></td><td>Kurs $213 — o 4% niżej niż w poprzedniej analizie sprzed tygodnia</td><td style="color:var(--neutral)">Konsolidacja</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Co zmieniło się od analizy z 30 lipca:</strong> kurs osunął się z $222 do $213 (-4%), a rozjazd opinii analityków stał się jeszcze wyraźniejszy — Mizuho podniosło rekomendację do kupuj, podczas gdy Wells Fargo obniżyło cel do $176, czyli <em>poniżej</em> obecnej ceny. Fundamenty pozostają bez zmian: rekordowy kwartał i podniesiona prognoza wciąż obowiązują.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Produkt</th><th>Opis</th><th>Rola w modelu</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Energy Server (SOFC)</strong></td><td>Modułowe ogniwa paliwowe; prąd z gazu, biogazu lub wodoru bez procesu spalania</td><td>🔥 $935,4 mln w Q2, wzrost o 215%</td></tr>
+          <tr><td><strong>Serwis długoterminowy</strong></td><td>Utrzymanie, wymiana stosów, monitoring — kontrakty na 10–20 lat</td><td>💰 Powtarzalna część backlogu</td></tr>
+          <tr><td><strong>Elektrolizery</strong></td><td>Produkcja wodoru poprzez odwrócenie procesu</td><td>Opcja na przyszłość, dziś marginalna</td></tr>
+          <tr><td>Gotowość na wychwyt CO₂</td><td>Czysty strumień dwutlenku węgla ułatwiający jego wychwytywanie</td><td>Argument środowiskowy dla hyperscalerów</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat — sprzedaż czasu, nie energii</h3>
+      <p>Przewaga Bloom nie polega na tym, że produkuje prąd taniej. Polega na tym, że <strong>produkuje go szybciej</strong>. Operator centrum danych AI, który czeka pięć lat na przyłącze, przegrywa wyścig o klientów — a różnica między uruchomieniem obiektu w tym roku a za cztery lata jest warta znacznie więcej niż różnica w cenie kilowatogodziny.</p>
+      <p>Drugim elementem jest model <strong>„produkt plus serwis"</strong>: każde zamówienie sprzętu ciąga za sobą wieloletni kontrakt utrzymaniowy. To buduje bazę powtarzalnych przychodów rosnącą wraz z liczbą zainstalowanych jednostek.</p>
+      <div class="alert alert-warn"><strong>Ograniczenie fosy:</strong> Bloom sprzedaje przewagę czasową, która z definicji jest przejściowa. Jeśli sieci energetyczne przyspieszą albo producenci turbin gazowych rozładują kolejki zamówień, główny argument sprzedażowy słabnie. To fosa realna, ale nie trwała jak licencja regulacyjna czy efekt sieciowy.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Zapotrzebowanie centrów danych AI na moc:</strong> dziesiątki gigawatów nowych mocy potrzebnych do 2030 roku, podczas gdy rozbudowa sieci przebiega w tempie liczonym w latach</li>
+        <li><strong>Rynek instalacji „za licznikiem":</strong> szacunkowo dziesiątki miliardów dolarów w perspektywie dekady — energia dla centrów danych, przemysłu, szpitali</li>
+        <li><strong>Konkurencja o moc:</strong> producenci turbin gazowych mają wyprzedane zdolności produkcyjne na lata, co kieruje klientów ku ogniwom paliwowym</li>
+        <li><strong>Regulacje:</strong> ulgi podatkowe na czystą energię i presja środowiskowa hyperscalerów sprzyjają; zmiany polityki w USA pozostają ryzykiem</li>
+        <li><strong>Ceny gazu:</strong> ekonomia rozwiązania zależy od różnicy między ceną gazu a ceną prądu z sieci — tani gaz w USA jest dziś sprzymierzeńcem</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="chips"><span class="chip lime">Nebius ($1,7 mld, 10 lat)</span><span class="chip lime">EdgeMode (projekty w Panamie)</span><span class="chip">Operatorzy centrów danych AI</span><span class="chip">Equinix, przemysł, szpitale</span><span class="chip">Korea (SK ecoplant)</span></div>
+      <p>Model sprzedaży łączy kontakt bezpośredni z finansowaniem przez partnerów kapitałowych — takich jak Oaktree czy IDF. Klient nie musi wykładać środków z góry; płaci za energię przez okres umowy. To odblokowuje duże projekty, ale uzależnia tempo wzrostu od dostępności kapitału u inwestorów infrastrukturalnych.</p>
+      <div class="alert alert-warn"><strong>Koncentracja:</strong> przy pojedynczych kontraktach rzędu $1,7 mld kilku klientów odpowiada za znaczną część backlogu. Opóźnienie lub anulowanie jednego projektu ma nieproporcjonalnie duży wpływ na prognozy — a odbiorcy tacy jak Nebius sami finansują się kapitałem zewnętrznym.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Przychody</th><th>Zmiana</th><th>Zysk operacyjny</th></tr></thead>
+        <tbody>
+          <tr><td>Q2 2025</td><td>~$400 mln</td><td>—</td><td style="color:var(--sell)">strata $3,5 mln</td></tr>
+          <tr><td><strong>Q2 2026</strong></td><td><strong>$1,065 mld</strong></td><td style="color:var(--strong-buy)">+166%</td><td style="color:var(--strong-buy)"><strong>+$182,2 mln</strong></td></tr>
+          <tr><td>— w tym produkty</td><td>$935,4 mln</td><td style="color:var(--strong-buy)">+215%</td><td>Główny motor wyniku</td></tr>
+          <tr><td><strong>2026 (prognoza podniesiona)</strong></td><td><strong>$3,9–4,2 mld</strong></td><td style="color:var(--strong-buy)">ok. +100%</td><td>Non-GAAP $800–900 mln</td></tr>
+          <tr><td>2027E</td><td>zależne od konwersji backlogu</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <p>Struktura przychodów to sprzedaż sprzętu (dziś dominująca, jednorazowa) uzupełniona serwisem (powtarzalny, 10–20 lat). Im większa baza zainstalowanych jednostek, tym większy udział stabilnych przychodów serwisowych — z czasem powinno to obniżać zmienność wyników.</p>
+      <div class="alert alert-success"><strong>Skala zmiany:</strong> jeszcze rok temu Bloom notował stratę operacyjną. W jednym kwartale 2026 roku zarobił operacyjnie $182,2 mln, a prognoza na cały rok mówi o $800–900 mln. Przychody mają się podwoić. To nie jest poprawa — to zmiana kategorii spółki.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $213</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>~$58 mld</td><td>—</td></tr>
+          <tr><td><strong>P/S (2026E $4,05 mld)</strong></td><td><strong>~14,3×</strong></td><td style="color:var(--sell)">⚠️ Bardzo wysoko dla producenta sprzętu</td></tr>
+          <tr><td>P/S (2027E, przy dalszym wzroście)</td><td>ok. 9–10×</td><td style="color:var(--neutral)">Wciąż premium</td></tr>
+          <tr><td>EV / zysk operacyjny 2026E</td><td>ok. 68×</td><td style="color:var(--sell)">Wymaga dalszej ekspansji marż</td></tr>
+          <tr><td>EV / backlog całkowity (ok. $20 mld)</td><td>ok. 2,9×</td><td style="color:var(--neutral)">Sensowne, jeśli backlog się zrealizuje</td></tr>
+          <tr><td>Dywidenda</td><td>brak</td><td>Cały kapitał reinwestowany</td></tr>
+          <tr><td>Cel analityków (29 firm)</td><td>$273,51 · Buy</td><td style="color:var(--buy)">+28%, ale Wells Fargo obniżył do $176</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>nie jest miarodajne</td><td>Spółka była nierentowna jeszcze rok temu — baza porównawcza nie istnieje</td></tr>
+          <tr><td><strong>Forward P/E (FY2026, non-GAAP)</strong></td><td><strong>ok. 79×</strong></td><td>Prognoza zarządu: EPS $2,55–2,85; liczone na środku przedziału ($2,70)</td></tr>
+          <tr><td><strong>Forward P/E (FY2027, non-GAAP)</strong></td><td><strong>ok. 45–55×</strong></td><td>Szacunek własny przy wzroście zysku o 45–70% wraz z konwersją backlogu</td></tr>
+          <tr><td>PEG (forward, wzgl. wzrostu przychodów)</td><td>ok. 0,8</td><td>Poniżej 1,0 — przy wzroście przychodów o 100% mnożnik nie jest absurdalny</td></tr>
+          <tr><td>Peer: GE Vernova</td><td>wyraźnie niższe mnożniki</td><td>Producent turbin — wolniejszy wzrost, dojrzały biznes</td></tr>
+          <tr><td>Producenci sprzętu ogółem</td><td>zwykle 15–30× zysku</td><td>Bloom handluje z wielokrotną premią wobec tej grupy</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> forward P/E na poziomie 79× to mnożnik zarezerwowany dla spółek o wyjątkowej dynamice — i Bloom akurat taką ma, bo przychody rosną o 166%, a wskaźnik PEG poniżej 1,0 pokazuje, że wzrost częściowo tę wycenę usprawiedliwia. Problem polega na czymś innym: <strong>to nadal jest producent fizycznego sprzętu</strong>, z kosztami materiałów, logistyką i ryzykiem gwarancyjnym, a takie firmy historycznie handlują przy 15–30-krotności zysku. Cała premia opiera się na założeniu, że deficyt mocy dla AI utrzyma się latami. Warto też pamiętać, że <strong>prognoza zarządu jest w ujęciu non-GAAP</strong> — w standardowym ujęciu księgowym marża jest niższa.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$190 – $280</div><div class="fair-value-note">Baza: P/S 10–13× na przychodach 2027 przy utrzymaniu dynamiki backlogu | Konsensus analityków $273,51 | Scenariusz negatywny (spowolnienie inwestycji AI, problemy gwarancyjne, P/S 6×): $110–130 | Scenariusz pozytywny (backlog rośnie, marże powyżej 25%): $330–360 | Przy $213 potencjał od -11% do +31% — przedział bardzo szeroki</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Q2 2026</th><th>Rok wcześniej</th><th>Zmiana</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto (GAAP)</td><td><strong>33,4%</strong></td><td>26,7%</td><td style="color:var(--buy)">+668 pb</td></tr>
+          <tr><td>Marża brutto (non-GAAP)</td><td>34,3%</td><td>28,2%</td><td style="color:var(--buy)">+604 pb</td></tr>
+          <tr><td>Marża operacyjna (skorygowana)</td><td>22,5%</td><td>ujemna</td><td style="color:var(--strong-buy)">Przełom</td></tr>
+          <tr><td>Zysk operacyjny</td><td>$182,2 mln</td><td>strata $3,5 mln</td><td style="color:var(--strong-buy)">+$185,7 mln</td></tr>
+          <tr><td>EPS (non-GAAP)</td><td>$0,78</td><td>—</td><td>ok. 7,8× wzrost</td></tr>
+        </tbody>
+      </table></div>
+      <p>Dźwignia operacyjna działa tu wzorcowo: przychody wzrosły o 166%, a zysk operacyjny przeszedł ze straty na $182 mln. Koszty stałe fabryk rozkładają się na znacznie większy wolumen, więc każda dodatkowa jednostka sprzedaży dokłada nieproporcjonalnie dużo do wyniku.</p>
+      <div class="alert alert-danger"><strong>Czerwona flaga z poprzedniej analizy, wciąż aktualna:</strong> rezerwy gwarancyjne wzrosły do <strong>4,2% przychodów z produktów — siedmiokrotnie więcej niż rok wcześniej</strong>. Może to być ostrożne księgowanie przy gwałtownym skalowaniu, ale równie dobrze wczesny sygnał problemów z trwałością stosów w nowych instalacjach. Dla producenta sprzętu koszty gwarancyjne potrafią systematycznie zjadać marżę właśnie wtedy, gdy baza zainstalowanych jednostek rośnie najszybciej. To pozycja, którą warto sprawdzić w raporcie za Q3.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>~$2,67 mld</td><td>Solidna poduszka</td></tr>
+          <tr><td>Dług</td><td>~$2,48 mld</td><td>Praktycznie zrównoważony gotówką</td></tr>
+          <tr><td>Niewykorzystana linia kredytowa</td><td>$600 mln</td><td>Rezerwa nietknięta</td></tr>
+          <tr><td>Płynność bieżąca</td><td>ok. 5,0</td><td>Bardzo wysoka</td></tr>
+        </tbody>
+      </table></div>
+      <p>Bilans nie jest dziś ograniczeniem. Gotówka pokrywa zadłużenie, płynność bieżąca jest wysoka, a linia kredytowa pozostaje nieuruchomiona. Co ważniejsze, spółka generuje już zysk operacyjny, więc ryzyko rozwadniających emisji akcji — które przez lata ciążyło nad Bloom Energy — znacząco spadło.</p>
+      <p>Warto jednak pamiętać o historii: przez wiele lat firma regularnie emitowała akcje, żeby sfinansować działalność. Ten rozdział wydaje się zamknięty, ale przy dalszej agresywnej rozbudowie mocy produkcyjnych temat może wrócić.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">⚡</div><div class="catalyst-body"><h4>Prąd jest wąskim gardłem AI, a Bloom dostarcza go w miesiące</h4><p>Kolejka po przyłącze do sieci w USA trwa cztery do siedmiu lat. Operator, który czeka, przegrywa wyścig — dlatego klienci płacą premię za szybkość, a nie za tanią energię.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📊</div><div class="catalyst-body"><h4>Pierwszy kwartał powyżej miliarda i przełom rentowności</h4><p>Przychody +166%, produkty +215%, zysk operacyjny $182,2 mln wobec straty rok wcześniej, marża brutto w górę o 668 punktów bazowych. Prognoza podniesiona do $3,9–4,2 mld, czyli podwojenia rocznych obrotów.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📦</div><div class="catalyst-body"><h4>Backlog rzędu 20 mld USD daje wieloletnią widoczność</h4><p>Przy prognozowanych przychodach 4 mld rocznie to około pięciu lat pokrycia. Kontrakty serwisowe dołączone do sprzedaży sprzętu budują bazę powtarzalnych przychodów.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🌍</div><div class="catalyst-body"><h4>Popyt globalny, nie tylko amerykański</h4><p>Kontrakt z Nebius na $1,7 mld, projekty EdgeMode w Panamie, obecność w Korei. Model instalacji „za licznikiem" skaluje się wszędzie tam, gdzie brakuje przepustowości sieci.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🛡️</div><div class="catalyst-body"><h4>Trzy duże banki odparły raport short-sellera</h4><p>Morgan Stanley, UBS i RBC publicznie podtrzymały pozytywne rekomendacje. Instytucje rzadko ryzykują reputacją w obronie spółki, jeśli nie są przekonane do fundamentów.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">💸</div><div class="catalyst-body"><h4>Forward P/E 79× dla producenta fizycznego sprzętu</h4><p>Bloom montuje urządzenia z kosztem materiałów, logistyką i ryzykiem serwisowym. Firmy z tej kategorii historycznie handlują przy 15–30-krotności zysku. Cała premia opiera się na założeniu, że deficyt mocy dla AI potrwa lata.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔧</div><div class="catalyst-body"><h4>Rezerwy gwarancyjne siedem razy wyższe niż rok temu</h4><p>4,2% przychodów z produktów odkładane na przyszłe naprawy. Jeśli to sygnał problemów z trwałością stosów przy szybkim skalowaniu, koszty serwisu zaczną zjadać właśnie odbudowaną marżę.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Analitycy przestali być zgodni</h4><p>Mizuho podnosi do kupuj, ale Wells Fargo tnie cel do $176 — czyli <em>poniżej</em> obecnej ceny — a Truist do $218. Gdy rozpiętość ocen jest tak duża, o kursie decyduje narracja, nie arytmetyka.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🫧</div><div class="catalyst-body"><h4>Pełna zależność od cyklu inwestycji w AI</h4><p>Backlog to zamówienia firm, które same finansują się kapitałem zewnętrznym. Zacieśnienie warunków finansowania w sektorze AI natychmiast przełoży się na opóźnienia i renegocjacje.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚔️</div><div class="catalyst-body"><h4>Przewaga czasowa jest z natury przejściowa</h4><p>GE Vernova, Caterpillar i Cummins rozbudowują produkcję turbin, a reaktory modułowe obiecują czystą moc po 2030 roku. Jeśli kolejki po turbiny się rozładują, główny argument sprzedażowy Bloom słabnie.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Rozwiązanie</th><th>Gracze</th><th>Przewaga</th><th>Słabość wobec Bloom</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Ogniwa paliwowe SOFC</strong></td><td>Bloom Energy</td><td>Szybkie wdrożenie, wysoka sprawność, cicha praca, gotowość na wodór</td><td>Wysoki koszt jednostkowy, rosnące rezerwy gwarancyjne</td></tr>
+          <tr><td>Turbiny gazowe</td><td>GE Vernova, Siemens Energy, Caterpillar, Cummins</td><td>Niższy koszt na megawat, sprawdzona technologia</td><td>Wyprzedane moce na lata, emisje, hałas, pozwolenia</td></tr>
+          <tr><td>Reaktory modułowe</td><td>Oklo, NuScale, X-energy</td><td>Czysta moc bazowa</td><td>Realnie dostępne dopiero po 2030 roku</td></tr>
+          <tr><td>Sieć energetyczna</td><td>Operatorzy przesyłowi</td><td>Najtańsze rozwiązanie, gdy jest dostępne</td><td>Kolejka cztery do siedmiu lat</td></tr>
+          <tr><td>Inne ogniwa paliwowe</td><td>FuelCell Energy, Plug Power</td><td>—</td><td>Słabsze wyniki finansowe i mniejsza skala</td></tr>
+        </tbody>
+      </table></div>
+      <p>Pozycja: <strong>lider niszy, która nagle stała się główną sceną</strong>. Przewaga Bloom to nie sama technologia, lecz zdolność dostarczenia mocy szybciej niż ktokolwiek inny — przewaga realna, ale z wbudowanym terminem ważności.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Dno 52-tygodniowe</td><td>$32,52</td><td>Punkt startu wzrostu o ponad 550%</td></tr>
+          <tr><td>Szczyt 52-tygodniowy</td><td>$351,28</td><td>Maksimum przed korektą</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$213</strong></td><td>-39% od szczytu, o 4% niżej niż tydzień temu</td></tr>
+          <tr><td>Wsparcie S1</td><td>$190–200</td><td>Strefa broniona po wynikach</td></tr>
+          <tr><td>Wsparcie S2</td><td>$155–175</td><td>Konsolidacja z czerwca i lipca; tam też cel Wells Fargo</td></tr>
+          <tr><td>Opór R1</td><td>$240–260</td><td>Poziomy sprzed ostatniej korekty</td></tr>
+          <tr><td>Opór R2</td><td>$273</td><td>Konsensus analityków</td></tr>
+          <tr><td>Opór R3</td><td>$351</td><td>Szczyt 52-tygodniowy</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Obrona strefy $190–200</li><li>Nowy duży kontrakt na zasilanie AI</li><li>Q3 z marżą powyżej 35% i stabilnymi rezerwami gwarancyjnymi</li><li>Ruch ku $260–273</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Przebicie $190 z wolumenem</li><li>Dalszy wzrost rezerw gwarancyjnych</li><li>Odwrót od spółek związanych z AI</li><li>Test $155–176 (cel Wells Fargo)</li></ul></div>
+      </div>
+      <p>Kurs konsoliduje się po lipcowym wystrzale, oddając część zysków. Trend długoterminowy pozostaje silnie wzrostowy, ale krótkoterminowo brakuje impulsu — najbliższy realny katalizator to wyniki za trzeci kwartał.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Katalizator w postaci wyników już się wypalił, kurs konsoliduje po korekcie. Do wyników Q3 brak nowego impulsu, a rozstrzał ocen analityków jest duży.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO na cofnięciach</div><div class="rating-note">Backlog 20 mld, prognoza podwojenia przychodów, marże w górę. Konsensus $273,51 daje +28%. Ale wejście lepiej rozłożyć na strefę $190–200 niż kupować całość teraz.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO (spekulacyjne)</div><div class="rating-note">Deficyt mocy dla AI to trend dekady, a serwis buduje bazę powtarzalną. Konkurencja i wysoka wycena każą trzymać pozycję umiarkowaną.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia wejścia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji:</strong> 2–3% portfela — zmienność od $32 do $351 w ciągu roku wyklucza większe zaangażowanie</li>
+        <li><strong>Pierwsza transza:</strong> $195–213 (poziom obecny, po korekcie o 39% od szczytu)</li>
+        <li><strong>Druga transza:</strong> $160–180 przy głębszym cofnięciu sektora</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w okolicach $270 (konsensus), reszta powyżej $310</li>
+        <li><strong>Monitoruj w Q3:</strong> rezerwy gwarancyjne — to najwcześniejszy sygnał problemów jakościowych</li>
+        <li><strong>Wyjście z tezy:</strong> trwałe przebicie $155 albo dalszy wzrost kosztów gwarancyjnych</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$190 – $280</div><div class="fair-value-note">Scenariusz negatywny: $110–130 | Scenariusz pozytywny: $330–360 | Konsensus: $273,51</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Sprzedaje czas, nie prąd</strong> — przyłącze do sieci trwa 4–7 lat, Bloom dostarcza moc w miesiące; to przewaga, za którą operatorzy AI płacą premię</li>
+          <li><strong>Pierwszy kwartał powyżej miliarda i przełom rentowności</strong> — przychody +166%, produkty +215%, zysk operacyjny $182 mln wobec straty rok wcześniej, prognoza podniesiona do $3,9–4,2 mld</li>
+          <li><strong>Backlog około 20 mld USD i zdrowy bilans</strong> — pięć lat pokrycia przychodów, gotówka równoważąca dług, koniec ery emisji akcji</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Forward P/E 79× dla producenta sprzętu</strong> — kategoria, która zwykle handluje przy 15–30-krotności zysku; premia wymaga, by boom na moc dla AI trwał latami</li>
+          <li><strong>Rezerwy gwarancyjne siedmiokrotnie wyższe r/r</strong> — 4,2% przychodów z produktów; potencjalny sygnał problemów z trwałością przy szybkim skalowaniu</li>
+          <li><strong>Analitycy przestali być zgodni</strong> — Mizuho podnosi do kupuj, Wells Fargo tnie cel do $176, czyli poniżej obecnej ceny; zmienność od $32 do $351 w rok</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> dalszy wzrost rezerw gwarancyjnych w Q3 albo anulowanie lub opóźnienie dużego projektu AI → zejście w okolice $130–160.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> Q3 z marżą brutto powyżej 35%, stabilnymi rezerwami gwarancyjnymi i backlogiem rosnącym powyżej $25 mld → atak na $270–310.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Bloom Energy przeszedł w 2026 roku przemianę, której rynek nie doceniał przez całą poprzednią dekadę. Firma, która przez lata uchodziła za kosztowny eksperyment z pogranicza zielonej energii, właśnie <strong>przekroczyła miliard dolarów przychodów w jednym kwartale</strong>, zwiększyła sprzedaż o 166%, a zysk operacyjny podniosła ze straty do $182 mln. Powód jest jeden i bardzo konkretny: budowa centrów danych AI zderzyła się ze ścianą, której nikt nie przewidział — brakiem prądu. Kolejka po przyłącze do sieci w USA sięga siedmiu lat, a Bloom potrafi uruchomić moc w kilka miesięcy. Sprzedaje więc nie energię, lecz <strong>czas</strong>, a w wyścigu o AI czas jest najdroższym towarem.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Spór nie dotyczy więc jakości biznesu, lecz jego ceny. Przy $213 płacisz około 14-krotności tegorocznej sprzedaży i <strong>79-krotność prognozowanego zysku za firmę, która montuje fizyczne urządzenia</strong> — a producenci sprzętu historycznie handlują przy piętnasto- do trzydziestokrotności. Cała premia opiera się na założeniu, że deficyt mocy dla AI potrwa lata, a nie kwartały. Podział wśród analityków oddaje ten spór idealnie: Mizuho podnosi rekomendację do kupuj, podczas gdy Wells Fargo obniża cel do $176 — poniżej obecnej ceny. Nie chodzi o różnicę w prognozach, lecz o różnicę w wierze.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Skala i rentowność.</strong> Pierwszy kwartał powyżej miliarda, zysk operacyjny $182 mln, marża brutto w górę o 668 punktów bazowych — warunek spełniony ponad oczekiwania.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Widoczność zamówień.</strong> Backlog rzędu 20 mld USD przy prognozie 4 mld przychodów rocznie daje około pięciu lat pokrycia.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Zdrowy bilans.</strong> Gotówka $2,67 mld równoważąca dług, nieuruchomiona linia kredytowa, koniec finansowania się emisjami akcji.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Kontrola kosztów gwarancyjnych.</strong> Rezerwy siedmiokrotnie wyższe niż rok temu. Jeśli to ostrożność, marża się utrzyma; jeśli problem jakościowy, zacznie ją zjadać.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Trwałość deficytu mocy.</strong> Przewaga Bloom polega na szybkości. Gdy sieci przyspieszą albo turbiny staną się dostępne, argument sprzedażowy słabnie.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Październik–listopad 2026</strong></td><td>Wyniki Q3 2026</td><td>Test marży i — ważniejsze — poziomu rezerw gwarancyjnych</td></tr>
+            <tr><td>H2 2026</td><td>Realizacja projektu Nebius i innych dużych kontraktów</td><td>Pokaże, czy Bloom dowozi w terminie przy tak szybkim skalowaniu</td></tr>
+            <tr><td>H2 2026 – 2027</td><td>Nowe kontrakty na zasilanie centrów danych</td><td>Każdy kolejny podnosi backlog i uzasadnia obecne mnożniki</td></tr>
+            <tr><td>Na bieżąco</td><td>Dostępność turbin gazowych i tempo rozbudowy sieci</td><td>Rozładowanie kolejek osłabia główną przewagę Bloom</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Rezerwy gwarancyjne</td><td>4,2% przychodów z produktów (7× r/r)</td><td>dalszy wzrost powyżej 5%</td><td><span class="mon-dot r"></span>Ryzyko</td></tr>
+            <tr><td>Marża brutto</td><td>33,4% GAAP / 34,3% non-GAAP</td><td>&lt; 30%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Wzrost przychodów z produktów</td><td>+215% r/r</td><td>&lt; 60%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Backlog</td><td>ok. 20 mld USD</td><td>spadek kwartał do kwartału</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Forward P/E</td><td>ok. 79× (FY2026)</td><td>brak marginesu bezpieczeństwa</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Kurs wobec wsparcia $190</td><td>ok. 11% powyżej</td><td>trwałe przebicie w dół</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji:</strong> 2–3% portfela — zakres roczny od $32 do $351 oznacza obsunięcia rzędu kilkudziesięciu procent</li>
+          <li><strong>Pierwsza transza:</strong> $195–213, czyli poziom obecny po korekcie o 39% od szczytu</li>
+          <li><strong>Druga transza:</strong> $160–180 przy głębszym cofnięciu — w tej strefie leży też cel Wells Fargo</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w okolicach $270 (konsensus analityków), reszta powyżej $310</li>
+          <li><strong>Kluczowa pozycja do sprawdzenia w Q3:</strong> rezerwy gwarancyjne — jedna liczba, która może zmienić całą tezę</li>
+          <li><strong>Wyjście z tezy:</strong> trwałe przebicie $155 albo wzrost rezerw gwarancyjnych powyżej 5% przychodów z produktów</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--neutral)">⚖️ NEUTRALNA — kupuj na cofnięciach, nie w euforii</div>
+        <p>Bloom Energy przestał być spekulacją na zieloną energię, a stał się dostawcą infrastruktury krytycznej dla sztucznej inteligencji — i wyniki za drugi kwartał nie pozostawiają co do tego wątpliwości. Przychody podwoiły się z nawiązką, spółka zarabia operacyjnie, a backlog rzędu 20 mld dolarów daje widoczność na kilka lat. To realna zmiana kategorii, a nie chwilowy dobry kwartał.</p>
+        <p>Cena jednak wciąż zakłada, że wszystko pójdzie zgodnie z planem. <strong>Przy 79-krotności prognozowanego zysku nie ma miejsca na potknięcie</strong>, a jedno konkretne potknięcie już majaczy w danych: rezerwy gwarancyjne wzrosły siedmiokrotnie w ciągu roku. Korekta o 39% od szczytu poprawiła relację ryzyka do nagrody względem lipcowego wystrzału, ale nie na tyle, by mówić o okazji. Rozsądne wydaje się budowanie pozycji transzami — pierwsza tutaj, druga w okolicach $160–180 — i uważne przeczytanie raportu za trzeci kwartał, ze szczególną uwagą na jedną pozycję kosztową.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$190–280</b></div>
+          <div><span>Scenariusz negatywny</span><b>$110–130</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$330–360</b></div>
+          <div><span>Sugerowana pozycja</span><b>2–3% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3 — jesień</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 7 sierpnia 2026 | Cena od użytkownika: $213 | Zastępuje wersję z 30 lipca (cena $222) | Dane: Bloom Energy IR (Q2 2026, 28 lipca), SEC 8-K, BusinessWire, StockAnalysis, TIKR, Simply Wall St | Forward P/E liczone na prognozie non-GAAP zarządu | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

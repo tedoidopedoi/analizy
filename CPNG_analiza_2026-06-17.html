@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPNG — Analiza Inwestycyjna</title>
+<style>
+  :root {
+    --bg: #0f1117; --surface: #1a1d2e; --surface2: #242740; --border: #2e3150;
+    --text: #e8eaf0; --muted: #8b90a0; --accent: #6c63ff; --accent2: #00d4aa;
+    --strong-buy: #00c853; --buy: #4caf50; --neutral: #ffd740; --sell: #ff6d00; --strong-sell: #d50000;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; line-height: 1.6; font-size: 15px; }
+  .header { background: linear-gradient(135deg, #1a1d2e 0%, #242740 100%); border-bottom: 1px solid var(--border); padding: 32px 48px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .header-left h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; }
+  .header-left h1 span { color: var(--accent); }
+  .header-left p { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+  .rating-badge { padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 1rem; letter-spacing: 0.5px; text-transform: uppercase; }
+  .rating-badge.buy { background: var(--buy); color: #fff; }
+  .rating-badge.strong-buy { background: var(--strong-buy); color: #fff; }
+  .rating-badge.neutral { background: var(--neutral); color: #000; }
+  .nav-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 48px; overflow-x: auto; display: flex; scrollbar-width: none; }
+  .nav-bar::-webkit-scrollbar { display: none; }
+  .nav-item { padding: 14px 18px; color: var(--muted); font-size: 0.82rem; font-weight: 500; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.15s; text-decoration: none; display: block; }
+  .nav-item:hover { color: var(--text); border-bottom-color: var(--accent); }
+  .nav-item.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .main { max-width: 1100px; margin: 0 auto; padding: 40px 48px 80px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-bottom: 40px; }
+  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+  .metric-card .label { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .metric-card .value { font-size: 1.25rem; font-weight: 700; }
+  .metric-card .sub { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 24px; overflow: hidden; }
+  .section-header { padding: 18px 24px; background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; }
+  .section-number { background: var(--accent); color: #fff; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 0.95rem; font-weight: 600; flex: 1; }
+  .section-toggle { color: var(--muted); font-size: 0.8rem; transition: transform 0.2s; }
+  .section-toggle.open { transform: rotate(180deg); }
+  .section-body { padding: 24px; display: block; }
+  .section-body.collapsed { display: none; }
+  .section-body p { margin-bottom: 12px; }
+  .section-body p:last-child { margin-bottom: 0; }
+  .section-body ul, .section-body ol { padding-left: 20px; margin-bottom: 12px; }
+  .section-body li { margin-bottom: 6px; }
+  h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent2); margin: 16px 0 8px; }
+  h4:first-child { margin-top: 0; }
+  .metrics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin: 12px 0; }
+  .metric-row { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; display: flex; flex-direction: column; gap: 2px; }
+  .metric-row .m-label { color: var(--muted); font-size: 0.75rem; }
+  .metric-row .m-value { font-weight: 600; font-size: 0.95rem; }
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 12px 0; }
+  .comp-table th { background: var(--surface2); color: var(--muted); font-weight: 600; text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.3px; }
+  .comp-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table tr.highlight td { background: rgba(108,99,255,0.08); }
+  .comp-table tr:hover td { background: rgba(255,255,255,0.03); }
+  .bull-list, .bear-list { border-radius: 10px; padding: 16px 18px; }
+  .bull-list { background: rgba(0,200,83,0.07); border: 1px solid rgba(0,200,83,0.2); }
+  .bear-list { background: rgba(213,0,0,0.07); border: 1px solid rgba(213,0,0,0.2); }
+  .bull-list h4 { color: var(--strong-buy); margin-top: 0; }
+  .bear-list h4 { color: #ff5252; margin-top: 0; }
+  .bull-list li::marker { color: var(--strong-buy); }
+  .bear-list li::marker { color: #ff5252; }
+  .verdict-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0; }
+  .verdict-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .verdict-card .term { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .verdict-card .v-rating { font-size: 0.88rem; font-weight: 700; margin-bottom: 8px; padding: 4px 10px; border-radius: 20px; display: inline-block; }
+  .verdict-card .v-text { color: var(--muted); font-size: 0.82rem; line-height: 1.5; }
+  .v-rating.neutral { background: var(--neutral); color: #000; }
+  .v-rating.buy { background: var(--buy); color: #fff; }
+  .v-rating.strong-buy { background: var(--strong-buy); color: #fff; }
+  .tldr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .reason-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+  .reason-card h4 { margin-top: 0; }
+  .reason-card ul { padding-left: 18px; }
+  .thesis-breaker { background: rgba(255,215,64,0.08); border: 1px solid rgba(255,215,64,0.25); border-radius: 10px; padding: 16px 18px; }
+  .thesis-breaker h4 { color: var(--neutral); margin-top: 0; }
+  .fair-value-box { background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.3); border-radius: 10px; padding: 16px 20px; margin-top: 16px; }
+  .fair-value-box .fv-label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .fair-value-box .fv-value { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin: 4px 0; }
+  .fair-value-box .fv-sub { color: var(--muted); font-size: 0.82rem; }
+  .alert-box { background: rgba(255,109,0,0.08); border: 1px solid rgba(255,109,0,0.3); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+  .alert-box strong { color: var(--sell); }
+  .highlight-box { background: rgba(0,212,170,0.07); border: 1px solid rgba(0,212,170,0.2); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+  .na { color: var(--muted); font-style: italic; }
+  .footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 32px; border-top: 1px solid var(--border); margin-top: 40px; }
+  @media (max-width: 768px) {
+    .header { padding: 20px; } .main { padding: 20px 16px 60px; } .nav-bar { padding: 0 16px; }
+    .verdict-grid, .tldr-grid { grid-template-columns: 1fr; } .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1><span>CPNG</span> — Coupang, Inc.</h1>
+    <p>NYSE · E-commerce / Logistyka / Korea Południowa · Analiza: 2026-06-17</p>
+  </div>
+  <div class="rating-badge buy">Kupno</div>
+</div>
+
+<nav class="nav-bar">
+  <a class="nav-item active" href="#profil">1. Profil</a>
+  <a class="nav-item" href="#produkt">2. Produkt</a>
+  <a class="nav-item" href="#rynki">3. Rynki</a>
+  <a class="nav-item" href="#klienci">4. Klienci</a>
+  <a class="nav-item" href="#biznes">5. Biznes</a>
+  <a class="nav-item" href="#wycena">6. Wycena</a>
+  <a class="nav-item" href="#marze">7. Marże</a>
+  <a class="nav-item" href="#bilans">8. Bilans</a>
+  <a class="nav-item" href="#bulls">9. Bull Case</a>
+  <a class="nav-item" href="#bears">10. Bear Case</a>
+  <a class="nav-item" href="#konkurencja">11. Konkurencja</a>
+  <a class="nav-item" href="#technika">12. Technika</a>
+  <a class="nav-item" href="#ocena">13. Ocena</a>
+  <a class="nav-item" href="#tldr">14. TL;DR</a>
+</nav>
+
+<div class="main">
+
+  <div class="alert-box">
+    <strong>⚠️ Kontekst do analizy:</strong> Akcja jest w silnym downtrndzie (-47% od ATH) w wyniku jednorazowego zdarzenia — wycieku danych 33,7 mln użytkowników (koniec 2025), który wygenerował $1,17 mld w voucherach i $409 mln regulacyjnej kary. Q1 2026 był skażony przez te koszty. Fundamenty biznesu są nienaruszone — wzrost przychodów 20%+ FX-neutral kontynuowany.
+  </div>
+
+  <div class="summary-grid">
+    <div class="metric-card">
+      <div class="label">Kapitalizacja</div>
+      <div class="value">~$32 mld</div>
+      <div class="sub">Market Cap</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Cena akcji</div>
+      <div class="value">~$17,95</div>
+      <div class="sub">-47% od ATH $34,08</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">P/S TTM</div>
+      <div class="value">~1,0x</div>
+      <div class="sub">P/E Forward: ~35x</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">EV/EBITDA</div>
+      <div class="value">~22–40x</div>
+      <div class="sub">Zniekształcone przez Q1 2026</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Wzrost przychodów</div>
+      <div class="value">+20%+ YoY</div>
+      <div class="sub">FX-neutral · FY2024: $30,3 mld</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Marża brutto</div>
+      <div class="value">~29–31%</div>
+      <div class="sub">FCF FY2024: $1,0 mld</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">52W High / Low</div>
+      <div class="value">$34,08</div>
+      <div class="sub">Low: $14,92</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Fair Value</div>
+      <div class="value">$28–35</div>
+      <div class="sub">Potencjał: +56–95%</div>
+    </div>
+  </div>
+
+  <!-- 1. PROFIL -->
+  <div class="section" id="profil">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">1</div>
+      <div class="section-title">Profil Spółki</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Historia i siedziba</h4>
+      <p>Coupang, Inc. (NYSE: CPNG) założona w 2010 roku przez Boma Kima (Koreańczyk-Amerykanin, Harvard Business School) w Seulu, Korea Południowa. Idea: zbudować „Amazon + UPS + Whole Foods" dla Korei — jedną platformę z własną logistyką, dostawą i marketplace. IPO na NYSE w marcu 2021 roku z wyceną ~$60 mld. Siedziba prawna: Seattle, WA. Operacje: Korea Południowa (~95% rev), Tajwan (~5%), globalnie via Farfetch. Kapitalizacja rynkowa: ~$32 mld (czerwiec 2026).</p>
+      <h4>Czym się zajmuje</h4>
+      <p>Coupang to największy e-commerce w Korei Południowej. Dysponuje własną siecią logistyczną (ponad 100 centrów fulfillment, tysiące furgonetów Coupang Man). Flagowy produkt: <strong>Rocket Delivery</strong> — dostawa do 99% koreańskich gospodarstw domowych w ciągu kilku godzin od zamówienia, 365 dni w roku. Platforma obejmuje również: Coupang Eats (food delivery), Coupang Play (streaming video), Rocket WOW (membership), Coupang Pay, Farfetch/R.Lux (luxury fashion). Rozwiązuje problem fragmentacji handlu detalicznego — jedna aplikacja zastępuje całe centrum handlowe + supermarket + sklep elektroniczny.</p>
+      <h4>Etap rozwoju</h4>
+      <p><strong>Akcelerujący wzrost z pierwszą rentownością</strong> — spółka osiągnęła profitowość w 2023–2024, a Q1 2026 to jednorazowy wstrząs związany z incydentem danych. Przychody $30,3 mld w FY2024, z 20%+ wzrostem FX-neutral. Na ścieżce do Fortune 100.</p>
+      <h4>Kluczowe wydarzenia ostatnich 12 miesięcy</h4>
+      <ul>
+        <li><strong>Wyciek danych (Nov 2025 ujawniony):</strong> 33,7 mln użytkowników dotkniętych wyciekiem. PIPC nałożyła rekordową karę 624,6 mld won (~$409 mln). Coupang wypłacił vouchery o łącznej wartości $1,17 mld (50 000 won na klienta). Koszt Q1 2026: strata netto $266 mln vs. zysk rok wcześniej.</li>
+        <li><strong>Citi Downgrade (maj 2026):</strong> Citigroup obniżył rating z Buy do Neutral, target z $23 do $22,20 — akcja spada -21% w miesiąc, -31% YTD.</li>
+        <li><strong>Tajwan ekspansja:</strong> Udziały w Tajwanie rosną 78% YoY w CC. Cel: logistyka w 230 z 260 miast Tajwanu do 2027.</li>
+        <li><strong>Farfetch integracja:</strong> Platforma luksusowa Farfetch (przejęta I 2024) działa jako R.Lux — break-even i stabilizacja operacji.</li>
+        <li><strong>Buyback expansion:</strong> Zarząd ogłosił rozszerzenie skupu akcji — sygnał zaufania przy niskich wycenach.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2. PRODUKT -->
+  <div class="section" id="produkt">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">2</div>
+      <div class="section-title">Produkt / Usługa</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Portfolio produktów</h4>
+      <ul>
+        <li><strong>Rocket Delivery:</strong> Dostawa dnia następnego (lub kilkugodzinna) do 99% koreańskich gospodarstw. Zlecenia do północy — dostarczane przed 7:00 rano. Unikalny na skalę globalną poziom serwisu.</li>
+        <li><strong>Rocket WOW Membership:</strong> ~14–15 mln subskrybentów (~$5,70/mies.) = ~30% populacji Korei. Dostęp do: darmowych dostaw, Coupang Play (streaming), Coupang Eats zniżki.</li>
+        <li><strong>Coupang Eats:</strong> Platforma food delivery — bezpośredni konkurent Baemin/Yogiyo. Zysk operacyjny w Korei.</li>
+        <li><strong>Coupang Play:</strong> Serwis streamingowy — licencjonowane treści + sport (Liga NBA, Premier League w Korei). Bundlowany z WOW.</li>
+        <li><strong>Farfetch / R.Lux:</strong> Globalny luksusowy marketplace — 4+ mln klientów na całym świecie, integracja z koreańskim fulfillment.</li>
+        <li><strong>Coupang Pay:</strong> System płatności wewnętrzny — retencja danych transakcyjnych, financial services.</li>
+        <li><strong>Tajwan:</strong> Rocket Delivery replikacja — wzrost 78% YoY, ekspansja do 230/260 miast do 2027.</li>
+      </ul>
+      <h4>Moat i przewagi konkurencyjne</h4>
+      <ul>
+        <li><strong>Logistyczna forteca:</strong> $10+ mld zainwestowane w infrastrukturę logistyczną w ciągu 15 lat. Żaden konkurent nie może replikować w krótkim czasie. Bariera wejścia: kapitałowa i czasowa.</li>
+        <li><strong>WOW flywheel:</strong> Membership → częstsze zakupy → więcej danych → lepsze rekomendacje → wyższy AOV → więcej dostaw → niższy koszt per delivery. Klasyczny efekt sieciowy danych.</li>
+        <li><strong>Coupang Man trust:</strong> Właśni kurierzy (nie gig-economy) = jakość + bezpieczeństwo + lojalność. W Korei stał się instytucją kultury (memotyp „Coupang Man").</li>
+        <li><strong>Skalowanie kosztów stałych:</strong> Przy wzroście GMV, marże rosną — dźwignia operacyjna jest kluczowym silnikiem przyszłej rentowności.</li>
+      </ul>
+      <h4>Skalowalność i roadmapa</h4>
+      <p>Tajwan jako proof of concept międzynarodowego rollout modelu. Potencjalne kolejne rynki: Japonia, Indie (gdzie Amazon dominuje, ale Coupang może przynieść superior delivery). Rozszerzenie usług finansowych (Coupang Pay) i reklamowych (retail media) to marżowe możliwości na istniejącej bazie klientów.</p>
+    </div>
+  </div>
+
+  <!-- 3. RYNKI -->
+  <div class="section" id="rynki">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">3</div>
+      <div class="section-title">Rynki i Otoczenie</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>TAM / SAM / SOM</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">TAM Korea e-commerce (2024)</div><div class="m-value">~$230 mld (szac.)</div></div>
+        <div class="metric-row"><div class="m-label">TAM Korea e-commerce (2027E)</div><div class="m-value">~$336 mld (+13% CAGR)</div></div>
+        <div class="metric-row"><div class="m-label">Penetracja rynku CPNG (2024)</div><div class="m-value">~15% retail value (vs. 6,8% w 2020)</div></div>
+        <div class="metric-row"><div class="m-label">Tajwan TAM (2027E)</div><div class="m-value">Rozległy — 230/260 miast cel</div></div>
+        <div class="metric-row"><div class="m-label">Farfetch Global Luxury TAM</div><div class="m-value">~$400 mld (globalny rynek luxury)</div></div>
+      </div>
+      <div class="highlight-box">
+        <strong>Penetracja Korei rośnie szybko:</strong> Coupang zwiększył udział w retailu z 6,8% (2020) do 15,1% (2024) — podwojenie udziału przy 80% populacji kupującej online. Przy dalszym wzroście do 20-25%, sama Korea to $45-60 mld przychodów — vs. obecne ~$29 mld.
+      </div>
+      <h4>Geografie</h4>
+      <p><strong>Korea Południowa (~95% rev):</strong> Rynek dojrzały digitally (80%+ zakupów online), ale Coupang wciąż zwiększa udział. <strong>Tajwan (~5% rev i rosnące):</strong> Szybki wzrost, model Rocket Delivery przetestowany. <strong>Globalnie via Farfetch:</strong> 4+ mln klientów w 190+ krajach — luksus online.</p>
+      <h4>Trendy makro</h4>
+      <ul>
+        <li>Korea ma jedną z najwyższych penetracji e-commerce na świecie (~80%) — rynek bardzo dojrzały cyfrowo.</li>
+        <li>Demografia Korei: starzejące się społeczeństwo sprzyja dostawom do domu (convenience premium).</li>
+        <li>Presja cenowa ze strony Temu/AliExpress: chińskie platformy weszły agresywnie w Korei w 2024–2025. Zagrożenie dla produktów masowych, mniej dla Rocket Delivery premium.</li>
+        <li>Tajwan: młodsze demograficznie, rosnąca klasa średnia, duża ekspozycja na technologię (TSMC ekosystem).</li>
+      </ul>
+      <h4>Cykliczność</h4>
+      <p>E-commerce jest relatywnie defensywny — ludzie kupują żywność i produkty codziennego użytku niezależnie od koniunktury. Segmenty premium (R.Lux, Coupang Travel w voucherach) są bardziej cykliczne.</p>
+    </div>
+  </div>
+
+  <!-- 4. KLIENCI -->
+  <div class="section" id="klienci">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">4</div>
+      <div class="section-title">Klienci i Sprzedaż</div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body collapsed">
+      <h4>Profil klientów</h4>
+      <p><strong>B2C wyłącznie</strong> — konsumenci koreańscy i tajwańscy. Szeroka demografia: od millenialsów po seniorów (Rocket Delivery popular w starszych grupach ze względu na convenience). WOW membership: ~14–15 mln osób = ~30% populacji Korei. Farfetch: zamożni konsumenci globalni, 4+ mln klientów w 190 krajach.</p>
+      <h4>Retencja i engagement</h4>
+      <p>Brak oficjalnego NRR (B2C). Proxy retencji: renewal rate WOW membership jest bardzo wysoki (precyzyjna liczba nie ujawniona). Aktywni klienci (kupujący w ostatnich 12 miesiącach) nie są publicznie ujawniani, jednak wzrost przychodów 20%+ YoY przy stabilnej penetracji Korei sugeruje wzrost AOV (Annual Order Value) na klienta — upsell do wyższych kategorii i Coupang Eats.</p>
+      <h4>Koncentracja klientów</h4>
+      <p>Zero koncentracji — miliony pojedynczych konsumentów. Brak ryzyka odejścia pojedynczego klienta materialnie wpływającego na wyniki.</p>
+      <h4>Kanały sprzedaży</h4>
+      <ul>
+        <li>Aplikacja mobilna (dominujący kanał — Korea ma jeden z najwyższych wskaźników m-commerce na świecie)</li>
+        <li>Web (mniejszy udział, rośnie desktop wśród starszych)</li>
+        <li>Coupang Eats (osobna aplikacja + integracja z WOW)</li>
+        <li>R.Lux (Farfetch app + web)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 5. BIZNES -->
+  <div class="section" id="biznes">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">5</div>
+      <div class="section-title">Model Biznesowy i Przychody</div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body collapsed">
+      <h4>Struktura przychodów (FY2024: ~$30,3 mld)</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">Product Commerce (Korea)</div><div class="m-value">~$27–28 mld (~93%)</div></div>
+        <div class="metric-row"><div class="m-label">Developing Offerings (Eats, Play, Tajwan, Farfetch)</div><div class="m-value">~$2–3 mld (~7%)</div></div>
+        <div class="metric-row"><div class="m-label">WOW Membership Revenue</div><div class="m-value">Wliczone w Product Commerce</div></div>
+        <div class="metric-row"><div class="m-label">Developing Offerings wzrost Q1 2026</div><div class="m-value">+28% YoY (przy +4% core)</div></div>
+      </div>
+      <p>Model hybrydowy: sprzedaż bezpośrednia (Rocket delivery, 1P inventory) + marketplace (3P sprzedawcy) + membership SaaS (WOW) + reklama (emerging). Reklama i fintech to długoterminowe high-margin warstwy do dodania — wzorem Amazon Advertising.</p>
+      <h4>Unit Economics</h4>
+      <p>Coupang nie ujawnia CAC/LTV jawnie. Pośrednio: przy $30 mld revenue i 14–15 mln WOW subscribers (płacący ~$68/rok), WOW generuje ~$1 mld recurring subscription revenue. Każdy WOW member kupuje statystycznie 3–5x więcej niż non-member.</p>
+      <h4>Prognozy konsensusu</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">FY2025E Revenue</div><div class="m-value">~$34–36 mld (+15–18% YoY)</div></div>
+        <div class="metric-row"><div class="m-label">FY2026E Revenue</div><div class="m-value">~$38–42 mld (+12–17% YoY)</div></div>
+        <div class="metric-row"><div class="m-label">FY2026E Adj. EBITDA</div><div class="m-value">~$1,5–2 mld (recovery)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. WYCENA -->
+  <div class="section" id="wycena">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">6</div>
+      <div class="section-title">Wskaźniki Wyceny</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Mnożniki rynkowe (cena ~$17,95, czerwiec 2026)</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">P/E TTM</div><div class="m-value">ujemny (Q1 2026 strata)</div></div>
+        <div class="metric-row"><div class="m-label">P/E Forward (FY2027E)</div><div class="m-value">~35x</div></div>
+        <div class="metric-row"><div class="m-label">P/S TTM</div><div class="m-value">~1,0x (!)</div></div>
+        <div class="metric-row"><div class="m-label">EV/EBITDA</div><div class="m-value">~22x (zniekształ. przez Q1 strata)</div></div>
+        <div class="metric-row"><div class="m-label">Price/FCF (FY2024)</div><div class="m-value">~31x ($1,0 mld FCF)</div></div>
+        <div class="metric-row"><div class="m-label">FCF Yield</div><div class="m-value">~3,2%</div></div>
+        <div class="metric-row"><div class="m-label">Debt/Equity</div><div class="m-value">Umiarkowane</div></div>
+        <div class="metric-row"><div class="m-label">Dividend</div><div class="m-value">Brak</div></div>
+      </div>
+      <div class="highlight-box">
+        <strong>P/S ratio 1,0x:</strong> Jest to wyjątkowo niska wycena dla spółki rosnącej 15–20% YoY z dominującą pozycją rynkową w Korei. Amazon handluje na ~3–4x P/S, MercadoLibre ~5x, JD.com ~0,3x (ale China risk premium). CPNG ~1x sugeruje albo wycenę permanentnego spowolnienia, albo jednorazową okazję. Naszym zdaniem — to drugie.
+      </div>
+      <h4>Kontekst vs. peers</h4>
+      <p>Analitycy (14 Buy, 2 Hold, 1 Sell) mają medianę targetów $35 — implikuje ~95% upside od $17,95. Nawet po downgrade Citi ($22,20), to +24% upside. Barclays utrzymuje Overweight. Rynek wycenia permanentne pogorszenie, analitycy widzą one-time impact.</p>
+    </div>
+  </div>
+
+  <!-- 7. MARŻE -->
+  <div class="section" id="marze">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">7</div>
+      <div class="section-title">Marżowość i Dynamika Finansowa</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Trend marż (FY2022–FY2025)</h4>
+      <table class="comp-table">
+        <thead><tr><th>Metryka</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>Q3 FY2025</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto</td><td>~19%</td><td>~24%</td><td>~27–31%</td><td>~29,4%</td></tr>
+          <tr><td>Marża operacyjna (adj.)</td><td>ujemna</td><td>~2%</td><td>~3–4%</td><td>rosnąca</td></tr>
+          <tr><td>FCF</td><td>-$0,1 mld</td><td>$1,8 mld</td><td>$1,0 mld</td><td>$0,78 mld TTM</td></tr>
+          <tr><td>Revenue Growth YoY</td><td>+12%</td><td>+18%</td><td>+24%</td><td>+18–21% FX-neutral</td></tr>
+          <tr><td>Gross Profit Growth YoY</td><td>N/A</td><td>N/A</td><td>+48% (Q4)</td><td>+20% (Q3 2025)</td></tr>
+        </tbody>
+      </table>
+      <h4>Uwaga o FY2024 FCF</h4>
+      <p>FCF spadł z $1,8 mld (FY2023) do $1,0 mld (FY2024) — wynika z jednorazowych korzyści w 2023 z working capital, nie z pogorszenia biznesu. Gross profit rośnie szybciej niż revenue (48% vs. 21% w Q4 2024) — wyraźny sygnał dźwigni operacyjnej.</p>
+      <h4>Dźwignia operacyjna</h4>
+      <p>Coupang buduje dźwignię: marża brutto systematycznie rośnie (19% → 31%) przy stałym wzroście przychodów. Logistyka własna: wysoki koszt stały, ale przy skalowaniu koszt per dostawa spada. W Korei jest już w dobrej pozycji — Developing Offerings (Tajwan, Eats) są na etapie inwestycji i chwilowo presują marżę skonsolidowaną.</p>
+    </div>
+  </div>
+
+  <!-- 8. BILANS -->
+  <div class="section" id="bilans">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">8</div>
+      <div class="section-title">Bilans i Płynność</div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body collapsed">
+      <h4>Pozycja bilansowa</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">Total Assets</div><div class="m-value">~$17,4 mld</div></div>
+        <div class="metric-row"><div class="m-label">Total Liabilities</div><div class="m-value">~$9,6 mld</div></div>
+        <div class="metric-row"><div class="m-label">Total Equity</div><div class="m-value">~$3,9 mld</div></div>
+        <div class="metric-row"><div class="m-label">FCF FY2024</div><div class="m-value">$1,0 mld</div></div>
+        <div class="metric-row"><div class="m-label">FCF TTM (Q2 2025)</div><div class="m-value">$0,78 mld</div></div>
+        <div class="metric-row"><div class="m-label">Operating CF FY2024</div><div class="m-value">$1,9 mld</div></div>
+      </div>
+      <h4>Wpływ incydentu danych na bilans</h4>
+      <p>Jednorazowe obciążenia: regulacyjna kara $409 mln + vouchery $1,17 mld. Vouchery były rozliczane w Q1 2026 (dystrybuowane od stycznia, ważne do 15 kwietnia) — stąd strata netto $266 mln w Q1 2026. Spółka ma wystarczające rezerwy i zdolność do absorpcji tych kosztów bez ryzyka płynności.</p>
+      <h4>SBC i dilucja</h4>
+      <p>SBC jest obecny (typowo 2–3% przychodów dla e-commerce). Buyback program ogłoszony przy okazji Q1 2026 — zarząd wykorzystuje niską wycenę do skupu akcji, co jest pozytywnym sygnałem. Ryzyko dilucji: niskie.</p>
+    </div>
+  </div>
+
+  <!-- 9. BULL CASE -->
+  <div class="section" id="bulls">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">9</div>
+      <div class="section-title">Szanse — Bull Case</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="bull-list">
+        <h4>🟢 Katalizatory wzrostu</h4>
+        <ul>
+          <li><strong>Normalizacja po incydencie danych:</strong> Q2/Q3 2026 powinny pokazać powrót do zysku netto po jednorazowym impakcie Q1. Vouchery ($1,17 mld) wygasły 15 kwietnia — od Q2 ta presja znika. Rynek może to odczytać jako dno, powrót do $25+ jest realistyczny.</li>
+          <li><strong>Penetracja Korei 15% → 20–25%:</strong> Na rynku $230 mld, każdy punkt procentowy udziału = $2,3 mld dodatkowych przychodów. Rocket Delivery advantage jest trwały — Naver nie ma własnej logistyki tej skali.</li>
+          <li><strong>Tajwan jako proof of concept:</strong> 78% wzrost YoY, rozszerzenie do 230 miast. Jeśli Tajwan osiągnie rentowność 2025–2026, otwiera drogę do Japonii lub innych rynków azjatyckich. Każdy nowy rynek to $10–30 mld TAM.</li>
+          <li><strong>Reklama i fintech (retail media):</strong> Amazon Advertising generuje $50 mld/rok. Coupang ma 14+ mln aktywnych kupujących z bogatymi danymi transakcyjnymi — Coupang Ads i Coupang Pay to opcjonalności highmargin nieuwzględnione w wycenie P/S 1,0x.</li>
+          <li><strong>Buyback przy $18:</strong> Spółka skupuje akcje przy historycznie niskiej wycenie (P/S 1x) — mechanicznie redukuje liczbę akcji, wzmacnia EPS w przyszłości. Sygnał zarządu, że cena jest za niska.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. BEAR CASE -->
+  <div class="section" id="bears">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">10</div>
+      <div class="section-title">Zagrożenia — Bear Case</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="bear-list">
+        <h4>🔴 Kluczowe ryzyka</h4>
+        <ul>
+          <li><strong>Temu / AliExpress — cenowa presja:</strong> Chińskie platformy weszły agresywnie w Korei z cenami niemożliwymi do skontowania przez Coupang. Dla produktów masowych (elektronika, odzież, AGD), Coupang traci udział cenowy. Odpowiedź: focus na grocery, fresh food, convenience — gdzie dostawa ultra-szybka jest kluczowa.</li>
+          <li><strong>Incydent danych — reputacja i regulacje:</strong> $409 mln kara i $1,17 mld vouchery to już rozliczone, ale ryzyko reputacyjne utrzymuje się. Ponowny wyciek lub kolejne naruszenie mogłoby zdestabilizować bazę użytkowników. Regulacje PIPC zaostrzają wymagania.</li>
+          <li><strong>Marże w Developing Offerings:</strong> Tajwan i Farfetch są nadal stratne lub breakeven. Jeśli ekspansja wymaga dalszych inwestycji dłużej niż oczekiwano, FCF spółki skonsolidowanej pozostanie pod presją.</li>
+          <li><strong>Ryzyko walutowe KRW/USD:</strong> Korea — FX wpływa istotnie na wyniki raportowane w USD. Przy umacniającym się dolarze, wzrost FX-neutral (20%+) przekłada się tylko na 10–18% wzrostu reportowanego.</li>
+          <li><strong>Wycena przez rynek permanentnych problemów:</strong> Rynek może utrzymywać niską wycenę (P/S 1x) jeśli uzna, że incydent danych + Temu presja + FX = permanentna destrukcja marż. Catalyst do re-ratingu wymaga kilku kwartałów czystych wyników.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. KONKURENCJA -->
+  <div class="section" id="konkurencja">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">11</div>
+      <div class="section-title">Analiza Konkurencji</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <table class="comp-table">
+        <thead>
+          <tr><th>Spółka</th><th>Ticker</th><th>Rynek</th><th>Marża brutto</th><th>P/S</th><th>Pozycja vs. CPNG</th></tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td><strong>Coupang</strong></td><td>CPNG</td><td>Korea+Taiwan</td><td>~30%</td><td>~1,0x</td><td>🥇 Lider Korea (40% traffic)</td>
+          </tr>
+          <tr>
+            <td>Naver Shopping</td><td>NAVER (KRX)</td><td>Korea</td><td>~43%</td><td>~2x</td><td>Challenger — search-driven marketplace, brak własnej logistyki</td>
+          </tr>
+          <tr>
+            <td>Gmarket / SSG (Shinsegae)</td><td>prywatny</td><td>Korea</td><td>N/D</td><td>N/D</td><td>Incumbent — offline assets, mniejsza skala e-comm</td>
+          </tr>
+          <tr>
+            <td>AliExpress / Temu</td><td>PDD Holdings</td><td>Korea (cross-border)</td><td>N/D</td><td>~2x</td><td>Nowe zagrożenie cenowe — ultra-low price, wolna dostawa</td>
+          </tr>
+          <tr>
+            <td>Amazon</td><td>AMZN</td><td>Global / Korea marginalnie</td><td>~47%</td><td>~3x</td><td>Brak istotnej obecności w Korei — Coupang jest „Korean Amazon"</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Coupang kontroluje ~25% udziału rynkowego e-commerce w Korei (revenue) i ~40% online traffic. Naver jest jedynym realnym konkurentem w premium segmencie — jednak bez własnej sieci dostaw szybkich pozostaje zależny od partnerów logistycznych (CJ Logistics). Presja Temu/AliExpress dotyczy wartościowo niskich produktów importowanych — mniejsze zagrożenie dla grocery, fresh, i usług (Eats, Play) gdzie Coupang jest niezastąpiony.</p>
+    </div>
+  </div>
+
+  <!-- 12. TECHNIKA -->
+  <div class="section" id="technika">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">12</div>
+      <div class="section-title">Analiza Techniczna</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Trend i struktura wykresu</h4>
+      <p>Akcja w silnym <strong>downtrndzie</strong> od ATH ~$34 (koniec 2025) do bieżących ~$17,95 — korekta -47%. Technicznie ujemna struktura: kurs poniżej SMA50 i SMA200. Po odbiciu od dna $14,92 (52W Low) akcja oscyluje wokół $17–18 z tendencją do testowania wsparcia. Momentum bearish krótkoterminowo, ale poziomy techniczne sugerują możliwe dno.</p>
+      <h4>Odchylenia od średnich kroczących</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">SMA20 (~$16,22)</div><div class="m-value">+10,7% powyżej</div></div>
+        <div class="metric-row"><div class="m-label">SMA50 (~$18,44)</div><div class="m-value">-2,7% poniżej ⚠️</div></div>
+        <div class="metric-row"><div class="m-label">SMA200 (~$23,85)</div><div class="m-value">-24,7% poniżej ⚠️</div></div>
+        <div class="metric-row"><div class="m-label">Od 52W Low ($14,92)</div><div class="m-value">+20,3% powyżej dna</div></div>
+        <div class="metric-row"><div class="m-label">Od 52W High ($34,08)</div><div class="m-value">-47,4% poniżej ATH</div></div>
+      </div>
+      <h4>Wskaźniki momentum</h4>
+      <p><strong>RSI(14): ~44</strong> — neutralny z tendencją do oversold. Po niedawnym skoku do 62 (marzec 2026, odreagowanie), RSI wycofał się, co sugeruje kontynuację konsolidacji. <strong>MACD:</strong> 12 sygnałów Sell vs. 0 Buy (bearish momentum). Technicznie: akcja jest w obszarze potencjalnego dołowania, ale brak potwierdzenia odwrócenia.</p>
+      <h4>Kluczowe poziomy</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">Opór 1</div><div class="m-value">$18,50–19 (SMA50)</div></div>
+        <div class="metric-row"><div class="m-label">Opór 2</div><div class="m-value">$22–24 (Citi target / SMA200)</div></div>
+        <div class="metric-row"><div class="m-label">Opór 3</div><div class="m-value">$28–30 (analyst targets)</div></div>
+        <div class="metric-row"><div class="m-label">Wsparcie 1</div><div class="m-value">$15–16 (blisko 52W Low)</div></div>
+        <div class="metric-row"><div class="m-label">Stop loss techniczny</div><div class="m-value">&lt;$14,50 (poniżej 52W Low)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13. OCENA -->
+  <div class="section" id="ocena">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">13</div>
+      <div class="section-title">Ocena Inwestycyjna</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="verdict-grid">
+        <div class="verdict-card">
+          <div class="term">Krótki termin (1–3 mies.)</div>
+          <div class="v-rating neutral">Neutralna</div>
+          <div class="v-text">Technicznie bearish — akcja poniżej SMA50 i SMA200. Sentiment negatywny po Citi downgrade i stracie Q1 2026. Kluczowy katalizator: wyniki Q2 2026 (sierpień) — powrót do zysku po jednorazowych kosztach voucherów. Wejście spekulacyjne przy $15–16, nie przy $18.</div>
+        </div>
+        <div class="verdict-card">
+          <div class="term">Średni termin (6–18 mies.)</div>
+          <div class="v-rating buy">Kupno</div>
+          <div class="v-text">P/S 1,0x dla lidera e-commerce z 20%+ wzrostem to rażąco tania wycena. Po normalizacji wyników (Q2–Q3 2026 wolne od kosztów incydentu) rynek powinien re-ratować. Cel $25–30 (+40–70%). Analitycy: mediana $35 (+95%).</div>
+        </div>
+        <div class="verdict-card">
+          <div class="term">Długi termin (3–5 lat)</div>
+          <div class="v-rating strong-buy">Mocne Kupno</div>
+          <div class="v-text"><strong>Bull:</strong> $60–80 jeśli Tajwan skaluje, Korea penetracja do 22–25%, reklama/fintech dojrzewa do $2–5 mld. <strong>Bear:</strong> $8–12 jeśli Temu wypcznie Coupang z kluczowych kategorii i Tajwan okaże się zbyt kosztowny.</div>
+        </div>
+      </div>
+      <div class="fair-value-box">
+        <div class="fv-label">Szacunkowy Fair Value</div>
+        <div class="fv-value">$28 – $35</div>
+        <div class="fv-sub">Bazuje na P/S 1,5x na FY2026E revenue ~$38 mld = $57 mld EV / ~1,79 mld akcji = ~$32. Konserwatywny: P/S 1,2x = $25. Bull: P/S 2,0x = $42. Konsensus analityków ($35) na górnym końcu jest uzasadniony przy normalizacji marż. Aktualna cena $17,95 = dyskont 51–94% do fair value.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14. TL;DR -->
+  <div class="section" id="tldr">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">14</div>
+      <div class="section-title">Podsumowanie — TL;DR</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="tldr-grid">
+        <div class="reason-card">
+          <h4 style="color: var(--strong-buy);">✅ 3 powody, by kupić</h4>
+          <ul>
+            <li><strong>P/S 1,0x to aberracja:</strong> Lider e-commerce rosnący 20%+ FX-neutral, z dominującą pozycją w Korei (40% traffic) i trwałą przewagą logistyczną, nie powinien handlować jak stagnujący detalista. Rynek karze za incydent danych, który jest jednorazowy.</li>
+            <li><strong>Incydent danych = jednorazowy:</strong> Vouchery ważne do 15 kwietnia 2026 → Q2 2026 powinien powrócić do zysku. Kara regulacyjna: zapłacona. Fundamenty biznesu nienaruszone — Korea rekord sprzedaży $30,3 mld w FY2024.</li>
+            <li><strong>Tajwan + opcjonalności:</strong> 78% wzrost w Tajwanie to potężny sygnał, że model jest replikowalny. Reklama online i Coupang Pay to $multi-mld opcjonalności nieuwzględnione w wycenie P/S 1x.</li>
+          </ul>
+        </div>
+        <div class="reason-card">
+          <h4 style="color: #ff5252;">❌ 3 powody, by unikać</h4>
+          <ul>
+            <li><strong>Technicznie bearish:</strong> Akcja poniżej SMA50 i SMA200 (-25%), momentum negatywny. Nie ma potwierdzenia dna — może spaść do $13–15 przed odbiciem.</li>
+            <li><strong>Temu/AliExpress presja cenowa:</strong> Strukturalne ryzyko w segmentach towarów masowych — nie do zniwelowania logistyką. Długoterminowo może erodować GMV w niższych kategoriach cenowych.</li>
+            <li><strong>FX + low marże e-commerce:</strong> 30% marża brutto to nisko vs. software. Każde umocnienie USD o 10% = -10% reportowanych przychodów. Mała zmiana marż = duże zmiany zysku netto.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="thesis-breaker">
+        <h4>⚡ Thesis-Breaker / Thesis-Confirmer</h4>
+        <p><strong>CONFIRMER:</strong> Wyniki Q2 2026 z powrotem do Adj. EBITDA $200–300 mln+ i wzrostem revenue 15%+, połączone z potwierdzeniem Tajwanu zbliżającego się do breakeven → rynek re-ratuje do P/S 1,5–2x, akcja zmierza ku $25–35.</p>
+        <p style="margin-top:10px;"><strong>BREAKER:</strong> Q2 2026 ujawnia strukturalne spowolnienie (nie jednorazowe) — wzrost core Korea spada poniżej 10% YoY z powodu Temu erozji, a Developing Offerings nie osiągają breakeven w 2026–2027 → P/S 1x okazuje się uzasadniony, akcja konsoliduje się w $12–16.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Analiza wygenerowana przez Claude · 2026-06-17 · Nie stanowi porady inwestycyjnej · Dane mogą być nieaktualne
+  </div>
+</div>
+
+<script>
+  function toggleSection(header) {
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector('.section-toggle');
+    body.classList.toggle('collapsed');
+    toggle.classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-item').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const id = this.getAttribute('href').slice(1);
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelectorAll('.nav-item').forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+  const sections = document.querySelectorAll('.section');
+  const navItems = document.querySelectorAll('.nav-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(item => { item.classList.toggle('active', item.getAttribute('href') === '#' + id); });
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

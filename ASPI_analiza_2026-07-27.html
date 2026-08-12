@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASPI — ASP Isotopes | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#eab308; --accent2:#facc15; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#1a1505 0%,#0f1117 50%,#141005 100%); border-bottom:1px solid var(--border); padding:40px 32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(234,179,8,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#000; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.neutral { background:rgba(255,215,64,0.12); border:2px solid var(--neutral); color:var(--neutral); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.amber { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#000; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.amber { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); } .chip.red { border-color:var(--sell); color:var(--sell); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.neutral { color:var(--neutral); } .rating-box .rating-text.sell { color:var(--sell); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .fair-value-box { background:linear-gradient(135deg,rgba(234,179,8,0.08),rgba(250,204,21,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(234,179,8,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .alert-danger { background:rgba(213,0,0,0.06); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+  <div class="header-content">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: ASPI</div>
+    <div class="company-name">ASP Isotopes Inc.</div>
+    <div class="company-sub">Wzbogacanie izotopów (Si-28, C-14, Yb-176) · Quantum Leap Energy: HALEU dla TerraPower · Renergen: hel + LNG · Radiofarmacja (PET Labs) · Waszyngton, DC</div>
+    <div class="header-meta">
+      <div class="rating-badge neutral">⚠️ SPEKULACYJNA — wysokie ryzyko / wysoka nagroda</div>
+      <span class="meta-tag">Izotopy / Nuclear</span>
+      <span class="meta-tag">Pre-profit</span>
+      <span class="meta-tag">Micro/Small Cap</span>
+      <span class="meta-tag">Katalizatory Q3 2026</span>
+      <div class="price-display">
+        <div class="price-main">$3,78</div>
+        <div class="price-sub">Cena (27.07.2026) | 52W: $3,87–$14,49 — świeże dołki!</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">TL;DR</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (27.07.2026)</div><div class="metric-value">$3,78</div><div class="metric-detail">-74% od 52W high $14,49 | nowe dołki</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value yellow">~$0,5-0,65B</div><div class="metric-detail">Po dilucji i przejęciu Renergen</div></div>
+    <div class="metric-card"><div class="metric-label">Revenue Q1 2026</div><div class="metric-value green">$4,18M</div><div class="metric-detail">vs $1,10M rok temu (+280%)</div></div>
+    <div class="metric-card"><div class="metric-label">Strata netto Q1</div><div class="metric-value red">-$6,88M</div><div class="metric-detail">EPS -$0,06 | zwęża się</div></div>
+    <div class="metric-card"><div class="metric-label">Płynność</div><div class="metric-value green">$290,5M</div><div class="metric-detail">+ $750M committed debt (DFC) dla Renergen</div></div>
+    <div class="metric-card"><div class="metric-label">Dilucja</div><div class="metric-value red">72M→111M+</div><div class="metric-detail">akcji 2024→2025; Renergen dodał kolejne</div></div>
+    <div class="metric-card"><div class="metric-label">Katalizatory Q3 2026</div><div class="metric-value amber">2 duże</div><div class="metric-detail">Si-28 commercial + hel nameplate</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value green">$13 ($11-15)</div><div class="metric-detail">+244%!, ale tylko 2 analityków</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest ASP Isotopes?</h3>
+      <p>ASP Isotopes (NASDAQ: ASPI) to spółka advanced materials budująca <strong>zdolności wzbogacania izotopów poza Rosją</strong> (która historycznie dominowała ten rynek). Technologie: Aerodynamic Separation Process (ASP) i laserowe Quantum Enrichment (QE), zakłady w RPA (Pretoria). Portfel: izotopy przemysłowe/medyczne (Si-28 dla chipów kwantowych, C-14, Yb-176, Mo-100), paliwo jądrowe przez spółkę-córkę <strong>Quantum Leap Energy</strong> (HALEU dla SMR — umowy z TerraPower), radiofarmacja (PET Labs, 51%) oraz — po przejęciu <strong>Renergen</strong> (I 2026) — hel i LNG z Virginia Gas Project w RPA.</p>
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>VIII 2025</td><td>Pierwsze próbki wzbogaconego Si-28 do klienta w USA — enrichment zgodny z teorią</td><td style="color:var(--buy)">↑ Proof of tech</td></tr>
+          <tr><td>2025</td><td>QLE: umowy HALEU z TerraPower ($22M conditional loan + supply agreements), współpraca z Necsa, plan spin-offu QLE</td><td style="color:var(--buy)">↑ Nuclear option</td></tr>
+          <tr><td>7 I 2026</td><td><strong>Zamknięcie przejęcia Renergen</strong> — hel/LNG + $750M committed debt (US DFC)</td><td style="color:var(--neutral)">Transformacja + dilucja</td></tr>
+          <tr><td>IV-V 2026</td><td>Q1: revenue $4,18M (+280%), strata -$6,88M; restart 18 stopni zakładu Si-28 po ulepszeniach</td><td style="color:var(--neutral)">Postęp, ale opóźnienia</td></tr>
+          <tr><td>VI-VII 2026</td><td>Wyprzedaż -53% od czerwcowego szczytu; pierwszy take-or-pay na hel (Azja); kurs $3,78 = nowe dołki</td><td style="color:var(--sell)">↓↓ Kapitulacja</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Dlaczego kurs spada mimo postępów?</strong> Trzy powody: (1) dilucja — akcje 72M→111M+ plus emisje pod Renergen; (2) opóźnienia komercjalizacji Si-28 (przesunięcie na Q3 2026 po "engineering enhancements"); (3) rotacja kapitału z spekulacyjnych nuclear names. Rynek przestał płacić za obietnice — chce zobaczyć przychody komercyjne. Te mają nadejść w Q3 2026 — czyli lada moment.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Linia</th><th>Produkt</th><th>Zastosowanie</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Si-28</strong></td><td>Wzbogacony krzem-28</td><td>Chipy kwantowe, AI semiconductors (lepsze przewodnictwo cieplne)</td><td>🔥 Commercial shipments Q3 2026</td></tr>
+          <tr><td><strong>C-14, Yb-176, Mo-100</strong></td><td>Izotopy medyczne/przemysłowe</td><td>Radiofarmacja, diagnostyka, terapie</td><td>⚡ Pierwsze dostawy 2026</td></tr>
+          <tr><td><strong>QLE — HALEU/LEU+</strong></td><td>Paliwo dla SMR i advanced reactors</td><td>TerraPower, Fermi America; Li-6/Li-7 dla fuzji</td><td>🔬 Rozwój; spin-off QLE planowany</td></tr>
+          <tr><td><strong>Renergen — hel</strong></td><td>Hel skroplony + LNG (Virginia Gas, RPA)</td><td>Przemysł, chipy, medycyna — ceny helu na wieloletnich szczytach</td><td>⚡ Nameplate capacity Q3 2026, 1. take-or-pay podpisany</td></tr>
+          <tr><td>PET Labs (51%)</td><td>Radiofarmacja operacyjna</td><td>Generuje bieżące przychody</td><td>✅ Rośnie, +2 apteki USA</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat</h3>
+      <p>Wzbogacanie izotopów to oligopol o ekstremalnych barierach (regulacje, technologia, lata budowy). Zachód desperacko potrzebuje zdolności poza Rosją (Rosatom kontroluje większość rynku komercyjnego). ASPI jest jedną z niewielu spółek publicznych z działającą infrastrukturą — jeśli dowiezie komercjalizację, pozycja będzie unikalna.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Izotopy specjalistyczne:</strong> ~$6-8B globalnie, rośnie 8-12% rocznie; premia za "non-Russian supply"</li>
+        <li><strong>HALEU:</strong> krytyczne wąskie gardło dla SMR — USA/UE budują łańcuch od zera; TerraPower, X-energy, Oklo czekają na paliwo</li>
+        <li><strong>Hel:</strong> strukturalny deficyt, kontrakty long-term ~$500/mcf (+15% CAGR od 2018); Renergen ma jedne z największych stężeń helu na świecie</li>
+        <li><strong>Si-28:</strong> quantum computing + zaawansowane chipy — mały ale szybko rosnący rynek premium</li>
+        <li><strong>Geopolityka:</strong> sankcje na rosyjskie izotopy/paliwo = strukturalny tailwind dla całego portfela</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="chips"><span class="chip amber">TerraPower (HALEU — loan + supply)</span><span class="chip amber">Fermi America</span><span class="chip">Necsa (RPA, współpraca)</span><span class="chip">US semiconductor customer (Si-28)</span><span class="chip">Azjatycki nabywca helu (take-or-pay)</span><span class="chip">Pacjenci/szpitale (PET Labs)</span></div>
+      <p>Baza klientów embrionalna, ale jakościowa — TerraPower (Bill Gates) jako anchor dla HALEU i take-or-pay na hel dają pierwsze kontraktowane przepływy. Kluczowe ryzyko: <strong>wszystko zależy od egzekucji zakładów w RPA</strong> — kraju z ryzykiem infrastrukturalnym (prąd, logistyka).</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Revenue</th><th>Wynik netto</th></tr></thead>
+        <tbody>
+          <tr><td>2024</td><td>~$4M (PET Labs)</td><td>strata</td></tr>
+          <tr><td>2025</td><td>~$5-6M</td><td>strata (TTM -$173M z odpisami/non-cash)</td></tr>
+          <tr><td>Q1 2026</td><td><strong>$4,18M</strong> (+280% YoY)</td><td>-$6,88M (EPS -$0,06)</td></tr>
+          <tr><td>2026E (z helem + Si-28 od Q3)</td><td>$25-40M</td><td>strata operacyjna maleje</td></tr>
+          <tr><td>2027-2028E (hel ramp + izotopy)</td><td>$80-150M+</td><td>możliwy breakeven</td></tr>
+        </tbody>
+      </table></div>
+      <p>Model docelowy: kontrakty długoterminowe (take-or-pay hel, supply agreements HALEU, umowy na izotopy) = przewidywalne przepływy o wysokich marżach. Dziś: przychody głównie z radiofarmacji, reszta w fazie pre-commercial. Konsensus (2 analityków) zakłada zysk ~$4M w 2026 — moim zdaniem zbyt optymistycznie.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Market Cap</td><td>~$0,5-0,65B</td><td>Micro/small cap</td></tr>
+          <tr><td>P/S (2026E $30M)</td><td>~18×</td><td style="color:var(--neutral)">Wysokie, ale to rok zerowy komercjalizacji</td></tr>
+          <tr><td>P/S (2027E $100M)</td><td>~5,5×</td><td style="color:var(--buy)">Atrakcyjne JEŚLI egzekucja</td></tr>
+          <tr><td>EV z committed debt</td><td>uwaga: $750M DFC to dług projektowy Renergen</td><td>Nie obciąża spółki-matki wprost</td></tr>
+          <tr><td>Cel analityków</td><td>$13 (zakres $11-15)</td><td style="color:var(--strong-buy)">+244%! Ale tylko 2 analityków (Strong Buy)</td></tr>
+          <tr><td>Głosy przeciwne</td><td>niezależna analiza: Sell, "25% ryzyko porażki"</td><td style="color:var(--sell)">Rozstrzał opinii ekstremalny</td></tr>
+        </tbody>
+      </table></div>
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value (ważony ryzykiem)</div><div class="fair-value-range">$5 – $9</div><div class="fair-value-note">Scenariusz egzekucji (Si-28 + hel dowożą w Q3): $8-13 | Scenariusz poślizgów + dilucji: $2-3 | Cel analityków $13 zakłada pełny sukces. Przy $3,78 rynek wycenia głównie porażkę — asymetria dodatnia, ale zmienność ekstremalna.</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <p>Dziś: marże nieistotne (pre-commercial; radiofarmacja niskomarżowa). Docelowo: wzbogacone izotopy i hel to produkty o <strong>marżach brutto 50-80%</strong> przy kontraktach take-or-pay. Strata netto Q1 -$6,88M kwartalnie (~-$28M/rok run rate) przy płynności $290M = runway na 3-4 lata bez uwzględnienia nowych przychodów. TTM -$173M zawiera głównie pozycje niegotówkowe/odpisy — realny cash burn jest znacznie niższy.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <p>Płynność <strong>$290,5M</strong> + $750M committed debt (US DFC i inni) na rozbudowę helu Renergen — finansowanie zabezpieczone bez kolejnych wielkich emisji w krótkim terminie. ALE: historia dilucji jest brutalna (72M → 111M+ akcji w rok, plus akcje za Renergen) i przy $3,78 każda następna emisja byłaby skrajnie kosztowna dla akcjonariuszy. Struktura holdingowa (QLE spin-off, PET Labs 51%, Renergen, IsoBio, Skyline) jest złożona — utrudnia wycenę i audyt przepływów.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">BULL CASE</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📦</div><div class="catalyst-body"><h4>Q3 2026: dwa katalizatory naraz — Si-28 commercial + hel nameplate</h4><p>Pierwsze komercyjne dostawy Si-28 i osiągnięcie nameplate capacity helu przypadają na najbliższe tygodnie-miesiące. Przy kursie na dołkach, każde potwierdzenie = gwałtowny re-rating (spółka potrafiła rosnąć +50% w tydzień).</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚛️</div><div class="catalyst-body"><h4>HALEU — opcja warta więcej niż cała spółka</h4><p>Zachód nie ma komercyjnego HALEU; TerraPower już płaci ($22M loan + supply agreements). Planowany spin-off QLE może odblokować wycenę — porównywalne nuclear-fuel names (Centrus) wyceniane są na miliardy.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎈</div><div class="catalyst-body"><h4>Hel: take-or-pay + $750M DFC + ceny na szczytach</h4><p>Virginia Gas ma jedne z najbogatszych stężeń helu na świecie. Kontraktowane przepływy + finansowanie rządowe USA = najbardziej "bankowalny" segment grupy.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🇷🇺</div><div class="catalyst-body"><h4>Geopolityka: jedyna publiczna alternatywa dla rosyjskich izotopów</h4><p>Każde zaostrzenie sankcji na Rosatom podnosi wartość strategiczną ASPI. Potencjalny cel przejęcia dla Constellation/Centrus/BWXT.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">BEAR CASE</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">⏰</div><div class="catalyst-body"><h4>Historia poślizgów — "Q3 2026" już było "H1 2026"</h4><p>Si-28 wymagał "engineering enhancements" i restartu. Kolejne opóźnienie po tylu obietnicach może złamać zaufanie ostatecznie → $2-2,50.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💧</div><div class="catalyst-body"><h4>Dilucja jako model biznesowy</h4><p>+54% akcji w rok. Przy złożonej strukturze (spin-offy, mniejszości, przejęcia za akcje) akcjonariusz mniejszościowy jest ostatni w kolejce do wartości.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🇿🇦</div><div class="catalyst-body"><h4>Ryzyko RPA: prąd, logistyka, waluta, polityka</h4><p>Wszystkie kluczowe aktywa (Pretoria, Virginia Gas) w kraju z chronicznymi problemami Eskom i ryzykiem randa. Jeden blackout-kryzys może wykoleić harmonogramy.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔬</div><div class="catalyst-body"><h4>Short-sellerzy i spory o wiarygodność</h4><p>Spółka była celem raportów short (zarzuty o przeszacowanie technologii). Niezależna analiza szacuje "25% prawdopodobieństwo porażki". Przy micro-cap każda negatywna publikacja = -20-30%.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>Obszar</th><th>vs ASPI</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rosatom (Rosja)</strong></td><td>Dominator izotopów i HALEU</td><td>Główny "konkurent", którego sankcje wykluczają</td></tr>
+          <tr><td>Centrus Energy (LEU)</td><td>Jedyny licencjonowany HALEU w USA</td><td>Większy, dalej w uranie; ASPI szybszy w izotopach</td></tr>
+          <tr><td>Urenco</td><td>Wzbogacanie uranu (konsorcjum)</td><td>Establishment; nie robi izotopów specjalnych</td></tr>
+          <tr><td>Silex/GLE</td><td>Laserowe wzbogacanie (Cameco)</td><td>Podobna technologia, wolniejszy timeline</td></tr>
+          <tr><td>Air Liquide/Linde (hel)</td><td>Przemysłowi giganci gazów</td><td>Klienci raczej niż konkurenci dla Renergen</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">TECHNIKA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>52W high</td><td>$14,49</td><td>Szczyt nuclear-hype</td></tr>
+          <tr><td>Szczyt lokalny (2 VI)</td><td>~$8</td><td>Od tego -53% — sygnał sell MACD</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$3,78</strong></td><td>PONIŻEJ dotychczasowego 52W low ($3,87) — cena odkrywa dno</td></tr>
+          <tr><td>Wsparcie S1</td><td>$3,00-3,30</td><td>Strefa psychologiczna; brak historycznego wolumenu poniżej</td></tr>
+          <tr><td>Opór R1</td><td>$4,80-5,20</td><td>Baza czerwcowo-lipcowa</td></tr>
+          <tr><td>Opór R2</td><td>$8</td><td>Szczyt czerwcowy</td></tr>
+        </tbody>
+      </table></div>
+      <p>Obraz techniczny fatalny: nowe dołki, MACD sell, brak wsparcia wolumenowego poniżej — spadający nóż. Ale to też oznacza maksymalny pesymizm tuż przed binarnymi katalizatorami Q3. Dla spekulanta: wejście dopiero po sygnale odwrócenia (reclaim $4,20+) lub po newsie o dostawach — nie łapać noża w ciemno.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA (binarna)</div><div class="rating-note">Q3 milestones = ruleta: dostawy Si-28 + hel nameplate → +50-100%; kolejny poślizg → -30-40%. Nie łap noża przed newsem; ewentualnie mikropozycja.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO spekulacyjne</div><div class="rating-note">Jeśli Q3 dowiezie choć jeden milestone, przy $3,78 asymetria jest mocno dodatnia (fair $5-9, bull $13). Pozycja max 1-2% portfela.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO spekulacyjne</div><div class="rating-note">Non-Russian izotopy + HALEU + hel to trzy strategiczne rynki dekady. Sukces = spółka $2-3B (5-6× od dziś). Porażka = -70%. Loteria z dodatnią wartością oczekiwaną.</div></div>
+      </div>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value (ważony ryzykiem)</div><div class="fair-value-range">$5 – $9</div><div class="fair-value-note">Wejście: po reclaim $4,20+ lub po potwierdzeniu dostaw | Stop: $3,00 | Cel analityków $13 tylko przy pełnej egzekucji</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">TL;DR</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić (spekulacyjnie)</h4><ul>
+          <li><strong>Maksymalny pesymizm tuż przed katalizatorami</strong> — kurs na nowych dołkach (-74%), a Q3 2026 przynosi dostawy komercyjne Si-28 i nameplate helu; cel analityków $13 = +244%</li>
+          <li><strong>Trzy strategiczne aktywa w jednej spółce</strong> — non-Russian izotopy, HALEU z TerraPower jako klientem, hel z $750M finansowania rządowego USA i take-or-pay</li>
+          <li><strong>Płynność $290M = runway 3-4 lata</strong> — bankructwo w krótkim terminie praktycznie wykluczone; opcja spin-offu QLE i przejęcia całości</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Historia obietnic i poślizgów + dilucja 54%/rok</strong> — rynek już nie wierzy na słowo; kolejne opóźnienie = $2,50</li>
+          <li><strong>Wszystko w RPA</strong> — ryzyko energetyczne, walutowe i operacyjne skoncentrowane w jednym kraju</li>
+          <li><strong>Spadający nóż bez wsparcia</strong> — technicznie brak dna; short-sellerzy aktywni; "25% ryzyko porażki" wg niezależnych analiz</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> kolejne przesunięcie dostaw Si-28 lub helu poza Q4 2026 LUB nowa duża emisja akcji poniżej $4 → $2-2,50.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> potwierdzone przychody komercyjne Si-28 + hel nameplate w Q3 → $6-8 szybko; do tego postęp HALEU/spin-off QLE → $10+.</p>
+      <hr class="divider">
+      <div style="text-align:center; padding:20px 0">
+        <div class="rating-badge neutral" style="display:inline-flex; font-size:20px; padding:14px 32px; margin-bottom:16px;">⚠️ SPEKULACYJNA — binarny zakład na Q3 2026</div>
+        <p style="color:var(--text-muted); max-width:700px; margin:0 auto; font-size:13px;">ASPI przy $3,78 to zakład o wysokiej stawce: albo Q3 przyniesie pierwsze realne przychody komercyjne i kurs wraca do $6-9, albo kolejny poślizg dobije zaufanie. Wartość oczekiwana wygląda dodatnio, ale to pozycja wyłącznie na mały, "spisany na straty" kapitał — max 1-2% portfela, najlepiej po sygnale odwrócenia trendu, nie w spadający nóż.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 27 lipca 2026 | Cena od użytkownika: $3,78 | Dane: ASP Isotopes IR, SEC 8-K/10-K, StockTitan, Simply Wall St, GlobeNewswire | Nie stanowi porady inwestycyjnej</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){const e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+<script>function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b</body></body>(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}</script><style>.section{scroll-margin-top:64px}</style></body>
+</html>

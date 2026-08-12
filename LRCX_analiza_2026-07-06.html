@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LRCX — Lam Research | Analiza Inwestycyjna 2026</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d2e;
+    --surface2: #242740;
+    --accent: #3b82f6;
+    --accent2: #60a5fa;
+    --text: #e8eaf6;
+    --text-muted: #8892b0;
+    --border: #2e3250;
+    --strong-buy: #00c853;
+    --buy: #4caf50;
+    --neutral: #ffd740;
+    --sell: #ff6d00;
+    --strong-sell: #d50000;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.7; }
+
+  .header {
+    background: linear-gradient(135deg, #050a1a 0%, #0f1117 50%, #0a0f20 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 32px 32px;
+    position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute; top: -50px; right: -50px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(59,130,246,0.10) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .header-content { max-width: 1100px; margin: 0 auto; position: relative; }
+  .ticker-badge { display: inline-block; background: var(--accent); color: #fff; font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 6px; letter-spacing: 1px; margin-bottom: 12px; }
+  .company-name { font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .company-sub { color: var(--text-muted); font-size: 15px; margin-bottom: 20px; }
+  .header-meta { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+  .rating-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 700; padding: 10px 24px; border-radius: 30px; }
+  .rating-badge.neutral { background: rgba(255,215,64,0.12); border: 2px solid var(--neutral); color: var(--neutral); }
+  .rating-badge.buy { background: rgba(76,175,80,0.15); border: 2px solid var(--buy); color: var(--buy); }
+  .meta-tag { background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; padding: 6px 14px; border-radius: 20px; }
+  .price-display { margin-left: auto; text-align: right; }
+  .price-main { font-size: 30px; font-weight: 800; color: #fff; }
+  .price-sub { color: var(--text-muted); font-size: 13px; }
+
+  .nav-sticky { position: sticky; top: 0; z-index: 100; background: rgba(26,29,46,0.96); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); overflow-x: auto; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; padding: 0 16px; }
+  .nav-link { flex-shrink: 0; padding: 14px 16px; color: var(--text-muted); font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; cursor: pointer; }
+  .nav-link:hover { color: var(--text); }
+  .nav-link.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .summary-wrapper { max-width: 1100px; margin: 28px auto; padding: 0 24px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; transition: border-color 0.2s; }
+  .metric-card:hover { border-color: var(--accent); }
+  .metric-label { color: var(--text-muted); font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 8px; }
+  .metric-value { font-size: 22px; font-weight: 800; color: #fff; }
+  .metric-value.green { color: var(--buy); }
+  .metric-value.red { color: var(--sell); }
+  .metric-value.yellow { color: var(--neutral); }
+  .metric-value.blue { color: var(--accent); }
+  .metric-detail { color: var(--text-muted); font-size: 12px; margin-top: 4px; }
+
+  .main { max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 16px; overflow: hidden; }
+  .section:hover { border-color: var(--accent); }
+  .section-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; cursor: pointer; user-select: none; }
+  .section-title-wrap { display: flex; align-items: center; gap: 14px; }
+  .section-num { background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-title { font-size: 15px; font-weight: 700; color: var(--text); }
+  .section-toggle { color: var(--text-muted); font-size: 18px; transition: transform 0.3s; }
+  .section-toggle.open { transform: rotate(180deg); }
+  .section-body { padding: 0 24px 24px; display: none; }
+  .section-body.open { display: block; }
+
+  h3 { color: var(--accent2); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; margin: 20px 0 10px; }
+  h3:first-child { margin-top: 0; }
+  p { margin-bottom: 12px; color: var(--text-muted); }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--text); }
+  ul { list-style: none; padding: 0; }
+  ul li { padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-muted); }
+  ul li:last-child { border-bottom: none; }
+  ul li::before { content: '→'; color: var(--accent); margin-right: 8px; font-size: 12px; }
+
+  .table-wrap { overflow-x: auto; margin: 12px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--surface2); color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 10px 14px; text-align: left; }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+  tr:hover td { background: rgba(59,130,246,0.03); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .chip { background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; padding: 4px 12px; border-radius: 20px; }
+  .chip.green { border-color: var(--buy); color: var(--buy); background: rgba(76,175,80,0.08); }
+  .chip.blue { border-color: var(--accent); color: var(--accent); background: rgba(59,130,246,0.08); }
+  .chip.teal { border-color: #10b981; color: #10b981; background: rgba(16,185,129,0.08); }
+  .chip.yellow { border-color: var(--neutral); color: var(--neutral); background: rgba(255,215,64,0.08); }
+  .chip.red { border-color: var(--sell); color: var(--sell); background: rgba(255,109,0,0.08); }
+
+  .rating-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 14px; }
+  .rating-box { background: var(--surface2); border-radius: 10px; padding: 18px; text-align: center; }
+  .rating-box .period { color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+  .rating-box .rating-text { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+  .rating-box .rating-text.buy { color: var(--buy); }
+  .rating-box .rating-text.strong-buy { color: var(--strong-buy); }
+  .rating-box .rating-text.neutral { color: var(--neutral); }
+  .rating-box .rating-note { color: var(--text-muted); font-size: 12px; }
+
+  .scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .bull-box { background: rgba(0,200,83,0.06); border: 1px solid rgba(0,200,83,0.25); border-radius: 10px; padding: 18px; }
+  .bear-box { background: rgba(213,0,0,0.06); border: 1px solid rgba(213,0,0,0.2); border-radius: 10px; padding: 18px; }
+  .bull-box h4 { color: var(--strong-buy); margin-bottom: 12px; }
+  .bear-box h4 { color: var(--strong-sell); margin-bottom: 12px; }
+  .bull-box ul li::before { color: var(--strong-buy); }
+  .bear-box ul li::before { color: var(--strong-sell); }
+
+  .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .thesis-buy { background: rgba(0,200,83,0.06); border: 1px solid rgba(0,200,83,0.2); border-radius: 10px; padding: 18px; }
+  .thesis-avoid { background: rgba(213,0,0,0.06); border: 1px solid rgba(213,0,0,0.2); border-radius: 10px; padding: 18px; }
+  .thesis-buy h4 { color: var(--strong-buy); margin-bottom: 10px; }
+  .thesis-avoid h4 { color: var(--strong-sell); margin-bottom: 10px; }
+
+  .fair-value-box { background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(96,165,250,0.05)); border: 1px solid var(--accent); border-radius: 12px; padding: 24px; margin-top: 16px; text-align: center; }
+  .fair-value-label { color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .fair-value-range { font-size: 32px; font-weight: 800; color: var(--accent2); margin-bottom: 8px; }
+  .fair-value-note { color: var(--text-muted); font-size: 13px; }
+
+  .alert { border-radius: 8px; padding: 14px 18px; margin: 14px 0; font-size: 13px; }
+  .alert-info { background: rgba(59,130,246,0.06); border-left: 3px solid var(--accent); color: var(--text-muted); }
+  .alert-warn { background: rgba(255,215,64,0.06); border-left: 3px solid var(--neutral); color: var(--text-muted); }
+  .alert-success { background: rgba(0,200,83,0.06); border-left: 3px solid var(--strong-buy); color: var(--text-muted); }
+  .alert-danger { background: rgba(213,0,0,0.06); border-left: 3px solid var(--strong-sell); color: var(--text-muted); }
+  .alert-teal { background: rgba(16,185,129,0.06); border-left: 3px solid #10b981; color: var(--text-muted); }
+
+  .csbg-badge { background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(96,165,250,0.06)); border: 1px solid var(--accent); border-radius: 12px; padding: 20px 24px; margin: 14px 0; }
+  .csbg-badge h4 { color: var(--accent2); font-size: 16px; margin-bottom: 8px; }
+
+  .catalyst-item { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom: none; }
+  .catalyst-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .catalyst-body h4 { color: var(--text); font-size: 14px; margin-bottom: 4px; }
+  .catalyst-body p { color: var(--text-muted); font-size: 13px; margin: 0; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+  .footer { text-align: center; padding: 32px 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 700px) {
+    .rating-grid, .scenario-grid, .thesis-grid { grid-template-columns: 1fr; }
+    .company-name { font-size: 24px; }
+    .header-meta { flex-direction: column; align-items: flex-start; }
+    .price-display { margin-left: 0; }
+  }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+  <div class="header-content">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: LRCX</div>
+    <div class="company-name">Lam Research Corporation</div>
+    <div class="company-sub">Lider etch semiconductor #1 | CSBG $2,1B/kwartał · WFE $140B rynek · HBM/Advanced Packaging +50% · 49,9% GM · Fremont, CA | Założona 1980</div>
+    <div class="header-meta">
+      <div class="rating-badge neutral">⚖️ NEUTRALNA / KUPNO</div>
+      <span class="meta-tag">Semiconductor Equipment</span>
+      <span class="meta-tag">Etch #1</span>
+      <span class="meta-tag">AI Infrastructure</span>
+      <span class="meta-tag">HBM / Advanced Pkg</span>
+      <span class="meta-tag">CSBG Recurring</span>
+      <div class="price-display">
+        <div class="price-main">~$364</div>
+        <div class="price-sub">Cena (07.2026) | 52W: $90,94–$438,50</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a>
+    <a class="nav-link" onclick="goSec('s2')">Produkt</a>
+    <a class="nav-link" onclick="goSec('s3')">Rynek</a>
+    <a class="nav-link" onclick="goSec('s4')">Klienci</a>
+    <a class="nav-link" onclick="goSec('s5')">Biznes</a>
+    <a class="nav-link" onclick="goSec('s6')">Wycena</a>
+    <a class="nav-link" onclick="goSec('s7')">Marże</a>
+    <a class="nav-link" onclick="goSec('s8')">Bilans</a>
+    <a class="nav-link" onclick="goSec('s9')">Bull</a>
+    <a class="nav-link" onclick="goSec('s10')">Bear</a>
+    <a class="nav-link" onclick="goSec('s11')">Konkurencja</a>
+    <a class="nav-link" onclick="goSec('s12')">Technicals</a>
+    <a class="nav-link" onclick="goSec('s13')">Ocena</a>
+    <a class="nav-link" onclick="goSec('s14')">TL;DR</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card">
+      <div class="metric-label">Cena (07.2026)</div>
+      <div class="metric-value">~$364</div>
+      <div class="metric-detail">52W: $90,94–$438,50 | -17% od ATH</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Kapitalizacja</div>
+      <div class="metric-value">~$500B</div>
+      <div class="metric-detail">~1,37B akcji | 10:1 split X 2024</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Revenue Q3 FY2026</div>
+      <div class="metric-value green">$5,84B</div>
+      <div class="metric-detail">+24% YoY | Q4E: $6,6B (rekord)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Revenue TTM</div>
+      <div class="metric-value green">$21,7B</div>
+      <div class="metric-detail">FY2025: $18,4B (+24%) | FY2027E: ~$29B</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Non-GAAP GM</div>
+      <div class="metric-value green">49,9%</div>
+      <div class="metric-detail">Q4E 50,5% — zbliżanie do 50% milestone</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">CSBG Revenue</div>
+      <div class="metric-value blue">$2,1B</div>
+      <div class="metric-detail">Rekordowy kwartał — recurring/serwis</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">FCF (TTM)</div>
+      <div class="metric-value green">$6,0B</div>
+      <div class="metric-detail">FCF margin ~28% | Net cash $1B</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Avg. cel analityków</div>
+      <div class="metric-value yellow">~$350</div>
+      <div class="metric-detail">⚠️ Cena $364 > avg target — uwaga!</div>
+    </div>
+  </div>
+</div>
+
+<main class="main">
+
+  <!-- S1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')">
+      <div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div>
+      <div class="section-toggle open" id="s1-toggle">▾</div>
+    </div>
+    <div class="section-body open" id="s1-body">
+      <h3>Historia i DNA</h3>
+      <p>Lam Research Corporation (NASDAQ: LRCX) to jeden z globalnych liderów w produkcji urządzeń do wytwarzania chipów półprzewodnikowych. Założona w <strong>1980 roku</strong> przez Davida Lama, siedziba w Fremont (Kalifornia). Na liście Fortune 500. Produkt Lama — systemy etch i deposition — to narzędzia bez których nie można wyprodukować żadnego zaawansowanego chipa. <strong>Praktycznie każdy nowoczesny chip powstaje z udziałem technologii Lam Research.</strong></p>
+      <p>Spółka operuje globalnie z klientami w Korei, Tajwanie, Chinach, Japonii, USA i Europie. CEO: <strong>Tim Archer</strong> (od 2019), wcześniej prezes Lam. Stabilne, długoletnie kierownictwo.</p>
+
+      <h3>Etap — Compounding Quality Growth</h3>
+      <div class="chips">
+        <span class="chip blue">Duże cap quality compounder</span>
+        <span class="chip green">AI semiconductor supercycle</span>
+        <span class="chip teal">HBM/Advanced Packaging tailwind</span>
+        <span class="chip">50% GM milestone</span>
+        <span class="chip yellow">Cena powyżej avg analyst target</span>
+      </div>
+
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+          <tbody>
+            <tr><td>X 2024</td><td>Split akcji 10:1 — LRCX stało się bardziej dostępne dla inwestorów detalicznych</td><td style="color:var(--buy)">↑ Płynność</td></tr>
+            <tr><td>H1 2025</td><td>Akcja przy $90,94 (52W low) — rynek obawiał się spadku memory capex</td><td style="color:var(--sell)">Dno</td></tr>
+            <tr><td>Q1–Q2 FY2026</td><td>HBM demand + AI capex przyspieszenie → revenue akceleruje QoQ i YoY</td><td style="color:var(--buy)">↑ Momentum</td></tr>
+            <tr><td>22 kwietnia 2026</td><td>Q3 FY2026: $5,84B revenue, Non-GAAP GM 49,9%, WFE outlook podniesiony do $140B</td><td style="color:var(--strong-buy)">↑↑ Rekord</td></tr>
+            <tr><td>Q4 FY2026E (VI 2026)</td><td>Guidance $6,6B revenue — kolejny rekord, Non-GAAP GM 50,5%</td><td style="color:var(--strong-buy)">↑↑ Milestone 50%</td></tr>
+            <tr><td>H1 2026</td><td>+154% wzrost ceny akcji w H1 2026. ATH $438,50. Korekta do ~$364 (-17%)</td><td style="color:var(--neutral)">Korekta</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-info">
+        <strong>Kontekst:</strong> LRCX wzrosła +255% w ciągu 52 tygodni (z $90,94 do $364). Pomimo korekty z ATH $438,50, spółka handluje powyżej średniego celu analityków (~$350). To ważny sygnał — rynek już zdyskontował wiele dobrych wiadomości.
+      </div>
+    </div>
+  </div>
+
+  <!-- S2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')">
+      <div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div>
+      <div class="section-toggle" id="s2-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s2-body">
+      <h3>Co produkuje Lam Research?</h3>
+      <p>Lam Research dostarcza dwa główne typy systemów: <strong>Etch</strong> (trawienie plazmowe) i <strong>Deposition</strong> (CVD, ALD — osadzanie warstw). To fundamentalne procesy, bez których nie istnieje żaden chip.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Kategoria</th><th>Produkt</th><th>Pozycja rynkowa</th><th>Zastosowanie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Etch Systems</strong></td><td>Plasma etch, Reactive Ion Etch (RIE)</td><td style="color:var(--accent)">~45% globalnego rynku — LIDER #1</td><td>Definiowanie wzorców na chipach, GAA, DRAM, NAND</td></tr>
+            <tr><td><strong>CVD/ALD Deposition</strong></td><td>PECVD, ALD, MOCVD</td><td>#2 globalnie (za AMAT)</td><td>Osadzanie dielektryków, metali, high-k layers</td></tr>
+            <tr><td><strong>Clean / Surface Prep</strong></td><td>Dry clean, wet clean systems</td><td>Niche player</td><td>Czyszczenie przed/po każdym kroku litho</td></tr>
+            <tr><td><strong>Advanced Packaging</strong></td><td>TSV etch, hybrid bonding prep</td><td>Szybko rośnie</td><td>3D stacking, HBM, chiplets, CoWoS</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="csbg-badge">
+        <h4>🔁 CSBG — Customer Support Business Group: $2,1B/kwartał (Rekord)</h4>
+        <p style="color:var(--text-muted); font-size:13px;">CSBG to segment serwisowy Lam — naprawa, modernizacja, części zamienne, upgrade systemów już zainstalowanych u klientów. To <strong>najbardziej stabilna i marżowa część biznesu</strong>. Q3 FY2026 był rekordowy: $2,1B. CSBG rośnie wraz z rosnącą bazą zainstalowaną (installed base). Im więcej nowych narzędzi Lam kupuje TSMC/Samsung/Micron, tym większy CSBG w kolejnych latach. To jest "embedded flywheel" Lam Research.</p>
+      </div>
+
+      <h3>Moat — Switching cost klasy enterprise</h3>
+      <p>Zmiana dostawcy etch z Lam na Applied Materials (AMAT) to dla klienta jak wymiana silnika w lecącym samolocie. Każde narzędzie wymaga <strong>kilkumiesięcznej re-kwalifikacji</strong> procesu, certyfikacji przez klienta końcowego (np. Apple, AMD, NVIDIA), inżynierów od integracji, i nowego SOW (Statement of Work). Rzeczywisty koszt zmiany to dziesiątki milionów USD na process node + ryzyko delay. Dlatego churn klientów Lam jest <strong>praktycznie zerowy</strong> — raz zainstalowany Lam zostaje na lata.</p>
+    </div>
+  </div>
+
+  <!-- S3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')">
+      <div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div>
+      <div class="section-toggle" id="s3-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s3-body">
+      <h3>WFE (Wafer Fab Equipment) — TAM</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Rok</th><th>WFE Market</th><th>Zmiana</th><th>Komentarz</th></tr></thead>
+          <tbody>
+            <tr><td>2024</td><td>~$110B</td><td>—</td><td>Ożywienie po capex dołku 2023</td></tr>
+            <tr><td>2025</td><td>~$120–125B</td><td>+10-15%</td><td>Memory recovery, AI foundry</td></tr>
+            <tr><td><strong>2026E</strong></td><td><strong>$140B</strong></td><td style="color:var(--buy)"><strong>+12-17%</strong></td><td>Guidance Lam (podniesione z $135B) — AI supercycle</td></tr>
+            <tr><td>2027E</td><td>$180–200B+</td><td style="color:var(--strong-buy)">+30%+</td><td>Lam internal forecast — AI cluster build-out</td></tr>
+            <tr><td>Lam SAM (etch+dep)</td><td>~$35–40B</td><td>—</td><td>~25-30% WFE share</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Trendy strukturalne — Dlaczego WFE rośnie szybciej niż kiedykolwiek?</h3>
+      <ul>
+        <li><strong>HBM (High-Bandwidth Memory):</strong> Każdy GPU AI (NVIDIA H100/H200/B200) wymaga stosu HBM. HBM produkcja wymaga 4-5× więcej kroków etch niż standardowe DRAM — czyli 4-5× więcej narzędzi Lam na ten sam wolumen pamięci</li>
+        <li><strong>GAA (Gate-All-Around) nanosheet transistors:</strong> Samsung (3nm), TSMC (2nm, 1.6nm) = dramatycznie więcej kroków etch na wafer vs FinFET. Lam jest liderem GAA etch</li>
+        <li><strong>Advanced Packaging (3D stacking, CoWoS, SoIC):</strong> TSV drilling, hybrid bonding = nowe rynki dla etch i deposition. LRCX spodziewa się +50% w tym segmencie w 2026</li>
+        <li><strong>AI Capex supercycle — AI factory buildout:</strong> Meta, Google, Microsoft, xAI, Amazon inwestują $100B+ w data centers → każdy wydany na GPU = potrzeba fabryki chipów → więcej narzędzi Lam u TSMC/Samsung</li>
+        <li><strong>US/Europe/Japan fab onshoring:</strong> CHIPS Act (USA $52B), European Chips Act, TSMC Arizona, Intel IFS, Samsung Texas → nowe fabryki wymagają nowych narzędzi</li>
+      </ul>
+
+      <h3>Cykliczność — ryzyko i jak ją ocenić</h3>
+      <div class="alert alert-warn">
+        <strong>Semiconductor equipment jest cykliczny</strong> — w 2023 roku przychody Lam <em>spadły o 32%</em> YoY z powodu przeinwestowania w memory capex w 2021-2022. Teraz jesteśmy w fazie recovery + growth. Kluczowe pytanie: kiedy nastąpi kolejny dołek? Konsensus — nie przed 2028-2029 z powodu AI capex. Ale ryzyko istnieje.
+      </div>
+    </div>
+  </div>
+
+  <!-- S4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')">
+      <div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div>
+      <div class="section-toggle" id="s4-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s4-body">
+      <h3>Profil klientów — wszyscy więksi producenci chipów</h3>
+      <div class="chips">
+        <span class="chip blue">B2B — Pure semiconductor manufacturers</span>
+        <span class="chip">TSMC (Tajwan)</span>
+        <span class="chip">Samsung (Korea)</span>
+        <span class="chip">SK Hynix (Korea)</span>
+        <span class="chip">Micron (USA)</span>
+        <span class="chip">Intel Foundry (USA)</span>
+        <span class="chip">CXMT/YMTC (Chiny — ograniczone)</span>
+      </div>
+
+      <h3>Koncentracja i ryzyko Chin</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Klient/Region</th><th>% Revenue</th><th>Trend</th><th>Komentarz</th></tr></thead>
+          <tbody>
+            <tr><td>Korea (Samsung + SK Hynix)</td><td>~35%</td><td style="color:var(--buy)">↑ Rośnie</td><td>HBM ekspansja — SK Hynix +150% capex</td></tr>
+            <tr><td>Tajwan (TSMC + inne)</td><td>~25%</td><td style="color:var(--buy)">↑ Rośnie</td><td>TSMC N2/A16/CoWoS skalowanie</td></tr>
+            <tr><td>Chiny (CXMT, YMTC, inne)</td><td style="color:var(--sell)">~30% → <30%</td><td style="color:var(--sell)">↓ Spada</td><td>Export controls — $600M drag 2026</td></tr>
+            <tr><td>USA (Micron, Intel IFS)</td><td>~7%</td><td style="color:var(--buy)">↑ Rośnie</td><td>CHIPS Act fab expansion</td></tr>
+            <tr><td>Europa/Japonia</td><td>~3%</td><td style="color:var(--neutral)">Stabilny</td><td>TSMC Japan, Rapidus, IMEC</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-danger">
+        <strong>Ryzyko Chin:</strong> USA nałożyły nowe ograniczenia eksportowe na sprzęt do produkcji chipów. Revenue Chin spada poniżej 30% w 2026, tworząc ~$600M drag w całym roku ($200M per kwartał od Q2 FY2026). To 3-4% całorocznego revenue — zarządzalny ból, ale obecny.
+      </div>
+    </div>
+  </div>
+
+  <!-- S5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')">
+      <div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div>
+      <div class="section-toggle" id="s5-body-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s5-body">
+      <h3>Źródła Revenue — Systems + CSBG</h3>
+      <p>Lam operuje w dwóch podstawowych strumieniach: <strong>Systems</strong> (nowe narzędzia — bardziej cykliczne) i <strong>CSBG</strong> (serwis, parts, upgrade — bardziej stabilne i marżowe). CSBG jest "renta" na installed base — im więcej narzędzi sprzedano w poprzednich latach, tym wyższe CSBG w kolejnych. To wbudowany flywheel, który stabilizuje biznes w dołkach capex.</p>
+
+      <h3>Kwartalne wyniki FY2025–2026</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Kwartał</th><th>Revenue</th><th>Wzrost YoY</th><th>Non-GAAP GM</th><th>Op. Margin</th></tr></thead>
+          <tbody>
+            <tr><td>FY2024 (rok)</td><td>$14,9B</td><td style="color:var(--sell)">-14,5%</td><td>~46%</td><td>~28%</td></tr>
+            <tr><td>FY2025 (rok)</td><td>$18,4B</td><td style="color:var(--buy)">+23,7%</td><td>~47,5%</td><td>~31%</td></tr>
+            <tr><td>Q1 FY2026 (IX 2025)</td><td>~$4,7B</td><td style="color:var(--buy)">+24%</td><td>48,7%</td><td>33,5%</td></tr>
+            <tr><td>Q2 FY2026 (XII 2025)</td><td>~$5,4B</td><td style="color:var(--buy)">+24%</td><td>49,5%</td><td>34,8%</td></tr>
+            <tr><td><strong>Q3 FY2026 (III 2026)</strong></td><td><strong>$5,84B</strong></td><td style="color:var(--strong-buy)"><strong>+24% YoY 🔥</strong></td><td><strong>49,9%</strong></td><td><strong>35,0%</strong></td></tr>
+            <tr><td>Q4 FY2026E (VI 2026)</td><td>$6,6B ± $400M</td><td style="color:var(--strong-buy)">~+25% YoY E</td><td>50,5%±1pp</td><td>36,5%±1pp</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Prognoza roczna</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Rok</th><th>Revenue</th><th>Wzrost</th><th>EPS (Non-GAAP)</th></tr></thead>
+          <tbody>
+            <tr><td>FY2025</td><td>$18,4B</td><td>+24%</td><td>~$5,00</td></tr>
+            <tr><td><strong>FY2026E</strong></td><td><strong>~$22–23B</strong></td><td style="color:var(--buy)"><strong>+25%</strong></td><td>~$6,70–7,00</td></tr>
+            <tr><td>FY2027E (konsensus)</td><td>~$29B</td><td style="color:var(--strong-buy)">+31%</td><td>~$9,00–10,00</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success">
+        <strong>Acceleration do FY2027:</strong> Konsensus prognozuje przyspieszenie z +25% do +31% YoY w FY2027 — to rzadkie dla spółki tej skali ($22B+). Driver: 2027 WFE $180-200B, pełny ramp HBM3e/4, advanced packaging normalizacja, US fabs TSMC Arizona/Micron Idaho nowe linie.
+      </div>
+    </div>
+  </div>
+
+  <!-- S6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')">
+      <div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div>
+      <div class="section-toggle" id="s6-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s6-body">
+      <h3>Wskaźniki przy cenie ~$364 (lipiec 2026)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Ocena</th></tr></thead>
+          <tbody>
+            <tr><td>Market Cap</td><td>~$500B</td><td>(~1,37B akcji × $364)</td></tr>
+            <tr><td>Cash</td><td>$4,75B</td><td>—</td></tr>
+            <tr><td>Dług</td><td>$3,73B</td><td>—</td></tr>
+            <tr><td><strong>Net Cash</strong></td><td><strong>+$1,02B</strong></td><td style="color:var(--buy)">✅ Net cash — czysty bilans</td></tr>
+            <tr><td>EV</td><td>~$499B</td><td>—</td></tr>
+            <tr><td><strong>P/S (TTM $21,7B)</strong></td><td><strong>~23×</strong></td><td style="color:var(--sell)">⚠️ Historycznie drogie dla cyclical</td></tr>
+            <tr><td><strong>P/S (FY2027E $29B)</strong></td><td><strong>~17×</strong></td><td style="color:var(--neutral)">Lepsze — ale wciąż premium</td></tr>
+            <tr><td>EV/EBITDA (TTM)</td><td>~45×</td><td style="color:var(--sell)">Drogie na historycznych standardach</td></tr>
+            <tr><td>Forward P/E (FY2026E $6,85)</td><td>~53×</td><td style="color:var(--neutral)">Wysoki — ale EPS rośnie szybko</td></tr>
+            <tr><td>Forward P/E (FY2027E ~$9,50)</td><td>~38×</td><td style="color:var(--neutral)">Akceptowalne dla +31% EPS growth</td></tr>
+            <tr><td>Price/FCF (TTM $6B)</td><td>~83×</td><td style="color:var(--sell)">Drogie — rynek wycenia przyszłość</td></tr>
+            <tr><td>Dividend yield</td><td>~0,28%</td><td>Dywidenda rośnie od 11 lat z rzędu</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-warn">
+        <strong>Kluczowa obserwacja wyceny:</strong> Cena $364 jest <em>powyżej</em> średniego celu analityków (~$350). To rzadkość dla jakościowej spółki i sygnalizuje, że krótkoterminowo większość pozytywnych informacji jest zdyskontowana. Bull case analityków (max $438) = +20%. Bear case = $220-250 (-35-40%).
+      </div>
+
+      <h3>Scenariusze wyceny FY2027</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Scenariusz</th><th>Revenue FY2027E</th><th>P/S target</th><th>Market Cap</th><th>Cena/akcję</th></tr></thead>
+          <tbody>
+            <tr><td>Bear (WFE spada, China ban szerszy)</td><td>$22B</td><td>10×</td><td>$220B</td><td>~$160</td></tr>
+            <tr><td>Base (WFE $180B, +31% wzrost)</td><td>$29B</td><td>15×</td><td>$435B</td><td>~$317</td></tr>
+            <tr><td>Bull (WFE $200B, HBM+CPO ramp)</td><td>$34B</td><td>18×</td><td>$612B</td><td>~$447</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="fair-value-box">
+        <div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div>
+        <div class="fair-value-range">$315 – $440</div>
+        <div class="fair-value-note">Base P/S 15× FY2027E $29B = ~$317 | Bull: $440+ | Analyst avg. ~$350 | Obecna $364 = przy górnej granicy base case — brak wyraźnego marginesu bezpieczeństwa</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')">
+      <div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA FINANSOWA</div></div>
+      <div class="section-toggle" id="s7-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s7-body">
+      <h3>Trend marż — systematyczna ekspansja</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Rok/Kwartał</th><th>Revenue</th><th>Non-GAAP GM</th><th>Op. Margin (GAAP)</th><th>Net Margin</th></tr></thead>
+          <tbody>
+            <tr><td>FY2022</td><td>$17,2B</td><td>~46%</td><td>~30%</td><td>~26%</td></tr>
+            <tr><td>FY2023</td><td>$17,4B</td><td>~45%</td><td>~27%</td><td>~23%</td></tr>
+            <tr><td>FY2024</td><td>$14,9B</td><td>~46,5%</td><td>~27%</td><td>~23%</td></tr>
+            <tr><td>FY2025</td><td>$18,4B</td><td>~47,5%</td><td>~31%</td><td>~28%</td></tr>
+            <tr><td><strong>Q3 FY2026</strong></td><td><strong>$5,84B</strong></td><td><strong>49,9%</strong></td><td><strong>35%</strong></td><td><strong>31%</strong></td></tr>
+            <tr><td>Q4 FY2026E</td><td>$6,6B</td><td>50,5%E</td><td>36,5%E</td><td>~33%E</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success">
+        <strong>Milestone 50% GM zbliża się:</strong> Q4 FY2026 guidance 50,5% GM — to przełom psychologiczny. Dotychczas Lam był postrzegany jako "sub-50% GM hardware company". Pokonanie tej bariery zmienia optykę wyceny — rynek może zacząć applicować P/S bliższe software/SaaS spółkom z powtarzalnymi marżami.
+      </div>
+
+      <h3>FCF — silnik zwrotu dla akcjonariuszy</h3>
+      <p>FCF TTM: <strong>$6,0B</strong> (FCF margin ~28%). W pierwszych 3 kwartałach FY2026: FCF $3,62B + <strong>$4,55B zwrócono akcjonariuszom</strong> ($1,16B buybacks + $326M dywidenda = $1,49B tylko w Q3). Spółka zwraca więcej niż generuje FCF — co możliwe dzięki net cash pozycji. 11 lat z rzędu podwyżek dywidendy.</p>
+    </div>
+  </div>
+
+  <!-- S8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')">
+      <div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div>
+      <div class="section-toggle" id="s8-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s8-body">
+      <h3>Bilans (Q3 FY2026 — marzec 2026)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Pozycja</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+          <tbody>
+            <tr><td>Gotówka + ekwiwalenty</td><td>$4,75B</td><td>—</td></tr>
+            <tr><td>Dług długoterminowy</td><td>$3,73B</td><td>Obligacje o stałym oprocentowaniu</td></tr>
+            <tr><td><strong>Net Cash</strong></td><td><strong>+$1,02B</strong></td><td style="color:var(--buy)">✅ Net cash — bez presji finansowej</td></tr>
+            <tr><td>Equity akcjonariuszy</td><td>$10,1B</td><td>—</td></tr>
+            <tr><td>Debt/Equity</td><td>0,35×</td><td>Konserwatywna dźwignia</td></tr>
+            <tr><td>Current Ratio</td><td>2,54×</td><td>Doskonała płynność bieżąca</td></tr>
+            <tr><td>FCF TTM</td><td>$6,0B</td><td>FCF margin ~28%</td></tr>
+            <tr><td>Operating Cash Flow TTM</td><td>$6,95B</td><td>—</td></tr>
+            <tr><td>CapEx TTM</td><td>$949M</td><td>~4,4% revenue — niskie dla producenta</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success">
+        <strong>Jakość bilansu — klasa Premium.</strong> Net cash $1B, FCF $6B TTM, current ratio 2,5×, CapEx tylko 4,4% revenue (fabless-like efficiency). Lam Research jest kapitalnie zarządzaną finansowo spółką. Agresywne buybacks ($3,4B w FY2025) redukują share count i zwiększają EPS per share mimo wzrostu market cap.
+      </div>
+    </div>
+  </div>
+
+  <!-- S9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')">
+      <div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div>
+      <div class="section-toggle" id="s9-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🧠</div>
+        <div class="catalyst-body">
+          <h4>HBM supercycle — każdy AI GPU wymaga stosu od Lam</h4>
+          <p>HBM4 (SK Hynix, Samsung, Micron) wymaga 4-5× więcej kroków etch na DRAM die niż standardowe DDR5. NVIDIA GB200/GB300 clusters = dziesiątki milionów HBM die/rok. To wieloletni tailwind — każda generacja HBM wymaga bardziej zaawansowanego etch. Lam jest niekwestionowanym liderem DRAM etch.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">📦</div>
+        <div class="catalyst-body">
+          <h4>Advanced Packaging +50% w 2026 — nowy $5B+ rynek dla Lam</h4>
+          <p>CoWoS, SoIC (TSMC), Foveros (Intel), HBM stacking — wszystkie wymagają Through-Silicon Via (TSV) etch i deposition. Lam expect +50% advanced packaging revenue w FY2026 i to dopiero początek. Do 2028 advanced packaging może być $5-8B segmentem (vs ~$3B w 2026).</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🏭</div>
+        <div class="catalyst-body">
+          <h4>US/Europe onshoring — nowe fabryki = new tool orders</h4>
+          <p>TSMC Arizona (N3/N2 fabs ramp 2025-2027), Intel IFS Ohio + Arizona (18A, 14A), Samsung Texas, Micron Idaho — każda nowa gigafab wymaga kompletnego equipmentu od podstaw. To wielomiliardowe zamówienia na Lam narzędzia na następne 3-5 lat. Benefit jest niezależny od cyklu memory.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🔄</div>
+        <div class="catalyst-body">
+          <h4>CSBG flywheel — im więcej narzędzi, tym wyższy serwis</h4>
+          <p>CSBG ($2,1B/Q) rośnie proporcjonalnie do installed base. Każdy nowy tool sprzedany dziś generuje 5-8% wartości rocznie w serwisie przez 15+ lat. Przy sprzedaży $22B+ nowych narzędzi w FY2026, przyszły CSBG jest strukturalnie wyższy. To jest biznes w biznesie — stabilny, marżowy, rosnący.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">💎</div>
+        <div class="catalyst-body">
+          <h4>50%+ GM milestone → re-rating wyceny</h4>
+          <p>Q4 FY2026 guidance 50,5% GM = pierwsze przekroczenie 50% w historii. Rynek may re-rate Lam jako "premium quality compounder" analogicznie do spółek SaaS z powtarzalnymi marżami. Historycznie przebicie kluczowych marżowych progów = 15-25% re-rating P/S. Jeśli to nastąpi, cel $450-500+.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S10 -->
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')">
+      <div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div>
+      <div class="section-toggle" id="s10-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🔄</div>
+        <div class="catalyst-body">
+          <h4>Cykliczność — w 2023 revenue spadło o 32% YoY</h4>
+          <p>To było jeszcze nie tak dawno. Semiconductor equipment jest jednym z najbardziej cyklicznych sektorów. Jeśli AI capex zwolni, memory oversupply wróci (jak w 2022-2023), lub globalny popyt na elektronikę znów spadnie — Lam może stracić 30-40% revenue w ciągu roku. Przy obecnym P/S 23×, akcja mogłaby spaść 50%+.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🌐</div>
+        <div class="catalyst-body">
+          <h4>China export controls — $600M drag + eskalacja ryzyka</h4>
+          <p>Chiny to ~30% revenue. Obecne restrykcje powodują $600M drag w FY2026. Ryzyko: Biden-era regulations mogą zostać rozszerzone przez następną administrację (do jeszcze szerszej listy chińskich klientów). Pełna utrata Chin = -$6B revenue → akcja spada 40-50%. To jest ogonowe ryzyko, ale realne.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">📊</div>
+        <div class="catalyst-body">
+          <h4>Wycena P/S 23× > average analyst target — brak marginesu bezpieczeństwa</h4>
+          <p>Przy $364, cena jest powyżej średniego celu analityków (~$350). To znaczy, że base case jest już wyceniony. Każde rozczarowanie (miss Q4, słaba guidance FY2027, China ban expansion) = korekta 20-30% bez zmiany fundamentalnej tezy. Brak "margin of safety" przy aktualnej cenie.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">⚔️</div>
+        <div class="catalyst-body">
+          <h4>Applied Materials i TEL intensyfikują AI etch portfolio</h4>
+          <p>AMAT inwestuje agresywnie w GAA etch i advanced packaging. Tokyo Electron (TEL) ma silną pozycję w ALD/coater. Choć zmiana dostawcy jest trudna (switching cost), TSMC może dywersyfikować dostawców na nowych procesach (N1, GAA++), redukując koncentrację u Lam w dłuższym terminie.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🤖</div>
+        <div class="catalyst-body">
+          <h4>AI efficiency improvements → mniej GPU potrzeba → mniej fab capacity</h4>
+          <p>DeepSeek R1, model distillation, sparse attention — jeśli trenowanie LLM stanie się 10× bardziej efektywne, hyperscalerzy mogą ograniczyć capex na nowe GPU clusters. Pośredni efekt: mniej zamówień na nowe wafery → mniej tool orders dla Lam. To byłby egzogenny szok dla tezy AI semiconductor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S11 -->
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')">
+      <div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div>
+      <div class="section-toggle" id="s11-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Firma</th><th>Revenue (roczny)</th><th>Fokus</th><th>GM</th><th>Pozycja vs LRCX</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Lam Research (LRCX)</strong></td><td>~$22-23B FY2026E</td><td>Etch #1 + CVD/ALD</td><td style="color:var(--buy)">49,9%</td><td>🥇 Lider Etch, DRAM, Advanced Pkg</td></tr>
+            <tr><td>Applied Materials (AMAT)</td><td>~$28B FY2025</td><td>CVD/PVD/Etch — broad portfolio</td><td>48-49%</td><td>Większy ogólnie, ale słabszy w etch</td></tr>
+            <tr><td>KLA Corporation (KLAC)</td><td>~$12B</td><td>Process Control — metrology</td><td style="color:var(--buy)">61%!</td><td>Inny segment — inspection/measurement</td></tr>
+            <tr><td>Tokyo Electron (TEL)</td><td>~$20B JPY equivalent</td><td>ALD, coater/developer, etch</td><td>~47%</td><td>Silny w ALD, japonski rynek</td></tr>
+            <tr><td>ASML</td><td>~€28B</td><td>EUV/DUV Lithography</td><td>~52%</td><td>Kompletnie inny segment — litho monopol</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Dlaczego Lam Research wygrywa w AI etch?</h3>
+      <ul>
+        <li><strong>GAA (Gate-All-Around) etch leadership:</strong> Lam dostarczył >$1B w GAA tool revenue w 2024, AMAT i TEL są za. TSMC i Samsung certyfikowali Lam jako główny dostawca GAA etch</li>
+        <li><strong>DRAM etch monopol:</strong> HBM wymaga precyzyjnego DRAM etch — Lam ma tutaj dominującą pozycję (vs AMAT które jest silniejszy w Flash/NAND etch)</li>
+        <li><strong>H1 2025 comparison:</strong> Lam systems revenue +48,5% YoY vs AMAT +4% — dramatyczna różnica pokazuje gdzie jest najbardziej gorący AI demand</li>
+        <li><strong>Gross margin advantage vs AMAT:</strong> Lam 50% vs AMAT 48-49% — Lam osiągnął wyższe marże przy podobnej skali</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- S12 -->
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')">
+      <div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div>
+      <div class="section-toggle" id="s12-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s12-body">
+      <h3>Poziomy kluczowe</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>52W minimum</td><td>$90,94</td><td>Dno (H1 2025) — +300% rajd do ATH</td></tr>
+            <tr><td>ATH (H1 2026)</td><td>$438,50</td><td>Szczyt rajdu AI supercycle</td></tr>
+            <tr><td>Cena bieżąca (07.2026)</td><td>~$364</td><td>-17% od ATH | +154% H1 2026 YTD</td></tr>
+            <tr><td>Wsparcie S1</td><td>~$342–350</td><td>Intraday low 6 lipca $342 | Avg analyst target</td></tr>
+            <tr><td>Wsparcie S2</td><td>~$300–310</td><td>Silniejsze fibo wsparcie</td></tr>
+            <tr><td>Wsparcie S3</td><td>~$250–260</td><td>Base case FY2027 wycena P/S 15×</td></tr>
+            <tr><td>Opór R1</td><td>~$385–400</td><td>Strefa oporu technicznego po ATH</td></tr>
+            <tr><td>Opór R2 / ATH</td><td>$438,50</td><td>ATH — psychologiczna bariera</td></tr>
+            <tr><td>Opór R3</td><td>$450-500</td><td>Bull case / 50% GM re-rating</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Wskaźniki techniczne</h3>
+      <ul>
+        <li><strong>RSI (14):</strong> ~56 — neutralne, lekko bycze. Nie wykupione, nie wyprzedane</li>
+        <li><strong>MACD:</strong> Mieszane sygnały — oscyluje wokół zera po korekcie z ATH</li>
+        <li><strong>SMA5:</strong> ~$266 — cena znacznie powyżej (bullish)</li>
+        <li><strong>SMA50:</strong> ~$232 — cena znacznie powyżej (bullish)</li>
+        <li><strong>SMA200:</strong> ~$166 — cena znacznie powyżej (long-term bullish)</li>
+        <li><strong>RSI divergence:</strong> RSI trend spada przy rosnącej cenie = ostrzeżenie o możliwej korekcie</li>
+      </ul>
+
+      <div class="scenario-grid">
+        <div class="bull-box">
+          <h4>🐂 Scenariusz byczek</h4>
+          <ul>
+            <li>Q4 FY2026 (sierpień) $6,8B+ z GM 51%</li>
+            <li>FY2027 guidance >$30B = bullish re-rating</li>
+            <li>WFE outlook podniesiony do $160B+</li>
+            <li>Wybicie powyżej $438 ATH → $470-500</li>
+          </ul>
+        </div>
+        <div class="bear-box">
+          <h4>🐻 Scenariusz niedźwiedź</h4>
+          <ul>
+            <li>Q4 FY2026 miss ($6B- vs $6,6B guidance)</li>
+            <li>China export controls rozszerzenie</li>
+            <li>Memory capex spowolnienie (AI bubble?)</li>
+            <li>Test wsparcia $300, głębiej $250</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S13 -->
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')">
+      <div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div>
+      <div class="section-toggle" id="s13-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box">
+          <div class="period">Krótki termin (1–3 mies.)</div>
+          <div class="rating-text neutral">NEUTRALNA</div>
+          <div class="rating-note">Cena $364 powyżej avg analyst target ($350). Brak margin of safety. RSI divergence = ostrzeżenie. Q4 FY2026 earnings (sierpień) = kluczowy katalizator w obie strony.</div>
+        </div>
+        <div class="rating-box">
+          <div class="period">Średni termin (6–18 mies.)</div>
+          <div class="rating-text buy">KUPNO</div>
+          <div class="rating-note">WFE $180-200B 2027, HBM4/advanced pkg ramp, 50% GM milestone, US fab buildout. Cel $380-440. Lepszy punkt wejścia: $320-340 (wsparcie).</div>
+        </div>
+        <div class="rating-box">
+          <div class="period">Długi termin (3–5 lat)</div>
+          <div class="rating-text strong-buy">MOCNE KUPNO</div>
+          <div class="rating-note">LRCX to jeden z najlepszych compounderów w semiconductor. CSBG flywheel, GAA leadership, HBM dominance, net cash bilans. Bull: $600-800 do 2029-2030.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <h3>Strategia wejścia</h3>
+      <ul>
+        <li><strong>Przy $364 (obecna cena):</strong> Małą pozycję można otworzyć — fundamenty doskonałe, ale cena lekko powyżej konsensusu. Bez margin of safety. Wymagana cierpliwość</li>
+        <li><strong>Idealny punkt wejścia:</strong> $320–340 (wsparcie S1) — tam P/S FY2027E spada do ~12-13×, co jest zdecydowanie atrakcyjne</li>
+        <li><strong>Agresywny entry:</strong> $280–300 (S2 przy głębszej korekcie) — tam byłby screaming buy przy fundamentalnie nienaruszonym biznesie</li>
+        <li><strong>Q4 FY2026 earnings (sierpień 2026):</strong> Kluczowy katalizator — beat = test ATH; miss = korekta do $320-340</li>
+        <li><strong>Stop-loss mentalny:</strong> Przebicie $250 = rewizja tezy o WFE supercycle</li>
+      </ul>
+
+      <div class="fair-value-box">
+        <div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div>
+        <div class="fair-value-range">$370 – $445</div>
+        <div class="fair-value-note">Base case P/S 15× FY2027E $29B = ~$317 (bear case) | Bull P/S 18× = $447 | Analyst avg ~$350 | Przy $364 jesteś przy górnej granicy base case — umiarkowane upside w 12m</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S14 -->
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')">
+      <div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">PODSUMOWANIE (TL;DR)</div></div>
+      <div class="section-toggle" id="s14-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy">
+          <h4>✅ 3 powody, by kupić (na korekcie)</h4>
+          <ul>
+            <li><strong>Lider etch #1 w najważniejszym cyklu capex w historii półprzewodników:</strong> WFE $140B → $200B+ 2027, każdy HBM4 die wymaga Lam etch, każdy GAA chip wymaga Lam narzędzia. To strukturalna, wieloletnia pozycja rynkowa — nie tymczasowa</li>
+            <li><strong>CSBG $2,1B/kwartał = wbudowany compounder w spółce:</strong> Serwis na installed base rośnie niezależnie od cyklu. Im więcej narzędzi sprzedanych (record revenue 2026), tym wyższe CSBG za 3-5 lat. To jest SaaS-like recurring revenue w hardware biznesie</li>
+            <li><strong>50% GM milestone + net cash + $6B FCF + buybacks = finansowa doskonałość:</strong> Lam jest kapitalistyczną maszyną. Net cash, 11 lat dywidend z rzędu, $4,55B zwrócone akcjonariuszom w 3 kwartałach. Przy głębszej korekcie ($300-320), to jest jeden z najlepszych compounders na giełdzie</li>
+          </ul>
+        </div>
+        <div class="thesis-avoid">
+          <h4>❌ 3 powody, by poczekać z zakupem</h4>
+          <ul>
+            <li><strong>Cena $364 jest powyżej avg analyst target $350 — brak margin of safety:</strong> Rynek zdyskontował base case. Upside w 12m przy obecnej cenie jest ograniczony do ~+20% (bull case). Ryzyko/reward na $364 jest gorszy niż na $320-340</li>
+            <li><strong>Cykliczność — w 2023 revenue spadło -32%, akcja -50%:</strong> To jedyne ryzyko, które może "wycerować" dobrą tezę. Przy P/S 23×, kolejny downcycle (2028-2029?) może spowodować 40-60% korekty ceny niezależnie od jakości biznesu</li>
+            <li><strong>China $600M drag + eskalacja ryzyka:</strong> 30% revenue z Chin + rosnące napięcia geopolityczne. Przy pełnym zamknięciu Chin (-$6-7B revenue), Lam musiałby 5-6 lat nadrabiać ten gap z innych regionów. To scenariusz ogonowy, ale ryzyk $364 nie wycenia wystarczająco</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <h3>Thesis-breaker</h3>
+      <p><strong>🔴 Jeśli:</strong> Memory capex supercycle okazuje się krótszy niż sądzono (AI efficiency leap jak DeepSeek v5) LUB China export controls obejmą 80%+ chińskich klientów LUB Q4 FY2026 miss poniżej $6B z GM <49% → test $280-300, potencjalnie niżej.</p>
+
+      <h3>Thesis-confirmer</h3>
+      <p><strong>🟢 Jeśli:</strong> Q4 FY2026 $6,8B+ z GM 51%+ + FY2027 guidance $30B+ + WFE outlook $160B → ATH test $438 i nowe highs $460-500 w 6 miesięcy. Jeśli SK Hynix ogłosi kolejny HBM capacity doubling — Lam jest pierwszym beneficjentem.</p>
+
+      <hr class="divider">
+      <div style="text-align:center; padding: 20px 0">
+        <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">OCENA KOŃCOWA</div>
+        <div class="rating-badge neutral" style="display:inline-flex; font-size:20px; padding:14px 32px; margin-bottom:16px;">⚖️ NEUTRALNA — czekaj na $320–340</div>
+        <p style="color:var(--text-muted); max-width:700px; margin:0 auto; font-size:13px;">LRCX to jedna z najlepszych spółek w semiconductor — lider etch, CSBG flywheel, 50% GM, net cash, 11 lat dywidend. Problem: cena $364 jest już <strong>powyżej konsensusu analityków</strong> i brak wyraźnego margin of safety. <strong>Nie kupuj w pośpiechu</strong> — poczekaj na Q4 earnings (sierpień 2026) lub korektę do $320-340. Na $320 byłoby to KUPNO, na $280 MOCNE KUPNO. Na $364 — obserwuj i czekaj.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+
+  Analiza wygenerowana: 6 lipca 2026 | Dane: Lam Research IR, SEC 8-K/10-Q, Yahoo Finance, MacroTrends, Stockanalysis.com, Futurum Group | Nie stanowi porady inwestycyjnej
+</div>
+
+<script>
+function toggleSection(id) {
+  const body = document.getElementById(id + '-body');
+  const toggle = document.getElementById(id + '-toggle');
+  if (!body) return;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  body.style.display = isOpen ? 'none' : 'block';
+  toggle.classList.toggle('open', !isOpen);
+}
+function goSec(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+document.addEventListener('DOMContentLoaded', () => {
+  ['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14'].forEach(id => {
+    const b = document.getElementById(id + '-body');
+    if (b) b.style.display = 'none';
+  });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);
+        if (a) { a.classList.add('active'); a.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); }
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.section').forEach(s => obs.observe(s));
+});
+</script>
+<script>function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b</body></body>(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}</script><style>.section{scroll-margin-top:64px}</style></body>
+</html>

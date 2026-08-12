@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AVGO — Broadcom | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#dc2626; --accent2:#f87171; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#1a0508 0%,#0f1117 50%,#160a0c 100%); border-bottom:1px solid var(--border); padding:40px 32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(220,38,38,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.buy { background:rgba(76,175,80,0.15); border:2px solid var(--buy); color:var(--buy); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.rose { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#fff; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent2); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.rose { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.strong-buy { color:var(--strong-buy); } .rating-box .rating-text.neutral { color:var(--neutral); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .fair-value-box { background:linear-gradient(135deg,rgba(220,38,38,0.08),rgba(248,113,113,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(220,38,38,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .openai-badge { background:linear-gradient(135deg,rgba(16,163,127,0.15),rgba(220,38,38,0.08)); border:1px solid #10a37f; border-radius:12px; padding:20px 24px; margin:14px 0; }
+  .openai-badge h4 { color:#10a37f; font-size:16px; margin-bottom:8px; }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+  <div class="header-content">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: AVGO</div>
+    <div class="company-name">Broadcom Inc.</div>
+    <div class="company-sub">Custom AI silicon #1 (XPU: Google, Meta, OpenAI, Anthropic) · AI Networking (Tomahawk/Jericho) · VMware · OpenAI 10 GW deal · Palo Alto, CA</div>
+    <div class="header-meta">
+      <div class="rating-badge buy">📈 KUPNO</div>
+      <span class="meta-tag">Custom ASIC / XPU lider</span>
+      <span class="meta-tag">AI Networking</span>
+      <span class="meta-tag">Infrastructure Software</span>
+      <span class="meta-tag">Dywidenda</span>
+      <div class="price-display">
+        <div class="price-main">~$381,50</div>
+        <div class="price-sub">Cena (07.2026) | 52W: $281,61–$495,00</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">TL;DR</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (07.2026)</div><div class="metric-value">~$381,50</div><div class="metric-detail">52W: $281,61–$495 | -23% od ATH</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$1,92T</div><div class="metric-detail">Top-5 spółka świata</div></div>
+    <div class="metric-card"><div class="metric-label">Revenue Q2 FY2026</div><div class="metric-value green">$22,2B</div><div class="metric-detail">+48% YoY | Q3 guide: $29,4B</div></div>
+    <div class="metric-card"><div class="metric-label">AI Semi Revenue Q2</div><div class="metric-value rose">$10,8B</div><div class="metric-detail">+143% YoY | Q3E: $16B (+200%)</div></div>
+    <div class="metric-card"><div class="metric-label">AI Revenue FY2026E</div><div class="metric-value green">$56B</div><div class="metric-detail">+180% | FY2027E: $100B+</div></div>
+    <div class="metric-card"><div class="metric-label">FCF FY2025</div><div class="metric-value green">$26,9B</div><div class="metric-detail">+39% | 2029E: $107B (konsensus)</div></div>
+    <div class="metric-card"><div class="metric-label">Dywidenda</div><div class="metric-value">$2,60/rok</div><div class="metric-detail">+10,2% podwyżka | yield ~0,7%</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value green">$500-525</div><div class="metric-detail">+31-38% | Strong Buy (48 analityków)</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest Broadcom?</h3>
+      <p>Broadcom (NASDAQ: AVGO) to trzecia siła AI compute świata po NVIDII i TSMC — <strong>niekwestionowany lider custom AI silicon (XPU)</strong> projektowanego dla hyperscalerów oraz dominator sieci AI (switche Tomahawk/Jericho). Do tego imperium infrastructure software zbudowane na przejęciu <strong>VMware ($69B, 2023)</strong>. CEO: legendarny <strong>Hock Tan</strong> — najskuteczniejszy alokator kapitału w półprzewodnikach ostatniej dekady. Kapitalizacja ~$1,92 biliona.</p>
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>IX 2025</td><td>Ogłoszenie współpracy z OpenAI — deployment 10 GW custom XPU (2026-2029)</td><td style="color:var(--strong-buy)">↑↑ Mega-deal</td></tr>
+          <tr><td>2025-2026</td><td>Rajd do ATH $495 — rynek dyskontuje $100B AI revenue w FY2027</td><td style="color:var(--buy)">Szczyt</td></tr>
+          <tr><td><strong>3 VI 2026</strong></td><td><strong>Q2 FY2026: AI +143%, ale software miss ($7,18B vs $7,32B) i brak podniesienia $100B celu → -13-15%</strong></td><td style="color:var(--sell)">↓↓ Sell-off</td></tr>
+          <tr><td>24 VI 2026</td><td><strong>Jalapeño</strong> — pierwszy custom chip inference OpenAI zaprojektowany z Broadcomem w 9 miesięcy</td><td style="color:var(--strong-buy)">↑↑ Walidacja</td></tr>
+          <tr><td>VII 2026</td><td>Konsolidacja ~$380 — -23% od ATH mimo przyspieszającego AI</td><td style="color:var(--neutral)">Okazja?</td></tr>
+        </tbody>
+      </table></div>
+      <div class="openai-badge"><h4>🌶️ OpenAI × Broadcom: Jalapeño + 10 GW (2026-2029)</h4><p style="color:var(--text-muted); font-size:13px;">OpenAI zaprojektowało z Broadcomem swój pierwszy chip inference (Jalapeño) — od projektu do produkcji w 9 miesięcy, z pomocą własnych modeli AI. Pierwsza generacja XPU wchodzi w wolumen w 2027 (1+ GW), całość programu to 10 gigawatów mocy do 2029. To największa pojedyncza walidacja tezy custom silicon w historii — najważniejszy klient AI świata wybrał Broadcom do uniezależnienia się od NVIDII.</p></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment</th><th>Produkty</th><th>Pozycja</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Custom AI XPU</strong></td><td>Projektowanie akceleratorów dla hyperscalerów (TPU Google, MTIA Meta, chipy OpenAI/Anthropic)</td><td>🥇 #1 świata — ~70%+ rynku custom</td></tr>
+          <tr><td><strong>AI Networking</strong></td><td>Switche Tomahawk 6 (102,4T), Jericho, NICs, optical DSP</td><td>🥇 #1 — standard Ethernet dla klastrów AI</td></tr>
+          <tr><td><strong>Semiconductors (non-AI)</strong></td><td>Broadband, wireless (Apple RF), storage, przemysł</td><td>Dojne krowy, cykliczne</td></tr>
+          <tr><td><strong>Infrastructure Software</strong></td><td>VMware (VCF), CA, Symantec — 85-90% marże</td><td>~$30B/rok, stabilne, po podwyżkach cen</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat</h3>
+      <p>Custom XPU to biznes o ekstremalnej barierze wejścia: wymaga IP w SerDes/packagingu 3nm-2nm, zespołów 1000+ inżynierów i wieloletnich relacji. Realnie liczy się dwóch graczy: Broadcom (#1) i Marvell (#2). W networkingu Ethernet AI Broadcom jest standardem de facto — a przejście na klastry 100k+ GPU gra na jego korzyść (Ethernet wypiera InfiniBand NVIDII). VMware daje lepki, subskrypcyjny cash flow niezależny od cyklu semi.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Custom AI accelerators:</strong> hyperscalerzy przesuwają 20-30%+ AI compute na własne chipy — rynek rośnie z ~$30B (2025) do $150B+ (2028E)</li>
+        <li><strong>AI Networking:</strong> każdy 1 GW klastra = miliardy $ w switchach/optyce; Ethernet zdobywa udział kosztem InfiniBand</li>
+        <li><strong>Serviceable AI SAM Broadcoma (deklaracja zarządu):</strong> $60-90B rocznie do 2027 tylko z obecnych klientów</li>
+        <li><strong>Infrastructure software:</strong> stabilny, $30B/rok, wzrost single-digit po repricingu VMware</li>
+      </ul>
+      <div class="alert alert-info"><strong>Klucz tezy:</strong> AI revenue Broadcoma rośnie szybciej niż NVIDII (+143% → +200% guidance) z dużo niższej bazy — a rynek wycenia AVGO na niższym mnożniku zysków forward. Custom silicon to strukturalny trend dekady, nie moda.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="chips"><span class="chip rose">Google (TPU — największy)</span><span class="chip rose">Meta (MTIA)</span><span class="chip rose">OpenAI (10 GW!)</span><span class="chip rose">Anthropic</span><span class="chip">+2 nieujawnionych</span><span class="chip">Apple (RF wireless)</span><span class="chip">Enterprise (VMware)</span></div>
+      <p><strong>6 klientów custom XPU</strong> — każdy to program wieloletni wart dziesiątki miliardów. Koncentracja jest realna (Google historycznie największy), ale portfel dywersyfikuje się szybciej niż u Marvella. Software (VMware) dodaje tysiące klientów enterprise — bufor stabilności, którego nie ma żaden inny gracz AI silicon.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Revenue</th><th>Wzrost</th><th>AI Semi</th></tr></thead>
+        <tbody>
+          <tr><td>FY2025</td><td>~$63B</td><td>+22%</td><td>~$20B</td></tr>
+          <tr><td>Q2 FY2026 (3 VI)</td><td><strong>$22,2B</strong></td><td style="color:var(--buy)">+48%</td><td>$10,8B (+143%)</td></tr>
+          <tr><td>Q3 FY2026 guide</td><td>$29,4B</td><td style="color:var(--strong-buy)">~+70%E</td><td>$16B (+200%)</td></tr>
+          <tr><td>FY2026E</td><td>~$100B</td><td style="color:var(--strong-buy)">+55-60%</td><td>$56B (+180%)</td></tr>
+          <tr><td>FY2027E</td><td>~$150B+</td><td style="color:var(--strong-buy)">+50%</td><td><strong>$100B+</strong> (cel Hock Tana)</td></tr>
+        </tbody>
+      </table></div>
+      <p>Miks: AI semi (rośnie wykładniczo) + non-AI semi (~$20B, cykliczne dno za nami) + software (~$30B, stabilne 85-90% marż). Software miss w Q2 ($7,18B vs $7,32B) to szum — VMware rośnie +9% i nadal trawi repricing.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Market Cap</td><td>~$1,92T</td><td>—</td></tr>
+          <tr><td>P/E trailing</td><td>~62×</td><td style="color:var(--neutral)">Zaburzony amortyzacją VMware</td></tr>
+          <tr><td>P/E forward (FY2027E EPS ~$14-15)</td><td>~26-27×</td><td style="color:var(--buy)">✅ Tanio dla +50% growera</td></tr>
+          <tr><td>P/S (FY2027E ~$150B)</td><td>~12,8×</td><td style="color:var(--neutral)">Premium uzasadnione miksem software</td></tr>
+          <tr><td>P/FCF (FY2026E ~$40B)</td><td>~48×</td><td style="color:var(--neutral)">FCF rośnie do $107B w 2029E → 18×</td></tr>
+          <tr><td>Dywidenda</td><td>$2,60 (~0,7%)</td><td>11 lat wzrostu z rzędu, +10,2%</td></tr>
+          <tr><td>Cel analityków</td><td>$500-525 (high $582)</td><td style="color:var(--strong-buy)">+31-38% | Strong Buy, 0 Sell</td></tr>
+        </tbody>
+      </table></div>
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$480 – $560</div><div class="fair-value-note">Base: 32-35× P/E na FY2027E EPS ~$15 | Konsensus $500-525 | Bull (OpenAI ramp szybszy, 7. klient XPU): $580+ | Przy $381,50 = margines ~25% do dolnej granicy</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <p>Non-GAAP GM ~77-79% (software 85-90%, custom XPU ~60-65%, networking ~70%). EBITDA margin ~65% — najwyższa efektywność operacyjna w dużych semi. Q2 adj. EPS $2,44 (beat). FCF FY2025 $26,9B (+39%), FCF margin ~43%. Rosnący mix custom XPU lekko rozwadnia GM% (jak u MRVL), ale absolutne $$ zysku eksplodują. Konsensus: FCF $107B w 2029 — to czyniłoby AVGO największą maszyną gotówkową świata po Apple.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <p>Dług ~$66B (spadek z ~$76B po VMware) vs EBITDA ~$65B run rate → <strong>leverage ~1× i szybko spada</strong>. Przy FCF $27B+ rocznie dług przestał być tematem — Hock Tan historycznie delewaruje po każdym przejęciu i wraca do buybacków/dywidend ($17,5B zwrócone w FY2025). Rating kredytowy investment grade. Jedyny "koszt": odsetki ~$3B/rok, malejące.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">BULL CASE</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🌶️</div><div class="catalyst-body"><h4>OpenAI 10 GW — największy program custom silicon w historii</h4><p>1. generacja XPU w wolumenie 2027 (1+ GW). 10 GW do 2029 = dziesiątki miliardów $ przychodów. Jalapeño powstał w 9 miesięcy — tempo, które cementuje przewagę Broadcoma nad każdą alternatywą.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>AI revenue akceleruje: +143% → +200% guidance</h4><p>$56B FY2026 → $100B+ FY2027. Sam wzrost AI revenue Broadcoma w FY2027 (+$44B) to więcej niż całe roczne przychody AMD. Rynek po -23% korekcie tego nie wycenia.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🌐</div><div class="catalyst-body"><h4>Ethernet wypiera InfiniBand — networking rośnie z każdym klastrem</h4><p>Tomahawk 6 (102,4T) jest standardem mega-klastrów. Networking to ~1/3 AI revenue z wyższymi marżami niż XPU — podwójny silnik na tej samej fali.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💰</div><div class="catalyst-body"><h4>FCF $27B → $107B (2029E) + dywidenda 11 lat wzrostu</h4><p>Przy 18× P/FCF 2029E obecna cena implikuje same wzrosty. Delewarowanie + buybacki wracają w FY2027.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🤝</div><div class="catalyst-body"><h4>7. i 8. klient XPU = darmowa opcja</h4><p>Apple (własny serwer AI?), xAI, Microsoft, Amazon — każdy nowy klient custom to skok wyceny. Zarząd sygnalizuje "aktywne rozmowy".</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">BEAR CASE</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🫧</div><div class="catalyst-body"><h4>Teza = AI capex bez końca. A jeśli bańka?</h4><p>$100B AI revenue FY2027 wymaga, by OpenAI/Meta/Google utrzymały biliony capexu. Efektywnościowy przełom (nowy "DeepSeek moment") lub problem finansowania OpenAI = cios w największy program. Przy $1,92T kapitalizacji korekta 30-40% jest możliwa bez zmiany fundamentów.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Koncentracja: 6 klientów decyduje o wszystkim</h4><p>Google (największy) rozwija własne zespoły projektowe; każda in-source'owana generacja TPU to ryzyko. Utrata jednego klienta = -15-25% wyceny.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🥊</div><div class="catalyst-body"><h4>NVIDIA kontratakuje (NVLink Fusion, cenowo)</h4><p>NVIDIA otworzyła NVLink dla custom chipów i może agresywnie ciąć ceny GPU, wydłużając decyzje hyperscalerów o własnym krzemie. Marvell też walczy o te same sockety.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💾</div><div class="catalyst-body"><h4>Software rozczarowuje (miss w Q2)</h4><p>VMware po repricingu rośnie tylko +9%; churn klientów wkurzonych podwyżkami Hock Tana może się ujawnić w FY2027. To 30% przychodów.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>Custom ASIC</th><th>Networking</th><th>vs AVGO</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Broadcom</strong></td><td>🥇 #1 (~70% rynku, 6 klientów)</td><td>🥇 #1 Ethernet</td><td>—</td></tr>
+          <tr><td>NVIDIA</td><td>Merchant GPU (inny model)</td><td>InfiniBand + Spectrum-X</td><td>Frenemy — traci % rynku networking</td></tr>
+          <tr><td>Marvell (MRVL)</td><td>#2 (18 wins, $75B funnel)</td><td>Teralynx (challenger)</td><td>Mniejszy, tańszy, bardziej ryzykowny</td></tr>
+          <tr><td>Alchip/GUC/MediaTek</td><td>Budget alternatywy</td><td>—</td><td>Presja cenowa w prostszych projektach</td></tr>
+          <tr><td>AMD</td><td>Merchant MI + semi-custom</td><td>Pensando</td><td>Inna liga w custom</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">TECHNIKA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>52W low</td><td>$281,61</td><td>Dołek przed AI re-ratingiem</td></tr>
+          <tr><td>ATH</td><td>$495,00</td><td>Szczyt przed Q2 sell-offem</td></tr>
+          <tr><td>Cena</td><td>~$381,50</td><td>-23% od ATH | konsolidacja od czerwca</td></tr>
+          <tr><td>Wsparcie S1</td><td>$360-370</td><td>Dno po earnings gap</td></tr>
+          <tr><td>Wsparcie S2</td><td>$320-330</td><td>Fibo 61,8% + SMA200 okolice</td></tr>
+          <tr><td>Opór R1</td><td>$410-425</td><td>Górna banda konsolidacji</td></tr>
+          <tr><td>Opór R2</td><td>$495</td><td>ATH</td></tr>
+        </tbody>
+      </table></div>
+      <p>Po -15% earnings gap kurs buduje bazę $360-400 od 7 tygodni — zdrowa konsolidacja przy rosnących fundamentach. Katalizator: <strong>wyniki Q3 FY2026 na początku września</strong> (guide $29,4B, AI $16B). Beat + podniesienie celu $100B na FY2027 = wybicie ku $450+.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Konsolidacja po -23% przy akcelerującym AI (+200% guide). Katalizator: wyniki wrzesień. Wejście $370-385, ryzyko do $330 przy risk-off.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text strong-buy">MOCNE KUPNO</div><div class="rating-note">$100B AI FY2027 + OpenAI volume ramp + forward P/E 26× dla +50% growera. Cel $500-560.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">FCF $107B 2029E, duopol custom silicon, dywidendowy kompounder. Ryzyko: cykl AI capex — pozycja duża, ale nie all-in.</div></div>
+      </div>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$480 – $560</div><div class="fair-value-note">Wejście: $370-385 | Dokupki: $330-350 | Stop mentalny: trwałe przebicie $320</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">TL;DR</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>-23% od ATH przy AI revenue akcelerującym +143% → +200%</strong> — rynek ukarał spółkę za software miss $140M, ignorując $5B beat-trajektorię AI; konsensus $500-525 (+31-38%), Strong Buy, 0 Sell</li>
+          <li><strong>OpenAI 10 GW + Jalapeño = największa walidacja custom silicon w historii</strong> — 6 klientów XPU (Google, Meta, OpenAI, Anthropic +2), $100B AI revenue w FY2027 to cel, nie marzenie</li>
+          <li><strong>Jedyny gracz AI z buforem software</strong> — VMware $30B/rok na 85-90% marżach + FCF idący z $27B do $107B (2029E) + 11 lat wzrostu dywidendy</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Zakład o nieskończony AI capex</strong> — $1,92T wyceny wymaga, by hyperscalerzy i OpenAI utrzymali bilionowe wydatki; "moment DeepSeek 2.0" = -30-40%</li>
+          <li><strong>6 klientów = 6 pojedynczych punktów ryzyka</strong> — in-sourcing Google lub poślizg OpenAI natychmiast widoczny w wycenie</li>
+          <li><strong>VMware może rozczarować</strong> — churn po agresywnych podwyżkach cen dopiero się zmaterializuje; software to 30% przychodów</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> Q3 (wrzesień) miss na AI guidance $16B LUB sygnał opóźnienia programu OpenAI → $320-330.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> Q3 beat + podniesienie celu $100B FY2027 + ogłoszenie 7. klienta XPU → $450-495 szybko, nowe ATH do końca roku.</p>
+      <hr class="divider">
+      <div style="text-align:center; padding:20px 0">
+        <div class="rating-badge buy" style="display:inline-flex; font-size:20px; padding:14px 32px; margin-bottom:16px;">📈 KUPNO — akceleracja w cenie korekty</div>
+        <p style="color:var(--text-muted); max-width:700px; margin:0 auto; font-size:13px;">AVGO przy $381,50 to rzadki układ: spółka podwaja AI revenue rocznie, ma OpenAI jako klienta dekady i forward P/E ~26×, a handluje -23% od szczytu przez kosmetyczny miss w software. W koszyku mega-capów AI to obecnie najlepszy stosunek jakości do ceny. Wejście $370-385, katalizator: wyniki wrześniowe.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 27 lipca 2026 | Dane: Broadcom IR, SEC 8-K, OpenAI Newsroom, CNBC, StockAnalysis, TIKR, Benzinga | Nie stanowi porady inwestycyjnej</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){const e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+<script>function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b</body></body>(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}</script><style>.section{scroll-margin-top:64px}</style></body>
+</html>

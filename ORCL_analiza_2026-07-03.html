@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORCL — Oracle Corporation | Analiza Inwestycyjna 2026</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d2e;
+    --surface2: #242740;
+    --surface3: #2e3250;
+    --accent: #f80000;
+    --accent2: #00d4aa;
+    --accent3: #ffd740;
+    --text: #e8eaf6;
+    --text-muted: #8892b0;
+    --border: #2e3250;
+    --strong-buy: #00c853;
+    --buy: #4caf50;
+    --neutral: #ffd740;
+    --sell: #ff6d00;
+    --strong-sell: #d50000;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.7; }
+
+  .header {
+    background: linear-gradient(135deg, #1a0505 0%, #0f1117 50%, #1a1d2e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 32px 32px;
+    position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(248,0,0,0.10) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .header-content { max-width: 1100px; margin: 0 auto; position: relative; }
+  .ticker-badge { display: inline-block; background: var(--accent); color: #fff; font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 6px; letter-spacing: 1px; margin-bottom: 12px; }
+  .company-name { font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .company-sub { color: var(--text-muted); font-size: 15px; margin-bottom: 20px; }
+  .header-meta { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+  .rating-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 700; padding: 10px 24px; border-radius: 30px; }
+  .rating-badge.buy { background: rgba(76,175,80,0.15); border: 2px solid var(--buy); color: var(--buy); }
+  .rating-badge.strong-buy { background: rgba(0,200,83,0.15); border: 2px solid var(--strong-buy); color: var(--strong-buy); }
+  .meta-tag { background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; padding: 6px 14px; border-radius: 20px; }
+  .price-display { margin-left: auto; text-align: right; }
+  .price-main { font-size: 30px; font-weight: 800; color: #fff; }
+  .price-sub { color: var(--text-muted); font-size: 13px; }
+
+  .nav-sticky { position: sticky; top: 0; z-index: 100; background: rgba(26,29,46,0.96); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); overflow-x: auto; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; padding: 0 16px; }
+  .nav-link { flex-shrink: 0; padding: 14px 16px; color: var(--text-muted); font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; cursor: pointer; }
+  .nav-link:hover { color: var(--text); }
+  .nav-link.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .summary-wrapper { max-width: 1100px; margin: 28px auto; padding: 0 24px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; transition: border-color 0.2s; }
+  .metric-card:hover { border-color: var(--accent); }
+  .metric-label { color: var(--text-muted); font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 8px; }
+  .metric-value { font-size: 22px; font-weight: 800; color: #fff; }
+  .metric-value.green { color: var(--buy); }
+  .metric-value.red { color: var(--sell); }
+  .metric-value.yellow { color: var(--neutral); }
+  .metric-detail { color: var(--text-muted); font-size: 12px; margin-top: 4px; }
+
+  .main { max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
+
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 16px; overflow: hidden; transition: border-color 0.2s; }
+  .section:hover { border-color: var(--accent); }
+  .section-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; cursor: pointer; user-select: none; }
+  .section-title-wrap { display: flex; align-items: center; gap: 14px; }
+  .section-num { background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-title { font-size: 15px; font-weight: 700; color: var(--text); }
+  .section-toggle { color: var(--text-muted); font-size: 18px; transition: transform 0.3s; }
+  .section-toggle.open { transform: rotate(180deg); }
+  .section-body { padding: 0 24px 24px; display: none; }
+  .section-body.open { display: block; }
+
+  h3 { color: var(--accent2); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; margin: 20px 0 10px; }
+  h3:first-child { margin-top: 0; }
+  p { margin-bottom: 12px; color: var(--text-muted); }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--text); }
+  ul { list-style: none; padding: 0; }
+  ul li { padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-muted); }
+  ul li:last-child { border-bottom: none; }
+  ul li::before { content: '→'; color: var(--accent); margin-right: 8px; font-size: 12px; }
+
+  .table-wrap { overflow-x: auto; margin: 12px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--surface2); color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 14px; text-align: left; }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+  tr:hover td { background: rgba(248,0,0,0.03); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .chip { background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; padding: 4px 12px; border-radius: 20px; }
+  .chip.green { border-color: var(--buy); color: var(--buy); background: rgba(76,175,80,0.08); }
+  .chip.red { border-color: var(--sell); color: var(--sell); background: rgba(255,109,0,0.08); }
+  .chip.accent { border-color: var(--accent); color: var(--accent); background: rgba(248,0,0,0.08); }
+  .chip.teal { border-color: var(--accent2); color: var(--accent2); background: rgba(0,212,170,0.08); }
+  .chip.yellow { border-color: var(--neutral); color: var(--neutral); background: rgba(255,215,64,0.08); }
+
+  .rating-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 14px; }
+  .rating-box { background: var(--surface2); border-radius: 10px; padding: 18px; text-align: center; }
+  .rating-box .period { color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+  .rating-box .rating-text { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+  .rating-box .rating-text.buy { color: var(--buy); }
+  .rating-box .rating-text.strong-buy { color: var(--strong-buy); }
+  .rating-box .rating-text.neutral { color: var(--neutral); }
+  .rating-box .rating-note { color: var(--text-muted); font-size: 12px; }
+
+  .scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .bull-box { background: rgba(0,200,83,0.06); border: 1px solid rgba(0,200,83,0.25); border-radius: 10px; padding: 18px; }
+  .bear-box { background: rgba(213,0,0,0.06); border: 1px solid rgba(213,0,0,0.2); border-radius: 10px; padding: 18px; }
+  .bull-box h4 { color: var(--strong-buy); margin-bottom: 12px; }
+  .bear-box h4 { color: var(--strong-sell); margin-bottom: 12px; }
+  .bull-box ul li::before { color: var(--strong-buy); }
+  .bear-box ul li::before { color: var(--strong-sell); }
+
+  .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .thesis-buy { background: rgba(0,200,83,0.06); border: 1px solid rgba(0,200,83,0.2); border-radius: 10px; padding: 18px; }
+  .thesis-avoid { background: rgba(213,0,0,0.06); border: 1px solid rgba(213,0,0,0.2); border-radius: 10px; padding: 18px; }
+  .thesis-buy h4 { color: var(--strong-buy); margin-bottom: 10px; }
+  .thesis-avoid h4 { color: var(--strong-sell); margin-bottom: 10px; }
+
+  .fair-value-box { background: linear-gradient(135deg, rgba(248,0,0,0.08), rgba(0,212,170,0.06)); border: 1px solid var(--accent); border-radius: 12px; padding: 24px; margin-top: 16px; text-align: center; }
+  .fair-value-label { color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .fair-value-range { font-size: 32px; font-weight: 800; color: var(--accent2); margin-bottom: 8px; }
+  .fair-value-note { color: var(--text-muted); font-size: 13px; }
+
+  .alert { border-radius: 8px; padding: 14px 18px; margin: 14px 0; font-size: 13px; }
+  .alert-info { background: rgba(248,0,0,0.06); border-left: 3px solid var(--accent); color: var(--text-muted); }
+  .alert-warn { background: rgba(255,215,64,0.06); border-left: 3px solid var(--neutral); color: var(--text-muted); }
+  .alert-success { background: rgba(0,200,83,0.06); border-left: 3px solid var(--strong-buy); color: var(--text-muted); }
+  .alert-danger { background: rgba(213,0,0,0.06); border-left: 3px solid var(--strong-sell); color: var(--text-muted); }
+  .alert-teal { background: rgba(0,212,170,0.06); border-left: 3px solid var(--accent2); color: var(--text-muted); }
+
+  .catalyst-item { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom: none; }
+  .catalyst-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .catalyst-body h4 { color: var(--text); font-size: 14px; margin-bottom: 4px; }
+  .catalyst-body p { color: var(--text-muted); font-size: 13px; margin: 0; }
+
+  .big-number { font-size: 42px; font-weight: 800; color: var(--accent); text-align: center; padding: 16px; }
+  .big-number-label { text-align: center; color: var(--text-muted); font-size: 13px; margin-top: -8px; }
+
+  .progress-row { display: flex; align-items: center; gap: 12px; margin: 8px 0; }
+  .progress-label { color: var(--text-muted); font-size: 12px; min-width: 120px; }
+  .progress-bar { flex: 1; background: var(--surface2); border-radius: 4px; height: 6px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 4px; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+
+  .footer { text-align: center; padding: 32px 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 700px) {
+    .rating-grid, .scenario-grid, .thesis-grid { grid-template-columns: 1fr; }
+    .company-name { font-size: 24px; }
+    .header-meta { flex-direction: column; align-items: flex-start; }
+    .price-display { margin-left: 0; }
+  }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+  <div class="header-content">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: ORCL</div>
+    <div class="company-name">Oracle Corporation</div>
+    <div class="company-sub">AI Infrastructure Landlord · Cloud ERP · Database Leader · Austin, TX | Założona 1977 | Larry Ellison Chairman & CTO</div>
+    <div class="header-meta">
+      <div class="rating-badge buy">📈 KUPNO</div>
+      <span class="meta-tag">Enterprise Software</span>
+      <span class="meta-tag">Cloud Infrastructure (OCI)</span>
+      <span class="meta-tag">AI Infrastructure</span>
+      <span class="meta-tag">Large Cap $422B</span>
+      <div class="price-display">
+        <div class="price-main">~$147,76</div>
+        <div class="price-sub">Cena (29.06.2026) | 52W: $134,57–$345,72</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a>
+    <a class="nav-link" onclick="goSec('s2')">Produkt</a>
+    <a class="nav-link" onclick="goSec('s3')">Rynek</a>
+    <a class="nav-link" onclick="goSec('s4')">Klienci</a>
+    <a class="nav-link" onclick="goSec('s5')">Biznes</a>
+    <a class="nav-link" onclick="goSec('s6')">Wycena</a>
+    <a class="nav-link" onclick="goSec('s7')">Marże</a>
+    <a class="nav-link" onclick="goSec('s8')">Bilans</a>
+    <a class="nav-link" onclick="goSec('s9')">Bull</a>
+    <a class="nav-link" onclick="goSec('s10')">Bear</a>
+    <a class="nav-link" onclick="goSec('s11')">Konkurencja</a>
+    <a class="nav-link" onclick="goSec('s12')">Technicals</a>
+    <a class="nav-link" onclick="goSec('s13')">Ocena</a>
+    <a class="nav-link" onclick="goSec('s14')">TL;DR</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card">
+      <div class="metric-label">Cena (29.06.2026)</div>
+      <div class="metric-value red">$147,76</div>
+      <div class="metric-detail">-57% od ATH $345,72 (09.2025)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Kapitalizacja</div>
+      <div class="metric-value">$422B</div>
+      <div class="metric-detail">-30% YoY | ~2,85B akcji</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Revenue FY2026</div>
+      <div class="metric-value green">$67,4B</div>
+      <div class="metric-detail">+17% YoY | cloud 51% total</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Revenue FY2027E</div>
+      <div class="metric-value green">$90B</div>
+      <div class="metric-detail">+34% YoY — oficjalny guidance</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">RPO Backlog</div>
+      <div class="metric-value green">$638B</div>
+      <div class="metric-detail">+363% YoY | 9,5× roczny revenue</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">OCI Q4 FY2026</div>
+      <div class="metric-value green">+93% YoY</div>
+      <div class="metric-detail">$5,8B — najszybszy cloud major</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Forward P/E</div>
+      <div class="metric-value yellow">22,9×</div>
+      <div class="metric-detail">Trailing 31,6× | EPS FY2026 $5,94</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Cel analityków</div>
+      <div class="metric-value green">$252,92</div>
+      <div class="metric-detail">+71% upside | 42 analityków, Buy</div>
+    </div>
+  </div>
+</div>
+
+<main class="main">
+
+  <!-- S1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')">
+      <div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div>
+      <div class="section-toggle open" id="s1-toggle">▾</div>
+    </div>
+    <div class="section-body open" id="s1-body">
+      <h3>Historia i DNA</h3>
+      <p>Oracle założona w <strong>1977 roku</strong> przez Larry'ego Ellisona, Boba Minera i Eda Oatesa w Santa Clara, CA. Siedziba przeniesiona do <strong>Austin, TX w 2020</strong>. Przez dekady Oracle dominował w relacyjnych bazach danych (Oracle Database), a od lat 90-tych rozszerzył się na ERP/CRM. Przełomowe przejęcia: PeopleSoft (2005, $10,3B), BEA Systems (2008, $8,5B), Sun Microsystems (2010, $7,4B), Cerner (2022, $28,3B — największe w historii). W 2013 Oracle weszło w cloud (SaaS), a od 2020 zbudowało OCI (Oracle Cloud Infrastructure) jako alternatywę dla AWS.</p>
+      <p><strong>CEO: Safra Catz</strong> (od 2014). <strong>Larry Ellison</strong> pełni funkcję Chairman & CTO — jeden z najbardziej wpływowych technologów świata, właściciel ok. 40% akcji. ~<strong>141 000 pracowników</strong> na całym świecie.</p>
+
+      <h3>Etap spółki</h3>
+      <div class="chips">
+        <span class="chip accent">Transformacja → Cloud / AI</span>
+        <span class="chip green">Profitable ($16,98B net income FY2026)</span>
+        <span class="chip yellow">Negative FCF (CapEx buildout)</span>
+        <span class="chip teal">$638B RPO visibility</span>
+      </div>
+
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+          <tbody>
+            <tr><td>Wrzesień 2025</td><td>ATH $345,72 — Oracle na fali entuzjazmu AI/OCI</td><td style="color:var(--buy)">↑ Euforia</td></tr>
+            <tr><td>2025 Q4–Q1 2026</td><td>CapEx $55,7B (+162% YoY) → negative FCF -$23,7B ujawniony</td><td style="color:var(--sell)">↓ Korekta -57%</td></tr>
+            <tr><td>Marzec 2026</td><td>OCI Supercluster gen. nowej generacji (NVIDIA Vera Rubin) — 50% więcej GPU QoQ</td><td style="color:var(--buy)">↑ Strategiczny</td></tr>
+            <tr><td>Kwiecień 2026</td><td>RPO backlog $638B (+363% YoY) ogłoszony — rekordowy kontrakt pipeline</td><td style="color:var(--buy)">↑ Bullish</td></tr>
+            <tr><td>Maj 2026</td><td>FY2026 Q4: OCI +93% YoY, total cloud $34B. Guidance FY2027: $90B revenue</td><td style="color:var(--buy)">↑ Record quarter</td></tr>
+            <tr><td>Lipiec 2026</td><td>Akcja przy $147 — -57% od ATH mimo rekordowego backlogu i guidingu $90B</td><td style="color:var(--sell)">↓ Dysonans rynku</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-teal">
+        <strong>Kluczowy paradoks 2026:</strong> Oracle raportuje rekordowy backlog ($638B), rekordowe przychody ($67,4B), rekordowy guidance ($90B na FY2027) — a akcja jest -57% od ATH. Rynek karze za ujemne FCF i masywne zadłużenie w trakcie CapEx buildout fazy.
+      </div>
+    </div>
+  </div>
+
+  <!-- S2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')">
+      <div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div>
+      <div class="section-toggle" id="s2-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s2-body">
+      <h3>Trzy filary biznesu</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Segment</th><th>FY2026 Revenue</th><th>Wzrost YoY</th><th>Opis</th></tr></thead>
+          <tbody>
+            <tr><td><strong>OCI — Cloud Infrastructure (IaaS)</strong></td><td>$18,1B</td><td style="color:var(--buy)">+68–93%</td><td>GPU compute, networking, storage dla AI/ML workloads</td></tr>
+            <tr><td><strong>SaaS — Cloud Applications</strong></td><td>$15,9B</td><td style="color:var(--buy)">~+20%</td><td>Fusion ERP, NetSuite, HCM, CX, Cerner Health</td></tr>
+            <tr><td><strong>Cloud/License Support</strong></td><td>~$33B</td><td style="color:var(--buy)">~+10%</td><td>Baza installed base — legacy licenses + cloud support</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>OCI — Najważniejszy katalizator wzrostu</h3>
+      <p><strong>Oracle Cloud Infrastructure (OCI)</strong> to platforma AI/cloud obliczona na rywalizację z AWS, Azure i Google. Kluczowe przewagi OCI:</p>
+      <ul>
+        <li><strong>Cena:</strong> OCI jest 30–50% tańszy od AWS/Azure dla wielu workloads — kluczowy argument sprzedażowy</li>
+        <li><strong>Wydajność GPU:</strong> OCI Supercluster zbudowany na NVIDIA Vera Rubin — ultra-low latency networking dla LLM training</li>
+        <li><strong>GPU utilization 97,5%</strong> — popyt masowo przekracza podaż, Oracle nie może budować wystarczająco szybko</li>
+        <li><strong>Sovereign cloud:</strong> Oracle oferuje dedicated cloud regions w krajach wymagających data sovereignty — unikalny model</li>
+        <li><strong>400 MW dostarczone klientom w FY2026</strong>, +50% GPU capacity QoQ w Q3</li>
+      </ul>
+
+      <h3>SaaS — Cerner i Fusion ERP</h3>
+      <p>Przejęcie <strong>Cerner (2022, $28,3B)</strong> dało Oracle #1 pozycję w Healthcare IT/EHR (Electronic Health Records) w USA. Fusion ERP obsługuje globalną finanse/procurement dla Fortune 500. NetSuite to dominujące ERP dla mid-market. Oracle Fusion Applications (HCM, SCM, EPM) konkurują z SAP i Workday.</p>
+
+      <h3>Przewagi konkurencyjne (moat)</h3>
+      <ul>
+        <li><strong>Database lock-in:</strong> Oracle Database (relacyjna, NoSQL, in-memory) napędza tysiące misji krytycznych systemów — switching cost ogromne</li>
+        <li><strong>Ellison efekt:</strong> Larry Ellison jako Chairman/CTO przyciąga klientów i negocjuje megakontrakty osobiście</li>
+        <li><strong>AI + database bundling:</strong> Oracle Autonomous Database + OCI AI = kompleksowy stack niemożliwy do odtworzenia w 2–3 lata</li>
+        <li><strong>Installed base 430,000 klientów:</strong> ogromna baza do upsell na OCI/SaaS</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- S3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')">
+      <div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div>
+      <div class="section-toggle" id="s3-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s3-body">
+      <h3>TAM — Cloud + AI + Database</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Rynek</th><th>2025</th><th>2026</th><th>2030E</th><th>CAGR</th></tr></thead>
+          <tbody>
+            <tr><td>Cloud Infrastructure (IaaS/PaaS)</td><td>~$400B</td><td>~$550B</td><td>>$1,5T</td><td>~25%</td></tr>
+            <tr><td>Enterprise SaaS (ERP/HCM/CRM)</td><td>~$280B</td><td>~$320B</td><td>>$500B</td><td>~15%</td></tr>
+            <tr><td>AI Infrastructure (GPU compute)</td><td>~$120B</td><td>~$220B</td><td>>$700B</td><td>~40%</td></tr>
+            <tr><td>Healthcare IT / EHR</td><td>~$45B</td><td>~$52B</td><td>~$90B</td><td>~15%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><em>Oracle addressuje łącznie TAM rzędu $1T+ do 2030.</em></p>
+
+      <h3>Kluczowe trendy</h3>
+      <ul>
+        <li><strong>AI buildout supercycle:</strong> Modele LLM, RAG, inferencing — wszystko wymaga GPU compute w chmurze. Oracle OCI z NVIDIA jako preferred partner</li>
+        <li><strong>Enterprise cloud migration:</strong> Tylko ~30% enterprise workloads przeniesione do chmury — ogromny TAM pozostaje on-prem</li>
+        <li><strong>Sovereign AI:</strong> Rządy i regulowane branże wymagają dedykowanego cloud → Oracle Cloud@Customer i Sovereign Cloud</li>
+        <li><strong>Healthcare digitalizacja:</strong> Cerner/EHR migracja do chmury — wieloletni kontrakt pipeline z szpitalami</li>
+        <li><strong>Multi-cloud:</strong> Klienci chcą portability → Oracle Interconnect z AWS/Azure (bez egress fees) = kompetytywna przewaga</li>
+      </ul>
+
+      <h3>Geograficzna ekspansja OCI</h3>
+      <p>Oracle agresywnie buduje data centra w: USA, Japonii, Malezji, Niemczech, Holandii, UK, Australii, Indiach. <strong>1,2 GW</strong> dostarczone klientom w FY2026. Plany rozszerzenia na kolejne kraje — OCI jest jedynym chmurowym providerem z tak szerokim zasięgiem sovereign deployment.</p>
+    </div>
+  </div>
+
+  <!-- S4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')">
+      <div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div>
+      <div class="section-toggle" id="s4-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s4-body">
+      <h3>Profil klientów</h3>
+      <div class="chips">
+        <span class="chip accent">B2B Enterprise</span>
+        <span class="chip">B2G (Government/DOD)</span>
+        <span class="chip teal">Healthcare / Cerner</span>
+        <span class="chip">430 000+ klientów globalnie</span>
+        <span class="chip green">Fortune 500 core</span>
+      </div>
+
+      <h3>Mega-kontrakty AI — nowa era sprzedaży</h3>
+      <p>W FY2026 Oracle podpisał kontrakty o wartości <strong>$67 miliardów</strong> w jednym kwartale. Kluczowi partnerzy OCI:</p>
+      <ul>
+        <li><strong>OpenAI:</strong> Multi-year multi-billion OCI partnership dla trenowania modeli GPT/o-series — flagowy deal</li>
+        <li><strong>xAI (Elon Musk):</strong> Ogromny klaster GPU na OCI dla Grok LLM</li>
+        <li><strong>ByteDance / TikTok:</strong> AI inference na OCI</li>
+        <li><strong>US Government / DOD:</strong> Sovereign cloud, healthcare (VA), defense</li>
+        <li><strong>Microsoft:</strong> Oracle Interconnect z Azure — klienci mogą korzystać z obu bez egress fees</li>
+      </ul>
+
+      <h3>RPO — Bezprecedensowa widoczność przychodów</h3>
+      <div class="alert alert-success">
+        <strong>$638 miliardów RPO (+363% YoY)</strong> — Remaining Performance Obligations to kontrakt backlog, który będzie convertowany w przychody przez kolejne 3–5 lat. Przy FY2026 revenue $67,4B, to 9,5× rocznego revenue. Żadna inna firma w historii cloud computing nie miała takiej widoczności.
+      </div>
+      <p>RPO expected to be recognized in next 12 months: <strong>+40% YoY</strong> (vs +25% poprzedni kwartał) — konwersja przyspiesza.</p>
+    </div>
+  </div>
+
+  <!-- S5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')">
+      <div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div>
+      <div class="section-toggle" id="s5-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s5-body">
+      <h3>Revenue historyczny i prognoza</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Rok fiskalny</th><th>Revenue</th><th>Wzrost YoY</th><th>Net Income</th><th>CapEx</th></tr></thead>
+          <tbody>
+            <tr><td>FY2024</td><td>~$53B</td><td>+6%</td><td>~$10,5B</td><td>~$8B</td></tr>
+            <tr><td>FY2025</td><td>$57,4B</td><td>+8%</td><td>$12,44B</td><td>$21,2B</td></tr>
+            <tr><td>FY2026</td><td>$67,4B</td><td style="color:var(--buy)">+17%</td><td>$16,98B</td><td style="color:var(--sell)">$55,7B (+162%!)</td></tr>
+            <tr><td>FY2027E (guidance)</td><td><strong>$90B</strong></td><td style="color:var(--buy)"><strong>+34%</strong></td><td>$22–25BE</td><td>~$35–50B</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Cloud revenue trajectory</h3>
+      <div class="progress-row">
+        <span class="progress-label">Cloud % of Revenue</span>
+        <div class="progress-bar"><div class="progress-fill" style="width:51%; background:linear-gradient(90deg,var(--accent),var(--accent2))"></div></div>
+        <span style="color:var(--text-muted);font-size:12px">FY2026: 51%</span>
+      </div>
+      <div class="progress-row">
+        <span class="progress-label">Cloud FY2025</span>
+        <div class="progress-bar"><div class="progress-fill" style="width:43%; background:linear-gradient(90deg,var(--accent),var(--accent2))"></div></div>
+        <span style="color:var(--text-muted);font-size:12px">FY2025: 43%</span>
+      </div>
+      <div class="progress-row">
+        <span class="progress-label">Cloud FY2024</span>
+        <div class="progress-bar"><div class="progress-fill" style="width:37%; background:linear-gradient(90deg,var(--accent),var(--accent2))"></div></div>
+        <span style="color:var(--text-muted);font-size:12px">FY2024: 37%</span>
+      </div>
+
+      <h3>OCI Revenue Roadmap (oficjalna)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Rok fiskalny</th><th>OCI Revenue</th><th>Wzrost</th></tr></thead>
+          <tbody>
+            <tr><td>FY2026 (actual)</td><td>$18,1B</td><td style="color:var(--buy)">+68% YoY</td></tr>
+            <tr><td>FY2027E</td><td>$32B</td><td style="color:var(--buy)">+77%</td></tr>
+            <tr><td>FY2028E</td><td>$73B</td><td style="color:var(--buy)">+128%</td></tr>
+            <tr><td>FY2029E</td><td>$114B</td><td style="color:var(--buy)">+56%</td></tr>
+            <tr><td>FY2030E</td><td>$144B</td><td style="color:var(--buy)">+26%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert alert-info">Jeśli Oracle zrealizuje choćby 50% roadmapy OCI, przy FY2030 będzie to $70–144B tylko z IaaS — przy zachowaniu SaaS+License, całkowity revenue może przekroczyć $200B. To jest thesis bull case.</div>
+
+      <h3>Model przychodów</h3>
+      <ul>
+        <li><strong>Subskrypcje cloud (recurring ~65% revenue):</strong> Długoterminowe umowy SaaS i OCI — wysoka przewidywalność</li>
+        <li><strong>License Support (~30% revenue):</strong> Highly recurring — klienci płacą co roku za wsparcie legacy licencji</li>
+        <li><strong>Hardware / Konsulting (~5%):</strong> Malejący, legacy segment</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- S6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')">
+      <div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div>
+      <div class="section-toggle" id="s6-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s6-body">
+      <h3>Aktualne wskaźniki (lipiec 2026)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Ocena</th></tr></thead>
+          <tbody>
+            <tr><td>Cena akcji</td><td>~$147,76</td><td>-57% od ATH</td></tr>
+            <tr><td>Market Cap</td><td>$422B</td><td>—</td></tr>
+            <tr><td>Enterprise Value</td><td>~$512B</td><td>MC + net debt ~$90B</td></tr>
+            <tr><td><strong>P/E Forward (FY2027)</strong></td><td><strong>~22,9×</strong></td><td style="color:var(--buy)">✅ Tanie dla 34% grower</td></tr>
+            <tr><td>P/E Trailing</td><td>31,6×</td><td>Umiarkowane</td></tr>
+            <tr><td>P/S (FY2026)</td><td>~6,3×</td><td>⚠️ Umiarkowane</td></tr>
+            <tr><td>EV/Revenue (FY2026)</td><td>~7,6×</td><td>⚠️ Umiarkowane</td></tr>
+            <tr><td>EV/Revenue (FY2027E $90B)</td><td><strong>~5,7×</strong></td><td style="color:var(--buy)">✅ Atrakcyjne dla ~34% wzrost</td></tr>
+            <tr><td>Dividend yield</td><td>~1,35%</td><td>$0,50/kwartał = $2,00/rok</td></tr>
+            <tr><td>PEG (forward)</td><td>~0,67×</td><td style="color:var(--buy)">✅ Tanie — <1,0 = undervalued</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Kontekst wyceny — dlaczego $148 to okazja?</h3>
+      <p>Oracle przy $148 handluje na <strong>forward EV/Revenue FY2027E = 5,7×</strong> przy guidingu +34% wzrostu i $638B backlogu. Dla porównania: AWS handluje na ~10× EV/Revenue, Google Cloud ~8×. Oracle — najszybciej rosnący cloud major (+93% OCI w Q4) — jest wyceniony <em>taniej</em> niż wolniej rosnące alternatywy.</p>
+
+      <div class="alert alert-success"><strong>PEG ratio ~0,67:</strong> Klasyczna definicja niedowartościowania to PEG < 1,0. Oracle przy 34% guidowanym wzroście i forward P/E ~22,9× ma PEG ~0,67 — poziom sugerujący znaczące niedowartościowanie przy założeniu realizacji guidingu.</div>
+
+      <h3>Scenariusze wyceny</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Scenariusz</th><th>Revenue FY2027E</th><th>P/S target</th><th>Implied Market Cap</th><th>Cena/akcję</th></tr></thead>
+          <tbody>
+            <tr><td>Bear (miss guidingu o 20%)</td><td>$72B</td><td>5×</td><td>$360B</td><td>~$126</td></tr>
+            <tr><td>Base (guidance realizowany)</td><td>$90B</td><td>6,5×</td><td>$585B</td><td>~$205</td></tr>
+            <tr><td>Bull (OCI powyżej guidingu)</td><td>$100B+</td><td>8×</td><td>$800B+</td><td>~$280+</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="fair-value-box">
+        <div class="fair-value-label">Szacunkowy fair value (base case FY2027)</div>
+        <div class="fair-value-range">$180 – $250</div>
+        <div class="fair-value-note">Przy P/S 6–7× na FY2027E revenue $90B | Analyst consensus: $252,92 | Obecna cena $147 = ~50% dyskonto vs fair value</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')">
+      <div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA FINANSOWA</div></div>
+      <div class="section-toggle" id="s7-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s7-body">
+      <h3>Trendy marż</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Wskaźnik</th><th>FY2024</th><th>FY2025</th><th>FY2026</th><th>FY2027E</th></tr></thead>
+          <tbody>
+            <tr><td>Revenue</td><td>~$53B</td><td>$57,4B</td><td>$67,4B</td><td>$90BE</td></tr>
+            <tr><td>Operating Margin</td><td>~28%</td><td>30,8%</td><td>~32%E</td><td>~35%E</td></tr>
+            <tr><td>Net Income</td><td>~$10,5B</td><td>$12,44B</td><td>$16,98B</td><td>~$22–25BE</td></tr>
+            <tr><td>EBITDA</td><td>~$21B</td><td>$23,9B</td><td>~$28BE</td><td>~$37–42BE</td></tr>
+            <tr><td>Operating CF</td><td>~$18B</td><td>$20,82B</td><td>$32B</td><td>>$40BE</td></tr>
+            <tr><td>CapEx</td><td>~$8B</td><td>$21,2B</td><td>$55,7B (!)</td><td>$35–50BE</td></tr>
+            <tr><td><strong>FCF</strong></td><td>~$10B</td><td>-$0,4B</td><td><strong>-$23,7B</strong></td><td>FCF breakeven?</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-warn">
+        <strong>Kluczowa kwestia: ujemne FCF.</strong> FY2026 CapEx $55,7B (+162% YoY, przekroczył własny guidance $50B) → FCF = -$23,7B pomimo $32B operating CF. To główna przyczyna korekty akcji. Ale: CapEx buduje fizyczne aktywa (data centra, GPU), nie są to koszty operacyjne — to inwestycja w przyszły revenue stream. Gdy CapEx znormalizuje się do $35–40B/rok w FY2028–2029 i revenue osiągnie $120B+, FCF będzie dodatnie i ogromne.
+      </div>
+
+      <h3>Marże strukturalne — dlaczego będą rosnąć</h3>
+      <ul>
+        <li><strong>OCI skaluje się: marginalny koszt GPU = 0</strong> po spłacie CapEx. Każdy $1 dodatkowego OCI revenue przy istniejącej infrastrukturze to ~70–80c EBITDA</li>
+        <li><strong>SaaS marże rosną:</strong> Cerner integracja optymalizuje koszty; Fusion ERP gross margin ~70%+</li>
+        <li><strong>License Support ~95% gross margin:</strong> Wysoka marża legacy segment stabilizuje całościowe marże</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- S8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')">
+      <div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div>
+      <div class="section-toggle" id="s8-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s8-body">
+      <h3>Bilans (Q3 FY2026, luty 2026)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Pozycja</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+          <tbody>
+            <tr><td>Gotówka i ekwiwalenty</td><td>~$31,3B</td><td>Wysoka płynność operacyjna</td></tr>
+            <tr><td>Dług całkowity</td><td>~$162B</td><td>Wzrost przez emisje obligacji na CapEx</td></tr>
+            <tr><td>Dług netto</td><td>~$90–130B</td><td>Kluczowe ryzyko strukturalne</td></tr>
+            <tr><td>Equity akcjonariuszy</td><td>$39,1B</td><td>Relatywnie niska vs. długu</td></tr>
+            <tr><td>Debt/Equity</td><td>~4,1×</td><td style="color:var(--sell)">Wysoki dźwig</td></tr>
+            <tr><td>Net Debt/EBITDA</td><td>~3,2–4,6×</td><td style="color:var(--neutral)">Podwyższony, ale spada wraz z EBITDA wzrostem</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-danger">
+        <strong>Ryzyko długu:</strong> Oracle planuje pozyskać dodatkowe $40B przez emisje obligacji i akcji w FY2027, by sfinansować dalszą rozbudowę OCI. Dług netto ~$90–130B jest największym ryzykiem strukturalnym — gdyby AI buildout spowolnił, Oracle byłoby narażone na credit stress. Interest coverage ratio wciąż zdrowe (operating CF $32B >> odsetki), ale marża bezpieczeństwa maleje.
+      </div>
+
+      <h3>Dywidenda i buybacks</h3>
+      <ul>
+        <li><strong>Dywidenda:</strong> $0,50/kwartał = $2,00/rok → yield ~1,35% przy $148. Właśnie podniesiona (poprzednio $0,40)</li>
+        <li><strong>Buybacks:</strong> Buyback ratio -2,57% (YTD do kwietnia 2026) — spółka netto zwiększa liczbę akcji (SBC > buybacks) z powodu kosztów programów stock compensation i emisji na CapEx</li>
+        <li><strong>Larry Ellison ~40% akcji:</strong> Alignment z akcjonariuszami — CEO/Chairman posiada osobiście ~$170B w ORCL przy ATH</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- S9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')">
+      <div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div>
+      <div class="section-toggle" id="s9-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🤖</div>
+        <div class="catalyst-body">
+          <h4>AI Supercycle — OCI jako preferred AI cloud</h4>
+          <p>OCI ma 97,5% GPU utilization i nie może budować wystarczająco szybko. Roadmap: $18B (FY26) → $32B (FY27) → $73B (FY28). Jeśli choćby 50% się zrealizuje, Oracle staje się $100B+ cloud company do 2028. OpenAI, xAI, ByteDance — najważniejsi klienci AI wybrali OCI.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">📋</div>
+        <div class="catalyst-body">
+          <h4>$638B RPO — Revenue jest "zamrożone" i czeka na release</h4>
+          <p>Największy backlog w historii cloud computing. +363% YoY. Konwersja w 12 miesięcy rośnie +40% QoQ. Gdy kontrakty zaczną generować revenue w FY2027–2028, inwestorzy będą zaskoczeni "nagłym" wzrostem.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🏥</div>
+        <div class="catalyst-body">
+          <h4>Cerner healthcare cloud — ukryta opcjonalność</h4>
+          <p>Przejęcie Cerner ($28,3B) dało Oracle #1 w US Healthcare IT. Migracja 1000+ szpitali z on-prem do Oracle Health Cloud = wieloletni recurring revenue. Rynek niedoszacowuje wartości tej opcji przy obecnej wycenie.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">💰</div>
+        <div class="catalyst-body">
+          <h4>FCF recovery — gdy CapEx znormalizuje się</h4>
+          <p>FY2026 CapEx $55,7B to szczyt buildout fazy. W FY2028–2029, gdy infrastruktura zostanie zbudowana i revenue osiągnie $120–150B przy ~35% marży operacyjnej, FCF może wynieść $15–25B+ rocznie. Multiples się rozszerzą.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🌍</div>
+        <div class="catalyst-body">
+          <h4>Sovereign AI i geopolityka — unikalny pozycjonowanie</h4>
+          <p>Rządy (EU, APAC, Middle East) potrzebują lokalnych AI cloud. Oracle Cloud@Customer i dedykowane regiony = jedyne rozwiązanie spełniające data sovereignty. AWS i Azure nie oferują tak elastycznego modelu.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S10 -->
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')">
+      <div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div>
+      <div class="section-toggle" id="s10-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item">
+        <div class="catalyst-icon">💸</div>
+        <div class="catalyst-body">
+          <h4>Dług $162B i ujemne FCF — ryzyko credit crisis</h4>
+          <p>Dług netto ~$90–130B to poważna pozycja. Jeśli stopy procentowe wzrosną lub AI buildout zwolni, Oracle może mieć problem z obsługą długu przy jednoczesnym braku FCF. Progi covenant w obligacjach mogą stać się problematyczne.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">⏳</div>
+        <div class="catalyst-body">
+          <h4>Revenue back-ended — ryzyko miss w FY2027</h4>
+          <p>$638B RPO brzmi imponująco, ale konwersja jest rozłożona w czasie. Jeśli duże kontrakty mają front-loaded płatności za GPU, ale revenue recognition jest rozłożone na lata, FY2027 $90B guidance może nie zostać osiągnięte. Każdy miss = ostry sell-off.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">⚔️</div>
+        <div class="catalyst-body">
+          <h4>AWS/Azure/Google odpowiadają — price war w cloud</h4>
+          <p>Hiperscalerzy mają 10× więcej kapitału niż Oracle. Jeśli zdecydują się prowadzić wojnę cenową (np. AWS obniży ceny GPU compute o 30–50%), Oracle traci swój główny argument sprzedażowy ("jesteśmy 30-50% tańsi").</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🧠</div>
+        <div class="catalyst-body">
+          <h4>AI model efficiency — mniej GPU potrzebne</h4>
+          <p>OpenAI o3, DeepSeek R1, Meta Llama — modele stają się coraz efektywniejsze i wymagają mniej compute. Jeśli trend "więcej za mniej GPU" się utrzyma, backlog kontraktów AI może nie zostać w pełni skonsumowany.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">👴</div>
+        <div class="catalyst-body">
+          <h4>Ryzyko koncentracji — Larry Ellison</h4>
+          <p>Larry Ellison (wiek ~81) posiada ~40% akcji i jest kluczową figurą dla negocjacji mega-kontraktów. Jakikolwiek scenariusz związany z jego zdrowiem lub wycofaniem się mógłby spowodować masową wyprzedaż.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S11 -->
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')">
+      <div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div>
+      <div class="section-toggle" id="s11-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s11-body">
+      <h3>Cloud Infrastructure — Ranking 2026</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Provider</th><th>Udział rynku</th><th>Cloud Revenue (annualized)</th><th>Wzrost</th><th>Ocena pozycji</th></tr></thead>
+          <tbody>
+            <tr><td><strong>AWS (Amazon)</strong></td><td>28–30%</td><td>~$120B+</td><td>~18%</td><td>🥇 Lider</td></tr>
+            <tr><td><strong>Azure (Microsoft)</strong></td><td>21–25%</td><td>~$90B+</td><td>~22%</td><td>🥈 Challenger rosnący</td></tr>
+            <tr><td><strong>Google Cloud</strong></td><td>13–14%</td><td>~$60B+</td><td>~28%</td><td>🥉 Fast grower</td></tr>
+            <tr><td><strong>Oracle OCI</strong></td><td>~3–4%</td><td>$18B (FY26) → $32B (FY27E)</td><td><strong>+68–93%</strong></td><td>⚡ Najszybszy wzrost</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Enterprise Software — Inne segmenty</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Segment</th><th>Oracle</th><th>Główny rywal</th><th>Pozycja Oracle</th></tr></thead>
+          <tbody>
+            <tr><td>ERP (duże enterprise)</td><td>Fusion ERP, E-Business Suite</td><td>SAP S/4HANA</td><td>Challenger — SAP lider globalnie</td></tr>
+            <tr><td>ERP (mid-market)</td><td>NetSuite</td><td>Microsoft Dynamics, Sage</td><td>🥇 Lider w cloud ERP mid-market</td></tr>
+            <tr><td>HCM / HR cloud</td><td>Oracle HCM Cloud</td><td>Workday</td><td>Challenger — Workday silniejszy</td></tr>
+            <tr><td>Database</td><td>Oracle DB, Autonomous DB</td><td>Microsoft SQL, PostgreSQL, AWS Aurora</td><td>🥇 Historyczny lider, eroded przez open source</td></tr>
+            <tr><td>Healthcare IT / EHR</td><td>Oracle Health (Cerner)</td><td>Epic Systems, Meditech</td><td>🥇 #1 w US government/VA; Epic silniejszy w private</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-teal">OCI jest najszybciej rosnącym chmurowym providerm spośród wszystkich 4 hyperscalerów w FY2026. Mimo tylko ~4% udziału rynku, tempo wzrostu +93% w Q4 FY2026 sugeruje, że Oracle ma szansę osiągnąć 8–10% udziału rynku do 2029 jeśli buildout postępuje zgodnie z planem.</div>
+    </div>
+  </div>
+
+  <!-- S12 -->
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')">
+      <div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div>
+      <div class="section-toggle" id="s12-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s12-body">
+      <h3>Poziomy kluczowe</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>ATH (09.2025)</td><td>~$345,72</td><td>Szczyt entuzjazmu AI/OCI — euforyczny top</td></tr>
+            <tr><td>YTD peak (01.2026)</td><td>~$248</td><td>Drugi szczyt przed CapEx/FCF-driven selloff</td></tr>
+            <tr><td>Cena bieżąca (07.2026)</td><td>~$147,76</td><td>-57% od ATH | near 52W low | ekstremalnie wyprzedana</td></tr>
+            <tr><td>52W minimum</td><td>$134,57</td><td>Kluczowe wsparcie — złamanie = test $120–125</td></tr>
+            <tr><td>Wsparcie S1</td><td>$136–141</td><td>Horyzontalne wsparcie multi-timeframe</td></tr>
+            <tr><td>Wsparcie S2</td><td>$132</td><td>Tygodniowe wsparcie</td></tr>
+            <tr><td>Opór R1</td><td>$181–183</td><td>Strefa oporu SMA + trend lines</td></tr>
+            <tr><td>Opór R2</td><td>$236–237</td><td>Cluster 50EMA + 100EMA (5Y chart)</td></tr>
+            <tr><td>Opór R3</td><td>$260</td><td>Fibonacci 1Y retracement + poprzedni ATH</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Wskaźniki techniczne</h3>
+      <ul>
+        <li><strong>Trend (długoterminowy):</strong> Pierwotny uptrend od 2020 nadal intaktny — korekta w ramach większego bull marketu AI</li>
+        <li><strong>RSI (14):</strong> Ekstremalnie wyprzedana — sugeruje potential bounce. Poziom podobny do dołków COVID-19 (marca 2020)</li>
+        <li><strong>SMA200:</strong> Akcja poniżej SMA200 = technicznie bear territory krótkoterminowo, ale historycznie takie poziomy są okazją długoterminową</li>
+        <li><strong>Volume:</strong> Wysoki wolumen na przecenach = dystrybucja. Ale przy -57% od ATH na fundamentalnie rosnącej spółce = potential capitulation bottom</li>
+        <li><strong>Fibonacci:</strong> ~$147 = 61,8% retracement od $345 do ~$80 (pre-AI dna) — klasyczny reversal level</li>
+      </ul>
+
+      <div class="scenario-grid">
+        <div class="bull-box">
+          <h4>🐂 Scenariusz techniczny bull</h4>
+          <ul>
+            <li>Hold $134–140 jako wsparcie</li>
+            <li>Bounce do $181–183 (R1) przy Q1 FY2027 earnings</li>
+            <li>Przebicie $183 → target $236 (R2)</li>
+            <li>Pełne odrobienie do $250+ w 12–18 mies.</li>
+          </ul>
+        </div>
+        <div class="bear-box">
+          <h4>🐻 Scenariusz techniczny bear</h4>
+          <ul>
+            <li>Break poniżej $132 → test $110–120</li>
+            <li>Brak Q1 FY2027 revenue recovery</li>
+            <li>Dalsza emisja akcji/obligacji → dilution pressure</li>
+            <li>Credit downgrade przy negative FCF</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S13 -->
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')">
+      <div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div>
+      <div class="section-toggle" id="s13-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box">
+          <div class="period">Krótki termin (1–3 mies.)</div>
+          <div class="rating-text buy">KUPNO</div>
+          <div class="rating-note">Akcja near 52W low, ekstremalnie wyprzedana. Q1 FY2027 earnings (wrzesień 2026) — pierwsza weryfikacja guidingu $90B. Potencjalny bounce do $181–183.</div>
+        </div>
+        <div class="rating-box">
+          <div class="period">Średni termin (6–18 mies.)</div>
+          <div class="rating-text strong-buy">MOCNE KUPNO</div>
+          <div class="rating-note">$638B RPO converting, OCI revenue ramp, FY2027 $90B guidance. Cel analityków $252 (+71%). CapEx peak → FCF recovery.</div>
+        </div>
+        <div class="rating-box">
+          <div class="period">Długi termin (3–5 lat)</div>
+          <div class="rating-text strong-buy">MOCNE KUPNO</div>
+          <div class="rating-note">Jeśli OCI roadmap $73B+ (FY2028) się realizuje → Oracle to $200B+ revenue company. Przy 6× P/S = $1,2T market cap. Potencjał wielokrotności od $148.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <h3>Kluczowe założenia modelu</h3>
+      <ul>
+        <li><strong>FY2027 revenue base case:</strong> $85–92B (bliżej guidingu $90B, ale konserwatywnie)</li>
+        <li><strong>OCI FY2027:</strong> $28–32B (+55–77% YoY) — wystarczy połowa guidingu dla bull thesis</li>
+        <li><strong>CapEx FY2027:</strong> $35–45B (szczyt za nami) → FCF poprawia się</li>
+        <li><strong>Net debt:</strong> rośnie krótkoterminowo, ale cash generation z operacji ($32B+) pokrywa odsetki</li>
+        <li><strong>Fair value base:</strong> $180–250 | <strong>Bull case:</strong> $280–400 do 2028</li>
+      </ul>
+
+      <div class="alert alert-success">
+        <strong>Asymetria ryzyka/zysku:</strong> Przy $148, downside do $132 (52W low) = -11%. Upside do consensus $253 = +71%. Do bull case $350+ = +137%. Ryzyko/zysk 1:6 do 1:12 — rzadko spotykany poziom dla spółki $422B market cap z $638B backlogiem i 34% growth guidingiem.
+      </div>
+    </div>
+  </div>
+
+  <!-- S14 -->
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')">
+      <div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">PODSUMOWANIE (TL;DR)</div></div>
+      <div class="section-toggle" id="s14-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy">
+          <h4>✅ 3 powody, by kupić</h4>
+          <ul>
+            <li><strong>$638B backlog przy $147 cenie:</strong> Rynek wycenia ~$422B spółkę z $638B zamrożonych kontraktów — matematycznie to "zapłać $0,66 za $1 przyszłego revenue" przed uwzględnieniem wzrostu</li>
+            <li><strong>OCI najszybszy cloud na świecie (+93% Q4):</strong> Przy 97,5% GPU utilization i dedykowanym partnerstwie z OpenAI/xAI — Oracle jest infrastrukturą AI era, nie tylko uczestnikiem</li>
+            <li><strong>Forward P/E 22,9× na 34% growth = PEG 0,67:</strong> Najtańszy hyperscaler mierzony PEG, mimo najszybszego wzrostu chmury</li>
+          </ul>
+        </div>
+        <div class="thesis-avoid">
+          <h4>❌ 3 powody, by unikać</h4>
+          <ul>
+            <li><strong>Dług netto $90–130B + ujemne FCF -$23,7B:</strong> Jeśli AI buildout zwolni lub stopy wzrosną, dźwig finansowy staje się egzystencjalnym ryzykiem</li>
+            <li><strong>CapEx może się znowu przekroczyć:</strong> FY2026 przekroczył własny guidance $50B o +11%. W środowisku rywalizacji GPU, Oracle może być zmuszony do jeszcze wyższych wydatków</li>
+            <li><strong>Revenue back-ended — cierpliwość wymagana:</strong> Duże kontrakty AI konwertują wolno. FY2027 może rozczarować vs guidingu, powodując kolejny selloff zanim "wielki ramp" nastąpi w FY2028</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <h3>Thesis-breaker</h3>
+      <p><strong>🔴 Jeśli:</strong> FY2027 Q1 revenue (wrzesień 2026) miss vs $90B run-rate LUB dług zostanie obniżony przez agencje ratingowe LUB AI model efficiency drastycznie redukuje popyt na GPU compute → test $110–125.</p>
+
+      <h3>Thesis-confirmer</h3>
+      <p><strong>🟢 Jeśli:</strong> Q1 FY2027 earnings pokaże OCI >$7B i total revenue >$21B przy FCF improvement + ogłoszenie nowego mega-kontraktu AI (np. Apple, Meta, Google on OCI) → natychmiastowe odrobienie do $200+.</p>
+
+      <hr class="divider">
+
+      <div style="text-align:center; padding: 20px 0">
+        <div style="font-size:13px; color:var(--text-muted); margin-bottom: 12px;">OCENA KOŃCOWA</div>
+        <div class="rating-badge buy" style="display:inline-flex; font-size:20px; padding:14px 32px; margin-bottom: 16px;">📈 KUPNO — cel $180–250 | Mocne Kupno przy $132–140</div>
+        <p style="color:var(--text-muted); max-width:700px; margin:0 auto;">Oracle jest najbardziej asymetryczną inwestycją wśród dużych spółek technologicznych w lipcu 2026. Rynek karze za ujemne FCF ignorując $638B backlog i +93% wzrost OCI. To klasyczny "show me" moment — Q1 FY2027 earnings (wrzesień 2026) będzie momentem prawdy.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+
+  Analiza wygenerowana: 3 lipca 2026 | Dane: Oracle IR, SEC 8-K/10-K, Yahoo Finance, MarketBeat, StockAnalysis, Futurum Research | Nie stanowi porady inwestycyjnej
+</div>
+
+<script>
+function toggleSection(id) {
+  const body = document.getElementById(id + '-body');
+  const toggle = document.getElementById(id + '-toggle');
+  if (!body) return;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  body.style.display = isOpen ? 'none' : 'block';
+  toggle.classList.toggle('open', !isOpen);
+}
+function goSec(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+document.addEventListener('DOMContentLoaded', () => {
+  ['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14'].forEach(id => {
+    const body = document.getElementById(id + '-body');
+    if (body) body.style.display = 'none';
+  });
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[onclick="goSec('${id}')"]`);
+        if (active) { active.classList.add('active'); active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); }
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => obs.observe(s));
+});
+</script>
+<script>function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b</body></body>(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}</script><style>.section{scroll-margin-top:64px}</style></body>
+</html>

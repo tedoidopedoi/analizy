@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOW — Analiza Inwestycyjna</title>
+<style>
+  :root {
+    --bg: #0f1117; --surface: #1a1d2e; --surface2: #242740; --border: #2e3150;
+    --text: #e8eaf0; --muted: #8b90a0; --accent: #6c63ff; --accent2: #00d4aa;
+    --strong-buy: #00c853; --buy: #4caf50; --neutral: #ffd740; --sell: #ff6d00; --strong-sell: #d50000;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; line-height: 1.6; font-size: 15px; }
+  .header { background: linear-gradient(135deg, #1a1d2e 0%, #242740 100%); border-bottom: 1px solid var(--border); padding: 32px 48px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .header-left h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; }
+  .header-left h1 span { color: var(--accent); }
+  .header-left p { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+  .rating-badge { padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 1rem; letter-spacing: 0.5px; text-transform: uppercase; }
+  .rating-badge.strong-buy { background: var(--strong-buy); color: #fff; }
+  .rating-badge.buy { background: var(--buy); color: #fff; }
+  .rating-badge.neutral { background: var(--neutral); color: #000; }
+  .nav-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 48px; overflow-x: auto; display: flex; scrollbar-width: none; }
+  .nav-bar::-webkit-scrollbar { display: none; }
+  .nav-item { padding: 14px 18px; color: var(--muted); font-size: 0.82rem; font-weight: 500; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.15s; text-decoration: none; display: block; }
+  .nav-item:hover { color: var(--text); border-bottom-color: var(--accent); }
+  .nav-item.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .main { max-width: 1100px; margin: 0 auto; padding: 40px 48px 80px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-bottom: 40px; }
+  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+  .metric-card .label { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .metric-card .value { font-size: 1.25rem; font-weight: 700; }
+  .metric-card .sub { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 24px; overflow: hidden; }
+  .section-header { padding: 18px 24px; background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; }
+  .section-number { background: var(--accent); color: #fff; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 0.95rem; font-weight: 600; flex: 1; }
+  .section-toggle { color: var(--muted); font-size: 0.8rem; transition: transform 0.2s; }
+  .section-toggle.open { transform: rotate(180deg); }
+  .section-body { padding: 24px; display: block; }
+  .section-body.collapsed { display: none; }
+  .section-body p { margin-bottom: 12px; }
+  .section-body p:last-child { margin-bottom: 0; }
+  .section-body ul, .section-body ol { padding-left: 20px; margin-bottom: 12px; }
+  .section-body li { margin-bottom: 6px; }
+  h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent2); margin: 16px 0 8px; }
+  h4:first-child { margin-top: 0; }
+  .metrics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin: 12px 0; }
+  .metric-row { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; display: flex; flex-direction: column; gap: 2px; }
+  .metric-row .m-label { color: var(--muted); font-size: 0.75rem; }
+  .metric-row .m-value { font-weight: 600; font-size: 0.95rem; }
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 12px 0; }
+  .comp-table th { background: var(--surface2); color: var(--muted); font-weight: 600; text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.3px; }
+  .comp-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table tr.highlight td { background: rgba(108,99,255,0.08); }
+  .comp-table tr:hover td { background: rgba(255,255,255,0.03); }
+  .bull-list, .bear-list { border-radius: 10px; padding: 16px 18px; }
+  .bull-list { background: rgba(0,200,83,0.07); border: 1px solid rgba(0,200,83,0.2); }
+  .bear-list { background: rgba(213,0,0,0.07); border: 1px solid rgba(213,0,0,0.2); }
+  .bull-list h4 { color: var(--strong-buy); margin-top: 0; }
+  .bear-list h4 { color: #ff5252; margin-top: 0; }
+  .bull-list li::marker { color: var(--strong-buy); }
+  .bear-list li::marker { color: #ff5252; }
+  .verdict-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0; }
+  .verdict-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .verdict-card .term { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .verdict-card .v-rating { font-size: 0.88rem; font-weight: 700; margin-bottom: 8px; padding: 4px 10px; border-radius: 20px; display: inline-block; }
+  .verdict-card .v-text { color: var(--muted); font-size: 0.82rem; line-height: 1.5; }
+  .v-rating.neutral { background: var(--neutral); color: #000; }
+  .v-rating.buy { background: var(--buy); color: #fff; }
+  .v-rating.strong-buy { background: var(--strong-buy); color: #fff; }
+  .tldr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .reason-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+  .reason-card h4 { margin-top: 0; }
+  .reason-card ul { padding-left: 18px; }
+  .thesis-breaker { background: rgba(255,215,64,0.08); border: 1px solid rgba(255,215,64,0.25); border-radius: 10px; padding: 16px 18px; }
+  .thesis-breaker h4 { color: var(--neutral); margin-top: 0; }
+  .fair-value-box { background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.3); border-radius: 10px; padding: 16px 20px; margin-top: 16px; }
+  .fair-value-box .fv-label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .fair-value-box .fv-value { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin: 4px 0; }
+  .fair-value-box .fv-sub { color: var(--muted); font-size: 0.82rem; }
+  .highlight-box { background: rgba(0,212,170,0.07); border: 1px solid rgba(0,212,170,0.2); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+  .na { color: var(--muted); font-style: italic; }
+  .footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 32px; border-top: 1px solid var(--border); margin-top: 40px; }
+  @media (max-width: 768px) {
+    .header { padding: 20px; } .main { padding: 20px 16px 60px; } .nav-bar { padding: 0 16px; }
+    .verdict-grid, .tldr-grid { grid-template-columns: 1fr; } .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+  <div class="header-left">
+    <h1><span>NOW</span> — ServiceNow, Inc.</h1>
+    <p>NYSE · Enterprise Software / SaaS / AI Workflows · Analiza: 2026-06-09</p>
+  </div>
+  <div class="rating-badge buy">Kupno</div>
+</div>
+
+<nav class="nav-bar">
+  <a class="nav-item active" href="#profil">1. Profil</a>
+  <a class="nav-item" href="#produkt">2. Produkt</a>
+  <a class="nav-item" href="#rynki">3. Rynki</a>
+  <a class="nav-item" href="#klienci">4. Klienci</a>
+  <a class="nav-item" href="#biznes">5. Biznes</a>
+  <a class="nav-item" href="#wycena">6. Wycena</a>
+  <a class="nav-item" href="#marze">7. Marże</a>
+  <a class="nav-item" href="#bilans">8. Bilans</a>
+  <a class="nav-item" href="#bulls">9. Bull Case</a>
+  <a class="nav-item" href="#bears">10. Bear Case</a>
+  <a class="nav-item" href="#konkurencja">11. Konkurencja</a>
+  <a class="nav-item" href="#technika">12. Technika</a>
+  <a class="nav-item" href="#ocena">13. Ocena</a>
+  <a class="nav-item" href="#tldr">14. TL;DR</a>
+</nav>
+
+<div class="main">
+
+  <div class="summary-grid">
+    <div class="metric-card">
+      <div class="label">Kapitalizacja</div>
+      <div class="value">~$116 mld</div>
+      <div class="sub">Market Cap</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Cena akcji</div>
+      <div class="value">~$112</div>
+      <div class="sub">-47% od ATH $211</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">P/E Forward</div>
+      <div class="value">~26x</div>
+      <div class="sub">P/E TTM: ~68x</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">EV/EBITDA</div>
+      <div class="value">~39x</div>
+      <div class="sub">P/S TTM: ~8,7x</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Wzrost przychodów</div>
+      <div class="value">+20,9% YoY</div>
+      <div class="sub">FY25: $13,3 mld</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Marża brutto</div>
+      <div class="value">~81% GAAP</div>
+      <div class="sub">FCF Margin: ~34,6%</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">52W High / Low</div>
+      <div class="value">$211,48</div>
+      <div class="sub">Low: $81,24</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Fair Value</div>
+      <div class="value">$140–165</div>
+      <div class="sub">Potencjał: +25–47%</div>
+    </div>
+  </div>
+
+  <!-- 1. PROFIL -->
+  <div class="section" id="profil">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">1</div>
+      <div class="section-title">Profil Spółki</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Historia i siedziba</h4>
+      <p>ServiceNow, Inc. (NYSE: NOW) została założona w 2004 roku przez Freda Luddy'ego jako chmurowa platforma do modernizacji systemów ITSM (IT Service Management). Siedziba: Santa Clara, Kalifornia, USA. Od 2019 roku CEO jest Bill McDermott (były prezes SAP). Spółka jest notowana na NYSE od 2012 roku. Kapitalizacja rynkowa: ~$116 mld (czerwiec 2026), z ceną akcji ok. $112 — znacznie poniżej szczytu $211.</p>
+      <h4>Czym się zajmuje i jaki problem rozwiązuje</h4>
+      <p>ServiceNow dostarcza chmurową platformę do automatyzacji przepływów pracy (workflows) w przedsiębiorstwach — począwszy od ITSM (zarządzanie incydentami IT), przez HR Service Delivery, Customer Service Management, Security Operations, po w pełni zautomatyzowane procesy biznesowe oparte na agentic AI. Rozwiązuje problem silosów danych i ręcznych, nieefektywnych procesów w dużych korporacjach.</p>
+      <h4>Etap rozwoju</h4>
+      <p><strong>Hiperwzrost (Growth)</strong> — przychody przekroczyły $13 mld przy 21% wzroście YoY i FCF margin 34,6%. McDermott zapowiada podwojenie do $30 mld przychodów. Platforma AI (Now Assist / agentic AI) staje się nowym motorem wzrostu — ACV Now Assist przekroczył $750 mln w Q1 2026, z celem $1,5 mld na cały rok.</p>
+      <h4>Kluczowe wydarzenia ostatnich 12 miesięcy</h4>
+      <ul>
+        <li><strong>Now Assist — eksplozja AI:</strong> ACV Now Assist przekroczył $600 mln w 2025, >$750 mln wchodząc w Q1 2026 (+ponad 2x YoY). Cel 2026: $1,5 mld.</li>
+        <li><strong>Agentic AI OS:</strong> ServiceNow pozycjonuje się jako „pełnostackowy agentyczny system operacyjny dla przedsiębiorstwa" — AI Agent Studio, pre-built agent library.</li>
+        <li><strong>Cel $30 mld revenue:</strong> W maju 2026 Fortune opisał ambicje McDermott'a podwojenia firmy — $30 mld to cel na 2030.</li>
+        <li><strong>Rozszerzenie TAM:</strong> Wejście w CRM (konkurencja z Salesforce), Industry Workflows, Security — TAM wzrósł z $90 mld do $600 mld (wg ServiceNow).</li>
+        <li><strong>RPO rekord:</strong> Remaining Performance Obligations: $23,9 mld (+29% YoY) w Q2 2025 — rekordowa widoczność przychodów.</li>
+        <li><strong>Przejęcie Maverick:</strong> ServiceNow złożyło Form 425 dot. przejęcia (szczegóły w toku zgodnie z SEC filings z 2025).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2. PRODUKT -->
+  <div class="section" id="produkt">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">2</div>
+      <div class="section-title">Produkt / Usługa</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Now Platform — rdzeń oferty</h4>
+      <ul>
+        <li><strong>IT Service Management (ITSM):</strong> Zarządzanie incydentami, zmianami, problemami — historyczny core. Lider Gartner MQ 2025 po raz 6. z rzędu.</li>
+        <li><strong>IT Operations Management (ITOM):</strong> Monitorowanie infrastruktury, AIOps.</li>
+        <li><strong>HR Service Delivery:</strong> Automatyzacja procesów HR — onboarding, offboarding, case management.</li>
+        <li><strong>Customer Service Management (CSM):</strong> Ekspansja na rynek CRM / customer workflows — bezpośrednia konkurencja z Salesforce.</li>
+        <li><strong>Security Operations (SecOps):</strong> Automatyzacja response na incydenty bezpieczeństwa.</li>
+        <li><strong>Now Assist (Gen AI):</strong> Warstwa generatywnego AI nad wszystkimi modułami — podsumowania, sugestie, autonomiczne zamykanie ticketów.</li>
+        <li><strong>AI Agent Studio:</strong> Narzędzie do budowania agentów AI obsługujących całe klasy workflowów bez interwencji człowieka.</li>
+      </ul>
+      <h4>Moat i przewagi konkurencyjne</h4>
+      <ul>
+        <li><strong>Platform stickiness (ekstremalny switching cost):</strong> Wdrożenie ServiceNow to projekt 12–24 miesięcy. Wymiana platformy = podobny czas i koszt. Renewal rate: 98%.</li>
+        <li><strong>Silo-buster:</strong> Jedyna platforma która spina IT + HR + Customer + Security w jednym data modelu — konkurenci obsługują maksymalnie 1–2 z tych obszarów.</li>
+        <li><strong>Workflows data flywheel:</strong> Im więcej procesów na platformie, tym więcej danych do trenowania modeli AI — efekt sieciowy danych.</li>
+        <li><strong>Enterprise-grade trust:</strong> 85% Fortune 500 to klienci NOW. Government / regulated industries — tam bezpieczeństwo i compliance są krytyczne.</li>
+      </ul>
+      <h4>Skalowalność i roadmapa</h4>
+      <p>Model SaaS multi-tenant jest z definicji skalowalny — nowe moduły (np. CSM, SecOps) wdrażane do istniejących klientów bez dodatkowego CAPEX. Roadmapa: pełna autonomia workflowów przez agentic AI (2026–2027), Industry-specific clouds (telco, banking, healthcare), integracja z modelem „agent-to-agent" (współpraca agentów NOW z agentami zewnętrznymi jak Copilot Studio czy LangChain).</p>
+    </div>
+  </div>
+
+  <!-- 3. RYNKI -->
+  <div class="section" id="rynki">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">3</div>
+      <div class="section-title">Rynki i Otoczenie</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>TAM / SAM / SOM</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">TAM (wg ServiceNow, 2026E)</div><div class="m-value">~$275–600 mld</div></div>
+        <div class="metric-row"><div class="m-label">TAM Enterprise Workflow (2027E)</div><div class="m-value">~$350 mld</div></div>
+        <div class="metric-row"><div class="m-label">TAM Agentic AI layer (+2030)</div><div class="m-value">+$80 mld</div></div>
+        <div class="metric-row"><div class="m-label">CAGR rynku workflow automation</div><div class="m-value">~19% (2024–2027)</div></div>
+        <div class="metric-row"><div class="m-label">Obecny udział NOW w rynku</div><div class="m-value">~$13 mld / TAM → &lt;5%</div></div>
+      </div>
+      <div class="highlight-box">
+        <strong>Uwaga TAM:</strong> Wewnętrzne szacunki ServiceNow ($600 mld) są bardzo agresywne — obejmują rynki CRM, ERP, Security, gdzie NOW jest challengerem, nie liderem. Konserwatywny SAM (core workflows + AI overlay) to ok. $100–150 mld, co i tak daje ogromną przestrzeń do wzrostu z obecnych $13 mld przychodów.
+      </div>
+      <h4>Geografie</h4>
+      <p>USA: ~55% przychodów (główny rynek). Europa (EMEA): ~30% — silna pozycja w dużych europejskich korporacjach i instytucjach publicznych. Azja-Pacyfik (APAC): ~15% — wzrost. Strategicznie ważna jest Japonia i Australia (regulated industries).</p>
+      <h4>Trendy makro i sektorowe</h4>
+      <ul>
+        <li><strong>Agentic AI enterprise adoption:</strong> Każda duża korporacja szuka platformy do wdrożenia AI agentów w procesach biznesowych — NOW jest na czele.</li>
+        <li><strong>IT modernization tailwind:</strong> Legacy ITSM (HP, BMC, Remedy) jest masowo zastępowany — NOW jest głównym beneficjentem migracji.</li>
+        <li><strong>Cyberataki i compliance:</strong> Rosnące wymogi regulacyjne (DORA, NIS2) nakręcają popyt na SecOps i ITOM.</li>
+        <li><strong>Cost-cutting przez AI automation:</strong> Korporacje szukają ROI — NOW może wykazać mierzalne oszczędności z automatyzacji (np. -40% czas rozwiązywania ticketów IT).</li>
+      </ul>
+      <h4>Cykliczność</h4>
+      <p>Biznes enterprise SaaS jest relatywnie antycykliczny — korporacje nie rezygnują z platform mission-critical w recesji. Jednak nowe kontrakty i ekspansja do nowych módułów mogą spowolnić w środowisku cięcia budżetów IT (jak miało to miejsce w 2022–2023).</p>
+    </div>
+  </div>
+
+  <!-- 4. KLIENCI -->
+  <div class="section" id="klienci">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">4</div>
+      <div class="section-title">Klienci i Sprzedaż</div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body collapsed">
+      <h4>Profil klientów</h4>
+      <p><strong>B2B / B2G wyłącznie.</strong> Klienci to największe globalne korporacje i instytucje publiczne: Fortune 500, rządy federalne (USA, UK, EU), banki, firmy ubezpieczeniowe, producenci, sieci telekomunikacyjne. 85% Fortune 500 korzysta z ServiceNow. Brak segmentu SMB — platforma skierowana na enterprise 5000+ pracowników.</p>
+      <h4>Koncentracja i segmenty klientów</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">Klienci &gt;$1M ACV (XII 2024)</div><div class="m-value">2 109 (+12% YoY)</div></div>
+        <div class="metric-row"><div class="m-label">Klienci &gt;$5M ACV (Q2 2025)</div><div class="m-value">528 (+19,5% YoY)</div></div>
+        <div class="metric-row"><div class="m-label">Renewal Rate</div><div class="m-value">98%</div></div>
+        <div class="metric-row"><div class="m-label">cRPO (XII 2025)</div><div class="m-value">$12,85 mld (+25% YoY)</div></div>
+        <div class="metric-row"><div class="m-label">Całkowite RPO (Q2 2025)</div><div class="m-value">$23,9 mld (+29% YoY)</div></div>
+      </div>
+      <p>Koncentracja klientów jest niska — brak jednego klienta &gt;10% przychodów. Segmenty: największy to IT / Technology, następnie Financial Services, Healthcare, Government, Telecom. Ekspansja w Healthcare i Government to kluczowe szanse na 2026–2028.</p>
+      <h4>Retencja i NRR</h4>
+      <p>Historycznie NRR przekraczał 120–125% (installed base rósł o 20%+ rocznie z upsell). NOW przestało raportować NRR jako osobny wskaźnik — zamiast tego Renewal Rate 98% jest kluczową metryką. Wzrost klientów >$5M ACV o 19,5% YoY wskazuje na skuteczną ekspansję w istniejącej bazie (land-and-expand).</p>
+      <h4>Kanały sprzedaży</h4>
+      <ul>
+        <li>Bezpośrednia siła sprzedaży enterprise (~70% bookings)</li>
+        <li>Partnerzy systemowi (Accenture, Deloitte, KPMG, Infosys) — implementacje i resell</li>
+        <li>Technology Alliances: integracje z Microsoft Azure, AWS, Google Cloud — cross-sell</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 5. BIZNES -->
+  <div class="section" id="biznes">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">5</div>
+      <div class="section-title">Model Biznesowy i Przychody</div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body collapsed">
+      <h4>Struktura przychodów (FY2025: $13,3 mld)</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">Subscription Revenue</div><div class="m-value">~$12,8 mld (~96%)</div></div>
+        <div class="metric-row"><div class="m-label">Professional Services</div><div class="m-value">~$0,5 mld (~4%)</div></div>
+        <div class="metric-row"><div class="m-label">Recurring Revenue %</div><div class="m-value">&gt;96% (SaaS)</div></div>
+        <div class="metric-row"><div class="m-label">Now Assist ACV (Q1 2026)</div><div class="m-value">$750 mln (run rate)</div></div>
+      </div>
+      <p>Model subskrypcyjny z rozliczeniem rocznym lub wieloletnim — bardzo wysokie visibility przychodów. Ceny oparte na liczbie użytkowników (per-seat) i złożoności workflow. Pro Plus (bundled AI) to nowy tier — wyższy ASP przy migracji z podstawowych pakietów.</p>
+      <h4>Unit Economics</h4>
+      <p>CAC i LTV nie są publicznie ujawniane. Pośrednio: przy FCF margin 34,6% i renewal rate 98%, LTV/CAC jest wyjątkowo wysoki. Klienci enterprise płacą przez dekady (switching cost). Gross margin subscription: ~84,5% non-GAAP — wskazuje na wyjątkową efektywność dostarczania usług.</p>
+      <h4>Prognozy konsensusu</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">FY2026E Revenue</div><div class="m-value">~$16 mld (+20% YoY)</div></div>
+        <div class="metric-row"><div class="m-label">FY2027E Revenue</div><div class="m-value">~$19–20 mld (+20% YoY)</div></div>
+        <div class="metric-row"><div class="m-label">FY2026E FCF</div><div class="m-value">~$5,5–6 mld</div></div>
+        <div class="metric-row"><div class="m-label">Now Assist ACV cel 2026</div><div class="m-value">$1,5 mld (podwyższony)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. WYCENA -->
+  <div class="section" id="wycena">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">6</div>
+      <div class="section-title">Wskaźniki Wyceny</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Mnożniki rynkowe (cena ~$112, czerwiec 2026)</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">P/E TTM</div><div class="m-value">~68x</div></div>
+        <div class="metric-row"><div class="m-label">P/E Forward (FY27E)</div><div class="m-value">~26x</div></div>
+        <div class="metric-row"><div class="m-label">P/S TTM</div><div class="m-value">~8,7x</div></div>
+        <div class="metric-row"><div class="m-label">EV/EBITDA</div><div class="m-value">~38–39x</div></div>
+        <div class="metric-row"><div class="m-label">Price/FCF</div><div class="m-value">~25x</div></div>
+        <div class="metric-row"><div class="m-label">FCF Yield</div><div class="m-value">~4%</div></div>
+        <div class="metric-row"><div class="m-label">Debt/Equity</div><div class="m-value">Minimalne</div></div>
+        <div class="metric-row"><div class="m-label">Dividend Yield</div><div class="m-value">Brak</div></div>
+      </div>
+      <h4>Kontekst wyceny — atrakcyjna historycznie</h4>
+      <p>Akcja jest <strong>~47% poniżej ATH</strong> ($211). Forward P/E ~26x przy 20%+ wzroście i FCF margin 34% to historycznie najtańsza wycena NOW od lat. Dla porównania: w 2021 NOW handlowało na 60–80x forward earnings. Analitycy (43 Buy, 4 Hold, 1 Sell) mają średni target $142 — implikuje ~27% upside.</p>
+      <p>Price/FCF ~25x przy spółce rosnącej 20%+ z compoundingiem i dominującą pozycją to poziom, który historycznie był punktem wejścia dla inwestorów long-term. PEG ratio: 26/20 = ~1,3x — uczciwe dla tej jakości biznesu.</p>
+    </div>
+  </div>
+
+  <!-- 7. MARŻE -->
+  <div class="section" id="marze">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">7</div>
+      <div class="section-title">Marżowość i Dynamika Finansowa</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Trend marż (FY2022–FY2025)</h4>
+      <table class="comp-table">
+        <thead><tr><th>Metryka</th><th>FY2022</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto (GAAP subs.)</td><td>~79%</td><td>~80%</td><td>~81%</td><td>~81%</td></tr>
+          <tr><td>Marża brutto (non-GAAP subs.)</td><td>~83%</td><td>~84%</td><td>~84,5%</td><td>~84,5%</td></tr>
+          <tr><td>EBITDA Margin</td><td>~28%</td><td>~31%</td><td>~34%</td><td>~36%</td></tr>
+          <tr><td>Net Margin</td><td>~17%</td><td>~22%</td><td>~26%</td><td>~28%</td></tr>
+          <tr><td>FCF Margin</td><td>~28%</td><td>~30%</td><td>~31%</td><td>~34,6%</td></tr>
+          <tr><td>Revenue Growth YoY</td><td>+29%</td><td>+23%</td><td>+22%</td><td>+21%</td></tr>
+        </tbody>
+      </table>
+      <h4>Dźwignia operacyjna</h4>
+      <p>ServiceNow wykazuje wyraźną dźwignię operacyjną — EBITDA margin rośnie o 2–3 pp rocznie przy stabilnym wzroście przychodów ~20% YoY. Model SaaS multi-tenant pozwala na skalowanie bez proporcjonalnego wzrostu kosztów. S&M / Revenue trend jest spadkowy — efektywność sprzedaży rośnie.</p>
+      <h4>FCF i CAPEX</h4>
+      <p>FCF FY2025: $4,6 mld (+34% YoY). FCF margin: 34,6%. CAPEX relatywnie niski (~3–4% revenue) — SaaS na publicznych cloudach (AWS, Azure, GCP) eliminuje CAPEX na własną infrastrukturę. FCF rośnie szybciej niż revenue — pozytywny sygnał dźwigni.</p>
+    </div>
+  </div>
+
+  <!-- 8. BILANS -->
+  <div class="section" id="bilans">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">8</div>
+      <div class="section-title">Bilans i Płynność</div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body collapsed">
+      <h4>Pozycja gotówkowa</h4>
+      <p>Gotówka i inwestycje krótkoterminowe: ~$3,7 mld. Dług długoterminowy: ~$0 (zerowy dług lub marginalne obligacje). Gotówka netto: ~$3,7 mld — bardzo silna pozycja. Żadnego ryzyka finansowego ani dilucyjnego w kontekście długu.</p>
+      <h4>SBC i dilucja</h4>
+      <p>Stock-Based Compensation jest istotnym kosztem w SaaS — dla NOW szacunkowo 8–10% przychodów. Buybacki: ServiceNow aktywnie skupuje akcje (program $3 mld+). Netto dilucja jest ograniczona, ale SBC jest wyższy procentowo niż u NVDA — należy to brać pod uwagę w analizie jakości zysku.</p>
+      <h4>Jakość zysku</h4>
+      <p>Net Income FY2025: ~$1,7 mld. FCF: $4,6 mld. Różnica ~$2,9 mld wynika głównie z SBC ($1,2–1,5 mld) i amortyzacji przejęć. FCF jest znacznie lepszą miarą rzeczywistej gotówki generowanej przez biznes. Konwersja cash jest bardzo wysoka — deferred revenue (płatności z góry od klientów) podbija CF operacyjny.</p>
+    </div>
+  </div>
+
+  <!-- 9. BULL CASE -->
+  <div class="section" id="bulls">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">9</div>
+      <div class="section-title">Szanse — Bull Case</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="bull-list">
+        <h4>🟢 Katalizatory wzrostu</h4>
+        <ul>
+          <li><strong>Now Assist / Agentic AI ramp:</strong> ACV $750M → $1,5 mld w 2026 (cel podwyższony) to tylko wstęp. Jeśli agentic AI stanie się standardem enterprise, NOW jest jedyną platformą z gotowym stosem end-to-end. Każdy Pro Plus upgrade = +20–30% ASP vs. standardowe licencje.</li>
+          <li><strong>CSM expansion — Salesforce challenger:</strong> Wejście w Customer Service Management to adresowanie rynku CRM ($50B+). Istniejący klienci mają gotową integrację z ITSM/HR — naturalne rozszerzenie bez nowego przetargu.</li>
+          <li><strong>Government / Regulated Industries:</strong> FedRAMP High Authorization otwiera US Government jako segment. Europejskie regulacje (DORA, NIS2) nakręcają popyt na ITOM i SecOps.</li>
+          <li><strong>AI monetization optionality:</strong> Jeśli 30% ACV z AI do 2030 (cel spółki) zostanie osiągnięte, przy wyższych marżach, model zysku może drastycznie wzrosnąć.</li>
+          <li><strong>Wycena w dołku korekty:</strong> Akcja -47% od ATH przy solidnych fundamentach to historyczny punkt wejścia. Powrót do 35x forward P/E (vs. aktualne 26x) przy wzroście zysku 20% daje 60–70% upside w 18 miesiącach.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. BEAR CASE -->
+  <div class="section" id="bears">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">10</div>
+      <div class="section-title">Zagrożenia — Bear Case</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="bear-list">
+        <h4>🔴 Kluczowe ryzyka</h4>
+        <ul>
+          <li><strong>Microsoft Copilot / Power Platform — bezpośrednie zagrożenie:</strong> Microsoft jest największym ryzykiem dla NOW. Copilot Studio + Power Automate + Teams integration pozwala budować AI workflowy bez ServiceNow. Każdy klient z EA Microsoft jest potencjalnym churnerem. NOW musi udowodnić wyraźną przewagę vs. Microsoft „good-enough" ITSM.</li>
+          <li><strong>Spowolnienie growth do &lt;20%:</strong> Wzrost przychylny zwalnia z 29% (FY22) do 21% (FY25). Jeśli trend zejdzie poniżej 18–20%, rynek może ukarać wycenę dalszym de-ratingiem (spółka traci status premium growth).</li>
+          <li><strong>Budget IT freeze:</strong> W scenariuszu recesji enterprise CIOs tną nowe projekty — Now Assist upsell może być odroczony. NOW jest stickowe (nie churns), ale ekspansja zwalnia.</li>
+          <li><strong>SBC dilucja:</strong> 8–10% SBC/Revenue to wysoki poziom — przez lata eruje wartość dla akcjonariuszy jeśli spółka nie kompensuje buybackami wystarczająco agresywnie.</li>
+          <li><strong>Ekspansja TAM = ryzyko egzekucji:</strong> CSM, Security, Industry Clouds to nowe segmenty z silnymi incumbentami (Salesforce, Palo Alto, Oracle). Rozproszenie zasobów R&D i S&M może osłabić core ITSM.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. KONKURENCJA -->
+  <div class="section" id="konkurencja">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">11</div>
+      <div class="section-title">Analiza Konkurencji</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <table class="comp-table">
+        <thead>
+          <tr><th>Spółka</th><th>Ticker</th><th>Rev Growth</th><th>Marża brutto</th><th>P/S TTM</th><th>Pozycja vs. NOW</th></tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td><strong>ServiceNow</strong></td><td>NOW</td><td>+21%</td><td>~81% GAAP</td><td>~8,7x</td><td>🥇 ITSM / Workflows lider</td>
+          </tr>
+          <tr>
+            <td>Microsoft (Power Platform)</td><td>MSFT</td><td>+13%</td><td>~69%</td><td>~11x</td><td>Największe zagrożenie — bundling w EA</td>
+          </tr>
+          <tr>
+            <td>Salesforce</td><td>CRM</td><td>+9%</td><td>~77%</td><td>~6x</td><td>CRM lider — teraz bezpośrednio konkuruje w workflows</td>
+          </tr>
+          <tr>
+            <td>Atlassian</td><td>TEAM</td><td>+15%</td><td>~83%</td><td>~10x</td><td>Mid-market ITSM / dev workflows</td>
+          </tr>
+          <tr>
+            <td>BMC / Remedy (prywatna)</td><td>—</td><td>N/D</td><td>N/D</td><td>N/D</td><td>Legacy ITSM — NOW główny beneficjent migracji</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>ServiceNow jest niekwestionowanym liderem enterprise ITSM (Gartner MQ 2025 — 6. rok z rzędu). Udział rynkowy rośnie — głównie kosztem legacy systemów (BMC Remedy, HP Service Manager) i organicznego wzrostu rynku. Kluczowe ryzyko to Microsoft, który wciąż bardziej bundluje niż compete head-to-head w enterprise ITSM, ale granica się zaciera.</p>
+    </div>
+  </div>
+
+  <!-- 12. TECHNIKA -->
+  <div class="section" id="technika">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">12</div>
+      <div class="section-title">Analiza Techniczna</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Trend i struktura wykresu</h4>
+      <p>Akcja handluje na poziomie ~$112 — znacząco poniżej ATH $211,48 (osiągniętego w 2025). To korekta ~47% od szczytu. Kurs jest powyżej SMA200 (~$94), co sugeruje długoterminowy trend wzrostowy intakt. Jednak struktura krótko- i średnioterminowa jest bearish/neutral — akcja consoliduje się w dolnej części swojego 52-tygodniowego zakresu ($81–$211).</p>
+      <h4>Odchylenia od średnich kroczących</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">SMA200 (~$94)</div><div class="m-value">+19% powyżej</div></div>
+        <div class="metric-row"><div class="m-label">SMA50 (szac. ~$105)</div><div class="m-value">+6,7% powyżej</div></div>
+        <div class="metric-row"><div class="m-label">SMA20 (szac. ~$110)</div><div class="m-value">+1,8% powyżej</div></div>
+        <div class="metric-row"><div class="m-label">Od ATH $211,48</div><div class="m-value">-47% poniżej</div></div>
+        <div class="metric-row"><div class="m-label">Od 52W Low $81,24</div><div class="m-value">+37,9% powyżej dna</div></div>
+      </div>
+      <h4>Wskaźniki momentum</h4>
+      <p><strong>RSI(14): ~52–57</strong> — neutralny, brak sygnałów wykupienia ani wyprzedania. <strong>MACD:</strong> Techniczne sygnały są generalnie konstruktywne (9 sygnałów buy, 0 sell wg niektórych źródeł), choć akcja jest w fazie konsolidacji po silnej fali od dna ~$81.</p>
+      <h4>Kluczowe poziomy</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">Opór 1</div><div class="m-value">$125–130 (poprzednia konsolidacja)</div></div>
+        <div class="metric-row"><div class="m-label">Opór 2</div><div class="m-value">$150–160 (cel analityków)</div></div>
+        <div class="metric-row"><div class="m-label">Wsparcie 1</div><div class="m-value">$100–105 (SMA50)</div></div>
+        <div class="metric-row"><div class="m-label">Wsparcie 2</div><div class="m-value">$90–94 (SMA200 — kluczowe)</div></div>
+        <div class="metric-row"><div class="m-label">Stop loss techniczny</div><div class="m-value">&lt;$81 (52W Low)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13. OCENA -->
+  <div class="section" id="ocena">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">13</div>
+      <div class="section-title">Ocena Inwestycyjna</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="verdict-grid">
+        <div class="verdict-card">
+          <div class="term">Krótki termin (1–3 mies.)</div>
+          <div class="v-rating neutral">Neutralna</div>
+          <div class="v-text">Akcja w konsolidacji po odbiciu od $81. RSI neutralny, brak wyraźnego momentum. Kluczowy katalizator: wyniki Q2 FY26 (lipiec/sierpień 2026) — czy Now Assist ACV osiągnie $1 mld run rate i czy wzrost cRPO utrzyma 25%+. Optymalny entry przy retestcie $100–105.</div>
+        </div>
+        <div class="verdict-card">
+          <div class="term">Średni termin (6–18 mies.)</div>
+          <div class="v-rating buy">Kupno</div>
+          <div class="v-text">Forward P/E 26x przy 20%+ wzroście to historycznie atrakcyjny poziom. AI monetyzacja nabiera tempa — Now Assist target $1,5 mld ACV w 2026 to realne. Scenariusz bazowy: powrót do $140–160 (+25–43%) przy re-ratingu do 30–35x forward P/E.</div>
+        </div>
+        <div class="verdict-card">
+          <div class="term">Długi termin (3–5 lat)</div>
+          <div class="v-rating strong-buy">Mocne Kupno</div>
+          <div class="v-text"><strong>Bull:</strong> $300–400 jeśli NOW stanie się „agentycznym OS" dla enterprise z $30 mld revenue i 40%+ FCF margin. <strong>Bear:</strong> $60–80 jeśli Microsoft skutecznie wypchnie NOW z kluczowych segmentów i wzrost spadnie do &lt;12% z kompresją marż.</div>
+        </div>
+      </div>
+      <div class="fair-value-box">
+        <div class="fv-label">Szacunkowy Fair Value (mnożnikowa FY27E)</div>
+        <div class="fv-value">$140 – $165</div>
+        <div class="fv-sub">Bazuje na FY27E FCF ~$6 mld × 25–28x Price/FCF (SaaS premium quality). Przy P/E forward 30x i EPS FY27E ~$5,5 → cel $165. Analitycy (konsensus $142) potwierdzają ten zakres. Aktualna cena $112 oferuje 25–47% margines bezpieczeństwa.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14. TL;DR -->
+  <div class="section" id="tldr">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">14</div>
+      <div class="section-title">Podsumowanie — TL;DR</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="tldr-grid">
+        <div class="reason-card">
+          <h4 style="color: var(--strong-buy);">✅ 3 powody, by kupić</h4>
+          <ul>
+            <li><strong>Historycznie tania wycena:</strong> Forward P/E 26x i Price/FCF 25x przy wzroście 20%+ i FCF margin 34% to najtańszy NOW od lat 2018–2019. -47% od ATH to rzadka okazja w spółce tej jakości.</li>
+            <li><strong>Agentic AI — next growth engine:</strong> Now Assist ACV $750M → $1,5 mld (2026) to dopiero początek. Jeśli AI stanie się standardem dla enterprise workflows, NOW jest naturalnym liderem z gotową platformą i 85% Fortune 500 jako bazą.</li>
+            <li><strong>Mission-critical + 98% renewal:</strong> Platforma jest niemożliwa do wymienienia w ciągu roku, klienci płacą stale, RPO $23,9 mld daje doskonałą widoczność przychodów na 2+ lata naprzód.</li>
+          </ul>
+        </div>
+        <div class="reason-card">
+          <h4 style="color: #ff5252;">❌ 3 powody, by unikać</h4>
+          <ul>
+            <li><strong>Microsoft bundling risk:</strong> Copilot + Power Platform + Teams to gotowy stack enterprise, który Microsft może oferować za ułamek ceny NOW w ramach istniejących EA. To największe egzystencjalne ryzyko.</li>
+            <li><strong>Wzrost deceleruje:</strong> Z 29% (FY22) do 21% (FY25) — jeśli zejdzie poniżej 18%, rynek straci cierpliwość do premium wyceny.</li>
+            <li><strong>P/E TTM 68x nie wybacza błędów:</strong> Każde Miss w wynikach kwartalnych (cRPO, Now Assist ACV) może wywołać -15–20% jednosesyjnie. Spółka tradesuje na oczekiwaniach.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="thesis-breaker">
+        <h4>⚡ Thesis-Breaker / Thesis-Confirmer</h4>
+        <p><strong>CONFIRMER:</strong> Q3/Q4 FY26 wyniki z Now Assist ACV przekraczającym $1 mld i cRPO growth powracającym do 27%+ → re-rating do 32–35x forward P/E, akcja zmierza ku $160–180. Dodatkowo: jeden duży kontrakt rządowy lub industry-cloud win (healthcare/banking) jako sygnał nowego growth vectora.</p>
+        <p style="margin-top:10px;"><strong>BREAKER:</strong> Microsoft ogłasza nową, agresywną ofertę ITSM/workflow bundle w ramach M365 Copilot za cenę ryczałtową, z migracją kilku dużych klientów NOW → teza o switching cost się kruszy, growth spada do &lt;15%, wycena kieruje się ku $60–70.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+
+    Analiza wygenerowana przez Claude · 2026-06-09 · Nie stanowi porady inwestycyjnej · Dane mogą być nieaktualne
+  </div>
+</div>
+
+<script>
+  function toggleSection(header) {
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector('.section-toggle');
+    body.classList.toggle('collapsed');
+    toggle.classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-item').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const id = this.getAttribute('href').slice(1);
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelectorAll('.nav-item').forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+  const sections = document.querySelectorAll('.section');
+  const navItems = document.querySelectorAll('.nav-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(item => { item.classList.toggle('active', item.getAttribute('href') === '#' + id); });
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RR — Analiza Inwestycyjna</title>
+<style>
+  :root {
+    --bg: #0f1117; --surface: #1a1d2e; --surface2: #242740; --border: #2e3150;
+    --text: #e8eaf0; --muted: #8b90a0; --accent: #6c63ff; --accent2: #00d4aa;
+    --strong-buy: #00c853; --buy: #4caf50; --neutral: #ffd740; --sell: #ff6d00; --strong-sell: #d50000;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; line-height: 1.6; font-size: 15px; }
+  .header { background: linear-gradient(135deg, #1a1d2e 0%, #242740 100%); border-bottom: 1px solid var(--border); padding: 32px 48px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .header-left h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; }
+  .header-left h1 span { color: var(--accent); }
+  .header-left p { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+  .rating-badge { padding: 10px 24px; border-radius: 50px; font-weight: 700; font-size: 1rem; letter-spacing: 0.5px; text-transform: uppercase; }
+  .rating-badge.strong-sell { background: var(--strong-sell); color: #fff; }
+  .rating-badge.sell { background: var(--sell); color: #fff; }
+  .rating-badge.neutral { background: var(--neutral); color: #000; }
+  .rating-badge.buy { background: var(--buy); color: #fff; }
+  .nav-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 48px; overflow-x: auto; display: flex; scrollbar-width: none; }
+  .nav-bar::-webkit-scrollbar { display: none; }
+  .nav-item { padding: 14px 18px; color: var(--muted); font-size: 0.82rem; font-weight: 500; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.15s; text-decoration: none; display: block; }
+  .nav-item:hover { color: var(--text); border-bottom-color: var(--accent); }
+  .nav-item.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .main { max-width: 1100px; margin: 0 auto; padding: 40px 48px 80px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-bottom: 40px; }
+  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+  .metric-card .label { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .metric-card .value { font-size: 1.25rem; font-weight: 700; }
+  .metric-card .sub { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+  .metric-card.danger .value { color: var(--strong-sell); }
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 24px; overflow: hidden; }
+  .section-header { padding: 18px 24px; background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; }
+  .section-number { background: var(--accent); color: #fff; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 0.95rem; font-weight: 600; flex: 1; }
+  .section-toggle { color: var(--muted); font-size: 0.8rem; transition: transform 0.2s; }
+  .section-toggle.open { transform: rotate(180deg); }
+  .section-body { padding: 24px; display: block; }
+  .section-body.collapsed { display: none; }
+  .section-body p { margin-bottom: 12px; }
+  .section-body p:last-child { margin-bottom: 0; }
+  .section-body ul, .section-body ol { padding-left: 20px; margin-bottom: 12px; }
+  .section-body li { margin-bottom: 6px; }
+  h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent2); margin: 16px 0 8px; }
+  h4:first-child { margin-top: 0; }
+  .metrics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin: 12px 0; }
+  .metric-row { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; display: flex; flex-direction: column; gap: 2px; }
+  .metric-row .m-label { color: var(--muted); font-size: 0.75rem; }
+  .metric-row .m-value { font-weight: 600; font-size: 0.95rem; }
+  .metric-row.red .m-value { color: #ff5252; }
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 12px 0; }
+  .comp-table th { background: var(--surface2); color: var(--muted); font-weight: 600; text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 0.78rem; text-transform: uppercase; }
+  .comp-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table tr.highlight td { background: rgba(108,99,255,0.08); }
+  .comp-table tr:hover td { background: rgba(255,255,255,0.03); }
+  .bull-list, .bear-list { border-radius: 10px; padding: 16px 18px; }
+  .bull-list { background: rgba(0,200,83,0.07); border: 1px solid rgba(0,200,83,0.2); }
+  .bear-list { background: rgba(213,0,0,0.07); border: 1px solid rgba(213,0,0,0.2); }
+  .bull-list h4 { color: var(--strong-buy); margin-top: 0; }
+  .bear-list h4 { color: #ff5252; margin-top: 0; }
+  .bull-list li::marker { color: var(--strong-buy); }
+  .bear-list li::marker { color: #ff5252; }
+  .verdict-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0; }
+  .verdict-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .verdict-card .term { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .verdict-card .v-rating { font-size: 0.88rem; font-weight: 700; margin-bottom: 8px; padding: 4px 10px; border-radius: 20px; display: inline-block; }
+  .verdict-card .v-text { color: var(--muted); font-size: 0.82rem; line-height: 1.5; }
+  .v-rating.neutral { background: var(--neutral); color: #000; }
+  .v-rating.sell { background: var(--sell); color: #fff; }
+  .v-rating.strong-sell { background: var(--strong-sell); color: #fff; }
+  .tldr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .reason-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+  .reason-card h4 { margin-top: 0; }
+  .reason-card ul { padding-left: 18px; }
+  .thesis-breaker { background: rgba(255,215,64,0.08); border: 1px solid rgba(255,215,64,0.25); border-radius: 10px; padding: 16px 18px; }
+  .thesis-breaker h4 { color: var(--neutral); margin-top: 0; }
+  .fair-value-box { background: rgba(213,0,0,0.08); border: 1px solid rgba(213,0,0,0.3); border-radius: 10px; padding: 16px 20px; margin-top: 16px; }
+  .fair-value-box .fv-label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .fair-value-box .fv-value { font-size: 1.5rem; font-weight: 700; color: #ff5252; margin: 4px 0; }
+  .fair-value-box .fv-sub { color: var(--muted); font-size: 0.82rem; }
+  .danger-box { background: rgba(213,0,0,0.10); border: 1px solid rgba(213,0,0,0.4); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+  .danger-box strong { color: #ff5252; }
+  .warn-box { background: rgba(255,109,0,0.08); border: 1px solid rgba(255,109,0,0.3); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+  .warn-box strong { color: var(--sell); }
+  .highlight-box { background: rgba(0,212,170,0.07); border: 1px solid rgba(0,212,170,0.2); border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+  .footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 32px; border-top: 1px solid var(--border); margin-top: 40px; }
+  @media (max-width: 768px) {
+    .header { padding: 20px; } .main { padding: 20px 16px 60px; } .nav-bar { padding: 0 16px; }
+    .verdict-grid, .tldr-grid { grid-template-columns: 1fr; } .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+  <div class="header-left">
+    <h1><span>RR</span> — Richtech Robotics, Inc.</h1>
+    <p>NASDAQ · Robotyka usługowa / Automatyzacja / Las Vegas, NV · Analiza: 2026-06-18</p>
+  </div>
+  <div class="rating-badge strong-sell">Mocna Sprzedaż</div>
+</div>
+
+<nav class="nav-bar">
+  <a class="nav-item active" href="#profil">1. Profil</a>
+  <a class="nav-item" href="#produkt">2. Produkt</a>
+  <a class="nav-item" href="#rynki">3. Rynki</a>
+  <a class="nav-item" href="#klienci">4. Klienci</a>
+  <a class="nav-item" href="#biznes">5. Biznes</a>
+  <a class="nav-item" href="#wycena">6. Wycena</a>
+  <a class="nav-item" href="#marze">7. Marże</a>
+  <a class="nav-item" href="#bilans">8. Bilans</a>
+  <a class="nav-item" href="#bulls">9. Bull Case</a>
+  <a class="nav-item" href="#bears">10. Bear Case</a>
+  <a class="nav-item" href="#konkurencja">11. Konkurencja</a>
+  <a class="nav-item" href="#technika">12. Technika</a>
+  <a class="nav-item" href="#ocena">13. Ocena</a>
+  <a class="nav-item" href="#tldr">14. TL;DR</a>
+</nav>
+
+<div class="main">
+
+  <div class="danger-box">
+    <strong>🚨 KRYTYCZNE OSTRZEŻENIE:</strong> Richtech Robotics jest przedmiotem poważnych zarzutów o oszustwo ze strony Capybara Research (wrzesień 2025) oraz Hunterbrook Research (styczeń 2026). Microsoft oficjalnie zaprzeczył partnerstwu. Nasdaq wydał notyfikację o niezgodności z zasadami giełdy (maj 2026) — ryzyko delistingu. Firma złożyła restated (korektę) raportu finansowego w czerwcu 2026. Wszystkie te okoliczności wymagają ekstremalnej ostrożności.
+  </div>
+
+  <div class="summary-grid">
+    <div class="metric-card danger">
+      <div class="label">Kapitalizacja</div>
+      <div class="value">~$462 mln</div>
+      <div class="sub">Cena: ~$2,09 (17.06.2026)</div>
+    </div>
+    <div class="metric-card danger">
+      <div class="label">P/S TTM</div>
+      <div class="value">~92x (!)</div>
+      <div class="sub">Revenue FY2025: $5,0 mln</div>
+    </div>
+    <div class="metric-card danger">
+      <div class="label">Strata netto FY2025</div>
+      <div class="value">-$15,75 mln</div>
+      <div class="sub">3x więcej niż przychody</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Wzrost przychodów</div>
+      <div class="value">+19% YoY</div>
+      <div class="sub">$4,24M → $5,05M (FY2025)</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">52W High / Low</div>
+      <div class="value">$7,43</div>
+      <div class="sub">Low: $1,37 · Obecna: $2,09</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Analitycy</div>
+      <div class="value">Hold</div>
+      <div class="sub">Mediana target: $4,00 (3 anality.)</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Gotówka (aktywa)</div>
+      <div class="value">~$107 mln</div>
+      <div class="sub">Debt: $0 · Runway: 3+ lat</div>
+    </div>
+    <div class="metric-card danger">
+      <div class="label">Fair Value (fund.)</div>
+      <div class="value">$0,50–1,50</div>
+      <div class="sub">-28% do -76% od ceny rynkowej</div>
+    </div>
+  </div>
+
+  <!-- 1. PROFIL -->
+  <div class="section" id="profil">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">1</div>
+      <div class="section-title">Profil Spółki</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Historia i siedziba</h4>
+      <p>Richtech Robotics, Inc. (NASDAQ: RR) założona w 2016 roku (pierwotnie jako Richtech Creative Displays LLC, nazwa zmieniona w czerwcu 2022). Siedziba: Las Vegas, Nevada. IPO na NASDAQ w 2023 roku. Spółka rozwija, produkuje, wdraża i sprzedaje roboty dla sektora usług: restauracje, hotele, retail, przemysł. Aktualnie ~220 mln akcji w obrocie (po kolejnych emisjach). Kapitalizacja rynkowa: ~$462 mln przy cenie $2,09 (17.06.2026).</p>
+      <h4>Czym się zajmuje i jaki problem rozwiązuje</h4>
+      <p>Richtech pozycjonuje się jako rozwiązanie dla branży restauracyjno-hotelowej zmagającej się z niedoborem siły roboczej i rosnącymi kosztami pracy. Roboty mają zastępować człowieka przy obsłudze stolików (Matradee), przygotowaniu napojów (ADAM, Scorpion), sprzątaniu (DUST-E) i logistyce (Titan). Model RaaS (Robot as a Service) — subskrypcja zamiast jednorazowego zakupu. Spółka prowadzi też własną sieć kawiarni automatycznych Clouffee & Tea.</p>
+      <h4>Etap</h4>
+      <p><strong>Pre-revenue (de facto):</strong> $5 mln przychodów przy $462 mln wyceny to spółka w bardzo wczesnej fazie komercjalizacji, finansowana głównie z emisji akcji. Strata operacyjna ok. -$16 mln/rok. Burn rate ~$1,3 mln miesięcznie.</p>
+      <h4>Kluczowe wydarzenia ostatnich 12 miesięcy</h4>
+      <ul>
+        <li><strong>Capybara Research (wrzesień 2025):</strong> Raport short-sellera: „China hustle, riddled with fraud, UNINVESTABLE." Zarzuty o podrabianie partnerstw, fałszywe deale, przepakowane chińskie roboty.</li>
+        <li><strong>Microsoft zaprzeczył partnerstwu (styczeń 2026):</strong> Hunterbrook Research ujawnił, że Microsoft oficjalnie neguje jakikolwiek komercyjny związek z Richtech. Akcje spadły. Warto dodać: Richtech był „na Azure Marketplace" (vendor listing), co nie jest partnerstwem strategicznym.</li>
+        <li><strong>Prywatna emisja akcji (styczeń 2026):</strong> 8,5 mln akcji Class B po $4,55/akcja → $38,7 mln brutto. Dziś te akcje są warte $2,09 (-54%).</li>
+        <li><strong>CES 2026 (styczeń 2026):</strong> Debiut Dex — mobilnego humanoidalnego robota. Prototyp, nie sprzedawany komercyjnie.</li>
+        <li><strong>Nasdaq non-compliance notice (28 maja 2026):</strong> Spółka nie złożyła w terminie 10-Q za Q1 FY2026 (kwartał kończący się 31.03.2026). 60 dni na plan naprawczy do 21.07.2026 — ryzyko delistingu.</li>
+        <li><strong>Restatement (czerwiec 2026):</strong> Spółka złożyła korektę wcześniejszego raportu finansowego — istotny sygnał o jakości wcześniejszego rachunkowości.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2. PRODUKT -->
+  <div class="section" id="produkt">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">2</div>
+      <div class="section-title">Produkt / Usługa</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Portfolio produktów (6 linii)</h4>
+      <ul>
+        <li><strong>Matradee / Matradee Plus / Matradee X:</strong> Autonomiczne roboty kelnerskie — podawanie potraw, zbieranie naczyń, hosting, reklama. Główny produkt komercyjny RR.</li>
+        <li><strong>ADAM (AI Drink-Making Machine):</strong> Dwuręczny robot do przygotowania napojów alkoholowych i bezalkoholowych w barach i hotelach. Flagship premium produktu.</li>
+        <li><strong>Scorpion:</strong> Specjalistyczny robot barmański do przygotowania kawy/napojów.</li>
+        <li><strong>Titan:</strong> Ciężkie AMR (Autonomous Mobile Robot) — dostawa w magazynach i obiektach przemysłowych. Nowa linia, pre-revenue.</li>
+        <li><strong>DUST-E:</strong> Autonomiczny robot czyszczący — podłogi komercyjne w hotelach/sklepach.</li>
+        <li><strong>Dex (humanoid):</strong> Mobilny robot humanoidalny zaprezentowany na CES 2026. Pre-komercyjny prototyp — brak sprzedaży.</li>
+      </ul>
+      <div class="warn-box">
+        <strong>⚠️ Kontrowersja „własność technologii":</strong> Capybara Research twierdzi, że Richtech kupuje gotowe roboty od chińskich producentów (w tym od firm powiązanych z właścicielami RR), rebranduje je i sprzedaje z marżą, nie tworząc własnej technologii hardware. Jeśli to prawda, moat (przewaga) jest zerowy.
+      </div>
+      <h4>RaaS Model</h4>
+      <p>Subskrypcja miesięczna zamiast jednorazowego zakupu. 55 podpisanych umów RaaS w FY2025, $692K przychodu z RaaS. Wzrost RaaS +31% QoQ w Q1 FY2026. Docelowo: recurring revenue stream z przewidywalnym cash flow — ale na obecnym etapie kwoty są śladowe.</p>
+      <h4>Skalowalność i Moat</h4>
+      <p>Jeśli Capybara ma rację (rebranded Chinese hardware), moat jest minimalny — każdy może zrobić to samo. Jeśli technologia jest własna — przewaga polega na integracji AI, software, i serwisowania. Brak danych patentowych i R&D, które uzasadniałyby wycenę premium.</p>
+    </div>
+  </div>
+
+  <!-- 3. RYNKI -->
+  <div class="section" id="rynki">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">3</div>
+      <div class="section-title">Rynki i Otoczenie</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>TAM / SAM / SOM</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">Restaurant robotics TAM (2025)</div><div class="m-value">$3,8 mld</div></div>
+        <div class="metric-row"><div class="m-label">Restaurant robotics TAM (2034E)</div><div class="m-value">$14,2 mld (+15,8% CAGR)</div></div>
+        <div class="metric-row"><div class="m-label">Hospitality robots (2025)</div><div class="m-value">$0,61 mld</div></div>
+        <div class="metric-row"><div class="m-label">Service robotics overall (2025)</div><div class="m-value">$26,4 mld</div></div>
+        <div class="metric-row"><div class="m-label">Service robotics (2034E)</div><div class="m-value">$131,9 mld (+19,8% CAGR)</div></div>
+        <div class="metric-row"><div class="m-label">Richtech market share (szac.)</div><div class="m-value">&lt;0,1%</div></div>
+      </div>
+      <div class="highlight-box">
+        <strong>Makrotailwind realny:</strong> Niedobór pracowników w gastronomii, wzrost płac minimalnych, rosnące koszty operacyjne lokali — to strukturalne bodźce do adopcji robotyki w restauracjach. TAM rośnie realnie. Problem Richtech to nie rynek, lecz zdolność do skalowania i wiarygodność operacyjna.
+      </div>
+      <h4>Geografie</h4>
+      <p><strong>USA:</strong> Główny rynek. Ekspansja w restauracjach, hotelach, retail. <strong>Asia (via JV):</strong> Umowa z Beijing Kaiwu Tongchuang Technology ($4,2 mln) — jednak powiązania z chińskimi podmiotami budzą obawy w kontekście zarzutów Capybary. <strong>MSA z dealership group, hotel brand, global retailer:</strong> Umowy-ramowe podpisane, ale wartości kontraktów są dotychczas śladowe ($388K przy automotive MSA).</p>
+      <h4>Cykliczność</h4>
+      <p>Restauracje i hospitality są cykliczne — w recesji nowe inwestycje w robotykę są pierwszym do cięcia. Niskie bariery do wstrzymania wdrożeń. Jednocześnie presja kosztów pracy jest kontrą dla cyklu — czyni robotykę bardziej atrakcyjną nawet w spowolnieniu.</p>
+    </div>
+  </div>
+
+  <!-- 4. KLIENCI -->
+  <div class="section" id="klienci">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">4</div>
+      <div class="section-title">Klienci i Sprzedaż</div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body collapsed">
+      <h4>Profil klientów — B2B</h4>
+      <p>Restauracje (wszystkich typów), hotele, retail, automotive dealerships, kawiarnie. Brak informacji o koncentracji klientów. Przy 55 umowach RaaS i ~$5 mln rev rocznie, średnia wartość kontraktu: ~$90K/rok. Automotive MSA: $388K łączna wartość przy 9 aktywnych SOW — bardzo małe kontrakty.</p>
+      <h4>Kontrowersyjne deale</h4>
+      <ul>
+        <li><strong>Walmart:</strong> Richtech ogłosił „partnerstwo z Walmart". Capybara: „at best a limited pilot program in a single store."</li>
+        <li><strong>MAC USA:</strong> Spółka ogłosiła partnerstwo. MAC USA (pracownicy): „never heard of Richtech" i „we've never sold robots."</li>
+        <li><strong>Microsoft:</strong> Richtech twierdził o „collaborative relationship with Microsoft" oraz obecności na Azure Marketplace. Microsoft: oficjalnie zaprzeczył jakiemukolwiek partnerstwu komercyjnemu.</li>
+      </ul>
+      <h4>Retencja</h4>
+      <p>Brak danych NRR. Przy 55 aktywnych umowach RaaS vs. $692K revenue — sugeruje bardzo niskie miesięczne opłaty lub wysoki churn. Model RaaS z natury tworzy switching cost, ale przy tak wczesnym etapie brak dowodów retencji.</p>
+    </div>
+  </div>
+
+  <!-- 5. BIZNES -->
+  <div class="section" id="biznes">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">5</div>
+      <div class="section-title">Model Biznesowy i Przychody</div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body collapsed">
+      <h4>Struktura przychodów FY2025 ($5,05 mln)</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">RaaS (subskrypcje)</div><div class="m-value">$692 tys. (14%)</div></div>
+        <div class="metric-row"><div class="m-label">Franczyza restauracyjna (Clouffee)</div><div class="m-value">$602 tys. (12%)</div></div>
+        <div class="metric-row"><div class="m-label">Sprzedaż hardware / inne</div><div class="m-value">~$3,75 mln (74%)</div></div>
+        <div class="metric-row"><div class="m-label">Kontrakt Asia (Beijing Kaiwu)</div><div class="m-value">$4,2 mln (jednorazowy)</div></div>
+        <div class="metric-row"><div class="m-label">Wzrost RaaS Q1 FY2026</div><div class="m-value">+31% QoQ</div></div>
+      </div>
+      <p>Model aspiruje do SaaS-like recurring revenue, ale zdecydowana większość przychodów wciąż pochodzi z jednorazowej sprzedaży sprzętu. RaaS to zaledwie 14% przychodów. Kontrakt z Beijing Kaiwu ($4,2 mln) jest jednorazowy — bez niego przychody roczne byłyby ~$0,85 mln.</p>
+      <h4>Prognozy konsensusu</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">Q2 FY2026E Revenue</div><div class="m-value">~$2,0 mln (+71% YoY)</div></div>
+        <div class="metric-row"><div class="m-label">Q2 FY2026E EPS</div><div class="m-value">-$0,04</div></div>
+        <div class="metric-row"><div class="m-label">Profitowość</div><div class="m-value">Brak horyzontu</div></div>
+      </div>
+      <p>Nawet optymistyczny scenariusz (2 analityków) zakłada przychody $2 mln/kwartał = $8 mln/rok. Przy obecnych kosztach operacyjnych ~$20 mln/rok — spółka nadal generowałaby ~$12 mln straty rocznie.</p>
+    </div>
+  </div>
+
+  <!-- 6. WYCENA -->
+  <div class="section" id="wycena">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">6</div>
+      <div class="section-title">Wskaźniki Wyceny</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Mnożniki rynkowe (cena ~$2,09, czerwiec 2026)</h4>
+      <div class="metrics-grid">
+        <div class="metric-row red"><div class="m-label">P/E TTM</div><div class="m-value">Brak (strata netto)</div></div>
+        <div class="metric-row red"><div class="m-label">P/S TTM</div><div class="m-value">~92x (!)</div></div>
+        <div class="metric-row red"><div class="m-label">EV/Revenue</div><div class="m-value">~72x (EV = cap - cash)</div></div>
+        <div class="metric-row"><div class="m-label">P/B</div><div class="m-value">~4,4x ($106M equity)</div></div>
+        <div class="metric-row"><div class="m-label">Debt/Equity</div><div class="m-value">0 (bez długu)</div></div>
+        <div class="metric-row"><div class="m-label">Dividend</div><div class="m-value">Brak</div></div>
+      </div>
+      <div class="danger-box">
+        <strong>P/S ~92x to ekstremalnie wysoka wycena</strong> dla spółki z $5 mln revenue, -$16 mln net loss i poważnymi zarzutami o fraud. Dla porównania: Palantir (uznanego lidera AI) handluje na ~40x P/S. Even NVIDIA na szczycie bańki miała ~35x P/S. Richtech przy 92x P/S jest wycenione jak idealny AI-play bez żadnego ryzyka — przy realiach skrajnie odmiennych.
+      </div>
+      <h4>Analitycy (3 osoby — bardzo mała próba)</h4>
+      <ul>
+        <li>HC Wainwright: Buy, target $6,00 (+187% od $2,09)</li>
+        <li>Konsensus mediana: $4,00 (+91%)</li>
+        <li>Freedom Broker: target $1,40 (-33% od $2,09)</li>
+      </ul>
+      <p>Przy tylko 3 analitykach konsensus jest bardzo ograniczonej wartości statystycznej. HC Wainwright często inicjuje coverage small-caps po emisjach akcji — potencjalny conflict of interest.</p>
+      <div class="fair-value-box">
+        <div class="fv-label">Szacunkowy Fair Value (fundamentalny)</div>
+        <div class="fv-value">$0,50 – $1,50</div>
+        <div class="fv-sub">Bazuje na: P/S 10-30x na FY2026E revenue $8 mln = $80-240 mln market cap / ~220 mln akcji. Przy ryzyku fraud i delistingu dolny przedział jest bardziej prawdopodobny. Obecna cena $2,09 = 40-320% premia do fair value fundamentalnego.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. MARŻE -->
+  <div class="section" id="marze">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">7</div>
+      <div class="section-title">Marżowość i Dynamika Finansowa</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Wyniki historyczne</h4>
+      <table class="comp-table">
+        <thead><tr><th>Metryka</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr></thead>
+        <tbody>
+          <tr><td>Revenue</td><td>~$8,92 mln</td><td>~$4,39 mln</td><td>$5,05 mln</td></tr>
+          <tr><td>Net Loss</td><td>N/D</td><td>~-$8,14 mln</td><td>-$15,75 mln</td></tr>
+          <tr><td>Strata/Revenue</td><td>N/D</td><td>~-185%</td><td>~-312%</td></tr>
+          <tr><td>Cash burn rate (est.)</td><td>N/D</td><td>~$680K/mies.</td><td>~$1,3 mln/mies.</td></tr>
+        </tbody>
+      </table>
+      <div class="danger-box">
+        <strong>⚠️ Przychody SPADŁY z $8,92M (FY2023) do $4,39M (FY2024) — -51% YoY.</strong> FY2025 odrobił część (+15%) głównie dzięki jednorazowemu kontraktowi Beijing ($4,2M). Bez tego kontraktu organiczne przychody = ok. $0,85M. Strata przyspiesza szybciej niż przychody. Negatywna dźwignia operacyjna — spółka traci coraz więcej na każdej złotówce przychodu.
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. BILANS -->
+  <div class="section" id="bilans">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">8</div>
+      <div class="section-title">Bilans i Płynność</div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body collapsed">
+      <h4>Pozycja bilansowa (FY2025)</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">Total Assets</div><div class="m-value">~$107,3 mln</div></div>
+        <div class="metric-row"><div class="m-label">Total Liabilities</div><div class="m-value">~$1,4 mln</div></div>
+        <div class="metric-row"><div class="m-label">Total Equity</div><div class="m-value">~$106 mln</div></div>
+        <div class="metric-row"><div class="m-label">Total Debt</div><div class="m-value">$0</div></div>
+        <div class="metric-row"><div class="m-label">Cash Runway (Simply Wall St)</div><div class="m-value">&gt;3 lata</div></div>
+        <div class="metric-row red"><div class="m-label">Cash Burn/rok (est.)</div><div class="m-value">~$15-16 mln</div></div>
+      </div>
+      <h4>Dyluacja akcjonariuszy</h4>
+      <p>Spółka finansuje się wyłącznie emisją akcji. Od IPO:</p>
+      <ul>
+        <li>ATM offering: $71,6 mln zebrane — ciągła presja podażowa na cenę akcji</li>
+        <li>Prywatna emisja (sty 2026): 8,5 mln akcji po $4,55 = $38,7 mln. Ci inwestorzy tracą dziś -54%</li>
+        <li>Przy obecnym burn ~$15 mln/rok i $106 mln gotówki: runway ~7 lat — lecz każdy kolejny rok = kolejna emisja akcji</li>
+      </ul>
+      <p>ATM (At-The-Market) offering to mechanizm ciągłego sprzedawania akcji po rynkowej cenie — każdy wzrost kursu jest "zarabiany" przez spółkę przez nowe emisje, nie przez akcjonariuszy. Silnie drenuje wartość istniejących akcjonariuszy.</p>
+    </div>
+  </div>
+
+  <!-- 9. BULL CASE -->
+  <div class="section" id="bulls">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">9</div>
+      <div class="section-title">Szanse — Bull Case</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="bull-list">
+        <h4>🟢 Scenariusz optymistyczny (nisko prawdopodobny)</h4>
+        <ul>
+          <li><strong>Zarzuty frauda okazują się fałszywe:</strong> Gdyby Capybara Research, Hunterbrook i pozostałe short-sellers okazali się bezpodstawni, a spółka miała rzeczywistą własną technologię i autentyczne umowy — narracja mogłaby się odwrócić. Akcja z $7,43 (ATH) do $2,09 to -72% dyskonto.</li>
+          <li><strong>Kontrakt chińskiego JV ($4,2 mln) → systematyczna sprzedaż do Azji:</strong> Jeśli deal z Beijing Kaiwu będzie pierwszym z serii kontraktów w Azji, łączne przychody mogłyby skoczyć do $15-20 mln w FY2026-27.</li>
+          <li><strong>Dex (humanoid) → gorący trend 2026:</strong> Humanoidalne roboty to gorący temat inwestycyjny (Figure AI, Boston Dynamics, 1X). Jeśli Dex trafi na pierwsze komercyjne zamówienia przemysłowe, sentiment może się drastycznie zmienić.</li>
+          <li><strong>Przejęcie/akwizycja przez większego gracza:</strong> Przy niskiej wycenie i portfelu produktów w hot sektorze — teoretyczna opcja. Bardzo mało prawdopodobne przy obecnych zarzutach.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. BEAR CASE -->
+  <div class="section" id="bears">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">10</div>
+      <div class="section-title">Zagrożenia — Bear Case</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="bear-list">
+        <h4>🔴 Kluczowe ryzyka (bardzo wysokie)</h4>
+        <ul>
+          <li><strong>Capybara Research — fraud allegations (wrzesień 2025):</strong> Szczegółowy raport dowodzi: (a) Richtech kupuje gotowe roboty od chińskich dostawców powiązanych z właścicielami RR, (b) inkasuje marżę, nie tworząc własnej technologii, (c) SEC bada pre-IPO shareholdera za manipulację kursem i powiązania z chińskim syndykatem przestępczym, (d) insider embezzlement. Jeśli prawdziwe → wartość akcji bliższa $0 niż $2.</li>
+          <li><strong>Microsoft zaprzeczył (styczeń 2026):</strong> Hunterbrook ujawnił, że MSFT oficjalnie neguje partnerstwo. To wskazuje na systematyczne fabricowanie relacji biznesowych w komunikacji dla inwestorów — ryzyko prawne (SEC, class action).</li>
+          <li><strong>Nasdaq non-compliance + ryzyko delistingu:</strong> Spółka nie złożyła 10-Q w terminie. Do 21.07.2026 musi przedstawić plan naprawczy. Delisting z NASDAQ = brak dostępu do głównych inwestorów instytucjonalnych, likwidacja płynności, często droga do upadku wyceny.</li>
+          <li><strong>Financial restatement (czerwiec 2026):</strong> Spółka koryguje wcześniejsze sprawozdania finansowe — sygnał poważnych problemów z rachunkowością lub próby zakrycia wcześniejszych nieścisłości.</li>
+          <li><strong>Ciągła dyluacja przez ATM:</strong> $71,6 mln zebrane przez ATM offering = systematyczne "drukowanie akcji" przy każdym wzroście kursu. Każda rallye jest mechanicznie gaszona przez nowe emisje.</li>
+          <li><strong>Konkurencja liderów chińskich:</strong> Pudu Robotics — 70 000+ robotów w 60 krajach. Keenon — lider w Azji. Bear Robotics (SoftBank) — 5K+ robotów u Chili's i Denny's w USA. Richtech ma 55 umów RaaS i $692K revenue z RaaS — proporcje są dramatyczne.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. KONKURENCJA -->
+  <div class="section" id="konkurencja">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">11</div>
+      <div class="section-title">Analiza Konkurencji</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <table class="comp-table">
+        <thead>
+          <tr><th>Spółka</th><th>Finansowanie / Status</th><th>Skala</th><th>Pozycja vs. CPNG</th></tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td><strong>Richtech Robotics (RR)</strong></td><td>NASDAQ, ~$462M market cap</td><td>55 umów RaaS, $5M rev</td><td>🔴 Niszowy &amp; sporny</td>
+          </tr>
+          <tr>
+            <td>Bear Robotics</td><td>Prywatna, SoftBank+LG backing, $81M raised</td><td>5 000+ robotów "Servi" · Chili's, Denny's</td><td>US market leader w restauracjach</td>
+          </tr>
+          <tr>
+            <td>Pudu Robotics</td><td>Prywatna, chińska, $15M+ raised</td><td>70 000+ robotów w 60+ krajach (!!)</td><td>Globalny lider wolumenu</td>
+          </tr>
+          <tr>
+            <td>Keenon Robotics</td><td>Prywatna, chińska</td><td>Lider Azji, tysiące jednostek</td><td>Dominacja Asia-Pacific</td>
+          </tr>
+          <tr>
+            <td>Serve Robotics (SERV)</td><td>NASDAQ, ~$400M cap</td><td>Dostawa chodnikowa, Uber Eats deal</td><td>Inny segment (outdoor delivery)</td>
+          </tr>
+          <tr>
+            <td>Miso Robotics</td><td>Prywatna</td><td>Kitchen automation (Flippy) · White Castle, Jack in the Box</td><td>Kitchen back-of-house vs. Richtech front</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Richtech jest mniejszościowym graczem na silnie zatłoczonym rynku. Pudu Robotics ma 70 000 robotów w 60+ krajach — 1000x więcej jednostek niż RR przy porównywalnej lub niższej wycenie. Bear Robotics ma silne relacje z największymi sieciami restauracyjnymi w USA (Chili's, Denny's). Richtech nie ogłosił żadnego konsensusu z topową siecią restauracyjną na porównywalną skalę.</p>
+    </div>
+  </div>
+
+  <!-- 12. TECHNIKA -->
+  <div class="section" id="technika">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">12</div>
+      <div class="section-title">Analiza Techniczna</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Trend i struktura wykresu</h4>
+      <p>Akcja w silnym <strong>downtrndzie</strong> od ATH $7,43 do bieżących ~$2,09 — korekta -72%. Prywatna emisja w enero 2026 po $4,55 wskazuje, że nawet "smart money" (PP investors) weszli grubo powyżej rynku i dziś tracą -54%. Technicznie: każda próba odbicia jest sprzedawana.</p>
+      <h4>Odchylenia od SMA</h4>
+      <div class="metrics-grid">
+        <div class="metric-row red"><div class="m-label">SMA20 (~$2,70)</div><div class="m-value">-24,2% poniżej</div></div>
+        <div class="metric-row red"><div class="m-label">SMA50 (~$2,52)</div><div class="m-value">-18,6% poniżej</div></div>
+        <div class="metric-row red"><div class="m-label">SMA200 (~$3,44)</div><div class="m-value">-40,3% poniżej</div></div>
+        <div class="metric-row"><div class="m-label">Od 52W Low ($1,37)</div><div class="m-value">+52,6% powyżej dna</div></div>
+        <div class="metric-row red"><div class="m-label">Od 52W High ($7,43)</div><div class="m-value">-71,9% poniżej ATH</div></div>
+      </div>
+      <h4>Wskaźniki momentum</h4>
+      <p><strong>RSI(14): ~37,68</strong> — bliskie oversold (poniżej 30), ale nie bouncing — oznacza słabość, nie sygnał kupna. Spółka spadła do okolic RSI 30 wielokrotnie bez trwałego odbicia. <strong>Bearish pattern:</strong> lower highs, lower lows przez całe 12 miesięcy.</p>
+      <h4>Kluczowe poziomy</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">Wsparcie 1</div><div class="m-value">$1,80–2,00</div></div>
+        <div class="metric-row"><div class="m-label">Wsparcie 2 / potencjalne dno</div><div class="m-value">$1,37 (52W Low)</div></div>
+        <div class="metric-row"><div class="m-label">Opór 1</div><div class="m-value">$2,50–2,70 (SMA50/20)</div></div>
+        <div class="metric-row"><div class="m-label">Opór 2</div><div class="m-value">$3,44 (SMA200)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13. OCENA -->
+  <div class="section" id="ocena">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">13</div>
+      <div class="section-title">Ocena Inwestycyjna</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="verdict-grid">
+        <div class="verdict-card">
+          <div class="term">Krótki termin (1–3 mies.)</div>
+          <div class="v-rating strong-sell">Mocna Sprzedaż</div>
+          <div class="v-text">Nasdaq non-compliance deadline 21.07.2026 → ryzyko delistingu. Restatement złożony w czerwcu = rozstrząsanie liczb. Katalizatory negatywne: SEC investigation, shareholder class action. Technicznie poniżej wszystkich SMA, RSI słaby. Jedyny potencjalny catalyst: Q2 earnings (data N/A — właśnie nie złożyli 10-Q w terminie).</div>
+        </div>
+        <div class="verdict-card">
+          <div class="term">Średni termin (6–18 mies.)</div>
+          <div class="v-rating sell">Sprzedaż</div>
+          <div class="v-text">Nawet bez fraud allegations — P/S 92x na $5M revenue z $16M stratą jest nieuzasadniony. Przy ~$8-10M revenue FY2026 i P/S 20x (premium growth) = wycena $160-200M = cena $0,73-0,91/akcję. Poprawa możliwa tylko przy dramatycznym wzroście sprzedaży (mało prawdopodobne biorąc pod uwagę skalę konkurentów) lub pozytywnym resolution zarzutów fraud (uncertain).</div>
+        </div>
+        <div class="verdict-card">
+          <div class="term">Długi termin (3–5 lat)</div>
+          <div class="v-rating sell">Sprzedaż</div>
+          <div class="v-text"><strong>Bull:</strong> Fraud allegations okazują się błędne, Dex humanoid trafia do przemysłu, przychody rosną 10x do $50M → P/S 10x = $500M, ok. $2,30/akcję (lekki wzrost). <strong>Bear:</strong> Nasdaq delisting, SEC charges, spółka traci płynność i restrukturyzuje — blisko $0. Asymetria jest negatywna.</div>
+        </div>
+      </div>
+      <div class="fair-value-box">
+        <div class="fv-label">Szacunkowy Fair Value</div>
+        <div class="fv-value">$0,50 – $1,50 / akcję</div>
+        <div class="fv-sub">Scenariusz bazowy: FY2026E revenue $8M × P/S 15x = $120M market cap / ~220M akcji = $0,55. Scenariusz optymistyczny (fraud false alarm, Beijing deal x3, Dex launches): FY2027 revenue $25M × P/S 20x = $500M / 250M akcji = $2,00. Obecna cena $2,09 = górna granica optymistyczna, nie scenariusz bazowy. Stop loss: $1,37 (52W Low).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14. TL;DR -->
+  <div class="section" id="tldr">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">14</div>
+      <div class="section-title">Podsumowanie — TL;DR</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="tldr-grid">
+        <div class="reason-card">
+          <h4 style="color: var(--strong-buy);">✅ 3 powody, żeby rozważyć pozycję</h4>
+          <ul>
+            <li><strong>Gorący temat:</strong> Humanoidalne roboty + AI + automatyzacja = gorąca narracja inwestycyjna w 2026. Spółka z Dex humanoidem i pozycjonowaniem „embodied AI" może przyciągać kapitał spekulatywny niezależnie od fundamentów.</li>
+            <li><strong>Brak długu + gotówka $106M:</strong> Nie zbankrutuje w ciągu 3 lat. Daje czas na realizację strategii — jeśli strategia jest uczciwa.</li>
+            <li><strong>-72% od ATH to już wiele negatywów zdyskontowanych:</strong> Przy $2,09 vs. PP $4,55 (styczeń 2026) wiele złych wiadomości może być już w cenie. Czysty short-squeeze przy pozytywnym catalyst jest możliwy.</li>
+          </ul>
+        </div>
+        <div class="reason-card">
+          <h4 style="color: #ff5252;">❌ 3 powody, żeby unikać</h4>
+          <ul>
+            <li><strong>P/S 92x dla spółki z $5M revenue i -$16M stratą:</strong> Fundamentalnie nierozsądna wycena. Nawet idealna realizacja strategii implikuje cenę ~$2/akcję (nie wzrost). Ryzyko jest asymetryczne w dół.</li>
+            <li><strong>Fraud allegations + Microsoft denied + restatement:</strong> Trzy niezależne czerwone flagi wskazują na poważne problemy z wiarygodnością zarządu. Nigdy nie wchodź w spółkę z aktywnym dochodzeniem SEC i zanegowanym partnerstwem z Fortune 500.</li>
+            <li><strong>Nasdaq non-compliance = ryzyko egzystencjalne:</strong> Delisting z NASDAQ to zazwyczaj punkt bez powrotu dla małej spółki. Deadline 21 lipca 2026 — tuż za rogiem.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="thesis-breaker">
+        <h4>⚡ Thesis-Breaker / Thesis-Confirmer</h4>
+        <p><strong>CONFIRMER (bull):</strong> Spółka terminowo składa 10-Q do 21 lipca 2026, SEC zamyka dochodzenie bez zarzutów, Q2 FY2026 wykazuje $2+ mln revenue z rosnącym RaaS — oczyszczenie z zarzutów frauda może być katalizatorem 50-100% rajdy (powrót do $3-4). Ale nadal fundamentalnie drogo.</p>
+        <p style="margin-top:10px;"><strong>BREAKER (base/bear):</strong> Nasdaq wydaje notice delistingu po 21 lipca, SEC składa charges przeciw spółce lub jej officers, kolejny raport investigative ujawnia nowe dowody na fabricowanie przychodów — cena może spaść do $0,50-1,00. <strong>Pozycja asymetrycznie ryzykowna. Ocena: Mocna Sprzedaż.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+
+    Analiza wygenerowana przez Claude · 2026-06-18 · Nie stanowi porady inwestycyjnej · Dane mogą być nieaktualne · Zarzuty Capybara Research są twierdzeniami — nie udowodnionymi faktami sądowymi
+  </div>
+</div>
+
+<script>
+  function toggleSection(header) {
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector('.section-toggle');
+    body.classList.toggle('collapsed');
+    toggle.classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-item').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const id = this.getAttribute('href').slice(1);
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelectorAll('.nav-item').forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+  const sections = document.querySelectorAll('.section');
+  const navItems = document.querySelectorAll('.nav-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(item => { item.classList.toggle('active', item.getAttribute('href') === '#' + id); });
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

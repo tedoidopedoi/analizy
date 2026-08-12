@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMSN — Samsung Electronics | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#6366f1; --accent2:#818cf8; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#0a0a20 0%,#0f1117 50%,#0d0d22 100%); border-bottom:1px solid var(--border); padding:40px 32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(99,102,241,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.buy { background:rgba(76,175,80,0.15); border:2px solid var(--buy); color:var(--buy); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:28px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.indigo { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#fff; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent2); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.indigo { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.strong-buy { color:var(--strong-buy); } .rating-box .rating-text.neutral { color:var(--neutral); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .fair-value-box { background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(129,140,248,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:30px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(99,102,241,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+  <div class="header-content">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">KRX: 005930 · LSE GDR: SMSN</div>
+    <div class="company-name">Samsung Electronics Co., Ltd.</div>
+    <div class="company-sub">HBM4 lider (pierwszy w masowej produkcji) · DRAM/NAND #1 · Foundry 2nm · Galaxy · Suwon, Korea Płd. | AI Memory Supercycle</div>
+    <div class="header-meta">
+      <div class="rating-badge buy">📈 KUPNO</div>
+      <span class="meta-tag">AI Memory / HBM</span>
+      <span class="meta-tag">Foundry</span>
+      <span class="meta-tag">Mega cap</span>
+      <span class="meta-tag">Cykliczna</span>
+      <div class="price-display">
+        <div class="price-main">GDR $3 844</div>
+        <div class="price-sub">KRX: ~₩339 500 | ATH: ₩372 000 (19 VI)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">TL;DR</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (30.07.2026)</div><div class="metric-value">$3 844 GDR</div><div class="metric-detail">KRX ~₩339 500 | -9% od ATH</div></div>
+    <div class="metric-card"><div class="metric-label">Performance 2026</div><div class="metric-value green">~5,7×</div><div class="metric-detail">Najlepszy mega-cap świata w 2026</div></div>
+    <div class="metric-card"><div class="metric-label">Revenue Q2 2026</div><div class="metric-value green">₩171,5T</div><div class="metric-detail">+28% QoQ — rekord wszech czasów</div></div>
+    <div class="metric-card"><div class="metric-label">Zysk operacyjny Q2</div><div class="metric-value green">₩89,5T</div><div class="metric-detail">+1814% YoY! Marża >52%</div></div>
+    <div class="metric-card"><div class="metric-label">HBM4</div><div class="metric-value indigo">3× w Q3</div><div class="metric-detail">Pierwszy w masowej produkcji (11,7 Gbps)</div></div>
+    <div class="metric-card"><div class="metric-label">Podaż pamięci</div><div class="metric-value yellow">Deficyt do 2028</div><div class="metric-detail">2027 "jeszcze ciaśniej" (zarząd)</div></div>
+    <div class="metric-card"><div class="metric-label">HBM4E</div><div class="metric-value indigo">1. próbki</div><div class="metric-detail">Industry-first (V 2026) — przewaga rośnie</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value green">₩468 076</div><div class="metric-detail">+38% | Strong Buy konsensus</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest Samsung w 2026?</h3>
+      <p>Samsung Electronics (KRX: 005930, GDR na LSE: SMSN) to największy producent pamięci na świecie (DRAM #1, NAND #1) i drugi foundry po TSMC. Po dwóch latach w cieniu SK Hynix na rynku HBM, w 2026 Samsung dokonał <strong>jednego z największych comebacków w historii半 przemysłu</strong>: jako pierwszy wszedł w masową produkcję HBM4 (11,7 Gbps), przeszedł kwalifikację u dominującego amerykańskiego producenta GPU (NVIDIA) i podpisał wieloletnie umowy HBM3E/HBM4. Efekt: akcja wzrosła ~5,7× w 2026.</p>
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>Końcówka 2025</td><td><strong>Przełom: kwalifikacja HBM u NVIDII</strong> + wieloletnie umowy HBM3E/HBM4 — koniec narracji "Samsung przegrał HBM"</td><td style="color:var(--strong-buy)">↑↑ Punkt zwrotny</td></tr>
+          <tr><td>H1 2026</td><td>Rajd +100%+ w pół roku; napływy kapitału do Korei (reformy "Value-Up")</td><td style="color:var(--buy)">↑ Rerating</td></tr>
+          <tr><td>29 V 2026</td><td><strong>Industry-first próbki HBM4E</strong> do kluczowych klientów</td><td style="color:var(--buy)">↑ Lider techniczny</td></tr>
+          <tr><td>19 VI 2026</td><td>ATH ~₩372 000</td><td style="color:var(--neutral)">Szczyt</td></tr>
+          <tr><td>VII 2026</td><td>Korekta ~-9% w ramach globalnego odwrotu od AI memory trade</td><td style="color:var(--neutral)">Oddech</td></tr>
+          <tr><td><strong>29 VII 2026</strong></td><td><strong>Q2: rekord wszech czasów — ₩171,5T revenue, ₩89,5T op. profit (+1814% YoY); akcja +7% w dzień; zarząd: deficyt podaży do 2028</strong></td><td style="color:var(--strong-buy)">↑↑ Potwierdzenie</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Nota o notowaniach:</strong> SMSN (LSE) to GDR reprezentujący akcje zwykłe z KRX — kwotowany w USD, płynność niższa niż w Seulu, więc chwilowe rozjazdy wyceny GDR vs KRX się zdarzają. Analiza wartości dotyczy spółki; poziomy cenowe podaję w ₩ (KRX) z Twoją ceną GDR $3 844 jako punktem odniesienia.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment</th><th>Produkty</th><th>Pozycja</th><th>Status 2026</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Memory — HBM</strong></td><td>HBM3E, HBM4 (masowa produkcja), HBM4E (próbki)</td><td>Lider techniczny HBM4</td><td>🔥 Sprzedaż 3× w Q3; >60% revenue HBM w H2</td></tr>
+          <tr><td><strong>Memory — DRAM/NAND</strong></td><td>DDR5, LPDDR, serwerowe SSD</td><td>#1 globalnie</td><td>🔥 Rekordowe wolumeny + rosnące ceny</td></tr>
+          <tr><td><strong>Foundry</strong></td><td>2nm GAA, HBM base-die, custom AI</td><td>#2 za TSMC</td><td>⚡ Dwucyfrowy wzrost, silne zamówienia z USA (Tesla i inni)</td></tr>
+          <tr><td><strong>MX (Galaxy)</strong></td><td>Smartfony, foldables</td><td>#1/#2 z Apple</td><td>⚠️ Strata operacyjna w Q2 — słabość konsumenta</td></tr>
+          <tr><td>Display / Harman</td><td>OLED, audio automotive</td><td>Lider OLED</td><td>Stabilnie</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat</h3>
+      <p>Pamięć to oligopol trzech (Samsung, SK Hynix, Micron) z barierami kapitałowymi rzędu dziesiątek miliardów $ na fab. Samsung jako jedyny łączy <strong>pamięć + foundry + packaging</strong> pod jednym dachem — może oferować HBM z base-die z własnej odlewni (czego nie potrafi Hynix ani Micron). W deficycie podaży do 2028 pricing power jest po stronie producentów.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>HBM TAM 2026:</strong> >$45B, +60% r/r — najszybciej rosnący segment半 przemysłu; każdy GPU/XPU potrzebuje stosów HBM</li>
+        <li><strong>DRAM/NAND:</strong> AI serwery pożerają podaż; konwencjonalna pamięć też w deficycie — ceny rosną kwartał do kwartału</li>
+        <li><strong>Deficyt do 2028:</strong> zarząd Samsunga wprost: podaż ograniczona przez 2027-2028, 2027 może być jeszcze ciaśniejszy — to wydłuża cykl ponad typowe 2 lata</li>
+        <li><strong>Foundry:</strong> klienci szukają second-source vs TSMC; 2nm GAA Samsunga zdobywa zamówienia (US customers, HBM base-die)</li>
+        <li><strong>Korea Value-Up:</strong> reformy corporate governance przyciągają globalny kapitał do KOSPI — strukturalny popyt na akcje</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="chips"><span class="chip indigo">NVIDIA (HBM3E/HBM4 — multi-year)</span><span class="chip indigo">Hyperscalerzy (HBM, DDR5, SSD)</span><span class="chip">AMD, Broadcom, custom XPU</span><span class="chip">Tesla i klienci foundry USA</span><span class="chip">Konsumenci (Galaxy)</span></div>
+      <p>Kwalifikacja u NVIDII (koniec 2025) była kluczem do wszystkiego — wcześniej HBM Samsunga nie przechodził testów, a rynek należał do SK Hynix. Teraz umowy wieloletnie dają widoczność, a HBM4E (pierwsze próbki w branży) może odwrócić role i uczynić z Samsunga dostawcę premium. Koncentracja na NVIDII to jednocześnie największe pojedyncze ryzyko przychodowe segmentu HBM.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Revenue</th><th>Zysk operacyjny</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>2024 (rok)</td><td>~₩300T</td><td>~₩33T</td><td>Dołek cyklu / odbicie</td></tr>
+          <tr><td>2025 (rok)</td><td>~₩320T</td><td>~₩35-40T</td><td>Przełom HBM pod koniec roku</td></tr>
+          <tr><td>Q1 2026</td><td>~₩134T</td><td>~₩57T</td><td>Start supercyklu</td></tr>
+          <tr><td><strong>Q2 2026</strong></td><td><strong>₩171,5T (+28% QoQ)</strong></td><td><strong>₩89,5T (+56% QoQ, +1814% YoY)</strong></td><td>Rekord wszech czasów; marża op. >52%</td></tr>
+          <tr><td>H2 2026E</td><td>wzrost dalej</td><td>HBM4 3× w Q3</td><td>Deficyt + podwyżki cen</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Uwaga na cykliczność zysków:</strong> pamięć to najbardziej cykliczny duży biznes świata — w dołku 2023 Samsung ledwo zarabiał, dziś marża >52%. Obecne zyski to szczyt cyklu (nawet jeśli wydłużonego do 2028). Wyceniaj przez cykl, nie przez pojedynczy kwartał.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>~₩2 000T (~$1,4-1,5T)</td><td>Top-5 globalnie po rajdzie</td></tr>
+          <tr><td>P/E (annualizowany run-rate 2026)</td><td>~8-11×</td><td style="color:var(--neutral)">Nisko — ale to zyski szczytu cyklu</td></tr>
+          <tr><td>P/E przez cykl (mid-cycle earnings)</td><td>~18-22×</td><td style="color:var(--neutral)">Fair dla jakości aktywów</td></tr>
+          <tr><td>P/B</td><td>~3×</td><td style="color:var(--sell)">Historycznie Samsung: 1-2× — premium cyklu</td></tr>
+          <tr><td>Cel analityków</td><td>₩468 076</td><td style="color:var(--buy)">+38% | Strong Buy</td></tr>
+          <tr><td>Dywidenda</td><td>~1-1,5% + buybacki</td><td>Value-Up program</td></tr>
+        </tbody>
+      </table></div>
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12 miesięcy (KRX)</div><div class="fair-value-range">₩400 000 – ₩470 000</div><div class="fair-value-note">≈ GDR $4 500-5 300 | Bazuje na: deficyt do 2028 + HBM4 3× + konsensus ₩468k | Bear (pęknięcie AI capex): ₩220-250k | Przy ₩339,5k / GDR $3 844 = upside +18-38%, downside -30% w scenariuszu makro</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <p>Marża operacyjna Q2: <strong>>52%</strong> — bezprecedensowa dla Samsunga (historyczne szczyty cyklu: 25-30%). Drivery: ceny HBM/DRAM rosnące szybciej niż koszty, mix przesunięty na HBM4 (najwyższe ASP w historii pamięci), dźwignia operacyjna fabów. Kontrapunkt: Galaxy (MX) zanotował <strong>stratę operacyjną</strong> — konsument słaby, cały zysk robi półprzewodnik. To koncentruje ryzyko: Samsung jest dziś de facto czystą spółką memory z przyczepionym biznesem telefonów.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <p>Fortecа: net cash ~₩80-100T (~$60-70B), zero ryzyka finansowego, samofinansujący się capex (₩50T+/rok na faby i HBM capacity). Program Value-Up = rosnące buybacki i dywidendy. Jedyny "problem" bilansowy to nadmiar gotówki — historycznie Samsung trzymał za dużo i zwracał za mało; reformy koreańskie to zmieniają na korzyść akcjonariuszy.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">BULL CASE</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🧠</div><div class="catalyst-body"><h4>HBM4 lider + HBM4E first — role się odwróciły</h4><p>Samsung z maruderа stał się liderem technicznym. HBM4 sprzedaż 3× w Q3, >60% przychodów HBM w H2. Jeśli HBM4E utrzyma przewagę, Samsung dyktuje ceny w najgorętszym rynku半 przemysłu przez 2027-2028.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Deficyt do 2028 — najdłuższy cykl pamięci w historii</h4><p>Zarząd: 2027 "jeszcze ciaśniejszy". AI serwery + odbudowa konsumenta + ograniczona podaż (wszyscy przerzucili capex na HBM kosztem DRAM) = ceny rosną latami, nie kwartałami.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏭</div><div class="catalyst-body"><h4>Foundry wychodzi z cienia</h4><p>Dwucyfrowy wzrost + poprawa rentowności + HBM base-die + klienci USA. Jeśli 2nm GAA zdobędzie dużego klienta AI (druga po TSMC opcja na Zachodzie), to segment wart rewaluacji o setki miliardów ₩.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🇰🇷</div><div class="catalyst-body"><h4>Korea Value-Up + niska baza wyceny</h4><p>Nawet po 5,7× rajdzie P/E run-rate to ~8-11×. Micron handluje wyżej. Kontynuacja napływów do KOSPI + buybacki = wsparcie strukturalne.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">BEAR CASE</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🎢</div><div class="catalyst-body"><h4>Szczyt cyklu = szczyt złudzeń</h4><p>Pamięć ZAWSZE wygląda najtaniej na szczycie (niski P/E) — tuż przed załamaniem cen. Jeśli AI capex zwolni w 2027 (efektywność modeli, bańka), marże z 52% wracają do 20% i zysk spada o 60-70%. P/B 3× vs historyczne 1-2× nie zostawia marginesu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Po 5,7× rajdzie — kto jeszcze nie kupił?</h4><p>Pozycjonowanie globalne w Samsung/Korea jest zatłoczone. Lipcowy odwrót od "AI memory trade" pokazał, jak szybko kapitał ucieka. Korekty 20-30% w trakcie hossy pamięci to norma.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚔️</div><div class="catalyst-body"><h4>SK Hynix i Micron nie śpią</h4><p>Hynix broni relacji z NVIDIĄ, Micron agresywnie skaluje HBM4 w USA (CHIPS). Przewaga HBM4E może być przejściowa — w pamięci nikt nie utrzymuje leadership na długo.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🌏</div><div class="catalyst-body"><h4>Geopolityka i won</h4><p>Chiny (fabryki NAND w Xi'an), eksportowe restrykcje USA, ryzyko koreańskiej polityki podatkowej i umocnienia wona po napływach — wszystko może uszczknąć marże/sentyment.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>HBM</th><th>DRAM share</th><th>vs Samsung</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Samsung</strong></td><td>🥇 HBM4 mass prod. first + HBM4E samples</td><td>#1 (~40%)</td><td>—</td></tr>
+          <tr><td>SK Hynix</td><td>Lider 2023-2025, teraz #2 w HBM4</td><td>#2 (~30%)</td><td>Czystszy play na HBM, mniejsza skala</td></tr>
+          <tr><td>Micron</td><td>#3, skaluje w USA</td><td>#3 (~25%)</td><td>Premium wycena, CHIPS wsparcie</td></tr>
+          <tr><td>TSMC</td><td>—(packaging CoWoS)</td><td>—</td><td>Partner/rywal foundry — wciąż daleko przed</td></tr>
+          <tr><td>CXMT (Chiny)</td><td>—</td><td>rośnie w legacy</td><td>Zagrożenie w DDR4/LP — nie w HBM</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">TECHNIKA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom (KRX)</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Baza 2025</td><td>~₩60-100k</td><td>Start rajdu 5,7×</td></tr>
+          <tr><td>ATH (19 VI 2026)</td><td>~₩372 000</td><td>Szczyt euforii</td></tr>
+          <tr><td>Cena bieżąca</td><td>~₩339 500 (GDR $3 844)</td><td>-9% od ATH; +7% po wynikach Q2</td></tr>
+          <tr><td>Wsparcie S1</td><td>₩310-320k</td><td>Dołki lipcowej korekty</td></tr>
+          <tr><td>Wsparcie S2</td><td>₩270-285k</td><td>Fibo 38,2% rajdu 2026</td></tr>
+          <tr><td>Opór R1</td><td>₩372k (ATH)</td><td>Wybicie = price discovery</td></tr>
+        </tbody>
+      </table></div>
+      <p>Trend wzrostowy nienaruszony — korekta -9% to najpłytsza wśród AI names w lipcu (LRCX -17%, MRVL -48% od szczytów), a reakcja +7% na wyniki pokazuje siłę popytu. Powyżej ₩310k struktura jest bycza; wybicie ATH otwiera drogę do konsensusu ₩468k.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Momentum po rekordowym Q2 (+7% w dzień wyników), HBM4 3× w Q3, najpłytsza korekta w sektorze. Wejście na cofnięciach ₩320-340k.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Deficyt do 2028 + HBM4E + foundry turnaround + Value-Up. Cel ₩430-470k (GDR ~$4 900-5 300).</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text neutral">NEUTRALNA / KUPNO</div><div class="rating-note">Przez cykl: świetne aktywa, ale obecne 52% marże NIE są trwałe. Po 5,7× rajdzie długoterminowy zwrot będzie skromniejszy; redukuj w euforii przy ₩450k+.</div></div>
+      </div>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12 mies.</div><div class="fair-value-range">₩400-470k (GDR $4 500-5 300)</div><div class="fair-value-note">Wejście: ₩320-345k | Stop mentalny: ₩285k | Redukcja: ₩450k+</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">TL;DR</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Rekord wszech czasów potwierdzony 29 VII</strong> — ₩89,5T zysku operacyjnego w kwartał (+1814% r/r), marża >52%, HBM4 sprzedaż 3× w Q3; rynek zareagował +7%, trend żyje</li>
+          <li><strong>Deficyt pamięci do 2028 deklarowany przez zarząd</strong> — najdłuższy cykl w historii branży, a Samsung jako jedyny łączy HBM + DRAM + foundry + packaging</li>
+          <li><strong>Wciąż niski mnożnik</strong> — P/E run-rate 8-11× i cel analityków ₩468k (+38%) przy statusie lidera technicznego HBM4/HBM4E</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Kupujesz szczyt marż cyklicznego biznesu</strong> — 52% marży operacyjnej w pamięci nie jest normą; mid-cycle P/E to ~20×, nie 9×</li>
+          <li><strong>Po 5,7× w rok pozycjonowanie jest zatłoczone</strong> — lipcowy odwrót od AI memory pokazał podatność na gwałtowne korekty 20-30%</li>
+          <li><strong>Przewaga HBM może być przejściowa</strong> — Hynix i Micron gonią; w historii pamięci lider zmieniał się co 2-3 generacje</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> sygnał cięcia zamówień HBM od NVIDII/hyperscalerów LUB spadek cen DRAM QoQ (koniec deficytu) → ₩250-285k.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> Q3 z HBM4 3× i utrzymaną marżą 50%+ + duży klient 2nm foundry → wybicie ATH i marsz do ₩468k.</p>
+      <hr class="divider">
+      <div style="text-align:center; padding:20px 0">
+        <div class="rating-badge buy" style="display:inline-flex; font-size:20px; padding:14px 32px; margin-bottom:16px;">📈 KUPNO — lider supercyklu, z respektem dla cykliczności</div>
+        <p style="color:var(--text-muted); max-width:700px; margin:0 auto; font-size:13px;">Samsung przy ₩339,5k (GDR $3 844) to najsilniejszy fundamentalnie moment spółki w historii: rekordowe zyski, lider HBM4, deficyt do 2028 i wciąż jednocyfrowy P/E run-rate. Kupuj na cofnięciach (₩320-345k), ale pamiętaj czym jest pamięć: planuj redukcję w euforii (₩450k+), bo z cyklu jeszcze nikt nie uciekł.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 30 lipca 2026 | Cena GDR od użytkownika: $3 844 (TradingView SMSN) | Dane: Samsung Newsroom, Investing.com, TradingKey, CNBC, KED Global | Nie stanowi porady inwestycyjnej</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

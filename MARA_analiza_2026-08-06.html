@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MARA — MARA Holdings | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#f7931a; --accent2:#fbbf5c; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#1a1105 0%,#0f1117 50%,#160e05 100%); border-bottom:1px solid var(--border); padding:32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(247,147,26,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#000; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.neutral { background:rgba(255,215,64,0.12); border:2px solid var(--neutral); color:var(--neutral); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.orange { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#000; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.orange { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); } .chip.red { border-color:var(--sell); color:var(--sell); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.neutral { color:var(--neutral); } .rating-box .rating-text.sell { color:var(--sell); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--strong-buy); } .bear-box ul li::before { color:var(--strong-sell); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(247,147,26,0.08),rgba(251,191,92,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(247,147,26,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .alert-danger { background:rgba(213,0,0,0.08); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(0,200,83,.15); color:#00c853; border:1px solid rgba(0,200,83,.4); }
+  .ck.no  { background:rgba(213,0,0,.13);  color:#ff6b6b; border:1px solid rgba(213,0,0,.35); }
+  .ck.wait{ background:rgba(255,215,64,.13);color:#ffd740; border:1px solid rgba(255,215,64,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#00c853; } .mon-dot.y { background:#ffd740; } .mon-dot.r { background:#ff6d00; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: MARA</div>
+    <div class="company-name">MARA Holdings, Inc.</div>
+    <div class="company-sub">Największy notowany kopacz bitcoina · 72,2 EH/s · 35 303 BTC w skarbcu · Pivot na AI/HPC: Long Ridge $1,5 mld, pipeline 4,8 GW · Fort Lauderdale, FL</div>
+    <div class="header-meta">
+      <div class="rating-badge neutral">⚖️ NEUTRALNA — transformacja w toku, wynik binarny</div>
+      <span class="meta-tag">Bitcoin mining</span>
+      <span class="meta-tag">Pivot AI / HPC</span>
+      <span class="meta-tag">Wysoka zmienność</span>
+      <span class="meta-tag">⚠️ Wyniki DZIŚ po sesji</span>
+      <div class="price-display">
+        <div class="price-main">~$11,75</div>
+        <div class="price-sub">6.08.2026 | Kapitalizacja ~$4,5 mld</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (06.08.2026)</div><div class="metric-value">~$11,75</div><div class="metric-detail">Kapitalizacja ~$4,5 mld</div></div>
+    <div class="metric-card"><div class="metric-label">Bitcoin w skarbcu</div><div class="metric-value orange">35 303 BTC</div><div class="metric-detail">W tym 9 995 pożyczonych/zastawionych</div></div>
+    <div class="metric-card"><div class="metric-label">Hashrate</div><div class="metric-value green">72,2 EH/s</div><div class="metric-detail">+33% r/r — rekord</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q1 2026</div><div class="metric-value red">$174,6M</div><div class="metric-detail">Spadek r/r — niższa cena BTC</div></div>
+    <div class="metric-card"><div class="metric-label">Wynik Q1 2026</div><div class="metric-value red">-$1,3 mld</div><div class="metric-detail">Głównie ~$1 mld przeszacowania BTC</div></div>
+    <div class="metric-card"><div class="metric-label">Pivot AI — Long Ridge</div><div class="metric-value orange">$1,5 mld</div><div class="metric-detail">600 MW mocy AI, Ohio | Pipeline 4,8 GW</div></div>
+    <div class="metric-card"><div class="metric-label">Delewarowanie</div><div class="metric-value green">-$1,0 mld</div><div class="metric-detail">Wykup obligacji z dyskontem 9%</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value green">$17,6–22,8</div><div class="metric-detail">+50–94% | Buy (13 analityków)</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest MARA?</h3>
+      <p>MARA Holdings (dawniej Marathon Digital) to <strong>największy notowany na giełdzie kopacz bitcoina na świecie</strong> — 72,2 EH/s mocy obliczeniowej i 35 303 BTC w skarbcu firmowym. Siedziba: Fort Lauderdale. Spółka od lat realizuje dwutorową strategię: kopie bitcoina i jednocześnie gromadzi go w bilansie, finansując zakupy emisją obligacji zamiennych o zerowym oprocentowaniu.</p>
+      <p>W 2026 roku MARA rozpoczęła jednak <strong>najgłębszą przemianę w swojej historii</strong>: sprzedaż części bitcoina, spłatę zadłużenia i przekierowanie kapitału na centra danych AI/HPC. Z kopacza kryptowalut staje się operatorem infrastruktury energetycznej — tą samą drogą, którą wcześniej poszedł Core Scientific.</p>
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>Marzec 2026</td><td><strong>Sprzedaż 15 133 BTC za ~$1,1 mld</strong> i wykup obligacji zamiennych za $1,0 mld z 9% dyskontem — oszczędność $88,1 mln</td><td style="color:var(--buy)">↑ Delewarowanie</td></tr>
+          <tr><td>Maj 2026</td><td>Łącznie sprzedano bitcoina za ~$1,5 mld w ramach przesunięcia kapitału na infrastrukturę AI</td><td style="color:var(--neutral)">Zmiana modelu</td></tr>
+          <tr><td>2026</td><td><strong>Przejęcie Long Ridge Energy &amp; Power</strong> (elektrownia gazowa + kampus DC w Ohio) za $1,5 mld z Starwood Capital — docelowo ponad 600 MW mocy AI</td><td style="color:var(--strong-buy)">↑↑ Pivot</td></tr>
+          <tr><td>Q1 2026</td><td>Przychody $174,6 mln (spadek r/r przy ~18% niższej cenie BTC), rekordowy hashrate 72,2 EH/s (+33%), <strong>strata netto $1,3 mld</strong> (w tym ~$1 mld przeszacowania BTC)</td><td style="color:var(--sell)">↓ Ból cyklu</td></tr>
+          <tr><td>Q2 2026</td><td>Ujawniony pipeline mocy <strong>4,8 GW</strong> — akcja rośnie 17% na fali narracji AI</td><td style="color:var(--buy)">↑ Re-rating</td></tr>
+          <tr><td><strong>6 sierpnia 2026</strong></td><td><strong>Wyniki Q2 dziś po sesji (17:00 ET)</strong> — konsensus przychodów $206–210 mln (+18–20% kw/kw)</td><td style="color:var(--neutral)">Katalizator</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Ostrzeżenie o terminie:</strong> MARA publikuje wyniki za II kwartał <strong>dzisiaj po zamknięciu sesji</strong>. Cała poniższa analiza opiera się na danych za I kwartał i komunikatach bieżących. Wejście na pozycję przed publikacją to zakład o wynik, nie decyzja analityczna — rozsądniej poczekać kilka godzin.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Linia</th><th>Opis</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Kopanie bitcoina</strong></td><td>72,2 EH/s w farmach w USA i za granicą; 2 247 BTC wykopanych w kwartale</td><td>💰 Rdzeń przychodów, ale zależny od ceny BTC</td></tr>
+          <tr><td><strong>Skarbiec BTC</strong></td><td>35 303 bitcoina, z czego 9 995 pożyczonych lub zastawionych jako zabezpieczenie</td><td>⚠️ Największa pozycja bilansu — i źródło zmienności wyniku</td></tr>
+          <tr><td><strong>Infrastruktura AI/HPC</strong></td><td>Long Ridge (Ohio): elektrownia gazowa + kampus, docelowo 600+ MW dla AI</td><td>🔥 Nowy silnik — start monetyzacji przed nami</td></tr>
+          <tr><td><strong>Pipeline energetyczny</strong></td><td>Łącznie ~4,8 GW mocy w różnych stadiach rozwoju</td><td>⚡ Opcja skalowania na lata</td></tr>
+          <tr><td>Usługi energetyczne / IT</td><td>Odzysk ciepła, stabilizacja sieci, kolokacja krytyczna</td><td>Uzupełnienie miksu</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat — energia, nie technologia</h3>
+      <p>Podobnie jak w przypadku Core Scientific, przewagą MARA nie jest żadna unikalna technologia — koparki kupuje od Bitmaina, tak jak wszyscy. Prawdziwym aktywem są <strong>umowy przyłączeniowe i dostęp do taniej energii w skali gigawatów</strong>, budowane przez lata, gdy nikt inny się o nie nie bił. Dziś, gdy operatorzy AI czekają na przyłącza po cztery do siedmiu lat, ten zasób nagle stał się strategiczny.</p>
+      <p>Long Ridge idzie o krok dalej: MARA kupuje nie tylko kampus, lecz <strong>własną elektrownię gazową</strong>. To model „behind-the-meter" — energia produkowana na miejscu, z pominięciem kolejki do sieci. Dokładnie ta sama logika, która napędza wycenę Bloom Energy, tyle że tutaj kupujesz ją znacznie taniej.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Rynek kopania bitcoina:</strong> gra o sumie zerowej — łączny hashrate rośnie, trudność sieci za nim, więc marża zależy wyłącznie od ceny BTC i kosztu energii. Halving co cztery lata strukturalnie tnie przychody na jednostkę mocy</li>
+        <li><strong>Kolokacja AI/HPC:</strong> deficyt gigawatów w USA; operatorzy neocloud (CoreWeave, Nebius, Lambda) wynajmują moc zamiast budować — rynek rośnie dwucyfrowo</li>
+        <li><strong>Wartość samej mocy:</strong> rynek wycenia dziś gotowe przyłącza w przedziale kilku milionów dolarów za megawat — przy 4,8 GW pipeline'u sama opcja energetyczna jest warta wielokrotność obecnej kapitalizacji, o ile zostanie zmonetyzowana</li>
+        <li><strong>Cena bitcoina:</strong> główny czynnik ryzyka i szansy zarazem; spadek o 18% r/r wystarczył, by przychody MARA spadły mimo wzrostu hashrate o 33%</li>
+        <li><strong>Cykliczność:</strong> skrajna — MARA łączy zmienność kryptowalut ze zmiennością rynku energii i budownictwa infrastrukturalnego</li>
+      </ul>
+      <div class="alert alert-info"><strong>Kluczowa obserwacja rynkowa:</strong> w 2026 roku rynek przestał wyceniać kopaczy bitcoina jako spółki kryptowalutowe, a zaczął patrzeć na nie jak na <strong>banki energii</strong>. Ci, którzy potrafią przekonująco pokazać drogę od megawatów do kontraktów AI, dostają zupełnie inny mnożnik. MARA jest w połowie tej drogi.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="chips"><span class="chip orange">Sieć bitcoin (brak klienta w klasycznym sensie)</span><span class="chip">Starwood Capital — partner kapitałowy</span><span class="chip yellow">Klienci AI/HPC — jeszcze nieogłoszeni</span><span class="chip">Rynki energii / operatorzy sieci</span></div>
+      <p>W segmencie górniczym MARA nie ma klientów — sprzedaje wykopanego bitcoina lub trzyma go w bilansie. To oznacza zerowe ryzyko kontrahenta, ale też zerową przewidywalność przychodów: wszystko zależy od kursu jednego aktywa.</p>
+      <div class="alert alert-warn"><strong>Najważniejsza luka w tezie:</strong> w przeciwieństwie do Core Scientific, które ma podpisane kontrakty z CoreWeave (~590 MW) i AMD ($14 mld na 15 lat), <strong>MARA nie ogłosiła dotąd żadnej dużej umowy kolokacyjnej na moc AI</strong>. Ma megawaty i kampus, brakuje jej najemcy. Do czasu pierwszego kontraktu pivot pozostaje deklaracją, a nie modelem biznesowym — i to jest główny powód, dla którego rynek wycenia MARA niżej niż CORZ.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Przychody</th><th>Wynik netto</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Q1 2025</td><td>~$213 mln</td><td>strata</td><td>2 011 BTC wykopanych</td></tr>
+          <tr><td><strong>Q1 2026</strong></td><td><strong>$174,6 mln</strong></td><td style="color:var(--sell)"><strong>-$1,3 mld</strong></td><td>2 247 BTC (+12%), ale cena BTC -18% r/r; ~$1 mld to przeszacowanie skarbca</td></tr>
+          <tr><td>Q2 2026 (konsensus)</td><td>$206–210 mln</td><td>—</td><td>+18–20% kw/kw; publikacja dziś po sesji</td></tr>
+          <tr><td>2027E (z AI)</td><td>zależne od kontraktów</td><td>—</td><td>Pierwsze przychody z Long Ridge dopiero po podpisaniu najemcy</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Trzy strumienie o zupełnie różnym charakterze</h3>
+      <ul>
+        <li><strong>Kopanie (dziś ~100% przychodów):</strong> zmienne, bez kontraktów, marża zależna od ceny BTC minus koszt energii</li>
+        <li><strong>Skarbiec BTC:</strong> nie generuje przychodów, ale wywołuje gigantyczne wahania wyniku księgowego przez wycenę rynkową (mark-to-market)</li>
+        <li><strong>Kolokacja AI (przyszłość):</strong> docelowo kontrakty 10–15-letnie typu take-or-pay — dokładnie ten model, który pozwolił Core Scientific na re-rating</li>
+      </ul>
+      <div class="alert alert-info">Wynik księgowy MARA jest w praktyce <strong>pochodną kursu bitcoina, a nie działalności operacyjnej</strong>. Strata $1,3 mld w I kwartale nie oznacza, że firma spaliła $1,3 mld gotówki — to głównie zapis przeszacowania aktywów. Analizując tę spółkę, patrz na produkcję BTC, koszt energii i megawaty, a nie na dolną linię rachunku wyników.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>~$4,5 mld</td><td>381,3 mln akcji</td></tr>
+          <tr><td>Dług zamienny</td><td>~$2,3 mld</td><td style="color:var(--buy)">Spadek z $3,3 mld po wykupie</td></tr>
+          <tr><td><strong>Wartość skarbca BTC</strong></td><td><strong>35 303 BTC</strong></td><td style="color:var(--accent2)">Kluczowa pozycja — patrz kalkulacja niżej</td></tr>
+          <tr><td>P/E</td><td>n/d (strata księgowa)</td><td>Bez znaczenia przy mark-to-market</td></tr>
+          <tr><td>P/S (2026E ~$800 mln)</td><td>~5,6×</td><td style="color:var(--neutral)">Umiarkowane jak na spółkę cykliczną</td></tr>
+          <tr><td>Cel analityków</td><td>$17,57–$22,80</td><td style="color:var(--buy)">+50–94% | konsensus Buy (13 analityków)</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Wycena „po częściach" — najbardziej sensowna metoda</h3>
+      <p>Dla MARA klasyczne mnożniki są bezużyteczne. Sensowniej rozłożyć spółkę na trzy składniki:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Składnik</th><th>Wartość szacunkowa</th><th>Uwagi</th></tr></thead>
+        <tbody>
+          <tr><td>Skarbiec 35 303 BTC</td><td>zależna od kursu bitcoina</td><td>Przy BTC $90 tys. ≈ $3,2 mld; przy $120 tys. ≈ $4,2 mld</td></tr>
+          <tr><td>Działalność górnicza (72,2 EH/s)</td><td>~$1,5–2,5 mld</td><td>Wyceniana zwykle w przedziale $20–35 mln za EH/s</td></tr>
+          <tr><td>Pipeline energetyczny 4,8 GW</td><td>opcja o dużej wartości, dziś ~$0</td><td>Rynek płaci dopiero po podpisaniu kontraktów AI</td></tr>
+          <tr><td>Minus dług zamienny</td><td>−$2,3 mld</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Wniosek z wyceny:</strong> przy kapitalizacji ~$4,5 mld rynek płaci mniej więcej za sam skarbiec bitcoina plus część biznesu górniczego, a <strong>za 4,8 GW mocy energetycznej nie płaci praktycznie nic</strong>. To właśnie na tej luce opiera się cała teza byków — i to ona zamknie się dopiero wtedy, gdy pojawi się pierwszy realny kontrakt AI.</div>
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 mies.</div><div class="fair-value-range">$15 – $22</div><div class="fair-value-note">Scenariusz bazowy zakłada BTC w okolicach obecnych poziomów i podpisanie pierwszego kontraktu AI | Bez kontraktu i przy słabym BTC: $7–9 | Przy dużym kontrakcie w skali CORZ i mocnym BTC: $28–32 | Konsensus analityków: $17,6–22,8</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <p>Rentowność kopania sprowadza się do jednego równania: <strong>cena bitcoina minus koszt energii i amortyzacja koparek</strong>. MARA należy do najtańszych producentów w branży dzięki własnym umowom energetycznym, ale nawet to nie chroni przed spadkiem kursu — w I kwartale wzrost mocy obliczeniowej o 33% nie wystarczył, by zrównoważyć 18-procentowy spadek ceny BTC.</p>
+      <p>Wynik księgowy zaburza dodatkowo wycena skarbca. Strata $1,3 mld w I kwartale to w około trzech czwartych <strong>zapis niegotówkowy</strong>. W kwartale, w którym bitcoin rośnie, ta sama pozycja generuje rekordowe „zyski" — jak w II kwartale 2025, gdy spółka pokazała $808 mln zysku netto przy zaledwie $238 mln przychodów. Żadna z tych liczb nie mówi nic o kondycji operacyjnej.</p>
+      <div class="alert alert-danger"><strong>Praktyczna wskazówka:</strong> przy MARA ignoruj wynik netto. Patrz na trzy rzeczy: <strong>liczbę wykopanych BTC</strong>, <strong>koszt energii na wykopanego bitcoina</strong> i <strong>liczbę megawatów oddanych do użytku</strong>. Reszta to szum wywołany księgowaniem kursu kryptowaluty.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Bitcoin w skarbcu</td><td>35 303 BTC</td><td>Główne aktywo; 9 995 pożyczonych lub zastawionych</td></tr>
+          <tr><td>Dług zamienny</td><td>~$2,3 mld</td><td style="color:var(--buy)">Spadek z $3,3 mld</td></tr>
+          <tr><td>— w tym zapadające 2026</td><td>$48,1 mln</td><td>Nieistotne</td></tr>
+          <tr><td>— 2031 (2,125%)</td><td>$300 mln</td><td>—</td></tr>
+          <tr><td>— 2032 (0,00%)</td><td>$1,025 mld</td><td>Zerowy kupon</td></tr>
+          <tr><td>Akcje w obrocie</td><td>381,3 mln</td><td style="color:var(--sell)">+17% w rok — istotne rozwodnienie</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Delewarowanie — najlepsza decyzja zarządu w tym cyklu</h3>
+      <p>W marcu MARA sprzedała 15 133 bitcoina za ~$1,1 mld i wykupiła obligacje zamienne o wartości $1,0 mld <strong>z 9-procentowym dyskontem</strong>, oszczędzając $88,1 mln. To ruch podwójnie korzystny: zmniejsza dług i jednocześnie usuwa ryzyko rozwodnienia, które powstałoby przy konwersji obligacji na akcje.</p>
+      <div class="alert alert-warn"><strong>Druga strona medalu:</strong> sprzedaż bitcoina oznacza rezygnację z części ekspozycji na aktywo, które przez lata było głównym magnesem dla inwestorów kupujących MARA jako lewarowany zakład na BTC. Liczba akcji i tak wzrosła o 17% w ciągu roku — rozwodnienie pozostaje realnym kosztem posiadania tych akcji.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">⚡</div><div class="catalyst-body"><h4>Pipeline 4,8 GW wyceniany dziś praktycznie na zero</h4><p>Rynek płaci za skarbiec bitcoina i część biznesu górniczego. Gigawaty mocy — najrzadszy zasób ery AI — dostajesz w cenie za darmo. Wystarczy jeden kontrakt kolokacyjny, żeby ta luka zaczęła się zamykać.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏭</div><div class="catalyst-body"><h4>Long Ridge: własna elektrownia, nie tylko kampus</h4><p>Przejęcie za $1,5 mld ze Starwood Capital daje ponad 600 MW mocy dla AI z generacją na miejscu, z pominięciem kolejki po przyłącze. To model, za który rynek płaci Bloom Energy 15-krotność sprzedaży.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Delewarowanie z dyskontem — rzadka jakość zarządzania</h4><p>Wykup obligacji za $1,0 mld przy 9% dyskoncie, oszczędność $88,1 mln, dług zamienny w dół z $3,3 do $2,3 mld. Zarząd sprzedał bitcoina drogo i kupił własny dług tanio.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔗</div><div class="catalyst-body"><h4>Precedens Core Scientific pokazuje skalę możliwego re-ratingu</h4><p>CORZ przeszedł tę samą drogę i dostał kontrakty z CoreWeave (~590 MW) oraz AMD ($14 mld). Jeśli MARA powtórzy ten manewr choćby w połowie, obecna kapitalizacja $4,5 mld okaże się zaniżona.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">₿</div><div class="catalyst-body"><h4>Wciąż lewarowany zakład na bitcoina — tylko taniej</h4><p>35 303 BTC w bilansie oznacza, że wzrost kursu bitcoina nadal przekłada się na wycenę spółki, tyle że teraz z bezpieczniejszym bilansem i darmową opcją na AI w pakiecie.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📄</div><div class="catalyst-body"><h4>Brak kontraktu AI — pivot pozostaje prezentacją</h4><p>Core Scientific ma podpisane umowy na miliardy. MARA ma megawaty i zapowiedzi. Bez pierwszego najemcy cała teza jest obietnicą, a rynek obietnicom w tym sektorze przestał ufać.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">₿</div><div class="catalyst-body"><h4>Podwójna ekspozycja na cykl: bitcoin i AI naraz</h4><p>Spadek kursu BTC uderza w przychody i skarbiec jednocześnie. Spowolnienie inwestycji w AI zamyka drugą nogę tezy. To spółka, która może przegrać na obu frontach w tym samym kwartale.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💧</div><div class="catalyst-body"><h4>Rozwodnienie +17% w rok i historia finansowania emisjami</h4><p>Liczba akcji rośnie systematycznie. Budowa gigawatów mocy wymaga miliardów, a MARA finansuje się długiem zamiennym i sprzedażą akcji — akcjonariusz płaci za wzrost rozwodnieniem.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏗️</div><div class="catalyst-body"><h4>Ryzyko wykonania: górnicy nie są operatorami centrów danych AI</h4><p>Kolokacja dla klastrów GPU wymaga zupełnie innych standardów niezawodności, chłodzenia i SLA niż farma koparek. To przebudowa kompetencji, nie tylko infrastruktury.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎢</div><div class="catalyst-body"><h4>Wynik księgowy oderwany od operacji</h4><p>Strata $1,3 mld w jednym kwartale, rekordowy zysk w innym — wszystko przez wycenę skarbca. Taka sprawozdawczość odstrasza inwestorów instytucjonalnych i utrudnia jakąkolwiek stabilną wycenę.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>Profil</th><th>Kontrakty AI</th><th>Pozycja vs MARA</th></tr></thead>
+        <tbody>
+          <tr><td><strong>MARA Holdings</strong></td><td>Największy kopacz, 72,2 EH/s, 35 303 BTC, pipeline 4,8 GW</td><td style="color:var(--sell)">Brak ogłoszonych</td><td>Najwięcej mocy, najmniej dowodów</td></tr>
+          <tr><td>Core Scientific (CORZ)</td><td>Ex-górnik → kolokacja AI</td><td style="color:var(--buy)">CoreWeave ~590 MW, AMD $14 mld</td><td>Wyprzedza MARA o kilka kroków w pivocie</td></tr>
+          <tr><td>Riot Platforms (RIOT)</td><td>Górnik + własne moce w Teksasie</td><td>Częściowe</td><td>Podobna teza, mniejsza skala BTC</td></tr>
+          <tr><td>CleanSpark (CLSK)</td><td>Czysty górnik, niski koszt energii</td><td>Minimalne</td><td>Najbardziej „czysta" ekspozycja na BTC</td></tr>
+          <tr><td>TeraWulf, IREN, Cipher</td><td>Konwertyci z górnictwa</td><td>Różnie — część już z umowami</td><td>Ten sam wyścig o najemców AI</td></tr>
+          <tr><td>MicroStrategy (MSTR)</td><td>Czysty skarbiec BTC bez operacji</td><td>—</td><td>Alternatywa dla ekspozycji na sam bitcoin</td></tr>
+        </tbody>
+      </table></div>
+      <p>Pozycja: <strong>lider skalą, maruder w monetyzacji</strong>. MARA ma najwięcej bitcoina i najwięcej megawatów w pipeline, ale jako jedyna z dużych spółek tej grupy nie pokazała jeszcze podpisanego kontraktu AI. W wyścigu o najemców liczy się kolejność — kto pierwszy podpisze, ten dostanie lepsze warunki.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Cena bieżąca</td><td>~$11,75</td><td>Kapitalizacja ~$4,5 mld, -8,3% w ciągu tygodnia</td></tr>
+          <tr><td>Wsparcie S1</td><td>$10,50–11,00</td><td>Strefa broniona przy ostatnich spadkach BTC</td></tr>
+          <tr><td>Wsparcie S2</td><td>$8,50–9,50</td><td>Poziom przy głębszej korekcie bitcoina</td></tr>
+          <tr><td>Opór R1</td><td>$13,50–14,00</td><td>Górna banda ostatniego zakresu</td></tr>
+          <tr><td>Opór R2</td><td>$17,50</td><td>Dolny cel analityków</td></tr>
+          <tr><td>Opór R3</td><td>$22,80</td><td>Górny cel analityków</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Uwaga do danych technicznych:</strong> źródła podają dla MARA 52-tygodniowy zakres $11,99–$13,88, co przy historycznej zmienności tej spółki wygląda na błąd danych — realna amplituda jest wielokrotnie większa. Traktuj poziomy orientacyjnie i zweryfikuj we własnym terminalu.</div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Wyniki dziś powyżej konsensusu $210 mln</li><li>Zapowiedź lub podpisanie kontraktu AI</li><li>Odbicie bitcoina powyżej poprzednich szczytów</li><li>Ruch ku $15–17</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Wyniki poniżej $200 mln i brak newsów o AI</li><li>Kontynuacja słabości bitcoina</li><li>Nowa emisja akcji na finansowanie Long Ridge</li><li>Test $9–10</li></ul></div>
+      </div>
+      <p>MARA porusza się w rytmie bitcoina z podwyższoną betą — spadki są głębsze, wzrosty gwałtowniejsze. Dopiero pierwszy kontrakt AI mógłby częściowo odkleić kurs od kryptowaluty i zbudować niezależną wycenę.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Wyniki publikowane dziś po sesji czynią z każdego wejścia przed 17:00 ET zakład, nie decyzję. Poczekaj na liczby i ewentualne komentarze o kontraktach AI.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO spekulacyjne</div><div class="rating-note">Warunkowo: jeśli pojawi się pierwszy kontrakt AI, luka wyceny (4,8 GW za darmo) zacznie się zamykać. Konsensus $17,6–22,8. Bez kontraktu — pozostaje zakład na bitcoina.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Sukces pivotu oznacza spółkę infrastrukturalną o powtarzalnych przychodach. Porażka — powrót do roli lewarowanego kopacza w branży o kurczących się marżach po każdym halvingu.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia wejścia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji:</strong> maksymalnie 1–2% portfela — podwójna ekspozycja cykliczna wyklucza większe zaangażowanie</li>
+        <li><strong>Nie wchodź dziś przed 17:00 ET</strong> — wyniki Q2 mogą ruszyć kursem o kilkanaście procent w dowolną stronę</li>
+        <li><strong>Pierwsza transza:</strong> $10,50–11,75 po publikacji wyników, jeśli liczby nie rozczarują</li>
+        <li><strong>Druga transza:</strong> $8,50–9,50 przy głębszej korekcie bitcoina</li>
+        <li><strong>Realizacja zysku:</strong> częściowa przy $17,50, reszta w okolicach $22</li>
+        <li><strong>Wyjście z tezy:</strong> brak kontraktu AI do końca I kwartału 2027 lub kolejna duża emisja akcji</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$15 – $22</div><div class="fair-value-note">Scenariusz negatywny: $7–9 | Scenariusz pozytywny: $28–32</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by rozważyć</h4><ul>
+          <li><strong>4,8 GW mocy w cenie zera</strong> — rynek płaci za skarbiec BTC i górnictwo, pipeline energetyczny dostajesz gratis</li>
+          <li><strong>Long Ridge: własna elektrownia i 600+ MW dla AI</strong> — model behind-the-meter, za który Bloom Energy jest wyceniany 15× sprzedaż</li>
+          <li><strong>Delewarowanie z 9% dyskontem</strong> — dług zamienny z $3,3 do $2,3 mld, oszczędność $88 mln, mniejsze ryzyko rozwodnienia</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Zero podpisanych kontraktów AI</strong> — w przeciwieństwie do CORZ (CoreWeave, AMD) pivot pozostaje deklaracją</li>
+          <li><strong>Podwójna cykliczność</strong> — bitcoin i AI capex mogą uderzyć jednocześnie; strata $1,3 mld w jednym kwartale to nie anomalia, lecz cecha modelu</li>
+          <li><strong>Rozwodnienie +17% rocznie</strong> — budowa gigawatów kosztuje miliardy, a płaci za nią akcjonariusz</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> brak umowy kolokacyjnej do I kwartału 2027 przy jednoczesnym spadku bitcoina poniżej poprzednich dołków → powrót w okolice $7–9.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> ogłoszenie kontraktu AI na 200+ MW z wiarygodnym najemcą → natychmiastowe przeszacowanie w stronę $17–22.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">MARA jest dziś spółką w połowie mostu. Z jednej strony wciąż jest <strong>największym notowanym kopaczem bitcoina</strong> — 72,2 EH/s mocy i 35 303 BTC w skarbcu — czyli biznesem, którego wynik dyktuje kurs jednej kryptowaluty. Z drugiej zarząd przekierowuje kapitał na centra danych AI: sprzedał bitcoina za $1,5 mld, wykupił dług z dyskontem i kupił za $1,5 mld Long Ridge, kampus z własną elektrownią gazową i docelową mocą ponad 600 MW. Kupując dziś MARA, <strong>kupujesz przede wszystkim prawdopodobieństwo, że ta przeprawa się uda</strong>.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Sedno sporu jest jednak prostsze, niż sugeruje skala transformacji. Core Scientific przeszło tę samą drogę i ma dziś podpisane kontrakty z CoreWeave i AMD warte miliardy. <strong>MARA ma megawaty, ale nie ma jeszcze ani jednego ogłoszonego najemcy AI.</strong> Rynek to wie i dlatego wycenia pipeline 4,8 GW praktycznie na zero — płacąc mniej więcej za sam skarbiec bitcoina i część biznesu górniczego. Ta luka to jednocześnie największa szansa i najuczciwsza miara ryzyka w tej inwestycji.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Uporządkowanie bilansu.</strong> Wykup obligacji za $1,0 mld z 9% dyskontem obniżył dług zamienny z $3,3 do $2,3 mld i ograniczył ryzyko rozwodnienia. Warunek spełniony i to w sposób wzorowy.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Zdobycie aktywów energetycznych.</strong> Long Ridge z własną generacją plus pipeline 4,8 GW dają fizyczną podstawę pod biznes kolokacyjny. Moc jest — to nie jest już prezentacja inwestorska.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Pierwszy kontrakt AI.</strong> Kluczowy brakujący element. Bez podpisanej umowy typu take-or-pay z wiarygodnym najemcą cała narracja o infrastrukturze pozostaje niezweryfikowana.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Kompetencje operacyjne.</strong> Prowadzenie farmy koparek a obsługa klastrów GPU z rygorystycznymi SLA to dwa różne rzemiosła. Przekwalifikowanie organizacji dopiero się zaczyna.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Stabilizacja bitcoina.</strong> Dopóki skarbiec stanowi lwią część wartości, spadek kursu BTC potrafi zniweczyć każdy postęp po stronie AI.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>6 sierpnia 2026, 17:00 ET</strong></td><td>Wyniki Q2 2026</td><td>Konsensus $206–210 mln. Ważniejsze od liczb: czy zarząd wspomni o rozmowach kontraktowych na moc AI</td></tr>
+            <tr><td>H2 2026</td><td>Integracja Long Ridge i pierwsze megawaty gotowe pod AI</td><td>Test zdolności wykonawczych — czy harmonogram się utrzyma</td></tr>
+            <tr><td><strong>H2 2026 – Q1 2027</strong></td><td>Potencjalne ogłoszenie pierwszego najemcy AI</td><td>Najważniejszy pojedynczy katalizator w całej tezie; otwiera drogę do przeszacowania</td></tr>
+            <tr><td>Cały okres</td><td>Kurs bitcoina</td><td>Determinuje wartość skarbca i przychody z kopania — działa niezależnie od pivotu</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Podpisane kontrakty AI (MW)</td><td>0 MW</td><td>brak umowy do Q1 2027</td><td><span class="mon-dot r"></span>Ryzyko</td></tr>
+            <tr><td>Hashrate</td><td>72,2 EH/s (+33% r/r)</td><td>spadek kw/kw</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Dług zamienny</td><td>~$2,3 mld (z $3,3 mld)</td><td>wzrost powyżej $2,8 mld</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Liczba akcji</td><td>381,3 mln (+17% r/r)</td><td>&gt; +15% rocznie</td><td><span class="mon-dot r"></span>Ryzyko</td></tr>
+            <tr><td>Skarbiec BTC</td><td>35 303 BTC</td><td>dalsza sprzedaż &gt; 10 tys. BTC</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Produkcja BTC / kwartał</td><td>2 247 BTC</td><td>&lt; 2 000 BTC</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji:</strong> 1–2% portfela. Podwójna ekspozycja cykliczna — bitcoin plus AI capex — wyklucza traktowanie tej spółki jako pozycji fundamentalnej</li>
+          <li><strong>Nie wchodź dziś przed publikacją wyników</strong> (17:00 ET) — to rzut monetą, nie analiza</li>
+          <li><strong>Pierwsza transza:</strong> $10,50–11,75, po zapoznaniu się z raportem Q2</li>
+          <li><strong>Druga transza:</strong> $8,50–9,50, jeśli bitcoin pogłębi korektę</li>
+          <li><strong>Realizacja zysku:</strong> połowa pozycji przy $17,50 (dolny cel analityków), reszta w okolicach $22</li>
+          <li><strong>Wyjście z tezy:</strong> brak kontraktu AI do końca I kwartału 2027 albo nowa duża emisja akcji finansująca Long Ridge</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--neutral)">⚖️ NEUTRALNA — właściwe aktywa, brakujący dowód</div>
+        <p>MARA robi wszystko, co powinna: sprzedaje bitcoina blisko szczytów, odkupuje własny dług z dyskontem, kupuje elektrownię i buduje pipeline mocy, o który za dwa lata będą się bić operatorzy AI. Zarząd podejmuje decyzje, które w retrospektywie mogą wyglądać na bardzo trafne. Brakuje jednak jednej rzeczy — <strong>podpisu klienta pod umową</strong>. Dopóki go nie ma, kupujesz najlepiej przygotowanego zawodnika, który nie wszedł jeszcze na boisko.</p>
+        <p>Praktyczna konkluzja: jeśli szukasz ekspozycji na deficyt mocy dla AI, <strong>Core Scientific oferuje tę samą tezę z podpisanymi kontraktami</strong> i to on zasługuje na większą pozycję. MARA jest sensowna jako <strong>mniejszy, tańszy zakład uzupełniający</strong> — z darmową opcją na 4,8 GW i wciąż działającą dźwignią na bitcoina. Kup mało, poczekaj na wyniki, a decyzję o zwiększeniu pozycji uzależnij od jednego zdarzenia: pierwszej umowy na moc.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$15–22</b></div>
+          <div><span>Scenariusz negatywny</span><b>$7–9</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$28–32</b></div>
+          <div><span>Sugerowana pozycja</span><b>1–2% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q2 — dziś 17:00 ET</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 6 sierpnia 2026 | Dane: MARA IR/SEC 8-K, CoinDesk, Seeking Alpha, StockAnalysis, Nasdaq, ts2.tech | Wyniki Q2 2026 publikowane dziś po sesji — analiza oparta na danych za Q1 | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

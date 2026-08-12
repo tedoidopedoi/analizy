@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LPTH — LightPath Technologies | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#e11d48; --accent2:#fb7185; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#1a0510 0%,#0f1117 50%,#160a12 100%); border-bottom:1px solid var(--border); padding:40px 32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(225,29,72,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.neutral { background:rgba(255,215,64,0.12); border:2px solid var(--neutral); color:var(--neutral); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.pink { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#fff; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.pink { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); } .chip.red { border-color:var(--sell); color:var(--sell); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.strong-buy { color:var(--strong-buy); } .rating-box .rating-text.neutral { color:var(--neutral); } .rating-box .rating-text.sell { color:var(--sell); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--strong-buy); } .bear-box ul li::before { color:var(--strong-sell); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(225,29,72,0.08),rgba(251,113,133,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-info { background:rgba(225,29,72,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .alert-danger { background:rgba(213,0,0,0.06); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+  <div class="header-content">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: LPTH</div>
+    <div class="company-name">LightPath Technologies, Inc.</div>
+    <div class="company-sub">Optyka podczerwieni (IR) · BlackDiamond™ germanium-free glass · Kamery termalne defense · Counter-UAS · Orlando, FL</div>
+    <div class="header-meta">
+      <div class="rating-badge neutral">⚖️ NEUTRALNA (po +517% rajdzie)</div>
+      <span class="meta-tag">Defense / IR Optics</span>
+      <span class="meta-tag">Small Cap</span>
+      <span class="meta-tag">Germanium-free moat</span>
+      <span class="meta-tag">Counter-UAS</span>
+      <div class="price-display">
+        <div class="price-main">~$17</div>
+        <div class="price-sub">Cena (07.2026) | 52W: $2,75–$18,94</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">TL;DR</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (07.2026)</div><div class="metric-value">~$17</div><div class="metric-detail">52W: $2,75–$18,94 | +517% od dołka!</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$1,0B</div><div class="metric-detail">Small cap — po ogromnym rajdzie</div></div>
+    <div class="metric-card"><div class="metric-label">Revenue Q3 FY2026</div><div class="metric-value green">$19,1M</div><div class="metric-detail">+109% YoY 🔥</div></div>
+    <div class="metric-card"><div class="metric-label">Backlog</div><div class="metric-value green">$110,6M</div><div class="metric-detail">+196% YoY — rekord</div></div>
+    <div class="metric-card"><div class="metric-label">Gross Margin</div><div class="metric-value yellow">36%</div><div class="metric-detail">+700bps YoY (z 29%)</div></div>
+    <div class="metric-card"><div class="metric-label">Net Income</div><div class="metric-value red">-$4,1M</div><div class="metric-detail">GAAP strata | Adj. EBITDA +$1,1M</div></div>
+    <div class="metric-card"><div class="metric-label">Cash</div><div class="metric-value green">$55M + $50M</div><div class="metric-detail">Po ofercie akcji VI 2026 (dilucja!)</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value red">$14,12</div><div class="metric-detail">⚠️ PONIŻEJ ceny — -17%!</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest LightPath?</h3>
+      <p>LightPath Technologies (NASDAQ: LPTH) to producent optyki podczerwieni (IR) i systemów obrazowania termicznego dla zastosowań obronnych i komercyjnych. Siedziba: Orlando, Floryda; zakłady w Teksasie, New Hampshire, na Łotwie i w Chinach. Kluczowy asset: <strong>BlackDiamond™</strong> — własnościowe szkło chalkogenidowe (licencja wyłączna z U.S. Naval Research Laboratory), które zastępuje german w optyce IR.</p>
+      <p>Dlaczego to ważne: <strong>Chiny zakazały eksportu germanu do USA</strong> — a german był standardowym materiałem soczewek termalnych. LightPath jest jedyną firmą z gotowym, skalowalnym zamiennikiem. To przekształciło niszowego producenta soczewek w strategicznego dostawcę defense.</p>
+      <h3>Kluczowe zdarzenia (18 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>II 2025</td><td>Przejęcie G5 Infrared (kamery cooled IR, New Hampshire)</td><td style="color:var(--buy)">↑ Pivot na systemy</td></tr>
+          <tr><td>IX 2025</td><td>Zamówienie $18,2M + follow-on $22,1M od "leading global technology customer"</td><td style="color:var(--strong-buy)">↑↑ Przełom</td></tr>
+          <tr><td>2025-2026</td><td>Kolejne zamówienia: $9,6M (defense cooled IR), $11M follow-on (counter-UAS)</td><td style="color:var(--buy)">↑ Momentum</td></tr>
+          <tr><td>V 2026</td><td>Q3 FY2026: revenue +109%, backlog $110,6M (+196%)</td><td style="color:var(--strong-buy)">↑↑ Rekord</td></tr>
+          <tr><td>VI 2026</td><td>Oferta akcji $50M (dilucja) + 52W high $18,94</td><td style="color:var(--neutral)">Kapitał + dilucja</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Kontekst ceny:</strong> Akcja wzrosła +517% od 52W dołka ($2,75 → $17). Średni cel analityków ($14,12) jest PONIŻEJ obecnej ceny. Rynek wycenia dużo przyszłego wzrostu z góry.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <h3>Portfolio — od szkła do kompletnych kamer</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Produkt</th><th>Opis</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>BlackDiamond™ Glass (BD6)</strong></td><td>Szkło chalkogenidowe zastępujące german — własna produkcja (melt in-house)</td><td>🔥 Moat — jedyni z licencją NRL</td></tr>
+          <tr><td><strong>Kamery cooled IR (G5)</strong></td><td>Wysokiej klasy kamery chłodzone MWIR — defense, przemysł, OGI (gas imaging)</td><td>⚡ Nowy silnik wzrostu — assemblies +355%</td></tr>
+          <tr><td><strong>Soczewki i optyka IR</strong></td><td>Precyzyjne soczewki molded glass, asferyczne</td><td>✅ Biznes bazowy</td></tr>
+          <tr><td><strong>Counter-UAS systems</strong></td><td>Optyka do systemów antydronowych — zamówienia $11M+</td><td>⚡ Rosnący segment (wojny dronowe)</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat — wertykalna integracja + geopolityka</h3>
+      <p>Konkurenci (Teledyne FLIR i inni) muszą <strong>kupować german</strong> — surowiec kontrolowany przez Chiny (zakaz eksportu do USA) — lub gotowe soczewki. LightPath sam wytwarza swoje szkło BD6. W świecie zmilitaryzowanych łańcuchów dostaw to unikalna pozycja: Pentagon i prime contractors potrzebują dostawcy niezależnego od Chin.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <h3>TAM</h3>
+      <ul>
+        <li><strong>Rynek obrazowania IR:</strong> ~$9B globalnie — defense, przemysł, automotive, medycyna</li>
+        <li><strong>Counter-UAS:</strong> Najszybciej rosnący segment defense — wojny dronowe (Ukraina, Bliski Wschód) wymuszają masowe inwestycje</li>
+        <li><strong>Optical Gas Imaging (OGI):</strong> Regulacje EPA dot. emisji metanu — nowy komercyjny rynek dla kamer G5</li>
+        <li><strong>Space/ISR:</strong> Po przejęciu Amorphous Materials — optyka do zastosowań kosmicznych i dalekiego zasięgu</li>
+      </ul>
+      <h3>Trendy makro</h3>
+      <ul>
+        <li><strong>Rekordowe budżety obronne:</strong> USA, Europa (2-3%+ PKB), Azja — wieloletni cykl zbrojeniowy</li>
+        <li><strong>Chiński zakaz eksportu germanu</strong> — strukturalny tailwind dla BlackDiamond</li>
+        <li><strong>Proliferacja dronów</strong> — każdy system C-UAS wymaga optyki termalnej</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="chips"><span class="chip pink">B2B/B2G — Defense primes</span><span class="chip">Lockheed, RTX (klienci i konkurenci)</span><span class="chip">"Leading global technology customer" ($51M+ zamówień)</span><span class="chip">Przemysł O&G (OGI)</span></div>
+      <h3>Koncentracja — ryzyko</h3>
+      <p>Największe zamówienia ($18,2M + $22,1M + $11M = <strong>$51M+</strong>) pochodzą od jednego, nieujawnionego "leading global technology customer" (spekulacje: Anduril lub podobny defense-tech). To ogromna koncentracja jak na spółkę z revenue ~$70-80M rocznie. Utrata tego klienta = załamanie tezy.</p>
+      <div class="alert alert-info"><strong>Backlog $110,6M</strong> daje ~1,5 roku widoczności przy obecnym run rate — dużo jak na small cap. Klucz: konwersja backlogu na przychody bez problemów produkcyjnych (skalowanie fabryk to execution risk).</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Revenue</th><th>Wzrost YoY</th><th>GM</th><th>Wynik</th></tr></thead>
+        <tbody>
+          <tr><td>FY2024 (VI 2024)</td><td>~$32M</td><td>—</td><td>~28%</td><td>Strata</td></tr>
+          <tr><td>FY2025 (VI 2025)</td><td>~$40M</td><td>+25%</td><td>~29-31%</td><td>Strata</td></tr>
+          <tr><td>Q3 FY2026 (III 2026)</td><td><strong>$19,1M</strong></td><td style="color:var(--strong-buy)"><strong>+109%</strong></td><td><strong>36%</strong></td><td>-$4,1M GAAP / +$1,1M adj. EBITDA</td></tr>
+          <tr><td>FY2026E (run rate)</td><td>~$70-80M</td><td style="color:var(--buy)">+75-100%</td><td>~36-38%</td><td>Blisko breakeven</td></tr>
+          <tr><td>FY2027E</td><td>$100M+ (konwersja backlogu)</td><td style="color:var(--buy)">+30-40%</td><td>40%+ cel</td><td>Zyskowność możliwa</td></tr>
+        </tbody>
+      </table></div>
+      <p>Model przesuwa się z komponentów (soczewki, niskie marże) na <strong>systemy i assemblies</strong> (+355% YoY!) — kamery kompletne mają wyższą wartość i marże. Segment assemblies to już $8,4M/kwartał.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Market Cap</td><td>~$1,0B</td><td>—</td></tr>
+          <tr><td>P/S (FY2026E ~$75M)</td><td><strong>~13×</strong></td><td style="color:var(--sell)">⚠️ Bardzo drogo dla hardware</td></tr>
+          <tr><td>P/S (FY2027E ~$105M)</td><td>~9,5×</td><td style="color:var(--neutral)">Wysokie, wymaga perfekcji</td></tr>
+          <tr><td>P/E</td><td>n/a (strata GAAP)</td><td>—</td></tr>
+          <tr><td>EV/Backlog</td><td>~8×</td><td>Rynek płaci 8× za każdy $ backlogu</td></tr>
+          <tr><td>Cel analityków</td><td>$14,12</td><td style="color:var(--sell)">-17% PONIŻEJ ceny</td></tr>
+        </tbody>
+      </table></div>
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$12 – $18</div><div class="fair-value-note">Base: P/S 8-10× FY2027E $105M = $11-14 | Bull (nowe mega-zamówienia, breakeven): $18-22 | Obecna cena $17 = blisko górnej granicy</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <p>GM wzrosła z 29% do <strong>36%</strong> (+700bps) dzięki miksowi assemblies. Cel: 40%+ przy skali. Adjusted EBITDA przeszło z -$1,6M na <strong>+$1,1M</strong> — pierwszy pozytywny kwartał. GAAP nadal strata (-$4,1M), głównie przez non-cash earnout z przejęcia G5 ($3,4M). Realna rentowność operacyjna jest bliska zera — to lepsze niż wygląda na GAAP, ale to wciąż spółka pre-profit.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <p>Cash: <strong>$55,2M</strong> + $50M brutto z oferty czerwcowej ≈ $100M+ gotówki. Zero problemów płynnościowych na 2-3 lata. Ale: kapitał pozyskano <strong>emisjami akcji i warrantami</strong> — liczba akcji znacząco rośnie (dilucja). Przy market cap $1B i revenue $75M, każda kolejna emisja rozwadnia agresywnie. Jakość finansowania: umiarkowana.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🛡️</div><div class="catalyst-body"><h4>Monopol na germanium-free IR w erze zakazu eksportu</h4><p>Chiny kontrolują german; LightPath ma jedyny skalowalny zamiennik (BD6, licencja NRL). Każdy program defense wymagający niezależności od Chin = potencjalny klient. To strukturalny, wieloletni moat.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🚁</div><div class="catalyst-body"><h4>Counter-UAS boom — $51M+ od jednego klienta i rośnie</h4><p>Wojny dronowe czynią C-UAS najgorętszym segmentem defense. Follow-on orders ($18M→$22M→$11M) sugerują ramp produkcyjny u klienta — kolejne zamówienia prawdopodobne.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Backlog $110M = 1,5 roku widoczności + operacyjna dźwignia</h4><p>Przy konwersji backlogu i GM 40%+, spółka może osiągnąć trwałą zyskowność w FY2027 — potencjalny re-rating z "story stock" na "growth compounder".</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Cel przejęcia (M&A)</h4><p>Strategiczny asset (licencja NRL, US manufacturing) przy $1B market cap to łatwy kąsek dla Teledyne, RTX, Anduril czy private equity. Premia przejęcia: typowo +30-50%.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📊</div><div class="catalyst-body"><h4>Wycena wyprzedziła fundamenty — cel analityków -17% poniżej ceny</h4><p>P/S 13× dla hardware z GM 36% to wycena zarezerwowana dla software. Po +517% rajdzie każde potknięcie (miss kwartalny, opóźnienie konwersji backlogu) = korekta 30-50%.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏭</div><div class="catalyst-body"><h4>Koncentracja: jeden klient = $51M+ zamówień</h4><p>Przy revenue ~$75M/rok, jeden anulowany kontrakt od "global technology customer" cofa spółkę o 2 lata. Brak dywersyfikacji przychodów.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💧</div><div class="catalyst-body"><h4>Dilucja — finansowanie wzrostu emisjami</h4><p>$50M oferta VI 2026 + wcześniejsze warranty. Skalowanie produkcji wymaga capexu — kolejne emisje prawdopodobne. Akcjonariusze płacą za wzrost rozwodnieniem.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚔️</div><div class="catalyst-body"><h4>Giganci mogą wejść w chalkogenidy</h4><p>Teledyne, Coherent, Schott mają zasoby by opracować własne szkła IR. Licencja NRL chroni częściowo, ale nie wiecznie. Moat jest realny, lecz nie niezniszczalny.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>Segment</th><th>Pozycja vs LPTH</th></tr></thead>
+        <tbody>
+          <tr><td><strong>LightPath (LPTH)</strong></td><td>IR optics + kamery, germanium-free</td><td>🥇 Niche leader BD glass</td></tr>
+          <tr><td>Teledyne FLIR</td><td>Kamery termalne — lider rynku</td><td>Większy 10×, ale zależny od germanu</td></tr>
+          <tr><td>Leonardo DRS</td><td>Defense electronics/IR</td><td>Prime — częściowo klient</td></tr>
+          <tr><td>Coherent (COHR)</td><td>Materiały optyczne szeroko</td><td>Inny fokus (datacom), marginalny overlap</td></tr>
+          <tr><td>Lockheed/RTX</td><td>Systemy IR (in-house)</td><td>Klienci ORAZ konkurenci</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>52W low</td><td>$2,75</td><td>Start rajdu +517%</td></tr>
+          <tr><td>52W high</td><td>$18,94</td><td>Szczyt — -10% od niego</td></tr>
+          <tr><td>Cena bieżąca</td><td>~$17</td><td>Blisko szczytu, konsolidacja</td></tr>
+          <tr><td>Wsparcie S1</td><td>$14-15</td><td>Strefa oferty akcji + cel analityków</td></tr>
+          <tr><td>Wsparcie S2</td><td>$10-11</td><td>Silne wsparcie po wybiciu</td></tr>
+          <tr><td>Opór R1</td><td>$18,94</td><td>52W high</td></tr>
+        </tbody>
+      </table></div>
+      <p>Momentum silne, ale parabola po +517% zwykle wymaga miesięcy konsolidacji. Wolumen przy szczytach sugeruje dystrybucję części instytucji. Nowe ATH wymaga świeżego katalizatora (kolejne mega-zamówienie lub wyniki Q4 FY2026, ~wrzesień 2026).</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Cena powyżej celu analityków, parabola wymaga konsolidacji. Czekaj na $14-15 lub nowy katalizator.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text neutral">NEUTRALNA / KUPNO na korekcie</div><div class="rating-note">Konwersja backlogu $110M + breakeven = teza działa. Wejście $12-15 daje dobry R/R.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO (spekulacyjne)</div><div class="rating-note">Germanium-free moat + defense supercycle + opcja M&A. Pozycja mała — to nadal small cap wysokiego ryzyka.</div></div>
+      </div>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$12 – $18</div><div class="fair-value-note">Przy $17 jesteś przy górnej granicy. Atrakcyjne wejście: $12–15</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">PODSUMOWANIE (TL;DR)</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Jedyny skalowalny germanium-free dostawca IR</strong> w świecie chińskiego zakazu eksportu — strukturalny moat z licencją NRL</li>
+          <li><strong>Backlog $110M (+196%) i revenue +109%</strong> — hipergrowth z realną widocznością, assemblies +355% podnosi marże</li>
+          <li><strong>Counter-UAS + defense supercycle + opcja przejęcia</strong> — wieloletnie tailwindy i strategiczna wartość dla większych graczy</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Cena $17 > cel analityków $14,12</strong> — po +517% rajdzie rynek wycenił perfekcję; brak marginesu bezpieczeństwa</li>
+          <li><strong>Koncentracja jednego klienta ($51M+ zamówień)</strong> przy revenue $75M/rok — pojedynczy punkt awarii tezy</li>
+          <li><strong>Dilucja i pre-profit status</strong> — wzrost finansowany emisjami, GAAP strata, P/S 13× wymaga bezbłędnej egzekucji</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> anulowanie/brak follow-on od głównego klienta LUB problemy ze skalowaniem produkcji (backlog nie konwertuje) → powrót do $8-10.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> kolejne zamówienie $20M+ od nowego klienta + Q4 FY2026 z dodatnim GAAP net income → $20-25.</p>
+      <hr class="divider">
+      <div style="text-align:center; padding:20px 0">
+        <div class="rating-badge neutral" style="display:inline-flex; font-size:20px; padding:14px 32px; margin-bottom:16px;">⚖️ NEUTRALNA — świetna spółka, wymagająca cena</div>
+        <p style="color:var(--text-muted); max-width:700px; margin:0 auto; font-size:13px;">LPTH ma realny moat i hipergrowth, ale po +517% cena wyprzedziła cel analityków. Kupuj na korekcie $12-15, nie na szczycie. Mała pozycja spekulacyjna — to wciąż small cap zależny od jednego klienta.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 21 lipca 2026 | Dane: LightPath IR, SEC 8-K/10-Q, StockTitan, Seeking Alpha, WallStreetZen | Nie stanowi porady inwestycyjnej</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){const e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+<script>function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b</body></body>(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}</script><style>.section{scroll-margin-top:64px}</style></body>
+</html>

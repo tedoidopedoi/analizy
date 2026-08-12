@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVDA — Analiza Inwestycyjna</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d2e;
+    --surface2: #242740;
+    --border: #2e3150;
+    --text: #e8eaf0;
+    --muted: #8b90a0;
+    --accent: #6c63ff;
+    --accent2: #00d4aa;
+    --strong-buy: #00c853;
+    --buy: #4caf50;
+    --neutral: #ffd740;
+    --sell: #ff6d00;
+    --strong-sell: #d50000;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1d2e 0%, #242740 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 48px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .header-left h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; }
+  .header-left h1 span { color: var(--accent); }
+  .header-left p { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+  .rating-badge {
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .rating-badge.buy { background: var(--buy); color: #fff; }
+  .nav-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    overflow-x: auto;
+    display: flex;
+    gap: 0;
+    scrollbar-width: none;
+  }
+  .nav-bar::-webkit-scrollbar { display: none; }
+  .nav-item {
+    padding: 14px 18px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    text-decoration: none;
+    display: block;
+  }
+  .nav-item:hover { color: var(--text); border-bottom-color: var(--accent); }
+  .nav-item.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .main { max-width: 1100px; margin: 0 auto; padding: 40px 48px 80px; }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .metric-card .label { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .metric-card .value { font-size: 1.25rem; font-weight: 700; color: var(--text); }
+  .metric-card .sub { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 18px 24px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .section-number {
+    background: var(--accent);
+    color: #fff;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-title { font-size: 0.95rem; font-weight: 600; flex: 1; }
+  .section-toggle { color: var(--muted); font-size: 0.8rem; transition: transform 0.2s; }
+  .section-toggle.open { transform: rotate(180deg); }
+  .section-body { padding: 24px; display: block; }
+  .section-body.collapsed { display: none; }
+  .section-body p { margin-bottom: 12px; }
+  .section-body p:last-child { margin-bottom: 0; }
+  .section-body ul, .section-body ol { padding-left: 20px; margin-bottom: 12px; }
+  .section-body li { margin-bottom: 6px; }
+  h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent2); margin: 16px 0 8px; }
+  h4:first-child { margin-top: 0; }
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin: 12px 0;
+  }
+  .metric-row {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .metric-row .m-label { color: var(--muted); font-size: 0.75rem; }
+  .metric-row .m-value { font-weight: 600; font-size: 0.95rem; }
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 12px 0;
+  }
+  .comp-table th {
+    background: var(--surface2);
+    color: var(--muted);
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .comp-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table tr.highlight td { background: rgba(108,99,255,0.08); }
+  .comp-table tr:hover td { background: rgba(255,255,255,0.03); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 4px 0; }
+  .bull-list, .bear-list { border-radius: 10px; padding: 16px 18px; }
+  .bull-list { background: rgba(0,200,83,0.07); border: 1px solid rgba(0,200,83,0.2); }
+  .bear-list { background: rgba(213,0,0,0.07); border: 1px solid rgba(213,0,0,0.2); }
+  .bull-list h4 { color: var(--strong-buy); margin-top: 0; }
+  .bear-list h4 { color: #ff5252; margin-top: 0; }
+  .bull-list li::marker { color: var(--strong-buy); }
+  .bear-list li::marker { color: #ff5252; }
+  .verdict-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0; }
+  .verdict-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .verdict-card .term { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .verdict-card .v-rating { font-size: 0.88rem; font-weight: 700; margin-bottom: 8px; padding: 4px 10px; border-radius: 20px; display: inline-block; }
+  .verdict-card .v-text { color: var(--muted); font-size: 0.82rem; line-height: 1.5; }
+  .v-rating.neutral { background: var(--neutral); color: #000; }
+  .v-rating.buy { background: var(--buy); color: #fff; }
+  .v-rating.strong-buy { background: var(--strong-buy); color: #fff; }
+  .tldr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .reason-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+  .reason-card h4 { margin-top: 0; }
+  .reason-card ul { padding-left: 18px; }
+  .thesis-breaker {
+    background: rgba(255,215,64,0.08);
+    border: 1px solid rgba(255,215,64,0.25);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .thesis-breaker h4 { color: var(--neutral); margin-top: 0; }
+  .na { color: var(--muted); font-style: italic; }
+  .footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 32px; border-top: 1px solid var(--border); margin-top: 40px; }
+  .fair-value-box {
+    background: rgba(108,99,255,0.1);
+    border: 1px solid rgba(108,99,255,0.3);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 16px;
+  }
+  .fair-value-box .fv-label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .fair-value-box .fv-value { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin: 4px 0; }
+  .fair-value-box .fv-sub { color: var(--muted); font-size: 0.82rem; }
+  @media (max-width: 768px) {
+    .header { padding: 20px 20px; }
+    .main { padding: 20px 16px 60px; }
+    .nav-bar { padding: 0 16px; }
+    .two-col, .verdict-grid, .tldr-grid { grid-template-columns: 1fr; }
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+  <div class="header-left">
+    <h1><span>NVDA</span> — NVIDIA Corporation</h1>
+    <p>NASDAQ · Półprzewodniki / AI Infrastructure · Analiza: 2026-06-09</p>
+  </div>
+  <div class="rating-badge buy">Kupno</div>
+</div>
+
+<nav class="nav-bar">
+  <a class="nav-item active" href="#profil">1. Profil</a>
+  <a class="nav-item" href="#produkt">2. Produkt</a>
+  <a class="nav-item" href="#rynki">3. Rynki</a>
+  <a class="nav-item" href="#klienci">4. Klienci</a>
+  <a class="nav-item" href="#biznes">5. Biznes</a>
+  <a class="nav-item" href="#wycena">6. Wycena</a>
+  <a class="nav-item" href="#marze">7. Marże</a>
+  <a class="nav-item" href="#bilans">8. Bilans</a>
+  <a class="nav-item" href="#bulls">9. Bull Case</a>
+  <a class="nav-item" href="#bears">10. Bear Case</a>
+  <a class="nav-item" href="#konkurencja">11. Konkurencja</a>
+  <a class="nav-item" href="#technika">12. Technika</a>
+  <a class="nav-item" href="#ocena">13. Ocena</a>
+  <a class="nav-item" href="#tldr">14. TL;DR</a>
+</nav>
+
+<div class="main">
+
+  <div class="summary-grid">
+    <div class="metric-card">
+      <div class="label">Kapitalizacja</div>
+      <div class="value">$5,22B</div>
+      <div class="sub">Market Cap (bln)</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Cena akcji</div>
+      <div class="value">$214,75</div>
+      <div class="sub">+87% vs. rok temu</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">P/E Forward</div>
+      <div class="value">20,6x</div>
+      <div class="sub">P/E TTM: 38,1x</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">EV/EBITDA</div>
+      <div class="value">27,6x</div>
+      <div class="sub">EV/Rev: 20,3x</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Wzrost przychodów</div>
+      <div class="value">+142% YoY</div>
+      <div class="sub">FY25: $130,5 mld</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Marża brutto</div>
+      <div class="value">73,5%</div>
+      <div class="sub">FCF Margin: ~55%</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">52W High / Low</div>
+      <div class="value">$227</div>
+      <div class="sub">Low: ~$86</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Fair Value</div>
+      <div class="value">$230–270</div>
+      <div class="sub">Potencjał: +7–26%</div>
+    </div>
+  </div>
+
+  <!-- 1 -->
+  <div class="section" id="profil">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">1</div>
+      <div class="section-title">Profil Spółki</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Historia i siedziba</h4>
+      <p>NVIDIA Corporation (NASDAQ: NVDA) została założona w 1993 roku przez Jensena Huanga, Chrisa Mallachopa i Curtisa Primma. Siedziba: Santa Clara, Kalifornia, USA. Spółka jest twórcą architektury GPU (Graphics Processing Unit) i od 2016 roku liderem infrastruktury do trenowania modeli AI. Kapitalizacja rynkowa: ~$5,2 biliona USD (czerwiec 2026) — jedna z 2–3 największych spółek świata.</p>
+      <h4>Czym się zajmuje</h4>
+      <p>NVIDIA dostarcza akceleratory obliczeniowe (GPU, HGX systemy), oprogramowanie (CUDA, cuDNN), platformy chmurowe (DGX Cloud) i frameworki AI (NeMo, Triton). Rozwiązuje problem niedoboru mocy obliczeniowej wymaganej do trenowania i wnioskowania modeli LLM, wizji komputerowej i robotyki.</p>
+      <h4>Etap rozwoju</h4>
+      <p><strong>Hiperwzrost (Growth+)</strong> — spółka generuje ponad $130 mld przychodów rocznie z ~145% wzrostem YoY, przy marży netto przekraczającej 55%. Unikalna kombinacja wzrostu i rentowności na tym poziomie skalowania nie ma precedensu.</p>
+      <h4>Kluczowe wydarzenia (ostatnie 12 miesięcy)</h4>
+      <ul>
+        <li><strong>Blackwell GPU:</strong> Masowa produkcja architektury Blackwell (B100, B200, GB200) — popyt wielokrotnie przekracza podaż, bookingi sięgają 2026–2027.</li>
+        <li><strong>NIM Microservices:</strong> NVIDIA uruchomiła platformę NVIDIA Inference Microservices — monetyzacja oprogramowania AI.</li>
+        <li><strong>Eksport do Chin:</strong> Restrykcje USA ograniczyły sprzedaż H100/A800 do Chin (ok. 20% przychodów historycznie), NVIDIA opracowuje zgodne z przepisami warianty (H20).</li>
+        <li><strong>Partnerstwo z hyperscalerami:</strong> Microsoft, Google, Amazon, Meta — każdy zamówił >$10 mld GPU w FY25/26.</li>
+        <li><strong>Jensen Huang:</strong> CEO bez zmian, posiada ~3,5% akcji. Brak kluczowych odejść z zarządu.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="produkt">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">2</div>
+      <div class="section-title">Produkt / Usługa</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Portfolio produktów</h4>
+      <ul>
+        <li><strong>Data Center GPU:</strong> H100/H200 (Hopper), B100/B200/GB200 (Blackwell) — rdzień przychodów (~88% revenue FY25)</li>
+        <li><strong>CUDA Platform:</strong> Ekosystem deweloperski zbudowany przez 20 lat — ponad 4 mln deweloperów. Switching cost jest ekstremalnie wysoki.</li>
+        <li><strong>Networking:</strong> InfiniBand (Mellanox), NVLink — skalowanie klastrów GPU</li>
+        <li><strong>Gaming GPU:</strong> GeForce RTX — historyczny biznes, ok. 10% przychodów</li>
+        <li><strong>Automotive (DRIVE):</strong> Platformy autonomicznej jazdy — ~2% przychodów, rosnący pipeline</li>
+        <li><strong>DGX Cloud / NIM:</strong> Usługi chmurowe AI — monetyzacja software'u</li>
+      </ul>
+      <h4>Moat i przewagi</h4>
+      <ul>
+        <li><strong>Efekt sieciowy CUDA:</strong> 20 lat bibliotek, frameworków (PyTorch, TensorFlow natywnie na CUDA). Przepisanie na alternatywny stack to lata pracy.</li>
+        <li><strong>Switching cost:</strong> Hiperwysoki — model wytrenowany na H100 nie jest trywialnie przenoszony na ROCm (AMD). Całe MLOps pipeline zakłada CUDA.</li>
+        <li><strong>Full-stack:</strong> Jedyna firma oferująca hardware + interconnect + software + usługi chmurowe w jednym ekosystemie.</li>
+        <li><strong>Lead technologiczny:</strong> Blackwell oferuje ~4x throughput vs. Hopper przy porównywalnym TDP.</li>
+      </ul>
+      <h4>Skalowalność i roadmapa</h4>
+      <p>Roadmapa: Rubin (2026), Feynman (2027+) — coroczne generacje GPU. NVIDIA zapowiedziała przejście na model rocznych wydań. NIM Microservices i NEMO to pierwsze kroki ku stałym przychodom SaaS z AI inference.</p>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="rynki">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">3</div>
+      <div class="section-title">Rynki i Otoczenie</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>TAM / SAM / SOM</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">TAM (AI Infrastructure 2027E)</div><div class="m-value">~$500 mld</div></div>
+        <div class="metric-row"><div class="m-label">SAM (GPU Accelerators)</div><div class="m-value">~$200–250 mld</div></div>
+        <div class="metric-row"><div class="m-label">SOM (NVDA udział ~80%)</div><div class="m-value">~$160–200 mld</div></div>
+        <div class="metric-row"><div class="m-label">CAGR rynku AI Infra</div><div class="m-value">~35–40% (2024–2028)</div></div>
+      </div>
+      <h4>Geografie</h4>
+      <p>USA (~50% revenue), Europa (~15%), Azja (Japonia, Korea, Indie ~15%), Reszta świata (~20%). Chiny historycznie 15–20%, od 2023 ograniczone restrykcjami eksportowymi — NVIDIA sprzedaje H20 (ograniczona wersja) na rynek chiński.</p>
+      <h4>Trendy makro i sektorowe</h4>
+      <ul>
+        <li>Wyścig zbrojeń AI wśród hyperscalerów — Microsoft, Google, Amazon, Meta wydają łącznie ~$200 mld na capex AI w 2025.</li>
+        <li>Sovereign AI — rządy (UAE, Indie, Francja, Arabia Saudyjska) budują własną infrastrukturę AI.</li>
+        <li>Przejście od trenowania do inference — nowa faza (reasoning models) wymaga 10–100x więcej mocy obliczeniowej.</li>
+        <li>Fizyczne AI i robotyka — NVIDIA Isaac platform, Omniverse.</li>
+      </ul>
+      <h4>Cykliczność</h4>
+      <p>Branża półprzewodników jest historycznie cykliczna. Jednak dywersyfikacja NVIDIA na data center (kontrakt-based, długoterminowe bookingi) znacząco ogranicza ekspozycję na tradycyjny cykl chipowy. Gaming (~10% rev) pozostaje cykliczny.</p>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="klienci">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">4</div>
+      <div class="section-title">Klienci i Sprzedaż</div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body collapsed">
+      <h4>Profil klientów</h4>
+      <p><strong>B2B i B2G:</strong> Główni klienci to cloud hyperscalers (Microsoft Azure, AWS, Google Cloud, Oracle Cloud), przedsiębiorstwa budujące własne klastry AI, rządy i instytucje badawcze, producenci samochodów (Mercedes, BYD).</p>
+      <h4>Koncentracja klientów</h4>
+      <p>Top 3 klientów (Microsoft, Google, Amazon + Meta) odpowiada szacunkowo za ~40–50% przychodów Data Center. Ryzyko koncentracji jest obecne, jednak hyperscalerzy nie mają dziś wiarygodnej alternatywy do Blackwell dla trenowania frontier models.</p>
+      <h4>Wskaźniki retencji</h4>
+      <p>NVIDIA nie raportuje NRR/churn jako sprzedawca hardware. Stickiness jest de facto ~100% — klienci którzy zbudowali klastry na H100, kupują następnie Blackwell. Ekosystem CUDA tworzy lock-in porównywalny z enterprise software.</p>
+      <h4>Kanały sprzedaży</h4>
+      <ul>
+        <li>Sprzedaż bezpośrednia do hyperscalerów (dominująca, ~60% rev)</li>
+        <li>OEM partnerzy: Dell, HPE, Lenovo (DGX systemy)</li>
+        <li>Dystrybutorzy: Arrow, Ingram dla mniejszych klientów enterprise</li>
+        <li>DGX Cloud — direct cloud delivery</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="biznes">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">5</div>
+      <div class="section-title">Model Biznesowy i Przychody</div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body collapsed">
+      <h4>Źródła przychodów (FY25: $130,5 mld)</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">Data Center</div><div class="m-value">~88% (~$115 mld)</div></div>
+        <div class="metric-row"><div class="m-label">Gaming</div><div class="m-value">~9% (~$11,8 mld)</div></div>
+        <div class="metric-row"><div class="m-label">Professional Visualization</div><div class="m-value">~1,5%</div></div>
+        <div class="metric-row"><div class="m-label">Automotive</div><div class="m-value">~1,5%</div></div>
+      </div>
+      <h4>Struktura przychodów</h4>
+      <p>Przychody są głównie transakcyjne (hardware), jednak bookingi długoterminowe i framework CUDA tworzą de facto recurring demand. NVIDIA buduje warstwę software (NIM) — docelowo wyższe marże i powtarzalne przychody.</p>
+      <h4>Prognozy konsensusu</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">FY26E Revenue</div><div class="m-value">~$195–200 mld (+50%)</div></div>
+        <div class="metric-row"><div class="m-label">FY27E Revenue</div><div class="m-value">~$240–260 mld (+25–30%)</div></div>
+        <div class="metric-row"><div class="m-label">FY26E EPS (non-GAAP)</div><div class="m-value">~$4,20–4,50</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="wycena">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">6</div>
+      <div class="section-title">Wskaźniki Wyceny</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Mnożniki rynkowe (stan: czerwiec 2026)</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">P/E TTM</div><div class="m-value">38,1x</div></div>
+        <div class="metric-row"><div class="m-label">P/E Forward (FY27)</div><div class="m-value">20,6x</div></div>
+        <div class="metric-row"><div class="m-label">P/S TTM</div><div class="m-value">~40x</div></div>
+        <div class="metric-row"><div class="m-label">EV/EBITDA</div><div class="m-value">27,6x</div></div>
+        <div class="metric-row"><div class="m-label">EV/Revenue</div><div class="m-value">20,3x</div></div>
+        <div class="metric-row"><div class="m-label">Price/FCF</div><div class="m-value">~38x</div></div>
+        <div class="metric-row"><div class="m-label">Dividend Yield</div><div class="m-value">0,03% (symbol.)</div></div>
+        <div class="metric-row"><div class="m-label">Net Debt/EBITDA</div><div class="m-value">Gotówka netto</div></div>
+      </div>
+      <h4>Kontekst wyceny</h4>
+      <p>Wycena na first look wygląda wysoko, jednak forward P/E 20,6x przy spółce rosnącej 50%+ YoY daje PEG ratio poniżej 0,5x — co jest historycznie tanim poziomem dla spółki tej jakości. Dla porównania AMD handluje na ~45x forward P/E przy wzroście ~20%. Kluczowe jest czy FY27E $260 mld jest osiągalne.</p>
+      <p>Analitycy (73 buys, 1 hold, 0 sells) mają średni target $271–311 vs. cena $214 — implikuje 26–45% upside.</p>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="marze">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">7</div>
+      <div class="section-title">Marżowość i Dynamika Finansowa</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Trend marż (FY22–FY25)</h4>
+      <table class="comp-table">
+        <thead><tr><th>Metryka</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto</td><td>64,9%</td><td>56,9%</td><td>72,7%</td><td>73,5%</td></tr>
+          <tr><td>Marża operacyjna</td><td>37,3%</td><td>16,0%</td><td>54,1%</td><td>62,5%</td></tr>
+          <tr><td>Marża netto</td><td>36,2%</td><td>16,2%</td><td>55,0%</td><td>55,8%</td></tr>
+          <tr><td>Revenue Growth YoY</td><td>+61%</td><td>+0,2%</td><td>+122%</td><td>+142%</td></tr>
+        </tbody>
+      </table>
+      <h4>Dźwignia operacyjna</h4>
+      <p>Klasyczny przykład dźwigni operacyjnej: przy wzroście revenue 142% YoY (FY25) marża operacyjna skoczyła z 54% do 62,5%. NVDA jest fabless — koszty COGS rosną wolniej niż revenue. Ryzyko: Blackwell wymaga większych inwestycji w packaging (CoWoS), co tymczasowo presuje marże brutto (73,5% vs. 76% w szczycie FY24).</p>
+      <h4>FCF i CAPEX</h4>
+      <p>FCF FY25: ~$60–65 mld (FCF margin ~50%). CAPEX ~$3 mld (NVDA jest fabless — produkuje TSMC). Bardzo niska intensywność CAPEX jak na skalę biznesu. Gotówka jest przeznaczana głównie na buybacki i R&D.</p>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="bilans">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">8</div>
+      <div class="section-title">Bilans i Płynność</div>
+      <div class="section-toggle">▾</div>
+    </div>
+    <div class="section-body collapsed">
+      <h4>Pozycja gotówkowa</h4>
+      <p>Gotówka i krótkoterminowe inwestycje: ~$43 mld (Q4 FY25). Dług długoterminowy: ~$8,5 mld. Gotówka netto: ~$34,5 mld — bardzo silna pozycja. Brak ryzyka finansowego.</p>
+      <h4>SBC i dilucja</h4>
+      <p>Stock-Based Compensation FY25: ~$4,8 mld (~3,7% przychodów). Buyscback FY25: ~$33 mld — znacząco przewyższa SBC, akcja bazy maleje rok do roku. Net dilucja: negatywna (spółka skupuje więcej niż emituje).</p>
+      <h4>Jakość zysku</h4>
+      <p>Net Income FY25: $72,9 mld. FCF: ~$60–65 mld. Różnica wynika głównie ze SBC i podatków odroczonych. FCF jest nieco niższy niż net income — pozytywna konwersja. Jakość zysku: wysoka.</p>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section" id="bulls">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">9</div>
+      <div class="section-title">Szanse — Bull Case</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="bull-list">
+        <h4>🟢 Katalizatory wzrostu</h4>
+        <ul>
+          <li><strong>Blackwell supercycle:</strong> Popyt na GB200 NVL72 racks przekracza podaż o 12–18 miesięcy. Backlog sięga 2027. Każdy rack NVL72 = ~$3 mln ASP.</li>
+          <li><strong>Inference boom:</strong> Przejście od trenowania do inference (reasoning models jak o3, Gemini Ultra) multiplies demand. Inference wymaga 10–100x więcej GPU niż training. NVDA szacuje inference revenue przewyższy training do 2027.</li>
+          <li><strong>Sovereign AI:</strong> Rządy UAE, Indie, Japonia, Arabia Saudyjska, Francja inwestują dziesiątki miliardów w własną infrastrukturę — bezpośrednio do NVIDIA.</li>
+          <li><strong>Robotics/Physical AI:</strong> NVIDIA Isaac/Omniverse — $1 bln pipeline na robotykę fizyczną. Jeszcze niszowy segment, ale 2026–2028 to potencjalny punkt przełomowy.</li>
+          <li><strong>Software monetyzacja:</strong> NIM Microservices, DGX Cloud, NEMO — jeśli 5% klientów przejdzie na model SaaS, generuje $5–10 mld recurring revenue o marżach 80%+.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="section" id="bears">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">10</div>
+      <div class="section-title">Zagrożenia — Bear Case</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="bear-list">
+        <h4>🔴 Kluczowe ryzyka</h4>
+        <ul>
+          <li><strong>Custom ASICs hyperscalerów:</strong> Google TPU v5, Amazon Trainium2, Microsoft Maia, Meta MTIA — hyperscalerzy aktywnie redukują zależność od NVIDIA. Do 2027–2028 custom silicon może przejąć 15–25% ich workloadów.</li>
+          <li><strong>Restrykcje eksportowe USA-Chiny:</strong> Dalsze zaostrzenie przepisów może odciąć chiński rynek (~10–15% rev). Segment H20 może być zakazany — ryzyko ~$10–15 mld revenue.</li>
+          <li><strong>Spowolnienie capex hyperscalerów:</strong> Jeśli ROI z AI investments okaże się niewystarczający, hyperscalerzy mogą ciąć capex. Recesja lub credit crunch to natychmiastowy hamulec.</li>
+          <li><strong>Wycena i momentum:</strong> $5,2 bln cap. — każde rozczarowanie konsensusu może wywołać korektę 20–30%. Spółka trades on perfection.</li>
+          <li><strong>TSMC zależność i geopolityka:</strong> 100% produkcji na TSMC (Tajwan). Konflikt w Cieśninie Tajwańskiej to egzystencjalne ryzyko dla łańcucha dostaw.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="section" id="konkurencja">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">11</div>
+      <div class="section-title">Analiza Konkurencji</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Spółka</th>
+            <th>Ticker</th>
+            <th>Rev Growth YoY</th>
+            <th>Marża brutto</th>
+            <th>EV/Revenue</th>
+            <th>Pozycja</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td><strong>NVIDIA</strong></td>
+            <td>NVDA</td>
+            <td>+142%</td>
+            <td>73,5%</td>
+            <td>20,3x</td>
+            <td>🥇 Lider</td>
+          </tr>
+          <tr>
+            <td>Advanced Micro Devices</td>
+            <td>AMD</td>
+            <td>+14%</td>
+            <td>53%</td>
+            <td>~7x</td>
+            <td>Challenger</td>
+          </tr>
+          <tr>
+            <td>Intel Corporation</td>
+            <td>INTC</td>
+            <td>-2%</td>
+            <td>42%</td>
+            <td>~2,5x</td>
+            <td>Restrukturyzacja</td>
+          </tr>
+          <tr>
+            <td>Broadcom</td>
+            <td>AVGO</td>
+            <td>+51%</td>
+            <td>69%</td>
+            <td>~15x</td>
+            <td>Custom ASIC niches</td>
+          </tr>
+          <tr>
+            <td>Google (TPU)</td>
+            <td>GOOGL</td>
+            <td>wewnętrzny</td>
+            <td>—</td>
+            <td>—</td>
+            <td>Captive threat</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>NVIDIA utrzymuje ~80–86% udziału w rynku AI GPU accelerators. AMD Instinct MI300X jest jedyną komercyjną alternatywą, jednak ekosystem oprogramowania (ROCm vs. CUDA) pozostaje znacząco słabszy. Udział rynkowy NVIDIA rośnie rok do roku mimo rosnącej konkurencji — moat jest wyjątkowo trwały w krótkim i średnim terminie.</p>
+    </div>
+  </div>
+
+  <!-- 12 -->
+  <div class="section" id="technika">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">12</div>
+      <div class="section-title">Analiza Techniczna</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <h4>Trend i struktura wykresu</h4>
+      <p>NVDA handluje w długoterminowym trendzie wzrostowym. Cena: ~$214. ATH: ~$227 (Q1 2026). Po osiągnięciu ATH nastąpiła konsolidacja. Akcja jest powyżej SMA200 ($190) i SMA50 ($212) — bull trend intakt.</p>
+      <h4>Odchylenia od średnich kroczących</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">SMA20 (~$218)</div><div class="m-value">-1,5% poniżej</div></div>
+        <div class="metric-row"><div class="m-label">SMA50 (~$212)</div><div class="m-value">+1,3% powyżej</div></div>
+        <div class="metric-row"><div class="m-label">SMA200 (~$190)</div><div class="m-value">+12,5% powyżej</div></div>
+        <div class="metric-row"><div class="m-label">52W High ($227)</div><div class="m-value">-5,4% poniżej ATH</div></div>
+      </div>
+      <h4>Wskaźniki momentum</h4>
+      <p><strong>RSI(14): ~44–47</strong> — neutralny, ani wykupiony ani wyprzedany. Brak sygnałów przegrzania. <strong>MACD:</strong> lekko negatywny (linia sygnału powyżej MACD) — krótkoterminowa słabość momentum. Struktura wskazuje na konsolidację przed kolejnym ruchem.</p>
+      <h4>Poziomy techniczne</h4>
+      <div class="metrics-grid">
+        <div class="metric-row"><div class="m-label">Opór 1</div><div class="m-value">$220–225 (ATH zone)</div></div>
+        <div class="metric-row"><div class="m-label">Opór 2</div><div class="m-value">$240–250</div></div>
+        <div class="metric-row"><div class="m-label">Wsparcie 1</div><div class="m-value">$200–205 (okrągła liczba + SMA50)</div></div>
+        <div class="metric-row"><div class="m-label">Wsparcie 2</div><div class="m-value">$185–190 (SMA200)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13 -->
+  <div class="section" id="ocena">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">13</div>
+      <div class="section-title">Ocena Inwestycyjna</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="verdict-grid">
+        <div class="verdict-card">
+          <div class="term">Krótki termin (1–3 mies.)</div>
+          <div class="v-rating neutral">Neutralna</div>
+          <div class="v-text">Konsolidacja po ATH, RSI neutralny, MACD słaby. Kluczowy katalizator: wyniki Q2 FY26 (sierpień 2026) — czy Blackwell spełni oczekiwania. Wejście optymalne przy retestcie $200–205.</div>
+        </div>
+        <div class="verdict-card">
+          <div class="term">Średni termin (6–18 mies.)</div>
+          <div class="v-rating buy">Kupno</div>
+          <div class="v-text">Blackwell supercycle, inference boom, Sovereign AI. Cel $250–270 (FY27E P/E ~22x na $12 EPS non-GAAP). Scenariusz bazowy: +20–30% od bieżących poziomów.</div>
+        </div>
+        <div class="verdict-card">
+          <div class="term">Długi termin (3–5 lat)</div>
+          <div class="v-rating strong-buy">Mocne Kupno</div>
+          <div class="v-text"><strong>Bull:</strong> $500+ jeśli NVDA monetyzuje software, AI inference boom trwa, robotics startuje. <strong>Bear:</strong> $100–130 jeśli custom ASICs przejmą 40%+ rynku i capex hyperscalerów spada o 30%+.</div>
+        </div>
+      </div>
+      <div class="fair-value-box">
+        <div class="fv-label">Szacunkowy Fair Value (wycena mnożnikowa FY27E)</div>
+        <div class="fv-value">$230 – $270</div>
+        <div class="fv-sub">Bazuje na FY27E EPS non-GAAP ~$11–13 × 20–22x forward P/E. Przy P/E 25x (premium za jakość) — cel $275–325. Aktualna cena $214 oferuje margines bezpieczeństwa ~7–26%.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14 -->
+  <div class="section" id="tldr">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">14</div>
+      <div class="section-title">Podsumowanie — TL;DR</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="tldr-grid">
+        <div class="reason-card">
+          <h4 style="color: var(--strong-buy);">✅ 3 powody, by kupić</h4>
+          <ul>
+            <li><strong>Blackwell supercycle</strong> — popyt > podaż przez kolejne 12–18 mies. Backlog do 2027, ASP rośnie.</li>
+            <li><strong>Forward P/E 20x przy +50% wzroście</strong> — PEG &lt;0,5x to historycznie atrakcyjny poziom dla spółki tej jakości.</li>
+            <li><strong>CUDA moat jest niezniszczalny</strong> w 2–3-letnim horyzoncie — 20 lat lock-in software ekosystemu nie zmieni się w rok.</li>
+          </ul>
+        </div>
+        <div class="reason-card">
+          <h4 style="color: #ff5252;">❌ 3 powody, by unikać</h4>
+          <ul>
+            <li><strong>Custom ASIC risk</strong> — Google, Amazon, Microsoft masowo inwestują we własne chipy. 2027–2028 to punkt krytyczny.</li>
+            <li><strong>Geopolityka Tajwan</strong> — 100% produkcji na TSMC. Eskalacja w Cieśninie = czarny łabędź dla całego NVDA.</li>
+            <li><strong>Wycena $5,2 bln</strong> wbudowuje perfekcyjne wykonanie — każde rozczarowanie wynikowe może być drogą na 20–30% niżej.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="thesis-breaker">
+        <h4>⚡ Thesis-breaker / Thesis-confirmer</h4>
+        <p><strong>CONFIRMER:</strong> Q3/Q4 FY26 wyniki Data Center >$50 mld kwartalnie + oficjalna roadmapa NIM/software monetyzacji z konkretnymi liczbami → wycena uzasadniona, cena zmierza ku $300+.</p>
+        <p style="margin-top:10px;"><strong>BREAKER:</strong> Microsoft lub Google oficjalnie ogłaszają redukcję zamówień Blackwell o 20%+ na rzecz własnych chipów LUB eskalacja eksportowych restrykcji USA eliminująca segment H20 → teza runęłaby, target &lt;$150.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+
+    Analiza wygenerowana przez Claude · 2026-06-09 · Nie stanowi porady inwestycyjnej · Dane mogą być nieaktualne
+  </div>
+</div>
+
+<script>
+  function toggleSection(header) {
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector('.section-toggle');
+    body.classList.toggle('collapsed');
+    toggle.classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-item').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const id = this.getAttribute('href').slice(1);
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelectorAll('.nav-item').forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+  const sections = document.querySelectorAll('.section');
+  const navItems = document.querySelectorAll('.nav-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(item => {
+          item.classList.toggle('active', item.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

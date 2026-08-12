@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOK — Nokia | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#1d4ed8; --accent2:#60a5fa; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#050a1f 0%,#0f1117 50%,#0a0f22 100%); border-bottom:1px solid var(--border); padding:40px 32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(29,78,216,0.12) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.buy { background:rgba(76,175,80,0.15); border:2px solid var(--buy); color:var(--buy); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.blue { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#fff; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent2); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.strong-buy { color:var(--strong-buy); } .rating-box .rating-text.neutral { color:var(--neutral); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .fair-value-box { background:linear-gradient(135deg,rgba(29,78,216,0.10),rgba(96,165,250,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(29,78,216,0.08); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .nvidia-badge { background:linear-gradient(135deg,rgba(118,185,0,0.15),rgba(29,78,216,0.08)); border:1px solid #76b900; border-radius:12px; padding:20px 24px; margin:14px 0; }
+  .nvidia-badge h4 { color:#76b900; font-size:16px; margin-bottom:8px; }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.blue { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); }
+  @media (max-width:700px) { .rating-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+  <div class="header-content">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: NOK (ADR)</div>
+    <div class="company-name">Nokia Oyj</div>
+    <div class="company-sub">Optical Networks dla AI data centers · Fixed/Mobile Networks · AI-RAN z NVIDIA · Photonic chips (Allentown 10×) · Espoo, Finlandia</div>
+    <div class="header-meta">
+      <div class="rating-badge buy">📈 KUPNO</div>
+      <span class="meta-tag">Telecom → AI Networking</span>
+      <span class="meta-tag">Optical / DCI</span>
+      <span class="meta-tag">NVIDIA Partner</span>
+      <span class="meta-tag">Dywidenda</span>
+      <div class="price-display">
+        <div class="price-main">€8,00 (~$9,30)</div>
+        <div class="price-sub">Helsinki €8 / ADR ~$9,30 | 52W ADR: $4,00–$17,45</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">TL;DR</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena ADR (07.2026)</div><div class="metric-value">€8 / ~$9,30</div><div class="metric-detail">52W: $4,00–$17,45 | -47% od szczytu</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$58B</div><div class="metric-detail">Najtańszy "duży" AI networking play</div></div>
+    <div class="metric-card"><div class="metric-label">Q2 2026 Sales</div><div class="metric-value green">€4,82B</div><div class="metric-detail">+9% YoY | Zysk +64%, EPS +75%</div></div>
+    <div class="metric-card"><div class="metric-label">AI & Cloud rev.</div><div class="metric-value green">+105%</div><div class="metric-detail">AI&Cloud Q2 YoY (€446M) | Optical +20%</div></div>
+    <div class="metric-card"><div class="metric-label">FY26 guidance</div><div class="metric-value blue">€2,0-2,5B</div><div class="metric-detail">Op. profit | Capex €0,9-1B na Optical</div></div>
+    <div class="metric-card"><div class="metric-label">AI/cloud orders</div><div class="metric-value green">€2,8B</div><div class="metric-detail">Order intake Q2! Połowa → revenue w 12 mies.</div></div>
+    <div class="metric-card"><div class="metric-label">Dywidenda</div><div class="metric-value">1,23%</div><div class="metric-detail">+ buyback | P/E 61 (zaniżone przez legacy)</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value green">$15,16</div><div class="metric-detail">+63% upside | High: $21 (JPMorgan)</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Nokia 2026 — nie telefony, nie tylko 5G</h3>
+      <p>Nokia (NYSE: NOK, Helsinki: NOKIA) to fiński gigant infrastruktury sieciowej. Segmenty: <strong>Network Infrastructure</strong> (optyka, fixed, submarine — tu dzieje się AI story), <strong>Mobile Networks</strong> (5G RAN — stabilny/legacy), <strong>Cloud & Network Services</strong> oraz <strong>Nokia Technologies</strong> (patenty — wysokomarżowe royalties). CEO: <strong>Justin Hotard</strong> (od 2025, ex-Intel AI/HPC) — symbol pivotu na AI.</p>
+      <p>Przejęcie <strong>Infinera (2024, $2,3B)</strong> dało Nokii czołową pozycję w optyce data center (DCI, koherentne 800G+). To był kluczowy ruch — dziś optyka do AI data centers jest najszybciej rosnącym biznesem spółki.</p>
+      <h3>Kluczowe zdarzenia</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>X 2025</td><td><strong>NVIDIA inwestuje $1B w Nokię</strong> + partnerstwo AI-RAN (anyRAN + Aerial)</td><td style="color:var(--strong-buy)">↑↑ Przełom percepcji</td></tr>
+          <tr><td>Q1 2026</td><td>AI & Cloud +49%, Optical +20%, op. profit +54% — beat</td><td style="color:var(--buy)">↑ Fundamenty dowożą</td></tr>
+          <tr><td>IV-VI 2026</td><td>~€1B zamówień AI/cloud optical; Argus/JPM podnoszą cele ($15/$21)</td><td style="color:var(--buy)">↑ Momentum</td></tr>
+          <tr><td>VI 2026</td><td>Plan $4B US: Allentown — 10× produkcja photonic chips; kurs najwyżej od 2010 ($17,45)</td><td style="color:var(--buy)">↑ Szczyt</td></tr>
+          <tr><td>VII 2026</td><td><strong>23 VII: Q2 BEAT — €4,82B (+9%), zysk +64%, AI&Cloud orders €2,8B (+105% sprzedaż). Kurs mimo to spadł do €8 — obawy o "lumpy" growth</strong></td><td style="color:var(--neutral)">Rozjazd fundamenty/kurs</td></tr>
+        </tbody>
+      </table></div>
+      <div class="nvidia-badge"><h4>⚡ NVIDIA $1B + AI-RAN (X 2025)</h4><p style="color:var(--text-muted); font-size:13px;">NVIDIA kupiła ~$1B akcji Nokii i połączyła platformę Aerial (AI-RAN) z Nokia anyRAN. Cel: stacje bazowe 6G z GPU liczące AI na brzegu sieci. Do tego optyka Nokii (po Infinerze) spina AI data centers między sobą (DCI). Nokia jest w tym samym "klubie NVIDII" co LITE, COHR i MRVL — ale wyceniana jak telekom, nie jak AI play.</p></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment</th><th>Produkty</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Optical Networks (Infinera)</strong></td><td>Koherentna optyka DCI 800G/1.2T, ICE-7 photonic ICs, submarine</td><td>🔥 +20% YoY, ~€1B AI orders, capex €1B na moce</td></tr>
+          <tr><td><strong>Fixed Networks</strong></td><td>Fiber-to-the-home, broadband dla AI backhaul</td><td>✅ Stabilny wzrost</td></tr>
+          <tr><td><strong>Mobile Networks</strong></td><td>5G RAN, AI-RAN z NVIDIA (6G roadmap)</td><td>⚖️ Legacy, płaski — ale opcja 6G</td></tr>
+          <tr><td><strong>Nokia Technologies</strong></td><td>Patenty 5G/6G, licencje (Apple, Samsung...)</td><td>💰 ~€1,4B/rok, marża ~90%</td></tr>
+        </tbody>
+      </table></div>
+      <p>Allentown (Pensylwania): <strong>10× wzrost produkcji photonic chips</strong> w ramach $4B planu USA — Nokia buduje amerykański łańcuch dostaw optyki AI, co otwiera kontrakty rządowe i hyperscalerowe.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>DCI (Data Center Interconnect):</strong> AI data centers muszą być spinane między sobą (multi-site training) — rynek koherentnej optyki rośnie 20-30% rocznie</li>
+        <li><strong>AI backhaul / fiber:</strong> każdy nowy kampus AI wymaga terabitowych łączy — popyt na fixed networks rośnie</li>
+        <li><strong>AI-RAN / 6G:</strong> opcja na drugą połowę dekady (compute na brzegu sieci)</li>
+        <li><strong>5G RAN:</strong> rynek dojrzały, płaski — Ericsson/Huawei/Samsung walczą o wolno rosnący tort</li>
+      </ul>
+      <div class="alert alert-info"><strong>Teza:</strong> rynek wciąż wycenia Nokię jak wolno rosnący telekom (EV/Sales ~2,5×), podczas gdy rosnąca część biznesu (optical/AI) zasługuje na mnożniki infrastruktury AI. Rozjazd percepcji = okazja.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="chips"><span class="chip blue">Hyperscalerzy (optical DCI)</span><span class="chip">Operatorzy telco (AT&T, VF, DT...)</span><span class="chip green">NVIDIA (partner + inwestor)</span><span class="chip">Rządy/submarine</span><span class="chip">Licencjobiorcy patentów</span></div>
+      <p>Baza klientów szeroka i zdywersyfikowana — przewaga nad mniejszymi photonics playami. Zamówienia AI/cloud (~€1B) głównie od hyperscalerów na optykę DCI. Telco (większość przychodów) daje stabilność, ale nie wzrost.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Wartość</th><th>Zmiana</th></tr></thead>
+        <tbody>
+          <tr><td>FY2025 sales</td><td>~€19,5B</td><td>+3-4%</td></tr>
+          <tr><td>Q1 2026 sales</td><td>€4,5B</td><td style="color:var(--buy)">+4% YoY</td></tr>
+          <tr><td>Q1 2026 op. profit</td><td>€281M</td><td style="color:var(--buy)">+54% YoY</td></tr>
+          <tr><td>Q1 AI & Cloud</td><td>—</td><td style="color:var(--strong-buy)">+49% YoY</td></tr>
+          <tr><td>Q2 2026 guidance</td><td>sales +5-9% QoQ</td><td>wyniki 23 VII</td></tr>
+          <tr><td>FY2026 op. profit guidance</td><td><strong>€2,0-2,5B</strong></td><td>vs €1,7B w 2025 → +20-45%</td></tr>
+        </tbody>
+      </table></div>
+      <p>Miks się zmienia: telco (płaskie) maleje w udziale, AI/optical (+49%/+20%) rośnie. Nawet jeśli całość rośnie "tylko" 4-6%, <em>zyski</em> rosną 20-50%, bo nowy biznes ma wyższe marże i dźwignia operacyjna działa.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Market Cap</td><td>$58B</td><td>—</td></tr>
+          <tr><td>EV/Sales (FY2026E ~€20B)</td><td>~2,5×</td><td style="color:var(--buy)">✅ Ułamek wyceny peerów AI (LITE 16×, COHR 8×)</td></tr>
+          <tr><td>P/E trailing</td><td>61× (zaburzone one-offami)</td><td style="color:var(--neutral)">Mylące</td></tr>
+          <tr><td>P/E forward (FY2026E EPS ~€0,45-0,55)</td><td>~17-20×</td><td style="color:var(--buy)">✅ Tanio dla rosnących zysków +30%</td></tr>
+          <tr><td>EV/Op.profit (mid guidance €2,25B)</td><td>~23×</td><td style="color:var(--neutral)">Fair</td></tr>
+          <tr><td>Dywidenda + buyback</td><td>1,23% + skup</td><td style="color:var(--buy)">Zwrot gotówki</td></tr>
+          <tr><td>Cel analityków</td><td>$15,16 (high $21)</td><td style="color:var(--buy)">+63% upside</td></tr>
+        </tbody>
+      </table></div>
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$13 – $18</div><div class="fair-value-note">Base: re-rating do EV/Sales 3× + wzrost op. profit → $13-15 | Bull (AI optical ramp + 6G narracja): $18-21 | Konsensus $15,16 | Przy $10,29 = wyraźny margines bezpieczeństwa</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <p>Comparable op. margin Q1: ~6,2% (rośnie z ~4-5%). Cel FY2026: €2,0-2,5B op. profit = marża ~10-12,5%. Nokia Technologies (patenty) ma ~90% marż i stabilizuje całość. Optical po integracji Infinery poprawia miks. Net income Q1 +245% YoY (€86M). Marże niskie vs pure-tech, ale <strong>kierunek jest jednoznacznie w górę</strong> — a to kierunek napędza kurs telekomów.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <p>Net cash ~€3B (nawet po przejęciu Infinery), inwestycja NVIDII $1B wzmocniła kasę, dywidenda + buyback kontynuowane. Capex €0,9-1B na rozbudowę mocy Optical — finansowany z własnej gotówki. Bilans klasy investment grade; zero ryzyka finansowego.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">BULL CASE</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">💡</div><div class="catalyst-body"><h4>AI orders €2,8B w samym Q2 — widoczność do 2027</h4><p>Infinera dała Nokii top-3 pozycję w koherentnym DCI. Hyperscalerzy dywersyfikują od Ciena — Nokia jest naturalnym beneficjentem. Allentown 10× photonic capacity = USA supply chain premium.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏷️</div><div class="catalyst-body"><h4>Najtańsza ekspozycja na AI networking na rynku</h4><p>EV/Sales 2,5× i forward P/E ~18× przy zyskach rosnących 30-50%. LITE/COHR/CIEN wyceniane 3-6× drożej na sprzedaży. Re-rating o 1 punkt EV/Sales = +40% kursu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🤝</div><div class="catalyst-body"><h4>NVIDIA $1B + AI-RAN = opcja na 6G</h4><p>Jeśli AI-RAN stanie się standardem 6G (2028+), Nokia i Ericsson będą duopolem zachodnim. NVIDIA wybrała Nokię jako partnera #1 — realna opcja warta dziesiątki miliardów.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📅</div><div class="catalyst-body"><h4>Q2 (23 VII) już dowiózł — a kurs tego nie wycenił</h4><p>Guidance +5-9% QoQ, kolejne AI orders prawdopodobne. Po -41% korekcie oczekiwania są zresetowane — beat może odwrócić trend.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">BEAR CASE</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🐌</div><div class="catalyst-body"><h4>Legacy telco to wciąż ~80% biznesu</h4><p>Mobile Networks płaskie/spadkowe maskują wzrost AI. Całość może rosnąć tylko 3-5% latami — "value trap" risk, w którym re-rating nigdy nie przychodzi.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚔️</div><div class="catalyst-body"><h4>Ciena — silniejszy rywal w DCI</h4><p>Ciena ma ~40% rynku koherentnego DCI i głębsze relacje z hyperscalerami. Nokia/Infinera to challenger — wojna cenowa może zjeść marże.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎢</div><div class="catalyst-body"><h4>-47% od szczytu = momentum pękło</h4><p>Rajd z $4 do $17,45 był gwałtowny; obecna korekta może pogłębić się do $8-9 przy słabym Q2 lub risk-off na AI.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💱</div><div class="catalyst-body"><h4>Ryzyko EUR/USD i geopolityka</h4><p>ADR wrażliwy na kurs euro; submarine/rządowe kontrakty na napięcia geopolityczne.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>Obszar</th><th>vs NOK</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Nokia</strong></td><td>Optical DCI + fixed + RAN + patenty</td><td>Najszersze portfolio, najniższa wycena</td></tr>
+          <tr><td>Ericsson</td><td>RAN — główny rywal 5G</td><td>Czystszy RAN play, bez optyki</td></tr>
+          <tr><td>Ciena</td><td>Koherentny DCI — lider</td><td>Mocniejszy w optyce, 3× droższy na sprzedaży</td></tr>
+          <tr><td>Huawei</td><td>Wszystko — wykluczony z Zachodu</td><td>Nokia zyskuje na de-Huaweizacji</td></tr>
+          <tr><td>Cisco/Juniper(HPE)</td><td>Routing/switching DC</td><td>Częściowy overlap</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">TECHNIKA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>52W low</td><td>$4,00</td><td>Przed NVIDIA deal</td></tr>
+          <tr><td>52W high</td><td>$17,45</td><td>VI 2026 — najwyżej od 2010</td></tr>
+          <tr><td>Cena</td><td>€8 (~$9,30)</td><td>-47% od szczytu; postearnings dołki</td></tr>
+          <tr><td>Wsparcie S1</td><td>$9,00-9,20 (€7,70-7,90)</td><td>Dołki po wynikach</td></tr>
+          <tr><td>Wsparcie S2</td><td>$8-8,50</td><td>Baza z wiosny</td></tr>
+          <tr><td>Opór R1</td><td>$12-13</td><td>Strefa podażowa</td></tr>
+          <tr><td>Opór R2</td><td>$15-17,45</td><td>Konsensus / szczyt</td></tr>
+        </tbody>
+      </table></div>
+      <p>Korekta głęboka, ale struktura wyższych dołków od 2025 nienaruszona powyżej $8. Wyniki 23 VII przyniosły beat, ale rynek w sektorowym risk-off go zignorował — kurs osunął się do €8. Struktura wyższych dołków od 2025 broni się powyżej $8/€7. Kolejny katalizator: Q3 (październik) i konwersja €2,8B zamówień na przychody.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Q2 beat (zysk +64%, orders €2,8B) przy kursie na dołkach = rozjazd do wykorzystania. Konsensus +63%. Ryzyko: dalszy risk-off AI → €7,50.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Re-rating telco→AI networking w toku; op. profit +20-45% w FY26; AI orders z widocznością do 2027. Cel $13-16.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Opcja 6G/AI-RAN z NVIDIA + photonics USA. Wolniejszy compounder niż pure playe, ale z dywidendą i niskim ryzykiem.</div></div>
+      </div>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$13 – $18</div><div class="fair-value-note">Wejście: €7,80-8,20 ($9,00-9,50) | Stop mentalny: €7 ($8)</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">TL;DR</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Najtańsza duża ekspozycja na AI networking</strong> — EV/Sales 2,5× przy AI & Cloud +49% i ~€1B zamówień optical z widocznością do 2027</li>
+          <li><strong>NVIDIA $1B + AI-RAN + Allentown 10×</strong> — Nokia jest w klubie NVIDII, a rynek wciąż wycenia ją jak telekom</li>
+          <li><strong>Zyski rosną 30-50% mimo wolnej sprzedaży</strong> — dźwignia miksu (optical/patenty) + dywidenda + buyback + net cash</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>80% biznesu to płaskie telco</strong> — ryzyko value trap, jeśli rynek nie przyzna mnożnika AI</li>
+          <li><strong>Ciena silniejsza w DCI</strong> — Nokia to challenger, nie lider optyki data center</li>
+          <li><strong>Momentum pękło (-41%)</strong> — słabe Q2 (23 VII) cofnie kurs do $8,50</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> Q3 miss LUB brak konwersji €2,8B orders na przychody LUB obniżenie guidance → €7 (~$8).</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> Q2 JUŻ dowiózł. Teraz: konwersja orders w Q3 + utrzymanie marż → $12-13 (€10,5+), do końca roku $15.</p>
+      <hr class="divider">
+      <div style="text-align:center; padding:20px 0">
+        <div class="rating-badge buy" style="display:inline-flex; font-size:20px; padding:14px 32px; margin-bottom:16px;">📈 KUPNO — value + AI z katalizatorem 23 VII</div>
+        <p style="color:var(--text-muted); max-width:700px; margin:0 auto; font-size:13px;">Nokia przy €8 (~$9,30) to asymetryczny zakład: w dół ~-20% (wsparcie $8-8,50), w górę +63% do konsensusu i +90% w bull case. NVIDIA za plecami, zyski rosną, wycena telco. Wyniki już znamy — były dobre, a cena spadła. To poprawia setup: kupujesz potwierdzone fundamenty z dyskontem risk-off.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 21 lipca 2026 (aktualizacja: 30 lipca 2026, po wynikach Q2, cena €8) | Dane: Nokia IR, SEC 6-K, Yahoo Finance, JPMorgan/Argus notes, Kavout, StocksToTrade | Nie stanowi porady inwestycyjnej</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){const e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+<script>function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b</body></body>(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}</script><style>.section{scroll-margin-top:64px}</style></body>
+</html>

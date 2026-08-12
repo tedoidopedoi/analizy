@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRAB — Grab Holdings | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#00b14f; --accent2:#4ade80; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#05170c 0%,#0f1117 50%,#08150d 100%); border-bottom:1px solid var(--border); padding:32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(0,177,79,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#000; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.buy { background:rgba(76,175,80,0.15); border:2px solid var(--buy); color:var(--buy); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.emerald { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#000; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.emerald { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); } .chip.red { border-color:var(--sell); color:var(--sell); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.strong-buy { color:var(--strong-buy); } .rating-box .rating-text.neutral { color:var(--neutral); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--strong-buy); } .bear-box ul li::before { color:var(--strong-sell); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(0,177,79,0.08),rgba(74,222,128,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(0,177,79,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .alert-danger { background:rgba(213,0,0,0.08); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(0,200,83,.15); color:#00c853; border:1px solid rgba(0,200,83,.4); }
+  .ck.no  { background:rgba(213,0,0,.13);  color:#ff6b6b; border:1px solid rgba(213,0,0,.35); }
+  .ck.wait{ background:rgba(255,215,64,.13);color:#ffd740; border:1px solid rgba(255,215,64,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#00c853; } .mon-dot.y { background:#ffd740; } .mon-dot.r { background:#ff6d00; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+  .decision-box { background:rgba(0,177,79,.06); border:1px solid var(--accent); border-radius:12px; padding:24px 26px; margin:22px 0; }
+  .decision-box h4 { color:var(--accent2); font-size:13px; letter-spacing:1.2px; text-transform:uppercase; margin-bottom:14px; }
+  .decision-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; }
+  .decision-grid > div { background:var(--surface2); border-radius:9px; padding:16px 18px; }
+  .decision-grid h5 { font-size:12px; font-weight:800; margin-bottom:9px; letter-spacing:.6px; }
+  .decision-grid p { font-size:13px; margin:0; }
+  @media (max-width:700px){ .decision-grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: GRAB</div>
+    <div class="company-name">Grab Holdings Limited</div>
+    <div class="company-sub">Superaplikacja Azji Południowo-Wschodniej · Przejazdy · Dostawy · Usługi finansowe (Superbank) · 8 krajów · Singapur</div>
+    <div class="header-meta">
+      <div class="rating-badge buy">📈 KUPNO / TRZYMAJ</div>
+      <span class="meta-tag">Superapp SEA</span>
+      <span class="meta-tag">Pierwszy rok zysku</span>
+      <span class="meta-tag">Buyback $1,75 mld</span>
+      <span class="meta-tag">⚠️ Sprzedaż insiderów</span>
+      <div class="price-display">
+        <div class="price-main">~$3,74</div>
+        <div class="price-sub">6.08.2026 | 52W low: $3,39 | Kap. ~$13,8 mld</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (06.08.2026)</div><div class="metric-value">~$3,74</div><div class="metric-detail">Tuż nad 52W low $3,39</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$13,8 mld</div><div class="metric-detail">—</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">$997M</div><div class="metric-detail">+22% r/r — rekord</div></div>
+    <div class="metric-card"><div class="metric-label">Zysk netto Q2</div><div class="metric-value green">$235M</div><div class="metric-detail">+$215M r/r — przełom</div></div>
+    <div class="metric-card"><div class="metric-label">Adj. EBITDA Q2</div><div class="metric-value green">$168M</div><div class="metric-detail">+54% r/r | marża 16,9% (z 13,3%)</div></div>
+    <div class="metric-card"><div class="metric-label">GMV on-demand</div><div class="metric-value green">$6,5 mld</div><div class="metric-detail">+21% r/r — przyspieszenie</div></div>
+    <div class="metric-card"><div class="metric-label">Buyback</div><div class="metric-value emerald">$1,75 mld</div><div class="metric-detail">Rozszerzony o $750M; $400M wykonane</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value green">$5,86</div><div class="metric-detail">+57% | Strong Buy (26 analityków)</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest Grab?</h3>
+      <p>Grab Holdings to <strong>dominująca superaplikacja Azji Południowo-Wschodniej</strong> — jedna aplikacja łącząca przejazdy, dostawy jedzenia i zakupów, płatności oraz usługi finansowe. Działa w ośmiu krajach regionu (Singapur, Indonezja, Malezja, Tajlandia, Wietnam, Filipiny, Kambodża, Mjanma), obsługując rynek zamieszkany przez ponad 650 milionów ludzi. Siedziba: Singapur. Debiut na Nasdaq w grudniu 2021 przez SPAC — jedno z największych takich wejść w historii.</p>
+      <p>Model „superaplikacji" oznacza, że użytkownik pozyskany dzięki przejazdowi zamawia potem jedzenie, płaci portfelem GrabPay, a w końcu bierze mikropożyczkę w Superbanku. Każda kolejna usługa jest tańsza w sprzedaży i bardziej marżowa niż poprzednia.</p>
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>Przełom 2025/26</td><td>Konsolidacja Superbanku i przejęcie Stash — budowa pionu usług finansowych</td><td style="color:var(--buy)">↑ Nowy silnik marży</td></tr>
+          <tr><td>Maj–czerwiec 2026</td><td><strong>Tiger Global całkowicie wychodzi z pozycji</strong>; CEO Anthony Tan sprzedaje pakiety akcji</td><td style="color:var(--sell)">↓↓ Sygnał zaufania</td></tr>
+          <tr><td>Lipiec 2026</td><td><strong>Dara Khosrowshahi (CEO Ubera) opuszcza radę dyrektorów</strong> — kurs -3,7%; udział ekonomiczny Ubera pozostaje</td><td style="color:var(--sell)">↓ Niepokój rynku</td></tr>
+          <tr><td>Lipiec 2026</td><td>Tan sprzedaje kolejne 400 tys. akcji; bezpośredni pakiet klasy A spada do 28 498 sztuk</td><td style="color:var(--strong-sell)">↓↓ Czerwona flaga</td></tr>
+          <tr><td>Lipiec 2026</td><td>Amerykański senator wzywa FTC do zbadania ukrytych opłat w aplikacjach dostawczych</td><td style="color:var(--neutral)">Ryzyko regulacyjne</td></tr>
+          <tr><td><strong>4 sierpnia 2026</strong></td><td><strong>Rekordowy Q2: przychody $997M (+22%), zysk $235M, EBITDA +54%, podniesione prognozy, buyback rozszerzony do $1,75 mld</strong> — kurs +6,4%</td><td style="color:var(--strong-buy)">↑↑ Przełom operacyjny</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Sedno sytuacji:</strong> Grab właśnie pokazał <strong>najlepszy kwartał w historii</strong> — pierwszy raz na taką skalę rentowny, z podniesionymi prognozami i większym skupem akcji. A kurs jest ledwie kilkanaście procent nad rocznym minimum. Powód nie leży w wynikach, lecz w tym, kto sprzedaje: <strong>prezes, największy fundusz i przedstawiciel Ubera w radzie</strong>.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment</th><th>Opis</th><th>Rola w modelu</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Mobilność (przejazdy)</strong></td><td>Taksówki, motocykle, przewozy — rdzeń historyczny</td><td>💰 Najbardziej marżowy, pozyskuje użytkownika</td></tr>
+          <tr><td><strong>Dostawy</strong></td><td>Jedzenie, zakupy, przesyłki (GrabFood, GrabMart, GrabExpress)</td><td>🔥 Największy GMV, buduje częstotliwość</td></tr>
+          <tr><td><strong>Usługi finansowe</strong></td><td>GrabPay, pożyczki, ubezpieczenia, <strong>Superbank</strong>, Stash</td><td>⚡ Rentowność EBITDA w H2 2026</td></tr>
+          <tr><td><strong>Reklama</strong></td><td>Promowane restauracje i sklepy w aplikacji</td><td>Wysoka marża, rośnie w tle</td></tr>
+          <tr><td>GrabAds / Enterprise</td><td>Rozwiązania dla firm, flota korporacyjna</td><td>Uzupełnienie</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat — skala i gęstość, nie technologia</h3>
+      <p>Przewaga Grab opiera się na <strong>efekcie sieciowym w skali lokalnej</strong>: więcej kierowców oznacza krótszy czas oczekiwania, co przyciąga więcej pasażerów, co przyciąga kolejnych kierowców. W dostawach ta sama gęstość obniża koszt jednej dostawy. Nowy gracz musiałby subsydiować obie strony rynku jednocześnie przez lata — co próbowały już Uber i Gojek, oba z ograniczonym skutkiem.</p>
+      <p>Drugą warstwą jest <strong>licencja bankowa Superbanku</strong>. Grab widzi historię transakcyjną milionów użytkowników i kierowców, czyli dane kredytowe, których nie ma żaden lokalny bank. To pozwala udzielać mikropożyczek z lepszą oceną ryzyka i wyższą marżą niż tradycyjne instytucje.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Rynek docelowy:</strong> Azja Południowo-Wschodnia, ponad 650 mln mieszkańców, klasa średnia rosnąca najszybciej na świecie po Indiach</li>
+        <li><strong>Penetracja usług cyfrowych:</strong> wciąż niska w porównaniu z Chinami czy USA — to rynek na wczesnym etapie, nie nasycony</li>
+        <li><strong>Usługi finansowe:</strong> setki milionów ludzi bez dostępu do konta bankowego; mikropożyczki i płatności to największa nieobsłużona przestrzeń</li>
+        <li><strong>Struktura rynku:</strong> praktyczny duopol Grab–GoTo w Indonezji, wyraźna dominacja Grab w pozostałych krajach</li>
+        <li><strong>Ryzyko regulacyjne:</strong> presja na opłaty w aplikacjach dostawczych (również w USA), przepisy o statusie kierowców, lokalne wymogi dotyczące danych</li>
+        <li><strong>Cykliczność:</strong> umiarkowana — przejazdy i dostawy zależą od konsumpcji, ale to wydatki codzienne, nie luksusowe</li>
+      </ul>
+      <div class="alert alert-success"><strong>Argument strukturalny:</strong> Grab jest tym dla Azji Południowo-Wschodniej, czym Meituan dla Chin — pojedynczą aplikacją obsługującą codzienne życie setek milionów ludzi na rynku, który dopiero się cyfryzuje. Ten rodzaj pozycji buduje się raz i trudno go potem odebrać.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="chips"><span class="chip emerald">Konsumenci — dziesiątki milionów użytkowników</span><span class="chip">Kierowcy i kurierzy (partnerzy)</span><span class="chip">Restauracje i sklepy</span><span class="chip">Reklamodawcy</span></div>
+      <p>Grab obsługuje rynek trójstronny: konsumentów, partnerów zarobkowych (kierowcy, kurierzy) i sprzedawców. Brak jakiejkolwiek koncentracji — przychody rozproszone na miliony pojedynczych transakcji, co czyni model wyjątkowo odpornym na utratę pojedynczego klienta.</p>
+      <p>Wskaźnikiem zdrowia bazy jest <strong>GMV on-demand: $6,5 mld w kwartale, wzrost o 21% rok do roku i to z przyspieszeniem</strong>. To liczba, która pokazuje, że użytkownicy nie tylko zostają, ale wydają coraz więcej. Program lojalnościowy GrabUnlimited dodatkowo podnosi częstotliwość korzystania.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Przychody</th><th>Zmiana</th><th>Adj. EBITDA</th><th>Zysk netto</th></tr></thead>
+        <tbody>
+          <tr><td>Q2 2025</td><td>~$817M</td><td>—</td><td>$109M (13,3% marży)</td><td>~$20M</td></tr>
+          <tr><td><strong>Q2 2026</strong></td><td><strong>$997M</strong></td><td style="color:var(--buy)">+22%</td><td><strong>$168M (16,9%)</strong> +54%</td><td style="color:var(--strong-buy)"><strong>$235M</strong> (+$215M)</td></tr>
+          <tr><td><strong>2026E (podniesione)</strong></td><td><strong>$4,10–4,15 mld</strong></td><td style="color:var(--buy)">~+20%</td><td><strong>$720–740M</strong></td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Skąd biorą się pieniądze</h3>
+      <p>Grab zarabia na <strong>prowizji od wartości transakcji</strong> (take rate) — procent od każdego przejazdu i każdej dostawy — oraz coraz bardziej na usługach finansowych i reklamie, które mają dużo wyższą marżę. Model jest w pełni powtarzalny: użytkownik korzysta z aplikacji kilka razy w tygodniu.</p>
+      <div class="alert alert-success"><strong>Najważniejsza zmiana:</strong> zysk netto skoczył z około $20 mln do <strong>$235 mln rok do roku</strong>, a marża EBITDA z 13,3% do 16,9%. Grab przestał być spółką „obiecującą rentowność" i stał się spółką rentowną. Do tego pion finansowy ma osiągnąć dodatnią EBITDA w drugiej połowie 2026 — to zdejmuje ostatni segment, który dotąd palił gotówkę.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $3,74</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>~$13,8 mld</td><td>—</td></tr>
+          <tr><td>Gotówka netto</td><td>istotna (miliardy, bez zadłużenia netto)</td><td style="color:var(--buy)">Finansuje buyback bez długu</td></tr>
+          <tr><td><strong>P/S (2026E $4,12 mld)</strong></td><td><strong>~3,3×</strong></td><td style="color:var(--neutral)">Umiarkowane dla 20% wzrostu</td></tr>
+          <tr><td><strong>EV/EBITDA (2026E $730M)</strong></td><td><strong>~17×</strong></td><td style="color:var(--buy)">✅ Rozsądne przy EBITDA rosnącej +54%</td></tr>
+          <tr><td>P/E</td><td>wysokie, ale zysk dopiero się materializuje</td><td>Mnożnik szybko spada wraz z rentownością</td></tr>
+          <tr><td>Buyback</td><td>$1,75 mld = ~12,7% kapitalizacji</td><td style="color:var(--strong-buy)">✅ Bardzo duży program jak na tę skalę</td></tr>
+          <tr><td>Cel analityków</td><td>$5,86 (mediana); niektóre źródła $7,41; BofA obniżył do $4,90</td><td style="color:var(--buy)">+31–98% | Strong Buy, 26 analityków</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Uwaga do celów analityków:</strong> rozrzut jest szeroki — od $4,90 (BofA, po obniżce) przez $5,86 (mediana) do $7,41. Nawet najbardziej ostrożny z tych celów leży <strong>o ponad 30% powyżej obecnej ceny</strong>, co samo w sobie mówi o skali rozjazdu między wyceną a postrzeganiem fundamentów.</div>
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 mies.</div><div class="fair-value-range">$5,00 – $6,50</div><div class="fair-value-note">Baza: EV/EBITDA 20–24× na 2027E przy utrzymaniu tempa wzrostu EBITDA | Scenariusz negatywny (spowolnienie GMV, presja regulacyjna): $2,80–3,20 | Scenariusz pozytywny (finanse rentowne, marża EBITDA &gt;20%): $7,50–8,50 | Przy $3,74 potencjał +34–74%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Q2 2026</th><th>Rok wcześniej</th><th>Zmiana</th></tr></thead>
+        <tbody>
+          <tr><td>Marża adj. EBITDA</td><td><strong>16,9%</strong></td><td>13,3%</td><td style="color:var(--buy)">+3,6 pp</td></tr>
+          <tr><td>Adj. EBITDA</td><td>$168M</td><td>$109M</td><td style="color:var(--buy)">+54%</td></tr>
+          <tr><td>Zysk netto</td><td>$235M</td><td>~$20M</td><td style="color:var(--strong-buy)">+$215M</td></tr>
+          <tr><td>Przychody</td><td>$997M</td><td>~$817M</td><td style="color:var(--buy)">+22%</td></tr>
+        </tbody>
+      </table></div>
+      <p>Widać tu klasyczną <strong>dźwignię operacyjną platformy</strong>: przychody rosną o 22%, a EBITDA o 54%, bo koszty infrastruktury i technologii są w dużej mierze stałe. Każdy dodatkowy przejazd czy dostawa w istniejącym mieście kosztuje niewiele więcej, a przynosi pełną prowizję.</p>
+      <p>Kluczowy element układanki: <strong>pion usług finansowych ma osiągnąć dodatnią EBITDA w drugiej połowie 2026</strong>. To był ostatni segment dokładający do interesu — jego przejście na plus oznacza, że cała grupa zaczyna generować gotówkę ze wszystkich linii jednocześnie.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <p>Grab wyszedł z ery SPAC z <strong>bardzo dużą poduszką gotówkową i bez istotnego zadłużenia netto</strong> — to spuścizna po pozyskaniu kapitału w 2021 roku. Ta pozycja pozwala dziś finansować przejęcia (Stash, konsolidacja Superbanku) oraz skup akcji własnych bez zaciągania długu i bez emisji nowych akcji.</p>
+      <p>Program skupu został rozszerzony do <strong>$1,75 mld, z czego $400 mln zrealizowano już w pierwszej połowie 2026</strong>. Przy kapitalizacji około $13,8 mld oznacza to możliwość umorzenia blisko 13% wszystkich akcji. Dla spółki technologicznej z tego regionu to bardzo agresywny zwrot kapitału — i sygnał, że zarząd uważa kurs za zaniżony.</p>
+      <div class="alert alert-success"><strong>Warto zauważyć sprzeczność:</strong> spółka kupuje własne akcje za miliardy, twierdząc, że są tanie — a jednocześnie prezes sprzedaje swoje pakiety. Te dwa sygnały wykluczają się nawzajem i to napięcie jest dziś sednem sporu o GRAB.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">💰</div><div class="catalyst-body"><h4>Przełom w rentowności — zysk $235 mln zamiast $20 mln</h4><p>Grab przestał być spółką „na obietnicę". Marża EBITDA 16,9% z 13,3%, wzrost EBITDA o 54% przy przychodach +22% — dźwignia operacyjna działa dokładnie tak, jak zakładał model platformowy.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏦</div><div class="catalyst-body"><h4>Usługi finansowe wychodzą na plus w H2 2026</h4><p>Ostatni segment palący gotówkę zaczyna zarabiać. Superbank z danymi transakcyjnymi milionów użytkowników to potencjalnie najbardziej marżowa część grupy w perspektywie kilku lat.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔄</div><div class="catalyst-body"><h4>Buyback $1,75 mld — blisko 13% kapitalizacji</h4><p>Zarząd finansuje skup z własnej gotówki, bez długu i bez rozwodnienia. Przy tak niskim kursie każda wykupiona akcja podnosi zysk na akcję pozostałych.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🌏</div><div class="catalyst-body"><h4>Pozycja quasi-monopolisty na rynku 650 mln ludzi</h4><p>Duopol z GoTo w Indonezji, dominacja w reszcie regionu. Efekt sieciowy zbudowany przez dekadę subsydiów jest praktycznie nie do powtórzenia przez nowego gracza.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Kurs przy rocznym dnie mimo rekordowych wyników</h4><p>Nawet najniższy cel analityków ($4,90 od BofA po obniżce) leży 31% powyżej obecnej ceny, mediana $5,86 daje +57%. Konsensus 26 analityków: Strong Buy.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🚩</div><div class="catalyst-body"><h4>Prezes wyprzedaje akcje — najpoważniejszy sygnał ostrzegawczy</h4><p>Anthony Tan sprzedawał wielokrotnie, sprowadzając bezpośredni pakiet klasy A do 28 498 akcji. Sprzedaż insiderów nigdy nie przesądza sprawy, ale gdy założyciel redukuje udział w momencie, gdy spółka ogłasza rekordowe wyniki i skup akcji, jest to sprzeczność wymagająca wyjaśnienia.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🐅</div><div class="catalyst-body"><h4>Tiger Global wyszedł całkowicie, Uber wycofał człowieka z rady</h4><p>Fundusz, który był jednym z filarów akcjonariatu, zlikwidował pozycję. Dara Khosrowshahi opuścił radę dyrektorów (choć Uber zachował udział ekonomiczny). To odpływ inwestorów, którzy znali spółkę od środka.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚖️</div><div class="catalyst-body"><h4>Presja regulacyjna na opłaty w aplikacjach</h4><p>Wezwanie amerykańskiego senatora do zbadania ukrytych opłat w aplikacjach dostawczych zapowiada szerszy trend. Regulacja take rate lub statusu kierowców uderzyłaby bezpośrednio w marże.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🌐</div><div class="catalyst-body"><h4>Ryzyko walutowe i makro ośmiu rynków naraz</h4><p>Przychody w rupiach, ringgitach, bahtach i dongach, raportowane w dolarach. Osłabienie walut regionu obniża wyniki niezależnie od tego, jak dobrze idzie biznes operacyjnie.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Rok w miejscu — koszt utraconych możliwości</h4><p>Kurs blisko rocznego dna mimo poprawiających się wyników pokazuje, że rynek konsekwentnie odmawia tej spółce wyższego mnożnika. Kapitał zamrożony w GRAB przez rok nie pracował, podczas gdy inne aktywa rosły.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>Zasięg</th><th>Przewaga</th><th>Pozycja vs Grab</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Grab</strong></td><td>8 krajów SEA</td><td>Skala regionalna, superapp, Superbank</td><td>🥇 Lider regionu</td></tr>
+          <tr><td>GoTo (Gojek + Tokopedia)</td><td>Głównie Indonezja</td><td>Silna pozycja lokalna, e-commerce</td><td>Główny rywal na największym rynku</td></tr>
+          <tr><td>Sea Limited (Shopee)</td><td>Cała SEA</td><td>E-commerce i płatności, wchodzi w dostawy</td><td>Konkurencja o portfel klienta, nie o przejazdy</td></tr>
+          <tr><td>Foodpanda (Delivery Hero)</td><td>Dostawy</td><td>Doświadczenie europejskie</td><td>Traci udziały, wycofuje się z rynków</td></tr>
+          <tr><td>Lokalni gracze (Be, Xanh SM)</td><td>Wietnam i inne</td><td>Znajomość rynku, wsparcie lokalne</td><td>Presja punktowa na pojedynczych rynkach</td></tr>
+        </tbody>
+      </table></div>
+      <p>Pozycja: <strong>najsilniejsza platforma regionalna</strong>, ale nie bez rywali. Realna walka toczy się w Indonezji z GoTo oraz o to, kto pierwszy przekona użytkownika, by w jednej aplikacji robił wszystko — tu Sea Limited z Shopee wchodzi od strony zakupów, a Grab od strony mobilności.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>52-tygodniowe minimum</td><td>$3,39</td><td>Świeże dno, testowane w lipcu</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>~$3,74</strong></td><td>+10% nad dnem, po skoku o 6,4% na wynikach</td></tr>
+          <tr><td>Wsparcie S1</td><td>$3,39–3,50</td><td>Roczne minimum — kluczowa obrona</td></tr>
+          <tr><td>Wsparcie S2</td><td>$3,00</td><td>Poziom psychologiczny przy przebiciu</td></tr>
+          <tr><td>Opór R1</td><td>$4,20–4,50</td><td>Strefa konsolidacji z wiosny</td></tr>
+          <tr><td>Opór R2</td><td>$4,90–5,00</td><td>Najniższy cel analityków</td></tr>
+          <tr><td>Opór R3</td><td>$5,86</td><td>Mediana celów</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Obrona $3,50 i wybicie ponad $4,20</li><li>Realizacja buybacku wspiera kurs</li><li>Potwierdzenie rentowności pionu finansowego w Q3</li><li>Ruch ku $4,90–5,00</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Przebicie $3,39 z wolumenem</li><li>Kolejne transze sprzedaży insiderów</li><li>Konkretne działania regulacyjne wobec opłat</li><li>Zejście ku $3,00</li></ul></div>
+      </div>
+      <p>Obraz techniczny jest słaby — kurs porusza się w trendzie bocznym z tendencją spadkową, mimo systematycznie poprawiających się wyników. Sierpniowy skok o 6,4% na wynikach to pierwszy od miesięcy sygnał, że popyt potrafi się pojawić. Kluczowe: czy obroni się poziom $3,50.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Wyniki właśnie się wypaliły jako katalizator, sentyment psuty przez sprzedaż insiderów. Kurs przy dnie, ale bez impulsu do wzrostu do wyników Q3.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO / TRZYMAJ</div><div class="rating-note">Rentowność potwierdzona, finanse wychodzą na plus, buyback 13% kapitalizacji. Nawet najniższy cel analityków daje +31%. Cel $5,00–5,86.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Quasi-monopol na rynku 650 mln ludzi, który dopiero się cyfryzuje, z opcją na bankowość. Profil podobny do wczesnego Meituana.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Dla nowej pozycji:</strong> obecny poziom $3,74 jest atrakcyjnym punktem wejścia — blisko dna, po potwierdzeniu rentowności</li>
+        <li><strong>Transze:</strong> $3,60–3,80 (pierwsza), $3,20–3,40 (druga przy teście dna)</li>
+        <li><strong>Realizacja zysku:</strong> częściowa przy $4,90, reszta w okolicach $5,80</li>
+        <li><strong>Kluczowy warunek:</strong> obrona poziomu $3,39; przebicie z wolumenem wymaga ponownej oceny</li>
+        <li><strong>Monitoruj:</strong> dalsze transakcje insiderów oraz tempo realizacji buybacku</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$5,00 – $6,50</div><div class="fair-value-note">Scenariusz negatywny: $2,80–3,20 | Scenariusz pozytywny: $7,50–8,50</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by trzymać</h4><ul>
+          <li><strong>Przełom w rentowności jest faktem</strong> — zysk $235 mln zamiast $20 mln, EBITDA +54%, marża z 13,3% do 16,9%, prognozy podniesione</li>
+          <li><strong>Buyback $1,75 mld to blisko 13% spółki</strong> — finansowany gotówką, bez długu i rozwodnienia; zarząd głosuje portfelem, że akcje są tanie</li>
+          <li><strong>Quasi-monopol na rynku 650 mln ludzi</strong> z opcją bankową (Superbank), a najniższy cel analityków leży 31% wyżej</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by sprzedać</h4><ul>
+          <li><strong>Prezes wyprzedaje akcje</strong> — bezpośredni pakiet klasy A spadł do 28 498 sztuk; to sprzeczne z narracją o niedowartościowaniu</li>
+          <li><strong>Tiger Global wyszedł całkowicie, człowiek Ubera opuścił radę</strong> — odpływ inwestorów znających spółkę od środka</li>
+          <li><strong>Rok w miejscu przy poprawiających się wynikach</strong> — rynek konsekwentnie odmawia wyższego mnożnika; kapitał nie pracuje</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> kolejne duże transze sprzedaży przez zarząd albo konkretne działania regulacyjne ograniczające prowizje → zejście poniżej $3,00.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> Q3 z potwierdzoną rentownością pionu finansowego, dalszym wzrostem GMV i widoczną realizacją buybacku → powrót do $4,90–5,00.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Grab jest dziś spółką, w której <strong>rachunek wyników i wykres opowiadają sprzeczne historie</strong>. Operacyjnie firma właśnie przekroczyła próg, na który inwestorzy czekali od debiutu w 2021 roku: przychody $997 mln (+22%), zysk netto $235 mln zamiast $20 mln rok wcześniej, marża EBITDA w górę z 13,3% do 16,9%, podniesione prognozy i skup akcji rozszerzony do $1,75 mld — blisko 13% całej spółki. To nie jest kwartał „lepszy niż oczekiwano". To jest moment, w którym model biznesowy przestał być hipotezą.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">A jednak kurs stoi kilkanaście procent nad rocznym minimum. Powód nie leży w liczbach, lecz w tym, <strong>kto sprzedaje</strong>: prezes i współzałożyciel Anthony Tan wielokrotnie redukował pakiet, sprowadzając bezpośredni udział w akcjach klasy A do 28 498 sztuk; Tiger Global zlikwidował pozycję w całości; Dara Khosrowshahi opuścił radę dyrektorów. Rynek stanął przed pytaniem, na które nie ma dobrej odpowiedzi: dlaczego spółka kupuje własne akcje za miliardy, twierdząc, że są tanie, skoro ludzie znający ją najlepiej robią dokładnie odwrotnie?</p>
+
+      <div class="decision-box">
+        <h4>🎯 Twój dylemat: sprzedać na zero po roku?</h4>
+        <p>Rok w miejscu przy poprawiających się wynikach to frustrujące doświadczenie i zrozumiałe, że skłania do wyjścia. Warto jednak rozdzielić dwie zupełnie różne kwestie, które łatwo pomylić.</p>
+        <div class="decision-grid">
+          <div>
+            <h5 style="color:var(--strong-buy)">Argument za trzymaniem</h5>
+            <p>Twoja cena zakupu jest informacją o przeszłości, nie o spółce. Pytanie brzmi nie „czy odrobiłem stratę", lecz <strong>„czy kupiłbym GRAB dzisiaj po $3,74"</strong>. Jeśli patrzysz na rekordowy kwartał, rentowność po raz pierwszy w tej skali, buyback 13% kapitalizacji i najniższy cel analityków 31% wyżej — odpowiedź brzmi raczej tak. Wtedy sprzedaż na zero byłaby wyjściem dokładnie w momencie, gdy teza zaczęła się materializować.</p>
+          </div>
+          <div>
+            <h5 style="color:var(--strong-sell)">Argument za sprzedażą</h5>
+            <p>Rok to wystarczająco długo, by ocenić, czy rynek chce wyceniać tę spółkę wyżej — i konsekwentnie nie chce, mimo dowodów. Do tego dochodzi sygnał, którego nie da się zignorować: <strong>założyciel wychodzi</strong>. Jeśli masz lepsze pomysły na ten kapitał, a GRAB kosztuje Cię głównie cierpliwość i nerwy, wyjście bez straty jest rozsądnym zamknięciem nieudanej pozycji. Nie każda inwestycja musi się udać.</p>
+          </div>
+        </div>
+        <p style="margin-top:16px"><strong>Rozwiązanie pośrednie, które warto rozważyć:</strong> sprzedaż połowy pozycji teraz i pozostawienie reszty do wyników Q3 (listopad). Odzyskujesz część kapitału, zdejmujesz presję psychologiczną, a jednocześnie zachowujesz ekspozycję na scenariusz, w którym rentowność pionu finansowego zostaje potwierdzona i kurs wraca w okolice $5. To rozwiązanie nie jest optymalne w żadnym pojedynczym scenariuszu, ale dobrze znosi oba.</p>
+      </div>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Trwała rentowność.</strong> Zysk $235 mln i marża EBITDA 16,9% przy wzroście przychodów o 22% — warunek spełniony i to z nawiązką.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Zwrot kapitału do akcjonariuszy.</strong> Buyback rozszerzony do $1,75 mld, $400 mln już wykonane, finansowany z gotówki bez zadłużania spółki.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Rentowność usług finansowych.</strong> Zapowiedziana na drugą połowę 2026 — do potwierdzenia w wynikach za Q3. To domknęłoby ostatni segment palący gotówkę.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Zaufanie insiderów.</strong> Sprzedaż akcji przez prezesa i wyjście Tiger Global to sygnał odwrotny do tego, którego oczekiwalibyśmy przy niedowartościowanej spółce.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Akceptacja rynku.</strong> Mimo dowodów rynek nie podnosi mnożnika. Potrzebne dwa–trzy kwartały konsekwentnych wyników, żeby to przełamać.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Listopad 2026</strong></td><td>Wyniki Q3 2026</td><td>Test zapowiedzi rentowności pionu finansowego — najważniejszy pojedynczy katalizator</td></tr>
+            <tr><td>H2 2026, na bieżąco</td><td>Realizacja buybacku ($1,35 mld pozostałe)</td><td>Realny popyt na akcje z rynku; wsparcie kursu i wzrost zysku na akcję</td></tr>
+            <tr><td>H2 2026, na bieżąco</td><td>Zgłoszenia transakcji insiderów (formularze SEC)</td><td>Czy sprzedaż prezesa się zatrzymała — kluczowy sygnał sentymentu</td></tr>
+            <tr><td>2027</td><td>Pełny rok rentowności grupy</td><td>Dopiero to może wymusić przeszacowanie mnożnika przez instytucje</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Wzrost GMV on-demand</td><td>+21% r/r</td><td>&lt; 12%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża adj. EBITDA</td><td>16,9%</td><td>spadek poniżej 14%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>EBITDA usług finansowych</td><td>bliska zeru, plan na H2 2026</td><td>brak plusa do końca 2026</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Transakcje insiderów</td><td>sprzedaż prezesa i funduszy</td><td>kolejne duże transze</td><td><span class="mon-dot r"></span>Ryzyko</td></tr>
+            <tr><td>Realizacja buybacku</td><td>$400 mln z $1,75 mld</td><td>zatrzymanie programu</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Kurs vs $3,39</td><td>~10% powyżej</td><td>trwałe przebicie w dół</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Jeśli trzymasz:</strong> horyzont minimum do wyników Q3 (listopad 2026) — to moment weryfikacji najważniejszej zapowiedzi zarządu</li>
+          <li><strong>Jeśli sprzedajesz:</strong> obecny poziom po skoku na wynikach jest lepszy niż okolice $3,39 sprzed dwóch tygodni</li>
+          <li><strong>Wariant pośredni:</strong> redukcja o połowę teraz, reszta pod wyniki Q3</li>
+          <li><strong>Dla powiększania pozycji:</strong> transze $3,60–3,80 i $3,20–3,40, wyłącznie jeśli akceptujesz ryzyko związane ze sprzedażą insiderów</li>
+          <li><strong>Realizacja zysku:</strong> częściowa przy $4,90 (najniższy cel analityków), reszta w okolicach $5,80</li>
+          <li><strong>Wyjście z tezy:</strong> trwałe przebicie $3,39 albo kolejna duża sprzedaż przez zarząd</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--buy)">📈 KUPNO / TRZYMAJ — fundamenty przekroczyły próg, zaufanie jeszcze nie</div>
+        <p>Z punktu widzenia samej analizy Grab wygląda dziś lepiej niż kiedykolwiek: jest rentowny, rośnie o ponad 20%, kupuje własne akcje za 13% kapitalizacji i zajmuje pozycję trudną do podważenia na rynku 650 milionów ludzi, który dopiero przenosi się do świata cyfrowego. Przy $3,74 płacisz około 17-krotność tegorocznej EBITDA za spółkę, której EBITDA rośnie o 54% rocznie. Gdyby oceniać wyłącznie liczby, byłoby to wyraźne kupno.</p>
+        <p>Powstrzymuje mnie jedna rzecz, której nie da się zważyć w arkuszu: <strong>ludzie znający tę spółkę najlepiej zmniejszają w niej udział</strong>. To nie przesądza sprawy — założyciele sprzedają akcje z wielu powodów, a Tiger Global likwidował wtedy wiele pozycji naraz. Ale w połączeniu z rokiem, w którym rynek uparcie nie chciał podnieść wyceny mimo dobrych wyników, każe traktować tę inwestycję jako pozycję <strong>umiarkowanej wielkości i z konkretnym terminem weryfikacji</strong>, a nie jako fundament portfela. Wyniki Q3 w listopadzie są tym terminem.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno / Trzymaj</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$5,00–6,50</b></div>
+          <div><span>Scenariusz negatywny</span><b>$2,80–3,20</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$7,50–8,50</b></div>
+          <div><span>Sugerowana pozycja</span><b>2–4% portfela</b></div>
+          <div><span>Termin weryfikacji</span><b>Wyniki Q3 — listopad</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 6 sierpnia 2026 | Dane: Grab IR (Q2 2026, 4 sierpnia), SEC 6-K, Investing.com, Simply Wall St, StocksToTrade | Nie stanowi porady inwestycyjnej — decyzja o sprzedaży zależy od Twojej sytuacji, horyzontu i alternatyw
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

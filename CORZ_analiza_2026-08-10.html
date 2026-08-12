@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORZ — Core Scientific | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#f43f5e; --accent2:#fda4af; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#1a0510 0%,#0f1117 50%,#160812 100%); border-bottom:1px solid var(--border); padding:32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(244,63,94,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.buy { background:rgba(76,175,80,0.15); border:2px solid var(--buy); color:var(--buy); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.rose { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#fff; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.rose { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); } .chip.red { border-color:var(--sell); color:var(--sell); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.strong-buy { color:var(--strong-buy); } .rating-box .rating-text.neutral { color:var(--neutral); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--strong-buy); } .bear-box ul li::before { color:var(--strong-sell); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(244,63,94,0.08),rgba(253,164,175,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(244,63,94,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .alert-danger { background:rgba(213,0,0,0.10); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(0,200,83,.15); color:#00c853; border:1px solid rgba(0,200,83,.4); }
+  .ck.no  { background:rgba(213,0,0,.13);  color:#ff6b6b; border:1px solid rgba(213,0,0,.35); }
+  .ck.wait{ background:rgba(255,215,64,.13);color:#ffd740; border:1px solid rgba(255,215,64,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#00c853; } .mon-dot.y { background:#ffd740; } .mon-dot.r { background:#ff6d00; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+  .cmp-table th { background:rgba(244,63,94,.10); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: CORZ</div>
+    <div class="company-name">Core Scientific, Inc.</div>
+    <div class="company-sub">Kolokacja AI/HPC · 437 MW rozliczanych · Kontrakty: CoreWeave, AMD ($14 mld / 15 lat) · 1,1 GW zakontraktowane · Austin, TX</div>
+    <div class="header-meta">
+      <div class="rating-badge buy">📈 KUPNO (spekulacyjne)</div>
+      <span class="meta-tag">AI Data Centers</span>
+      <span class="meta-tag">Dodatnia EBITDA</span>
+      <span class="meta-tag">Ex-górnik bitcoina</span>
+      <span class="meta-tag">Wysoka zmienność</span>
+      <div class="price-display">
+        <div class="price-main">$20,38</div>
+        <div class="price-sub">10.08.2026 | 52W: $13,14–$30,46</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (10.08.2026)</div><div class="metric-value">$20,38</div><div class="metric-detail">-33% od szczytu $30,46 | +55% od dna</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$6,55 mld</div><div class="metric-detail">52W: $13,14–$30,46</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">$164,2 mln</div><div class="metric-detail">+42% kw/kw | kolokacja $136,7 mln</div></div>
+    <div class="metric-card"><div class="metric-label">Adj. EBITDA</div><div class="metric-value green">+$41,1 mln</div><div class="metric-detail">Z $8,9 mln kwartał wcześniej — dodatnia!</div></div>
+    <div class="metric-card"><div class="metric-label">Moc rozliczana</div><div class="metric-value rose">437 MW</div><div class="metric-detail">Run-rate przychodów ok. $635 mln rocznie</div></div>
+    <div class="metric-card"><div class="metric-label">Forward P/E</div><div class="metric-value red">nie dotyczy</div><div class="metric-detail">Strata GAAP $1,15 mld — głównie warranty</div></div>
+    <div class="metric-card"><div class="metric-label">Zakontraktowana moc</div><div class="metric-value rose">1,1 GW</div><div class="metric-detail">Ponad $24 mld potencjalnych przychodów</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value green">$32–36,56</div><div class="metric-detail">+57–79% | 17 analityków, Strong Buy</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest Core Scientific?</h3>
+      <p>Core Scientific (NASDAQ: CORZ) to operator centrów danych, który przeszedł jedną z bardziej brawurowych przemian ostatnich lat: z największego kopacza bitcoina w Ameryce Północnej — i bankruta z 2022 roku — w dostawcę <strong>kolokacji o wysokiej gęstości dla obciążeń AI</strong>. Kluczowym aktywem są kampusy z gotowymi przyłączami energetycznymi w USA, zbudowane w erze kopania kryptowalut. Siedziba: Austin w Teksasie. Wyjście z upadłości nastąpiło w styczniu 2024 roku.</p>
+      <p>W październiku 2025 akcjonariusze <strong>odrzucili przejęcie przez CoreWeave</strong> za około 9 miliardów dolarów, uznając ofertę za zaniżoną. Z perspektywy czasu ta decyzja wygląda na trafną — spółka podpisała potem kontrakt z AMD i osiągnęła dodatnią EBITDA.</p>
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>Lipiec 2025</td><td>CoreWeave ogłasza przejęcie CORZ za ok. $9 mld w akcjach</td><td style="color:var(--buy)">↑ Walidacja aktywów</td></tr>
+          <tr><td><strong>30 października 2025</strong></td><td><strong>Akcjonariusze odrzucają fuzję</strong> — spółka pozostaje niezależna</td><td style="color:var(--strong-buy)">↑↑ Decyzja, która się opłaciła</td></tr>
+          <tr><td>Przełom 2025/26</td><td>Emisja obligacji zabezpieczonych na $3,3 mld, spłata kredytu terminowego $1 mld</td><td style="color:var(--buy)">↑ Samodzielne finansowanie</td></tr>
+          <tr><td>2026</td><td><strong>Kontrakt z AMD: 15 lat, ponad $14 mld, 530 MW</strong> — łączna zakontraktowana moc rośnie do 1,1 GW</td><td style="color:var(--strong-buy)">↑↑ Dywersyfikacja</td></tr>
+          <tr><td>2026</td><td>Zakup kampusu Hunt County w Teksasie za $233 mln</td><td style="color:var(--buy)">↑ Rozbudowa</td></tr>
+          <tr><td><strong>28 lipca 2026</strong></td><td><strong>Q2: przychody $164,2 mln (+42% kw/kw), kolokacja $136,7 mln, adj. EBITDA +$41,1 mln, 437 MW rozliczanych</strong></td><td style="color:var(--strong-buy)">↑↑ Przełom rentowności</td></tr>
+          <tr><td>Sierpień 2026</td><td>Kurs w okolicach $20,38 — o 33% poniżej rocznego szczytu</td><td style="color:var(--neutral)">Korekta</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Najważniejsza zmiana od poprzedniej analizy (30 lipca):</strong> spółka pokazała <strong>dodatnią skorygowaną EBITDA na poziomie $41,1 mln</strong> wobec $8,9 mln kwartał wcześniej, a moc rozliczana osiągnęła <strong>437 MW</strong> przy rocznym run-rate przychodów z kolokacji rzędu $635 mln. To już nie jest spółka obiecująca przemianę — to spółka, która ją wykonała i zaczyna na niej zarabiać.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Linia</th><th>Opis</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Kolokacja AI/HPC</strong></td><td>Wynajem mocy i przestrzeni dla klastrów GPU; chłodzenie cieczą, kontrakty 12–15 lat</td><td>🔥 $136,7 mln w Q2, marża brutto 59%</td></tr>
+          <tr><td><strong>Kopanie bitcoina</strong></td><td>Historyczny rdzeń działalności</td><td>📉 Wygaszany, moc przenoszona do AI</td></tr>
+          <tr><td><strong>Pipeline mocy</strong></td><td>Kolejne kampusy w rozbudowie, w tym Hunt County w Teksasie</td><td>⚡ Motor wzrostu na lata 2027–2030</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat — prąd i podpisy, nie technologia</h3>
+      <p>Przewaga Core Scientific nie leży w innowacji, lecz w <strong>posiadaniu gotowych przyłączy energetycznych o dużej mocy</strong>. Nowe przyłącze w USA oznacza dziś kolejkę trwającą od czterech do siedmiu lat; CORZ ma je już wybudowane, bo lata temu potrzebował ich do kopania bitcoina. Konwersja kampusu górniczego na kolokację AI jest szybsza i tańsza niż budowa od zera.</p>
+      <p>Drugą warstwą są <strong>kontrakty take-or-pay na 12–15 lat</strong> z klientami inwestycyjnego kalibru. Zamieniają one zmienny biznes energetyczny w przewidywalny strumień przypominający najem nieruchomości komercyjnych — i to właśnie ta zamiana uzasadnia zupełnie inny mnożnik wyceny niż dla kopacza kryptowalut.</p>
+      <div class="alert alert-warn"><strong>Ograniczenie fosy:</strong> przewaga czasowa jest z natury przejściowa. Jeśli sieci energetyczne przyspieszą albo pojawi się nadpodaż mocy dla centrów danych, główny argument sprzedażowy słabnie. Kolokacja to też model o niższych marżach niż usługi chmurowe — CORZ wynajmuje przestrzeń i prąd, nie sprzedaje mocy obliczeniowej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Deficyt mocy dla AI:</strong> ten sam trend, który napędza Bloom Energy i TeraWulf — brakuje gigawatów, a kolejka po przyłącza sięga końca dekady</li>
+        <li><strong>Rynek kolokacji AI:</strong> operatorzy typu neocloud (CoreWeave, Nebius, Lambda) nie budują własnych obiektów, tylko je wynajmują — model trwały i skalowalny</li>
+        <li><strong>Wartość samej mocy:</strong> rynek wycenia gotowe przyłącza w przedziale kilku milionów dolarów za megawat; przy 1,1 GW zakontraktowanych daje to wartość porównywalną z całą kapitalizacją spółki</li>
+        <li><strong>Producenci chipów jako klienci:</strong> kontrakt z AMD pokazuje nowy trend — wytwórcy procesorów sami zabezpieczają moc obliczeniową dla swoich klientów</li>
+        <li><strong>Cykliczność:</strong> historycznie skrajna, obecnie malejąca wraz z przechodzeniem na kontrakty wieloletnie</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Klient</th><th>Zakres</th><th>Charakter</th></tr></thead>
+        <tbody>
+          <tr><td><strong>AMD</strong></td><td>530 MW, 15 lat, ponad $14 mld przychodów kontraktowych</td><td style="color:var(--buy)">Producent chipów o ratingu inwestycyjnym</td></tr>
+          <tr><td><strong>CoreWeave</strong></td><td>ok. 590 MW w sześciu lokalizacjach</td><td style="color:var(--neutral)">Operator chmury AI, sam mocno zadłużony</td></tr>
+          <tr><td>Łącznie</td><td colspan="2"><strong>1,1 GW zakontraktowane, ponad $24 mld potencjalnych przychodów</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p>Model opiera się na kontraktach take-or-pay negocjowanych w megawatach, o horyzoncie 12–15 lat. Kontrakt z AMD ma szczególne znaczenie, bo <strong>dywersyfikuje ryzyko kontrahenta</strong>: dotąd największym klientem był CoreWeave — ta sama firma, której ofertę przejęcia akcjonariusze odrzucili, i która sama finansuje się kapitałem zewnętrznym.</p>
+      <div class="alert alert-info"><strong>Poprawa profilu ryzyka:</strong> w poprzedniej analizie wskazywałem koncentrację na CoreWeave jako główne ryzyko biznesowe. Kontrakt z AMD — firmą o kapitalizacji przekraczającej 800 miliardów dolarów i ratingu inwestycyjnym — istotnie tę ekspozycję rozkłada. Ryzyko łańcuchowe nie zniknęło, ale przestało być jednopunktowe.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Przychody</th><th>Kolokacja</th><th>Adj. EBITDA</th></tr></thead>
+        <tbody>
+          <tr><td>Q2 2025</td><td>$78,6 mln</td><td>$10,6 mln</td><td>—</td></tr>
+          <tr><td>Q1 2026</td><td>~$115 mln</td><td>rosnąca</td><td>+$8,9 mln</td></tr>
+          <tr><td><strong>Q2 2026</strong></td><td><strong>$164,2 mln (+42% kw/kw)</strong></td><td><strong>$136,7 mln</strong> (marża 59%)</td><td style="color:var(--buy)"><strong>+$41,1 mln</strong></td></tr>
+          <tr><td>Run-rate (od lipca)</td><td>—</td><td>ok. $635 mln rocznie</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Jak czytać te liczby</h3>
+      <p>Kluczowa metryka to <strong>moc rozliczana: 437 MW w połowie lipca</strong>, co przekłada się na roczny run-rate przychodów z kolokacji rzędu 635 milionów dolarów. To znacznie więcej niż wskazują kwartalne przychody, bo część mocy została uruchomiona dopiero w trakcie kwartału.</p>
+      <p>Marża brutto na kolokacji sięga <strong>59%</strong> — to poziom typowy dla dojrzałych operatorów centrów danych i zupełnie inny świat niż kopanie bitcoina, gdzie zysk zależał od kursu kryptowaluty minus koszt prądu.</p>
+      <div class="alert alert-success"><strong>Przełom, na który czekał rynek:</strong> skorygowana EBITDA wzrosła z $8,9 mln do <strong>$41,1 mln w jednym kwartale</strong>. Spółka nie tylko przestała palić gotówkę na poziomie operacyjnym, ale zaczęła ją generować w tempie, które przy dalszej konwersji mocy szybko się zwielokrotni.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $20,38</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>~$6,55 mld</td><td>Poniżej odrzuconej oferty $9 mld</td></tr>
+          <tr><td>Płynność</td><td>$1,8 mld</td><td style="color:var(--buy)">Komfortowa</td></tr>
+          <tr><td>Obligacje zabezpieczone</td><td>$3,3 mld</td><td style="color:var(--sell)">Wysoka dźwignia</td></tr>
+          <tr><td>Wartość przedsiębiorstwa (EV)</td><td>~$8,05 mld</td><td>—</td></tr>
+          <tr><td>EV / run-rate przychodów ($635 mln)</td><td>ok. 12,7×</td><td style="color:var(--neutral)">Wysoko, ale run-rate szybko rośnie</td></tr>
+          <tr><td><strong>EV / zakontraktowane przychody ($24 mld)</strong></td><td><strong>ok. 0,34×</strong></td><td style="color:var(--buy)">✅ Kluczowa miara — bardzo nisko</td></tr>
+          <tr><td>EV / annualizowana adj. EBITDA ($164 mln)</td><td>ok. 49×</td><td style="color:var(--neutral)">Spada szybko wraz z konwersją mocy</td></tr>
+          <tr><td>Cel analityków (17 firm)</td><td>$32,05–36,56 · Strong Buy</td><td style="color:var(--strong-buy)">+57–79%</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td><strong>nie dotyczy</strong></td><td>Strata netto $1,15 mld w Q2, głównie z przeszacowania warrantów</td></tr>
+          <tr><td><strong>Forward P/E (FY2026)</strong></td><td><strong>nie dotyczy</strong></td><td>Konsensus nie zakłada zysku netto w tym roku obrotowym</td></tr>
+          <tr><td><strong>Forward P/E (FY2027)</strong></td><td><strong>brak wiarygodnych danych</strong></td><td>Zależny od tempa oddawania mocy; prognozy o dużym rozrzucie</td></tr>
+          <tr><td>Skorygowana EBITDA (annualizowana)</td><td>ok. $164 mln</td><td style="color:var(--buy)">Dodatnia i rosnąca — kwartał do kwartału +362%</td></tr>
+          <tr><td>Marża brutto na kolokacji</td><td>59%</td><td>Poziom typowy dla dojrzałych operatorów DC</td></tr>
+          <tr><td>Peer: TeraWulf, MARA</td><td>również nierentowne w ujęciu GAAP</td><td>Cała grupa wyceniana przez moc i kontrakty, nie przez zysk</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> Forward P/E nie ma tu zastosowania i nie będzie miał przez najbliższy rok, bo <strong>strata netto $1,15 mld wynika przede wszystkim z przeszacowania warrantów</strong>, a nie z działalności operacyjnej. To ta sama mechanika, którą opisywałem przy TeraWulf: wzrost kursu akcji podnosi wartość zobowiązania z tytułu warrantów i generuje stratę księgową bez wypływu gotówki. Właściwymi miarami są tu <strong>skorygowana EBITDA (dodatnia, $41,1 mln w kwartale)</strong> oraz relacja wartości przedsiębiorstwa do zakontraktowanych przychodów, wynosząca około 0,34×.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$27 – $36</div><div class="fair-value-note">Baza: EV/zakontraktowane przychody 0,45–0,60× przy terminowej konwersji mocy | Cele analityków $32,05–36,56 (Strong Buy, 17 firm) | Scenariusz negatywny (opóźnienia, problemy CoreWeave, odwrót od AI): $12–15 | Scenariusz pozytywny (nowe kontrakty klasy AMD, EBITDA powyżej $400 mln): $42–50 | Przy $20,38 potencjał od -30% do +77%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Q2 2026</th><th>Q1 2026</th><th>Zmiana</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$164,2 mln</td><td>~$115 mln</td><td style="color:var(--buy)">+42%</td></tr>
+          <tr><td>Zysk brutto</td><td>$70,0 mln</td><td>—</td><td>Marża na kolokacji 59%</td></tr>
+          <tr><td><strong>Skorygowana EBITDA</strong></td><td style="color:var(--buy)"><strong>+$41,1 mln</strong></td><td>+$8,9 mln</td><td style="color:var(--strong-buy)">+362%</td></tr>
+          <tr><td>Wynik netto (GAAP)</td><td>-$1,15 mld</td><td>ujemny</td><td style="color:var(--neutral)">Głównie przeszacowanie warrantów</td></tr>
+        </tbody>
+      </table></div>
+      <p>Dźwignia operacyjna działa tu wzorcowo: przychody wzrosły o 42%, a skorygowana EBITDA niemal pięciokrotnie. Powód jest strukturalny — koszty stałe kampusu (obsługa, ochrona, część infrastruktury) rozkładają się na coraz większą liczbę rozliczanych megawatów, więc każdy dodatkowy megawat dokłada nieproporcjonalnie dużo do wyniku.</p>
+      <div class="alert alert-warn"><strong>Uwaga na stratę netto:</strong> $1,15 mld brzmi katastrofalnie, ale to w przeważającej części <strong>pozycja niegotówkowa</strong> wynikająca z wyceny warrantów. Przy analizie tej spółki — podobnie jak przy TeraWulf — dolna linia rachunku wyników jest bezużyteczna. Patrz na skorygowaną EBITDA, marżę na kolokacji i liczbę rozliczanych megawatów.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Płynność (koniec kwartału)</td><td><strong>$1,8 mld</strong></td><td>Wystarczająca na bieżącą rozbudowę</td></tr>
+          <tr><td>Obligacje zabezpieczone</td><td>$3,3 mld</td><td style="color:var(--sell)">Główne źródło finansowania</td></tr>
+          <tr><td>Spłacony kredyt terminowy</td><td>$1 mld</td><td style="color:var(--buy)">Uporządkowanie struktury długu</td></tr>
+          <tr><td>Ostatnia akwizycja</td><td>$233 mln</td><td>Kampus Hunt County, Teksas</td></tr>
+          <tr><td>Warranty</td><td>zobowiązanie wyceniane rynkowo</td><td style="color:var(--neutral)">Rośnie wraz z kursem — źródło straty księgowej</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Kapitałochłonność pozostaje głównym ryzykiem finansowym.</strong> Budowa gigawatów mocy dla AI pochłania miliardy, a Core Scientific finansuje ją długiem oprocentowanym w warunkach wysokich stóp. Płynność $1,8 mld daje komfort na najbliższe kwartały, ale przy zamknięciu rynku długu spółka stanie przed wyborem: emisja akcji albo spowolnienie ekspansji. Historia bankructwa z 2022 roku każe traktować dźwignię z ostrożnością — choć dzisiejsza struktura jest znacznie zdrowsza, a spółka generuje już dodatnią EBITDA.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">⚡</div><div class="catalyst-body"><h4>437 MW już rozliczanych — najwięcej w grupie</h4><p>Run-rate przychodów z kolokacji sięga około $635 mln rocznie. To nie plan ani backlog, tylko moc, za którą klienci płacą dziś. Dla porównania TeraWulf rozlicza 102 MW.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💰</div><div class="catalyst-body"><h4>Dodatnia EBITDA i marża 59% na kolokacji</h4><p>Skorygowana EBITDA wzrosła z $8,9 mln do $41,1 mln w jednym kwartale. Spółka przeszła z fazy palenia gotówki do jej generowania, a marża brutto na kolokacji odpowiada poziomom dojrzałych operatorów centrów danych.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🤝</div><div class="catalyst-body"><h4>AMD dywersyfikuje ryzyko kontrahenta</h4><p>15 lat, ponad $14 mld, 530 MW — i, co ważniejsze, klient o ratingu inwestycyjnym obok zadłużonego CoreWeave. To istotnie poprawia jakość portfela kontraktowego.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏷️</div><div class="catalyst-body"><h4>Wycena 0,34× zakontraktowanych przychodów</h4><p>Rynek płaci około jednej trzeciej wartości podpisanych umów. Kapitalizacja $6,55 mld pozostaje niższa niż odrzucona przez akcjonariuszy oferta $9 mld — mimo że spółka jest dziś w wyraźnie lepszym miejscu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Wciąż atrakcyjny cel przejęcia</h4><p>CoreWeave chciał kupić te aktywa i nadal ich potrzebuje. Konsensus 17 analityków wynosi $32–36,56 z rekomendacją Strong Buy, co pozostawia znaczną przestrzeń.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">⛓️</div><div class="catalyst-body"><h4>CoreWeave wciąż odpowiada za znaczną część mocy</h4><p>Około 590 MW z 1,1 GW to jeden klient, który sam jest mocno zadłużony i zależny od finansowania sektora AI. Kontrakt AMD rozkłada ryzyko, ale go nie eliminuje.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💸</div><div class="catalyst-body"><h4>Dług $3,3 mld po historii bankructwa</h4><p>Rozbudowa mocy pochłania miliardy finansowane obligacjami. Zamknięcie rynku długu oznaczałoby emisję akcji lub hamowanie ekspansji — a spółka ma już za sobą jedną upadłość.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏗️</div><div class="catalyst-body"><h4>Pozostałe 660 MW wciąż do oddania</h4><p>Rozliczane jest 437 MW z 1,1 GW zakontraktowanych. Budowa centrów danych o wysokiej gęstości notorycznie się opóźnia — transformatory, chłodzenie, wykonawcy.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🫧</div><div class="catalyst-body"><h4>Pełna zależność od cyklu inwestycji w AI</h4><p>Kontrakty piętnastoletnie zakładają nieprzerwany wzrost popytu na moc obliczeniową. Spowolnienie inwestycji uderzy w renegocjacje i nowe umowy.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Sprawozdawczość trudna w odbiorze</h4><p>Strata $1,15 mld w kwartale przy dodatniej EBITDA to zestawienie, które odstrasza część inwestorów instytucjonalnych i utrudnia stabilną wycenę.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <h3>Porównanie trzech ex-górników bitcoina — stan na sierpień 2026</h3>
+      <div class="table-wrap"><table class="cmp-table">
+        <thead><tr><th>Kryterium</th><th>Core Scientific</th><th>TeraWulf</th><th>MARA</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Moc rozliczana</strong></td><td style="color:var(--buy)"><strong>437 MW</strong></td><td>102 MW</td><td>—</td></tr>
+          <tr><td>Zakontraktowane przychody</td><td>ponad $24 mld</td><td style="color:var(--buy)">ponad $27 mld</td><td style="color:var(--sell)">brak umów AI</td></tr>
+          <tr><td>Zakontraktowana moc</td><td>1,1 GW</td><td>setki MW</td><td>pipeline 4,8 GW</td></tr>
+          <tr><td><strong>Skorygowana EBITDA</strong></td><td style="color:var(--buy)"><strong>+$41,1 mln</strong></td><td style="color:var(--sell)">ujemna</td><td>zmienna</td></tr>
+          <tr><td>Klienci</td><td>AMD, CoreWeave</td><td>Anthropic, Fluidstack, Core42</td><td>brak</td></tr>
+          <tr><td>Zadłużenie</td><td>$3,3 mld</td><td style="color:var(--sell)">$4,12 mld</td><td>$2,3 mld</td></tr>
+          <tr><td>Skarbiec BTC</td><td>marginalny</td><td>marginalny</td><td style="color:var(--buy)">35 303 BTC</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Korekta wcześniejszej oceny:</strong> w analizie TeraWulf z 10 sierpnia napisałem, że to WULF jest najdalej w przemianie — na podstawie wielkości portfela kontraktowego. Dane z Q2 każą tę ocenę doprecyzować. TeraWulf ma nieco większy portfel podpisanych umów, ale <strong>Core Scientific rozlicza czterokrotnie więcej megawatów i jako jedyny generuje dodatnią EBITDA</strong>. W kategorii „kto najwięcej obiecał" prowadzi WULF; w kategorii „kto najwięcej już dowiózł" — CORZ.</div>
+      <hr class="divider">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Szersza konkurencja</th><th>Profil</th><th>Pozycja vs CORZ</th></tr></thead>
+        <tbody>
+          <tr><td>Equinix, Digital Realty</td><td>Klasyczne REIT-y centrów danych</td><td>Tańszy kapitał i skala, wolniejsi w segmencie wysokiej gęstości</td></tr>
+          <tr><td>Vantage, QTS, CyrusOne</td><td>Operatorzy hyperscale wspierani przez fundusze</td><td>Ogromne budżety — główna konkurencja o kontrakty</td></tr>
+          <tr><td>Hyperscalerzy budujący sami</td><td>Microsoft, Google, Meta, Amazon</td><td>Ograniczają rynek najmu, budując własne obiekty</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Dno 52-tygodniowe</td><td>$13,14</td><td>Dołek po zerwaniu fuzji z CoreWeave</td></tr>
+          <tr><td>Szczyt 52-tygodniowy</td><td>$30,46</td><td>Maksimum na fali kontraktu z AMD</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$20,38</strong></td><td>-33% od szczytu, +55% od dna</td></tr>
+          <tr><td>Wsparcie S1</td><td>$18–19</td><td>Strefa konsolidacji po wynikach</td></tr>
+          <tr><td>Wsparcie S2</td><td>$15–16</td><td>Poziom przy szerszym odwrocie od AI</td></tr>
+          <tr><td>Opór R1</td><td>$24–25</td><td>Górna banda zakresu</td></tr>
+          <tr><td>Opór R2</td><td>$30,46</td><td>Szczyt roczny</td></tr>
+          <tr><td>Opór R3</td><td>$32–36</td><td>Strefa celów analityków</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Obrona strefy $18–19</li><li>Q3 z mocą rozliczaną powyżej 550 MW</li><li>Nowy kontrakt klasy AMD</li><li>Wybicie ponad $25 → atak na $30</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Przebicie $18 z wolumenem</li><li>Złe wieści od CoreWeave</li><li>Opóźnienia w oddawaniu kampusów</li><li>Zejście ku $15, skrajnie $13</li></ul></div>
+      </div>
+      <p>Kurs porusza się w szerokim zakresie $13–30 bez wyraźnego trendu, reagując przede wszystkim na newsy kontraktowe. Obecny poziom jest mniej więcej w środku tego przedziału — po korekcie od szczytu, ale wyraźnie powyżej dna.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Wyniki Q2 już opublikowane i dobrze przyjęte. Do raportu za Q3 (listopad) brak nowego katalizatora poza ewentualnymi kontraktami.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO spekulacyjne</div><div class="rating-note">Dodatnia EBITDA, 437 MW rozliczanych, wycena 0,34× kontraktów, konsensus $32–36,56. Warunek: dalsza konwersja mocy zgodnie z planem.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO spekulacyjne</div><div class="rating-note">1,1 GW i kontrakty piętnastoletnie dają profil infrastruktury o powtarzalnych przychodach. Dźwignia $3,3 mld każe trzymać pozycję umiarkowaną.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia wejścia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji:</strong> 1,5–3% portfela — nieco więcej niż przy TeraWulf, bo CORZ ma już dodatnią EBITDA i niższe zadłużenie</li>
+        <li><strong>Pierwsza transza:</strong> $19–20,50 (poziom obecny, w środku rocznego zakresu)</li>
+        <li><strong>Druga transza:</strong> $15–17 przy szerszym odwrocie od spółek AI</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w okolicach $30 (szczyt roczny), reszta bliżej konsensusu $32–36</li>
+        <li><strong>Kluczowy wskaźnik:</strong> liczba rozliczanych megawatów w każdym raporcie — cel na Q3 to wyraźnie powyżej 500 MW</li>
+        <li><strong>Wyjście z tezy:</strong> problemy finansowe CoreWeave, opóźnienia w oddawaniu mocy albo spadek skorygowanej EBITDA</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$27 – $36</div><div class="fair-value-note">Scenariusz negatywny: $12–15 | Scenariusz pozytywny: $42–50 | Konsensus: $32,05–36,56</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Najbardziej zaawansowana egzekucja w grupie</strong> — 437 MW rozliczanych (czterokrotnie więcej niż TeraWulf) i run-rate przychodów z kolokacji około $635 mln rocznie</li>
+          <li><strong>Dodatnia EBITDA i marża 59%</strong> — skorygowana EBITDA z $8,9 mln na $41,1 mln w jednym kwartale; jedyna spółka w grupie, która zarabia operacyjnie</li>
+          <li><strong>Wycena 0,34× zakontraktowanych przychodów</strong> przy kontrakcie AMD na $14 mld i konsensusie analityków $32–36,56 (Strong Buy, 17 firm)</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>CoreWeave to wciąż ok. 590 MW z 1,1 GW</strong> — zadłużony klient zależny od finansowania sektora AI; kontrakt AMD rozkłada ryzyko, ale go nie usuwa</li>
+          <li><strong>Dług $3,3 mld po historii bankructwa z 2022 roku</strong> — dalsza rozbudowa wymaga kapitału, którego dostępność nie jest gwarantowana</li>
+          <li><strong>660 MW wciąż do oddania</strong> — opóźnienia w budowie centrów danych są w tej branży regułą, a każdy kwartał poślizgu kosztuje odsetki</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> kłopoty finansowe CoreWeave lub renegocjacja kontraktów w dół, opóźnienia w oddawaniu mocy albo spadek skorygowanej EBITDA poniżej zera → zejście w okolice $12–15.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> Q3 z mocą rozliczaną powyżej 550 MW, skorygowaną EBITDA powyżej $70 mln i kolejnym kontraktem klasy AMD → ruch ku $30–36.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Core Scientific przeszedł drogę, którą trudno byłoby wymyślić: z największego kopacza bitcoina w Ameryce Północnej przez bankructwo w 2022 roku, odrzucenie oferty przejęcia wartej 9 miliardów dolarów, aż po status <strong>operatora kolokacji AI, który jako jedyny w swojej grupie generuje dodatnią EBITDA</strong>. Wyniki za drugi kwartał, opublikowane 28 lipca, domykają tę opowieść liczbami: przychody 164,2 miliona dolarów przy wzroście o 42% kwartał do kwartału, kolokacja stanowiąca 136,7 miliona z marżą brutto 59%, skorygowana EBITDA na poziomie 41,1 miliona wobec 8,9 miliona kwartał wcześniej, oraz <strong>437 megawatów, za które klienci już płacą</strong>.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Warto zestawić to z konkurencją, bo obraz jest wyraźniejszy niż przy pojedynczej analizie. TeraWulf ma nieco większy portfel podpisanych umów — ponad 27 miliardów wobec 24 — ale rozlicza zaledwie 102 megawaty i wciąż nie zarabia operacyjnie. MARA nie ma ani jednego ogłoszonego najemcy AI. <strong>W kategorii obietnic prowadzi TeraWulf, w kategorii wykonania — Core Scientific.</strong> A rynek, płacąc około jednej trzeciej wartości zakontraktowanych przychodów, wciąż wycenia całą grupę tak, jakby żadna z tych umów nie miała się zmaterializować.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Realna konwersja mocy na przychody.</strong> 437 MW rozliczanych i run-rate 635 mln dolarów rocznie — warunek, którego pozostali w grupie jeszcze nie spełnili.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Rentowność operacyjna.</strong> Skorygowana EBITDA wzrosła niemal pięciokrotnie w jeden kwartał, do 41,1 mln dolarów.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Dywersyfikacja klientów.</strong> Kontrakt z AMD na 15 lat i ponad 14 mld dolarów postawił obok zadłużonego CoreWeave partnera o ratingu inwestycyjnym.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Oddanie pozostałych 660 MW.</strong> Rozliczane jest 437 z 1,1 GW. Opóźnienia w tej branży są normą, a każdy kwartał poślizgu kosztuje odsetki od 3,3 mld dolarów długu.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Kondycja CoreWeave.</strong> Wciąż największy najemca, sam finansujący się kapitałem zewnętrznym — ryzyko przechodzi łańcuchowo.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Listopad 2026</strong></td><td>Wyniki Q3 2026</td><td>Test tempa konwersji mocy — cel powyżej 550 MW i EBITDA powyżej 70 mln</td></tr>
+            <tr><td>H2 2026</td><td>Uruchamianie kolejnych kampusów, w tym Hunt County</td><td>Każdy oddany megawat to bezpośredni przyrost przychodów</td></tr>
+            <tr><td>H2 2026 – 2027</td><td>Potencjalne nowe kontrakty klasy AMD</td><td>Dalsza dywersyfikacja i wzrost portfela ponad 24 mld dolarów</td></tr>
+            <tr><td>Na bieżąco</td><td>Sytuacja finansowa CoreWeave</td><td>Największy najemca; jego kłopoty natychmiast stają się kłopotami CORZ</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Moc rozliczana (MW)</td><td>437 MW</td><td>brak przyrostu kwartał do kwartału</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Skorygowana EBITDA</td><td>+$41,1 mln (z $8,9 mln)</td><td>powrót poniżej zera</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża brutto na kolokacji</td><td>59%</td><td>&lt; 45%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Udział CoreWeave w mocy</td><td>ok. 590 z 1 100 MW</td><td>brak dalszej dywersyfikacji</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Zadłużenie</td><td>$3,3 mld obligacji</td><td>wzrost powyżej $4 mld</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Płynność</td><td>$1,8 mld</td><td>spadek poniżej $800 mln</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji:</strong> 1,5–3% portfela — nieco więcej niż przy TeraWulf, bo CORZ ma dodatnią EBITDA, niższe zadłużenie i lepiej zdywersyfikowanych klientów</li>
+          <li><strong>Pierwsza transza:</strong> $19–20,50, czyli poziom obecny w środku rocznego zakresu</li>
+          <li><strong>Druga transza:</strong> $15–17 przy szerszym odwrocie od spółek związanych z AI</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w okolicach $30 (szczyt roczny), reszta bliżej konsensusu $32–36</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> rozliczane megawaty w każdym raporcie kwartalnym — to jedyna metryka, która naprawdę mówi o postępie</li>
+          <li><strong>Wyjście z tezy:</strong> kłopoty CoreWeave, spadek EBITDA poniżej zera albo komunikat o istotnych opóźnieniach</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--buy)">📈 KUPNO spekulacyjne — najlepsze wykonanie w grupie, wciąż na kredyt</div>
+        <p>Spośród trzech ex-górników bitcoina, które analizowaliśmy, Core Scientific jest tym, który przestał opowiadać o przemianie i zaczął ją rozliczać. 437 megawatów generujących przychody, marża brutto 59% na kolokacji, dodatnia i szybko rosnąca EBITDA oraz kontrakt z AMD na piętnaście lat — to zestaw, którego nie ma ani TeraWulf, ani MARA. Kapitalizacja 6,55 miliarda dolarów pozostaje przy tym niższa niż oferta, którą akcjonariusze odrzucili prawie rok temu, mimo że spółka jest dziś w wyraźnie lepszym miejscu.</p>
+        <p>Nie zmienia to jednak charakteru tej inwestycji. <strong>To wciąż lewarowany zakład na trwałość deficytu mocy dla AI</strong>, finansowany długiem 3,3 miliarda dolarów przez firmę, która cztery lata temu przechodziła przez upadłość. Sześćset sześćdziesiąt megawatów pozostaje do oddania, a największy najemca sam balansuje na zewnętrznym finansowaniu. Dlatego pozycja umiarkowana — nieco większa niż przy TeraWulf ze względu na dodatnią EBITDA i lepszą dywersyfikację, ale wciąż daleka od fundamentu portfela. Śledź megawaty, nie nagłówki o miliardowych stratach księgowych.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno spekulacyjne</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$27–36</b></div>
+          <div><span>Scenariusz negatywny</span><b>$12–15</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$42–50</b></div>
+          <div><span>Sugerowana pozycja</span><b>1,5–3% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3 — listopad</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 10 sierpnia 2026 | Cena od użytkownika: $20,38 | Zastępuje wersję z 30 lipca (cena $21) | Dane: Core Scientific IR (Q2 2026, 28 lipca), BusinessWire, Nasdaq, StockAnalysis, Simply Wall St | Strata GAAP zawiera przeszacowanie warrantów — patrz sekcja 7 | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

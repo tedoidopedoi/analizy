@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COHR — Coherent Corp | Analiza Inwestycyjna 2026</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d2e;
+    --surface2: #242740;
+    --accent: #f97316;
+    --accent2: #fb923c;
+    --text: #e8eaf6;
+    --text-muted: #8892b0;
+    --border: #2e3250;
+    --strong-buy: #00c853;
+    --buy: #4caf50;
+    --neutral: #ffd740;
+    --sell: #ff6d00;
+    --strong-sell: #d50000;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.7; }
+
+  .header {
+    background: linear-gradient(135deg, #1a0a00 0%, #0f1117 50%, #1a1000 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 32px 32px;
+    position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute; top: -50px; right: -50px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(249,115,22,0.10) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .header-content { max-width: 1100px; margin: 0 auto; position: relative; }
+  .ticker-badge { display: inline-block; background: var(--accent); color: #000; font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 6px; letter-spacing: 1px; margin-bottom: 12px; }
+  .company-name { font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .company-sub { color: var(--text-muted); font-size: 15px; margin-bottom: 20px; }
+  .header-meta { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+  .rating-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 700; padding: 10px 24px; border-radius: 30px; }
+  .rating-badge.buy { background: rgba(76,175,80,0.15); border: 2px solid var(--buy); color: var(--buy); }
+  .rating-badge.neutral { background: rgba(255,215,64,0.12); border: 2px solid var(--neutral); color: var(--neutral); }
+  .meta-tag { background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; padding: 6px 14px; border-radius: 20px; }
+  .price-display { margin-left: auto; text-align: right; }
+  .price-main { font-size: 30px; font-weight: 800; color: #fff; }
+  .price-sub { color: var(--text-muted); font-size: 13px; }
+
+  .nav-sticky { position: sticky; top: 0; z-index: 100; background: rgba(26,29,46,0.96); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); overflow-x: auto; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; padding: 0 16px; }
+  .nav-link { flex-shrink: 0; padding: 14px 16px; color: var(--text-muted); font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; cursor: pointer; }
+  .nav-link:hover { color: var(--text); }
+  .nav-link.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .summary-wrapper { max-width: 1100px; margin: 28px auto; padding: 0 24px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; transition: border-color 0.2s; }
+  .metric-card:hover { border-color: var(--accent); }
+  .metric-label { color: var(--text-muted); font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 8px; }
+  .metric-value { font-size: 22px; font-weight: 800; color: #fff; }
+  .metric-value.green { color: var(--buy); }
+  .metric-value.red { color: var(--sell); }
+  .metric-value.yellow { color: var(--neutral); }
+  .metric-value.orange { color: var(--accent); }
+  .metric-detail { color: var(--text-muted); font-size: 12px; margin-top: 4px; }
+
+  .main { max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
+
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 16px; overflow: hidden; }
+  .section:hover { border-color: var(--accent); }
+  .section-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; cursor: pointer; user-select: none; }
+  .section-title-wrap { display: flex; align-items: center; gap: 14px; }
+  .section-num { background: var(--accent); color: #000; font-size: 11px; font-weight: 700; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-title { font-size: 15px; font-weight: 700; color: var(--text); }
+  .section-toggle { color: var(--text-muted); font-size: 18px; transition: transform 0.3s; }
+  .section-toggle.open { transform: rotate(180deg); }
+  .section-body { padding: 0 24px 24px; display: none; }
+  .section-body.open { display: block; }
+
+  h3 { color: var(--accent2); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; margin: 20px 0 10px; }
+  h3:first-child { margin-top: 0; }
+  p { margin-bottom: 12px; color: var(--text-muted); }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--text); }
+  ul { list-style: none; padding: 0; }
+  ul li { padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-muted); }
+  ul li:last-child { border-bottom: none; }
+  ul li::before { content: '→'; color: var(--accent); margin-right: 8px; font-size: 12px; }
+
+  .table-wrap { overflow-x: auto; margin: 12px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--surface2); color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 10px 14px; text-align: left; }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+  tr:hover td { background: rgba(249,115,22,0.03); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .chip { background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; padding: 4px 12px; border-radius: 20px; }
+  .chip.green { border-color: var(--buy); color: var(--buy); background: rgba(76,175,80,0.08); }
+  .chip.orange { border-color: var(--accent); color: var(--accent); background: rgba(249,115,22,0.08); }
+  .chip.teal { border-color: #10b981; color: #10b981; background: rgba(16,185,129,0.08); }
+  .chip.yellow { border-color: var(--neutral); color: var(--neutral); background: rgba(255,215,64,0.08); }
+  .chip.red { border-color: var(--sell); color: var(--sell); background: rgba(255,109,0,0.08); }
+
+  .rating-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 14px; }
+  .rating-box { background: var(--surface2); border-radius: 10px; padding: 18px; text-align: center; }
+  .rating-box .period { color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+  .rating-box .rating-text { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+  .rating-box .rating-text.buy { color: var(--buy); }
+  .rating-box .rating-text.strong-buy { color: var(--strong-buy); }
+  .rating-box .rating-text.neutral { color: var(--neutral); }
+  .rating-box .rating-note { color: var(--text-muted); font-size: 12px; }
+
+  .scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .bull-box { background: rgba(0,200,83,0.06); border: 1px solid rgba(0,200,83,0.25); border-radius: 10px; padding: 18px; }
+  .bear-box { background: rgba(213,0,0,0.06); border: 1px solid rgba(213,0,0,0.2); border-radius: 10px; padding: 18px; }
+  .bull-box h4 { color: var(--strong-buy); margin-bottom: 12px; }
+  .bear-box h4 { color: var(--strong-sell); margin-bottom: 12px; }
+  .bull-box ul li::before { color: var(--strong-buy); }
+  .bear-box ul li::before { color: var(--strong-sell); }
+
+  .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .thesis-buy { background: rgba(0,200,83,0.06); border: 1px solid rgba(0,200,83,0.2); border-radius: 10px; padding: 18px; }
+  .thesis-avoid { background: rgba(213,0,0,0.06); border: 1px solid rgba(213,0,0,0.2); border-radius: 10px; padding: 18px; }
+  .thesis-buy h4 { color: var(--strong-buy); margin-bottom: 10px; }
+  .thesis-avoid h4 { color: var(--strong-sell); margin-bottom: 10px; }
+
+  .fair-value-box { background: linear-gradient(135deg, rgba(249,115,22,0.08), rgba(251,146,60,0.06)); border: 1px solid var(--accent); border-radius: 12px; padding: 24px; margin-top: 16px; text-align: center; }
+  .fair-value-label { color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .fair-value-range { font-size: 32px; font-weight: 800; color: var(--accent2); margin-bottom: 8px; }
+  .fair-value-note { color: var(--text-muted); font-size: 13px; }
+
+  .alert { border-radius: 8px; padding: 14px 18px; margin: 14px 0; font-size: 13px; }
+  .alert-info { background: rgba(249,115,22,0.06); border-left: 3px solid var(--accent); color: var(--text-muted); }
+  .alert-warn { background: rgba(255,215,64,0.06); border-left: 3px solid var(--neutral); color: var(--text-muted); }
+  .alert-success { background: rgba(0,200,83,0.06); border-left: 3px solid var(--strong-buy); color: var(--text-muted); }
+  .alert-danger { background: rgba(213,0,0,0.06); border-left: 3px solid var(--strong-sell); color: var(--text-muted); }
+  .alert-teal { background: rgba(16,185,129,0.06); border-left: 3px solid #10b981; color: var(--text-muted); }
+
+  .catalyst-item { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom: none; }
+  .catalyst-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .catalyst-body h4 { color: var(--text); font-size: 14px; margin-bottom: 4px; }
+  .catalyst-body p { color: var(--text-muted); font-size: 13px; margin: 0; }
+
+  .nvidia-badge { background: linear-gradient(135deg, rgba(118,185,0,0.15), rgba(249,115,22,0.08)); border: 1px solid #76b900; border-radius: 12px; padding: 20px 24px; margin: 14px 0; }
+  .nvidia-badge h4 { color: #76b900; font-size: 16px; margin-bottom: 8px; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+  .footer { text-align: center; padding: 32px 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 700px) {
+    .rating-grid, .scenario-grid, .thesis-grid { grid-template-columns: 1fr; }
+    .company-name { font-size: 24px; }
+    .header-meta { flex-direction: column; align-items: flex-start; }
+    .price-display { margin-left: 0; }
+  }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+  <div class="header-content">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: COHR</div>
+    <div class="company-name">Coherent Corp.</div>
+    <div class="company-sub">Największa firma photonics | 800G/1.6T Transceivers · Silicon Carbide (SiC) · OCS · NVIDIA $2B Partner · Saxonburg, PA | Dawniej II-VI Incorporated</div>
+    <div class="header-meta">
+      <div class="rating-badge buy">📈 KUPNO</div>
+      <span class="meta-tag">Photonics / Optics</span>
+      <span class="meta-tag">AI Infrastructure</span>
+      <span class="meta-tag">Silicon Carbide</span>
+      <span class="meta-tag">CPO / OCS</span>
+      <span class="meta-tag">Turnaround</span>
+      <div class="price-display">
+        <div class="price-main">~$340</div>
+        <div class="price-sub">Cena (07.2026) | 52W: $84,35–$440,00</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a>
+    <a class="nav-link" onclick="goSec('s2')">Produkt</a>
+    <a class="nav-link" onclick="goSec('s3')">Rynek</a>
+    <a class="nav-link" onclick="goSec('s4')">Klienci</a>
+    <a class="nav-link" onclick="goSec('s5')">Biznes</a>
+    <a class="nav-link" onclick="goSec('s6')">Wycena</a>
+    <a class="nav-link" onclick="goSec('s7')">Marże</a>
+    <a class="nav-link" onclick="goSec('s8')">Bilans</a>
+    <a class="nav-link" onclick="goSec('s9')">Bull</a>
+    <a class="nav-link" onclick="goSec('s10')">Bear</a>
+    <a class="nav-link" onclick="goSec('s11')">Konkurencja</a>
+    <a class="nav-link" onclick="goSec('s12')">Technicals</a>
+    <a class="nav-link" onclick="goSec('s13')">Ocena</a>
+    <a class="nav-link" onclick="goSec('s14')">TL;DR</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card">
+      <div class="metric-label">Cena (07.2026)</div>
+      <div class="metric-value">~$340</div>
+      <div class="metric-detail">52W: $84,35–$440 | -23% od ATH</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Kapitalizacja</div>
+      <div class="metric-value">~$55B</div>
+      <div class="metric-detail">~161M akcji w obrocie</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Revenue Q3 FY2026</div>
+      <div class="metric-value green">$1,81B</div>
+      <div class="metric-detail">+21% YoY | Q4E: $1,91–2,05B</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Revenue FY2026E</div>
+      <div class="metric-value green">~$7,05B</div>
+      <div class="metric-detail">FY2027E: ~$9,45B (+34% YoY)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Non-GAAP GM Q3</div>
+      <div class="metric-value green">39,6%</div>
+      <div class="metric-detail">+105 bps YoY — trend rosnący</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">NVIDIA deal</div>
+      <div class="metric-value orange">$2B</div>
+      <div class="metric-detail">Inwestycja + multi-mld zakupy (03.2026)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Dźwignia netto</div>
+      <div class="metric-value green">0,5×</div>
+      <div class="metric-detail">Net debt/EBITDA | Było 2,4× rok temu</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Cel analityków</div>
+      <div class="metric-value green">$384</div>
+      <div class="metric-detail">+13% upside | 22 analityków, Buy</div>
+    </div>
+  </div>
+</div>
+
+<main class="main">
+
+  <!-- S1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')">
+      <div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div>
+      <div class="section-toggle open" id="s1-toggle">▾</div>
+    </div>
+    <div class="section-body open" id="s1-body">
+      <h3>Historia i DNA</h3>
+      <p>Coherent Corp. (NYSE: COHR) to jeden z największych producentów fotonicznych i optoelektronicznych na świecie. Zarejestrowana w 1971 jako <strong>II-VI Incorporated</strong> (Carl Johnson i James Hawkey), przez dekady budowała kompetencje w inżynierii materiałów, laserów i optyki. W marcu 2022 roku II-VI przejęło legendarną spółkę <strong>Coherent Corporation</strong> (systemy laserowe) i przemianowało się na Coherent Corp. Siedziba: Saxonburg, Pensylwania.</p>
+      <p>Dzisiaj Coherent to zdywersyfikowany gigant fotonu operujący w 3 segmentach: <strong>Networking</strong> (transceivery AI, optyka datacenter), <strong>Materials</strong> (materiały inżynieryjne, SiC, lasery pompujące) i <strong>Lasers</strong> (lasery przemysłowe, ekscymerowe). CEO: <strong>Jim Anderson</strong> (od stycznia 2024), wcześniej CEO Lattice Semiconductor.</p>
+
+      <h3>Etap spółki — Turnaround + Growth</h3>
+      <div class="chips">
+        <span class="chip orange">Turnaround (delewarowanie)</span>
+        <span class="chip green">AI Infrastructure play</span>
+        <span class="chip teal">SiC optionalność</span>
+        <span class="chip">Trzy segmenty — diversified</span>
+        <span class="chip yellow">Wysoki dług (szybko spada)</span>
+      </div>
+
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+          <tbody>
+            <tr><td>Lato 2025</td><td>Akcja przy $84,35 (52W low) — rynek penalizował dług i słabszy Lasers/Materials</td><td style="color:var(--sell)">Dno</td></tr>
+            <tr><td>Q1 FY2026 (IX 2025)</td><td>Sprzedaż dywizji Aerospace & Defense za $400M → dług spłacony, leverage 2,4×→1,7×</td><td style="color:var(--buy)">↑ Pivot</td></tr>
+            <tr><td>Marzec 2026</td><td><strong>NVIDIA $2B inwestycja strategiczna</strong> + multi-mld purchase commitment</td><td style="color:var(--strong-buy)">↑↑ Game changer</td></tr>
+            <tr><td>Q3 FY2026 (III 2026)</td><td>Revenue $1,81B (+21% YoY), Non-GAAP GM 39,6%, dźwignia spada do 0,5×</td><td style="color:var(--buy)">↑ Rekord</td></tr>
+            <tr><td>Kwiecień 2026</td><td>300mm SiC platform launch — 10kV power devices dla AI data centers + EVs</td><td style="color:var(--buy)">↑ SiC bull</td></tr>
+            <tr><td>Czerwiec 2026</td><td>ATH $426,89 (2.06.2026). Następnie korekta do ~$340 (-23%)</td><td style="color:var(--neutral)">Korekta</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-info">
+        <strong>Unikalny profil:</strong> Coherent to nie jest "pure play" na AI optical — to <strong>zdywersyfikowana spółka</strong> z trzema segmentami i opcjonalnością Silicon Carbide. To sprawia, że jest wyceniana z dyskontem do Lumentum (pure play EML), ale daje większą ochronę przy ewentualnym spowolnieniu AI.
+      </div>
+    </div>
+  </div>
+
+  <!-- S2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')">
+      <div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div>
+      <div class="section-toggle" id="s2-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s2-body">
+      <h3>Trzy segmenty — Networking dominuje</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Segment</th><th>Produkty</th><th>Pozycja</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Networking (~65%+ revenue)</strong></td><td>Transceivery 400G/800G/1,6T, systemy, OCS, EML, PICs, subsystemy</td><td>Top-2 globalnie (obok Lumentum)</td><td>🔥 Hypergrowth — AI driver</td></tr>
+            <tr><td><strong>Materials (~20% revenue)</strong></td><td>Materiały inżynieryjne, lasery pompujące, SiC substraty, VCSEL, PICs</td><td>Unikalna propozycja SiC</td><td>⚡ Opcjonalność SiC/EV+AI</td></tr>
+            <tr><td><strong>Lasers (~15% revenue)</strong></td><td>Excimer, CO2, solid-state lasers — display, semiconductor litho, science</td><td>Niche lider excimer (OLED)</td><td>✅ Stabilny, nie rośnie</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="nvidia-badge">
+        <h4>⚡ NVIDIA $2B — Strategiczny deal (2 marca 2026)</h4>
+        <p style="color:var(--text-muted); font-size:13px;">Identyczny jak u Lumentum — NVIDIA równolegle zainwestowało $2B i podpisało multi-miliardowe zobowiązania zakupowe zarówno w Coherent jak i Lumentum. Potwierdza to, że NVIDIA prowadzi <strong>dual-supplier strategy</strong> — nie stawia na jednego dostawcę. Coherent dostaje kapitał na US manufacturing expansion, R&D silicon photonics i CPO.</p>
+      </div>
+
+      <h3>Co to jest CPO i dlaczego Coherent na tym wygra?</h3>
+      <p>Co-Packaged Optics (CPO) to architektura, gdzie lasery i ASIC chip są umieszczone razem w jednej obudowie — radykalnie redukuje zużycie energii i latency w AI serverach. Coherent zaktualizował TAM dla CPO do <strong>$15 miliardów</strong> na OFC 2026. Coherent ma pełen portfolio: External Laser Source (ELS), high-power CW lasers, PICs, fiber attach units, thermoelectric coolers. To jest przyszłość transceiverów po 2027–2028.</p>
+
+      <h3>Silicon Carbide (SiC) — Ukryta opcjonalność</h3>
+      <p>Coherent posiada <strong>75% udziałów</strong> w swojej dywizji SiC (DENSO + Mitsubishi zainwestowały łącznie $1B za 25% udziałów w 2023). SiC to materiał półprzewodnikowy przyszłości dla pojazdów EV, ładowarek, power devices. Coherent właśnie ogłosił <strong>platformę 300mm SiC</strong> z możliwością 10kV devices — to przełom dla AI data center power delivery i EVs. Przy obecnej wycenie rynek prawie nie płaci za SiC.</p>
+    </div>
+  </div>
+
+  <!-- S3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')">
+      <div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div>
+      <div class="section-toggle" id="s3-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s3-body">
+      <h3>TAM — Gigantyczna szansa</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Segment</th><th>TAM (aktualne)</th><th>TAM 2030E</th><th>CAGR</th></tr></thead>
+          <tbody>
+            <tr><td>CPO (Co-Packaged Optics)</td><td><$1B</td><td>$15B (zaktualizowane OFC 2026)</td><td>60%+</td></tr>
+            <tr><td>Optical Transceivers (pluggable)</td><td>$13,6B</td><td>$25B</td><td>13%</td></tr>
+            <tr><td>OCS (Optical Circuit Switches)</td><td>$2B+</td><td>$5B+</td><td>25-40%</td></tr>
+            <tr><td>Silicon Carbide Substrates</td><td>$2,5B</td><td>$7B+ (EV + AI)</td><td>20%</td></tr>
+            <tr><td>Lasers (industrial, excimer)</td><td>$3B</td><td>$4B</td><td>5%</td></tr>
+            <tr><td><strong>ŁĄCZNY TAM Coherent</strong></td><td><strong>~$22B</strong></td><td><strong>$50B+</strong></td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success">
+        <strong>Kluczowa obserwacja z OFC 2026:</strong> Coherent zaprezentował zaktualizowany roadmap CPO z TAM $15B — to największa rewizja w górę wśród wszystkich komunikatów spółki w 2026. CPO jest kolejnym krokiem po pluggable transceiverach i Coherent jest jedną z 2–3 firm gotowych na masową produkcję.
+      </div>
+
+      <h3>Trendy makro</h3>
+      <ul>
+        <li><strong>AI Capex supercycle:</strong> Meta, Google, Microsoft, xAI wydają $100B+ na infrastrukturę AI 2025-2026 → każdy wydany dolar na GPU = potrzeba większej optyki</li>
+        <li><strong>800G → 1.6T → 3.2T:</strong> Każde przejście generacyjne = nowy cykl capex dla optycznych komponentów</li>
+        <li><strong>CPO jako standard po 2027:</strong> Plug-in transceivery zaczynają tracić wydajność energetyczną — CPO staje się niezbędny</li>
+        <li><strong>US manufacturing onshoring:</strong> CHIPS Act + NVIDIA strategic deal = Coherent buduje zdolności produkcyjne w USA</li>
+        <li><strong>EV penetration:</strong> SiC jest krytycznym komponentem dla EV inverterów — Coherent ma gotową platformę 300mm</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- S4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')">
+      <div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div>
+      <div class="section-toggle" id="s4-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s4-body">
+      <h3>Profil klientów</h3>
+      <div class="chips">
+        <span class="chip orange">B2B — Hyperscalerzy AI</span>
+        <span class="chip">OEM producenci transceiverów</span>
+        <span class="chip teal">NVIDIA (strategic + customer)</span>
+        <span class="chip">Producenci EV (SiC)</span>
+        <span class="chip">Przemysł, OLED display (Lasers)</span>
+      </div>
+
+      <h3>Dywersyfikacja vs. Koncentracja</h3>
+      <p>Coherent ma <strong>bardziej zdywersyfikowaną bazę klientów niż Lumentum</strong>. Trzy segmenty oznaczają ekspozycję na różne branże. Networking segment obsługuje hyperscalerów (Meta, Google, Amazon, Microsoft, xAI) poprzez producentów transceiverów. Segment Materials obsługuje DENSO, Mitsubishi (SiC) oraz rynek pump laser telco. Segment Lasers obsługuje producent paneli OLED (Samsung, LG) i semiconductor capex.</p>
+
+      <h3>Backlog i widoczność</h3>
+      <p>Management ogłosił na Q3 FY2026: <strong>"bookings reached record levels and backlog extending into 2028"</strong>. NVIDIA $2B + multi-mld purchase commitment zapewnia widoczność na 3+ lata. Deconcentracja od Apple'a (legacy Lumentum/3D sensing) dała Coherent bardziej zrównoważony profil.</p>
+
+      <div class="alert alert-teal">
+        <strong>Advantage vs LITE:</strong> Coherent jest mniej podatny na "następnego Apple'a" dzięki 3-segmentowej strukturze. Jeśli AI optical spowolni, SiC i Lasers utrzymują base revenue.
+      </div>
+    </div>
+  </div>
+
+  <!-- S5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')">
+      <div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div>
+      <div class="section-toggle" id="s5-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s5-body">
+      <h3>Revenue — Kwartalna trajektoria FY2025–2026</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Kwartał</th><th>Revenue</th><th>Wzrost YoY</th><th>GAAP GM</th><th>Non-GAAP GM</th></tr></thead>
+          <tbody>
+            <tr><td>Q2 FY2025 (XII 2024)</td><td>$1,43B</td><td>—</td><td>35,5%</td><td>—</td></tr>
+            <tr><td>Q3 FY2025 (III 2025)</td><td>$1,50B</td><td>—</td><td>35,2%</td><td>38,5%</td></tr>
+            <tr><td>Q1 FY2026 (IX 2025)</td><td>—</td><td>—</td><td>36,6%</td><td>38,7%</td></tr>
+            <tr><td>Q2 FY2026 (XII 2025)</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td><strong>Q3 FY2026 (III 2026)</strong></td><td><strong>$1,81B</strong></td><td style="color:var(--buy)"><strong>+21% YoY</strong></td><td><strong>37,7%</strong></td><td><strong>39,6%</strong></td></tr>
+            <tr><td>Q4 FY2026E (VI 2026)</td><td>$1,91–2,05B</td><td style="color:var(--buy)">~+25% YoY E</td><td>—</td><td>39–41%E</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Roczne prognozy</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Rok</th><th>Revenue</th><th>Wzrost</th><th>EBITDA</th></tr></thead>
+          <tbody>
+            <tr><td>FY2024</td><td>$4,72B</td><td>—</td><td>$664,5M (14,1% marża)</td></tr>
+            <tr><td>FY2025</td><td>$5,81B</td><td style="color:var(--buy)">+23%</td><td>$948M (16,3% marża)</td></tr>
+            <tr><td><strong>FY2026E</strong></td><td><strong>~$7,05B</strong></td><td style="color:var(--buy)"><strong>+21%</strong></td><td>~$1,4–1,6B E</td></tr>
+            <tr><td>FY2027E</td><td>~$9,45B</td><td style="color:var(--strong-buy)">+34%</td><td>~$2,1–2,4B E</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-info">
+        <strong>Kluczowa obserwacja:</strong> Coherent rośnie wolniej niż Lumentum (+21% vs +90% YoY) — ale jest to porównanie jabłek z pomarańczami. Coherent to spółka 4× większa (revenue $7B vs $3B run rate). Na tej skali, +21% to solidny wzrost — a FY2027E +34% sugeruje akcelerację.
+      </div>
+    </div>
+  </div>
+
+  <!-- S6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')">
+      <div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div>
+      <div class="section-toggle" id="s6-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s6-body">
+      <h3>Wskaźniki przy cenie ~$340 (lipiec 2026)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Ocena</th></tr></thead>
+          <tbody>
+            <tr><td>Market Cap</td><td>~$54,7B</td><td>(~161M akcji × $340)</td></tr>
+            <tr><td>Cash</td><td>~$3,0B</td><td>(po NVIDIA $2B investment)</td></tr>
+            <tr><td>Dług</td><td>~$3,1–3,5B</td><td>Szybko spada przez delewarowanie</td></tr>
+            <tr><td>Net Debt</td><td>~$0,5B</td><td>Net debt/EBITDA = 0,5× (było 2,4×)</td></tr>
+            <tr><td>EV</td><td>~$55,2B</td><td>—</td></tr>
+            <tr><td><strong>P/S (FY2026E $7,05B)</strong></td><td><strong>~7,8×</strong></td><td style="color:var(--buy)">✅ Atrakcyjne vs peers</td></tr>
+            <tr><td><strong>P/S (FY2027E $9,45B)</strong></td><td><strong>~5,8×</strong></td><td style="color:var(--strong-buy)">✅ Bardzo atrakcyjne</td></tr>
+            <tr><td>EV/EBITDA (FY2025 $948M)</td><td>~58×</td><td style="color:var(--sell)">⚠️ Wysokie — ale EBITDA rośnie szybko</td></tr>
+            <tr><td>EV/EBITDA (FY2027E $2,2B)</td><td>~25×</td><td style="color:var(--neutral)">Akceptowalne dla tempa wzrostu</td></tr>
+            <tr><td>P/E trailing (GAAP)</td><td>~150× (nie miarodajne)</td><td>Spółka ramp-up — focus na FCF</td></tr>
+            <tr><td>P/E forward (Non-GAAP)</td><td>~48×</td><td style="color:var(--neutral)">Umiarkowane dla +34% wzrostu</td></tr>
+            <tr><td>Dywidenda</td><td>Brak</td><td>Cały FCF idzie na debt + capex</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Porównanie COHR vs. LITE (przy aktualnych cenach)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Wskaźnik</th><th>COHR ($340)</th><th>LITE ($730)</th><th>Ocena</th></tr></thead>
+          <tbody>
+            <tr><td>P/S FY2026E</td><td style="color:var(--buy)">~7,8×</td><td style="color:var(--sell)">~16,3×</td><td>COHR tańsze 2×</td></tr>
+            <tr><td>P/S FY2027E</td><td style="color:var(--buy)">~5,8×</td><td style="color:var(--buy)">~10,5×</td><td>COHR tańsze 1,8×</td></tr>
+            <tr><td>Revenue wzrost YoY</td><td>+21%</td><td>+90%</td><td>LITE szybsze, ale z niskiej bazy</td></tr>
+            <tr><td>Revenue skala</td><td style="color:var(--buy)">$7B+</td><td>$3B run rate</td><td>COHR 2,3× większe</td></tr>
+            <tr><td>NVIDIA deal</td><td>$2B (równy)</td><td>$2B (równy)</td><td>Remis</td></tr>
+            <tr><td>Koncentracja klientów</td><td style="color:var(--buy)">Niższa (3 segm.)</td><td style="color:var(--sell)">Wyższa (mono-focus)</td><td>COHR bezpieczniejsze</td></tr>
+            <tr><td>Unikalny moat</td><td>SiC + CPO TAM $15B</td><td>Monopol EML 200G</td><td>Różne katalizatory</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Scenariusze wyceny FY2027</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Scenariusz</th><th>Revenue FY2027E</th><th>P/S target</th><th>Market Cap</th><th>Cena/akcję</th></tr></thead>
+          <tbody>
+            <tr><td>Bear (+15% wzrost, marginy flat)</td><td>$8,0B</td><td>5×</td><td>$40B</td><td>~$248</td></tr>
+            <tr><td>Base (+34% wzrost, marże +3pp)</td><td>$9,45B</td><td>7×</td><td>$66B</td><td>~$410</td></tr>
+            <tr><td>Bull (+40% + CPO ramp)</td><td>$11B</td><td>9×</td><td>$99B</td><td>~$615</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="fair-value-box">
+        <div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div>
+        <div class="fair-value-range">$380 – $450</div>
+        <div class="fair-value-note">Base case P/S 7–8× na FY2027E $9,45B | Analyst avg. $384 | High target $455 (Rothschild) | Obecna cena $340 = z dyskontem do konsensusu</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')">
+      <div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA FINANSOWA</div></div>
+      <div class="section-toggle" id="s7-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s7-body">
+      <h3>Trend marż — poprawa wyraźna, ale wolniejsza niż LITE</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Okres</th><th>GAAP GM</th><th>Non-GAAP GM</th><th>EBITDA Margin</th></tr></thead>
+          <tbody>
+            <tr><td>FY2024</td><td>~29%</td><td>~35%</td><td>14,1%</td></tr>
+            <tr><td>FY2025</td><td>35,2%</td><td>37,9%</td><td>16,3%</td></tr>
+            <tr><td>Q1 FY2026</td><td>36,6%</td><td>38,7%</td><td>—</td></tr>
+            <tr><td>Q3 FY2026</td><td>37,7%</td><td>39,6%</td><td>~20%E</td></tr>
+            <tr><td>Q4 FY2026 Guidance</td><td>—</td><td>39–41%</td><td>—</td></tr>
+            <tr><td>FY2027E</td><td>~40%</td><td>~43–45%</td><td>~23–25%E</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success">
+        <strong>Delewarowanie = marżowy tailwind.</strong> Każdy $1B długu spłaconego to ~$50-60M mniej odsetek rocznie, co bezpośrednio poprawia EPS i FCF. Przy leverage 0,5× i rosnącym EBITDA, Coherent może generować $1B+ FCF rocznie do FY2028 — transformacja wyceny.
+      </div>
+
+      <h3>EPS momentum</h3>
+      <p>Q3 FY2026 Non-GAAP EPS: <strong>$1,41</strong> (+$0,50 YoY). Q4 FY2026 guidance: <strong>$1,52–1,72</strong>. Annualizowany forward EPS ≈ $6,50–7,00 → przy $340 cenie, forward P/E ≈ 49–52×. Przy FY2027 EPS growth ~40%, to PEG ≈ 1,2–1,3. Akceptowalne.</p>
+    </div>
+  </div>
+
+  <!-- S8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')">
+      <div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div>
+      <div class="section-toggle" id="s8-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s8-body">
+      <h3>Stan bilansu (Q3 FY2026 — marzec 2026)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Pozycja</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+          <tbody>
+            <tr><td>Gotówka i ekwiwalenty</td><td>~$3,0B</td><td>Po NVIDIA $2B investment</td></tr>
+            <tr><td>Dług długoterminowy</td><td>~$3,0–3,5B</td><td>Szybko spada (delewarowanie)</td></tr>
+            <tr><td><strong>Dług netto</strong></td><td><strong>~$0–0,5B</strong></td><td>Net debt/EBITDA = 0,5× (vs 2,4× rok temu)</td></tr>
+            <tr><td>SiC JV (25% minority)</td><td>$1B (DENSO+Mitsubishi)</td><td>Wzmacnia bilans bez dilucji</td></tr>
+            <tr><td>Debt/Equity</td><td>~0,6×</td><td>Umiarkowane i spada</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Delewarowanie — epicki turnaround</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Moment</th><th>Net Debt/EBITDA</th><th>Źródło redukcji</th></tr></thead>
+          <tbody>
+            <tr><td>FY2024 (po przejęciu legacy Coherent)</td><td>~4–5×</td><td>—</td></tr>
+            <tr><td>Q1 FY2026</td><td>2,4×</td><td>A&D divestiture $400M</td></tr>
+            <tr><td>Q2 FY2026</td><td>1,7×</td><td>FCF + divestitures</td></tr>
+            <tr><td><strong>Q3 FY2026</strong></td><td><strong>0,5×</strong></td><td>NVIDIA $2B + FCF + $162M debt payment</td></tr>
+            <tr><td>FY2027E</td><td>~0×</td><td>Planowane wyjście z netto długu</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success">
+        <strong>To jest rzadki case rynkowy.</strong> Spółka w ciągu 12 miesięcy przeszła z 4-5× leverage na 0,5×. Gdy firma wychodzi z dziury długowej przy jednoczesnym wzroście revenue i marż — rynek zazwyczaj gwałtownie repricuje ją wyżej. To jest właśnie ta faza dla Coherent.
+      </div>
+    </div>
+  </div>
+
+  <!-- S9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')">
+      <div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div>
+      <div class="section-toggle" id="s9-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item">
+        <div class="catalyst-icon">💡</div>
+        <div class="catalyst-body">
+          <h4>CPO jako 10-miliardowy katalizator od 2027</h4>
+          <p>Co-Packaged Optics to najważniejsze przejście architektoniczne po pluggable. Coherent zaktualizował CPO TAM do $15B na OFC 2026. Ma pełne portfolio komponentów CPO (ELS, CW lasers, PICs, termoelektryczne). Jeśli hiperskalerzy przyjmą CPO od 2027-2028, revenue networking może potroić się bez nowych rynków.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🔋</div>
+        <div class="catalyst-body">
+          <h4>SiC 300mm — Unikalny optionalność niewidoczna w wycenie</h4>
+          <p>Coherent jest jedną z niewielu firm na świecie z platformą 300mm SiC. Platforma 10kV adresuje AI data center power delivery (moc dla GPU clusters) i pojazdy elektryczne. DENSO i Mitsubishi dały $1B walidacji. Rynek SiC może być $7B+ do 2030. Przy obecnej wycenie, rynek płaci ~0× za SiC.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">📉</div>
+        <div class="catalyst-body">
+          <h4>Delewarowanie → FCF redeployment → buybacks lub M&A</h4>
+          <p>Gdy Net Debt/EBITDA osiągnie 0× (FY2027), Coherent będzie generować $1B+ rocznego FCF. CEO Anderson ma doświadczenie z buybacks z Lattice Semiconductor. Skupienie akcji lub akwizycja uzupełniająca (np. wejście w CPO czip) to realny katalizator re-ratingu do wyższego P/S.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🤖</div>
+        <div class="catalyst-body">
+          <h4>Record bookings i backlog do 2028 = wysoka widoczność</h4>
+          <p>Management Q3 FY2026: "bookings reached record levels, backlog extending into 2028." To 2-letnia widoczność przychodów. W połączeniu z NVIDIA purchase commitment i hiperskalerów, Coherent ma prawdopodobnie najbardziej przewidywalny revenue stream wśród spółek photonics.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🌍</div>
+        <div class="catalyst-body">
+          <h4>Excimer laser dla OLED/LTPS — cichy zysk</h4>
+          <p>Segment Lasers generuje stabilne ~$1B revenue rocznie. Excimer lasery Coherenta są kluczowe dla produkcji paneli OLED (Samsung, LG). Ekspansja OLED do samochodów, tabletów i foldable = nowy cykl zamówień. Nie jest w żadnym bullcase, a może dodać $50-100M revenue.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S10 -->
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')">
+      <div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div>
+      <div class="section-toggle" id="s10-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item">
+        <div class="catalyst-icon">📊</div>
+        <div class="catalyst-body">
+          <h4>EV/EBITDA ~40× — drogie na historycznych standardach hardware</h4>
+          <p>Tradycyjnie hardware/photonics spółki handlują na 15-25× EV/EBITDA. Coherent na ~40× dyskontuje perfekcję. Przy najmniejszym miss przychodów (Q4 FY2026 poniżej $1,9B lub Q1 FY2027 poniżej $2B), możliwa repricingа do 25-30× = cena $180-220. To najważniejsze ryzyko krótkoterminowe.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">⚔️</div>
+        <div class="catalyst-body">
+          <h4>Lumentum monopol na EML 200G — COHR goni</h4>
+          <p>W segmencie 200G EML dla 1.6T transceiverów, Lumentum jest na prowadzeniu. Coherent pracuje nad własnym EML 200G w wolumenie, ale jest kilka kwartałów za LITE. To oznacza, że największe zamówienia 1.6T na 2026 mogą trafić do Lumentum. COHR kompensuje to większym portfolio (800G pluggable + CPO).</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🏭</div>
+        <div class="catalyst-body">
+          <h4>Integracja i złożoność 3 segmentów — execution risk</h4>
+          <p>Zarządzanie trzema różnymi biznesami (optyka, materiały, lasery) jednocześnie, przy wysokim capexie na US manufacturing i R&D CPO, to ogromne wyzwanie operacyjne dla nowego CEO Andersona. Historycznie II-VI/Coherent przejęcia (2022 merger) zostawiały wiele integracyjnych problemów.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🧪</div>
+        <div class="catalyst-body">
+          <h4>SiC nie "ramps" zgodnie z planem — EV zwalnia</h4>
+          <p>Rynek EV globalnie zwalnia (Tesla missed estimates, europejski rynek EV -15% 2025). Jeśli SiC demand dla EV nie odbuduje się w 2026-2027, segment Materials pozostanie flat lub spada. To eliminuje jedną z kluczowych "optionalności" tezy bull.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🌐</div>
+        <div class="catalyst-body">
+          <h4>Chiński rynek — ryzyko geopolityczne i SiC</h4>
+          <p>Chiny to znaczący rynek dla laserów przemysłowych i SiC. Eskalacja ograniczeń eksportowych (CHIPS Act, Entity List) może uderzyć w revenue Materials i Lasers. Jednocześnie chińscy producenci SiC (CREE-equivalent) agresywnie atakują ceny substratów.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S11 -->
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')">
+      <div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div>
+      <div class="section-toggle" id="s11-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Firma</th><th>Revenue</th><th>Fokus</th><th>AI pozycja</th><th>Ocena vs COHR</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Coherent (COHR)</strong></td><td>$7B+ FY2026E</td><td>Networking + Materials + Lasers</td><td>800G/1.6T + CPO + SiC</td><td>🥇 Lider wolumenem, diversified</td></tr>
+            <tr><td>Lumentum (LITE)</td><td>$3B run rate</td><td>Pure play photonics</td><td>Monopol EML 200G, OCS</td><td>Szybsze +90% wzrosty, wyższy moat</td></tr>
+            <tr><td>MKS Instruments</td><td>$3,3B</td><td>Laser, instruments, vacuum</td><td>Semiconductor capex exposure</td><td>Słabszy AI play</td></tr>
+            <tr><td>Mitsubishi Electric</td><td>private segment</td><td>EML, pump lasers</td><td>Dostawca 200G EML (w rozwoju)</td><td>Partial competitor w Materials</td></tr>
+            <tr><td>Broadcom (AVGO)</td><td>~$50B total</td><td>ASICs, optical</td><td>Custom silicon + optics</td><td>Nie direct photonics competitor</td></tr>
+            <tr><td>IPG Photonics</td><td>$1,4B</td><td>Industrial fiber lasers</td><td>Bez AI exposure</td><td>Competitor tylko w Lasers segment</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>COHR vs LITE — Dwa sposoby na granie AI photonics</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Kryterium</th><th>COHR</th><th>LITE</th></tr></thead>
+          <tbody>
+            <tr><td>Styl inwestycji</td><td>Value + Growth | Turnaround</td><td>Pure Growth | Monopol</td></tr>
+            <tr><td>Wycena</td><td style="color:var(--buy)">Tańsze (P/S 7,8×)</td><td style="color:var(--sell)">Droższe (P/S 16×)</td></tr>
+            <tr><td>Ryzyko</td><td style="color:var(--buy)">Niższe (dywersyfikacja)</td><td style="color:var(--sell)">Wyższe (koncentracja EML)</td></tr>
+            <tr><td>Potencjalny upside</td><td>+20–80%</td><td>+50–200%</td></tr>
+            <tr><td>Idealny profil</td><td>Risk-averse | długoterminowy</td><td>High-conviction | tolerancja zmienności</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- S12 -->
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')">
+      <div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div>
+      <div class="section-toggle" id="s12-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s12-body">
+      <h3>Poziomy kluczowe</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>52W minimum</td><td>$84,35</td><td>Dno (lato 2025) — +303% do ATH</td></tr>
+            <tr><td>ATH (2 czerwiec 2026)</td><td>$426,89</td><td>Szczyt po rajdzie AI + NVIDIA deal</td></tr>
+            <tr><td>Cena bieżąca (07.2026)</td><td>~$340</td><td>-23% od ATH | korekta po rajdzie</td></tr>
+            <tr><td>Wsparcie S1</td><td>~$325–330</td><td>Intraday low 5 lipca: $325,66</td></tr>
+            <tr><td>Wsparcie S2</td><td>~$280–300</td><td>Fibonacciego 38,2% korekty od $84 do ATH</td></tr>
+            <tr><td>Opór R1</td><td>~$375–385</td><td>Strefa oporu — avg analyst target $384</td></tr>
+            <tr><td>Opór R2</td><td>~$427</td><td>ATH</td></tr>
+            <tr><td>Opór R3</td><td>$440+ (highs)</td><td>Nowe szczyty = fresh all-time high</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Wskaźniki techniczne — mieszane, ale trendem wzrostowym</h3>
+      <ul>
+        <li><strong>RSI (14):</strong> ~45 — neutralne, nie wyprzedane, nie wykupione</li>
+        <li><strong>MACD:</strong> Sygnał byka (+0,25) — momentum lekko pozytywne</li>
+        <li><strong>SMA20:</strong> ~$258 — cena znacznie powyżej (bullish)</li>
+        <li><strong>SMA50:</strong> ~$232 — cena znacznie powyżej (bullish)</li>
+        <li><strong>SMA200:</strong> ~$150 — cena znacznie powyżej (long-term bullish)</li>
+        <li><strong>Bollinger Bands:</strong> Cena blisko dolnej bandy — potencjalne wsparcie przy $325</li>
+      </ul>
+
+      <div class="alert alert-teal">
+        <strong>Wnioski tech:</strong> Przy $340, cena jest przy dolnej Bollinger Band po korekcie z ATH. RSI 45 = nie jest przebrane. MACD bycze. Fundamentalne wsparcie SMA200 ($150) to daleko — ale bliższe wsparcie $325 jest realne. Techniczne outlook = neutralny do lekko pozytywnego. Catalyst potrzebny (Q4 earnings).
+      </div>
+
+      <div class="scenario-grid">
+        <div class="bull-box">
+          <h4>🐂 Scenariusz byczek</h4>
+          <ul>
+            <li>Hold $325 S1 jako wsparcie</li>
+            <li>Q4 FY2026 earnings (sierpień 2026) ≥$2B revenue</li>
+            <li>Wybicie powyżej $385 → cel $427 ATH</li>
+            <li>CPO/SiC announcement → $450-500</li>
+          </ul>
+        </div>
+        <div class="bear-box">
+          <h4>🐻 Scenariusz niedźwiedź</h4>
+          <ul>
+            <li>Przebicie $325 → test $280-300</li>
+            <li>Q4 earnings miss / słaba guidance</li>
+            <li>Ogólny sell-off AI stocks</li>
+            <li>SiC news negatywny → $220-250</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S13 -->
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')">
+      <div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div>
+      <div class="section-toggle" id="s13-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box">
+          <div class="period">Krótki termin (1–3 mies.)</div>
+          <div class="rating-text buy">KUPNO</div>
+          <div class="rating-note">RSI 45 neutralne, korekta -23% od ATH. Q4 FY2026 earnings (sierpień) = kluczowy katalizator. Hold $325 jako wsparcie. Cel $380-400 do jesieni.</div>
+        </div>
+        <div class="rating-box">
+          <div class="period">Średni termin (6–18 mies.)</div>
+          <div class="rating-text buy">KUPNO</div>
+          <div class="rating-note">P/S 5,8× na FY2027E =$410+ potencjał. Delewarowanie do 0× dźwigni. CPO ramp commence. Backlog do 2028 — wysoka widoczność. Cel $400-450.</div>
+        </div>
+        <div class="rating-box">
+          <div class="period">Długi termin (3–5 lat)</div>
+          <div class="rating-text strong-buy">MOCNE KUPNO</div>
+          <div class="rating-note">CPO $15B TAM + SiC $7B TAM + AI optyczne. Przy P/S 8× na FY2028E $13-15B revenue → bull case $500-600+. SiC opcjonalność może podwoić wartość.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <h3>Strategia wejścia</h3>
+      <ul>
+        <li><strong>Przy $340:</strong> Atrakcyjny punkt wejścia — -23% od ATH, P/S 7,8× to rozsądna wycena dla +34% FY2027 grower</li>
+        <li><strong>Idealne dokupowanie:</strong> $300–320 przy pogłębieniu korekty — tam P/S spada do 6,5× co jest bardzo atrakcyjne</li>
+        <li><strong>Katalizator Q4 FY2026 (sierpień 2026):</strong> Jeśli revenue $1,95B+ i GM 40%+ → przełamanie $385 oporu</li>
+        <li><strong>Stop-loss mentalny:</strong> Przebicie $280 z wolumenem = rewizja tezy</li>
+        <li><strong>Pozycja vs LITE:</strong> COHR = bezpieczniejszy, tańszy, mniej volatilny. LITE = wyższy potencjał, wyższe ryzyko. Komplementarne.</li>
+      </ul>
+
+      <div class="fair-value-box">
+        <div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div>
+        <div class="fair-value-range">$390 – $455</div>
+        <div class="fair-value-note">Base case P/S 7–8× na FY2027E $9,45B | Analyst high $455 (Rothschild) | Avg analyst $384 | Bull case $500-600+ (CPO + SiC)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S14 -->
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')">
+      <div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">PODSUMOWANIE (TL;DR)</div></div>
+      <div class="section-toggle" id="s14-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy">
+          <h4>✅ 3 powody, by kupić</h4>
+          <ul>
+            <li><strong>Turnaround + NVIDIA $2B = wyjście z pułapki długu:</strong> Spółka przeszła z 4-5× leverage na 0,5× w 12 miesięcy. To rzadki case — delewarowanie przy jednoczesnym wzroście revenue. Gdy leverage osiągnie 0×, FCF redeployment na buybacks = re-rating wyceny w górę</li>
+            <li><strong>P/S 5,8× na FY2027E przy +34% wzroście:</strong> To jest 2× taniej niż Lumentum przy porównywalnym NVIDIA endorsement. Coherent ma taki sam deal ($2B), identyczną AI tailwind, ale wyceniony jak value stock. Ta luka zostanie zamknięta</li>
+            <li><strong>CPO $15B + SiC = ukryte opcjonalności warte 0$ w wycenie:</strong> CPO ramp od 2027-2028 to kolejny 5-8 letni supercycle. SiC 300mm z DENSO/Mitsubishi backing to $1B+ potencjał. Rynek płaci za transceivery — dostaje też dwa game-changer segmenty za darmo</li>
+          </ul>
+        </div>
+        <div class="thesis-avoid">
+          <h4>❌ 3 powody, by unikać</h4>
+          <ul>
+            <li><strong>EV/EBITDA ~40× to premium wymagający perfekcji w wykonaniu:</strong> Historyczne hardware/photonics spółki handlują na 15-25×. Przy jakimkolwiek miss Q4 FY2026 lub Q1 FY2027 — repricing do 25× EV/EBITDA = cena $190-240. Downside jest asymetryczny jeśli coś pójdzie nie tak</li>
+            <li><strong>Lumentum jest 6-12 miesięcy przed w 200G EML monopolu:</strong> Najgorętszy produkt AI optical (200G EML dla 1.6T) to Lumentum. COHR goni w CPO, ale w 2026 kluczowy wolumen idzie do LITE. To oznacza wolniejszą akcelerację Networking revenue</li>
+            <li><strong>Złożoność 3 segmentów = execution risk pod nowym CEO:</strong> Jim Anderson jest nowy (od 2024), odziedziczy integracyjne problemy z połączenia II-VI + Coherent. Zarządzanie photonics + materials + lasers + SiC + US manufacturing ramp + NVIDIA integration to extreme complexity — i jeden błąd operacyjny może kosztować 20-30% ceny</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <h3>Thesis-breaker</h3>
+      <p><strong>🔴 Jeśli:</strong> Q4 FY2026 revenue poniżej $1,85B lub GM spada poniżej 38% → sygnał że Networking segment zwalnia LUB CPO announcement okazuje się years away LUB SiC demand EV nie odbudowuje się w H2 2026 → repricingа do $220-260.</p>
+
+      <h3>Thesis-confirmer</h3>
+      <p><strong>🟢 Jeśli:</strong> Q4 FY2026 revenue $2B+ z GM 40%+ + CPO design win announcement + SiC 300mm volume ramp update → powrót do ATH $427 i nowe highs $455-500 w ciągu 6 miesięcy. Jeśli CEO Anderson ogłosi buyback program w FY2027 → instant re-rating o 15-20%.</p>
+
+      <hr class="divider">
+      <div style="text-align:center; padding: 20px 0">
+        <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">OCENA KOŃCOWA</div>
+        <div class="rating-badge buy" style="display:inline-flex; font-size:20px; padding:14px 32px; margin-bottom:16px;">📈 KUPNO — przy $340 wycena atrakcyjna</div>
+        <p style="color:var(--text-muted); max-width:700px; margin:0 auto; font-size:13px;">COHR przy $340 to <strong>tańszy i bezpieczniejszy</strong> sposób na granie AI optical supercycle vs Lumentum. P/S 7,8× przy +34% FY2027 wzroście, NVIDIA $2B deal, rekordowy backlog do 2028, i delewarowanie z 4-5× do 0,5× leverage — to fundamentalnie przekonujące. CPO i SiC to ukryte opcjonalności. Techniczne wsparcie $325 trzyma. Idealny punkt wejścia: $300–340. Cel 12m: $390-455. Bull case (CPO+SiC): $500-600+.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+
+  Analiza wygenerowana: 6 lipca 2026 | Dane: Coherent IR, SEC 8-K/10-Q, NVIDIA Newsroom, Futurum Group, MacroTrends, Yahoo Finance, MarketBeat | Nie stanowi porady inwestycyjnej
+</div>
+
+<script>
+function toggleSection(id) {
+  const body = document.getElementById(id + '-body');
+  const toggle = document.getElementById(id + '-toggle');
+  if (!body) return;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  body.style.display = isOpen ? 'none' : 'block';
+  toggle.classList.toggle('open', !isOpen);
+}
+function goSec(id) {
+  const el = uwaga = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+document.addEventListener('DOMContentLoaded', () => {
+  ['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14'].forEach(id => {
+    const b = document.getElementById(id + '-body');
+    if (b) b.style.display = 'none';
+  });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);
+        if (a) { a.classList.add('active'); a.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); }
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.section').forEach(s => obs.observe(s));
+});
+</script>
+<script>function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b</body></body>(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}</script><style>.section{scroll-margin-top:64px}</style></body>
+</html>

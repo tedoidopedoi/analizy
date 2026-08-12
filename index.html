@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP Corp — Katalog analiz inwestycyjnych</title>
+<style>
+:root{--bg:#0f1117;--surface:#1a1d2e;--surface2:#242740;--accent:#00d4aa;--accent2:#5eead4;
+--text:#e8eaf6;--text-muted:#8892b0;--border:#2e3250;--kupno:#4caf50;--neutralna:#ffd740;
+--sprzedaz:#ff6d00;--spek:#f43f5e;--porown:#7c8cff;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6}
+.tp-wm{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.tp-wm svg{position:absolute;width:100%;height:100%}
+.tp-wm text{font-family:'Segoe UI',system-ui,sans-serif;font-weight:800;font-size:34px;letter-spacing:6px}
+.header,.wrap{position:relative;z-index:1}
+.header{background:linear-gradient(135deg,#062b26 0%,#0f1117 55%,#0a1f1c 100%);border-bottom:1px solid var(--border);padding:34px 24px 30px}
+.header-in{max-width:1080px;margin:0 auto}
+.tp-logo{display:inline-flex;align-items:center;gap:10px}
+.tp-logo-mark{width:40px;height:40px;border-radius:10px;background:var(--accent);display:flex;align-items:center;
+justify-content:center;font-weight:800;font-size:15px;color:#0f1117;letter-spacing:.5px;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+.tp-logo-text b{display:block;font-size:16px;font-weight:800;letter-spacing:1.2px}
+.tp-logo-text span{display:block;font-size:9.5px;color:var(--text-muted);letter-spacing:2.4px;text-transform:uppercase}
+h1{font-size:27px;font-weight:800;margin:20px 0 6px;color:#fff}
+.sub{color:var(--text-muted);font-size:14px}
+.wrap{max-width:1080px;margin:0 auto;padding:24px}
+.panel{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:20px}
+#szukaj{flex:1;min-width:210px;background:var(--surface);border:1px solid var(--border);border-radius:9px;
+padding:11px 15px;color:var(--text);font-size:14px;font-family:inherit}
+#szukaj:focus{outline:none;border-color:var(--accent)}
+#sortuj{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:11px 13px;color:var(--text);font-size:13px;font-family:inherit}
+.filtry{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.f-btn{background:var(--surface);border:1px solid var(--border);color:var(--text-muted);font-size:12.5px;
+font-weight:600;padding:7px 15px;border-radius:20px;cursor:pointer;font-family:inherit}
+.f-btn:hover{color:var(--text);border-color:var(--accent)}
+.f-btn.akt{background:rgba(0,212,170,.13);border-color:var(--accent);color:var(--accent2)}
+.karta{display:flex;gap:18px;align-items:center;background:var(--surface);border:1px solid var(--border);
+border-radius:12px;padding:16px 20px;margin-bottom:11px;text-decoration:none;color:inherit}
+.karta:hover{border-color:var(--accent);background:var(--surface2)}
+.k-lewa{width:96px;flex-shrink:0}
+.k-ticker{font-size:19px;font-weight:800;color:#fff;letter-spacing:.4px;word-break:break-word}
+.k-gielda{font-size:10px;color:var(--text-muted);letter-spacing:1.1px;text-transform:uppercase;margin-top:2px}
+.k-srodek{flex:1;min-width:0}
+.k-nazwa{font-size:14.5px;font-weight:600;color:var(--text);margin-bottom:7px}
+.k-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:12px;letter-spacing:.4px;text-transform:uppercase}
+.p-kupno{background:rgba(76,175,80,.15);color:var(--kupno);border:1px solid rgba(76,175,80,.35)}
+.p-neutralna{background:rgba(255,215,64,.13);color:var(--neutralna);border:1px solid rgba(255,215,64,.32)}
+.p-sprzedaz{background:rgba(255,109,0,.13);color:var(--sprzedaz);border:1px solid rgba(255,109,0,.32)}
+.p-spekulacyjna{background:rgba(244,63,94,.13);color:var(--spek);border:1px solid rgba(244,63,94,.32)}
+.p-porownanie{background:rgba(124,140,255,.13);color:var(--porown);border:1px solid rgba(124,140,255,.32)}
+.p-nieznana{background:var(--surface2);color:var(--text-muted);border:1px solid var(--border)}
+.p-nowy{background:rgba(0,212,170,.1);color:var(--accent2);border:1px solid rgba(0,212,170,.28)}
+.k-data{font-size:12px;color:var(--text-muted)}
+.wiek{font-size:10.5px;padding:2px 8px;border-radius:10px}
+.w-swieza{background:rgba(76,175,80,.1);color:var(--kupno)}
+.w-srednia{background:rgba(255,215,64,.1);color:var(--neutralna)}
+.w-stara{background:rgba(255,109,0,.12);color:var(--sprzedaz)}
+.hist{font-size:11.5px;color:var(--text-muted);margin-top:7px}
+.hist a{color:var(--accent2);text-decoration:none}
+.hist a:hover{text-decoration:underline}
+.k-prawa{width:140px;flex-shrink:0;text-align:right}
+.k-lbl{font-size:9.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+.k-val{font-size:14px;font-weight:700;color:#fff}
+.k-val.fv{color:var(--accent2)}
+.pusto{text-align:center;color:var(--text-muted);padding:40px;display:none}
+.disclaimer{background:rgba(255,215,64,.05);border:1px solid rgba(255,215,64,.2);border-left:3px solid var(--neutralna);
+border-radius:9px;padding:15px 19px;margin:26px 0 0;font-size:12.5px;color:var(--text-muted)}
+.stopka{text-align:center;padding:28px 24px 40px;color:var(--text-muted);font-size:11.5px}
+@media(max-width:720px){.karta{flex-wrap:wrap;gap:12px}.k-lewa{width:auto}.k-prawa{width:100%;text-align:left;
+display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-prawa .k-lbl{margin-top:0!important}h1{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent)"/></svg></div>
+
+<div class="header"><div class="header-in">
+  <div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div>
+  <h1>Katalog analiz inwestycyjnych</h1>
+  <div class="sub">33 spółek · 35 raportów łącznie · aktualizacja 12.08.2026</div>
+</div></div>
+
+<div class="wrap">
+  <div class="panel">
+    <input id="szukaj" type="search" placeholder="Szukaj po tickerze lub nazwie spółki…" autocomplete="off">
+    <select id="sortuj">
+      <option value="data">Sortuj: najnowsze</option>
+      <option value="data-asc">Sortuj: najstarsze</option>
+      <option value="ticker">Sortuj: ticker A–Z</option>
+    </select>
+  </div>
+  <div class="filtry">
+      <button class="f-btn akt" data-f="wszystkie">Wszystkie (33)</button>
+      <button class="f-btn" data-f="kupno">Kupno (16)</button>
+      <button class="f-btn" data-f="neutralna">Neutralna (9)</button>
+      <button class="f-btn" data-f="spekulacyjna">Spekulacyjna (3)</button>
+      <button class="f-btn" data-f="sprzedaz">Sprzedaż (2)</button>
+      <button class="f-btn" data-f="porownanie">Porównania (2)</button>
+  </div>
+  <div id="lista">
+
+    <a class="karta" href="WULF_analiza_2026-08-10.html" data-kat="kupno" data-szukaj="wulf terawulf inc. nasdaq" data-data="2026-08-10" data-ticker="WULF">
+      <div class="k-lewa">
+        <div class="k-ticker">WULF</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">TeraWulf Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-08-10</span>
+          <span class="wiek w-swieza">świeża</span>
+          <span class='pill p-nowy'>szablon 15 sekcji</span>
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$17</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$22 – $32</div>
+      </div>
+    </a>
+
+    <a class="karta" href="CORZ_analiza_2026-08-10.html" data-kat="kupno" data-szukaj="corz core scientific, inc. nasdaq" data-data="2026-08-10" data-ticker="CORZ">
+      <div class="k-lewa">
+        <div class="k-ticker">CORZ</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Core Scientific, Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-08-10</span>
+          <span class="wiek w-swieza">świeża</span>
+          <span class='pill p-nowy'>szablon 15 sekcji</span>
+        </div>
+        <div class="hist">Starsze wersje: <a href="CORZ_analiza_2026-07-30.html">2026-07-30</a></div>
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">$20,38</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$27 – $36</div>
+      </div>
+    </a>
+
+    <a class="karta" href="S_SentinelOne_analiza_2026-08-07.html" data-kat="neutralna" data-szukaj="s sentinelone, inc. nyse" data-data="2026-08-07" data-ticker="S">
+      <div class="k-lewa">
+        <div class="k-ticker">S</div>
+        <div class="k-gielda">NYSE</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">SentinelOne, Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-neutralna">Neutralna</span>
+          <span class="k-data">2026-08-07</span>
+          <span class="wiek w-swieza">świeża</span>
+          <span class='pill p-nowy'>szablon 15 sekcji</span>
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$20,05</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$21 – $25</div>
+      </div>
+    </a>
+
+    <a class="karta" href="RDW_analiza_2026-08-07.html" data-kat="spekulacyjna" data-szukaj="rdw redwire corporation nyse" data-data="2026-08-07" data-ticker="RDW">
+      <div class="k-lewa">
+        <div class="k-ticker">RDW</div>
+        <div class="k-gielda">NYSE</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Redwire Corporation</div>
+        <div class="k-meta">
+          <span class="pill p-spekulacyjna">Spekulacyjna</span>
+          <span class="k-data">2026-08-07</span>
+          <span class="wiek w-swieza">świeża</span>
+          <span class='pill p-nowy'>szablon 15 sekcji</span>
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$11,83</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$12 – $16</div>
+      </div>
+    </a>
+
+    <a class="karta" href="BE_analiza_2026-08-07.html" data-kat="neutralna" data-szukaj="be bloom energy corporation nyse" data-data="2026-08-07" data-ticker="BE">
+      <div class="k-lewa">
+        <div class="k-ticker">BE</div>
+        <div class="k-gielda">NYSE</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Bloom Energy Corporation</div>
+        <div class="k-meta">
+          <span class="pill p-neutralna">Neutralna</span>
+          <span class="k-data">2026-08-07</span>
+          <span class="wiek w-swieza">świeża</span>
+          <span class='pill p-nowy'>szablon 15 sekcji</span>
+        </div>
+        <div class="hist">Starsze wersje: <a href="BE_analiza_2026-07-30.html">2026-07-30</a></div>
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">$213</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$190 – $280</div>
+      </div>
+    </a>
+
+    <a class="karta" href="SNAP_analiza_2026-08-06.html" data-kat="neutralna" data-szukaj="snap snap inc. nyse" data-data="2026-08-06" data-ticker="SNAP">
+      <div class="k-lewa">
+        <div class="k-ticker">SNAP</div>
+        <div class="k-gielda">NYSE</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Snap Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-neutralna">Neutralna</span>
+          <span class="k-data">2026-08-06</span>
+          <span class="wiek w-swieza">świeża</span>
+          <span class='pill p-nowy'>szablon 15 sekcji</span>
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">$5,30</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$6,50 – $9</div>
+      </div>
+    </a>
+
+    <a class="karta" href="MARA_analiza_2026-08-06.html" data-kat="neutralna" data-szukaj="mara mara holdings, inc. nasdaq" data-data="2026-08-06" data-ticker="MARA">
+      <div class="k-lewa">
+        <div class="k-ticker">MARA</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">MARA Holdings, Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-neutralna">Neutralna</span>
+          <span class="k-data">2026-08-06</span>
+          <span class="wiek w-swieza">świeża</span>
+          <span class='pill p-nowy'>szablon 15 sekcji</span>
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$11,75</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$15 – $22</div>
+      </div>
+    </a>
+
+    <a class="karta" href="HOOD_analiza_2026-08-06.html" data-kat="kupno" data-szukaj="hood robinhood markets, inc. nasdaq" data-data="2026-08-06" data-ticker="HOOD">
+      <div class="k-lewa">
+        <div class="k-ticker">HOOD</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Robinhood Markets, Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-08-06</span>
+          <span class="wiek w-swieza">świeża</span>
+          <span class='pill p-nowy'>szablon 15 sekcji</span>
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$92</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$105 – $135</div>
+      </div>
+    </a>
+
+    <a class="karta" href="GRAB_analiza_2026-08-06.html" data-kat="kupno" data-szukaj="grab grab holdings limited nasdaq" data-data="2026-08-06" data-ticker="GRAB">
+      <div class="k-lewa">
+        <div class="k-ticker">GRAB</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Grab Holdings Limited</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-08-06</span>
+          <span class="wiek w-swieza">świeża</span>
+          <span class='pill p-nowy'>szablon 15 sekcji</span>
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$3,74</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$5,00 – $6,50</div>
+      </div>
+    </a>
+
+    <a class="karta" href="AMD_analiza_2026-08-06.html" data-kat="kupno" data-szukaj="amd advanced micro devices, inc. nasdaq" data-data="2026-08-06" data-ticker="AMD">
+      <div class="k-lewa">
+        <div class="k-ticker">AMD</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Advanced Micro Devices, Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-08-06</span>
+          <span class="wiek w-swieza">świeża</span>
+          <span class='pill p-nowy'>szablon 15 sekcji</span>
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">$493</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$560 – $650</div>
+      </div>
+    </a>
+
+    <a class="karta" href="VEEV_analiza_2026-07-30.html" data-kat="kupno" data-szukaj="veev veeva systems inc. nyse" data-data="2026-07-30" data-ticker="VEEV">
+      <div class="k-lewa">
+        <div class="k-ticker">VEEV</div>
+        <div class="k-gielda">NYSE</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Veeva Systems Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-07-30</span>
+          <span class="wiek w-swieza">świeża</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$200</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$240 – $290</div>
+      </div>
+    </a>
+
+    <a class="karta" href="SOFI_analiza_2026-07-30.html" data-kat="neutralna" data-szukaj="sofi sofi technologies, inc. nasdaq" data-data="2026-07-30" data-ticker="SOFI">
+      <div class="k-lewa">
+        <div class="k-ticker">SOFI</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">SoFi Technologies, Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-neutralna">Neutralna</span>
+          <span class="k-data">2026-07-30</span>
+          <span class="wiek w-swieza">świeża</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">$16,17</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$19 – $24</div>
+      </div>
+    </a>
+
+    <a class="karta" href="SMSN_analiza_2026-07-30.html" data-kat="kupno" data-szukaj="smsn samsung electronics co., ltd. lse gdr / krx" data-data="2026-07-30" data-ticker="SMSN">
+      <div class="k-lewa">
+        <div class="k-ticker">SMSN</div>
+        <div class="k-gielda">LSE GDR / KRX</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Samsung Electronics Co., Ltd.</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-07-30</span>
+          <span class="wiek w-swieza">świeża</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">GDR $3 844</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">₩400 000 – ₩470 000</div>
+      </div>
+    </a>
+
+    <a class="karta" href="KIOXIA_analiza_2026-07-30.html" data-kat="spekulacyjna" data-szukaj="kioxia kioxia holdings corporation tse 285a" data-data="2026-07-30" data-ticker="KIOXIA">
+      <div class="k-lewa">
+        <div class="k-ticker">KIOXIA</div>
+        <div class="k-gielda">TSE 285A</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Kioxia Holdings Corporation</div>
+        <div class="k-meta">
+          <span class="pill p-spekulacyjna">Spekulacyjna</span>
+          <span class="k-data">2026-07-30</span>
+          <span class="wiek w-swieza">świeża</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~¥45-52 tys.</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">¥40 000 – ¥90 000</div>
+      </div>
+    </a>
+
+    <a class="karta" href="AVGO_analiza_2026-07-27.html" data-kat="kupno" data-szukaj="avgo broadcom inc. nasdaq" data-data="2026-07-27" data-ticker="AVGO">
+      <div class="k-lewa">
+        <div class="k-ticker">AVGO</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Broadcom Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-07-27</span>
+          <span class="wiek w-swieza">świeża</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$381,50</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$480 – $560</div>
+      </div>
+    </a>
+
+    <a class="karta" href="ASPI_analiza_2026-07-27.html" data-kat="spekulacyjna" data-szukaj="aspi asp isotopes inc. nasdaq" data-data="2026-07-27" data-ticker="ASPI">
+      <div class="k-lewa">
+        <div class="k-ticker">ASPI</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">ASP Isotopes Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-spekulacyjna">Spekulacyjna</span>
+          <span class="k-data">2026-07-27</span>
+          <span class="wiek w-swieza">świeża</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">$3,78</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$5 – $9</div>
+      </div>
+    </a>
+
+    <a class="karta" href="NVTS_analiza_2026-07-21.html" data-kat="sprzedaz" data-szukaj="nvts navitas semiconductor nasdaq" data-data="2026-07-21" data-ticker="NVTS">
+      <div class="k-lewa">
+        <div class="k-ticker">NVTS</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Navitas Semiconductor</div>
+        <div class="k-meta">
+          <span class="pill p-sprzedaz">Sprzedaż</span>
+          <span class="k-data">2026-07-21</span>
+          <span class="wiek w-swieza">świeża</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$14,40</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$6 – $12</div>
+      </div>
+    </a>
+
+    <a class="karta" href="NOK_analiza_2026-07-21.html" data-kat="kupno" data-szukaj="nok nokia oyj nyse" data-data="2026-07-21" data-ticker="NOK">
+      <div class="k-lewa">
+        <div class="k-ticker">NOK</div>
+        <div class="k-gielda">NYSE</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Nokia Oyj</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-07-21</span>
+          <span class="wiek w-swieza">świeża</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">€8,00 (~$9,30)</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$13 – $18</div>
+      </div>
+    </a>
+
+    <a class="karta" href="MRVL_analiza_2026-07-21.html" data-kat="kupno" data-szukaj="mrvl marvell technology, inc. nasdaq" data-data="2026-07-21" data-ticker="MRVL">
+      <div class="k-lewa">
+        <div class="k-ticker">MRVL</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Marvell Technology, Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-07-21</span>
+          <span class="wiek w-swieza">świeża</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$170</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$240 – $300</div>
+      </div>
+    </a>
+
+    <a class="karta" href="LPTH_analiza_2026-07-21.html" data-kat="neutralna" data-szukaj="lpth lightpath technologies, inc. nasdaq" data-data="2026-07-21" data-ticker="LPTH">
+      <div class="k-lewa">
+        <div class="k-ticker">LPTH</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">LightPath Technologies, Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-neutralna">Neutralna</span>
+          <span class="k-data">2026-07-21</span>
+          <span class="wiek w-swieza">świeża</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$17</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$12 – $18</div>
+      </div>
+    </a>
+
+    <a class="karta" href="GWRE_analiza_2026-07-21.html" data-kat="kupno" data-szukaj="gwre guidewire software, inc. nyse" data-data="2026-07-21" data-ticker="GWRE">
+      <div class="k-lewa">
+        <div class="k-ticker">GWRE</div>
+        <div class="k-gielda">NYSE</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Guidewire Software, Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-07-21</span>
+          <span class="wiek w-swieza">świeża</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$144</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$180 – $230</div>
+      </div>
+    </a>
+
+    <a class="karta" href="BB_analiza_2026-07-21.html" data-kat="neutralna" data-szukaj="bb blackberry limited nyse" data-data="2026-07-21" data-ticker="BB">
+      <div class="k-lewa">
+        <div class="k-ticker">BB</div>
+        <div class="k-gielda">NYSE</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">BlackBerry Limited</div>
+        <div class="k-meta">
+          <span class="pill p-neutralna">Neutralna</span>
+          <span class="k-data">2026-07-21</span>
+          <span class="wiek w-swieza">świeża</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$8,77</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$7,50 – $11</div>
+      </div>
+    </a>
+
+    <a class="karta" href="POROWNANIE_6_spolek_2026-07-21.html" data-kat="porownanie" data-szukaj="6 spółek cohr · lpth · mrvl · nvts · bb · nok — porównanie mix" data-data="2026-07-21" data-ticker="6 SPÓŁEK">
+      <div class="k-lewa">
+        <div class="k-ticker">6 spółek</div>
+        <div class="k-gielda">MIX</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">COHR · LPTH · MRVL · NVTS · BB · NOK — porównanie</div>
+        <div class="k-meta">
+          <span class="pill p-porownanie">Porównanie</span>
+          <span class="k-data">2026-07-21</span>
+          <span class="wiek w-swieza">świeża</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">—</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">—</div>
+      </div>
+    </a>
+
+    <a class="karta" href="LRCX_analiza_2026-07-06.html" data-kat="neutralna" data-szukaj="lrcx lam research corporation nasdaq" data-data="2026-07-06" data-ticker="LRCX">
+      <div class="k-lewa">
+        <div class="k-ticker">LRCX</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Lam Research Corporation</div>
+        <div class="k-meta">
+          <span class="pill p-neutralna">Neutralna</span>
+          <span class="k-data">2026-07-06</span>
+          <span class="wiek w-srednia">37 dni</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$364</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$315 – $440</div>
+      </div>
+    </a>
+
+    <a class="karta" href="COHR_analiza_2026-07-06.html" data-kat="kupno" data-szukaj="cohr coherent corp. nyse" data-data="2026-07-06" data-ticker="COHR">
+      <div class="k-lewa">
+        <div class="k-ticker">COHR</div>
+        <div class="k-gielda">NYSE</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Coherent Corp.</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-07-06</span>
+          <span class="wiek w-srednia">37 dni</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$340</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$380 – $450</div>
+      </div>
+    </a>
+
+    <a class="karta" href="ORCL_analiza_2026-07-03.html" data-kat="kupno" data-szukaj="orcl oracle corporation nyse" data-data="2026-07-03" data-ticker="ORCL">
+      <div class="k-lewa">
+        <div class="k-ticker">ORCL</div>
+        <div class="k-gielda">NYSE</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Oracle Corporation</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-07-03</span>
+          <span class="wiek w-srednia">40 dni</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$147,76</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$180 – $250</div>
+      </div>
+    </a>
+
+    <a class="karta" href="MRAM_analiza_2026-07-03.html" data-kat="neutralna" data-szukaj="mram everspin technologies, inc. nasdaq" data-data="2026-07-03" data-ticker="MRAM">
+      <div class="k-lewa">
+        <div class="k-ticker">MRAM</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Everspin Technologies, Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-neutralna">Neutralna</span>
+          <span class="k-data">2026-07-03</span>
+          <span class="wiek w-srednia">40 dni</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$22,33</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$18 – $28</div>
+      </div>
+    </a>
+
+    <a class="karta" href="LITE_analiza_2026-07-03.html" data-kat="kupno" data-szukaj="lite lumentum holdings inc. nasdaq" data-data="2026-07-03" data-ticker="LITE">
+      <div class="k-lewa">
+        <div class="k-ticker">LITE</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Lumentum Holdings Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-07-03</span>
+          <span class="wiek w-srednia">40 dni</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$730</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$750 – $1 100</div>
+      </div>
+    </a>
+
+    <a class="karta" href="OKLO_vs_SMR_analiza_2026-07-01.html" data-kat="porownanie" data-szukaj="oklo vs smr oklo vs nuscale power — porównanie nyse" data-data="2026-07-01" data-ticker="OKLO VS SMR">
+      <div class="k-lewa">
+        <div class="k-ticker">OKLO vs SMR</div>
+        <div class="k-gielda">NYSE</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Oklo vs NuScale Power — porównanie</div>
+        <div class="k-meta">
+          <span class="pill p-porownanie">Porównanie</span>
+          <span class="k-data">2026-07-01</span>
+          <span class="wiek w-srednia">42 dni</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">$52,31 / $11,74</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">—</div>
+      </div>
+    </a>
+
+    <a class="karta" href="RR_analiza_2026-06-18.html" data-kat="sprzedaz" data-szukaj="rr richtech robotics inc. nasdaq" data-data="2026-06-18" data-ticker="RR">
+      <div class="k-lewa">
+        <div class="k-ticker">RR</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Richtech Robotics Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-sprzedaz">Sprzedaż</span>
+          <span class="k-data">2026-06-18</span>
+          <span class="wiek w-srednia">55 dni</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">brak danych</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">brak danych</div>
+      </div>
+    </a>
+
+    <a class="karta" href="CPNG_analiza_2026-06-17.html" data-kat="nieznana" data-szukaj="cpng coupang, inc. nyse" data-data="2026-06-17" data-ticker="CPNG">
+      <div class="k-lewa">
+        <div class="k-ticker">CPNG</div>
+        <div class="k-gielda">NYSE</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Coupang, Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-nieznana">Nieznana</span>
+          <span class="k-data">2026-06-17</span>
+          <span class="wiek w-srednia">56 dni</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">brak danych</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">brak danych</div>
+      </div>
+    </a>
+
+    <a class="karta" href="NVDA_analiza_2026-06-09.html" data-kat="kupno" data-szukaj="nvda nvidia corporation nasdaq" data-data="2026-06-09" data-ticker="NVDA">
+      <div class="k-lewa">
+        <div class="k-ticker">NVDA</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">NVIDIA Corporation</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-06-09</span>
+          <span class="wiek w-srednia">64 dni</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">brak danych</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">brak danych</div>
+      </div>
+    </a>
+
+    <a class="karta" href="NOW_analiza_2026-06-09.html" data-kat="kupno" data-szukaj="now servicenow, inc. nyse" data-data="2026-06-09" data-ticker="NOW">
+      <div class="k-lewa">
+        <div class="k-ticker">NOW</div>
+        <div class="k-gielda">NYSE</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">ServiceNow, Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-06-09</span>
+          <span class="wiek w-srednia">64 dni</span>
+          
+        </div>
+        
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">~$1 030</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">brak danych</div>
+      </div>
+    </a>
+  </div>
+  <div class="pusto" id="pusto">Brak analiz spełniających kryteria.</div>
+
+  <div class="disclaimer">
+    <strong>Zastrzeżenie.</strong> Analizy własne przygotowane do użytku prywatnego. Nie stanowią rekomendacji
+    inwestycyjnej w rozumieniu obowiązujących przepisów ani porady inwestycyjnej. Każdy raport odzwierciedla stan
+    wiedzy i ceny z dnia jego sporządzenia — dane mogły ulec dezaktualizacji. Decyzje inwestycyjne podejmujesz
+    na własną odpowiedzialność.
+  </div>
+</div>
+<div class="stopka">TP CORP · Equity Research · katalog generowany automatycznie</div>
+
+<script>
+(function(){
+  var lista=document.getElementById('lista'), pusto=document.getElementById('pusto'),
+      szukaj=document.getElementById('szukaj'), sortuj=document.getElementById('sortuj'),
+      karty=Array.prototype.slice.call(lista.querySelectorAll('.karta')), filtr='wszystkie';
+  function odswiez(){
+    var q=szukaj.value.trim().toLowerCase(), widoczne=0;
+    karty.forEach(function(k){
+      var ok=(filtr==='wszystkie'||k.dataset.kat===filtr) &&
+             (!q||k.dataset.szukaj.indexOf(q)>-1);
+      k.style.display=ok?'':'none'; if(ok)widoczne++;
+    });
+    pusto.style.display=widoczne?'none':'block';
+  }
+  function przesortuj(){
+    var t=sortuj.value, s=karty.slice();
+    s.sort(function(a,b){
+      if(t==='ticker') return a.dataset.ticker.localeCompare(b.dataset.ticker);
+      if(t==='data-asc') return a.dataset.data.localeCompare(b.dataset.data);
+      return b.dataset.data.localeCompare(a.dataset.data);
+    });
+    s.forEach(function(k){lista.appendChild(k);});
+  }
+  szukaj.addEventListener('input',odswiez);
+  sortuj.addEventListener('change',przesortuj);
+  document.querySelectorAll('.f-btn').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.f-btn').forEach(function(x){x.classList.remove('akt');});
+      b.classList.add('akt'); filtr=b.dataset.f; odswiez();
+    });
+  });
+})();
+</script>
+</body>
+</html>

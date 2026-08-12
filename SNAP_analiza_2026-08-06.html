@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNAP — Snap Inc. | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#facc15; --accent2:#fde047; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#1a1705 0%,#0f1117 50%,#161305 100%); border-bottom:1px solid var(--border); padding:40px 32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(250,204,21,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#000; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.neutral { background:rgba(255,215,64,0.12); border:2px solid var(--neutral); color:var(--neutral); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.gold { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#000; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.gold { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); } .chip.red { border-color:var(--sell); color:var(--sell); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.neutral { color:var(--neutral); } .rating-box .rating-text.sell { color:var(--sell); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--strong-buy); } .bear-box ul li::before { color:var(--strong-sell); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(250,204,21,0.08),rgba(253,224,71,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(250,204,21,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .alert-danger { background:rgba(213,0,0,0.08); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  /* === Sekcja 15: Podsumowanie inwestycyjne === */
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(0,200,83,.15); color:#00c853; border:1px solid rgba(0,200,83,.4); }
+  .ck.no  { background:rgba(213,0,0,.13);  color:#ff6b6b; border:1px solid rgba(213,0,0,.35); }
+  .ck.wait{ background:rgba(255,215,64,.13);color:#ffd740; border:1px solid rgba(255,215,64,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#00c853; } .mon-dot.y { background:#ffd740; } .mon-dot.r { background:#ff6d00; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+  <div class="header-content">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: SNAP</div>
+    <div class="company-name">Snap Inc.</div>
+    <div class="company-sub">Snapchat: 493M DAU · Snapchat+ i Lens+ (subskrypcje) · Specs — okulary AR za $2 195 · Santa Monica, CA | Kontrola głosów: Evan Spiegel</div>
+    <div class="header-meta">
+      <div class="rating-badge neutral">⚖️ NEUTRALNA — poprawa fundamentów, ale kosztowny zakład na AR</div>
+      <span class="meta-tag">Social media</span>
+      <span class="meta-tag">Reklama</span>
+      <span class="meta-tag">AR / Specs</span>
+      <span class="meta-tag">Blisko 52W low</span>
+      <div class="price-display">
+        <div class="price-main">$5,30</div>
+        <div class="price-sub">06.08.2026 | 52W low: $3,81 (27 III)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (06.08.2026)</div><div class="metric-value">$5,30</div><div class="metric-detail">52W low $3,81 | -9% w dniu 5 VIII</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$9B</div><div class="metric-detail">Po latach spadków z $130B (2021)</div></div>
+    <div class="metric-card"><div class="metric-label">Revenue Q2 2026</div><div class="metric-value green">$1,599B</div><div class="metric-detail">+19% YoY — przyspieszenie</div></div>
+    <div class="metric-card"><div class="metric-label">Adj. EBITDA Q2</div><div class="metric-value green">$250M</div><div class="metric-detail">+$208M YoY — skokowa poprawa</div></div>
+    <div class="metric-card"><div class="metric-label">DAU</div><div class="metric-value yellow">493M</div><div class="metric-detail">+5% YoY, ale USA/Europa w stagnacji</div></div>
+    <div class="metric-card"><div class="metric-label">Other Revenue</div><div class="metric-value green">$316M</div><div class="metric-detail">+85% YoY — subskrypcje ratują miks</div></div>
+    <div class="metric-card"><div class="metric-label">Marża brutto</div><div class="metric-value green">58%</div><div class="metric-detail">+7 pp YoY</div></div>
+    <div class="metric-card"><div class="metric-label">Guidance Q3</div><div class="metric-value green">$1,70-1,74B</div><div class="metric-detail">~+19% | EBITDA $300-350M</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest Snap?</h3>
+      <p>Snap Inc. (NYSE: SNAP) to właściciel <strong>Snapchata</strong> — komunikatora wizualnego z 493 mln użytkowników dziennie i 971 mln miesięcznie, popularnego zwłaszcza wśród nastolatków i młodych dorosłych. Spółka określa się jako „firma kamerowa", a nie społecznościowa, i od lat inwestuje w <strong>rzeczywistość rozszerzoną (AR)</strong>. Siedziba: Santa Monica. Współzałożyciel i CEO <strong>Evan Spiegel</strong> kontroluje spółkę poprzez akcje o uprzywilejowanym głosie — akcjonariusze zewnętrzni praktycznie nie mają wpływu na decyzje.</p>
+      <p>Historia kursu jest brutalna: ze szczytu ~$83 w 2021 roku (kapitalizacja ~$130 mld) do $5,30 dziś — spadek o ponad 90%.</p>
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>XI 2025</td><td>Umowa z Perplexity na $400 mln — integracja AI w czacie; kurs skacze 15%</td><td style="color:var(--buy)">↑ Nadzieja na AI</td></tr>
+          <tr><td>27 III 2026</td><td>52-tygodniowe minimum <strong>$3,81</strong></td><td style="color:var(--sell)">Dno</td></tr>
+          <tr><td><strong>Q1 2026</strong></td><td><strong>Umowa z Perplexity „polubownie zakończona"</strong> — $400 mln wypada z prognoz; ostrożne guidance</td><td style="color:var(--strong-sell)">↓↓ Utrata katalizatora</td></tr>
+          <tr><td>16 VI 2026</td><td><strong>Premiera Specs — okulary AR za $2 195</strong>, wysyłka jesienią 2026; $3 mld wydane na R&D</td><td style="color:var(--neutral)">Ryzykowny zakład</td></tr>
+          <tr><td><strong>3 VIII 2026</strong></td><td><strong>Q2: przychody +19% ($1,599 mld), EBITDA +$208 mln YoY, marża brutto +7 pp</strong></td><td style="color:var(--buy)">↑ Najlepszy kwartał od lat</td></tr>
+          <tr><td>5 VIII 2026</td><td>Kurs -9,3% do $5,25 — analitycy: okulary za $2 195 to „nonstarter" dla masowego rynku</td><td style="color:var(--sell)">↓ Rynek nie wierzy w AR</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Sedno sytuacji:</strong> Snap właśnie pokazał <strong>najlepsze wyniki finansowe od lat</strong> — przychody +19%, EBITDA wyższa o ponad $200 mln rok do roku, marża brutto w górę o 7 punktów. A kurs spadł o 9% w jeden dzień. Powód: rynek uznał, że okulary za $2 195, na które poszły miliardy z R&D, nie mają szans na masowy sukces. To spór nie o dzisiejsze liczby, lecz o to, na co spółka wydaje pieniądze.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Produkt</th><th>Opis</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Snapchat (reklamy)</strong></td><td>Komunikator wizualny; monetyzacja przez reklamy w Stories, Spotlight, Lenses</td><td>💰 $1,28 mld/kw (+9%) — rdzeń, ale wolno rosnący</td></tr>
+          <tr><td><strong>Snapchat+ / Lens+</strong></td><td>Subskrypcje premium: dodatkowe funkcje, brak reklam, narzędzia AR</td><td>🔥 Część „Other Revenue" +85% YoY</td></tr>
+          <tr><td><strong>Memory Storage</strong></td><td>Płatne przechowywanie wspomnień (zdjęć/filmów) w chmurze</td><td>⚡ Nowy, dobrze rosnący strumień</td></tr>
+          <tr><td><strong>Specs (okulary AR)</strong></td><td>$2 195, pole widzenia 51°, dwa układy Qualcomm, do 20 h z etui; wysyłka jesień 2026 (USA, UK, Francja)</td><td>🎲 Zakład za $3 mld R&D</td></tr>
+          <tr><td>Lens Studio / AR dla marek</td><td>Narzędzia AR dla twórców i reklamodawców</td><td>Ekosystem wspierający</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat — kruchy, ale realny w swojej niszy</h3>
+      <p>Przewagą Snapa jest <strong>pozycja w komunikacji prywatnej młodych ludzi</strong>: Snapchat nie jest miejscem publикacji jak Instagram czy TikTok, lecz codziennym kanałem rozmowy ze znajomymi. Efekt sieciowy w grupie rówieśniczej jest silny, a „streaks" (serie dni z wymianą wiadomości) tworzą nawyk. Do tego Snap ma najbardziej zaawansowaną technologię AR w mobile.</p>
+      <p>Słabość: <strong>ten moat nie przekłada się na pieniądze</strong>. Przychód na użytkownika jest wielokrotnie niższy niż u Meta, bo reklamy w komunikatorze są mniej skuteczne niż w kanale przeglądanym godzinami. Snap ma zasięg, ale słabą monetyzację — i to jest jego strukturalny problem od IPO.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Reklama cyfrowa:</strong> rynek wart setki miliardów, ale zdominowany przez Google, Meta i coraz mocniej Amazon oraz TikTok — udział Snapa to ułamek procenta</li>
+        <li><strong>Reklama napędzana AI:</strong> Meta i Google wykorzystują AI do targetowania i generowania kreacji, podnosząc skuteczność; mniejsi gracze zostają w tyle technologicznie</li>
+        <li><strong>Okulary AR/smart glasses:</strong> rynek rozgrzany przez Meta Ray-Ban (~$300-400) — sprzedają się w milionach. Snap wchodzi z produktem po $2 195, czyli 5-7× drożej</li>
+        <li><strong>Regulacje dot. nieletnich:</strong> rosnąca presja na platformy używane przez nastolatków (weryfikacja wieku, ograniczenia czasu) — Snap jest szczególnie eksponowany</li>
+        <li><strong>Cykliczność:</strong> wysoka — budżety reklamowe kurczą się jako pierwsze w spowolnieniu gospodarczym</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I UŻYTKOWNICY</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Region</th><th>DAU Q2 2026</th><th>Trend</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Ameryka Północna</strong></td><td>92 mln</td><td style="color:var(--neutral)">Stabilizacja po spadku z 99 mln (Q1 2025)</td><td>⚠️ Rynek o najwyższym ARPU — tu spadek boli najbardziej</td></tr>
+          <tr><td><strong>Europa</strong></td><td>98 mln</td><td style="color:var(--neutral)">Lekki spadek ze 100 mln</td><td>Stagnacja</td></tr>
+          <tr><td><strong>Reszta świata</strong></td><td>~303 mln</td><td style="color:var(--buy)">Cały wzrost pochodzi stąd</td><td>⚠️ Najniższe ARPU</td></tr>
+          <tr><td><strong>Razem</strong></td><td><strong>493 mln (+5%)</strong></td><td>MAU: 971 mln (+4%)</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>To najważniejsza tabela w całej analizie.</strong> Snap rośnie wyłącznie tam, gdzie zarabia najmniej. W USA użytkowników jest dziś <em>mniej</em> niż półtora roku temu (92 vs 99 mln), a Europa stoi w miejscu. Wzrost przychodów o 19% pochodzi więc z lepszej monetyzacji i subskrypcji, nie z pozyskiwania wartościowych użytkowników. Jeśli baza w krajach rozwiniętych będzie dalej się kurczyć, źródło poprawy wyników wyschnie.</div>
+      <p>Klientami są reklamodawcy — od globalnych marek po małe firmy (self-serve). Brak istotnej koncentracji, ale też brak lojalności: budżety przenoszą się tam, gdzie zwrot z inwestycji jest wyższy.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Strumień</th><th>Q2 2026</th><th>Zmiana YoY</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Reklama</strong></td><td>$1,28 mld</td><td style="color:var(--neutral)">+9%</td><td>80% przychodów, ale rośnie wolno</td></tr>
+          <tr><td><strong>Other Revenue</strong></td><td>$316 mln</td><td style="color:var(--strong-buy)">+85%</td><td>Snapchat+, Memory Storage, Lens+</td></tr>
+          <tr><td><strong>Razem</strong></td><td><strong>$1,599 mld</strong></td><td style="color:var(--buy)">+19%</td><td>Przyspieszenie dzięki subskrypcjom</td></tr>
+          <tr><td>Q3 2026 (guidance)</td><td>$1,70-1,74 mld</td><td>~+19%</td><td>EBITDA $300-350 mln</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Najciekawsza zmiana strukturalna:</strong> subskrypcje rosną +85% rocznie i to one, a nie reklamy, odpowiadają za przyspieszenie przychodów. Snapchat+ to model powtarzalny, o wyższej marży i niezależny od budżetów reklamowych. Jeśli ten trend potrwa, Snap przestanie być czystą spółką reklamową — a to uzasadniałoby wyższą wycenę. To realny, pozytywny zwrot w tej historii.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $5,30</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>~$9 mld</td><td>—</td></tr>
+          <tr><td>Gotówka + papiery</td><td>~$2,66 mld</td><td style="color:var(--buy)">Solidna poduszka</td></tr>
+          <tr><td>Dług</td><td>~$3,53 mld</td><td style="color:var(--neutral)">Dług netto ~$0,9 mld</td></tr>
+          <tr><td>EV</td><td>~$9,9 mld</td><td>—</td></tr>
+          <tr><td><strong>EV/Sales (2026E ~$6,4 mld)</strong></td><td><strong>~1,5×</strong></td><td style="color:var(--buy)">✅ Bardzo nisko — Meta ~7×, Pinterest ~4×</td></tr>
+          <tr><td>EV/EBITDA (2026E ~$1,1 mld)</td><td>~9×</td><td style="color:var(--buy)">✅ Rozsądnie po poprawie rentowności</td></tr>
+          <tr><td>P/E</td><td>n/d — strata GAAP $164 mln w Q2</td><td style="color:var(--neutral)">Duży wpływ SBC</td></tr>
+          <tr><td>Cel analityków</td><td>~$7,26 (konsensus Hold)</td><td style="color:var(--neutral)">+37%, ale rekomendacja: trzymaj</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Zastrzeżenie do celów analityków:</strong> w źródłach pojawia się też cel „$34" — to najprawdopodobniej błąd danych lub agregacja historyczna sprzed lat. Wiarygodne, świeże cele mieszczą się w przedziale <strong>$7-9</strong> (Morgan Stanley $8,50, UBS $9,00, Rosenblatt $8,70), przy przeważającej rekomendacji „trzymaj".</div>
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12-18 mies.</div><div class="fair-value-range">$6,50 – $9</div><div class="fair-value-note">Base: EV/Sales 2-2,5× przy utrzymaniu wzrostu +19% i rosnącej EBITDA = $7-8,50 | Bear (reklamy hamują, Specs pochłania gotówkę, DAU spada w USA): $3,50-4,50 | Bull (subskrypcje +85% utrzymane, EBITDA >$1,5 mld): $11-13 | Przy $5,30 upside +23-70%, downside -35%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Q2 2026</th><th>Zmiana YoY</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto</td><td><strong>58%</strong></td><td style="color:var(--buy)">+7 pp</td></tr>
+          <tr><td>Adjusted EBITDA</td><td><strong>$250 mln</strong></td><td style="color:var(--strong-buy)">+$208 mln</td></tr>
+          <tr><td>Marża EBITDA</td><td>~16%</td><td style="color:var(--buy)">z ~3%</td></tr>
+          <tr><td>Strata netto GAAP</td><td>-$164 mln</td><td style="color:var(--buy)">Poprawa o $99 mln</td></tr>
+        </tbody>
+      </table></div>
+      <p>Poprawa rentowności jest tu autentyczna i szybka: EBITDA wzrosła o ponad $200 mln rok do roku, marża brutto o 7 punktów, a strata netto skurczyła się o $99 mln. To efekt dyscypliny kosztowej, wyższej marży na subskrypcjach i lepszej efektywności infrastruktury.</p>
+      <div class="alert alert-warn"><strong>Uwaga na różnicę GAAP vs adjusted:</strong> spółka pokazuje $250 mln „skorygowanej EBITDA", ale wciąż notuje <strong>stratę netto $164 mln</strong>. Różnicę tworzą głównie <strong>wynagrodzenia w akcjach (SBC)</strong> — realny koszt dla akcjonariuszy, bo rozwadnia ich udziały. Snap historycznie należał do liderów w tej kategorii wśród spółek technologicznych. Śledź liczbę akcji, nie tylko EBITDA.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (30 VI 2026)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka i ekwiwalenty</td><td>$959 mln</td></tr>
+          <tr><td>Papiery zbywalne</td><td>$1 701 mln</td></tr>
+          <tr><td><strong>Razem płynne aktywa</strong></td><td><strong>~$2,66 mld</strong></td></tr>
+          <tr><td>Dług krótkoterminowy</td><td>$153 mln</td></tr>
+          <tr><td>Dług długoterminowy</td><td>$3 381 mln</td></tr>
+          <tr><td>Aktywa / zobowiązania ogółem</td><td>$7,47 mld / $5,54 mld</td></tr>
+          <tr><td>Kapitał własny</td><td>~$1,93 mld</td></tr>
+        </tbody>
+      </table></div>
+      <p>Bilans jest znośny, ale nie mocny: dług netto około $0,9 mld przy EBITDA rzędu $1 mld rocznie oznacza dźwignię poniżej 1× — to bezpieczny poziom. Poduszka $2,66 mld daje spółce kilka lat na finansowanie projektu Specs nawet przy braku zysku netto.</p>
+      <p>Realnym problemem nie jest więc wypłacalność, lecz <strong>alokacja kapitału</strong>: $3 mld wydane na R&D okularów AR to kwota porównywalna z jedną trzecią obecnej kapitalizacji spółki, wydana na produkt o niepewnym rynku.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Najlepszy kwartał operacyjny od lat, a kurs blisko dna</h4><p>Przychody +19%, EBITDA wyższa o $208 mln rok do roku, marża brutto +7 pp, guidance na Q3 podtrzymuje tempo. Rynek wycenia spółkę tak, jakby te wyniki nie istniały.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💳</div><div class="catalyst-body"><h4>Subskrypcje +85% — zmiana modelu biznesowego</h4><p>Snapchat+, Lens+ i Memory Storage rosną szybciej niż reklamy i mają wyższą marżę. To przychód powtarzalny, odporny na wahania budżetów reklamowych — dokładnie to, czego brakowało tezie inwestycyjnej Snapa.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏷️</div><div class="catalyst-body"><h4>EV/Sales ~1,5× — wycena spółki schyłkowej przy rosnących przychodach</h4><p>Meta handluje przy ~7×, Pinterest ~4×. Nawet umiarkowany powrót zaufania do 2,5× oznacza kurs w okolicach $8-9.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">👓</div><div class="catalyst-body"><h4>Specs jako opcja o asymetrycznym profilu</h4><p>Rynek wycenia okulary na zero lub wartość ujemną. Jeśli AR stanie się kolejną platformą po smartfonie, Snap ma dekadę przewagi technologicznej i ekosystem twórców — wtedy dzisiejsza kapitalizacja $9 mld będzie wyglądać absurdalnie nisko.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Potencjalny cel przejęcia</h4><p>493 mln użytkowników dziennie za $9 mld to jedna z tańszych baz użytkowników na rynku. Bariera: struktura głosów Spiegela, która blokuje wrogie przejęcie — ale przy dalszej słabości presja może rosnąć.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">👓</div><div class="catalyst-body"><h4>Specs za $2 195 to zakład, w który rynek nie wierzy</h4><p>Meta sprzedaje okulary Ray-Ban za $300-400 w milionach sztuk. Snap wchodzi 5-7× drożej z produktem cięższym i mniej dopracowanym wizualnie. Analitycy nazwali to „nonstarterem" dla masowego odbiorcy — stąd spadek o 9% w jeden dzień.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Użytkownicy w USA: 92 mln wobec 99 mln w Q1 2025</h4><p>Snap traci bazę tam, gdzie zarabia najwięcej, a rośnie tam, gdzie ARPU jest najniższe. To strukturalna erozja jakości bazy użytkowników, której nie widać w zagregowanej liczbie 493 mln.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🤖</div><div class="catalyst-body"><h4>Zerwana umowa z Perplexity — utrata $400 mln i narracji AI</h4><p>Kontrakt, który wywindował kurs o 15% w listopadzie, został „polubownie zakończony" bez wyjaśnień. Snap został bez wyraźnej strategii AI w momencie, gdy konkurencja ją wdraża.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚔️</div><div class="catalyst-body"><h4>Konkurencja o niewspółmiernych zasobach</h4><p>Meta, Google, TikTok i Amazon mają budżety AI o rząd wielkości większe. W reklamie wygrywa ten, kto lepiej targetuje — a to dziś kwestia mocy obliczeniowej i danych, nie kreatywności produktu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🗳️</div><div class="catalyst-body"><h4>Brak kontroli akcjonariuszy i rozwodnienie przez SBC</h4><p>Evan Spiegel decyduje o wszystkim dzięki akcjom o uprzywilejowanym głosie — inwestorzy nie mają jak wymusić zmiany strategii, nawet gdy tracą 90% wartości. Do tego wysokie wynagrodzenia w akcjach systematycznie rozwadniają udziały.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>Skala</th><th>Przewaga nad Snapem</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Snap</strong></td><td>493 mln DAU, ~$6,4 mld przychodu</td><td>AR, pozycja wśród nastolatków, komunikacja prywatna</td><td>Niska monetyzacja, brak skali w AI</td></tr>
+          <tr><td>Meta (Instagram, WhatsApp)</td><td>~3,4 mld użytkowników</td><td>Skala, AI, reklama, tanie okulary Ray-Ban</td><td>Starsza baza użytkowników</td></tr>
+          <tr><td>TikTok (ByteDance)</td><td>>1 mld</td><td>Najsilniejszy algorytm, czas spędzany w aplikacji</td><td>Ryzyko regulacyjne w USA</td></tr>
+          <tr><td>Pinterest</td><td>~550 mln MAU</td><td>Wyższa intencja zakupowa, rentowność</td><td>Mniejsze zaangażowanie</td></tr>
+          <tr><td>Reddit</td><td>rosnąca</td><td>Dane do trenowania AI, wzrost przychodów</td><td>Węższa demografia</td></tr>
+          <tr><td>YouTube (Google)</td><td>>2,5 mld</td><td>Wideo, telewizja, dane Google</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <p>Pozycja: <strong>gracz niszowy z lojalną, ale trudną do zmonetyzowania bazą</strong>. Snap nie przegrywa na produkcie — przegrywa na skali potrzebnej, by konkurować w erze reklamy sterowanej przez AI.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Szczyt 2021</td><td>~$83</td><td>Kontekst: -94% od tamtego poziomu</td></tr>
+          <tr><td>52W low</td><td>$3,81</td><td>27 marca 2026</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$5,30</strong></td><td>+39% nad dnem, ale po -9% w jeden dzień</td></tr>
+          <tr><td>Wsparcie S1</td><td>$4,80-5,00</td><td>Strefa konsolidacji z wiosny</td></tr>
+          <tr><td>Wsparcie S2</td><td>$3,81</td><td>52W low — ostateczna obrona</td></tr>
+          <tr><td>Opór R1</td><td>$6,50-7,00</td><td>Poziomy sprzed wyprzedaży</td></tr>
+          <tr><td>Opór R2</td><td>$8,50-9,00</td><td>Cele analityków</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Bull techniczny</h4><ul><li>Obrona $5 i powrót nad $5,50</li><li>Dobre przedsprzedaże Specs jesienią</li><li>Q3 (listopad) z EBITDA $350 mln</li><li>Ruch ku $7</li></ul></div>
+        <div class="bear-box"><h4>🐻 Bear techniczny</h4><ul><li>Przebicie $4,80</li><li>Słaby odbiór Specs po premierze</li><li>Spadek DAU w USA poniżej 92 mln</li><li>Retest $3,81</li></ul></div>
+      </div>
+      <p>Kurs pozostaje w długoterminowym trendzie spadkowym, ale dno z marca jest wyraźnie wyżej niż panika sprzed lat. Kluczowy test: <strong>jesienna premiera Specs</strong> i wyniki Q3 w listopadzie.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Świeży spadek -9%, sentyment negatywny, premiera Specs dopiero jesienią. Konsensus „trzymaj". Brak powodu do pośpiechu.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text neutral">NEUTRALNA / KUPNO spekulacyjne</div><div class="rating-note">Jeśli subskrypcje utrzymają +85%, a EBITDA przekroczy $1,3 mld — EV/Sales 1,5× jest nie do obrony i kurs wraca do $7-9. Warunek: DAU w USA nie spada dalej.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Wszystko zależy od AR. Sukces Specs = nowa platforma i wielokrotność dzisiejszej wyceny. Porażka = powolna erozja bazy i przychodów. Zakład binarny bez możliwości wpływu akcjonariuszy.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Przy $5,30:</strong> to spekulacja o dodatniej wartości oczekiwanej, ale nie inwestycja jakościowa — wielkość pozycji maksymalnie 1-2% portfela</li>
+        <li><strong>Transze:</strong> $5,00-5,30 (pierwsza), $4,20-4,50 (druga przy retestach dna)</li>
+        <li><strong>Kluczowy termin:</strong> jesień 2026 — pierwsze dane o sprzedaży Specs; oraz wyniki Q3 w listopadzie</li>
+        <li><strong>Monitoruj przede wszystkim:</strong> DAU w Ameryce Północnej (dziś 92 mln) i dynamikę „Other Revenue" (+85%). To dwa wskaźniki, które rozstrzygają tezę</li>
+        <li><strong>Stop mentalny:</strong> spadek DAU w USA poniżej 90 mln lub wyhamowanie subskrypcji poniżej 40% wzrostu</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12-18 mies.</div><div class="fair-value-range">$6,50 – $9</div><div class="fair-value-note">Bear: $3,50-4,50 | Bull: $11-13 | Konsensus: ~$7,26 (Hold)</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by rozważyć</h4><ul>
+          <li><strong>Najlepszy kwartał operacyjny od lat przy kursie blisko dna</strong> — przychody +19%, EBITDA wyższa o $208 mln r/r, marża brutto +7 pp, strata netto zmniejszona o $99 mln</li>
+          <li><strong>Subskrypcje rosną +85% i zmieniają model biznesowy</strong> — Snapchat+, Lens+ i Memory Storage dają przychód powtarzalny o wyższej marży, niezależny od budżetów reklamowych</li>
+          <li><strong>EV/Sales ~1,5× to wycena spółki umierającej</strong> — przy Meta ~7× i Pinterest ~4×; nawet częściowy powrót zaufania oznacza $8-9, a Specs to darmowa opcja na AR</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Użytkownicy w USA spadli z 99 do 92 mln</strong> — Snap rośnie tylko tam, gdzie zarabia najmniej; to erozja jakości bazy ukryta pod zagregowaną liczbą 493 mln</li>
+          <li><strong>$3 mld i przyszłość spółki postawione na okulary za $2 195</strong> — przy Meta Ray-Ban po $300-400; rynek nazwał to „nonstarterem" i ściął kurs o 9% w dzień</li>
+          <li><strong>Zerwana umowa z Perplexity, brak strategii AI i zerowa kontrola akcjonariuszy</strong> — Spiegel decyduje sam dzięki uprzywilejowanym głosom, a SBC systematycznie rozwadnia udziały</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> słaba sprzedaż Specs jesienią połączona ze spadkiem DAU w USA poniżej 90 mln → powrót do $3,50-4,00.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> Q3 (listopad) z EBITDA $350 mln, utrzymanym wzrostem subskrypcji i stabilizacją DAU w USA → $7-9.</p>
+      <hr class="divider">
+      <div style="text-align:center; padding:20px 0">
+        <div class="rating-badge neutral" style="display:inline-flex; font-size:20px; padding:14px 32px; margin-bottom:16px;">⚖️ NEUTRALNA — tania opcja, ale bez kontroli nad tym, jak zostanie rozegrana</div>
+        <p style="color:var(--text-muted); max-width:700px; margin:0 auto; font-size:13px;">Snap przy $5,30 wygląda na okazję: rentowność poprawia się najszybciej od lat, subskrypcje rosną +85%, a EV/Sales 1,5× to poziom zarezerwowany dla spółek schyłkowych. Problem w tym, że nie kupujesz tu wyników — kupujesz zakład Evana Spiegela na okulary za $2 195, na który nie masz żadnego wpływu, przy kurczącej się bazie użytkowników w USA. Mała pozycja spekulacyjna, dwa wskaźniki do pilnowania: DAU w Ameryce Północnej i tempo wzrostu subskrypcji.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Snap to dziś spółka, w której <strong>wyniki i wycena opowiadają dwie zupełnie różne historie</strong>. Operacyjnie firma jest w najlepszym momencie od czasu debiutu: przychody rosną o 19%, marża brutto poprawiła się o 7 punktów procentowych, a skorygowana EBITDA wzrosła o ponad 200 mln USD rok do roku. Jednocześnie rynek wycenia ją na 1,5-krotność sprzedaży — mnożnik zarezerwowany dla firm w schyłku. Ta rozbieżność nie wynika z niewiedzy inwestorów, lecz z fundamentalnej nieufności wobec tego, <strong>na co Snap wydaje zarobione pieniądze</strong>.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Sedno sporu to trzy miliardy dolarów włożone w okulary Specs, które kosztują 2 195 USD — pięć do siedmiu razy więcej niż okulary Meta Ray-Ban sprzedawane w milionach sztuk. Evan Spiegel stawia firmę na tezę, że AR będzie kolejną platformą po smartfonie. Może mieć rację — ale <strong>akcjonariusze nie mają żadnego wpływu na tę decyzję</strong>, bo struktura głosów daje mu pełną kontrolę. Kupując SNAP, nie kupujesz wyników kwartalnych; kupujesz jego zakład.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Subskrypcje utrzymają dynamikę.</strong> Snapchat+, Lens+ i Memory Storage rosną +85% rocznie i to one napędzają przyspieszenie przychodów. Warunek już spełniony — trzeba go tylko utrzymać przez kolejne dwa kwartały.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Baza w USA przestanie się kurczyć.</strong> Dziś 92 mln użytkowników dziennie wobec 99 mln w I kwartale 2025. Stabilizacja to warunek konieczny — bez niej wzrost przychodów wyschnie, bo reszta świata monetyzuje się kilkukrotnie gorzej.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Specs znajdą swoją niszę.</strong> Nie muszą być hitem masowym. Wystarczy, że sprzedadzą się deweloperom i entuzjastom na tyle, by uzasadnić dalsze inwestycje i zbudować ekosystem aplikacji.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Powrót wiarygodnej strategii AI.</strong> Po zerwaniu umowy z Perplexity (400 mln USD) Snap został bez narracji AI w momencie, gdy konkurencja ją wdraża. To dziś największa luka w historii spółki.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Jesień 2026</strong></td><td>Wysyłka Specs (USA, UK, Francja)</td><td>Pierwsze realne dane o popycie — rozstrzyga spór o sens wydania 3 mld USD</td></tr>
+            <tr><td><strong>Listopad 2026</strong></td><td>Wyniki Q3</td><td>Test guidance: EBITDA 300–350 mln USD i utrzymanie tempa subskrypcji</td></tr>
+            <tr><td>Q4 2026 / Q1 2027</td><td>Sezon reklamowy + dane o DAU w USA</td><td>Najsilniejszy kwartał reklamowy pokaże, czy monetyzacja rośnie mimo płaskiej bazy</td></tr>
+            <tr><td>2027</td><td>Ewentualna tańsza wersja Specs</td><td>Dopiero cena poniżej 800–1000 USD otwiera rynek masowy</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>DAU Ameryka Północna</td><td>92 mln</td><td>&lt; 90 mln</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Wzrost „Other Revenue"</td><td>+85% r/r</td><td>&lt; 40%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Adjusted EBITDA</td><td>250 mln USD/kw.</td><td>&lt; 200 mln USD</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Wzrost przychodów reklamowych</td><td>+9% r/r</td><td>&lt; 5%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Liczba akcji (rozwodnienie SBC)</td><td>rośnie</td><td>&gt; 5% rocznie</td><td><span class="mon-dot r"></span>Ryzyko</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji:</strong> maksymalnie 1–2% portfela. To spekulacja o dodatniej wartości oczekiwanej, nie pozycja fundamentalna</li>
+          <li><strong>Pierwsza transza:</strong> 5,00–5,30 USD (poziom obecny, blisko wsparcia)</li>
+          <li><strong>Druga transza:</strong> 4,20–4,50 USD, jeśli rynek przetestuje okolice rocznego dna</li>
+          <li><strong>Realizacja zysku:</strong> częściowa przy 7 USD (konsensus analityków), reszta przy 8,50–9 USD</li>
+          <li><strong>Wyjście z tezy:</strong> DAU w USA poniżej 90 mln lub spadek dynamiki subskrypcji poniżej 40%</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--neutral)">⚖️ NEUTRALNA — tania opcja bez kontroli nad jej rozegraniem</div>
+        <p>Przy 5,30 USD Snap oferuje rzadką asymetrię: solidnie poprawiające się fundamenty wycenione tak, jakby firma umierała. Gdyby chodziło wyłącznie o liczby, byłoby to kupno. Problem polega na tym, że o przyszłości tej spółki nie zdecydują kwartalne wyniki, lecz jesienna premiera okularów za 2 195 USD — projekt, którego akcjonariusze nie mogą ani zatrzymać, ani skorygować.</p>
+        <p>Dlatego traktuj SNAP jako <strong>małą pozycję opcyjną</strong>, a nie inwestycję: kupujesz tanio prawdopodobieństwo, że AR wypali, akceptując, że możesz stracić większość wpłaconego kapitału, jeśli nie wypali. Dla kogoś, kto chce ekspozycji na reklamę cyfrową z realną kontrolą ryzyka, lepszym wyborem są spółki o sprawdzonej monetyzacji — Snap jest zakładem, nie fundamentem portfela.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>6,50–9,00 USD</b></div>
+          <div><span>Scenariusz negatywny</span><b>3,50–4,50 USD</b></div>
+          <div><span>Scenariusz pozytywny</span><b>11–13 USD</b></div>
+          <div><span>Sugerowana pozycja</span><b>1–2% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Premiera Specs, jesień</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 6 sierpnia 2026 | Cena od użytkownika: $5,30 | Dane: Snap IR (Q2 2026), SEC 10-Q, CNBC, Investing.com, TechCrunch, Road to VR | Nie stanowi porady inwestycyjnej</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

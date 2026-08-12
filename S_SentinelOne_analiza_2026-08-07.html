@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S — SentinelOne | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#a855f7; --accent2:#d8b4fe; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#150a20 0%,#0f1117 50%,#120a1c 100%); border-bottom:1px solid var(--border); padding:32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(168,85,247,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.neutral { background:rgba(255,215,64,0.12); border:2px solid var(--neutral); color:var(--neutral); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.violet { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#fff; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.violet { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); } .chip.red { border-color:var(--sell); color:var(--sell); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.neutral { color:var(--neutral); } .rating-box .rating-text.sell { color:var(--sell); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--strong-buy); } .bear-box ul li::before { color:var(--strong-sell); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(216,180,254,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(168,85,247,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .alert-danger { background:rgba(213,0,0,0.08); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(0,200,83,.15); color:#00c853; border:1px solid rgba(0,200,83,.4); }
+  .ck.no  { background:rgba(213,0,0,.13);  color:#ff6b6b; border:1px solid rgba(213,0,0,.35); }
+  .ck.wait{ background:rgba(255,215,64,.13);color:#ffd740; border:1px solid rgba(255,215,64,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#00c853; } .mon-dot.y { background:#ffd740; } .mon-dot.r { background:#ff6d00; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: S</div>
+    <div class="company-name">SentinelOne, Inc.</div>
+    <div class="company-sub">Platforma Singularity — ochrona endpointów oparta na AI · Purple AI · AI runtime security · ARR 1,163 mld USD · Mountain View, CA</div>
+    <div class="header-meta">
+      <div class="rating-badge neutral">⚖️ NEUTRALNA — dobra spółka, wyczerpany potencjał wzrostu ceny</div>
+      <span class="meta-tag">Cyberbezpieczeństwo</span>
+      <span class="meta-tag">AI-native</span>
+      <span class="meta-tag">Przy 52-tyg. szczycie</span>
+      <span class="meta-tag">Strata GAAP</span>
+      <div class="price-display">
+        <div class="price-main">~$20,05</div>
+        <div class="price-sub">7.08.2026 | 52W: $11,81–$20,71</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (07.08.2026)</div><div class="metric-value">~$20,05</div><div class="metric-detail">Tuż pod szczytem $20,71 | +70% od dna</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$6,87 mld</div><div class="metric-detail">52W: $11,81–$20,71</div></div>
+    <div class="metric-card"><div class="metric-label">ARR</div><div class="metric-value green">$1,163 mld</div><div class="metric-detail">+23% r/r — przekroczony miliard</div></div>
+    <div class="metric-card"><div class="metric-label">Nowy ARR (Q1)</div><div class="metric-value green">$44 mln</div><div class="metric-detail">+55% r/r — rekord kwartalny</div></div>
+    <div class="metric-card"><div class="metric-label">Forward P/E (FY2027)</div><div class="metric-value yellow">~57×</div><div class="metric-detail">Non-GAAP EPS $0,32–0,38 | GAAP: strata</div></div>
+    <div class="metric-card"><div class="metric-label">Marża operacyjna</div><div class="metric-value green">4% → 10%</div><div class="metric-detail">Non-GAAP Q1 vs cel na cały FY2027</div></div>
+    <div class="metric-card"><div class="metric-label">Klienci &gt;$100 tys. ARR</div><div class="metric-value green">1 702</div><div class="metric-detail">+17% r/r</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value red">$20,00–20,12</div><div class="metric-detail">⚠️ Praktycznie równy cenie — brak przestrzeni</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest SentinelOne?</h3>
+      <p>SentinelOne (NYSE: S) to dostawca platformy cyberbezpieczeństwa <strong>Singularity</strong>, chroniącej urządzenia końcowe, chmurę i tożsamości. Od początku budowana wokół <strong>autonomicznej sztucznej inteligencji</strong> — zamiast wykrywać zagrożenia po sygnaturach, model uczy się zachowań i reaguje bez udziału analityka. Siedziba: Mountain View, Kalifornia. Debiut giełdowy w 2021 roku.</p>
+      <p>W praktyce to <strong>główny wyzwanie rzucone CrowdStrike'owi</strong> — mniejszy, tańszy, agresywniejszy cenowo, ale z tą samą obietnicą technologiczną. Roczne przychody powtarzalne właśnie przekroczyły miliard dolarów, co w tej branży jest progiem oddzielającym pretendentów od realnych graczy.</p>
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>Wiosna 2026</td><td>Kurs w okolicach dna $11,81 — rynek wątpi w zdolność konkurowania z CrowdStrike'em</td><td style="color:var(--sell)">Dno</td></tr>
+          <tr><td><strong>28 maja 2026</strong></td><td><strong>Q1 FY2027: przychody $277 mln (+21%), ARR $1,163 mld (+23%), rekordowy nowy ARR $44 mln (+55%)</strong> — ale ostrożna prognoza i <strong>redukcja 8% zatrudnienia</strong></td><td style="color:var(--sell)">↓ Kurs spada o 8–17%</td></tr>
+          <tr><td>Czerwiec–lipiec 2026</td><td>Odbicie na fali narracji AI: ARR w segmencie bezpieczeństwa AI niemal się podwaja, Purple AI zyskuje trakcję</td><td style="color:var(--buy)">↑ Re-rating</td></tr>
+          <tr><td>Lipiec 2026</td><td>Scotiabank podnosi rekomendację do Outperform z celem $23,50; Jefferies podnosi cel do $25</td><td style="color:var(--buy)">↑ Wsparcie analityków</td></tr>
+          <tr><td><strong>Sierpień 2026</strong></td><td><strong>Kurs osiąga 52-tygodniowy szczyt $20,71 — wzrost o 47% w pół roku, +34% od początku roku</strong></td><td style="color:var(--neutral)">Szczyt</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Sedno sytuacji — odwrotnie niż zwykle:</strong> w większości analizowanych ostatnio spółek fundamenty poprawiały się szybciej niż kurs. Tutaj jest odwrotnie. SentinelOne <strong>wykonuje plan dobrze, ale kurs już to wycenił</strong> — akcje są przy 52-tygodniowym szczycie, a mediana celów analityków wynosi $20,00 przy cenie $20,05. Wall Street mówi zgodnym chórem: uczciwie wyceniona, ani grosza taniej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Produkt</th><th>Opis</th><th>Rola</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Singularity Endpoint</strong></td><td>Ochrona i reagowanie na urządzeniach końcowych (EDR/XDR) sterowane autonomicznym modelem</td><td>💰 Rdzeń przychodów</td></tr>
+          <tr><td><strong>Purple AI</strong></td><td>Asystent analityka bezpieczeństwa — zapytania w języku naturalnym, automatyczne dochodzenia</td><td>🔥 Główny motor nowej sprzedaży</td></tr>
+          <tr><td><strong>AI runtime security</strong></td><td>Ochrona samych obciążeń AI i modeli w czasie działania — nowa kategoria produktowa</td><td>⚡ ARR niemal podwojony</td></tr>
+          <tr><td><strong>Singularity Cloud</strong></td><td>Bezpieczeństwo obciążeń chmurowych i kontenerów</td><td>Rozszerzenie platformy</td></tr>
+          <tr><td>Singularity Data Lake</td><td>Magazyn danych bezpieczeństwa, alternatywa dla klasycznego SIEM</td><td>Wiąże klienta z platformą</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat — technologia realna, przewaga umiarkowana</h3>
+      <p>Największą siłą SentinelOne jest <strong>architektura zbudowana wokół AI od podstaw</strong>, a nie doklejona do starszego produktu. Model działa lokalnie na urządzeniu, więc chroni także wtedy, gdy nie ma połączenia z chmurą — to realna przewaga techniczna nad częścią konkurencji.</p>
+      <p>Drugą warstwą jest <strong>koszt zmiany dostawcy</strong>. Wymiana platformy bezpieczeństwa oznacza przeinstalowanie agentów na tysiącach urządzeń, przepisanie procedur i przeszkolenie zespołu — nikt nie robi tego dla oszczędności kilku procent. Stąd wysoka retencja.</p>
+      <div class="alert alert-info"><strong>Uczciwa ocena fosy:</strong> jest ona jednak <strong>węższa niż u Guidewire czy Veevy</strong>, które analizowaliśmy wcześniej. Tam zmiana systemu oznacza rewalidację u regulatora i ryzyko zatrzymania działalności. Tutaj to trudny, ale wykonalny projekt IT — dlatego walka cenowa z CrowdStrike'em i Microsoftem jest realna i stale trwa.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Rynek docelowy:</strong> spółka deklaruje adresowalny rynek rzędu <strong>50 mld USD</strong>, obejmujący ochronę endpointów, chmury, tożsamości i danych bezpieczeństwa</li>
+        <li><strong>Udział SentinelOne:</strong> ARR 1,163 mld USD to około 2% deklarowanego rynku — przestrzeni do wzrostu jest dużo, ale konkurencja o nią jest zażarta</li>
+        <li><strong>Bezpieczeństwo AI jako nowa kategoria:</strong> ochrona modeli i obciążeń AI w czasie działania dopiero powstaje; kto zbuduje tam pozycję wcześnie, może liczyć na premię</li>
+        <li><strong>Budżety na cyberbezpieczeństwo:</strong> jedna z ostatnich pozycji, którą firmy tną w kryzysie — to czyni branżę relatywnie odporną na cykl gospodarczy</li>
+        <li><strong>Presja konsolidacyjna:</strong> klienci chcą mniej dostawców i jednej platformy; sprzyja to największym graczom i utrudnia życie średnim</li>
+      </ul>
+      <div class="alert alert-warn"><strong>Ostrożnie z liczbą 50 mld USD:</strong> to szacunek samej spółki, obejmujący kategorie, w których SentinelOne dopiero zaczyna konkurować. Realny rynek, o który firma dziś skutecznie walczy, jest wielokrotnie mniejszy. Deklarowany TAM warto traktować jako kierunek ambicji, nie jako podstawę wyceny.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Q1 FY2027</th><th>Zmiana r/r</th><th>Interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>Klienci z ARR powyżej 100 tys. USD</td><td><strong>1 702</strong></td><td>+17%</td><td>Trzon przychodów — klienci korporacyjni</td></tr>
+          <tr><td>ARR ogółem</td><td>$1,163 mld</td><td>+23%</td><td>Rośnie szybciej niż liczba klientów — rosną też wydatki na klienta</td></tr>
+          <tr><td>Nowy ARR w kwartale</td><td>$44 mln</td><td style="color:var(--buy)">+55%</td><td>Rekord — sprzedaż wyraźnie przyspieszyła</td></tr>
+        </tbody>
+      </table></div>
+      <p>Struktura pokazuje zdrową dynamikę: <strong>ARR rośnie szybciej (+23%) niż liczba dużych klientów (+17%)</strong>, co oznacza, że obecni klienci dokupują kolejne moduły platformy. To najzdrowszy typ wzrostu w modelu subskrypcyjnym, bo sprzedaż istniejącemu klientowi kosztuje ułamek tego, co pozyskanie nowego.</p>
+      <p>Sprzedaż odbywa się przez zespół bezpośredni i sieć partnerów — w tym dostawców usług zarządzanego bezpieczeństwa, którzy odsprzedają platformę swoim klientom. Brak istotnej koncentracji na pojedynczym odbiorcy.</p>
+      <div class="alert alert-success"><strong>Najważniejsza liczba tego kwartału:</strong> nowy ARR $44 mln przy wzroście o 55% rok do roku. To wskaźnik wyprzedzający — pokazuje, ile świeżej sprzedaży firma pozyskała <em>teraz</em>, zanim jeszcze zobaczymy to w przychodach. Przyspieszenie tej pozycji przy jednoczesnej poprawie marż jest kombinacją, na którą rynek zwykle reaguje pozytywnie — i zareagował.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Przychody</th><th>Zmiana</th><th>ARR</th><th>Marża operacyjna (non-GAAP)</th></tr></thead>
+        <tbody>
+          <tr><td>Q1 FY2026</td><td>~$229 mln</td><td>—</td><td>~$946 mln</td><td>-2%</td></tr>
+          <tr><td><strong>Q1 FY2027 (28 V 2026)</strong></td><td><strong>$277 mln</strong></td><td style="color:var(--buy)">+21%</td><td><strong>$1,163 mld (+23%)</strong></td><td style="color:var(--buy)"><strong>+4%</strong></td></tr>
+          <tr><td><strong>FY2027 (prognoza)</strong></td><td><strong>$1,195–1,205 mld</strong></td><td>~+21%</td><td>—</td><td style="color:var(--buy)">ok. 10% (podniesione)</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Charakter przychodów</h3>
+      <p>Model jest w pełni <strong>subskrypcyjny</strong> — klienci płacą roczne lub wieloletnie abonamenty za liczbę chronionych urządzeń i wykupione moduły. Przychody są więc powtarzalne i przewidywalne, co przy wysokiej retencji daje solidną podstawę do prognozowania.</p>
+      <div class="alert alert-info"><strong>Warto zauważyć zmianę jakościową:</strong> marża operacyjna non-GAAP przeszła z -2% na +4% w rok, a prognoza na cały rok zakłada <strong>10%</strong>. SentinelOne przestaje być spółką „rośnij za wszelką cenę" i wchodzi w fazę, w której wzrost i rentowność idą razem. Redukcja 8% zatrudnienia ogłoszona w maju była częścią tego procesu — środki przekierowano na inwestycje w AI.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $20,05</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>~$6,87 mld</td><td>—</td></tr>
+          <tr><td><strong>P/S (FY2027E $1,20 mld)</strong></td><td><strong>~5,7×</strong></td><td style="color:var(--buy)">✅ Umiarkowane jak na cyberbezpieczeństwo</td></tr>
+          <tr><td>EV/ARR (ARR $1,163 mld)</td><td>ok. 5,3×</td><td style="color:var(--buy)">Rozsądnie wobec wzrostu ARR o 23%</td></tr>
+          <tr><td>P/S w porównaniu z CrowdStrike</td><td>zdecydowanie niżej</td><td style="color:var(--buy)">CRWD handluje z wyraźną premią</td></tr>
+          <tr><td>Dywidenda</td><td>brak</td><td>Cały kapitał reinwestowany</td></tr>
+          <tr><td>Cel analityków (47 firm)</td><td>mediana $20,00 · średnia $20,12</td><td style="color:var(--sell)">⚠️ Zakres $15–26; cena już na poziomie mediany</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM, GAAP)</td><td><strong>nie dotyczy</strong></td><td>Spółka wciąż notuje stratę w ujęciu GAAP — głównie przez wynagrodzenia w akcjach</td></tr>
+          <tr><td><strong>Forward P/E (FY2027, non-GAAP)</strong></td><td><strong>ok. 57×</strong></td><td>Prognoza zarządu: EPS non-GAAP $0,32–0,38; liczone na środku przedziału ($0,35)</td></tr>
+          <tr><td><strong>Forward P/E (FY2028, non-GAAP)</strong></td><td><strong>ok. 36–42×</strong></td><td>Szacunek własny przy dalszej ekspansji marży operacyjnej z 10% ku 14–15%</td></tr>
+          <tr><td>PEG (forward, wzgl. wzrostu przychodów)</td><td>ok. 2,7</td><td>Powyżej 1,0 — wycena zakłada raczej skok marż niż samo tempo sprzedaży</td></tr>
+          <tr><td>Peer: CrowdStrike (CRWD)</td><td>wyraźnie wyższe mnożniki</td><td>Premia za skalę, wyższe marże i pozycję lidera</td></tr>
+          <tr><td>Peer: Palo Alto Networks (PANW)</td><td>niższe forward P/E</td><td>Większa, dojrzalsza, rosnąca wolniej</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> forward P/E około 57× wygląda wysoko, ale to typowe dla spółki, która dopiero co przekroczyła próg rentowności — przy niskiej bazie zysku każdy mnożnik jest zawyżony i szybko spada wraz z poprawą marż. Znacznie bardziej miarodajny jest tu <strong>P/S na poziomie 5,7× oraz EV/ARR około 5,3×</strong>, które plasują SentinelOne wyraźnie poniżej CrowdStrike'a przy niewiele wolniejszym wzroście. Kluczowe zastrzeżenie: <strong>liczby non-GAAP pomijają wynagrodzenia w akcjach</strong>, które w tej spółce są istotne — w ujęciu GAAP firma nadal traci pieniądze, a różnica między jednym a drugim ujęciem to realny koszt ponoszony przez akcjonariuszy w postaci rozwodnienia.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$21 – $25</div><div class="fair-value-note">Baza: P/S 6–7× na przychodach FY2028 przy utrzymaniu wzrostu ARR powyżej 20% | Cele analityków: mediana $20,00, Scotiabank $23,50, Jefferies $25, maksimum $26 | Scenariusz negatywny (spowolnienie ARR poniżej 18%, presja cenowa): $14–16 | Scenariusz pozytywny (bezpieczeństwo AI jako trwała kategoria, marża powyżej 14%): $28–32 | Przy $20,05 potencjał +5–25%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Q1 FY2027</th><th>Rok wcześniej</th><th>Cel FY2027</th></tr></thead>
+        <tbody>
+          <tr><td>Marża operacyjna (non-GAAP)</td><td><strong>+4%</strong></td><td style="color:var(--sell)">-2%</td><td style="color:var(--buy)">ok. 10%</td></tr>
+          <tr><td>Wzrost przychodów</td><td>+21%</td><td>—</td><td>ok. +21%</td></tr>
+          <tr><td>Wzrost ARR</td><td>+23%</td><td>—</td><td>—</td></tr>
+          <tr><td>EPS non-GAAP</td><td>—</td><td>—</td><td>$0,32–0,38</td></tr>
+        </tbody>
+      </table></div>
+      <p>Przejście z ujemnej marży operacyjnej na dodatnią w ciągu roku, przy jednoczesnym utrzymaniu wzrostu powyżej 20%, to najważniejsza zmiana operacyjna w tej spółce. Podniesienie prognozy marży na cały rok do około 10% oznacza, że zarząd widzi trwałość tej poprawy, a nie jednorazowy efekt.</p>
+      <div class="alert alert-danger"><strong>Zastrzeżenie do jakości zysku:</strong> wszystkie powyższe marże są w ujęciu <strong>non-GAAP</strong>, czyli z pominięciem wynagrodzeń w akcjach. W młodych spółkach technologicznych ta pozycja bywa bardzo duża, a jej wykluczenie zamienia stratę w zysk. W ujęciu GAAP SentinelOne nadal jest nierentowny. To nie dyskwalifikuje spółki — tak liczy cała branża — ale oznacza, że <strong>akcjonariusz płaci za wzrost systematycznym rozwodnieniem</strong>, którego nie widać w prezentowanych wskaźnikach.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <p>SentinelOne wyszedł z debiutu giełdowego w 2021 roku z <strong>bardzo dużą poduszką gotówkową i bez istotnego zadłużenia</strong>. To pozwoliło firmie przetrwać okres, gdy paliła gotówkę, bez konieczności powrotu po kapitał na niekorzystnych warunkach — w przeciwieństwie do wielu spółek z tego samego rocznika debiutów.</p>
+      <p>Dziś, przy dodatniej marży operacyjnej non-GAAP i rosnących przepływach z subskrypcji, kwestia płynności przestała być tematem. Model subskrypcyjny ma dodatkowo tę zaletę, że klienci płacą z góry — spółka pobiera gotówkę, zanim rozpozna przychód.</p>
+      <div class="alert alert-warn"><strong>Realne ryzyko bilansowe to nie dług, lecz rozwodnienie.</strong> Wynagrodzenia w akcjach systematycznie zwiększają liczbę udziałów. Przy analizie warto śledzić nie tylko zysk na akcję, ale samą liczbę akcji — jeśli rośnie o kilka procent rocznie, część wzrostu wyników nie trafia do obecnych akcjonariuszy.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🚀</div><div class="catalyst-body"><h4>Nowy ARR przyspieszył o 55% — rekord kwartalny</h4><p>$44 mln świeżej sprzedaży w jednym kwartale przy wzroście o ponad połowę rok do roku. To wskaźnik wyprzedzający: pokazuje, że popyt rośnie szybciej, niż widać jeszcze w przychodach.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💰</div><div class="catalyst-body"><h4>Przełom rentowności: z -2% na +4%, cel 10%</h4><p>Spółka przeszła z palenia gotówki do zarabiania, nie zwalniając przy tym wzrostu. Podniesienie prognozy marży na cały rok sygnalizuje, że to zmiana strukturalna, nie jednorazowa.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🤖</div><div class="catalyst-body"><h4>Bezpieczeństwo AI jako nowa kategoria — ARR niemal podwojony</h4><p>Purple AI i ochrona obciążeń AI w czasie działania trafiają w moment, gdy firmy zaczynają wdrażać modele produkcyjnie i odkrywają, że nie mają czym ich chronić. Wczesna pozycja w nowej kategorii bywa najcenniejszym aktywem.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏷️</div><div class="catalyst-body"><h4>Wyraźne dyskonto wobec CrowdStrike'a</h4><p>P/S około 5,7× i EV/ARR 5,3× przy wzroście ARR o 23% to znacznie mniej, niż płaci się za lidera rynku. Jeśli różnica w tempie wzrostu będzie się zmniejszać, luka w wycenie powinna się domykać.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Naturalny cel przejęcia</h4><p>Platforma bezpieczeństwa z ARR powyżej miliarda dolarów i technologią AI to atrakcyjny kąsek dla większych graczy lub funduszy private equity, które w ostatnich latach aktywnie konsolidowały ten sektor.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📊</div><div class="catalyst-body"><h4>Cena zrównała się z konsensusem — brak przestrzeni</h4><p>Mediana celów 47 analityków to $20,00 przy cenie $20,05. Rynek uważa spółkę za uczciwie wycenioną tu i teraz. To najbardziej wymowny sygnał w całej analizie: dalszy wzrost wymaga zaskoczenia wynikami, nie tylko ich dowiezienia.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚔️</div><div class="catalyst-body"><h4>CrowdStrike i Microsoft po obu stronach</h4><p>Z jednej strony lider o większej skali i wyższych marżach, z drugiej Microsoft dorzucający Defendera do pakietów licencyjnych praktycznie za darmo. SentinelOne walczy o środek rynku, w którym presja cenowa jest największa.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🧾</div><div class="catalyst-body"><h4>Rentowność tylko w ujęciu non-GAAP</h4><p>W ujęciu GAAP spółka nadal traci. Różnicę tworzą przede wszystkim wynagrodzenia w akcjach, czyli realny koszt dla akcjonariusza ukryty pod postacią rozwodnienia.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">✂️</div><div class="catalyst-body"><h4>Redukcja 8% zatrudnienia — dwuznaczny sygnał</h4><p>Zarząd przedstawia ją jako przesunięcie środków na AI. Można jednak czytać ją inaczej: jako przyznanie, że dotychczasowa struktura kosztów była zbyt wysoka wobec tempa sprzedaży. Zwolnienia w spółce rosnącej o 21% zawsze zasługują na uwagę.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Wzrost przychodów zwolnił do 21%</h4><p>Jeszcze kilka lat temu SentinelOne rósł znacznie szybciej. Utrzymanie tempa powyżej 20% jest warunkiem obecnej wyceny — jego naruszenie oznaczałoby przecenę do poziomów typowych dla dojrzałych spółek software'owych.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>Pozycja</th><th>Przewaga nad SentinelOne</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>SentinelOne (S)</strong></td><td>Challenger, ARR $1,16 mld</td><td>—</td><td>—</td></tr>
+          <tr><td>CrowdStrike (CRWD)</td><td>🥇 Lider EDR/XDR</td><td>Skala, marże, rozpoznawalność, szersza platforma</td><td>Znacznie wyższa wycena</td></tr>
+          <tr><td>Microsoft Defender</td><td>Wbudowany w pakiety</td><td>Cena bliska zeru przy licencji E5, powszechność</td><td>Słabszy w zaawansowanym wykrywaniu</td></tr>
+          <tr><td>Palo Alto Networks (PANW)</td><td>Platforma pełnozakresowa</td><td>Skala, relacje z dużymi klientami</td><td>Wolniejszy wzrost, złożoność produktu</td></tr>
+          <tr><td>Cybereason, Trellix i inni</td><td>Mniejsi gracze</td><td>—</td><td>Tracą udziały na rzecz trzech głównych</td></tr>
+        </tbody>
+      </table></div>
+      <p>Pozycja: <strong>wyraźny numer dwa w ochronie endpointów opartej na AI</strong>. SentinelOne wygrywa tam, gdzie klient chce alternatywy dla CrowdStrike'a i lepszej ochrony niż wbudowany Defender, a jednocześnie zwraca uwagę na cenę. To sensowna nisza, ale zarazem najbardziej konkurencyjny fragment rynku.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Dno 52-tygodniowe</td><td>$11,81</td><td>Wiosna 2026 — moment największego pesymizmu</td></tr>
+          <tr><td>Szczyt 52-tygodniowy</td><td>$20,71</td><td>Sierpień 2026 — świeże maksimum</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>~$20,05</strong></td><td>3% pod szczytem, +70% od dna</td></tr>
+          <tr><td>Wsparcie S1</td><td>$18,00–18,50</td><td>Strefa konsolidacji z lipca</td></tr>
+          <tr><td>Wsparcie S2</td><td>$15,50–16,50</td><td>Poziom sprzed letniego rajdu</td></tr>
+          <tr><td>Opór R1</td><td>$20,71</td><td>Szczyt 52-tygodniowy — wybicie otwiera nowe poziomy</td></tr>
+          <tr><td>Opór R2</td><td>$23,50–25,00</td><td>Cele Scotiabank i Jefferies</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Wybicie ponad $20,71 z wolumenem</li><li>Wyniki Q2 z nowym ARR powyżej $45 mln</li><li>Potwierdzenie marży zmierzającej ku 10%</li><li>Ruch ku $23–25</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Odbicie od szczytu i powrót pod $18</li><li>Spowolnienie nowego ARR</li><li>Agresywna reakcja cenowa CrowdStrike'a lub Microsoftu</li><li>Zejście ku $15,50–16,50</li></ul></div>
+      </div>
+      <p>Trend jest wyraźnie wzrostowy — kurs urósł o 70% od wiosennego dna i testuje roczne maksimum. To układ techniczny sprzyjający kontynuacji, ale jednocześnie moment, w którym stosunek potencjalnego zysku do ryzyka jest najmniej korzystny w całym tym ruchu.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Cena zrównana z medianą celów analityków, kurs przy rocznym szczycie po wzroście o 70%. Do wyników Q2 (wrzesień) brak przewagi informacyjnej.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO na cofnięciach</div><div class="rating-note">Nowy ARR +55%, marża zmierzająca ku 10%, dyskonto wobec CrowdStrike'a. Ale wejście lepiej rozłożyć na strefę $17–18,50 niż gonić przy szczycie.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO (umiarkowane)</div><div class="rating-note">Cyberbezpieczeństwo to jeden z najodporniejszych budżetów IT, a pozycja w ochronie AI może okazać się cenna. Fosa węższa niż w vertical SaaS — pozycja umiarkowana.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia wejścia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji:</strong> 2–3% portfela — spółka jeszcze nierentowna w ujęciu GAAP, w mocno konkurencyjnym segmencie</li>
+        <li><strong>Nie gonić przy $20</strong> — cena jest równa medianie celów; to najgorszy moment na wejście całością</li>
+        <li><strong>Pierwsza transza:</strong> $17,50–18,50 przy cofnięciu do strefy konsolidacji</li>
+        <li><strong>Druga transza:</strong> $15,50–16,50 przy szerszej korekcie sektora</li>
+        <li><strong>Alternatywa:</strong> wejście po wybiciu i utrzymaniu się powyżej $21, jako potwierdzeniu kontynuacji trendu</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w okolicach $24–25 (cele Scotiabank i Jefferies)</li>
+        <li><strong>Wyjście z tezy:</strong> spadek nowego ARR dwa kwartały z rzędu albo cofnięcie marży operacyjnej poniżej zera</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$21 – $25</div><div class="fair-value-note">Scenariusz negatywny: $14–16 | Scenariusz pozytywny: $28–32 | Mediana celów analityków: $20,00</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Nowy ARR +55% i przekroczony miliard</strong> — rekordowe $44 mln świeżej sprzedaży w kwartale, ARR $1,163 mld przy wzroście 23%</li>
+          <li><strong>Przełom rentowności</strong> — marża operacyjna z -2% na +4%, cel 10% na cały rok; wzrost i zysk wreszcie idą razem</li>
+          <li><strong>Dyskonto wobec CrowdStrike'a</strong> — P/S 5,7× i EV/ARR 5,3× przy niewiele wolniejszym wzroście, plus wczesna pozycja w bezpieczeństwie AI</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Cena równa medianie celów analityków</strong> — $20,05 wobec $20,00 przy 47 analitykach; potencjał wzrostu został już skonsumowany rajdem o 70%</li>
+          <li><strong>Rentowność tylko non-GAAP</strong> — w ujęciu GAAP nadal strata; różnicę tworzą wynagrodzenia w akcjach, czyli rozwodnienie akcjonariuszy</li>
+          <li><strong>Presja z dwóch stron</strong> — CrowdStrike od góry, Microsoft Defender w cenie licencji od dołu; do tego wzrost przychodów spowolnił do 21%</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> spadek nowego ARR poniżej $35 mln w kolejnych kwartałach albo cofnięcie marży operacyjnej non-GAAP poniżej zera → powrót w okolice $14–16.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> Q2 z nowym ARR powyżej $45 mln, marżą zmierzającą ku 10% i dalszym podwajaniem ARR w segmencie bezpieczeństwa AI → wybicie ponad $20,71 i ruch ku $25.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">SentinelOne jest w tej chwili spółką, która <strong>robi dokładnie to, czego oczekiwali od niej inwestorzy</strong> — i właśnie na tym polega problem. Roczne przychody powtarzalne przekroczyły miliard dolarów i rosną o 23%. Nowa sprzedaż w kwartale sięgnęła rekordowych $44 mln, przyspieszając o 55% rok do roku. Marża operacyjna przeszła z minus dwóch procent na plus cztery, a zarząd podniósł całoroczny cel do dziesięciu. Do tego doszła nowa kategoria produktowa — ochrona obciążeń AI — w której przychody niemal się podwoiły. Trudno o czystsze wykonanie planu.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Rynek to jednak zauważył. Kurs urósł o <strong>70% od wiosennego dna</strong> i testuje roczne maksimum, a mediana celów 47 analityków wynosi $20,00 przy cenie $20,05. To sytuacja odwrotna do większości spółek, które ostatnio analizowaliśmy: tam fundamenty wyprzedzały wycenę, tutaj wycena dogoniła fundamenty. Kupując dziś, nie kupujesz rozjazdu między liczbami a ceną — kupujesz <strong>zakład, że SentinelOne przebije własne, już podniesione prognozy</strong>. To zupełnie inny profil ryzyka.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Przyspieszenie sprzedaży.</strong> Nowy ARR $44 mln przy wzroście o 55% to najlepszy wskaźnik wyprzedzający, jaki spółka mogła pokazać — warunek spełniony z nadwyżką.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Przejście na rentowność operacyjną.</strong> Z -2% na +4% w rok, z celem 10% na cały rok obrotowy. Wzrost przestał być finansowany kosztem wyniku.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Wejście w nową kategorię.</strong> Purple AI i ochrona obciążeń AI dały niemal podwojenie przychodów w tym segmencie — spółka jest wcześnie tam, gdzie rynek dopiero powstaje.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Utrzymanie tempa powyżej 20%.</strong> Wzrost przychodów spowolnił do 21%. Zejście poniżej tego progu oznaczałoby wycenę jak dojrzały software, czyli wyraźnie niżej.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Rentowność w ujęciu GAAP.</strong> Spółka nadal traci pieniądze według standardowych zasad rachunkowości — cała rentowność opiera się na wyłączeniu wynagrodzeń w akcjach.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Wrzesień 2026</strong></td><td>Wyniki Q2 FY2027</td><td>Test, czy rekordowe $44 mln nowego ARR to nowy poziom bazowy, czy jednorazowy szczyt</td></tr>
+            <tr><td>H2 2026</td><td>Efekty redukcji 8% zatrudnienia</td><td>Czy oszczędności faktycznie przełożą się na marżę 10%, nie osłabiając sprzedaży</td></tr>
+            <tr><td>H2 2026 – 2027</td><td>Rozwój segmentu bezpieczeństwa AI</td><td>Jedyny obszar, który może uzasadnić wycenę wyższą niż obecna mediana celów</td></tr>
+            <tr><td>Na bieżąco</td><td>Polityka cenowa CrowdStrike'a i Microsoftu</td><td>Agresywna reakcja liderów bezpośrednio uderza w tempo pozyskiwania klientów</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Nowy ARR w kwartale</td><td>$44 mln (+55% r/r)</td><td>&lt; $35 mln</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Wzrost ARR ogółem</td><td>+23% r/r</td><td>&lt; 18%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża operacyjna (non-GAAP)</td><td>+4%, cel 10%</td><td>powrót poniżej zera</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Wzrost przychodów</td><td>+21%</td><td>&lt; 18%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Wynik GAAP</td><td>strata</td><td>brak poprawy przez rok</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Cena wobec celów analityków</td><td>$20,05 vs mediana $20,00</td><td>utrzymywanie się powyżej celów</td><td><span class="mon-dot r"></span>Ryzyko</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji:</strong> 2–3% portfela — spółka nierentowna w ujęciu GAAP, w najbardziej konkurencyjnym fragmencie rynku bezpieczeństwa</li>
+          <li><strong>Nie kupuj całości przy $20</strong> — cena zrównała się z medianą celów, więc stosunek zysku do ryzyka jest najgorszy w całym tegorocznym ruchu</li>
+          <li><strong>Pierwsza transza:</strong> $17,50–18,50 przy cofnięciu do lipcowej konsolidacji</li>
+          <li><strong>Druga transza:</strong> $15,50–16,50 przy szerszej korekcie sektora</li>
+          <li><strong>Wariant dla podążających za trendem:</strong> wejście po wybiciu i utrzymaniu $21 przez kilka sesji</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie $24–25</li>
+          <li><strong>Wyjście z tezy:</strong> nowy ARR poniżej $35 mln dwa kwartały z rzędu albo powrót marży operacyjnej pod kreskę</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--neutral)">⚖️ NEUTRALNA — dobra spółka w cenie, która już wszystko uwzględnia</div>
+        <p>Gdyby oceniać wyłącznie biznes, SentinelOne zasługiwałby na wyraźne kupno: przekroczony miliard powtarzalnych przychodów, rekordowa nowa sprzedaż, przejście na rentowność operacyjną i wczesna pozycja w ochronie obciążeń AI. Wycena w postaci 5,7-krotności sprzedaży też nie jest wygórowana jak na cyberbezpieczeństwo, zwłaszcza wobec premii, jaką rynek płaci za CrowdStrike'a.</p>
+        <p>Problem polega na tym, że <strong>rynek zdążył to wszystko zauważyć w ciągu ostatnich sześciu miesięcy</strong>. Kurs urósł o 70%, a mediana celów 47 analityków wypada dokładnie na dzisiejszej cenie. Nie oznacza to, że akcje muszą spaść — dobre spółki potrafią rosnąć ponad konsensus miesiącami. Oznacza natomiast, że kupujesz bez marginesu bezpieczeństwa, licząc na przebicie już podniesionych prognoz. Rozsądniejsze wydaje się <strong>poczekanie na cofnięcie w okolice $17–18,50</strong> albo na potwierdzenie wybicia ponad roczny szczyt — i dopiero wtedy budowanie pozycji.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$21–25</b></div>
+          <div><span>Scenariusz negatywny</span><b>$14–16</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$28–32</b></div>
+          <div><span>Sugerowana pozycja</span><b>2–3% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q2 — wrzesień</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 7 sierpnia 2026 | Dane: SentinelOne IR (Q1 FY2027, 28 maja 2026), BusinessWire, StockAnalysis, TipRanks, Investing.com, Seeking Alpha | Forward P/E liczone na prognozie non-GAAP zarządu — w ujęciu GAAP spółka notuje stratę | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

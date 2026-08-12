@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEEV — Veeva Systems | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#e11d48; --accent2:#fb7185; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#1a0512 0%,#0f1117 50%,#160a14 100%); border-bottom:1px solid var(--border); padding:40px 32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(225,29,72,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.buy { background:rgba(76,175,80,0.15); border:2px solid var(--buy); color:var(--buy); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.rose { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#fff; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.rose { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.strong-buy { color:var(--strong-buy); } .rating-box .rating-text.neutral { color:var(--neutral); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--strong-buy); } .bear-box ul li::before { color:var(--strong-sell); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(225,29,72,0.08),rgba(251,113,133,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(225,29,72,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+  <div class="header-content">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: VEEV</div>
+    <div class="company-name">Veeva Systems Inc.</div>
+    <div class="company-sub">Vertical SaaS #1 dla life sciences · Vault CRM (migracja z Salesforce) · Development Cloud · AI: Falcon, Vault AI Agents · Pleasanton, CA</div>
+    <div class="header-meta">
+      <div class="rating-badge buy">📈 KUPNO</div>
+      <span class="meta-tag">Vertical SaaS</span>
+      <span class="meta-tag">Life Sciences</span>
+      <span class="meta-tag">45% marża operacyjna</span>
+      <span class="meta-tag">-36% od ATH</span>
+      <div class="price-display">
+        <div class="price-main">~$200</div>
+        <div class="price-sub">30.07.2026 | 52W: $148,05–$310,50</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">TL;DR</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (30.07.2026)</div><div class="metric-value">~$200</div><div class="metric-detail">52W: $148,05–$310,50 | -36% od ATH</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$33B</div><div class="metric-detail">~165M akcji</div></div>
+    <div class="metric-card"><div class="metric-label">Revenue Q1 FY2027</div><div class="metric-value green">$882,9M</div><div class="metric-detail">+16% YoY | Subskrypcje $730M (+15%)</div></div>
+    <div class="metric-card"><div class="metric-label">Guidance FY2027 ↑</div><div class="metric-value green">$3,64B</div><div class="metric-detail">EPS ~$9,05 | PODNIESIONE</div></div>
+    <div class="metric-card"><div class="metric-label">Marża operacyjna</div><div class="metric-value green">45%</div><div class="metric-detail">Non-GAAP, rośnie z 43,5%</div></div>
+    <div class="metric-card"><div class="metric-label">Vault CRM</div><div class="metric-value rose">150+ klientów</div><div class="metric-detail">10-6 vs Salesforce w top-20 pharma</div></div>
+    <div class="metric-card"><div class="metric-label">Net cash</div><div class="metric-value green">~$6B</div><div class="metric-detail">Zero długu + buyback $2B</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value green">$235-245</div><div class="metric-detail">+18-23% | Buy (29 analityków)</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest Veeva?</h3>
+      <p>Veeva Systems (NYSE: VEEV) to dominujący dostawca oprogramowania chmurowego dla <strong>branży life sciences</strong> — firm farmaceutycznych i biotechnologicznych. Dwa filary: <strong>Commercial Cloud</strong> (CRM dla przedstawicieli medycznych, dane rynkowe) oraz <strong>Development Cloud</strong> (Vault — zarządzanie badaniami klinicznymi, dokumentacją regulacyjną, jakością, bezpieczeństwem leków). Założona 2007 przez Petera Gassnera (ex-Salesforce), siedziba Pleasanton, CA. Praktycznie każda duża firma farmaceutyczna świata korzysta z któregoś produktu Veevy.</p>
+      <p>To ta sama kategoria biznesu co Guidewire w ubezpieczeniach — <strong>pionowy SaaS o głębokim moacie regulacyjnym</strong>, tylko większy i bardziej dochodowy.</p>
+      <h3>Kluczowe zdarzenia (12-24 miesiące)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>IX 2025</td><td><strong>Formalne rozstanie z Salesforce</strong> — koniec zależności technologicznej; okres wygaszania do IX 2030</td><td style="color:var(--buy)">↑ Niezależność</td></tr>
+          <tr><td>2025-2026</td><td>Migracja klientów na własny <strong>Vault CRM</strong>: 150+ klientów na żywo; <strong>10 z top-20 pharma vs 6 u Salesforce</strong></td><td style="color:var(--strong-buy)">↑↑ Wygrywa wojnę CRM</td></tr>
+          <tr><td>2025/26</td><td>Premiera <strong>Falcon</strong> — agentowa platforma AI do automatyzacji procesów klinicznych, regulacyjnych i bezpieczeństwa; przejęcie Copli (Falcon MLR)</td><td style="color:var(--buy)">↑ Odpowiedź na AI</td></tr>
+          <tr><td>3 VI 2026</td><td><strong>Q1 FY2027: $882,9M (+16%), EPS $2,24, guidance PODNIESIONE do $3,64B</strong></td><td style="color:var(--buy)">↑ Beat and raise</td></tr>
+          <tr><td>VI-VII 2026</td><td>Mimo dobrych wyników — <strong>przecena do ~$190-200 (-36% od ATH $310,50)</strong>; obawy o monetyzację AI, tempo migracji CRM i wycenę</td><td style="color:var(--sell)">↓ Derating sentymentu</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Sedno sytuacji:</strong> to trzeci przypadek w Twoim portfelu analiz (obok GWRE i SOFI), gdzie <strong>spółka dowozi wyniki, a kurs spada</strong>. Rynek w 2026 karze pionowy SaaS strachem przed AI — nawet gdy ta sama spółka wprowadza własne produkty AI i podnosi prognozy. Pytanie brzmi: czy to przesada rynku, czy przeczucie realnej zmiany.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment</th><th>Produkty</th><th>Rola</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Development Cloud (Vault)</strong></td><td>Clinical (badania), Regulatory (dokumentacja), Quality, Safety (farmakowigilancja)</td><td>Rdzeń wzrostu, najgłębszy moat</td><td>🔥 Standard branżowy</td></tr>
+          <tr><td><strong>Commercial Cloud</strong></td><td>Vault CRM, Veeva Data Cloud, Veeva Link</td><td>Historyczny rdzeń; dziś pole bitwy z Salesforce</td><td>⚡ Migracja: 150+ klientów</td></tr>
+          <tr><td><strong>AI: Falcon + Vault AI Agents</strong></td><td>Agenty automatyzujące żmudne zadania w rozwoju leków, Falcon MLR (przegląd materiałów)</td><td>Nowy wektor monetyzacji</td><td>🔬 Rollout do XII 2026</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat — regulacje jako fosa</h3>
+      <p>Oprogramowanie Veevy obsługuje procesy podlegające <strong>walidacji FDA/EMA</strong>. Zmiana systemu oznacza rewalidację, przepisanie procedur SOP, przeszkolenie setek osób i ryzyko opóźnienia rejestracji leku wartego miliardy. Żaden dyrektor ds. jakości w pharmie nie podejmie takiego ryzyka dla oszczędności kilku procent. Efekt: <strong>retencja bliska 100% i pricing power</strong>.</p>
+      <p>Do tego efekt sieciowy danych: Veeva Data Cloud i Link agregują informacje o lekarzach, badaniach i rynku, których pojedynczy klient nie odtworzy.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>TAM:</strong> ~$20-25 mld dla oprogramowania life sciences; Veeva przy ~$3,6 mld przychodów ma ~15% penetracji — przestrzeń do wzrostu jeszcze duża</li>
+        <li><strong>Rosnąca złożoność badań klinicznych</strong> — więcej danych, więcej regulacji, więcej krajów = więcej oprogramowania na jedno badanie</li>
+        <li><strong>Odbicie finansowania biotechu</strong> — po chudych latach 2022-2024 mniejsze firmy znów mają kapitał na systemy</li>
+        <li><strong>AI w odkrywaniu leków</strong> — szansa (nowe produkty jak Falcon) i zagrożenie (nowi gracze budujący natywnie AI-owe narzędzia)</li>
+        <li><strong>Cykliczność:</strong> niska — budżety IT w pharmie są stabilne, a leki muszą być rejestrowane niezależnie od koniunktury</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="chips"><span class="chip rose">Top-20 pharma (10 z 20 na Vault CRM)</span><span class="chip">Biotechy średnie i małe</span><span class="chip">CRO (firmy badawcze)</span><span class="chip green">Retencja ~100%</span></div>
+      <p>Baza klientów obejmuje praktycznie całą branżę — od Pfizera i Novartis po startupy biotechnologiczne. Brak istotnej koncentracji pojedynczego klienta. Model sprzedaży: bezpośredni zespół z głęboką wiedzą branżową, sprzedaż modułów krzyżowo (klient Vault Clinical kupuje potem Regulatory, Quality itd.).</p>
+      <div class="alert alert-success"><strong>Najważniejsza liczba w tej analizie:</strong> w wyścigu o CRM w top-20 firm farmaceutycznych Veeva prowadzi <strong>10:6 z Salesforce</strong> i spodziewa się zdobyć większość z pozostałych czterech decyzji. To rozstrzyga największą obawę rynku — że po rozstaniu z Salesforce klienci odejdą do byłego partnera. Nie odchodzą.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Przychody</th><th>Wzrost</th><th>Non-GAAP EPS</th></tr></thead>
+        <tbody>
+          <tr><td>FY2025</td><td>~$2,75B</td><td>+16%</td><td>~$6,50</td></tr>
+          <tr><td>FY2026</td><td>~$3,17B</td><td>+15%</td><td>$7,93</td></tr>
+          <tr><td><strong>Q1 FY2027 (V 2026)</strong></td><td><strong>$882,9M</strong></td><td style="color:var(--buy)">+16%</td><td>$2,24</td></tr>
+          <tr><td>Q2 FY2027 guidance</td><td>$902-905M</td><td>~+15%</td><td>$2,21-2,22</td></tr>
+          <tr><td><strong>FY2027E (podniesione)</strong></td><td><strong>$3,635-3,645B</strong></td><td style="color:var(--buy)">+15%</td><td>~$9,05</td></tr>
+        </tbody>
+      </table></div>
+      <p>Model: <strong>subskrypcje (~83% przychodów)</strong> plus usługi wdrożeniowe. Przychody powtarzalne, kontrakty wieloletnie, retencja bliska 100% — czyli dokładnie taki profil, za jaki rynek zwykle płaci premię. Wzrost ustabilizował się na poziomie ~15-16% rocznie: to już nie hipergrowth, ale bardzo przewidywalny compounding.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $200</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>~$33B</td><td>—</td></tr>
+          <tr><td>Net cash</td><td>~$6B</td><td style="color:var(--buy)">Zero długu</td></tr>
+          <tr><td>EV</td><td>~$27B</td><td>—</td></tr>
+          <tr><td><strong>EV/Sales (FY2027E $3,64B)</strong></td><td><strong>~7,4×</strong></td><td style="color:var(--buy)">✅ Historycznie Veeva: 12-20×</td></tr>
+          <tr><td><strong>P/E forward (EPS $9,05)</strong></td><td><strong>~22×</strong></td><td style="color:var(--buy)">✅ Bardzo nisko dla 45% marż i 15% wzrostu</td></tr>
+          <tr><td>P/E skorygowane o gotówkę</td><td>~18×</td><td style="color:var(--strong-buy)">✅ Poziom spółki „value"</td></tr>
+          <tr><td>Cel analityków</td><td>$235-245 (mediana $235)</td><td style="color:var(--buy)">+18-23% | Buy, 29 analityków</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Kluczowa obserwacja wyceny:</strong> Veeva przy 22× forward P/E jest tańsza niż przeciętna spółka z S&P 500, mimo że ma 45% marż operacyjnych, ~100% retencji, $6 mld gotówki netto i rośnie 15% rocznie. Historycznie handlowała w przedziale 12-20× EV/Sales; dziś jest przy 7,4×. To najniższa wycena w historii spółki jako podmiotu publicznego.</div>
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12-18 mies.</div><div class="fair-value-range">$240 – $290</div><div class="fair-value-note">Base: 26-30× EPS FY2028E (~$10) = $260-300 | Konsensus $235-245 | Bear (AI realnie zjada seaty, wzrost <10%): $150-170 | Bull (Falcon monetyzuje się, powrót do 12× EV/S): $330+ | Przy $200 upside +20-45%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <p>Marża operacyjna non-GAAP: <strong>45%</strong> i wciąż rośnie (z 43,5%). To jeden z najwyższych poziomów w całym oprogramowaniu — dla porównania większość SaaS-ów o podobnej skali mieści się w przedziale 20-30%. Powód: sprzedaż do skoncentrowanej branży (kilkaset firm decyduje o całym rynku) drastycznie obniża koszty pozyskania klienta.</p>
+      <p>Marża brutto powyżej 74%, przepływy operacyjne silne i przewidywalne, zero potrzeby finansowania zewnętrznego. Spółka realizuje <strong>buyback o wartości $2 mld</strong> — rzadkość w SaaS i sygnał, że zarząd uważa akcje za niedowartościowane.</p>
+      <div class="alert alert-warn"><strong>Co monitorować:</strong> tempo wzrostu subskrypcji (+15% w Q1). Spadek poniżej 12-13% oznaczałby, że obawy o nasycenie rynku lub presję AI są uzasadnione — to najważniejszy wskaźnik wyprzedzający dla tezy inwestycyjnej.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <p>Bilans klasy fortecy: <strong>ponad $6 mld gotówki netto, zero długu</strong>. Przy kapitalizacji ~$33 mld oznacza to, że blisko 18% wartości spółki stanowi gotówka. Trwa skup akcji własnych za $2 mld.</p>
+      <p>Praktyczna konsekwencja: Veeva może finansować przejęcia (jak Copli dla Falcon MLR), inwestować w AI i skupować akcje jednocześnie, bez rozwadniania akcjonariuszy ani zaciągania długu. W środowisku, gdzie wiele spółek SaaS zmaga się z kosztem kapitału, to znacząca przewaga konkurencyjna.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🏆</div><div class="catalyst-body"><h4>Wygrywa wojnę CRM z Salesforce: 10:6 w top-20 pharma</h4><p>Największa obawa rynku po rozstaniu z Salesforce właśnie się rozwiewa — 150+ klientów na żywo na Vault CRM, a zarząd spodziewa się zdobyć większość z czterech nierozstrzygniętych decyzji. Migracja to dodatkowo okazja do podniesienia cen.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💊</div><div class="catalyst-body"><h4>Moat regulacyjny — jeden z najsilniejszych w software</h4><p>Systemy walidowane przez FDA/EMA; zmiana dostawcy grozi opóźnieniem rejestracji leku wartego miliardy. Retencja bliska 100% i pricing power niezależny od koniunktury.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Najniższa wycena w historii spółki: 22× forward P/E, 7,4× EV/S</h4><p>Historycznie 12-20× EV/Sales. Dziś płacisz mniej niż za średnią spółkę z S&P 500 za biznes z 45% marżą operacyjną i 15% wzrostem. Skorygowane o gotówkę: ~18× zysku.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🤖</div><div class="catalyst-body"><h4>Falcon — AI jako nowy strumień przychodów, nie zagrożenie</h4><p>Agenty automatyzujące procesy kliniczne i regulacyjne wdrażane do grudnia 2026. Veeva ma przewagę, której nie kupi żaden startup: dostęp do zwalidowanych danych i procesów klientów.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💰</div><div class="catalyst-body"><h4>$6 mld gotówki netto + buyback $2 mld</h4><p>Zarząd skupuje akcje w dołku, spółka może finansować przejęcia AI bez długu i dilucji. Bilans daje komfort przetrwania każdej dekoniunktury.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🤖</div><div class="catalyst-body"><h4>Strach przed AI: model per-seat pod presją</h4><p>Jeśli agenty AI zastąpią część pracy przedstawicieli medycznych i specjalistów regulacyjnych, liczba licencji może przestać rosnąć. To ta sama obawa, która zbiła wyceny Salesforce i całego SaaS w 2026 — i nikt jeszcze nie wie, czy jest uzasadniona.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📊</div><div class="catalyst-body"><h4>Wzrost 15% to nie jest już historia wzrostowa</h4><p>Veeva przez lata rosła 25-30%. Przy 15% i penetracji rynku sięgającej kilkunastu procent, inwestorzy szukający wzrostu odeszli, a inwestorzy „value" jeszcze nie przyszli — to niebezpieczna ziemia niczyja dla wyceny.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚔️</div><div class="catalyst-body"><h4>Salesforce nie odpuszcza, a Agentforce ma przewagę czasową</h4><p>Salesforce Life Sciences Cloud walczy o te same konta, a jego platforma agentowa jest komercyjnie wcześniej niż Falcon. Veeva nadrabia domenową głębią, ale timing jest po stronie rywala.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏗️</div><div class="catalyst-body"><h4>Ryzyko wykonania migracji CRM do 2030</h4><p>Okres wygaszania umowy z Salesforce trwa do września 2030. Każde potknięcie techniczne przy migracji dużego klienta może stać się głośnym case'em i zahamować kolejne decyzje.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💉</div><div class="catalyst-body"><h4>Presja na budżety pharmy</h4><p>Reformy cen leków w USA, wygasające patenty i cięcia kosztów w dużych koncernach mogą spowolnić wydatki na oprogramowanie — a Veeva ma ekspozycję wyłącznie na tę jedną branżę.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>Obszar</th><th>Pozycja vs Veeva</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Veeva</strong></td><td>Cały stos life sciences (CRM + Development)</td><td>🥇 Standard branżowy, 45% marży</td></tr>
+          <tr><td>Salesforce (Life Sciences Cloud)</td><td>CRM dla pharmy</td><td>Główny rywal; przegrywa 6:10 w top-20, ale ma Agentforce wcześniej</td></tr>
+          <tr><td>IQVIA</td><td>Dane i usługi badawcze</td><td>Partner i konkurent w danych; słabszy w software</td></tr>
+          <tr><td>Medidata (Dassault)</td><td>Badania kliniczne (EDC)</td><td>Silny w niszy clinical data, węższy zakres</td></tr>
+          <tr><td>Oracle Health Sciences</td><td>Clinical trials, safety</td><td>Legacy, traci udziały na rzecz Vault</td></tr>
+          <tr><td>Startupy AI (drug discovery)</td><td>Narzędzia natywnie AI-owe</td><td>Ryzyko długoterminowe, dziś bez skali i walidacji</td></tr>
+        </tbody>
+      </table></div>
+      <p>Pozycja: <strong>lider z rosnącym udziałem</strong> w Development Cloud i odwracającym się na jej korzyść bilansem sił w CRM.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>52W high (ATH)</td><td>$310,50</td><td>Szczyt przed deratingiem SaaS</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>~$200</strong></td><td>-36% od szczytu; +35% nad dnem</td></tr>
+          <tr><td>Wsparcie S1</td><td>$185-190</td><td>Lipcowe dołki</td></tr>
+          <tr><td>Wsparcie S2</td><td>$148-160</td><td>52W low — strefa kapitulacji</td></tr>
+          <tr><td>Opór R1</td><td>$220-235</td><td>Strefa celów analityków</td></tr>
+          <tr><td>Opór R2</td><td>$260-270</td><td>Poziomy sprzed przeceny</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Bull techniczny</h4><ul><li>Obrona strefy $185-190</li><li>Q2 FY2027 (wrzesień) z subskrypcjami +15%</li><li>Konkretne przychody z Falcon</li><li>Powrót nad $235 → cel $270</li></ul></div>
+        <div class="bear-box"><h4>🐻 Bear techniczny</h4><ul><li>Przebicie $185 z wolumenem</li><li>Spowolnienie subskrypcji poniżej 13%</li><li>Kolejna fala strachu przed AI w SaaS</li><li>Test $160, skrajnie $148</li></ul></div>
+      </div>
+      <p>Trend spadkowy od szczytu, ale kurs trzyma się wyraźnie powyżej rocznego dna. Katalizator: <strong>wyniki Q2 FY2027 na początku września 2026</strong>.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA / KUPNO transzami</div><div class="rating-note">Sentyment do SaaS wciąż słaby, brak katalizatora do września. Ale wycena już defensywna — rozsądne budowanie pozycji $190-205.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">22× forward P/E przy 45% marż, ~100% retencji i wygrywanej wojnie CRM. Konsensus $235-245. Cel $240-270.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text strong-buy">MOCNE KUPNO</div><div class="rating-note">Monopolista pionowy w branży, która musi wydawać na compliance niezależnie od koniunktury. $6B gotówki, buyback, opcja AI. Klasyczny compounder.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Przy $200:</strong> atrakcyjny punkt startowy — poniżej wszystkich celów analityków, przy historycznie najniższej wycenie</li>
+        <li><strong>Transze:</strong> $200 (pierwsza), $180-185 (druga), $160 (trzecia przy kapitulacji)</li>
+        <li><strong>Katalizator:</strong> wyniki Q2 FY2027 (początek września 2026)</li>
+        <li><strong>Monitoruj:</strong> tempo wzrostu subskrypcji (dziś +15%) i liczbę wygranych decyzji CRM w top-20</li>
+        <li><strong>Stop mentalny:</strong> wzrost subskrypcji poniżej 12% przez dwa kwartały = rewizja tezy</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12-18 mies.</div><div class="fair-value-range">$240 – $290</div><div class="fair-value-note">Bear: $150-170 | Bull: $330+ | Konsensus: $235-245</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">PODSUMOWANIE (TL;DR)</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Najniższa wycena w historii spółki przy nienaruszonych fundamentach</strong> — 22× forward P/E (18× po korekcie o gotówkę) i 7,4× EV/Sales wobec historycznych 12-20×, przy wzroście +16% i podniesionym guidance</li>
+          <li><strong>Wygrywa wojnę CRM z Salesforce 10:6 w top-20 pharma</strong> — 150+ klientów na żywo na Vault CRM rozwiewa największą obawę rynku po rozstaniu z byłym partnerem</li>
+          <li><strong>Moat regulacyjny + 45% marży + $6 mld gotówki netto + buyback</strong> — systemy walidowane przez FDA, retencja ~100%, zero długu; taki zestaw rzadko bywa dostępny przy 22× zysku</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Strach przed AI wobec modelu per-seat</strong> — jeśli agenty zredukują liczbę stanowisk w pharmie, tempo wzrostu licencji spadnie; rynek wycenia to ryzyko i może mieć rację</li>
+          <li><strong>Wzrost 15% to ziemia niczyja</strong> — za wolno dla funduszy wzrostowych, za drogo (wciąż) dla value; taki profil potrafi dryfować bokiem kwartałami</li>
+          <li><strong>Salesforce z Agentforce jest wcześniej na rynku AI</strong>, a migracja CRM musi się udać do 2030 — jedno głośne niepowodzenie wdrożenia zatrzyma kolejne decyzje</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> spadek wzrostu subskrypcji poniżej 12% przez dwa kwartały LUB utrata dużego klienta CRM na rzecz Salesforce → $150-170.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> Q2 FY2027 (wrzesień) z subskrypcjami +15%, konkretnymi przychodami z Falcon i kolejnymi wygranymi w top-20 → powrót do $250-270.</p>
+      <hr class="divider">
+      <div style="text-align:center; padding:20px 0">
+        <div class="rating-badge buy" style="display:inline-flex; font-size:20px; padding:14px 32px; margin-bottom:16px;">📈 KUPNO — jakość w cenie przeciętności</div>
+        <p style="color:var(--text-muted); max-width:700px; margin:0 auto; font-size:13px;">Veeva to monopolista oprogramowania dla branży, która musi wydawać na zgodność regulacyjną niezależnie od koniunktury — z 45% marżą operacyjną, ~100% retencją i $6 mld gotówki netto. Rynek wycenia ją dziś na 22× zysku, taniej niż średnią spółkę z indeksu, bo boi się AI. Jeśli ten strach okaże się przesadzony (a Falcon sugeruje, że Veeva jest po właściwej stronie zmiany), to jedna z lepszych okazji jakościowych na rynku. Buduj pozycję transzami od $200.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 30 lipca 2026 | Cena od użytkownika: $200 | Dane: Veeva IR (Q1 FY2027), StockTitan, Seeking Alpha, Investing.com, StockAnalysis | Nie stanowi porady inwestycyjnej</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

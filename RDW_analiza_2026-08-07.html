@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RDW — Redwire | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#ff3b30; --accent2:#ff8a80; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#1a0605 0%,#0f1117 50%,#160807 100%); border-bottom:1px solid var(--border); padding:32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(255,59,48,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.neutral { background:rgba(255,215,64,0.12); border:2px solid var(--neutral); color:var(--neutral); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.rose { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#fff; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.rose { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); } .chip.red { border-color:var(--sell); color:var(--sell); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.neutral { color:var(--neutral); } .rating-box .rating-text.sell { color:var(--sell); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--strong-buy); } .bear-box ul li::before { color:var(--strong-sell); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(255,59,48,0.08),rgba(255,138,128,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(255,59,48,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .alert-danger { background:rgba(213,0,0,0.10); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(0,200,83,.15); color:#00c853; border:1px solid rgba(0,200,83,.4); }
+  .ck.no  { background:rgba(213,0,0,.13);  color:#ff6b6b; border:1px solid rgba(213,0,0,.35); }
+  .ck.wait{ background:rgba(255,215,64,.13);color:#ffd740; border:1px solid rgba(255,215,64,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#00c853; } .mon-dot.y { background:#ffd740; } .mon-dot.r { background:#ff6d00; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: RDW</div>
+    <div class="company-name">Redwire Corporation</div>
+    <div class="company-sub">Infrastruktura kosmiczna · Panele słoneczne, roboty orbitalne, biotechnologia w kosmosie · Edge Autonomy (drony) · Jacksonville, FL</div>
+    <div class="header-meta">
+      <div class="rating-badge neutral">⚠️ SPEKULACYJNA — zwrot operacyjny realny, ryzyko księgowe otwarte</div>
+      <span class="meta-tag">Space / Defense</span>
+      <span class="meta-tag">Pre-profit</span>
+      <span class="meta-tag">🚩 Opinia audytora</span>
+      <span class="meta-tag">Emisja do $500 mln</span>
+      <div class="price-display">
+        <div class="price-main">~$11,83</div>
+        <div class="price-sub">7.08.2026 | 52W: $4,87–$26,64</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (07.08.2026)</div><div class="metric-value">~$11,83</div><div class="metric-detail">-56% od szczytu $26,64 | +143% od dna</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$2,83 mld</div><div class="metric-detail">52W: $4,87–$26,64</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">$117,1 mln</div><div class="metric-detail">+89,6% r/r, +20,7% kw/kw — rekord</div></div>
+    <div class="metric-card"><div class="metric-label">Marża brutto</div><div class="metric-value green">27,8%</div><div class="metric-detail">Rok wcześniej -30,9% — ogromny zwrot</div></div>
+    <div class="metric-card"><div class="metric-label">Forward P/E</div><div class="metric-value red">nie dotyczy</div><div class="metric-detail">Strata GAAP $41 mln w Q2 | EBITDA -$3 mln</div></div>
+    <div class="metric-card"><div class="metric-label">Backlog</div><div class="metric-value rose">$542,1 mln</div><div class="metric-detail">Rekord kontraktowy</div></div>
+    <div class="metric-card"><div class="metric-label">Płynność</div><div class="metric-value green">$608 mln</div><div class="metric-detail">+366% r/r — po emisji akcji</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value green">$14,50–15,44</div><div class="metric-detail">+23–31% | 8 analityków, Buy</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest Redwire?</h3>
+      <p>Redwire (NYSE: RDW) to dostawca <strong>infrastruktury kosmicznej</strong> — paneli słonecznych i konstrukcji rozkładanych na orbicie, ramion robotycznych, systemów nawigacji, a także eksperymentów biotechnologicznych prowadzonych w warunkach mikrograwitacji. Spółka powstała w 2020 roku przez konsolidację kilkunastu mniejszych firm kosmicznych przez fundusz private equity, a na giełdę weszła w 2021 przez SPAC. Siedziba: Jacksonville na Florydzie.</p>
+      <p>Kluczowy zwrot nastąpił w czerwcu 2025 roku, gdy Redwire przejął <strong>Edge Autonomy</strong> — producenta bezzałogowych systemów powietrznych. Firma przestała być czystą spółką kosmiczną, a stała się dostawcą technologii dla obronności w szerszym sensie, co znacząco zwiększyło skalę przychodów.</p>
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>2025</td><td>Przejęcie Edge Autonomy — wejście w segment dronów; kurs w okolicach $4,87 (52-tygodniowe dno)</td><td style="color:var(--buy)">↑ Zmiana skali</td></tr>
+          <tr><td>Wiosna 2026</td><td>Rajd na fali entuzjazmu wobec spółek kosmicznych i obronnych</td><td style="color:var(--buy)">↑↑ Hossa</td></tr>
+          <tr><td><strong>28 maja 2026</strong></td><td><strong>Rekord notowań: $25,90</strong> (szczyt 52-tygodniowy $26,64)</td><td style="color:var(--buy)">Szczyt</td></tr>
+          <tr><td>Wiosna 2026</td><td><strong>KPMG wydaje negatywną opinię o kontroli wewnętrznej</strong> za rok 2025</td><td style="color:var(--strong-sell)">🚩 Ryzyko księgowe</td></tr>
+          <tr><td>Q1 2026</td><td>Słaby kwartał: strata netto ok. $76,5 mln, marża brutto zaledwie 9,2%</td><td style="color:var(--sell)">↓ Rozczarowanie</td></tr>
+          <tr><td><strong>9 czerwca 2026</strong></td><td><strong>Ogłoszenie emisji akcji typu ATM do $500 mln</strong> przy kapitalizacji ok. $2,4 mld</td><td style="color:var(--strong-sell)">↓↓ Nawis podażowy</td></tr>
+          <tr><td>Lipiec 2026</td><td>Spadek o 17,5% w jednej sesji; kurs schodzi w okolice $10; krótka sprzedaż przekracza 22% akcji w wolnym obrocie</td><td style="color:var(--sell)">↓ Kapitulacja</td></tr>
+          <tr><td><strong>5 sierpnia 2026</strong></td><td><strong>Q2: rekordowe przychody $117,1 mln (+90%), marża brutto z -30,9% na +27,8%, backlog $542 mln, płynność $608 mln</strong></td><td style="color:var(--strong-buy)">↑↑ Zwrot operacyjny</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>🚩 Najważniejsze ostrzeżenie tej analizy:</strong> audytor KPMG wydał <strong>negatywną opinię o kontroli wewnętrznej</strong> spółki za rok 2025. W praktyce oznacza to, że biegły rewident uznał systemy kontroli finansowej Redwire za niewystarczające, co podnosi ryzyko istotnych błędów w sprawozdaniach. To nie jest zwykłe ryzyko biznesowe — to <strong>ryzyko binarne</strong>, bo podważa wiarygodność wszystkich pozostałych liczb w tym raporcie, łącznie z imponującym zwrotem marży w drugim kwartale. Dopóki kontrole nie zostaną naprawione i potwierdzone przez audytora, każda teza inwestycyjna ma pod spodem znak zapytania.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment</th><th>Produkty</th><th>Rola</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Systemy energetyczne</strong></td><td>Rozkładane panele słoneczne, konstrukcje orbitalne (ROSA)</td><td>💰 Historyczny rdzeń, dostawy dla NASA i satelitów</td></tr>
+          <tr><td><strong>Robotyka i konstrukcje</strong></td><td>Ramiona robotyczne, mechanizmy rozkładania, produkcja na orbicie</td><td>Technologia różnicująca</td></tr>
+          <tr><td><strong>Edge Autonomy (drony)</strong></td><td>Bezzałogowe systemy powietrzne dla obronności</td><td>🔥 Główny motor wzrostu przychodów</td></tr>
+          <tr><td><strong>Biotechnologia kosmiczna</strong></td><td>Hodowla tkanek i badania farmaceutyczne w mikrograwitacji</td><td>🔬 Opcja długoterminowa, dziś bez przychodów</td></tr>
+          <tr><td>Nawigacja i czujniki</td><td>Kamery gwiazdowe, systemy pozycjonowania</td><td>Komponenty do satelitów</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat — portfolio komponentów, nie jedna technologia</h3>
+      <p>Redwire nie ma pojedynczej przełomowej technologii. Jego przewagą jest <strong>szerokość katalogu komponentów kosmicznych</strong> zbudowanego przez skupowanie mniejszych, wyspecjalizowanych firm. Producent satelity może kupić od Redwire panele, ramię robotyczne i kamerę nawigacyjną naraz, zamiast negocjować z trzema dostawcami.</p>
+      <p>Do tego dochodzi bariera kwalifikacyjna: komponent, który poleciał w kosmos i tam zadziałał, ma status <em>flight heritage</em> — a to w tej branży jest walutą. Nikt nie ryzykuje misji wartej setki milionów dolarów, żeby oszczędzić kilka procent na nieprzetestowanej części.</p>
+      <div class="alert alert-warn"><strong>Ograniczenie fosy:</strong> Redwire jest <strong>dostawcą komponentów, nie właścicielem platformy</strong>. Nie ma powtarzalnych przychodów abonamentowych ani efektu sieciowego — każdy kontrakt trzeba wygrać od nowa w przetargu. To model o strukturalnie niższych marżach niż u operatorów usług kosmicznych.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Gospodarka kosmiczna:</strong> szacowana na kilkaset miliardów dolarów rocznie z perspektywą podwojenia do 2035 roku; segment infrastruktury i komponentów to jej mniejsza, ale stabilna część</li>
+        <li><strong>Budżety obronne:</strong> rekordowe wydatki w USA i Europie; systemy bezzałogowe oraz zdolności kosmiczne należą do najszybciej rosnących pozycji</li>
+        <li><strong>Programy rządowe:</strong> NASA, Departament Obrony i agencje europejskie to główni zleceniodawcy — kontrakty duże, ale przyznawane w długich procedurach przetargowych</li>
+        <li><strong>Konsolidacja sektora:</strong> rynek jest rozdrobniony i wciąż trwa skupowanie mniejszych graczy; Redwire sam był tego produktem i nadal przejmuje firmy</li>
+        <li><strong>Cykliczność:</strong> umiarkowana — wydatki rządowe są stabilniejsze niż komercyjne, ale zależne od decyzji politycznych i harmonogramów budżetowych</li>
+      </ul>
+      <div class="alert alert-info"><strong>Kontekst sektorowy:</strong> lato 2026 przyniosło wyraźny odwrót od spółek kosmicznych po okresie euforii. Redwire spadł nie tylko z powodów wewnętrznych — cała grupa notowała słabość, a krótka sprzedaż w tej akcji przekroczyła <strong>22% akcji w wolnym obrocie</strong>, co oznacza, że znaczna część rynku aktywnie obstawia dalsze spadki.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="chips"><span class="chip rose">NASA</span><span class="chip rose">Departament Obrony USA</span><span class="chip">Producenci satelitów</span><span class="chip">Agencje europejskie</span><span class="chip">Odbiorcy wojskowi dronów</span></div>
+      <p>Model jest w przeważającej części <strong>B2G — sprzedaż do instytucji rządowych i wojskowych</strong>, bezpośrednio lub jako podwykonawca większych integratorów. To oznacza wysoką wiarygodność płatniczą kontrahentów, ale też długie cykle sprzedaży i uzależnienie od cyklu budżetowego.</p>
+      <p>Rekordowy <strong>backlog kontraktowy $542,1 mln</strong> przy prognozowanych rocznych przychodach $450–500 mln daje nieco ponad rok pokrycia. To przyzwoita widoczność, choć znacznie krótsza niż w spółkach infrastrukturalnych analizowanych wcześniej, gdzie backlog obejmował kilka lat.</p>
+      <div class="alert alert-warn"><strong>Ryzyko koncentracji:</strong> przy sprzedaży do sektora publicznego kilka dużych programów odpowiada za istotną część przychodów. Opóźnienie lub anulowanie pojedynczego kontraktu rządowego ma nieproporcjonalnie duży wpływ na wyniki, a decyzje te bywają polityczne, nie biznesowe.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Przychody</th><th>Marża brutto</th><th>Wynik netto</th></tr></thead>
+        <tbody>
+          <tr><td>Q2 2025</td><td>~$61,8 mln</td><td style="color:var(--sell)">-30,9%</td><td>strata $97 mln</td></tr>
+          <tr><td>Q1 2026</td><td>~$97 mln</td><td style="color:var(--sell)">9,2%</td><td>strata ok. $76,5 mln</td></tr>
+          <tr><td><strong>Q2 2026</strong></td><td><strong>$117,1 mln</strong> (+89,6% r/r)</td><td style="color:var(--buy)"><strong>27,8%</strong></td><td>strata $41 mln (poprawa o $56 mln)</td></tr>
+          <tr><td><strong>2026 (prognoza podtrzymana)</strong></td><td><strong>$450–500 mln</strong></td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Charakter przychodów</h3>
+      <p>Redwire zarabia na <strong>kontraktach projektowych</strong> — dostawie komponentów i systemów do konkretnych misji. To przychody jednorazowe, rozliczane w miarę postępu prac, bez elementu abonamentowego. Rentowność zależy więc od tego, czy projekt zmieści się w budżecie, co przy pracach badawczo-rozwojowych bywa trudne do przewidzenia.</p>
+      <div class="alert alert-success"><strong>Skala zwrotu w marży wymaga podkreślenia:</strong> przejście z marży brutto -30,9% na +27,8% w ciągu roku oznacza, że spółka <strong>przestała dopłacać do własnej produkcji</strong>. Ujemna marża brutto to sytuacja, w której sprzedaż kosztuje więcej, niż przynosi — jeden z najgorszych stanów, w jakich może być firma. Wyjście z niego to realne osiągnięcie, nawet jeśli spółka wciąż notuje stratę netto.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $11,83</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>~$2,83 mld</td><td>—</td></tr>
+          <tr><td><strong>P/S (2026E $475 mln)</strong></td><td><strong>~5,9×</strong></td><td style="color:var(--sell)">⚠️ Wysoko dla dostawcy komponentów ze stratą</td></tr>
+          <tr><td>P/S (2027E, przy dalszym wzroście)</td><td>ok. 4,3–4,8×</td><td style="color:var(--neutral)">Wciąż premium</td></tr>
+          <tr><td>EV / backlog ($542 mln)</td><td>ok. 5,2×</td><td style="color:var(--sell)">Wysoko — backlog pokrywa tylko rok</td></tr>
+          <tr><td>EV/EBITDA</td><td>nie dotyczy</td><td>EBITDA skorygowana wciąż ujemna (-$3 mln)</td></tr>
+          <tr><td>Cel analityków (8 firm)</td><td>$14,50–15,44 · Buy</td><td style="color:var(--buy)">+23–31%; Jefferies obniżył z $24 do $15</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td><strong>nie dotyczy</strong></td><td>Strata netto $41 mln w samym Q2; spółka nie była rentowna w żadnym z ostatnich kwartałów</td></tr>
+          <tr><td><strong>Forward P/E (FY2026)</strong></td><td><strong>nie dotyczy</strong></td><td>Konsensus nie zakłada zysku netto w tym roku obrotowym</td></tr>
+          <tr><td><strong>Forward P/E (FY2027)</strong></td><td><strong>brak wiarygodnych danych</strong></td><td>Prognozy analityków dla spółek pre-profit w tym sektorze mają bardzo duży rozrzut</td></tr>
+          <tr><td>Skorygowana EBITDA</td><td>-$3 mln w Q2 (rok wcześniej -$27 mln)</td><td>Zbliżanie się do progu — pierwszy dodatni kwartał możliwy w H2 2026</td></tr>
+          <tr><td>Przepływy pieniężne</td><td>-$35 mln w Q2 (rok wcześniej -$94 mln)</td><td>Nadal ujemne, ale spalanie gotówki zmalało o dwie trzecie</td></tr>
+          <tr><td>Peer: Rocket Lab, AST SpaceMobile</td><td>również pre-profit</td><td>Cały sektor wyceniany mnożnikami sprzedaży, nie zysku</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> Forward P/E nie ma tu zastosowania, bo Redwire nie zarabia i konsensus nie zakłada zysku netto w tym roku. Właściwym punktem odniesienia jest droga do rentowności: <strong>skorygowana EBITDA poprawiła się z -$27 mln do -$3 mln w ciągu roku</strong>, co oznacza, że pierwszy dodatni kwartał jest w zasięgu jeszcze w tym roku. Do tego czasu wycena opiera się wyłącznie na mnożnikach sprzedaży — a P/S na poziomie 5,9× jest wymagający jak na dostawcę komponentów, który dopiero co wyszedł z ujemnej marży brutto.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$12 – $16</div><div class="fair-value-note">Baza: P/S 5–6,5× na przychodach 2027 przy utrzymaniu dynamiki i dojściu do dodatniej EBITDA | Cele analityków $14,50–15,44 | Scenariusz negatywny (pełna emisja $500 mln, problemy z kontrolą wewnętrzną, spowolnienie kontraktów): $6–8 | Scenariusz pozytywny (dodatnia EBITDA, backlog powyżej $700 mln, naprawa kontroli): $20–24 | Przy $11,83 potencjał od -35% do +100%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Q2 2026</th><th>Q2 2025</th><th>Zmiana</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$117,1 mln</td><td>~$61,8 mln</td><td style="color:var(--buy)">+89,6%</td></tr>
+          <tr><td><strong>Marża brutto</strong></td><td style="color:var(--buy)"><strong>27,8%</strong></td><td style="color:var(--sell)">-30,9%</td><td style="color:var(--strong-buy)">+58,7 pp</td></tr>
+          <tr><td>Skorygowana EBITDA</td><td>-$3 mln</td><td>-$27 mln</td><td style="color:var(--buy)">+$24 mln</td></tr>
+          <tr><td>Wynik netto (GAAP)</td><td>-$41 mln</td><td>-$97 mln</td><td style="color:var(--buy)">+$56 mln</td></tr>
+          <tr><td>Przepływy pieniężne</td><td>-$35 mln</td><td>-$94 mln</td><td style="color:var(--buy)">+$59 mln</td></tr>
+        </tbody>
+      </table></div>
+      <p>Wszystkie linie rachunku wyników poprawiły się w tym samym kierunku i to znacząco. Najważniejsza jest marża brutto: skok o niemal 59 punktów procentowych oznacza, że spółka nauczyła się wyceniać i realizować kontrakty tak, by na nich zarabiać — a nie dopłacać.</p>
+      <div class="alert alert-warn"><strong>Trzeba jednak zachować dystans:</strong> pojedynczy kwartał w spółce projektowej może być zaburzony przez korzystny mix zleceń albo rozliczenie rezerw. Poprzedni kwartał przyniósł marżę brutto zaledwie 9,2%, więc <strong>rozrzut między kwartałami jest ogromny</strong>. Dopiero dwa lub trzy kolejne kwartały z marżą powyżej 25% potwierdzą, że to trwała zmiana, a nie szczęśliwy zbieg okoliczności. Ten rozrzut nabiera dodatkowego znaczenia w kontekście uwag audytora do kontroli wewnętrznej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Łączna płynność</td><td><strong>$608 mln</strong></td><td>+366% rok do roku — po pozyskaniu kapitału</td></tr>
+          <tr><td>Spalanie gotówki</td><td>-$35 mln w kwartale</td><td>Przy obecnym tempie zapas na kilkanaście kwartałów</td></tr>
+          <tr><td>Program emisji akcji (ATM)</td><td>do <strong>$500 mln</strong></td><td style="color:var(--sell)">Ok. 18% obecnej kapitalizacji</td></tr>
+          <tr><td>Wzrost liczby akcji od debiutu</td><td><strong>+232%</strong></td><td style="color:var(--sell)">Historia systematycznego rozwodnienia</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>ponad 22% akcji w wolnym obrocie</td><td>Wysoki poziom — potencjał gwałtownych ruchów w obie strony</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Rozwodnienie to główne ryzyko finansowe, nie płynność.</strong> Redwire ma dziś komfortową poduszkę $608 mln, więc bankructwo nie jest tematem. Problemem jest sposób, w jaki ta poduszka powstała: liczba akcji wzrosła od debiutu o <strong>232%</strong>, a spółka ogłosiła program pozwalający sprzedać kolejne akcje za <strong>do $500 mln</strong>. Przy kapitalizacji około $2,8 mld oznacza to potencjalne rozwodnienie rzędu jednej piątej. Każdy akcjonariusz kupujący dziś powinien zakładać, że jego udział będzie systematycznie maleć.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Marża brutto z -30,9% na +27,8% — zwrot o skali rzadko spotykanej</h4><p>Spółka przestała dopłacać do własnej produkcji. Przy jednoczesnym wzroście przychodów o 90% i poprawie EBITDA o $24 mln to najlepszy kwartał w historii Redwire.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🛰️</div><div class="catalyst-body"><h4>Edge Autonomy zmienia skalę i dywersyfikuje przychody</h4><p>Wejście w bezzałogowe systemy powietrzne dołożyło segment rosnący wraz z budżetami obronnymi i mniej zależny od harmonogramów misji kosmicznych.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📦</div><div class="catalyst-body"><h4>Rekordowy backlog $542 mln i płynność $608 mln</h4><p>Ponad rok pokrycia przychodów oraz zapas gotówki pozwalający finansować działalność przez kilkanaście kwartałów bez konieczności pilnego sięgania po kapitał.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Przecena o 56% od majowego szczytu</h4><p>Kurs spadł z $26,64 do poniżej $12, głównie z powodu obaw o rozwodnienie i sentymentu do sektora — a nie z powodu wyników, które właśnie okazały się rekordowe. Cele analityków leżą 23–31% wyżej.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚡</div><div class="catalyst-body"><h4>Wysoka krótka sprzedaż jako paliwo</h4><p>Ponad 22% akcji w wolnym obrocie sprzedanych na krótko oznacza, że pozytywne zaskoczenie może wywołać gwałtowne odbicie wymuszone zamykaniem pozycji.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🚩</div><div class="catalyst-body"><h4>Negatywna opinia KPMG o kontroli wewnętrznej — ryzyko binarne</h4><p>Audytor uznał systemy kontroli finansowej za niewystarczające. To podważa wiarygodność wszystkich raportowanych liczb, łącznie z imponującą marżą z Q2. W skrajnym scenariuszu oznacza korektę sprawozdań, dochodzenie regulatora i długotrwałą przecenę.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💧</div><div class="catalyst-body"><h4>Program emisji do $500 mln przy kapitalizacji $2,8 mld</h4><p>Potencjalne rozwodnienie rzędu 18–20%, nakładające się na wzrost liczby akcji o 232% od debiutu. Spółka finansuje rozwój kieszenią akcjonariuszy i nic nie wskazuje, by miało się to zmienić.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📊</div><div class="catalyst-body"><h4>Ogromny rozrzut wyników między kwartałami</h4><p>Marża brutto: 9,2% w pierwszym kwartale, 27,8% w drugim. W spółce projektowej takie wahania są normalne, ale uniemożliwiają prognozowanie i podnoszą ryzyko rozczarowania przy kolejnym raporcie.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏛️</div><div class="catalyst-body"><h4>Zależność od budżetów i decyzji politycznych</h4><p>Większość przychodów pochodzi od instytucji rządowych. Przesunięcie programu lub zmiana priorytetów budżetowych natychmiast uderza w backlog, a decyzje te bywają podejmowane z powodów niezwiązanych z jakością dostawcy.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💸</div><div class="catalyst-body"><h4>Wciąż brak rentowności i ujemne przepływy</h4><p>Strata netto $41 mln w kwartale, ujemna EBITDA, wypływ gotówki $35 mln. Poprawa jest realna, ale spółka nadal konsumuje kapitał, a P/S na poziomie 5,9× wycenia ją jak firmę już zarabiającą.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>Profil</th><th>Przewaga nad Redwire</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Redwire (RDW)</strong></td><td>Komponenty kosmiczne + drony</td><td>—</td><td>—</td></tr>
+          <tr><td>Rocket Lab (RKLB)</td><td>Rakiety i satelity</td><td>Własne rakiety, pełna usługa, większa skala</td><td>Również nierentowna</td></tr>
+          <tr><td>Lockheed Martin, Northrop</td><td>Wielcy integratorzy obronni</td><td>Skala, relacje rządowe, rentowność</td><td>Wolniejsi, mniej innowacyjni w niszach</td></tr>
+          <tr><td>Maxar (prywatna)</td><td>Satelity i obrazowanie</td><td>Pozycja ugruntowana</td><td>Poza giełdą po przejęciu</td></tr>
+          <tr><td>AST SpaceMobile, Planet Labs</td><td>Operatorzy usług kosmicznych</td><td>Powtarzalne przychody z usług</td><td>Inny model, wyższe ryzyko technologiczne</td></tr>
+        </tbody>
+      </table></div>
+      <p>Pozycja: <strong>wyspecjalizowany dostawca w rozdrobnionym rynku</strong>. Redwire nie konkuruje bezpośrednio z gigantami obronnymi — częściej jest ich podwykonawcą. To pozycja bezpieczniejsza pod względem konkurencji, ale zarazem ograniczająca siłę negocjacyjną i marże.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Dno 52-tygodniowe</td><td>$4,87</td><td>Punkt startu wzrostu o ponad 140%</td></tr>
+          <tr><td>Szczyt (28 maja 2026)</td><td>$25,90–26,64</td><td>Rekord notowań</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>~$11,83</strong></td><td>-56% od szczytu; odbicie z okolic $10</td></tr>
+          <tr><td>Wsparcie S1</td><td>$10,00–10,50</td><td>Lipcowe dno po wyprzedaży</td></tr>
+          <tr><td>Wsparcie S2</td><td>$8,00–8,50</td><td>Strefa przy dalszej presji</td></tr>
+          <tr><td>Opór R1</td><td>$14,50–15,50</td><td>Cele analityków</td></tr>
+          <tr><td>Opór R2</td><td>$18–20</td><td>Poziomy sprzed czerwcowego załamania</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Utrzymanie poziomu powyżej $10,50</li><li>Q3 z marżą brutto powyżej 25% i dodatnią EBITDA</li><li>Ograniczone wykorzystanie programu emisji akcji</li><li>Ruch ku $15, przy pokrywaniu krótkich pozycji wyżej</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Przebicie $10 z wolumenem</li><li>Powrót marży do poziomów z Q1 (9%)</li><li>Agresywne wykorzystanie emisji do $500 mln</li><li>Zejście ku $8, w skrajnym scenariuszu poniżej</li></ul></div>
+      </div>
+      <p>Kurs odbił od lipcowego dna, ale pozostaje o ponad połowę poniżej majowego szczytu. Wysoka krótka sprzedaż działa w obie strony — potęguje spadki, ale może też wywołać gwałtowne odbicie przy pozytywnym zaskoczeniu. To akcja o bardzo dużej amplitudzie ruchów.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Świetne wyniki Q2 już opublikowane, ale nad kursem ciąży nawis emisji akcji i nierozstrzygnięta kwestia kontroli wewnętrznej. Brak przewagi informacyjnej.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text neutral">SPEKULACYJNA</div><div class="rating-note">Jeśli marża się utrzyma, EBITDA wyjdzie na plus, a audytor potwierdzi naprawę kontroli — cele $15+ są realne. Bez tych trzech elementów teza nie istnieje.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text neutral">SPEKULACYJNA</div><div class="rating-note">Infrastruktura kosmiczna i systemy bezzałogowe to trwałe trendy. Ale model komponentowy ma niskie marże, a historia rozwodnienia jest niepokojąca.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia wejścia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji:</strong> maksymalnie 1–2% portfela — spółka nierentowna, z otwartym ryzykiem księgowym i nawisem emisji</li>
+        <li><strong>Pierwsza transza:</strong> $10,50–11,80 (poziom obecny, blisko lipcowego wsparcia)</li>
+        <li><strong>Druga transza:</strong> $8,00–9,00 przy pogłębieniu przeceny</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w okolicach $15 (cele analityków), reszta powyżej $18</li>
+        <li><strong>Kluczowe do sprawdzenia:</strong> raport za Q3 — czy marża brutto utrzyma się powyżej 25% i czy pojawi się informacja o naprawie kontroli wewnętrznej</li>
+        <li><strong>Wyjście z tezy:</strong> powrót marży brutto poniżej 15%, korekta sprawozdań finansowych albo pełne wykorzystanie programu emisji</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$12 – $16</div><div class="fair-value-note">Scenariusz negatywny: $6–8 | Scenariusz pozytywny: $20–24 | Cele analityków: $14,50–15,44</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by rozważyć</h4><ul>
+          <li><strong>Zwrot operacyjny o rzadkiej skali</strong> — marża brutto z -30,9% na +27,8%, przychody +90%, EBITDA lepsza o $24 mln, strata netto mniejsza o $56 mln</li>
+          <li><strong>Rekordowy backlog $542 mln i płynność $608 mln</strong> — ponad rok pokrycia przychodów i zapas gotówki na kilkanaście kwartałów</li>
+          <li><strong>Przecena o 56% od majowego szczytu</strong> z powodów niezwiązanych z wynikami; cele analityków 23–31% wyżej, a krótka sprzedaż powyżej 22% to potencjalne paliwo do odbicia</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Negatywna opinia KPMG o kontroli wewnętrznej</strong> — ryzyko binarne, które podważa wiarygodność wszystkich raportowanych liczb</li>
+          <li><strong>Emisja akcji do $500 mln przy kapitalizacji $2,8 mld</strong>, po wzroście liczby akcji o 232% od debiutu — rozwodnienie jest tu modelem finansowania</li>
+          <li><strong>Wciąż brak rentowności i ogromny rozrzut wyników</strong> — marża 9,2% w Q1, 27,8% w Q2; P/S 5,9× wycenia spółkę tak, jakby już zarabiała</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> korekta sprawozdań finansowych, brak postępu w naprawie kontroli wewnętrznej albo powrót marży brutto poniżej 15% → zejście w okolice $6–8.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> Q3 z marżą powyżej 25%, pierwszą dodatnią skorygowaną EBITDA i komunikatem o usunięciu uwag audytora → ruch ku $15–18.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Redwire pokazał 5 sierpnia kwartał, o jakim spółki pre-profit marzą: przychody wzrosły o 90% do rekordowych $117 mln, backlog sięgnął $542 mln, a <strong>marża brutto poprawiła się z minus 30,9% do plus 27,8%</strong>. Ta ostatnia liczba zasługuje na szczególną uwagę, bo ujemna marża brutto oznacza, że firma dopłaca do każdej sprzedanej jednostki — jeden z najgorszych stanów, w jakich może się znaleźć przedsiębiorstwo. Wyjście z niego w ciągu roku, przy jednoczesnym podwojeniu skali, to realne osiągnięcie operacyjne.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Problem polega na tym, że nad tymi liczbami wisi pytanie, na które nie da się odpowiedzieć analizą finansową: <strong>audytor KPMG wydał negatywną opinię o kontroli wewnętrznej spółki</strong>. Oznacza to, że biegły rewident uznał mechanizmy zapewniające poprawność sprawozdań za niewystarczające. Do tego dochodzi program emisji akcji do $500 mln — po tym, jak liczba udziałów wzrosła od debiutu o 232%. Kupując dziś Redwire, kupujesz więc dwa zakłady naraz: że zwrot operacyjny jest prawdziwy i trwały, oraz że raportowane liczby można traktować dosłownie.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Wyjście z ujemnej marży brutto.</strong> Z -30,9% na +27,8% przy wzroście przychodów o 90% — warunek spełniony i to spektakularnie, przynajmniej w jednym kwartale.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Zabezpieczenie finansowania.</strong> Płynność $608 mln daje kilkanaście kwartałów spokoju przy obecnym tempie spalania gotówki.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Powtarzalność marży.</strong> Q1 przyniósł 9,2%, Q2 aż 27,8%. Potrzebne dwa lub trzy kolejne kwartały powyżej 25%, żeby uznać to za trwałą zmianę, a nie korzystny mix zleceń.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Dojście do dodatniej EBITDA.</strong> Z -$27 mln na -$3 mln w rok — próg jest w zasięgu, prawdopodobnie jeszcze w tym roku obrotowym.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Naprawa kontroli wewnętrznej.</strong> Negatywna opinia audytora pozostaje nierozstrzygnięta i to ona, a nie wyniki, jest dziś głównym hamulcem dla wyceny.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Listopad 2026</strong></td><td>Wyniki Q3 2026</td><td>Test powtarzalności marży i możliwe pierwsze dodatnie EBITDA</td></tr>
+            <tr><td>H2 2026 – wiosna 2027</td><td>Kolejny raport roczny i opinia audytora</td><td>Najważniejszy pojedynczy katalizator — usunięcie uwag odblokowałoby wycenę</td></tr>
+            <tr><td>Na bieżąco</td><td>Wykorzystanie programu emisji akcji</td><td>Każda transza to realne rozwodnienie; tempo pokaże, jak pilnie spółka potrzebuje kapitału</td></tr>
+            <tr><td>H2 2026 – 2027</td><td>Nowe kontrakty rządowe i obronne</td><td>Wzrost backlogu powyżej $700 mln uzasadniłby wyższą wycenę</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Opinia audytora o kontroli wewnętrznej</td><td>negatywna (KPMG, rok 2025)</td><td>brak poprawy w kolejnym raporcie</td><td><span class="mon-dot r"></span>Ryzyko</td></tr>
+            <tr><td>Marża brutto</td><td>27,8% (w Q1 tylko 9,2%)</td><td>&lt; 15%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Skorygowana EBITDA</td><td>-$3 mln (rok wcześniej -$27 mln)</td><td>pogorszenie kwartał do kwartału</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Backlog kontraktowy</td><td>$542 mln (rekord)</td><td>spadek kwartał do kwartału</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Liczba akcji / emisja ATM</td><td>+232% od debiutu; program do $500 mln</td><td>szybkie wykorzystanie programu</td><td><span class="mon-dot r"></span>Ryzyko</td></tr>
+            <tr><td>Przepływy pieniężne</td><td>-$35 mln (rok wcześniej -$94 mln)</td><td>brak dalszej poprawy</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji:</strong> maksymalnie 1–2% portfela — nierentowna spółka z otwartym ryzykiem księgowym nie zasługuje na więcej, niezależnie od jakości ostatniego kwartału</li>
+          <li><strong>Pierwsza transza:</strong> $10,50–11,80, czyli poziom obecny blisko lipcowego wsparcia</li>
+          <li><strong>Druga transza:</strong> $8,00–9,00, gdyby przecena się pogłębiła</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w okolicach $15 (cele analityków), reszta powyżej $18</li>
+          <li><strong>Jedna rzecz do sprawdzenia przed dokupieniem:</strong> czy w raporcie za Q3 pojawi się informacja o postępach w naprawie kontroli wewnętrznej</li>
+          <li><strong>Wyjście z tezy:</strong> korekta sprawozdań, marża brutto poniżej 15% albo agresywne wykorzystanie emisji akcji</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--neutral)">⚠️ SPEKULACYJNA — dobry kwartał, otwarte pytanie o wiarygodność liczb</div>
+        <p>Gdyby oceniać wyłącznie drugi kwartał, Redwire wyglądałby na klasyczny przypadek udanego zwrotu: podwojone przychody, marża brutto wyprowadzona z głębokiego minusa, rekordowy backlog i solidna poduszka gotówkowa. Przecena o 56% od majowego szczytu tworzyłaby wtedy sensowną okazję, a cele analityków w okolicach $15 byłyby konserwatywne.</p>
+        <p>Nie da się jednak oceniać tego kwartału w oderwaniu od kontekstu. <strong>Audytor stwierdził, że spółka nie ma wystarczających mechanizmów kontroli nad własną sprawozdawczością</strong> — a to znaczy, że dokładnie te liczby, które mają uzasadniać inwestycję, pochodzą z systemu uznanego za zawodny. Do tego dochodzi program emisji akcji mogący rozwodnić akcjonariuszy o jedną piątą. Dlatego traktowałbym Redwire jako <strong>małą pozycję spekulacyjną, nie inwestycję</strong>, i uzależniłbym jej powiększenie od jednej rzeczy: potwierdzenia, że uwagi audytora zostały usunięte. Do tego czasu każda liczba w tym raporcie ma gwiazdkę.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Spekulacyjna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$12–16</b></div>
+          <div><span>Scenariusz negatywny</span><b>$6–8</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$20–24</b></div>
+          <div><span>Sugerowana pozycja</span><b>1–2% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3 — listopad</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 7 sierpnia 2026 | Dane: Redwire IR (Q2 2026, 5 sierpnia), BusinessWire, Nasdaq, StockAnalysis, TipRanks, Motley Fool | Uwaga: audytor wydał negatywną opinię o kontroli wewnętrznej za 2025 — dane finansowe należy traktować z ostrożnością | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

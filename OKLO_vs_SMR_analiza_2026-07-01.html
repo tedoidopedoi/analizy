@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OKLO vs SMR — Analiza Porównawcza</title>
+<style>
+  :root {
+    --bg: #0f1117; --surface: #1a1d2e; --surface2: #242740; --border: #2e3150;
+    --text: #e8eaf0; --muted: #8b90a0; --accent: #6c63ff; --accent2: #00d4aa;
+    --oklo: #6c63ff; --smr: #00b4d8;
+    --strong-buy: #00c853; --buy: #4caf50; --neutral: #ffd740; --sell: #ff6d00; --strong-sell: #d50000;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; line-height: 1.6; font-size: 15px; }
+  .header { background: linear-gradient(135deg, #1a1d2e 0%, #12142a 100%); border-bottom: 1px solid var(--border); padding: 28px 48px; }
+  .header-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 12px; }
+  .header-left h1 { font-size: 1.8rem; font-weight: 700; }
+  .header-left h1 .ok { color: var(--oklo); }
+  .header-left h1 .vs { color: var(--muted); font-size: 1rem; margin: 0 8px; }
+  .header-left h1 .sm { color: var(--smr); }
+  .header-left p { color: var(--muted); font-size: 0.88rem; margin-top: 4px; }
+  .winner-badge { background: linear-gradient(135deg, #6c63ff, #9b59b6); color: #fff; padding: 10px 20px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; }
+  .verdict-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .vs-card { border-radius: 12px; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; }
+  .vs-card.oklo-card { background: rgba(108,99,255,0.12); border: 1px solid rgba(108,99,255,0.3); }
+  .vs-card.smr-card { background: rgba(0,180,216,0.08); border: 1px solid rgba(0,180,216,0.2); }
+  .vs-card .ticker { font-size: 1.2rem; font-weight: 800; }
+  .vs-card.oklo-card .ticker { color: var(--oklo); }
+  .vs-card.smr-card .ticker { color: var(--smr); }
+  .vs-card .price { font-size: 1rem; font-weight: 600; }
+  .rating-pill { padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; }
+  .pill-buy { background: var(--buy); color: #fff; }
+  .pill-neutral { background: var(--neutral); color: #000; }
+  .nav-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 48px; overflow-x: auto; display: flex; scrollbar-width: none; }
+  .nav-bar::-webkit-scrollbar { display: none; }
+  .nav-item { padding: 12px 16px; color: var(--muted); font-size: 0.82rem; font-weight: 500; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.15s; text-decoration: none; display: block; }
+  .nav-item:hover { color: var(--text); border-bottom-color: var(--accent); }
+  .nav-item.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .main { max-width: 1200px; margin: 0 auto; padding: 40px 48px 80px; }
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 24px; overflow: hidden; }
+  .section-header { padding: 18px 24px; background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; }
+  .section-number { background: var(--accent); color: #fff; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+  .section-title { font-size: 0.95rem; font-weight: 600; flex: 1; }
+  .section-toggle { color: var(--muted); font-size: 0.8rem; transition: transform 0.2s; }
+  .section-toggle.open { transform: rotate(180deg); }
+  .section-body { padding: 24px; display: block; }
+  .section-body.collapsed { display: none; }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .col-oklo { background: rgba(108,99,255,0.06); border: 1px solid rgba(108,99,255,0.2); border-radius: 12px; padding: 18px 20px; }
+  .col-smr { background: rgba(0,180,216,0.05); border: 1px solid rgba(0,180,216,0.18); border-radius: 12px; padding: 18px 20px; }
+  .col-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+  .col-oklo .col-label { color: var(--oklo); }
+  .col-smr .col-label { color: var(--smr); }
+  .col-oklo p, .col-smr p { margin-bottom: 10px; font-size: 0.9rem; }
+  .col-oklo ul, .col-smr ul { padding-left: 18px; margin-bottom: 10px; }
+  .col-oklo li, .col-smr li { margin-bottom: 5px; font-size: 0.9rem; }
+  h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent2); margin: 14px 0 8px; }
+  h4:first-child { margin-top: 0; }
+  .metric-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 0; }
+  .metric-table th { background: var(--surface2); color: var(--muted); font-weight: 600; text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 0.75rem; text-transform: uppercase; }
+  .metric-table th.oklo-h { color: var(--oklo); }
+  .metric-table th.smr-h { color: var(--smr); }
+  .metric-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  .metric-table tr:last-child td { border-bottom: none; }
+  .metric-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .metric-table td.win { color: var(--strong-buy); font-weight: 600; }
+  .metric-table td.lose { color: #ff5252; }
+  .metric-table td.tie { color: var(--neutral); }
+  .metric-table .row-label { color: var(--muted); font-size: 0.82rem; }
+  .score-bar { display: flex; gap: 8px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border); }
+  .score-bar:last-child { border-bottom: none; }
+  .score-label { flex: 1; font-size: 0.88rem; color: var(--muted); }
+  .score-visual { display: flex; gap: 4px; flex: 2; }
+  .score-dot { width: 18px; height: 18px; border-radius: 50%; }
+  .dot-oklo { background: var(--oklo); }
+  .dot-smr { background: var(--smr); }
+  .dot-empty { background: var(--border); }
+  .score-winner { font-size: 0.75rem; font-weight: 700; }
+  .score-winner.oklo { color: var(--oklo); }
+  .score-winner.smr { color: var(--smr); }
+  .score-winner.tie { color: var(--muted); }
+  .verdict-final { background: linear-gradient(135deg, rgba(108,99,255,0.12), rgba(108,99,255,0.04)); border: 2px solid rgba(108,99,255,0.4); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+  .verdict-final h3 { font-size: 1.2rem; font-weight: 700; color: var(--oklo); margin-bottom: 12px; }
+  .highlight-box { background: rgba(0,212,170,0.07); border: 1px solid rgba(0,212,170,0.2); border-radius: 10px; padding: 14px 18px; margin: 12px 0; font-size: 0.9rem; }
+  .warn-box { background: rgba(255,109,0,0.08); border: 1px solid rgba(255,109,0,0.3); border-radius: 10px; padding: 14px 18px; margin: 12px 0; font-size: 0.9rem; }
+  .warn-box strong { color: var(--sell); }
+  .danger-box { background: rgba(213,0,0,0.08); border: 1px solid rgba(213,0,0,0.3); border-radius: 10px; padding: 14px 18px; margin: 12px 0; font-size: 0.9rem; }
+  .danger-box strong { color: #ff5252; }
+  .risk-label { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; margin-left: 6px; }
+  .risk-high { background: rgba(213,0,0,0.2); color: #ff5252; }
+  .risk-med { background: rgba(255,109,0,0.2); color: var(--sell); }
+  .risk-low { background: rgba(0,200,83,0.2); color: var(--strong-buy); }
+  .final-recs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .rec-card { border-radius: 12px; padding: 20px; }
+  .rec-card.oklo-rec { background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.3); }
+  .rec-card.smr-rec { background: rgba(0,180,216,0.07); border: 1px solid rgba(0,180,216,0.2); }
+  .rec-card .rc-ticker { font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; }
+  .rec-card.oklo-rec .rc-ticker { color: var(--oklo); }
+  .rec-card.smr-rec .rc-ticker { color: var(--smr); }
+  .rec-card .rc-rating { font-size: 0.85rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 12px; }
+  .rc-buy { background: var(--buy); color: #fff; }
+  .rc-neutral { background: var(--neutral); color: #000; }
+  .rc-text { color: var(--muted); font-size: 0.85rem; line-height: 1.6; }
+  .footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 32px; border-top: 1px solid var(--border); }
+  @media (max-width: 768px) {
+    .header { padding: 20px; } .main { padding: 20px 16px 60px; }
+    .compare-grid, .final-recs, .verdict-summary { grid-template-columns: 1fr; }
+    .nav-bar { padding: 0 16px; }
+  }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+  <div class="header-top">
+    <div class="header-left">
+      <h1><span class="ok">OKLO</span><span class="vs">vs</span><span class="sm">SMR</span></h1>
+      <p>NYSE · Energia jądrowa / Mikro-reaktory SMR · Analiza porównawcza: 2026-07-01</p>
+    </div>
+    <div class="winner-badge">🏆 Zwycięzca: OKLO</div>
+  </div>
+  <div class="verdict-summary">
+    <div class="vs-card oklo-card">
+      <div>
+        <div class="ticker">OKLO</div>
+        <div style="color:var(--muted);font-size:0.82rem;">Oklo Inc. · NYSE</div>
+      </div>
+      <div style="text-align:right">
+        <div class="price">~$52,31</div>
+        <div style="color:var(--muted);font-size:0.78rem;">Market cap: ~$9,1 mld</div>
+        <div style="margin-top:4px"><span class="rating-pill pill-buy">Kupno</span></div>
+      </div>
+    </div>
+    <div class="vs-card smr-card">
+      <div>
+        <div class="ticker">SMR</div>
+        <div style="color:var(--muted);font-size:0.82rem;">NuScale Power · NYSE</div>
+      </div>
+      <div style="text-align:right">
+        <div class="price">~$11,74</div>
+        <div style="color:var(--muted);font-size:0.78rem;">Market cap: ~$4,0 mld</div>
+        <div style="margin-top:4px"><span class="rating-pill pill-neutral">Neutralna</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-bar">
+  <a class="nav-item active" href="#kontekst">Kontekst</a>
+  <a class="nav-item" href="#technologia">Technologia</a>
+  <a class="nav-item" href="#kontrakt">Kontrakty</a>
+  <a class="nav-item" href="#finanse">Finanse</a>
+  <a class="nav-item" href="#wycena">Wycena</a>
+  <a class="nav-item" href="#ryzyka">Ryzyka</a>
+  <a class="nav-item" href="#scorecard">Scorecard</a>
+  <a class="nav-item" href="#werdykt">Werdykt</a>
+</nav>
+
+<div class="main">
+
+  <!-- KONTEKST -->
+  <div class="section" id="kontekst">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">1</div>
+      <div class="section-title">Kontekst: Dlaczego teraz energia jądrowa?</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <p>Energia jądrowa przeżywa renesans napędzany przez jeden czynnik: <strong>AI data centers potrzebują 24/7 czystej energii na bezprecedensową skalę.</strong> Microsoft, Meta, Google i Amazon ogłosiły kontrakty na gigawaty mocy jądrowej w 2025–2026. Odnawialne źródła (słońce, wiatr) nie gwarantują ciągłości — jądro tak. Do 2030 roku szacuje się, że data centers AI będą potrzebować 40–80 GW dodatkowej mocy w samych USA.</p>
+      <div class="highlight-box">
+        <strong>Kluczowy tailwind:</strong> Administracja Trumpa (2025–) jest najbardziej pro-jądrową w historii USA. Wykonawcze rozkazy o deregulacji NRC, cel „3 reaktory testowe do 4 lipca 2026", finansowanie DOE. To środowisko jest wyjątkowo korzystne dla obu spółek — ale OKLO skorzysta bardziej (szybsza ścieżka licencyjna dla mikro-reaktorów).
+      </div>
+      <div class="compare-grid">
+        <div class="col-oklo">
+          <div class="col-label">OKLO — profil</div>
+          <p><strong>Założona:</strong> 2013, Santa Clara, CA. IPO: maj 2024 (SPAC z AltC Acquisition Corp Sama Altmana). CEO: Jacob DeWitte (co-founder).</p>
+          <p><strong>Misja:</strong> Budować, posiadać i eksploatować własne reaktory Aurora, sprzedając elektryczność przez długoterminowe PPA (Power Purchase Agreements) — model utility, nie producent.</p>
+          <p><strong>Etap:</strong> Pre-revenue. Wbita pierwsza łopata pod budowę reaktora przy Idaho National Laboratory (wrzesień 2025).</p>
+        </div>
+        <div class="col-smr">
+          <div class="col-label">SMR — profil</div>
+          <p><strong>Założona:</strong> 2007, Portland, OR. Weszła na giełdę: maj 2022 (SPAC). CEO: John Hopkins.</p>
+          <p><strong>Misja:</strong> Sprzedaż reaktorów VOYGR (light water SMR, NRC-certified) do utility i rządów. Tradycyjny model producenta reaktorów.</p>
+          <p><strong>Etap:</strong> Wczesna komercjalizacja. Przychody ze sprzedaży usług inżynierskich ($31.5M Q1 2026). Ale poprzedni flagship projekt CFPP/UAMPS anulowany w 2023.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECHNOLOGIA -->
+  <div class="section" id="technologia">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">2</div>
+      <div class="section-title">Technologia i Przewagi</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="compare-grid">
+        <div class="col-oklo">
+          <div class="col-label">OKLO — Aurora Powerhouse</div>
+          <ul>
+            <li><strong>Typ:</strong> Sodowo-chłodzony szybki reaktor (Sodium-cooled Fast Reactor)</li>
+            <li><strong>Moc:</strong> 15–100 MWe na instalację (skalowalne Aurora Powerhouse)</li>
+            <li><strong>Paliwo:</strong> HALEU (High-Assay Low-Enriched Uranium) + możliwość recyklingu zużytego paliwa jądrowego</li>
+            <li><strong>Design:</strong> Wzorowany na EBR-II (Experimental Breeder Reactor II) — 30 lat danych operacyjnych</li>
+            <li><strong>Licencja NRC:</strong> Pierwsza aplikacja odrzucona 2022 (brak danych). Re-filing w toku, DOE Nuclear Safety Design Agreement marzec 2026</li>
+            <li><strong>Paliwo supply:</strong> LOI z Centrus Energy (czerwiec 2026) — dostawa HALEU dla 5 Aurorek od 2029</li>
+          </ul>
+          <div class="highlight-box" style="margin-top:8px">
+            <strong>Killer feature:</strong> Aurora może spalać zużyte paliwo jądrowe (nuclear waste) jako paliwo — adresuje ogromny problem składowania odpadów i redukuje koszt paliwa. Unikalny na skalę komercyjną.
+          </div>
+        </div>
+        <div class="col-smr">
+          <div class="col-label">SMR — NuScale VOYGR</div>
+          <ul>
+            <li><strong>Typ:</strong> Lekkowodny reaktor ciśnieniowy (Light Water SMR)</li>
+            <li><strong>Moc:</strong> 77 MWe/moduł × 6 modułów = 462 MWe VOYGR-6</li>
+            <li><strong>Paliwo:</strong> Standardowe niskowzbogacone paliwo uranowe (LEU) — powszechnie dostępne</li>
+            <li><strong>Design:</strong> Ewolucja tradycyjnej technologii LWR — niższe ryzyko technologiczne, ale mniejsza innowacyjność</li>
+            <li><strong>Licencja NRC:</strong> Pierwsza firma z certyfikatem NRC dla SMR (2022) ✓ — <strong>kluczowa przewaga</strong></li>
+            <li><strong>Paliwo supply:</strong> Standardowe paliwo LEU — brak ograniczeń HALEU</li>
+          </ul>
+          <div class="warn-box" style="margin-top:8px">
+            <strong>Słabość:</strong> Projekt UAMPS/CFPP (Idaho) anulowany 2023 — koszt wzrósł z $3B do $9.3B (+210%), cena energii z $55 do $89/MWh (+62%). NRC certyfikat posiada, ale cost competitiveness kwestionowana.
+          </div>
+        </div>
+      </div>
+
+      <h4>Porównanie technologiczne</h4>
+      <table class="metric-table">
+        <thead><tr><th class="row-label">Kryterium</th><th class="oklo-h">OKLO (Aurora)</th><th class="smr-h">SMR (VOYGR)</th><th>Zwycięzca</th></tr></thead>
+        <tbody>
+          <tr><td class="row-label">Innowacyjność</td><td class="win">Wysoka (fast reactor, HALEU, waste burning)</td><td>Umiarkowana (ewolucja LWR)</td><td class="win">OKLO</td></tr>
+          <tr><td class="row-label">Ryzyko technologiczne</td><td>Wyższe (mniej danych komercyjnych)</td><td class="win">Niższe (sprawdzona technologia LWR)</td><td class="win">SMR</td></tr>
+          <tr><td class="row-label">NRC Status</td><td>Odrzucona 2022, re-filing</td><td class="win">Certyfikacja NRC 2022 ✓</td><td class="win">SMR</td></tr>
+          <tr><td class="row-label">Dostępność paliwa</td><td>Ograniczona (HALEU)</td><td class="win">Powszechna (LEU)</td><td class="win">SMR</td></tr>
+          <tr><td class="row-label">Fuel cycle (recykling)</td><td class="win">Tak — może spalać waste</td><td>Nie</td><td class="win">OKLO</td></tr>
+          <tr><td class="row-label">Skalowalność modułowa</td><td class="win">15–100 MWe, bardzo elastyczna</td><td>77 MWe/moduł, min. VOYGR-6</td><td class="win">OKLO</td></tr>
+          <tr><td class="row-label">DOE track record</td><td class="win">INL — budowa w toku (2025)</td><td>CFPP cancelled (2023)</td><td class="win">OKLO</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- KONTRAKTY -->
+  <div class="section" id="kontrakt">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">3</div>
+      <div class="section-title">Pipeline Kontraktów i Klienci</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="compare-grid">
+        <div class="col-oklo">
+          <div class="col-label">OKLO — pipeline 18 GW</div>
+          <ul>
+            <li><strong>Meta (styczna 2026):</strong> 1,2 GW PPA w Ohio — jeden z pierwszych firm PPAs dla SMR. Meta prepłaca część za paliwo i development. Faza 1 (online 2030), pełne 1,2 GW do 2034.</li>
+            <li><strong>Nvidia:</strong> Partnerstwo z Nvidia (szczegóły nie ujawnione).</li>
+            <li><strong>Switch (data centers):</strong> 12 GW PPA podpisane wcześniej (znana umowa).</li>
+            <li><strong>Łącznie MOU pipeline:</strong> ~18 GW (w różnym stopniu zaawansowania)</li>
+            <li><strong>Armec Corporation:</strong> Akwizycja czerwiec 2026 (40 pracowników) — rozszerzenie kompetencji inżynieryjnych.</li>
+            <li><strong>DOE:</strong> Umowa na radioisotope pilot plant (styczeń 2026).</li>
+          </ul>
+          <p style="font-size:0.85rem;color:var(--muted)">Uwaga: większość pipeline to MOU (non-binding) — konwersja na firm PPA to kluczowy milestone.</p>
+        </div>
+        <div class="col-smr">
+          <div class="col-label">SMR — pipeline NuScale</div>
+          <ul>
+            <li><strong>Romania RoPower (FID luty 2026):</strong> 6 NuScale VOYGR-6 przy dawnej elektrowni węglowej w Doicești. US EXIM: $98M loan + LOI do $3B projektowego finansowania. Start ~2029+.</li>
+            <li><strong>US pipeline:</strong> Do 6 GW planowanej mocy w USA (różne etapy rozmów).</li>
+            <li><strong>US Exim + DFC:</strong> LOI do $1B + $3B wsparcia eksportowego dla Romania.</li>
+          </ul>
+          <div class="danger-box" style="margin-top:8px">
+            <strong>OSTRZEŻENIE — historia:</strong> Projekt CFPP/UAMPS (Idaho, 462 MW) — anulowany 11/2023. Koszt wzrósł 3x ($3B→$9.3B), cena energii +62% ($55→$89/MWh). Utility members rezygnowały z udziału. Buduje precedens o cost overruns.
+          </div>
+        </div>
+      </div>
+      <div class="highlight-box" style="margin-top:16px">
+        <strong>🎯 OKLO wygrywa kontraktami:</strong> 18 GW pipeline vs. Romania + US GW-scale rozmowy dla NuScale. Meta deal (1.2 GW) jest bezprecedensowy — big tech prepay capital jest potężną derisking strategią. Każda konwersja MOU na PPA = massive catalyst dla OKLO.
+      </div>
+    </div>
+  </div>
+
+  <!-- FINANSE -->
+  <div class="section" id="finanse">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">4</div>
+      <div class="section-title">Finanse i Płynność</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <table class="metric-table">
+        <thead>
+          <tr><th class="row-label">Metryka finansowa</th><th class="oklo-h">OKLO</th><th class="smr-h">SMR (NuScale)</th><th>Lepszy</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="row-label">Przychody TTM</td><td class="tie">$0 (pre-revenue)</td><td class="tie">~$30–35M/kwartał</td><td class="tie">Remis*</td></tr>
+          <tr><td class="row-label">Gotówka / płynność</td><td class="win">$2 mld+</td><td>~$1 mld</td><td class="win">OKLO</td></tr>
+          <tr><td class="row-label">Burn rate/kw.</td><td class="win">Niższy (est. ~$30–40M)</td><td class="lose">~$40–70M</td><td class="win">OKLO</td></tr>
+          <tr><td class="row-label">Runway (est.)</td><td class="win">5–7 lat</td><td>~14 kwartałów (~3,5 roku)</td><td class="win">OKLO</td></tr>
+          <tr><td class="row-label">Dług</td><td class="win">Brak / minimalny</td><td>Minimalny</td><td class="win">Remis</td></tr>
+          <tr><td class="row-label">Dyluacja ryzyk</td><td class="win">Mniejsze (gotówka z Meta prepay)</td><td class="lose">Wyższe (burn rate wymaga kolejnych emisji)</td><td class="win">OKLO</td></tr>
+          <tr><td class="row-label">Strata netto roczna</td><td>N/D (szac. -$100–150M)</td><td class="lose">~-$250–280M rocznie</td><td class="win">OKLO</td></tr>
+          <tr><td class="row-label">FCF (operacyjny)</td><td>Negatywny</td><td class="lose">-$316M Q1 2026 (wysoce ujemny)</td><td class="win">OKLO</td></tr>
+        </tbody>
+      </table>
+      <p style="color:var(--muted);font-size:0.82rem;margin-top:8px">*NuScale ma przychody, ale są to głównie inżynieryjne opłaty feasibility — nie od działających reaktorów. OKLO nie ma żadnych przychodów, co jest standardem na tym etapie.</p>
+      <div class="warn-box" style="margin-top:12px">
+        <strong>NuScale "Death Spiral Risk" (Seeking Alpha):</strong> Przy -$70M burn/kwartał i $1B gotówki, NuScale ma ~14 kwartałów (3,5 roku) runway. Jeśli Romania się opóźni lub US pipeline się nie zmaterializuje, spółka będzie musiała dokonać kolejnych emisji akcji przy niskiej cenie — klasyczna spirala dilucji.
+      </div>
+    </div>
+  </div>
+
+  <!-- WYCENA -->
+  <div class="section" id="wycena">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">5</div>
+      <div class="section-title">Wycena i Analitycy</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <table class="metric-table">
+        <thead>
+          <tr><th class="row-label">Metryka wyceny</th><th class="oklo-h">OKLO ($52,31)</th><th class="smr-h">SMR ($11,74)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="row-label">Market cap</td><td>~$9,1 mld</td><td>~$4,0 mld</td></tr>
+          <tr><td class="row-label">P/E TTM</td><td>ujemny (-62x)</td><td>ujemny</td></tr>
+          <tr><td class="row-label">P/S TTM</td><td>N/A (brak rev.)</td><td>~$4B / $120M = ~33x</td></tr>
+          <tr><td class="row-label">EV/Revenue</td><td>N/A</td><td>~32x</td></tr>
+          <tr><td class="row-label">Analitycy</td><td class="win">23–26 analityków, <strong>Buy</strong></td><td>17 analityków, <strong>Hold</strong></td></tr>
+          <tr><td class="row-label">Avg. price target</td><td class="win">$89–101 (+70–93% upside)</td><td>$15,36 (+31% upside)</td></tr>
+          <tr><td class="row-label">High target</td><td class="win">$150 (Seaport Global)</td><td>N/D</td></tr>
+          <tr><td class="row-label">HSBC rating</td><td class="win">Buy, $96</td><td>Hold, $13</td></tr>
+          <tr><td class="row-label">YoY stock perf.</td><td class="win">+214%</td><td class="lose">-23%</td></tr>
+          <tr><td class="row-label">Od ATH</td><td>~-20% (ATH ~$65)</td><td class="lose">-81% (ATH $53,43 X 2025)</td></tr>
+        </tbody>
+      </table>
+
+      <h4>Jak wyceniać spółki pre-revenue jądrowe?</h4>
+      <p>Obie spółki nie mają historycznych przychodów umożliwiających klasyczną wycenę DCF lub P/E. Metodologia rynkowa to:</p>
+      <ul>
+        <li><strong>GW backlog × $/GW:</strong> OKLO 18 GW pipeline × $1,5–3 mld/GW (koszt projektu) = potencjalny $27–54 mld revenue. Przy wycenie $9,1 mld — discount 83% od potencjalnego revenue. To standard dla wczesno-stadialnych nuclear plays.</li>
+        <li><strong>Porównanie do peer:</strong> Vistra Energy (~$40B cap, działający) i Constellation (~$100B) wskazują, że jądrowe utility warte są $3–4/watt zainstalowanej mocy. Przy 18 GW OKLO pipeline × $3/W = $54 mld potencjalna wartość końcowego stanu. Przy $9,1 mld cap = 83% dyskont do realizacji.</li>
+        <li><strong>SMR przy $4B cap:</strong> Romania 462 MW × $3/W = $1,4 mld + US pipeline. Przy romańskim projekcie jako jedynym pewnym — vycena jest agresywna.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- RYZYKA -->
+  <div class="section" id="ryzyka">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">6</div>
+      <div class="section-title">Ryzyka i Zagrożenia</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="compare-grid">
+        <div class="col-oklo">
+          <div class="col-label">OKLO — ryzyka</div>
+          <ul>
+            <li><strong>NRC relicensing</strong> <span class="risk-high">WYSOKIE</span><br>Pierwsza aplikacja odrzucona 2022. Nowy wniosek w toku, ale regulacyjna niepewność pozostaje. Bez NRC approval — żadnej komercjalizacji w USA.</li>
+            <li><strong>HALEU fuel supply</strong> <span class="risk-high">WYSOKIE</span><br>Centrus jest jedynym producentem HALEU w USA. Dostawa od 2029. Wszelkie opóźnienia Centrus = opóźnienie Oklo. Uzależnienie od monopolistycznego dostawcy.</li>
+            <li><strong>Zero revenue + $9,1B cap</strong> <span class="risk-med">ŚREDNIE</span><br>Rynek wycenia narrację, nie liczby. Zmiana sentymentu lub funding crisis może gwałtownie obniżyć wycenę.</li>
+            <li><strong>Timing ryzyk 2030</strong> <span class="risk-med">ŚREDNIE</span><br>First power target 2030. Historia jądra: projekty się opóźniają. Każde opóźnienie = więcej gotówki burned.</li>
+            <li><strong>Odejście Sama Altmana z Board</strong> <span class="risk-low">NISKIE</span><br>Altman zrezygnował IV 2025. Potencjalne partnerstwo OpenAI–Oklo jednak istnieje i mogłoby być pozytywne. Utrata celebrity endorsement minimalizuje się przy postępach operacyjnych.</li>
+          </ul>
+        </div>
+        <div class="col-smr">
+          <div class="col-label">SMR (NuScale) — ryzyka</div>
+          <ul>
+            <li><strong>Death Spiral dilution</strong> <span class="risk-high">WYSOKIE</span><br>$40–70M burn/kw. → $280M/rok → przy $1B cash = 3,5 roku runway. Bez revenue acceleration = seria dilucyjnych emisji. ATH $53 → $11 w 9 miesięcy = rynek już to dyskontuje.</li>
+            <li><strong>CFPP precedens kosztowy</strong> <span class="risk-high">WYSOKIE</span><br>Projekt UAMPS skalował koszt 3x ($3B→$9.3B). To systemowe ryzyko — SMR nie są tanie jak obiecywano. Może powtórzyć się w Romania.</li>
+            <li><strong>Romania execution</strong> <span class="risk-high">WYSOKIE</span><br>FID zatwierdzone, ale projekt "z zastrzeżeniami". Rumunia potrzebuje dalszego finansowania ($3B). Opóźnienia = cash drain bez wpływów.</li>
+            <li><strong>Technologia LWR bez moat</strong> <span class="risk-med">ŚREDNIE</span><br>Inne firmy (Rolls-Royce UK, GEH, X-energy) też rozwijają SMR LWR. NRC certification to przewaga, ale nie trwała bariera wejścia.</li>
+            <li><strong>Konkurencja ze strony OKLO/Terra Power</strong> <span class="risk-med">ŚREDNIE</span><br>Big tech podpisuje kontrakty z Oklo i Terra Power (fast reactors) — jeśli fast reactors okażą się tańsze, NuScale traci rynek.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCORECARD -->
+  <div class="section" id="scorecard">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">7</div>
+      <div class="section-title">Scorecard — Kto wygrywa w każdej kategorii?</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+      <div class="score-bar">
+        <div class="score-label">Innowacyjność technologii</div>
+        <div class="score-visual">
+          <div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div>
+          <div style="width:12px"></div>
+          <div class="score-dot dot-smr"></div><div class="score-dot dot-smr"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div>
+        </div>
+        <div class="score-winner oklo">OKLO wygrywa</div>
+      </div>
+      <div class="score-bar">
+        <div class="score-label">Status regulacyjny (NRC)</div>
+        <div class="score-visual">
+          <div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div>
+          <div style="width:12px"></div>
+          <div class="score-dot dot-smr"></div><div class="score-dot dot-smr"></div><div class="score-dot dot-smr"></div><div class="score-dot dot-smr"></div><div class="score-dot dot-empty"></div>
+        </div>
+        <div class="score-winner smr">SMR wygrywa</div>
+      </div>
+      <div class="score-bar">
+        <div class="score-label">Pipeline kontraktów</div>
+        <div class="score-visual">
+          <div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div>
+          <div style="width:12px"></div>
+          <div class="score-dot dot-smr"></div><div class="score-dot dot-smr"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div>
+        </div>
+        <div class="score-winner oklo">OKLO wygrywa</div>
+      </div>
+      <div class="score-bar">
+        <div class="score-label">Siła finansowa (gotówka/runway)</div>
+        <div class="score-visual">
+          <div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-empty"></div>
+          <div style="width:12px"></div>
+          <div class="score-dot dot-smr"></div><div class="score-dot dot-smr"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div>
+        </div>
+        <div class="score-winner oklo">OKLO wygrywa</div>
+      </div>
+      <div class="score-bar">
+        <div class="score-label">Model biznesowy (długoterminowy)</div>
+        <div class="score-visual">
+          <div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div>
+          <div style="width:12px"></div>
+          <div class="score-dot dot-smr"></div><div class="score-dot dot-smr"></div><div class="score-dot dot-smr"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div>
+        </div>
+        <div class="score-winner oklo">OKLO wygrywa</div>
+      </div>
+      <div class="score-bar">
+        <div class="score-label">Ryzyko dilucji (dla akcjonariuszy)</div>
+        <div class="score-visual">
+          <div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-empty"></div>
+          <div style="width:12px"></div>
+          <div class="score-dot dot-smr"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div>
+        </div>
+        <div class="score-winner oklo">OKLO wygrywa (mniejsze ryzyko)</div>
+      </div>
+      <div class="score-bar">
+        <div class="score-label">Wycena (atrakcyjność entry point)</div>
+        <div class="score-visual">
+          <div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div>
+          <div style="width:12px"></div>
+          <div class="score-dot dot-smr"></div><div class="score-dot dot-smr"></div><div class="score-dot dot-smr"></div><div class="score-dot dot-smr"></div><div class="score-dot dot-empty"></div>
+        </div>
+        <div class="score-winner smr">SMR "tańszy" od ATH (-81%)</div>
+      </div>
+      <div class="score-bar">
+        <div class="score-label">Sentiment analityków</div>
+        <div class="score-visual">
+          <div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div>
+          <div style="width:12px"></div>
+          <div class="score-dot dot-smr"></div><div class="score-dot dot-smr"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div>
+        </div>
+        <div class="score-winner oklo">OKLO: Buy consensus, $90+ target</div>
+      </div>
+      <div class="score-bar">
+        <div class="score-label">Track record wykonania</div>
+        <div class="score-visual">
+          <div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-oklo"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div>
+          <div style="width:12px"></div>
+          <div class="score-dot dot-smr"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div><div class="score-dot dot-empty"></div>
+        </div>
+        <div class="score-winner oklo">OKLO (INL budowa). SMR: UAMPS cancelled</div>
+      </div>
+
+      <div style="margin-top:20px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center">
+        <div style="font-size:1rem;font-weight:600">Łączny wynik:</div>
+        <div style="font-size:1.4rem;font-weight:800;color:var(--oklo)">OKLO 7–2</div>
+        <div style="font-size:1.4rem;font-weight:800;color:var(--smr)">SMR 2–7</div>
+        <div style="font-size:0.85rem;color:var(--muted)">(wygrywa kategorie)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WERDYKT -->
+  <div class="section" id="werdykt">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">8</div>
+      <div class="section-title">Werdykt Końcowy — Czy OKLO ma sens?</div>
+      <div class="section-toggle open">▾</div>
+    </div>
+    <div class="section-body">
+
+      <div class="verdict-final">
+        <h3>✅ TAK — OKLO to lepszy wybór niż SMR. Twój instynkt jest trafny.</h3>
+        <p style="margin-bottom:12px">OKLO wygrywa w 7 z 9 porównywanych kategorii. Kluczowe argumenty za OKLO jako silniejszym wyborem w perspektywie kilkuletniej:</p>
+        <ol style="padding-left:20px;margin:0">
+          <li style="margin-bottom:8px"><strong>Model biznesowy jest lepszy:</strong> OKLO sprzedaje elektryczność (PPA), nie reaktory. Utility model = predictable, recurring revenue. NuScale sprzedaje reaktory = one-time, capital-intensive, marże pod presją cost overruns.</li>
+          <li style="margin-bottom:8px"><strong>Big tech jako kotwa:</strong> Meta prepayment capital derisikuje projekt finansowo. To model „klient finansuje Twój asset" — potężny mechanizm. OpenAI (Altman), Nvidia — orbit OKLO przyciąga najpoważniejszych graczy AI.</li>
+          <li style="margin-bottom:8px"><strong>Więcej gotówki, mniej burn:</strong> $2B+ cash vs $1B u NuScale, przy niższym burn rate. OKLO ma spokój operacyjny na 5–7 lat. NuScale może być zmuszony do dilucji za 2–3 lata.</li>
+          <li style="margin-bottom:8px"><strong>NuScale ma precedens kosztowy:</strong> UAMPS/CFPP ($3B→$9.3B) to katastrofalny sygnał. OKLO nie ma jeszcze projektu do zakończenia — ale też nie ma tego bagażu. Fast reactors mogą być tańsze w buildout niż LWR.</li>
+          <li style="margin-bottom:0px"><strong>Analitycy potwierdzają:</strong> 23+ analityków „Buy", target $89–101 (+70–93%). HSBC: Buy $96 dla OKLO, Hold $13 dla SMR.</li>
+        </ol>
+      </div>
+
+      <div class="final-recs">
+        <div class="rec-card oklo-rec">
+          <div class="rc-ticker">OKLO</div>
+          <div class="rc-rating rc-buy">Kupno</div>
+          <div class="rc-text">
+            <strong>Krótki termin (1–3M):</strong> Spekulatywny. Katalizator: dalsze konwersje MOU→PPA, ogłoszenia nowych big-tech klientów, postęp NRC aplikacji.<br><br>
+            <strong>Średni termin (6–18M):</strong> Kupno. INL reactor construction milestones, Centrus fuel supply confirmations. Target analityków $89–101 to realistyczny scenariusz przy kontynuacji AI energy demand.<br><br>
+            <strong>Długi termin (3–5 lat):</strong> Mocne Kupno (jeśli NRC approve + INL online 2027–2028). Przy 1,2 GW Meta deal online i kolejnych PPA — OKLO wartość $20–30/watt × 5+ GW = $100B+ potencjał.<br><br>
+            <strong>Fair value (bazowy):</strong> $75–100 (analysts target). Bull: $150+. Bear: $25 (NRC denial lub HALEU problem).
+          </div>
+        </div>
+        <div class="rec-card smr-rec">
+          <div class="rc-ticker">SMR</div>
+          <div class="rc-rating rc-neutral">Neutralna</div>
+          <div class="rc-text">
+            <strong>Krótki termin (1–3M):</strong> Neutralna–Sprzedaż. Akcja -81% od ATH, "Death Spiral Risk" jest realny przy $70M/kwartał burn i $1B cash.<br><br>
+            <strong>Średni termin (6–18M):</strong> Neutralna. Jeśli Romania FID rzeczywiście przejdzie do implementation bez cost overruns — potencjalne odbicie do $15–20. Ale precedens UAMPS sugeruje risk of delays.<br><br>
+            <strong>Długi termin (3–5 lat):</strong> Niepewna. NRC certification jest realną przewagą, ale bez komercyjnego projektu na czas i koszty — certyfikat nie wystarczy.<br><br>
+            <strong>Fair value:</strong> $12–18 (analyst consensus). Nie jest tu oczywisty potencjał multi-bagger jak u OKLO.
+          </div>
+        </div>
+      </div>
+
+      <div class="warn-box">
+        <strong>⚠️ WAŻNE ZASTRZEŻENIE — obie spółki to spekulacja wysokiego ryzyka.</strong> Żadna z nich nie ma działającego reaktora komercyjnego. OKLO to zakład na technologię, regulatora (NRC) i timeline 2027–2030. SMR to zakład na Romania i brak kolejnych cost overruns. Zarówno OKLO jak i SMR mogą stracić 50–80% wartości jeśli kluczowe milestones się nie powiodą. Pozycja powinna być limitowana (max 5–10% portfela spekulatywnego).
+      </div>
+
+      <h4>Dla kogo OKLO, dla kogo SMR?</h4>
+      <table class="metric-table">
+        <thead><tr><th>Profil inwestora</th><th class="oklo-h">OKLO</th><th class="smr-h">SMR</th></tr></thead>
+        <tbody>
+          <tr><td>Tolerancja ryzyka</td><td>Wysoka (pre-revenue, NRC pending)</td><td>Wysoka (cash drain, history of overruns)</td></tr>
+          <tr><td>Horyzont</td><td class="win">3–7 lat (czekanie na 2030+ delivery)</td><td>2–4 lata (Romania + US)</td></tr>
+          <tr><td>Teza inwestycyjna</td><td class="win">AI energy demand, big tech PPA, fast reactor moat</td><td>First NRC-certified SMR, Romania opcja</td></tr>
+          <tr><td>Entry point (czerwiec 2026)</td><td>Wycena już wysoka ($9,1B), ale analyst upside duży</td><td class="win">Niska cena vs. ATH, ale fundamentalnie słabsze</td></tr>
+          <tr><td>Najgorszy scenariusz</td><td>NRC denial + HALEU delay = $20–25</td><td class="lose">Cash out + dilution spiral → $3–5</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+
+    Analiza wygenerowana przez Claude · 2026-07-01 · Nie stanowi porady inwestycyjnej · Dane oparte na publicznie dostępnych informacjach
+  </div>
+</div>
+
+<script>
+  function toggleSection(header) {
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector('.section-toggle');
+    body.classList.toggle('collapsed');
+    toggle.classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-item').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const id = this.getAttribute('href').slice(1);
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelectorAll('.nav-item').forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+  const sections = document.querySelectorAll('.section');
+  const navItems = document.querySelectorAll('.nav-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(item => { item.classList.toggle('active', item.getAttribute('href') === '#' + id); });
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

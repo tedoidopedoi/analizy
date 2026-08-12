@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOOD — Robinhood Markets | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#ccff00; --accent2:#d9ff4d; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#141a05 0%,#0f1117 50%,#111605 100%); border-bottom:1px solid var(--border); padding:32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(204,255,0,0.08) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#000; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.buy { background:rgba(76,175,80,0.15); border:2px solid var(--buy); color:var(--buy); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.lime { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#000; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.lime { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); } .chip.red { border-color:var(--sell); color:var(--sell); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.neutral { color:var(--neutral); } .rating-box .rating-text.sell { color:var(--sell); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--strong-buy); } .bear-box ul li::before { color:var(--strong-sell); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(204,255,0,0.07),rgba(217,255,77,0.04)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(204,255,0,0.05); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .alert-danger { background:rgba(213,0,0,0.08); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(0,200,83,.15); color:#00c853; border:1px solid rgba(0,200,83,.4); }
+  .ck.no  { background:rgba(213,0,0,.13);  color:#ff6b6b; border:1px solid rgba(213,0,0,.35); }
+  .ck.wait{ background:rgba(255,215,64,.13);color:#ffd740; border:1px solid rgba(255,215,64,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#00c853; } .mon-dot.y { background:#ffd740; } .mon-dot.r { background:#ff6d00; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: HOOD</div>
+    <div class="company-name">Robinhood Markets, Inc.</div>
+    <div class="company-sub">Broker detaliczny bez prowizji · 28,4 mln klientów · Gold 4,8 mln subskrybentów · Rynki predykcyjne (giełda Rothera) · Menlo Park, CA</div>
+    <div class="header-meta">
+      <div class="rating-badge buy">📈 KUPNO (z zastrzeżeniem zmienności)</div>
+      <span class="meta-tag">Fintech / Broker</span>
+      <span class="meta-tag">Rynki predykcyjne</span>
+      <span class="meta-tag">Ekstremalna zmienność</span>
+      <span class="meta-tag">-40% od szczytu</span>
+      <div class="price-display">
+        <div class="price-main">~$92</div>
+        <div class="price-sub">6.08.2026 | 52W: $63,52–$153,86</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (06.08.2026)</div><div class="metric-value">~$92</div><div class="metric-detail">-40% od szczytu, +45% od dna $63,52</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$83,4 mld</div><div class="metric-detail">52W: $63,52–$153,86</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">$1,31 mld</div><div class="metric-detail">+32% r/r — rekord</div></div>
+    <div class="metric-card"><div class="metric-label">EPS Q2 / Forward P/E</div><div class="metric-value green">$0,62</div><div class="metric-detail">Kons. $0,39–0,41 | Forward P/E ~37× (FY26)</div></div>
+    <div class="metric-card"><div class="metric-label">Rynki predykcyjne</div><div class="metric-value lime">$156M</div><div class="metric-detail">10× r/r — więcej niż krypto!</div></div>
+    <div class="metric-card"><div class="metric-label">Krypto</div><div class="metric-value red">$100M</div><div class="metric-detail">-38% r/r — schłodzenie rynku</div></div>
+    <div class="metric-card"><div class="metric-label">Zysk netto Q2</div><div class="metric-value green">$573M</div><div class="metric-detail">+48% r/r</div></div>
+    <div class="metric-card"><div class="metric-label">Klienci / Gold</div><div class="metric-value green">28,4M / 4,8M</div><div class="metric-detail">+7% / +39% r/r | wpłaty $21,7 mld</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest Robinhood?</h3>
+      <p>Robinhood Markets to broker detaliczny, który w 2013 roku wprowadził na amerykański rynek handel <strong>bez prowizji</strong> i zmusił całą branżę do pójścia w jego ślady. Dziś obsługuje 28,4 mln klientów z finansowanymi rachunkami i 4,8 mln subskrybentów usługi Gold. Siedziba: Menlo Park. Znany z debiutu giełdowego w 2021 roku i afery wokół akcji GameStop, przeszedł od tamtej pory drogę od symbolu spekulacji detalicznej do dochodowej platformy finansowej.</p>
+      <p>W 2026 roku firma dokonała czegoś nieoczywistego: <strong>zbudowała zupełnie nową kategorię przychodów</strong>. Rynki predykcyjne — kontrakty na wynik wydarzeń — wygenerowały w drugim kwartale więcej pieniędzy niż cały handel kryptowalutami.</p>
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>2025</td><td>Kurs rośnie o ponad 200% — po zwyżce o 190% rok wcześniej; szczyt $153,86</td><td style="color:var(--buy)">Euforia</td></tr>
+          <tr><td>H1 2026</td><td><strong>Załamanie o ponad 40%</strong> — przychody z krypto spadają o 47% r/r, Q1 rozczarowuje ($1,07 mld, poniżej prognoz o $70 mln)</td><td style="color:var(--strong-sell)">↓↓ Derating</td></tr>
+          <tr><td>Marzec–maj 2026</td><td>Mnożnik zysku kurczy się o niemal 40%; podniesione prognozy kosztów operacyjnych do $2,7–2,825 mld</td><td style="color:var(--sell)">↓ Presja marż</td></tr>
+          <tr><td>Czerwiec 2026</td><td><strong>Uruchomienie Rothera</strong> — własnej giełdy i izby rozliczeniowej z licencją CFTC</td><td style="color:var(--strong-buy)">↑↑ Nowa infrastruktura</td></tr>
+          <tr><td>Kwiecień 2026</td><td>Kurs osiąga dno $63,52</td><td style="color:var(--sell)">Dno</td></tr>
+          <tr><td><strong>29 lipca 2026</strong></td><td><strong>Q2: rekordowe $1,31 mld (+32%), EPS $0,62 wobec konsensusu $0,39–0,41, zysk netto $573 mln (+48%); rynki predykcyjne $156 mln — 10× r/r</strong></td><td style="color:var(--strong-buy)">↑↑ Przełom</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Sedno sytuacji:</strong> Robinhood przeszedł w tym roku pełny cykl emocji — z euforii po dwóch latach potrojenia kursu, przez załamanie o 40% wywołane spadkiem przychodów z krypto, aż po odbicie o 45% od dna po rekordowym kwartale. Kluczowa zmiana jakościowa: firma <strong>przestała być zakładem na kryptowaluty</strong> i znalazła nowe źródło przychodów, którego dwa lata temu w ogóle nie było.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Linia</th><th>Opis</th><th>Q2 2026</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rynki predykcyjne</strong></td><td>Kontrakty na wynik wydarzeń (sport, polityka, gospodarka) na własnej giełdzie Rothera z licencją CFTC</td><td><strong>$156 mln</strong></td><td>🔥 10× r/r, ponad 3,5 mld kontraktów od czerwca</td></tr>
+          <tr><td><strong>Akcje i opcje</strong></td><td>Handel bez prowizji, monetyzacja przez payment for order flow</td><td>rdzeń</td><td>💰 Stabilna baza</td></tr>
+          <tr><td><strong>Kryptowaluty</strong></td><td>Handel cyfrowymi aktywami</td><td>$100 mln</td><td style="color:var(--sell)">📉 -38% r/r</td></tr>
+          <tr><td><strong>Robinhood Gold</strong></td><td>Subskrypcja: wyższe oprocentowanie gotówki, marża, dane, karta</td><td>4,8 mln (+39%)</td><td>⚡ Powtarzalny przychód</td></tr>
+          <tr><td>Odsetki netto</td><td>Od sald gotówkowych i pożyczek pod zastaw papierów</td><td>istotny udział</td><td>Zależny od stóp procentowych</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat — dystrybucja i interfejs, nie technologia</h3>
+      <p>Przewagą Robinhooda jest <strong>dotarcie do młodego inwestora detalicznego</strong> i aplikacja, którą ci ludzie chcą otwierać. To brzmi banalnie, ale w finansach detalicznych kanał dystrybucji jest wart więcej niż produkt — konkurenci mają identyczne instrumenty, lecz nie mają nawyku użytkownika.</p>
+      <p>Drugą warstwą, znacznie mocniejszą, jest <strong>Rothera — własna giełda i izba rozliczeniowa z licencją CFTC</strong>. To zmienia model: Robinhood przestaje być pośrednikiem odsyłającym zlecenia gdzie indziej, a staje się właścicielem infrastruktury, na której inni też mogą handlować. Licencja regulacyjna tej klasy jest barierą, której nie da się kupić w kilka miesięcy.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Rynki predykcyjne:</strong> najszybciej rosnąca kategoria w handlu detalicznym; łączy zainteresowanie sportem, polityką i gospodarką z mechaniką giełdową. Rynek dopiero się formuje, więc udziały są do zdobycia</li>
+        <li><strong>Handel detaliczny akcjami:</strong> dojrzały, mocno konkurencyjny, ale Robinhood ma najmłodszą bazę klientów — a ta z czasem bogacieje</li>
+        <li><strong>Kryptowaluty:</strong> silnie cykliczne; w 2026 aktywność wyraźnie ostygła, co uderzyło w przychody całej branży</li>
+        <li><strong>Stopy procentowe:</strong> obniżki zmniejszają przychody odsetkowe od sald klientów — to niedoceniane ryzyko dla brokerów</li>
+        <li><strong>Regulacje:</strong> rynki predykcyjne działają w ramach nadzoru CFTC, ale ich status prawny w niektórych stanach bywa kwestionowany; to obszar żywej dyskusji politycznej</li>
+      </ul>
+      <div class="alert alert-warn"><strong>Ważne rozróżnienie:</strong> rynki predykcyjne rosną dziś tak szybko po części dlatego, że są nowością i trafiły na sezon wydarzeń sportowych oraz politycznych. Otwarte pytanie brzmi, czy jest to <strong>trwała kategoria finansowa, czy chwilowa moda</strong> — i to samo pytanie decyduje o tym, ile warta jest dzisiejsza wycena Robinhooda.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Q2 2026</th><th>Zmiana r/r</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Klienci z finansowanym rachunkiem</td><td><strong>28,4 mln</strong></td><td>+7%</td><td>Wzrost umiarkowany — baza dojrzewa</td></tr>
+          <tr><td>Subskrybenci Gold</td><td><strong>4,8 mln</strong></td><td style="color:var(--buy)">+39%</td><td>Najważniejsza metryka: powtarzalny przychód</td></tr>
+          <tr><td>Wpłaty netto</td><td>$21,7 mld</td><td>—</td><td>Klienci przynoszą coraz więcej kapitału</td></tr>
+        </tbody>
+      </table></div>
+      <p>Struktura klientów pokazuje ciekawą dynamikę: <strong>liczba użytkowników rośnie wolno (+7%), ale ich wartość szybko</strong>. Subskrypcje Gold rosną pięciokrotnie szybciej niż baza, a wpłaty netto liczone są w dziesiątkach miliardów. To oznacza, że Robinhood przestał być aplikacją do spekulacji drobnymi kwotami, a stał się miejscem, gdzie klienci trzymają realne oszczędności.</p>
+      <div class="alert alert-success"><strong>Kluczowa zmiana modelu:</strong> 4,8 mln subskrybentów Gold to strumień przychodów niezależny od tego, czy ktoś handluje. W branży maklerskiej, gdzie przychody tradycyjnie zależą od zmienności rynku, taka baza abonamentowa jest bardzo cenna — i zasługuje na wyższy mnożnik niż przychody transakcyjne.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Przychody</th><th>Zmiana</th><th>Zysk netto / EPS</th></tr></thead>
+        <tbody>
+          <tr><td>Q1 2026</td><td>$1,07 mld</td><td style="color:var(--sell)">poniżej prognoz o $70 mln</td><td>Krypto -47% r/r</td></tr>
+          <tr><td><strong>Q2 2026</strong></td><td><strong>$1,31 mld</strong></td><td style="color:var(--strong-buy)">+32% r/r</td><td><strong>$573 mln (+48%), EPS $0,62</strong></td></tr>
+        </tbody>
+      </table></div>
+      <h3>Rozkład przychodów w Q2 — zmiana warta uwagi</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Źródło</th><th>Kwota</th><th>Zmiana r/r</th><th>Charakter</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rynki predykcyjne</strong></td><td>$156 mln</td><td style="color:var(--strong-buy)">ponad 10×</td><td>Nowa kategoria, wysoka marża</td></tr>
+          <tr><td>Kryptowaluty</td><td>$100 mln</td><td style="color:var(--sell)">-38%</td><td>Cykliczne, nieprzewidywalne</td></tr>
+          <tr><td>Akcje, opcje, odsetki, Gold</td><td>reszta z $1,31 mld</td><td>—</td><td>Baza operacyjna</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Najważniejsza liczba w całym raporcie:</strong> rynki predykcyjne przyniosły <strong>$156 mln wobec $100 mln z kryptowalut</strong> — po raz pierwszy w historii spółki. Kategoria, która praktycznie nie istniała rok temu, właśnie przerosła ten segment, który przez lata definiował Robinhooda w oczach inwestorów. To zmienia charakter całej tezy inwestycyjnej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy ~$92</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>~$83,4 mld</td><td>—</td></tr>
+          <tr><td>Przychody (annualizowane z Q2)</td><td>~$5,2 mld</td><td>Przy utrzymaniu tempa</td></tr>
+          <tr><td><strong>P/S (annualizowane)</strong></td><td><strong>~16×</strong></td><td style="color:var(--sell)">⚠️ Wysoko jak na brokera</td></tr>
+          <tr><td>Zysk netto (annualizowany)</td><td>~$2,3 mld</td><td>EPS ok. $2,48 w tempie z Q2</td></tr>
+          <tr><td><strong>P/E (annualizowane z Q2)</strong></td><td><strong>~37×</strong></td><td style="color:var(--neutral)">Umiarkowane, jeśli tempo się utrzyma</td></tr>
+          <tr><td>Marża netto</td><td>ok. 44%</td><td style="color:var(--buy)">✅ Wyjątkowo wysoka</td></tr>
+          <tr><td>Cel analityków</td><td>BofA: $140</td><td style="color:var(--buy)">+52% od obecnej ceny</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Uwaga metodologiczna:</strong> podane mnożniki opierają się na annualizacji jednego kwartału, co przy Robinhoodzie jest zawodne — przychody potrafią wahać się o dziesiątki procent z kwartału na kwartał w zależności od zmienności rynku. Q1 przyniósł $1,07 mld, Q2 aż $1,31 mld. Traktuj te liczby jako orientację, nie precyzyjną wycenę.</div>
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>ok. 45–50×</td><td>Zaniżony przez słabe Q1 2026 ($1,07 mld, krypto -47%)</td></tr>
+          <tr><td><strong>Forward P/E (FY2026)</strong></td><td><strong>ok. 37×</strong></td><td>Na zannualizowanym EPS z Q2 (~$2,48). Q2 był rekordowy, więc to raczej dolna granica mnożnika</td></tr>
+          <tr><td><strong>Forward P/E (FY2027)</strong></td><td><strong>ok. 27–32×</strong></td><td>Przy założeniu wzrostu EPS o 15–30%, uzależnionym od trwałości rynków predykcyjnych</td></tr>
+          <tr><td>PEG (forward)</td><td>ok. 1,2–1,5</td><td>Powyżej 1,0 — wycena zakłada utrzymanie wysokiego tempa wzrostu</td></tr>
+          <tr><td>Peer: Coinbase (COIN)</td><td>zbliżone mnożniki</td><td>Podobna zmienność, ale silniejsza zależność od jednego cyklu</td></tr>
+          <tr><td>Peer: Charles Schwab (SCHW)</td><td>ok. 15–20×</td><td>Broker tradycyjny — wolniejszy wzrost, dużo stabilniejsze przychody</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> forward P/E około 37× to premia mniej więcej dwukrotna wobec brokerów tradycyjnych — uzasadniona wzrostem przychodów o 32% i marżą netto 44%, ale wyłącznie pod warunkiem, że rynki predykcyjne okażą się trwałą kategorią. Kluczowe zastrzeżenie: <strong>ten mnożnik liczony jest na annualizacji jednego, rekordowego kwartału</strong>. Q1 2026 przyniósł $1,07 mld przychodów, Q2 aż $1,31 mld — przy tak dużej zmienności realny forward P/E na cały 2026 rok może okazać się wyraźnie wyższy, jeśli kolejne kwartały nie powtórzą wyniku z Q2.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$105 – $135</div><div class="fair-value-note">Baza: P/E 32–38× na zannualizowanych zyskach przy utrzymaniu dynamiki rynków predykcyjnych | Cel BofA $140 | Scenariusz negatywny (moda na kontrakty mija, krypto dalej słabnie, koszty rosną): $55–70 | Scenariusz pozytywny (rynki predykcyjne jako trwała kategoria, powrót zmienności): $150–170 | Przy $92 potencjał +14–47%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <p>Robinhood ma <strong>marżę netto rzędu 44%</strong> — poziom, który w tradycyjnej bankowości praktycznie nie występuje. Wynika to z modelu w pełni cyfrowego: brak oddziałów, brak doradców, koszt obsłużenia kolejnego klienta bliski zeru. Zysk netto $573 mln przy przychodach $1,31 mld w jednym kwartale to wynik, jakiego nie osiąga żaden inny broker detaliczny tej wielkości.</p>
+      <div class="alert alert-warn"><strong>Sygnał ostrzegawczy z pierwszej połowy roku:</strong> mimo wzrostu przychodów o ponad 25% w ujęciu rocznym, <strong>marża netto obniżyła się z około 50% do 42%</strong>, a zarząd podniósł prognozę kosztów operacyjnych na 2026 rok do $2,7–2,825 mld. Firma inwestuje w budowę nowej infrastruktury (Rothera) i ekspansję — to uzasadnione, ale oznacza, że wzrost przychodów nie przekłada się już jeden do jednego na wzrost zysku.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <p>Jako broker–dealer Robinhood podlega wymogom kapitałowym nadzoru i utrzymuje <strong>znaczną poduszkę płynnościową</strong> — środki klientów są przy tym oddzielone od majątku firmy. Spółka jest rentowna gotówkowo, generuje zysk netto rzędu pół miliarda dolarów kwartalnie i nie potrzebuje finansowania zewnętrznego na bieżącą działalność.</p>
+      <p>Uruchomienie Rothery, czyli własnej giełdy z izbą rozliczeniową, wiąże się z dodatkowymi wymogami kapitałowymi i kosztami zgodności — to jeden z powodów podniesienia prognozy kosztów operacyjnych. Z perspektywy bilansu jest to jednak inwestycja w aktywo trwałe: licencja i infrastruktura rozliczeniowa mają wartość niezależną od bieżących obrotów.</p>
+      <p>Warto pamiętać o jednej rzeczy typowej dla spółek technologicznych: <strong>wynagrodzenia w akcjach</strong> systematycznie rozwadniają udziały akcjonariuszy i zaniżają realną jakość raportowanego zysku. Przy analizie EPS warto śledzić liczbę akcji, nie tylko dolną linię rachunku wyników.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Rynki predykcyjne przerosły krypto — nowa kategoria z niczego</h4><p>$156 mln wobec $100 mln z kryptowalut, wzrost ponad dziesięciokrotny w rok. Robinhood stworzył strumień przychodów, którego dwa lata temu nie było w żadnym modelu analitycznym.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏛️</div><div class="catalyst-body"><h4>Rothera — własna giełda z licencją CFTC</h4><p>Ponad 3,5 mld kontraktów przetworzonych od czerwcowego startu. Posiadanie infrastruktury, a nie tylko aplikacji, zmienia Robinhooda z pośrednika w operatora rynku — z zupełnie inną ekonomiką i barierą wejścia.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💳</div><div class="catalyst-body"><h4>Gold: 4,8 mln subskrybentów, wzrost o 39%</h4><p>Przychód abonamentowy niezależny od zmienności rynku. To najcenniejsza część modelu, bo stabilizuje wyniki w kwartałach, gdy klienci handlują mniej.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💰</div><div class="catalyst-body"><h4>Marża netto 44% i zysk $573 mln kwartalnie</h4><p>Rentowność, jakiej nie osiąga żaden inny broker detaliczny. Model w pełni cyfrowy oznacza, że każdy dodatkowy dolar przychodu w dużej części schodzi na dół rachunku wyników.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Kurs 40% poniżej szczytu przy rekordowych wynikach</h4><p>Przecena z pierwszej połowy roku wynikała ze słabości krypto — czyli segmentu, który właśnie przestał być najważniejszy. Cel BofA na poziomie $140 daje ponad 50% przestrzeni.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🎲</div><div class="catalyst-body"><h4>Czy rynki predykcyjne to kategoria, czy moda?</h4><p>Kluczowe nierozstrzygnięte pytanie. Kontrakty na wyniki wydarzeń mogą okazać się trwałym instrumentem finansowym albo chwilowym zainteresowaniem napędzanym sezonem sportowym i politycznym. Cała premia w wycenie opiera się na pierwszej odpowiedzi.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚖️</div><div class="catalyst-body"><h4>Ryzyko regulacyjne wokół kontraktów na wydarzenia</h4><p>Status prawny rynków predykcyjnych bywa kwestionowany na poziomie stanowym, a granica między instrumentem finansowym a zakładem jest przedmiotem sporu. Niekorzystne rozstrzygnięcie uderzyłoby w najszybciej rosnący segment.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📊</div><div class="catalyst-body"><h4>Ekstremalna zmienność przychodów i kursu</h4><p>Zakres 52-tygodniowy od $63,52 do $153,86 — kurs potrafi zmienić się ponad dwukrotnie w rok. Przychody skaczą z $1,07 mld w Q1 do $1,31 mld w Q2. Prognozowanie tej spółki jest z natury obarczone dużym błędem.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🪙</div><div class="catalyst-body"><h4>Krypto wciąż istotne i wciąż spada</h4><p>$100 mln przy spadku o 38% r/r. Segment nadal odpowiada za istotną część przychodów, a jego dalsze osłabienie może zniwelować wzrost w innych kategoriach.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💸</div><div class="catalyst-body"><h4>Presja kosztowa i erozja marży</h4><p>Marża netto spadła z około 50% do 42% w ujęciu rocznym, a prognoza kosztów operacyjnych została podniesiona do $2,7–2,825 mld. Budowa Rothery kosztuje, zanim zacznie zarabiać.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>Profil</th><th>Przewaga nad HOOD</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Robinhood</strong></td><td>Broker detaliczny + rynki predykcyjne + własna giełda</td><td>—</td><td>—</td></tr>
+          <tr><td>Kalshi</td><td>Wyspecjalizowana giełda kontraktów na wydarzenia</td><td>Pierwszeństwo i skupienie na jednej kategorii</td><td>Brak bazy klientów detalicznych Robinhooda</td></tr>
+          <tr><td>Polymarket</td><td>Rynki predykcyjne oparte na blockchainie</td><td>Zasięg globalny, rozpoznawalność</td><td>Trudniejsza integracja z systemem regulacyjnym USA</td></tr>
+          <tr><td>Coinbase</td><td>Giełda kryptowalut wchodząca w inne kategorie</td><td>Dominacja w krypto</td><td>Silniejsza zależność od jednego cyklu</td></tr>
+          <tr><td>Charles Schwab, Fidelity</td><td>Wielcy brokerzy tradycyjni</td><td>Skala, zaufanie, zamożniejsi klienci</td><td>Wolniejsi produktowo, starsza baza</td></tr>
+          <tr><td>Webull, eToro</td><td>Brokerzy aplikacyjni</td><td>—</td><td>Mniejsza skala i rozpoznawalność w USA</td></tr>
+        </tbody>
+      </table></div>
+      <p>Pozycja: <strong>najlepiej ustawiony gracz w nowej kategorii</strong>. Kalshi i Polymarket miały pierwszeństwo w rynkach predykcyjnych, ale to Robinhood ma 28 milionów klientów, którym może pokazać te kontrakty w aplikacji, z której korzystają codziennie. Do tego doszła własna infrastruktura rozliczeniowa — połączenie dystrybucji i licencji jest tu przewagą decydującą.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Szczyt 52-tygodniowy</td><td>$153,86</td><td>Maksimum przed załamaniem</td></tr>
+          <tr><td>Dno 52-tygodniowe</td><td>$63,52</td><td>Kwiecień 2026 — kapitulacja</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>~$92</strong></td><td>-40% od szczytu, +45% od dna</td></tr>
+          <tr><td>Wsparcie S1</td><td>$82–86</td><td>Baza sprzed wyników Q2</td></tr>
+          <tr><td>Wsparcie S2</td><td>$70–75</td><td>Strefa przy szerszym odwrocie</td></tr>
+          <tr><td>Opór R1</td><td>$100–105</td><td>Poziom psychologiczny i strefa podażowa</td></tr>
+          <tr><td>Opór R2</td><td>$120–130</td><td>Poziomy z okresu przed przeceną</td></tr>
+          <tr><td>Opór R3</td><td>$140–153</td><td>Cel BofA i szczyt 52-tygodniowy</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Utrzymanie poziomu powyżej $86</li><li>Q3 potwierdzający dynamikę rynków predykcyjnych</li><li>Powrót zmienności na rynkach i odbicie krypto</li><li>Wybicie ponad $105 → ruch ku $130</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Przebicie $82 z wolumenem</li><li>Wyhamowanie kontraktów na wydarzenia po sezonie</li><li>Niekorzystne rozstrzygnięcia regulacyjne</li><li>Zejście ku $70, w skrajnym wariancie retest $63</li></ul></div>
+      </div>
+      <p>Kurs odbił o 45% od kwietniowego dna, ale wciąż jest o 40% poniżej szczytu — to typowy obraz spółki po pęknięciu bańki oczekiwań, która odzyskuje wiarygodność wynikami. Zmienność pozostaje ekstremalna, więc każdy poziom techniczny należy traktować z dużym marginesem.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Po odbiciu o 45% od dna i rekordowych wynikach katalizator się wypalił. Do wyników Q3 (listopad) brak nowego impulsu, a zmienność pozostaje bardzo wysoka.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Rynki predykcyjne jako nowy silnik, Gold rosnący o 39%, marża netto 44%, cel BofA $140. Warunek: potwierdzenie trwałości kontraktów na wydarzenia w Q3 i Q4.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO (z zastrzeżeniem)</div><div class="rating-note">Robinhood buduje pozycję operatora rynku, nie tylko aplikacji. Ale historia pokazuje, że jego przychody potrafią spaść o połowę w jednym cyklu — pozycja umiarkowana.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia wejścia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji:</strong> 2–3% portfela — zakres 52-tygodniowy od $63 do $154 mówi wszystko o zmienności</li>
+        <li><strong>Pierwsza transza:</strong> $86–95 (poziom obecny)</li>
+        <li><strong>Druga transza:</strong> $70–78 przy szerszej korekcie rynku</li>
+        <li><strong>Realizacja zysku:</strong> częściowa przy $125–130, reszta w okolicach celu BofA $140</li>
+        <li><strong>Wyjście z tezy:</strong> spadek przychodów z rynków predykcyjnych dwa kwartały z rzędu albo niekorzystna decyzja regulacyjna dotycząca kontraktów na wydarzenia</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$105 – $135</div><div class="fair-value-note">Scenariusz negatywny: $55–70 | Scenariusz pozytywny: $150–170 | Cel BofA: $140</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Rynki predykcyjne przerosły krypto</strong> — $156 mln wobec $100 mln, wzrost ponad dziesięciokrotny; Robinhood stworzył kategorię przychodów, której dwa lata temu nie było</li>
+          <li><strong>Rekordowy kwartał przy kursie 40% poniżej szczytu</strong> — przychody $1,31 mld (+32%), EPS $0,62 wobec konsensusu $0,39–0,41, zysk netto $573 mln; cel BofA $140</li>
+          <li><strong>Rothera i Gold zmieniają charakter biznesu</strong> — własna giełda z licencją CFTC plus 4,8 mln subskrybentów (+39%) to infrastruktura i abonament zamiast samych prowizji</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Nie wiadomo, czy rynki predykcyjne to trwała kategoria</strong> — cała premia w wycenie zakłada, że tak; jeśli to moda sezonowa, wycena runie</li>
+          <li><strong>Ekstremalna zmienność</strong> — zakres 52-tygodniowy od $63,52 do $153,86, przychody skaczące z $1,07 do $1,31 mld kwartał do kwartału</li>
+          <li><strong>Erozja marży i ryzyko regulacyjne</strong> — marża netto z 50% do 42%, koszty operacyjne podniesione do $2,7–2,825 mld, a status prawny kontraktów na wydarzenia bywa kwestionowany</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> spadek przychodów z rynków predykcyjnych w dwóch kolejnych kwartałach albo niekorzystne rozstrzygnięcie regulacyjne dotyczące kontraktów na wydarzenia → powrót w okolice $65–75.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> Q3 z utrzymaną dynamiką rynków predykcyjnych, stabilną marżą i dalszym wzrostem Gold → ruch ku $125–140.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Robinhood zrobił w 2026 roku coś, czego prawie nikt się nie spodziewał: <strong>przestał być zakładem na kryptowaluty</strong>. Przez lata jego wycena poruszała się w rytmie bitcoina, a pierwsza połowa tego roku była tego brutalną ilustracją — przychody z krypto spadły o 47%, kurs runął o ponad 40%, a mnożnik zysku skurczył się niemal o połowę. Tymczasem firma po cichu budowała coś innego: rynki predykcyjne, czyli kontrakty na wynik wydarzeń, oparte na własnej giełdzie Rothera z licencją CFTC. W drugim kwartale ta kategoria przyniosła <strong>$156 mln — więcej niż całe krypto ($100 mln)</strong>, przy wzroście przekraczającym dziesięciokrotność w skali roku.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Cały spór o tę spółkę sprowadza się więc do jednego pytania: <strong>czy rynki predykcyjne to nowa, trwała kategoria finansowa, czy sezonowa moda</strong>, napędzona wydarzeniami sportowymi i politycznymi? Jeśli trwała — Robinhood jest dziś najlepiej ustawionym graczem na świecie, bo łączy 28 milionów klientów detalicznych z własną infrastrukturą rozliczeniową, czego nie ma ani Kalshi, ani Polymarket. Jeśli moda — dzisiejsza wycena przy około 16-krotności sprzedaży jest nie do obrony, a kurs wróci w okolice kwietniowego dna.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Dywersyfikacja od krypto.</strong> Rynki predykcyjne przerosły handel kryptowalutami już w tym kwartale — najważniejszy warunek został spełniony szybciej, niż zakładał rynek.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Własna infrastruktura.</strong> Rothera z licencją CFTC przetworzyła ponad 3,5 mld kontraktów od czerwcowego startu. Robinhood jest operatorem rynku, nie tylko pośrednikiem.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Powtarzalne przychody.</strong> 4,8 mln subskrybentów Gold przy wzroście o 39% daje bazę niezależną od zmienności rynku.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Trwałość kontraktów na wydarzenia.</strong> Potrzebne co najmniej dwa kolejne kwartały poza sezonem sportowym i politycznym, żeby odróżnić kategorię od mody.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Odbudowa marży.</strong> Spadek z około 50% do 42% przy rosnących kosztach operacyjnych wymaga zatrzymania — inaczej wzrost przychodów przestanie przekładać się na zysk.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Listopad 2026</strong></td><td>Wyniki Q3 2026</td><td>Pierwszy test, czy $156 mln z rynków predykcyjnych to poziom powtarzalny, czy jednorazowy szczyt</td></tr>
+            <tr><td>H2 2026, na bieżąco</td><td>Rozstrzygnięcia regulacyjne dotyczące kontraktów na wydarzenia</td><td>Największe pojedyncze ryzyko dla najszybciej rosnącego segmentu</td></tr>
+            <tr><td>H2 2026</td><td>Rozwój ekosystemu Rothera</td><td>Dopuszczenie zewnętrznych uczestników zmieniłoby model z detalicznego na infrastrukturalny</td></tr>
+            <tr><td>Cały okres</td><td>Zmienność rynków i kurs kryptowalut</td><td>Wciąż istotny czynnik przychodów, choć już nie decydujący</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Przychody z rynków predykcyjnych</td><td>$156 mln (10× r/r)</td><td>spadek dwa kwartały z rzędu</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Subskrybenci Gold</td><td>4,8 mln (+39%)</td><td>wzrost poniżej 15%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża netto</td><td>ok. 44% w Q2 (42% narastająco)</td><td>&lt; 35%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Przychody z krypto</td><td>$100 mln (-38% r/r)</td><td>dalszy spadek o ponad 30%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Koszty operacyjne (prognoza)</td><td>$2,7–2,825 mld</td><td>kolejne podniesienie</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Klienci z finansowanym rachunkiem</td><td>28,4 mln (+7%)</td><td>stagnacja lub spadek</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji:</strong> 2–3% portfela — przy zakresie rocznym od $63 do $154 większa ekspozycja oznacza akceptowanie obsunięć rzędu 40%</li>
+          <li><strong>Pierwsza transza:</strong> $86–95, czyli poziom obecny po odbiciu od dna</li>
+          <li><strong>Druga transza:</strong> $70–78, gdyby rynek zaliczył szerszą korektę</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w okolicach $125–130, reszta przy celu BofA $140</li>
+          <li><strong>Kluczowa data:</strong> wyniki Q3 w listopadzie — to wtedy okaże się, czy rynki predykcyjne mają powtarzalność</li>
+          <li><strong>Wyjście z tezy:</strong> dwa kwartały spadku przychodów z kontraktów na wydarzenia albo niekorzystna decyzja regulatora</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--buy)">📈 KUPNO — nowa kategoria w cenie starego strachu</div>
+        <p>Przecena Robinhooda z pierwszej połowy roku miała konkretną przyczynę: załamanie przychodów z kryptowalut. Problem w tym, że rynek ukarał spółkę za segment, który w międzyczasie <strong>przestał być jej najważniejszym źródłem zarobku</strong>. Rynki predykcyjne przyniosły więcej niż krypto, Gold rośnie o 39%, marża netto sięga 44%, a zysk kwartalny wynosi $573 mln — i wszystko to przy kursie 40% poniżej szczytu. Konsensus w postaci celu BofA na poziomie $140 sugeruje, że instytucje zaczynają to dostrzegać.</p>
+        <p>Zastrzeżenie jest jednak istotne i dotyczy natury nowego biznesu. Kontrakty na wydarzenia nie mają jeszcze historii pozwalającej ocenić, czy popyt na nie utrzyma się poza sezonem wielkich rozgrywek i wyborów. Dlatego traktowałbym HOOD jako <strong>pozycję umiarkowanej wielkości z jasnym terminem weryfikacji</strong> — wyniki listopadowe pokażą, czy $156 mln to nowy poziom bazowy, czy jednorazowy szczyt. Jeśli okaże się powtarzalny, obecna cena będzie wyglądać na okazję. Jeśli nie, zmienność tej spółki nie pozostawi czasu na spokojne wyjście.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$105–135</b></div>
+          <div><span>Scenariusz negatywny</span><b>$55–70</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$150–170</b></div>
+          <div><span>Sugerowana pozycja</span><b>2–3% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3 — listopad</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 6 sierpnia 2026 | Dane: Robinhood IR (Q2 2026, 29 lipca), Fortune, Yahoo Finance, TechTimes, Trefis, Motley Fool | Mnożniki oparte na annualizacji jednego kwartału — traktuj orientacyjnie | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

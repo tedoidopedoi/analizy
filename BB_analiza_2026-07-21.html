@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BB — BlackBerry | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#10b981; --accent2:#34d399; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#051510 0%,#0f1117 50%,#0a1410 100%); border-bottom:1px solid var(--border); padding:40px 32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(16,185,129,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#000; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.neutral { background:rgba(255,215,64,0.12); border:2px solid var(--neutral); color:var(--neutral); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.teal { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#000; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.neutral { color:var(--neutral); } .rating-box .rating-text.sell { color:var(--sell); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .fair-value-box { background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(52,211,153,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(16,185,129,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.teal { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); }
+  @media (max-width:700px) { .rating-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+  <div class="header-content">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: BB</div>
+    <div class="company-name">BlackBerry Limited</div>
+    <div class="company-sub">QNX — OS dla automotive/embedded · Secure Communications · Software-defined vehicles · Royalty backlog $950M · Waterloo, Kanada</div>
+    <div class="header-meta">
+      <div class="rating-badge neutral">⚖️ NEUTRALNA</div>
+      <span class="meta-tag">Automotive Software</span>
+      <span class="meta-tag">Cybersecurity</span>
+      <span class="meta-tag">QNX / SDV</span>
+      <span class="meta-tag">Turnaround zakończony</span>
+      <div class="price-display">
+        <div class="price-main">~$8,77</div>
+        <div class="price-sub">Cena (07.2026) | 52W: $3,12–$13,59</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">TL;DR</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (07.2026)</div><div class="metric-value">~$8,77</div><div class="metric-detail">52W: $3,12–$13,59 | -35% od szczytu</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$5,1B</div><div class="metric-detail">+187% YTD w pewnym momencie</div></div>
+    <div class="metric-card"><div class="metric-label">Revenue Q1 FY2027</div><div class="metric-value green">$152,9M</div><div class="metric-detail">+26% YoY — beat konsensusu</div></div>
+    <div class="metric-card"><div class="metric-label">Revenue FY2026</div><div class="metric-value yellow">$549M</div><div class="metric-detail">+3% — wolno; FY27E: $584-611M</div></div>
+    <div class="metric-card"><div class="metric-label">QNX backlog</div><div class="metric-value teal">$950M</div><div class="metric-detail">Royalty backlog — wieloletni</div></div>
+    <div class="metric-card"><div class="metric-label">Gross Margin</div><div class="metric-value green">76,2%</div><div class="metric-detail">Software-grade | QNX: 84%</div></div>
+    <div class="metric-card"><div class="metric-label">Adj. EBITDA Q4</div><div class="metric-value green">$36,1M</div><div class="metric-detail">+71% YoY — zyskowność stabilna</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value yellow">$9,71</div><div class="metric-detail">+11% | Konsensus: HOLD</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Nowy BlackBerry</h3>
+      <p>BlackBerry (NYSE: BB) nie produkuje już telefonów od dekady — dziś to spółka software'owa z dwoma filarami: <strong>QNX</strong> (system operacyjny czasu rzeczywistego dla samochodów i systemów embedded — 255M+ pojazdów na świecie) oraz <strong>Secure Communications</strong> (szyfrowana komunikacja dla rządów i wojska: AtHoc, SecuSUITE, UEM). Siedziba: Waterloo, Kanada. CEO: John Giamatteo (od XII 2023) — zakończył restrukturyzację, sprzedał Cylance i doprowadził do trwałej zyskowności EBITDA.</p>
+      <h3>Kluczowe zdarzenia</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>2025</td><td>Akcja przy $3,12 — rynek traktuje BB jako "dead money"</td><td style="color:var(--sell)">Dno</td></tr>
+          <tr><td>FY2026</td><td>QNX rekordowe kwartały, adj. EBITDA +71%, buyback</td><td style="color:var(--buy)">↑ Rewitalizacja</td></tr>
+          <tr><td>IV 2026</td><td>Q4 FY2026: revenue +10%, QNX +20% YoY, royalty backlog ~$950M</td><td style="color:var(--buy)">↑ Momentum</td></tr>
+          <tr><td>25 VI 2026</td><td><strong>Q1 FY2027: $152,9M (+26%), beat +11% vs konsensus — akcja +21% w dzień</strong></td><td style="color:var(--strong-buy)">↑↑ Breakout</td></tr>
+          <tr><td>VII 2026</td><td>52W high $13,59, potem korekta do ~$8,77</td><td style="color:var(--neutral)">Korekta -35%</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>To już nie meme stock.</strong> BB ma dodatnią EBITDA od 8 kwartałów, gross margin 76%, rosnący backlog QNX i zero problemów płynnościowych. Pytanie nie brzmi "czy przetrwa", tylko "jak szybko urośnie".</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment</th><th>Produkt</th><th>Moat</th></tr></thead>
+        <tbody>
+          <tr><td><strong>QNX (~50% revenue)</strong></td><td>RTOS dla automotive (ADAS, kokpity, SDV), medyczny, przemysł. QNX 8.0, QNX Everywhere</td><td>Certyfikacje bezpieczeństwa (ISO 26262) = switching cost ogromny; 255M pojazdów</td></tr>
+          <tr><td><strong>Secure Comms (~47%)</strong></td><td>AtHoc (alerty krytyczne — rządy), SecuSUITE (szyfrowane rozmowy — NATO), UEM</td><td>Certyfikacje NSA/NATO, wieloletnie kontrakty rządowe</td></tr>
+          <tr><td>Licensing (~3%)</td><td>Patenty</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Software-Defined Vehicle (SDV)</strong> to główna teza wzrostu: samochody stają się komputerami, każdy potrzebuje bezpiecznego OS. QNX ma design wins u większości OEM (BMW, Ford, VW, Toyota, chińscy producenci). Royalty backlog $950M konwertuje się na przychody, gdy auta wjeżdżają do produkcji (opóźnienie 2-4 lata od design win).</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Automotive software TAM:</strong> $50B+ do 2030 (SDV transformation) — QNX adresuje warstwy OS/middleware ~$5-8B</li>
+        <li><strong>Secure comms rządowe:</strong> rosnące budżety defense/cyber w NATO — stabilny wzrost 5-10%</li>
+        <li><strong>Embedded poza auto:</strong> QNX w robotyce, medycynie, przemyśle (QNX Everywhere strategia)</li>
+        <li>Ryzyko: cykl automotive słaby (produkcja aut flat), Chiny rozwijają własne OS (open-source alternatywy)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="chips"><span class="chip teal">OEM automotive (BMW, VW, Ford, Toyota...)</span><span class="chip teal">Tier-1 (Bosch, Continental)</span><span class="chip green">Rządy NATO (AtHoc, SecuSUITE)</span><span class="chip">Foxconn/HHTD (SDV partnership)</span></div>
+      <p>Dywersyfikacja dobra — żaden klient nie dominuje. Kontrakty rządowe (Secure Comms) są lepkie, ale przetargowe. QNX royalties zależą od wolumenów produkcji aut — ekspozycja na cykl automotive.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Revenue</th><th>Wzrost</th><th>Adj. EBITDA</th></tr></thead>
+        <tbody>
+          <tr><td>FY2025</td><td>$535M</td><td>—</td><td>dodatnia</td></tr>
+          <tr><td>FY2026</td><td>$549M</td><td style="color:var(--neutral)">+3%</td><td>rosnąca, Q4: $36,1M (+71%)</td></tr>
+          <tr><td>Q1 FY2027</td><td><strong>$152,9M</strong></td><td style="color:var(--buy)"><strong>+26%</strong></td><td>mocny beat</td></tr>
+          <tr><td>FY2027E (guidance)</td><td>$584-611M</td><td style="color:var(--neutral)">+6-11%</td><td>QNX: $290-307M; SecComms: $270-280M</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Zwróć uwagę na rozjazd:</strong> Q1 +26%, ale całoroczny guidance tylko +6-11%. Zarząd sygnalizuje, że Q1 był podbity jednorazowymi royalty catch-upami. Jeśli FY27 skończy się przy górnej granicy ($611M+), akcja ma paliwo; jeśli przy dolnej — obecna wycena jest pełna.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Market Cap</td><td>$5,1B</td><td>—</td></tr>
+          <tr><td>P/S (FY2027E ~$600M)</td><td>~8,5×</td><td style="color:var(--neutral)">Pełna wycena dla +6-11% growth</td></tr>
+          <tr><td>EV/EBITDA (annualized ~$130-150M)</td><td>~30-35×</td><td style="color:var(--neutral)">Wysokie</td></tr>
+          <tr><td>Cel analityków</td><td>$9,71 (Hold)</td><td>+11% | Zakres: RBC $9, CIBC $13</td></tr>
+          <tr><td>DCF (Simply Wall St)</td><td>przewartościowana ~34%</td><td style="color:var(--sell)">⚠️</td></tr>
+        </tbody>
+      </table></div>
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$7,50 – $11</div><div class="fair-value-note">Base: P/S 7-9× FY2027E | Bull (SDV acceleration, QNX +20%+ przez rok): $13+ | Obecna $8,77 = środek przedziału — uczciwie wyceniona</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <p>GM 76,2% (QNX: 84%, SecComms: 72%) — prawdziwy software. Adj. EBITDA Q4 FY2026: $36,1M (+71% YoY), marża ~23%. FCF dodatni. Trend marż rosnący dzięki dyscyplinie kosztowej po restrukturyzacji. To najzdrowszy finansowo BlackBerry od 15 lat — ale wzrost topline (poza Q1) pozostaje jednocyfrowy.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <p>Gotówka ~$400M+, zadłużenie minimalne (konwertyble spłacone/zrefinansowane), aktywny <strong>buyback</strong>. Zero ryzyka płynności. Spółka po raz pierwszy od lat kupuje własne akcje zamiast emitować — sygnał zaufania zarządu.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">BULL CASE</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🚗</div><div class="catalyst-body"><h4>SDV inflection — royalty backlog $950M zaczyna konwertować</h4><p>Design wins z lat 2022-2024 wchodzą do produkcji aut 2026-2028. QNX +20% YoY w Q4 i +26% w Q1 może być początkiem wieloletniej akceleracji royalties.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🛡️</div><div class="catalyst-body"><h4>Zbrojenia NATO = popyt na Secure Comms</h4><p>SecuSUITE i AtHoc wygrywają kontrakty rządowe w Europie (2%+ PKB na obronność). Segment +8% YoY z marżą 72% i rosnącą.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💰</div><div class="catalyst-body"><h4>Czysty bilans + buyback + możliwy strategiczny interes</h4><p>QNX jako asset byłby wart $4-6B samodzielnie dla Qualcomma/NXP. Suma części > obecna wycena w scenariuszu M&A.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">BEAR CASE</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🐌</div><div class="catalyst-body"><h4>Guidance FY27 tylko +6-11% — wzrost strukturalnie wolny</h4><p>Po wyjęciu jednorazowych royalty catch-upów, underlying growth to single digits. P/S 8,5× i EV/EBITDA 30× tego nie uzasadniają długoterminowo.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🇨🇳</div><div class="catalyst-body"><h4>Chińscy OEM przechodzą na własne/otwarte OS</h4><p>Chiny to najszybciej rosnący rynek aut — a tam QNX traci na rzecz AliOS/HarmonyOS/Linux. Długoterminowa erozja TAM.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Retail momentum stock — zmienność bez fundamentów</h4><p>+187% YTD, potem -35% w tygodnie. BB wciąż ma bazę spekulacyjnych traderów z czasów meme — kurs regularnie odrywa się od wartości w obie strony.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Konkurenci</th><th>Pozycja BB</th></tr></thead>
+        <tbody>
+          <tr><td>Automotive RTOS</td><td>Green Hills, Wind River (Aptiv), AGL/Linux, Android Automotive</td><td>🥇 Lider w safety-critical (ADAS/kokpit)</td></tr>
+          <tr><td>Secure comms rządowe</td><td>Motorola Solutions, Thales, lokalne</td><td>Silna nisza NATO</td></tr>
+          <tr><td>UEM/Endpoint</td><td>Microsoft Intune, VMware</td><td>Słaba — schyłkowy segment</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">TECHNIKA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>52W low</td><td>$3,12</td><td>2025 — "dead money" era</td></tr>
+          <tr><td>52W high</td><td>$13,59</td><td>Szczyt po Q1 beat</td></tr>
+          <tr><td>Cena</td><td>~$8,77</td><td>-35% od szczytu — oddana większość spike'u</td></tr>
+          <tr><td>Wsparcie S1</td><td>$8,00-8,50</td><td>Baza przed earnings gap</td></tr>
+          <tr><td>Wsparcie S2</td><td>$6,50-7,00</td><td>SMA200 okolice</td></tr>
+          <tr><td>Opór R1</td><td>$10-11</td><td>Strefa podażowa po korekcie</td></tr>
+        </tbody>
+      </table></div>
+      <p>Spike po wynikach (+21%) został w większości sprzedany — typowe dla BB. Konsolidacja $8-9 wygląda zdrowo; kolejny ruch zdefiniują wyniki Q2 FY2027 (wrzesień 2026).</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Po -35% korekcie blisko wsparcia $8, ale bez katalizatora do września. Cel analityków $9,71 daje tylko +11%.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text neutral">NEUTRALNA / KUPNO przy $7</div><div class="rating-note">Jeśli QNX utrzyma +15-20% YoY przez 2-3 kwartały → re-rating do $12-13. Jeśli wróci single-digit growth → $7.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO (umiarkowane)</div><div class="rating-note">SDV trend + backlog $950M + opcja M&A na QNX. Solidny, już zyskowny biznes — ale wzrost nie jest gwarantowany.</div></div>
+      </div>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$7,50 – $11</div><div class="fair-value-note">$8,77 = fair. Kupuj $7-8, realizuj $11-13</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">TL;DR</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>QNX royalty backlog $950M + SDV inflection</strong> — design wins konwertują się na przychody 2026-2028, Q1 +26% może być zwiastunem</li>
+          <li><strong>Software marże (76% GM) + dodatnia EBITDA + buyback</strong> — najzdrowszy finansowo BB od 15 lat</li>
+          <li><strong>Suma części > wycena</strong> — QNX samodzielnie wart $4-6B; opcja strategicznego przejęcia</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Guidance FY27 +6-11%</strong> — underlying wzrost wolny; Q1 spike był częściowo jednorazowy</li>
+          <li><strong>Konsensus HOLD, cel $9,71 (+11%)</strong> — Wall Street nie widzi dużego upside; DCF sugeruje przewartościowanie</li>
+          <li><strong>Chiny erozja QNX + meme-zmienność</strong> — najszybciej rosnący rynek aut ucieka do lokalnych OS</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> QNX wraca do single-digit growth w Q2/Q3 FY2027 → $6,50-7.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> QNX +20%+ drugi kwartał z rzędu + podniesienie guidance → $12-13.</p>
+      <hr class="divider">
+      <div style="text-align:center; padding:20px 0">
+        <div class="rating-badge neutral" style="display:inline-flex; font-size:20px; padding:14px 32px; margin-bottom:16px;">⚖️ NEUTRALNA — solidna, ale uczciwie wyceniona</div>
+        <p style="color:var(--text-muted); max-width:700px; margin:0 auto; font-size:13px;">BB to już nie spekulacja — to zyskowna spółka software z realnym moatem QNX. Ale przy $8,77 rynek płaci fair za +6-11% wzrostu. Kupuj przy $7-8 lub po potwierdzeniu akceleracji QNX. Pozycja "trzymaj i obserwuj", nie "goń".</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 21 lipca 2026 | Dane: BlackBerry IR, SEC 8-K, Yahoo Finance, Benzinga, Quartr | Nie stanowi porady inwestycyjnej</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){const e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+<script>function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b</body></body>(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}</script><style>.section{scroll-margin-top:64px}</style></body>
+</html>

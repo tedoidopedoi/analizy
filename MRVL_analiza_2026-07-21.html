@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MRVL — Marvell Technology | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#8b5cf6; --accent2:#a78bfa; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#120a1f 0%,#0f1117 50%,#0e0a1a 100%); border-bottom:1px solid var(--border); padding:40px 32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(139,92,246,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.buy { background:rgba(76,175,80,0.15); border:2px solid var(--buy); color:var(--buy); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.purple { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#fff; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.purple { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.strong-buy { color:var(--strong-buy); } .rating-box .rating-text.neutral { color:var(--neutral); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--strong-buy); } .bear-box ul li::before { color:var(--strong-sell); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(167,139,250,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-info { background:rgba(139,92,246,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .nvidia-badge { background:linear-gradient(135deg,rgba(118,185,0,0.15),rgba(139,92,246,0.08)); border:1px solid #76b900; border-radius:12px; padding:20px 24px; margin:14px 0; }
+  .nvidia-badge h4 { color:#76b900; font-size:16px; margin-bottom:8px; }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+  <div class="header-content">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: MRVL</div>
+    <div class="company-name">Marvell Technology, Inc.</div>
+    <div class="company-sub">Custom AI Silicon (XPU) · Optical DSP/interconnect 1.6T · NVLink Fusion · NVIDIA $2B Partner · 18 design wins · Santa Clara, CA</div>
+    <div class="header-meta">
+      <div class="rating-badge buy">📈 KUPNO</div>
+      <span class="meta-tag">Custom ASIC / XPU</span>
+      <span class="meta-tag">AI Data Center</span>
+      <span class="meta-tag">Optical DSP</span>
+      <span class="meta-tag">NVIDIA Partner</span>
+      <div class="price-display">
+        <div class="price-main">~$170</div>
+        <div class="price-sub">Cena (07.2026) | 52W: $61,44–$329,88</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">TL;DR</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (07.2026)</div><div class="metric-value">~$170</div><div class="metric-detail">52W: $61,44–$329,88 | -48% od ATH</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$147B</div><div class="metric-detail">~865M akcji</div></div>
+    <div class="metric-card"><div class="metric-label">Revenue Q1 FY2027</div><div class="metric-value green">$2,42B</div><div class="metric-detail">+28% YoY — rekord</div></div>
+    <div class="metric-card"><div class="metric-label">Revenue FY2026</div><div class="metric-value green">$8,2B</div><div class="metric-detail">+42% YoY | Data center $6B+ (+46%)</div></div>
+    <div class="metric-card"><div class="metric-label">Non-GAAP GM</div><div class="metric-value green">58,9%</div><div class="metric-detail">Q1 FY2027 | GAAP 52,1%</div></div>
+    <div class="metric-card"><div class="metric-label">NVIDIA</div><div class="metric-value purple">$2B</div><div class="metric-detail">Inwestycja + NVLink Fusion partnership</div></div>
+    <div class="metric-card"><div class="metric-label">Design wins</div><div class="metric-value purple">18 XPU</div><div class="metric-detail">Lifetime funnel $75B</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value green">$252</div><div class="metric-detail">+48% upside | Strong Buy (49 Buy/10 Hold)</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest Marvell?</h3>
+      <p>Marvell Technology (NASDAQ: MRVL) to projektant półprzewodników data infrastructure — <strong>custom AI silicon (XPU), optyczne DSP, switche Ethernet (Teralynx), kontrolery storage</strong>. Po NVIDII i Broadcomie, Marvell jest trzecim najważniejszym graczem w krzemie dla AI data centers — i #2 w custom ASIC dla hyperscalerów (za Broadcomem). Siedziba: Santa Clara. CEO: Matt Murphy (od 2016) — architekt transformacji z legacy storage na AI infrastructure.</p>
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>2025</td><td>Sell-off do $61,44 (obawy o utratę sockets Amazon Trainium na rzecz Alchip)</td><td style="color:var(--sell)">Dno</td></tr>
+          <tr><td>Początek 2026</td><td>High-volume production dla 2 hyperscalerów custom XPU — rampa przychodów</td><td style="color:var(--buy)">↑ Przełom</td></tr>
+          <tr><td>III 2026</td><td><strong>NVIDIA: $2B inwestycja + NVLink Fusion partnership</strong> — Marvell w ekosystemie AI factory</td><td style="color:var(--strong-buy)">↑↑ Game changer</td></tr>
+          <tr><td>III 2026</td><td>FY2026 wyniki: $8,2B (+42%), data center $6B+ (+46%)</td><td style="color:var(--buy)">↑ Rekord</td></tr>
+          <tr><td>27 V 2026</td><td>Q1 FY2027: $2,42B (+28%), rekordowy OCF $639M; rajd do ATH $329,88</td><td style="color:var(--buy)">↑ ATH</td></tr>
+          <tr><td>VI-VII 2026</td><td>Korekta -48% od ATH do ~$170 (profit taking, rotacja z AI)</td><td style="color:var(--neutral)">Korekta</td></tr>
+        </tbody>
+      </table></div>
+      <div class="nvidia-badge"><h4>⚡ NVIDIA $2B + NVLink Fusion (marzec 2026)</h4><p style="color:var(--text-muted); font-size:13px;">NVIDIA zainwestowała $2B w Marvell i otworzyła ekosystem NVLink Fusion — custom XPU Marvella mogą łączyć się natywnie z GPU NVIDII w rackach AI factory. To samo playbook co z LITE/COHR: NVIDIA buduje koalicję dostawców. Dla Marvella oznacza to legitymizację custom silicon jako komplementarnego (nie konkurencyjnego) wobec NVIDII.</p></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Produkt</th><th>Opis</th><th>Pozycja</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Custom XPU / ASIC</strong></td><td>Projektowanie custom chipów AI dla hyperscalerów (trening + inference)</td><td>#2 za Broadcomem | 18 design wins, funnel $75B</td></tr>
+          <tr><td><strong>Optical DSP (PAM4)</strong></td><td>Cyfrowe procesory sygnału dla transceiverów 800G/1.6T</td><td>Lider rynku (~60%+ share)</td></tr>
+          <tr><td><strong>Teralynx Ethernet</strong></td><td>Switche data center 51.2T</td><td>Challenger vs Broadcom Tomahawk</td></tr>
+          <tr><td><strong>Interconnect (CXL, PCIe, retimery)</strong></td><td>Łączność wewnątrz racka AI</td><td>Top-3</td></tr>
+          <tr><td>Storage, 5G, auto</td><td>Legacy — kontrolery HDD/SSD, procesory carrier</td><td>Malejący udział (~24% revenue)</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Roadmapa</h3>
+      <p><strong>2nm custom AI ASIC platform</strong> — komercyjny launch w 2026. Custom silicon rośnie, bo każdy wielki hyperscaler (Google TPU, Amazon Trainium, Microsoft Maia, Meta MTIA) chce własnego chipu obok GPU NVIDII — a tylko Broadcom i Marvell umieją je zaprojektować i dowieźć w wolumenie na 2-3nm.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Custom AI silicon TAM:</strong> $40-50B+ do 2028 (rośnie ~30-40% rocznie) — hyperscalerzy przesuwają 20-30% AI compute na custom XPU</li>
+        <li><strong>Optical interconnect (DSP):</strong> 1.6T inflection 2026-2027 — Marvell DSP w większości transceiverów świata (komplementarnie do laserów LITE/COHR)</li>
+        <li><strong>Data center switching:</strong> $10B+ rynek, walka z Broadcomem</li>
+        <li><strong>Lifetime revenue funnel Marvella: $75B</strong> — 18 XPU/XPU-attach design wins, wiele już w produkcji wolumenowej</li>
+      </ul>
+      <div class="alert alert-info"><strong>Marvell = "drugie źródło" AI compute świata.</strong> Rynek AI silicon przestaje być monopolem NVIDII — a Marvell (obok Broadcoma) jest głównym wykonawcą tej dywersyfikacji. Jednocześnie partnerstwo NVLink Fusion oznacza, że Marvell zarabia także wtedy, gdy wygrywa NVIDIA.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="chips"><span class="chip purple">Amazon (Trainium/Inferentia)</span><span class="chip purple">Microsoft (Maia)</span><span class="chip purple">Google (opcje)</span><span class="chip purple">NVIDIA (partner)</span><span class="chip">Producenci transceiverów (DSP)</span></div>
+      <p>Data center = <strong>76% przychodów</strong> (Q1 FY2027). Koncentracja hyperscalerów jest wysoka — utrata pojedynczego socketu XPU (jak strach o Amazon w 2025) potrafi ściąć wycenę o 30%+. Jednocześnie każdy socket wygrany = 3-5 lat przychodów. Custom compute ma character "winner takes most" na poziomie pojedynczych programów.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Revenue</th><th>Wzrost YoY</th><th>Data center</th></tr></thead>
+        <tbody>
+          <tr><td>FY2025</td><td>$5,77B</td><td>+5%</td><td>~$4,1B</td></tr>
+          <tr><td>FY2026</td><td><strong>$8,2B</strong></td><td style="color:var(--buy)">+42%</td><td>$6B+ (+46%)</td></tr>
+          <tr><td>Q1 FY2027</td><td>$2,42B</td><td style="color:var(--buy)">+28%</td><td>76% mix</td></tr>
+          <tr><td>FY2027E</td><td>~$10,5-11B</td><td style="color:var(--buy)">+30%</td><td>+40% YoY, exit run rate $3B+/Q</td></tr>
+        </tbody>
+      </table></div>
+      <p>Guidance FY2027: data center +40% YoY z akceleracją kwartał do kwartału i exit run rate spółki >$3B/kwartał (=$12B+ annualized). Custom silicon ma stanowić ~25% przychodów data center i rosnąć 20%+ rocznie w kolejnych latach.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Market Cap</td><td>~$147B</td><td>—</td></tr>
+          <tr><td>P/S (FY2027E ~$10,75B)</td><td>~13,7×</td><td style="color:var(--neutral)">Premium, ale +30% grower</td></tr>
+          <tr><td>Forward P/E (non-GAAP, FY2027E ~$3,60)</td><td>~47×</td><td style="color:var(--neutral)">Wysokie; EPS rośnie ~40%</td></tr>
+          <tr><td>Non-GAAP GM</td><td>58,9%</td><td style="color:var(--buy)">✅ Najwyższa w peer group photonics/silicon</td></tr>
+          <tr><td>OCF Q1 FY2027</td><td>$639M (rekord)</td><td style="color:var(--buy)">✅ Zdrowa konwersja gotówki</td></tr>
+          <tr><td>Cel analityków (43)</td><td>$252,56</td><td style="color:var(--buy)">+30% | Strong Buy, 0 Sell</td></tr>
+        </tbody>
+      </table></div>
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$240 – $300</div><div class="fair-value-note">Base: P/S 18-20× FY2027E + funnel $75B | Konsensus $252 | Bull (nowe design wins, 2nm ramp): $330+ (ATH) | Przy $170 = wyraźny margines bezpieczeństwa po korekcie -41%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <p>Non-GAAP GM: <strong>58,9-59,5%</strong> — stabilnie wysoka (fabless model, TSMC produkuje). GAAP GM 51-52%. Uwaga: custom XPU ma <em>niższe</em> marże (~40-50%) niż merchant silicon — rosnący mix custom lekko rozwadnia GM, ale zwiększa absolutne $$ zysku. Non-GAAP EPS Q1 FY2027: $0,80 (+ ~50% YoY). GAAP net income niski ($34,5M) przez amortyzację przejęć i SBC — typowe dla Marvella, śledź non-GAAP i FCF.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <p>Rekordowy OCF $639M w Q1 FY2027 + $2B gotówki od NVIDII. Dług ~$4B (po przejęciach Inphi/Innovium) — przy EBITDA $3B+ run rate leverage jest niski (~1×). Spółka płaci symboliczną dywidendę i skupuje akcje. Bilans nie jest ograniczeniem wzrostu.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🧠</div><div class="catalyst-body"><h4>Custom silicon supercycle — funnel $75B</h4><p>18 design wins XPU/XPU-attach, 2 hyperscalerzy w high-volume production, kolejni w pipeline. Każdy wygrany socket = miliardy przychodów przez 3-5 lat. Custom compute rośnie szybciej niż cały rynek AI chipów.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔗</div><div class="catalyst-body"><h4>NVLink Fusion — Marvell zarabia po obu stronach</h4><p>Partnerstwo z NVIDIA legitymizuje custom XPU w rackach NVIDII. Marvell nie musi pokonać NVIDII — wystarczy, że AI compute rośnie. DSP optyczne Marvella są i tak w każdym transceiverze.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💡</div><div class="catalyst-body"><h4>1.6T optical inflection — lider DSP</h4><p>Przejście 800G→1.6T podwaja content DSP na port. Marvell (po przejęciu Inphi) ma 60%+ udziału w PAM4 DSP. Ten sam trend, który napędza LITE i COHR, napędza Marvella — z wyższymi marżami.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Korekta -48% od ATH przy przyspieszających fundamentach</h4><p>Guidance mówi o akceleracji (exit $3B+/Q), a cena spadła z $330 do $170. Rozjazd ceny i fundamentów to klasyczna okazja — konsensus $252 daje +48%.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🎲</div><div class="catalyst-body"><h4>Ryzyko utraty socketów — binarne programy</h4><p>W 2025 strach przed utratą Amazon Trainium na rzecz Alchip ściął akcję o połowę. Custom business jest "lumpy" — przegrana jedna generacja u klienta = luka w przychodach na 2 lata. Broadcom i startupy (Alchip, Marvell-alternatywy) walczą o te same sockety.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏷️</div><div class="catalyst-body"><h4>Custom XPU rozwadnia marże</h4><p>Mix custom rośnie → GM% spada strukturalnie (z ~60% ku ~55%). Rynek może karać kompresję marż mimo wzrostu zysków absolutnych.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🌪️</div><div class="catalyst-body"><h4>Beta na sentyment AI — zmienność ekstremalna</h4><p>52W range $61-330 (5,4×!). Przy każdej panice o "AI bubble" MRVL spada 2× mocniej niż rynek. Wymagany żołądek na -30% obsunięcia.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🇨🇳</div><div class="catalyst-body"><h4>Chiny i legacy segmenty</h4><p>Storage/carrier/consumer (~24% revenue) stagnują; ekspozycja na Chiny w enterprise networking podatna na restrykcje.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>Custom ASIC</th><th>Optical DSP</th><th>Uwagi</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Marvell (MRVL)</strong></td><td>#2 (18 wins, $75B funnel)</td><td>🥇 Lider (60%+)</td><td>Najlepszy "pure play" na custom + optical</td></tr>
+          <tr><td>Broadcom (AVGO)</td><td>🥇 #1 (Google TPU, Meta)</td><td>Silny (Tomahawk/Jericho)</td><td>Większy, droższy, mniej "pure"</td></tr>
+          <tr><td>Alchip / GUC</td><td>Challenger (Amazon?)</td><td>—</td><td>Tajwańskie design houses — presja cenowa</td></tr>
+          <tr><td>NVIDIA</td><td>Merchant GPU dominator</td><td>własne NVLink</td><td>Partner i konkurent zarazem</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>52W low</td><td>$61,44</td><td>Panika 2025 (Amazon socket fears)</td></tr>
+          <tr><td>ATH</td><td>$329,88</td><td>Szczyt po NVIDIA deal + Q1</td></tr>
+          <tr><td>Cena bieżąca</td><td>~$170</td><td>-48% od ATH — głęboka korekta</td></tr>
+          <tr><td>Wsparcie S1</td><td>$160-165</td><td>Świeże dołki lipcowe</td></tr>
+          <tr><td>Wsparcie S2</td><td>$150-160</td><td>Fibo 61,8% całego rajdu</td></tr>
+          <tr><td>Opór R1</td><td>$230-250</td><td>Strefa celu analityków</td></tr>
+          <tr><td>Opór R2</td><td>$330</td><td>ATH</td></tr>
+        </tbody>
+      </table></div>
+      <p>Korekta pogłębiła się do -48% od ATH — to sektorowy odwrót od AI chipów plus downgrade analityka, BEZ negatywnych newsów spółkowych. Uwaga: insiderzy sprzedali $15,4M akcji w 3 miesiące. Trend krótkoterminowy spadkowy — nóż jeszcze spada. Katalizator: wyniki Q2 FY2027 (~koniec sierpnia 2026). Wejście transzami rozsądniejsze niż all-in.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">-48% od ATH przy akcelerującym guidance. Konsensus $252 (+48%). Katalizator: Q2 FY2027 (sierpień). Ryzyko: dalszy zjazd do $140-150.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text strong-buy">MOCNE KUPNO</div><div class="rating-note">Exit run rate $3B+/Q, custom ramp, 1.6T DSP inflection, NVLink Fusion. Cel $250-300.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Funnel $75B + optical leadership. Ryzyko binarnych socketów każe trzymać pozycję umiarkowaną. Bull $400+.</div></div>
+      </div>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$240 – $300</div><div class="fair-value-note">Wejście: $160-175 transzami | Stop mentalny: $140</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">PODSUMOWANIE (TL;DR)</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>-48% korekta przy akcelerujących fundamentach</strong> — guidance $3B+/Q exit, konsensus $252 (+48%), Strong Buy bez ani jednego Sell</li>
+          <li><strong>Podwójna ekspozycja AI: custom XPU ($75B funnel) + monopolistyczny DSP optyczny</strong> — zarabia i na dywersyfikacji od NVIDII, i na wzroście NVIDII (NVLink Fusion)</li>
+          <li><strong>NVIDIA $2B endorsement + 58,9% GM + rekordowy OCF</strong> — finansowo najzdrowsza spółka w koszyku AI infrastructure poza megacapami</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Binarne ryzyko socketów</strong> — jedna przegrana generacja u Amazona/Microsoftu = -30-50% ceny (już się zdarzyło w 2025)</li>
+          <li><strong>Zmienność 5× w 52 tygodnie</strong> ($61→$330→$195) — pozycja tylko dla tolerujących głębokie obsunięcia</li>
+          <li><strong>P/E 54× forward</strong> — przy panice AI multiple może się skompresować szybciej niż rosną zyski</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> utrata dużego socketu XPU lub guidance poniżej $2,6B na Q3 FY2027 → $150.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> nowy design win (Google/Meta scale) lub beat + raise w sierpniu → powrót ponad $250.</p>
+      <hr class="divider">
+      <div style="text-align:center; padding:20px 0">
+        <div class="rating-badge buy" style="display:inline-flex; font-size:20px; padding:14px 32px; margin-bottom:16px;">📈 KUPNO — korekta to okazja</div>
+        <p style="color:var(--text-muted); max-width:700px; margin:0 auto; font-size:13px;">MRVL przy $170 to najlepszy risk/reward w koszyku AI infrastructure: -48% od ATH, +48% do konsensusu, akcelerujące przychody i NVIDIA za plecami. Wchodź transzami ($170 / $155 / $140), katalizator: wyniki pod koniec sierpnia.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 21 lipca 2026 (aktualizacja: 30 lipca 2026, cena $170) | Dane: Marvell IR, SEC 8-K, Yahoo Finance, TipRanks, Simply Wall St | Nie stanowi porady inwestycyjnej</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){const e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+<script>function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b</body></body>(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}</script><style>.section{scroll-margin-top:64px}</style></body>
+</html>

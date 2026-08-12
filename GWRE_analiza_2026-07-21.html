@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GWRE — Guidewire Software | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#0ea5e9; --accent2:#38bdf8; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#051220 0%,#0f1117 50%,#0a1520 100%); border-bottom:1px solid var(--border); padding:40px 32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(14,165,233,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#000; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.buy { background:rgba(76,175,80,0.15); border:2px solid var(--buy); color:var(--buy); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.sky { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#000; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.sky { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.strong-buy { color:var(--strong-buy); } .rating-box .rating-text.neutral { color:var(--neutral); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .fair-value-box { background:linear-gradient(135deg,rgba(14,165,233,0.08),rgba(56,189,248,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(14,165,233,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .alert-danger { background:rgba(213,0,0,0.06); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+  <div class="header-content">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: GWRE</div>
+    <div class="company-name">Guidewire Software, Inc.</div>
+    <div class="company-sub">Vertical SaaS #1 dla ubezpieczeń P&C · InsuranceSuite Cloud (Policy/Billing/Claims) · AI: PricingCenter, ProNavigator · 42 kraje · San Mateo, CA</div>
+    <div class="header-meta">
+      <div class="rating-badge buy">📈 KUPNO</div>
+      <span class="meta-tag">Vertical SaaS</span>
+      <span class="meta-tag">Insurance P&C</span>
+      <span class="meta-tag">Cloud transformation</span>
+      <span class="meta-tag">-47% od ATH</span>
+      <div class="price-display">
+        <div class="price-main">~$144</div>
+        <div class="price-sub">Cena (07.2026) | 52W: $102,30–$272,60</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">TL;DR</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (07.2026)</div><div class="metric-value">~$144</div><div class="metric-detail">52W: $102,30–$272,60 | -47% od ATH</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$12,1B</div><div class="metric-detail">EV ≈ mkt cap (net cash)</div></div>
+    <div class="metric-card"><div class="metric-label">Revenue Q3 FY2026</div><div class="metric-value green">$372,5M</div><div class="metric-detail">+27% YoY — beat górnej granicy</div></div>
+    <div class="metric-card"><div class="metric-label">Subskrypcje+support</div><div class="metric-value green">$245M</div><div class="metric-detail">+35% YoY — silnik wzrostu</div></div>
+    <div class="metric-card"><div class="metric-label">ARR</div><div class="metric-value sky">$1,147B</div><div class="metric-detail">+19% YoY | FY26E: $1,22-1,23B</div></div>
+    <div class="metric-card"><div class="metric-label">TTM zysk netto</div><div class="metric-value green">$160M</div><div class="metric-detail">Zyskowna | Forward P/E ~28</div></div>
+    <div class="metric-card"><div class="metric-label">P/S (TTM $1,42B)</div><div class="metric-value yellow">~8×</div><div class="metric-detail">Było 15×+ na szczycie — derating</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value green">$200-207</div><div class="metric-detail">+39-44% upside! | Buy (12/2/0)</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest Guidewire?</h3>
+      <p>Guidewire Software (NYSE: GWRE) to dominujący dostawca <strong>systemów core dla ubezpieczycieli majątkowych (P&C — property & casualty)</strong>: zarządzanie polisami, rozliczeniami i likwidacją szkód. Setki marek ubezpieczeniowych w 42 krajach działa na Guidewire — to "system operacyjny" branży P&C, analogicznie jak Temenos w bankowości. Założona 2001, IPO 2012, siedziba San Mateo, CA. Jedyna platforma cloud P&C w TOP25 rankingu IDC FinTech (miejsce #22).</p>
+      <p>Ostatnia dekada = transformacja z licencji on-premise na <strong>SaaS/cloud (Guidewire Cloud Platform na AWS)</strong> — migracja, która właśnie osiąga masę krytyczną: subskrypcje rosną +35% przy całości +27%.</p>
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>2025</td><td>Rajd do ATH $272,60 — rynek celebruje cloud inflection + AI narrative</td><td style="color:var(--buy)">Szczyt euforii</td></tr>
+          <tr><td>2025-2026</td><td>Przejęcie ProNavigator (AI), launch PricingCenter i UnderwritingCenter (GenAI)</td><td style="color:var(--buy)">↑ AI portfolio</td></tr>
+          <tr><td>2026</td><td>$60M inwestycja w Japonię (ekspansja APAC); win Cincinnati Insurance (ClaimCenter cloud)</td><td style="color:var(--buy)">↑ Ekspansja</td></tr>
+          <tr><td><strong>5 VI 2026</strong></td><td><strong>Q3 FY2026: beat na revenue/EPS, ALE ARR na dolnej granicy + poślizgi deali + zmiana szefa sprzedaży → -11% w dzień</strong></td><td style="color:var(--sell)">↓↓ Załamanie</td></tr>
+          <tr><td>VI-VII 2026</td><td>Spadek do $102,30 (52W low), potem odbicie do ~$144 — derating z P/S 15× do 7×</td><td style="color:var(--sell)">-47% od ATH</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Sedno sytuacji:</strong> kurs spadł w dołku o 55% (obecnie -47%) nie dlatego, że biznes się psuje (rośnie +27%, bije prognozy revenue), tylko dlatego, że ARR wypadło o $2M poniżej oczekiwań ($1,233B vs $1,235B) przy wycenie wycenionej na perfekcję. To klasyczny przypadek "great company, broken stock" — pytanie tylko, czy poślizgi deali to timing, czy początek spowolnienia.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Produkt</th><th>Funkcja</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>PolicyCenter</strong></td><td>Underwriting i administracja polis</td><td>Core — standard Tier-1</td></tr>
+          <tr><td><strong>ClaimCenter</strong></td><td>End-to-end likwidacja szkód</td><td>Core — najczęstszy punkt wejścia</td></tr>
+          <tr><td><strong>BillingCenter</strong></td><td>Rozliczenia i płatności</td><td>Core</td></tr>
+          <tr><td><strong>Guidewire Cloud Platform</strong></td><td>Platforma SaaS na AWS, aktualizacje ciągłe</td><td>🔥 Silnik migracji — 11 cloud wins w Q3</td></tr>
+          <tr><td><strong>PricingCenter / UnderwritingCenter</strong></td><td>Nowe aplikacje GenAI (pricing, underwriting)</td><td>⚡ Nowe — cross-sell na bazie klientów</td></tr>
+          <tr><td><strong>ProNavigator (przejęte)</strong></td><td>AI knowledge management dla ubezpieczycieli</td><td>⚡ AI tooling</td></tr>
+          <tr><td>InsuranceNow</td><td>Gotowy pakiet dla mniejszych carrierów</td><td>Mid-market</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat — jeden z najgłębszych w software</h3>
+      <p>Wymiana systemu core u ubezpieczyciela to projekt na <strong>3-7 lat i dziesiątki-setki mln $</strong> — nikt nie robi tego dwa razy. Churn praktycznie zerowy; klient raz zmigowany na cloud płaci ARR rosnący z inflacją i wolumenem polis (DWP-based pricing). Do tego dane: dekady danych szkodowych klientów zasilają modele AI Guidewire (HazardHub, analytics), których konkurenci nie są w stanie odtworzyć.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>P&C core platform TAM:</strong> ~$10B dziś → $21,2B do 2034 (CAGR 9,4%)</li>
+        <li><strong>Cloud penetration:</strong> większość carrierów Tier-1/2 wciąż na legacy/on-prem — dekada migracji przed nami</li>
+        <li><strong>AI w ubezpieczeniach:</strong> pricing, underwriting, claims automation — Guidewire monetyzuje przez nowe centra (PricingCenter itd.)</li>
+        <li><strong>Geografia:</strong> USA core; ekspansja Japonia ($60M plan), Europa, APAC — 42 kraje</li>
+        <li><strong>Cykliczność:</strong> niska — budżety IT ubezpieczycieli są stabilne; branża P&C ma rekordowe zyski (twarde stawki 2023-2025), co finansuje modernizację</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="chips"><span class="chip sky">B2B — carriery P&C Tier 1-3</span><span class="chip">Cincinnati Insurance</span><span class="chip">Setki marek, 42 kraje</span><span class="chip green">Churn ~zero (switching cost)</span></div>
+      <p>Standard dla carrierów $5B+ DWP. Brak koncentracji pojedynczego klienta (setki wdrożeń). Przychody oparte o Direct Written Premium klienta — rosną organicznie z inflacją składek. Q3: <strong>11 cloud wins</strong> (nowi klienci + migracje z on-prem). Ryzyko krótkoterminowe: wydłużone cykle decyzyjne (poślizgi deali z Q3) i zmiana szefa sprzedaży.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Wartość</th><th>Zmiana</th></tr></thead>
+        <tbody>
+          <tr><td>Revenue TTM</td><td>$1,42B</td><td>+~25%</td></tr>
+          <tr><td>Q3 FY2026 total</td><td>$372,5M</td><td style="color:var(--buy)">+27% YoY</td></tr>
+          <tr><td>— subskrypcje + support</td><td>$245M</td><td style="color:var(--buy)">+35% YoY</td></tr>
+          <tr><td>— services</td><td>$72M</td><td>+32% YoY</td></tr>
+          <tr><td>ARR</td><td>$1,147B</td><td style="color:var(--buy)">+19% YoY</td></tr>
+          <tr><td>ARR FY2026 guidance</td><td>$1,22-1,23B</td><td style="color:var(--neutral)">Dolna granica — źródło sell-offu</td></tr>
+          <tr><td>FY2027E revenue</td><td>~$1,75B</td><td>+20-23% konsensus</td></tr>
+        </tbody>
+      </table></div>
+      <p>Model: ~85% przychodów recurring (subskrypcje/support/term licenses). Ramp-up deals: ubezpieczyciel podpisuje na lata, ARR rośnie schodkowo w miarę wdrażania kolejnych linii/regionów — stąd "timing" deali potrafi przesuwać ARR między kwartałami bez zmiany wartości kontraktów.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Market Cap</td><td>~$12,1B</td><td>—</td></tr>
+          <tr><td>P/S (TTM)</td><td>~8×</td><td style="color:var(--buy)">✅ Było 15×+ na ATH — derating o połowę</td></tr>
+          <tr><td>EV/Revenue (FY2027E $1,75B)</td><td>~6,9×</td><td style="color:var(--buy)">✅ Tanio dla 20%+ vertical SaaS z zerowym churnem</td></tr>
+          <tr><td>P/E trailing / forward</td><td>59× / ~28×</td><td style="color:var(--neutral)">Forward rozsądne — zyski szybko rosną</td></tr>
+          <tr><td>EV/EBITDA</td><td>~69× (TTM)</td><td style="color:var(--neutral)">Marże dopiero się rozwijają</td></tr>
+          <tr><td>Cel analityków</td><td>$200-207 (high $300)</td><td style="color:var(--strong-buy)">+39-44% upside | 12 Buy / 2 Hold / 0 Sell</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Benchmark:</strong> porównywalne vertical SaaS (Veeva, Tyler Tech) handlują na 9-13× EV/S przy podobnym wzroście. GWRE na 6,9× FY27E to najgłębsze dyskonto od lat — cena za jeden słabszy kwartał ARR i zmianę szefa sprzedaży.</div>
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$180 – $230</div><div class="fair-value-note">Base: EV/S 9× FY2027E $1,75B ≈ $190 | Konsensus $200-207 | Bull (ARR re-akceleracja +20%+): $250+ | Przy $143,80 = margines bezpieczeństwa ~25%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <p>TTM zysk netto $160M (marża ~11%) — spółka przeszła przez dolinę migracji cloud (2020-2023 straty) i teraz marże strukturalnie rosną: subscription gross margin poprawia się z każdym % utylizacji chmury, services (niskomarżowe) maleją w miksie. FCF dodatni i rosnący; CapEx tylko $30-35M rocznie (~2% revenue). Do FY2028 realny scenariusz: non-GAAP operating margin 20%+ przy revenue $2B+ — klasyczna dźwignia SaaS po inflection.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <p>Aktywa $2,69B vs zobowiązania $1,18B; current ratio 2,44; EV ≈ market cap → <strong>pozycja net cash</strong> (gotówka pokrywa konwertyble). Debt/Equity 0,53 — umiarkowane, obsługa długu bezproblemowa przy dodatnim FCF. Zero ryzyka finansowego; spółka stać na dalsze przejęcia AI (jak ProNavigator).</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">BULL CASE</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">☁️</div><div class="catalyst-body"><h4>Dekada migracji cloud przed nami — subskrypcje +35%</h4><p>Większość carrierów Tier-1/2 wciąż na legacy. Każda migracja = 2-3× wyższy ARR niż stary support. 11 cloud wins w jednym kwartale pokazuje, że silnik działa mimo poślizgów.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🤖</div><div class="catalyst-body"><h4>AI jako drugi akt: PricingCenter, UnderwritingCenter, ProNavigator</h4><p>Cross-sell AI na bazie setek klientów z zerowym churnem. Dane szkodowe dekad = przewaga treningowa nie do skopiowania. Każdy nowy "Center" to +10-20% potencjalnego ARR per klient.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Derating z 15× do 8× P/S za $2M missu ARR</h4><p>Rynek ukarał spółkę jak za załamanie wzrostu, którego nie ma (revenue +27%, beat). Jeśli Q4 FY2026 (wrzesień) pokaże domknięcie przesuniętych deali → gwałtowny powrót w stronę $180+.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🇯🇵</div><div class="catalyst-body"><h4>Ekspansja międzynarodowa (Japonia $60M) + twarde stawki P&C</h4><p>Ubezpieczyciele mają rekordowe zyski i budżety na modernizację. Japonia/APAC to greenfield dla cloud core.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">BEAR CASE</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">⏳</div><div class="catalyst-body"><h4>Poślizgi deali mogą być początkiem, nie wyjątkiem</h4><p>Jeśli wydłużone cykle decyzyjne to symptom ostrożności budżetowej carrierów (albo czekania na AI-clarity), ARR może rosnąć <15% przez kilka kwartałów — wtedy $123 nie jest dnem, a P/S 7× dalej się skompresuje do 5×.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">👔</div><div class="catalyst-body"><h4>Zmiana szefa sprzedaży w środku słabszego pipeline</h4><p>Tranzycje sales leadership historycznie kosztują 2-3 kwartały zaburzeń. Ryzyko kolejnego "miss & slip" w Q4/Q1.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🤖</div><div class="catalyst-body"><h4>AI jako miecz obosieczny</h4><p>Narracja "AI napisze systemy core taniej" może uderzać w mnożniki całego vertical SaaS — nawet jeśli operacyjnie nieprawdziwa w horyzoncie 5 lat.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🐌</div><div class="catalyst-body"><h4>Wzrost ARR +19% to nie hipergrowth</h4><p>Dla części inwestorów growth sub-20% + forward P/E 28 nie uzasadnia premii — spółka może utknąć w "no man's land" wycen na kwartały.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>Segment</th><th>vs GWRE</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Guidewire</strong></td><td>Tier-1/2 enterprise P&C</td><td>🥇 Standard dla carrierów $5B+ DWP</td></tr>
+          <tr><td>Duck Creek (Vista PE)</td><td>Cloud-native mid/large</td><td>Główny rywal NA; low-code, szybsze wdrożenia</td></tr>
+          <tr><td>Sapiens (SPNS)</td><td>Europa/APAC, Life+P&C</td><td>Regionalny, tańszy</td></tr>
+          <tr><td>Majesco</td><td>Greenfield/insurtech</td><td>Speed-to-market, niższe TCO</td></tr>
+          <tr><td>Insurity, EIS Group</td><td>Mid-tier</td><td>Nisze</td></tr>
+        </tbody>
+      </table></div>
+      <p>Guidewire broni dominacji w enterprise; presja konkurencyjna realna głównie w mid-market. W Tier-1 praktycznie brak alternatywy o porównywalnej głębi funkcjonalnej.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">TECHNIKA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>52W low</td><td>$102,30</td><td>Świeże dno (lipiec 2026)</td></tr>
+          <tr><td>ATH</td><td>$272,60</td><td>Szczyt 2025</td></tr>
+          <tr><td>Cena</td><td>~$144</td><td>-47% od ATH; +41% nad dnem</td></tr>
+          <tr><td>Wsparcie S2</td><td>$102-110</td><td>52W low — ostateczna obrona</td></tr>
+          <tr><td>Wsparcie S1 (nowe)</td><td>$130-135</td><td>Strefa odzyskanej bazy</td></tr>
+          <tr><td>Opór R1</td><td>$160-170</td><td>Strefa oporu po odbiciu; wyżej $180-200 (konsensus)</td></tr>
+        </tbody>
+      </table></div>
+      <p>Kurs odbił +41% od dna ($102,30 → $143,80) — w tym +11% w jeden dzień na fali AI-SaaS optimism. Momentum odwróciło się w górę; strefa $130-135 powinna teraz pełnić rolę wsparcia. Katalizator: wyniki Q4 FY2026 i guidance FY2027 (~początek września 2026) — domknięcie przesuniętych deali będzie testem tezy "timing, nie trend".</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">KUPNO (ostrożne)</div><div class="rating-note">Momentum odwrócone (+41% od dna), rynek wraca do jakościowego SaaS. Po odbiciu krótkoterminowy upside mniejszy — wejście transzami $135-145, dokupki przy $125-130.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text strong-buy">MOCNE KUPNO</div><div class="rating-note">EV/S 6,9× FY27E dla monopolisty vertical SaaS z +27% wzrostem to anomalia. Konsensus +39-44%. Cel $180-230.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Dekada migracji cloud + AI cross-sell + zerowy churn = compounder. Bull 2030: revenue $3B+, kurs $300+.</div></div>
+      </div>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$180 – $230</div><div class="fair-value-note">Wejście: $135-145 transzami, dokupki $125-130 | Stop mentalny: trwałe przebicie $115</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">TL;DR</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>-55% przeceny za $2M missu ARR</strong> — biznes rośnie +27%, bije prognozy, a wycena spadła z 15× do 8× P/S; konsensus analityków daje +39-44% upside przy 0 rekomendacjach Sell</li>
+          <li><strong>Najgłębszy moat w software</strong> — wymiana systemu core to 3-7 lat projektu; churn ~zero, przychody indeksowane składkami, dominacja Tier-1 bez realnej alternatywy</li>
+          <li><strong>Dwa silniki przed nami: dekada migracji cloud (+35% subskrypcje) i AI cross-sell</strong> (PricingCenter, UnderwritingCenter, ProNavigator) na captive bazie setek klientów</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>"Timing czy trend?"</strong> — jeśli poślizgi deali okażą się spowolnieniem sektora, ARR sub-15% złamie tezę i P/S skompresuje się do 5×</li>
+          <li><strong>Tranzycja szefa sprzedaży</strong> w newralgicznym momencie — ryzyko 2-3 słabszych kwartałów pipeline</li>
+          <li><strong>Wzrost 19-27% to nie hipergrowth</strong> — bez re-akceleracji ARR kurs może dryfować bokiem mimo taniości</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> Q4 FY2026 (wrzesień) bez domknięcia przesuniętych deali + ARR guidance FY2027 <15% → trwałe przebicie $100.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> domknięte deale + ARR FY2027 guidance 18%+ → powrót $160-180 w kilka tygodni.</p>
+      <hr class="divider">
+      <div style="text-align:center; padding:20px 0">
+        <div class="rating-badge buy" style="display:inline-flex; font-size:20px; padding:14px 32px; margin-bottom:16px;">📈 KUPNO — jakość w przecenie -55%</div>
+        <p style="color:var(--text-muted); max-width:700px; margin:0 auto; font-size:13px;">GWRE to rzadka okazja typu "great company, broken stock": monopolista vertical SaaS z zerowym churnem, rosnący +27%, przeceniony o połowę za kosmetyczny miss ARR i zmianę szefa sprzedaży. Wejście transzami $135-145 (dokupki $125-130); kluczowy test — wyniki wrześniowe. Margines bezpieczeństwa ~35% do dolnej granicy fair value.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 21 lipca 2026 | Dane: Guidewire IR, SEC 8-K, StockAnalysis, GuruFocus, Kavout, IDC | Nie stanowi porady inwestycyjnej</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){const e=document.getElementById(id);if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+<script>function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b</body></body>(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}</script><style>.section{scroll-margin-top:64px}</style></body>
+</html>

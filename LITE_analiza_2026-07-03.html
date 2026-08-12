@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LITE — Lumentum Holdings | Analiza Inwestycyjna 2026</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d2e;
+    --surface2: #242740;
+    --accent: #00d4ff;
+    --accent2: #00d4aa;
+    --text: #e8eaf6;
+    --text-muted: #8892b0;
+    --border: #2e3250;
+    --strong-buy: #00c853;
+    --buy: #4caf50;
+    --neutral: #ffd740;
+    --sell: #ff6d00;
+    --strong-sell: #d50000;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.7; }
+
+  .header {
+    background: linear-gradient(135deg, #050f1a 0%, #0f1117 50%, #0a1a2e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 32px 32px;
+    position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute; top: -50px; right: -50px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,212,255,0.10) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .header-content { max-width: 1100px; margin: 0 auto; position: relative; }
+  .ticker-badge { display: inline-block; background: var(--accent); color: #000; font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 6px; letter-spacing: 1px; margin-bottom: 12px; }
+  .company-name { font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .company-sub { color: var(--text-muted); font-size: 15px; margin-bottom: 20px; }
+  .header-meta { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+  .rating-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 700; padding: 10px 24px; border-radius: 30px; }
+  .rating-badge.buy { background: rgba(76,175,80,0.15); border: 2px solid var(--buy); color: var(--buy); }
+  .meta-tag { background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; padding: 6px 14px; border-radius: 20px; }
+  .price-display { margin-left: auto; text-align: right; }
+  .price-main { font-size: 30px; font-weight: 800; color: #fff; }
+  .price-sub { color: var(--text-muted); font-size: 13px; }
+
+  .nav-sticky { position: sticky; top: 0; z-index: 100; background: rgba(26,29,46,0.96); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); overflow-x: auto; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; padding: 0 16px; }
+  .nav-link { flex-shrink: 0; padding: 14px 16px; color: var(--text-muted); font-size: 12px; font-weight: 600; text-decoration: none; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; cursor: pointer; }
+  .nav-link:hover { color: var(--text); }
+  .nav-link.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .summary-wrapper { max-width: 1100px; margin: 28px auto; padding: 0 24px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; transition: border-color 0.2s; }
+  .metric-card:hover { border-color: var(--accent); }
+  .metric-label { color: var(--text-muted); font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 8px; }
+  .metric-value { font-size: 22px; font-weight: 800; color: #fff; }
+  .metric-value.green { color: var(--buy); }
+  .metric-value.red { color: var(--sell); }
+  .metric-value.yellow { color: var(--neutral); }
+  .metric-value.cyan { color: var(--accent); }
+  .metric-detail { color: var(--text-muted); font-size: 12px; margin-top: 4px; }
+
+  .main { max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
+
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 16px; overflow: hidden; }
+  .section:hover { border-color: var(--accent); }
+  .section-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; cursor: pointer; user-select: none; }
+  .section-title-wrap { display: flex; align-items: center; gap: 14px; }
+  .section-num { background: var(--accent); color: #000; font-size: 11px; font-weight: 700; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-title { font-size: 15px; font-weight: 700; color: var(--text); }
+  .section-toggle { color: var(--text-muted); font-size: 18px; transition: transform 0.3s; }
+  .section-toggle.open { transform: rotate(180deg); }
+  .section-body { padding: 0 24px 24px; display: none; }
+  .section-body.open { display: block; }
+
+  h3 { color: var(--accent2); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; margin: 20px 0 10px; }
+  h3:first-child { margin-top: 0; }
+  p { margin-bottom: 12px; color: var(--text-muted); }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--text); }
+  ul { list-style: none; padding: 0; }
+  ul li { padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text-muted); }
+  ul li:last-child { border-bottom: none; }
+  ul li::before { content: '→'; color: var(--accent); margin-right: 8px; font-size: 12px; }
+
+  .table-wrap { overflow-x: auto; margin: 12px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--surface2); color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 10px 14px; text-align: left; }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+  tr:hover td { background: rgba(0,212,255,0.03); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .chip { background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; padding: 4px 12px; border-radius: 20px; }
+  .chip.green { border-color: var(--buy); color: var(--buy); background: rgba(76,175,80,0.08); }
+  .chip.cyan { border-color: var(--accent); color: var(--accent); background: rgba(0,212,255,0.08); }
+  .chip.teal { border-color: var(--accent2); color: var(--accent2); background: rgba(0,212,170,0.08); }
+  .chip.yellow { border-color: var(--neutral); color: var(--neutral); background: rgba(255,215,64,0.08); }
+  .chip.red { border-color: var(--sell); color: var(--sell); background: rgba(255,109,0,0.08); }
+
+  .rating-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 14px; }
+  .rating-box { background: var(--surface2); border-radius: 10px; padding: 18px; text-align: center; }
+  .rating-box .period { color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; }
+  .rating-box .rating-text { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+  .rating-box .rating-text.buy { color: var(--buy); }
+  .rating-box .rating-text.strong-buy { color: var(--strong-buy); }
+  .rating-box .rating-text.neutral { color: var(--neutral); }
+  .rating-box .rating-note { color: var(--text-muted); font-size: 12px; }
+
+  .scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .bull-box { background: rgba(0,200,83,0.06); border: 1px solid rgba(0,200,83,0.25); border-radius: 10px; padding: 18px; }
+  .bear-box { background: rgba(213,0,0,0.06); border: 1px solid rgba(213,0,0,0.2); border-radius: 10px; padding: 18px; }
+  .bull-box h4 { color: var(--strong-buy); margin-bottom: 12px; }
+  .bear-box h4 { color: var(--strong-sell); margin-bottom: 12px; }
+  .bull-box ul li::before { color: var(--strong-buy); }
+  .bear-box ul li::before { color: var(--strong-sell); }
+
+  .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .thesis-buy { background: rgba(0,200,83,0.06); border: 1px solid rgba(0,200,83,0.2); border-radius: 10px; padding: 18px; }
+  .thesis-avoid { background: rgba(213,0,0,0.06); border: 1px solid rgba(213,0,0,0.2); border-radius: 10px; padding: 18px; }
+  .thesis-buy h4 { color: var(--strong-buy); margin-bottom: 10px; }
+  .thesis-avoid h4 { color: var(--strong-sell); margin-bottom: 10px; }
+
+  .fair-value-box { background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,212,170,0.06)); border: 1px solid var(--accent); border-radius: 12px; padding: 24px; margin-top: 16px; text-align: center; }
+  .fair-value-label { color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .fair-value-range { font-size: 32px; font-weight: 800; color: var(--accent2); margin-bottom: 8px; }
+  .fair-value-note { color: var(--text-muted); font-size: 13px; }
+
+  .alert { border-radius: 8px; padding: 14px 18px; margin: 14px 0; font-size: 13px; }
+  .alert-info { background: rgba(0,212,255,0.06); border-left: 3px solid var(--accent); color: var(--text-muted); }
+  .alert-warn { background: rgba(255,215,64,0.06); border-left: 3px solid var(--neutral); color: var(--text-muted); }
+  .alert-success { background: rgba(0,200,83,0.06); border-left: 3px solid var(--strong-buy); color: var(--text-muted); }
+  .alert-danger { background: rgba(213,0,0,0.06); border-left: 3px solid var(--strong-sell); color: var(--text-muted); }
+  .alert-teal { background: rgba(0,212,170,0.06); border-left: 3px solid var(--accent2); color: var(--text-muted); }
+
+  .catalyst-item { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom: none; }
+  .catalyst-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .catalyst-body h4 { color: var(--text); font-size: 14px; margin-bottom: 4px; }
+  .catalyst-body p { color: var(--text-muted); font-size: 13px; margin: 0; }
+
+  .nvidia-badge { background: linear-gradient(135deg, rgba(118,185,0,0.15), rgba(0,212,255,0.08)); border: 1px solid #76b900; border-radius: 12px; padding: 20px 24px; margin: 14px 0; }
+  .nvidia-badge h4 { color: #76b900; font-size: 16px; margin-bottom: 8px; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+  .footer { text-align: center; padding: 32px 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 700px) {
+    .rating-grid, .scenario-grid, .thesis-grid { grid-template-columns: 1fr; }
+    .company-name { font-size: 24px; }
+    .header-meta { flex-direction: column; align-items: flex-start; }
+    .price-display { margin-left: 0; }
+  }
+</style>
+<style id="tp-brand">
+  /* === TP Corp — branding === */
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+
+<div class="header">
+  <div class="header-content">
+<div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: LITE</div>
+    <div class="company-name">Lumentum Holdings Inc.</div>
+    <div class="company-sub">Laser Engine AI Optical Supercycle · Monopol 200G EML · NVIDIA $2B Partner · San Jose, CA | Założona 2015</div>
+    <div class="header-meta">
+      <div class="rating-badge buy">📈 KUPNO</div>
+      <span class="meta-tag">Photonics / Optics</span>
+      <span class="meta-tag">AI Infrastructure</span>
+      <span class="meta-tag">1.6T Transceivers</span>
+      <span class="meta-tag">OCS</span>
+      <span class="meta-tag">NVIDIA Partner</span>
+      <div class="price-display">
+        <div class="price-main">~$730</div>
+        <div class="price-sub">Cena (07.2026) | 52W: $88,37–$1 085,68</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a>
+    <a class="nav-link" onclick="goSec('s2')">Produkt</a>
+    <a class="nav-link" onclick="goSec('s3')">Rynek</a>
+    <a class="nav-link" onclick="goSec('s4')">Klienci</a>
+    <a class="nav-link" onclick="goSec('s5')">Biznes</a>
+    <a class="nav-link" onclick="goSec('s6')">Wycena</a>
+    <a class="nav-link" onclick="goSec('s7')">Marże</a>
+    <a class="nav-link" onclick="goSec('s8')">Bilans</a>
+    <a class="nav-link" onclick="goSec('s9')">Bull</a>
+    <a class="nav-link" onclick="goSec('s10')">Bear</a>
+    <a class="nav-link" onclick="goSec('s11')">Konkurencja</a>
+    <a class="nav-link" onclick="goSec('s12')">Technicals</a>
+    <a class="nav-link" onclick="goSec('s13')">Ocena</a>
+    <a class="nav-link" onclick="goSec('s14')">TL;DR</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card">
+      <div class="metric-label">Cena (07.2026)</div>
+      <div class="metric-value">~$730</div>
+      <div class="metric-detail">52W: $88,37–$1 085,68 (+1 129%!)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Kapitalizacja</div>
+      <div class="metric-value">~$52-57B</div>
+      <div class="metric-detail">71,7M akcji w obrocie</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Revenue Q3 FY2026</div>
+      <div class="metric-value green">$808M</div>
+      <div class="metric-detail">+90% YoY — rekord</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Revenue run rate</div>
+      <div class="metric-value green">~$3,2B</div>
+      <div class="metric-detail">Annualizowany z Q3 | FY2025: $1,65B</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Non-GAAP GM Q3</div>
+      <div class="metric-value green">47,9%</div>
+      <div class="metric-detail">Wzrost z 34,7% (FY2025 full year)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">NVIDIA deal</div>
+      <div class="metric-value cyan">$2B</div>
+      <div class="metric-detail">Inwestycja + multi-mld zakupy (03.2026)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">OCS Backlog</div>
+      <div class="metric-value cyan">$400M+</div>
+      <div class="metric-detail">Cel: $100M/kwartał do XII 2026</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Cel analityków</div>
+      <div class="metric-value green">$1 111</div>
+      <div class="metric-detail">+52% upside | 25 analityków, Buy</div>
+    </div>
+  </div>
+</div>
+
+<main class="main">
+
+  <!-- S1 -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')">
+      <div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div>
+      <div class="section-toggle open" id="s1-toggle">▾</div>
+    </div>
+    <div class="section-body open" id="s1-body">
+      <h3>Historia i DNA</h3>
+      <p>Lumentum Holdings wydzielona w <strong>2015 roku</strong> z JDS Uniphase (JDSU) jako samodzielna spółka fotona i optyki. Siedziba: San Jose, CA. Notowana na NASDAQ (LITE). Początkowo skupiona na 3D sensing (dostarczała lasery do Face ID iPhone'a) i telekomunikacji optycznej. Od 2023 roku <strong>pivotuje w kierunku AI/data center optical interconnects</strong> — i to była inwestycja życia dla akcjonariuszy.</p>
+      <p>Spółka operuje w dwóch segmentach: <strong>Cloud & Networking</strong> (większość revenue, szybko rośnie) oraz <strong>Industrial Tech</strong> (3D sensing, LiDAR, przemysł). CEO: Michael Hurlston (od 2023).</p>
+
+      <h3>Etap spółki</h3>
+      <div class="chips">
+        <span class="chip cyan">AI Infrastructure supercycle</span>
+        <span class="chip green">Hypergrowth (+90% YoY)</span>
+        <span class="chip teal">Monopol 200G EML</span>
+        <span class="chip green">NVIDIA strategic partner</span>
+        <span class="chip yellow">Wysokie P/S — premium wycena</span>
+      </div>
+
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+          <tbody>
+            <tr><td>Lato 2025</td><td>Akcja przy $88 (52W low) — rynek niedoszacowywał AI optical demand</td><td style="color:var(--sell)">Dno</td></tr>
+            <tr><td>Q2 FY2026 (XII 2025)</td><td>Rekordowy revenue $665,5M (+65% YoY) — rynek zaczyna rozumieć AI optical supercycle</td><td style="color:var(--buy)">↑ Przebicie</td></tr>
+            <tr><td>Marzec 2026</td><td><strong>NVIDIA ogłasza $2B inwestycję strategiczną</strong> w Lumentum + multi-mld purchase commitment</td><td style="color:var(--strong-buy)">↑↑ Game changer</td></tr>
+            <tr><td>Q3 FY2026 (III 2026)</td><td>Rekordowy revenue $808,4M (+90% YoY). Non-GAAP GM 47,9%. OCS backlog $400M+</td><td style="color:var(--strong-buy)">↑↑ Rekord</td></tr>
+            <tr><td>Maj 2026</td><td>ATH $1 085,68 — +1 129% od $88 w ciągu ~12 miesięcy</td><td style="color:var(--buy)">ATH</td></tr>
+            <tr><td>Lipiec 2026</td><td>Korekta do ~$730 (-33% od ATH) — profit taking + techniczne sell signals</td><td style="color:var(--neutral)">Korekta</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-teal">
+        <strong>Kontekst historyczny:</strong> Akcja wzrosła o +1 129% w ciągu roku (z $88 do $1 085). Przy $730, jest -33% od ATH. Biorąc pod uwagę fundamenty — czy to okazja czy pułapka? Na to odpowie ta analiza.
+      </div>
+    </div>
+  </div>
+
+  <!-- S2 -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')">
+      <div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div>
+      <div class="section-toggle" id="s2-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s2-body">
+      <h3>Co produkuje Lumentum?</h3>
+      <p>Lumentum produkuje komponenty fotoniczne i laserowe, które są "niewidzialnymi" elementami krytycznej infrastruktury AI. Kluczowe produkty:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Produkt</th><th>Zastosowanie</th><th>Pozycja rynkowa</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>EML — 200G-per-lane lasery</strong></td><td>Serce transceivera 1.6T dla AI data centers</td><td style="color:var(--accent)">JEDYNY dostawca w wolumenie</td><td>🔥 Core driver FY2026</td></tr>
+            <tr><td><strong>OCS — Optical Circuit Switches</strong></td><td>Przełączniki optyczne AI/ML interconnects</td><td>Backlog $400M+</td><td>⚡ Ramping Q4 FY2026</td></tr>
+            <tr><td><strong>Pump Lasers</strong></td><td>Wzmacniacze optyczne sieci telekomunikacyjnych</td><td>Top-3 global</td><td>✅ Stabilny</td></tr>
+            <tr><td><strong>3D Sensing (VCSEL)</strong></td><td>LiDAR, Face ID, AR/VR</td><td>Ex-Apple supplier</td><td>Malejący segment</td></tr>
+            <tr><td><strong>Transceivers 800G</strong></td><td>Obecna generacja data center (most volumes)</td><td>Top-3</td><td>✅ High volume</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="nvidia-badge">
+        <h4>⚡ NVIDIA $2B — Strategiczny Game Changer (2 marca 2026)</h4>
+        <p style="color:var(--text-muted); font-size:13px;">NVIDIA ogłosiła strategiczną inwestycję $2B w Lumentum oraz <strong>multi-miliardowe zobowiązania zakupowe</strong> na zaawansowane komponenty laserowe — 200G EML i OCS. Nie jest to zwykły kontrakt — NVIDIA inwestuje w zdolności produkcyjne Lumentum w USA (nowe fabryki). Oznacza to: (1) NVIDIA widzi Lumentum jako krytyczną infrastrukturę dla przyszłości AI compute, (2) kapitał na rozbudowę produkcji bez konieczności emisji akcji, (3) wieloletnia widoczność przychodów.</p>
+      </div>
+
+      <h3>Dlaczego EML 200G to monopol?</h3>
+      <p>Przejście z transceiverów 800G na <strong>1.6T (terabit per second)</strong> wymaga laserów pracujących z prędkością 200G per lane. To jest "najszybsze przejście generacyjne w historii optyki". Lumentum jest <strong>jedynym producentem dostarczającym te komponenty w wolumenie</strong>. Coherent, Mitsubishi i Sumitomo pracują nad własnymi EML 200G, ale są miesiące–lata za Lumentum. Każdy transceiver 1.6T = laser od Lumentum. Każdy AI data center nowej generacji = klient Lumentum.</p>
+
+      <h3>OCS — Nowy silnik wzrostu</h3>
+      <p>Optical Circuit Switch (OCS) to alternatywa dla tradycyjnych elektrycznych przełączników sieciowych w klastrach GPU. OCS ma <strong>100× niższe zużycie energii</strong>, niższe opóźnienia i wyższe przepustowości. Lumentum ma backlog $400M+ z targetem $100M kwartalnie do grudnia 2026. Multiyear, multibillion umowa zakupowa już podpisana.</p>
+    </div>
+  </div>
+
+  <!-- S3 -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')">
+      <div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div>
+      <div class="section-toggle" id="s3-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s3-body">
+      <h3>TAM — Rynki adresowane przez Lumentum</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Segment</th><th>2024</th><th>2029E</th><th>CAGR</th></tr></thead>
+          <tbody>
+            <tr><td>Optical Transceivers (global)</td><td>$13,6B</td><td>$25,0B</td><td>13%</td></tr>
+            <tr><td>Silicon Photonics</td><td>$3,1B</td><td>$10,4B</td><td>27%</td></tr>
+            <tr><td>AI Data Center Interconnects</td><td>~$5B</td><td>>$20B</td><td>~35%</td></tr>
+            <tr><td>Optical Circuit Switches (OCS)</td><td><$1B</td><td>$3–5B+</td><td>40%+</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Dlaczego optyka jest bottleneck AI?</h3>
+      <p>W klastrach 100 000+ GPU (jak budowane przez Meta, Google, Microsoft, xAI) <strong>bottleneck nie jest już GPU, lecz sieć</strong> — przepustowość i opóźnienia między kartami graficznymi. Miedź (kable elektryczne) nie skaluje się powyżej kilku metrów przy 1,6T. Jedyna opcja: <strong>optyka</strong>. To strukturalny, wieloletni trend, a Lumentum jest na jego ostrzu.</p>
+
+      <h3>Kluczowe trendy</h3>
+      <ul>
+        <li><strong>1.6T transceiver ramp:</strong> Najszybsze przejście generacyjne w historii — każda sztuka wymaga EML od Lumentum</li>
+        <li><strong>AI cluster scaling:</strong> Modele LLM rosną wykładniczo (GPT-4 → GPT-5 → GPT-6) → więcej GPU → więcej optyki</li>
+        <li><strong>US onshoring photonics:</strong> CHIPS Act, geopolityka → Lumentum buduje produkcję w USA — strategiczna pozycja</li>
+        <li><strong>OCS replaces electrical switches:</strong> $100B+ rynek electricalnych switch mogą przejść częściowo na OCS</li>
+        <li><strong>800G → 1.6T → 3.2T roadmap:</strong> Każde przejście = nowy cykl capex od data centers → demand dla Lumentum</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- S4 -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')">
+      <div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div>
+      <div class="section-toggle" id="s4-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s4-body">
+      <h3>Profil klientów</h3>
+      <div class="chips">
+        <span class="chip cyan">B2B — Hyperscalerzy AI</span>
+        <span class="chip">Producenci transceiverów (OEM)</span>
+        <span class="chip teal">NVIDIA (strategic + customer)</span>
+        <span class="chip">Telco carriers</span>
+      </div>
+
+      <h3>Łańcuch wartości — gdzie siedzi Lumentum?</h3>
+      <p>Lumentum dostarcza <strong>komponenty (EML lasery)</strong> do producentów transceiverów (np. InnoLight, Eoptolink, Coherent), którzy z kolei sprzedają gotowe transceivery do hyperscalerów (Meta, Google, Amazon, Microsoft). Oznacza to, że Lumentum jest w <strong>B2B2B modelu</strong> — zmiany decyzji zakupowych na poziomie hyperscalerów mogą dotrzeć z opóźnieniem kilku kwartałów.</p>
+
+      <h3>Koncentracja klientów — ryzyko</h3>
+      <div class="alert alert-warn">
+        Historycznie Apple odpowiadał za 30-40% revenue Lumentum (3D sensing/Face ID). Utrata Apple'a jako klienta (2023–2024, gdy Apple przeszło na własne rozwiązania) była jednym z powodów przeceny do $88. <strong>Teraz NVIDIA i wielcy hyperscalerzy AI zastępują Apple w koncentracji.</strong> Ryzyko koncentracji nie zniknęło — zmienił się klient.
+      </div>
+
+      <h3>Backlog i widoczność</h3>
+      <p>Poza NVIDIA ($2B inwestycja + multi-mld purchase), Lumentum ogłosiło <strong>multiyear multibillion OCS purchase agreement</strong> (hyperscaler nieujawniony). 60%+ revenue pochodzi z AI i cloud infrastructure. Management prognozuje "robust demand from hyperscalers into 2027 and beyond."</p>
+    </div>
+  </div>
+
+  <!-- S5 -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')">
+      <div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div>
+      <div class="section-toggle" id="s5-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s5-body">
+      <h3>Revenue — Kwartalne wyniki FY2026</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Kwartał</th><th>Revenue</th><th>Wzrost YoY</th><th>Non-GAAP GM</th><th>Non-GAAP Op. Margin</th></tr></thead>
+          <tbody>
+            <tr><td>Q1 FY2025</td><td>~$335M</td><td>—</td><td>~30%</td><td>~5%</td></tr>
+            <tr><td>Q4 FY2025</td><td>$480,7M</td><td>—</td><td>37,8%</td><td>—</td></tr>
+            <tr><td>Q1 FY2026 (IX 2025)</td><td>$533,8M</td><td style="color:var(--buy)">+32% YoY</td><td>39,4%</td><td>18,7%</td></tr>
+            <tr><td>Q2 FY2026 (XII 2025)</td><td>$665,5M</td><td style="color:var(--buy)">+65% YoY</td><td>42,5%</td><td>25,2%</td></tr>
+            <tr><td><strong>Q3 FY2026 (III 2026)</strong></td><td><strong>$808,4M</strong></td><td style="color:var(--strong-buy)"><strong>+90% YoY 🔥</strong></td><td><strong>47,9%</strong></td><td><strong>32,2%</strong></td></tr>
+            <tr><td>Q4 FY2026E (VI 2026)</td><td>$900M+E</td><td style="color:var(--strong-buy)">~+80% YoY E</td><td>~49%E</td><td>~33%E</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success">
+        <strong>Kluczowa obserwacja:</strong> Nie tylko revenue rośnie — rośnie <em>tempo wzrostu</em> (+32% → +65% → +90%) i marże (+30% → +47,9% non-GAAP GM). To klasyczna oznaka spółki w "hockey stick" momencie — skala produkcji powoduje dźwignię marżową.
+      </div>
+
+      <h3>Prognoza FY2026–2027</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Rok</th><th>Revenue</th><th>Wzrost</th><th>Non-GAAP GM</th></tr></thead>
+          <tbody>
+            <tr><td>FY2025</td><td>$1,65B</td><td>+21%</td><td>34,7%</td></tr>
+            <tr><td>FY2026E</td><td>~$2,9–3,1B</td><td style="color:var(--buy)">+76–88%</td><td>~47–49%</td></tr>
+            <tr><td>FY2027E</td><td>~$4,0–5,0B</td><td style="color:var(--buy)">+38–65%</td><td>~50–53%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- S6 -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')">
+      <div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div>
+      <div class="section-toggle" id="s6-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s6-body">
+      <h3>Aktualne wskaźniki (cena ~$730, lipiec 2026)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Ocena</th></tr></thead>
+          <tbody>
+            <tr><td>Market Cap</td><td>~$52,3B</td><td>(71,7M akcji × $730)</td></tr>
+            <tr><td>Cash</td><td>$3,17B</td><td>($2,62B cash + $0,55B STI)</td></tr>
+            <tr><td>Dług</td><td>$3,31B</td><td>Neutralny net debt ~$0,14B</td></tr>
+            <tr><td>EV</td><td>~$52,5B</td><td>Prawie równe market cap</td></tr>
+            <tr><td><strong>P/S (run rate $3,2B)</strong></td><td><strong>~16,3×</strong></td><td style="color:var(--neutral)">⚠️ Wysokie — ale +90% grower</td></tr>
+            <tr><td><strong>EV/Revenue (FY2027E $4,5B)</strong></td><td><strong>~11,7×</strong></td><td style="color:var(--neutral)">Umiarkowane dla tempa</td></tr>
+            <tr><td><strong>EV/Revenue (FY2027E $5B)</strong></td><td><strong>~10,5×</strong></td><td style="color:var(--buy)">✅ Atrakcyjne</td></tr>
+            <tr><td>P/E (forward)</td><td>brak danych precyzyjnych</td><td>Spółka nadal ramping profit</td></tr>
+            <tr><td>Dywidenda</td><td>Brak</td><td>Reinwestuje w wzrost</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Porównanie wyceny do rówieśników</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Spółka</th><th>P/S (forward)</th><th>Wzrost YoY</th><th>Ocena</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Lumentum (LITE)</strong></td><td>~10–12×</td><td>+90%</td><td>Najlepszy G/V ratio</td></tr>
+            <tr><td>Coherent (COHR)</td><td>~3–5×</td><td>+23%</td><td>Tańsze, wolniejsze</td></tr>
+            <tr><td>NVIDIA (NVDA)</td><td>~20×</td><td>~70%</td><td>Premium lider</td></tr>
+            <tr><td>Broadcom (AVGO)</td><td>~14×</td><td>~25%</td><td>Drogie vs wzrost</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Scenariusze wyceny</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Scenariusz</th><th>Revenue FY2027E</th><th>P/S target</th><th>Market Cap</th><th>Cena/akcję</th></tr></thead>
+          <tbody>
+            <tr><td>Bear (spowolnienie do +30%)</td><td>$3,5B</td><td>8×</td><td>$28B</td><td>~$390</td></tr>
+            <tr><td>Base (wzrost +50%)</td><td>$4,5B</td><td>11×</td><td>$49,5B</td><td>~$690</td></tr>
+            <tr><td>Bull (wzrost +65%, OCS ramp)</td><td>$5,5B</td><td>14×</td><td>$77B</td><td>~$1 075</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="fair-value-box">
+        <div class="fair-value-label">Szacunkowy fair value (base case FY2027)</div>
+        <div class="fair-value-range">$750 – $1 100</div>
+        <div class="fair-value-note">Przy P/S 11–14× na FY2027E $4,5–5,5B | Analyst avg. $1 111 | Obecna cena $730 = przy dolnej granicy base case</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S7 -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')">
+      <div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA FINANSOWA</div></div>
+      <div class="section-toggle" id="s7-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s7-body">
+      <h3>Ekspansja marż — trend przełomowy</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Kwartał</th><th>Revenue</th><th>GAAP GM</th><th>Non-GAAP GM</th><th>Non-GAAP Op. Margin</th></tr></thead>
+          <tbody>
+            <tr><td>Q2 FY2025</td><td>$402M</td><td>24,8%</td><td>32,3%</td><td>~5%</td></tr>
+            <tr><td>Q4 FY2025</td><td>$481M</td><td>33,3%</td><td>37,8%</td><td>~12%</td></tr>
+            <tr><td>Q1 FY2026</td><td>$534M</td><td>34,0%</td><td>39,4%</td><td>18,7%</td></tr>
+            <tr><td>Q2 FY2026</td><td>$666M</td><td>36,1%</td><td>42,5%</td><td>25,2%</td></tr>
+            <tr><td><strong>Q3 FY2026</strong></td><td><strong>$808M</strong></td><td><strong>44,2%</strong></td><td><strong>47,9%</strong></td><td><strong>32,2%</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success">
+        <strong>Marże rosną równolegle z revenue — to najlepszy możliwy scenariusz.</strong> Non-GAAP GM wzrosła z 32% do 48% w ciągu zaledwie 5 kwartałów (+16pp). Non-GAAP operating margin z ~5% do 32% (+27pp). Przy dalszym skalowaniu i OCS rampie, marże mogą osiągnąć 53–55% GM i 38–40% operating margin do FY2028.
+      </div>
+
+      <h3>FCF i profitability</h3>
+      <p>Q2 FY2026 Adjusted EBITDA: <strong>$198,3M</strong>. Przy Q3 wyższym revenue i marżach, EBITDA Q3 mogło wynieść $280–320M. Annualizowany EBITDA run rate: ~$1–1,2B. NVIDIA $2B inwestycja eliminuje potrzebę zewnętrznego finansowania CapEx produkcyjnego — Lumentum może inwestować w zdolności bez ryzyka dilucji.</p>
+    </div>
+  </div>
+
+  <!-- S8 -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')">
+      <div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div>
+      <div class="section-toggle" id="s8-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s8-body">
+      <h3>Bilans (28 marca 2026, Q3 FY2026)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Pozycja</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+          <tbody>
+            <tr><td>Gotówka i ekwiwalenty</td><td>$2 617,8M</td><td>—</td></tr>
+            <tr><td>Krótkoterminowe inwestycje</td><td>$554,5M</td><td>—</td></tr>
+            <tr><td><strong>Łączna gotówka</strong></td><td><strong>~$3 172M</strong></td><td>Solidna płynność</td></tr>
+            <tr><td>Dług całkowity</td><td>$3 310M</td><td>Obligacje konwertybilne</td></tr>
+            <tr><td><strong>Dług netto</strong></td><td><strong>~$138M</strong></td><td>Praktycznie neutralny — "czyste" finansowanie</td></tr>
+            <tr><td>Equity akcjonariuszy</td><td>$2 973,4M</td><td>—</td></tr>
+            <tr><td>Debt/Equity</td><td>1,11×</td><td>Umiarkowane</td></tr>
+            <tr><td>Akcji w obrocie</td><td>71,7M</td><td>Relatywnie mała liczba</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-success">
+        <strong>NVIDIA $2B zmienia kalkulację bilansu.</strong> Te środki trafiają bezpośrednio na rozbudowę mocy produkcyjnych w USA — bez konieczności emisji akcji lub zaciągania kolejnego długu. Przy neutralnym net debt i rosnącym FCF, bilans Lumentum znacznie się umacnia w 2026–2027.
+      </div>
+    </div>
+  </div>
+
+  <!-- S9 -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')">
+      <div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div>
+      <div class="section-toggle" id="s9-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item">
+        <div class="catalyst-icon">⚡</div>
+        <div class="catalyst-body">
+          <h4>Monopol 200G EML — każdy 1.6T transceiver = Lumentum</h4>
+          <p>Lumentum jest jedynym dostawcą 200G-per-lane EML w wolumenie. 1.6T ramp = najszybsze przejście w historii optyki. Rynek 1.6T transceiverów może osiągnąć $10B+ do 2028. Przy ~50% content value EML w transceivery, Lumentum adresuje $5B+ SAM tylko z EML.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🟢</div>
+        <div class="catalyst-body">
+          <h4>OCS — Nowy $100M/kwartał segment do XII 2026</h4>
+          <p>Optical Circuit Switches to całkowicie nowa linia biznesowa z backlogiem $400M+ i multiyear multibillion umową. Jeśli OCS osiągnie $100M/kwartał = $400M/rok nowego, wysokomarżowego revenue — to ~10-15% dodatkowego przychodu bez inwestycji w istniejącą bazę.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">💚</div>
+        <div class="catalyst-body">
+          <h4>Marże 50%+ GM — dźwignia operacyjna</h4>
+          <p>Z 32% GM (FY2025) do 48% GM (Q3 FY2026) w ciągu roku. Przy skalowaniu do $5B revenue i ~52% GM, non-GAAP operating income może wynieść $1,5–1,8B = EBITDA yield ~30% na Market Cap. To byłaby transformacja wyceny.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🤝</div>
+        <div class="catalyst-body">
+          <h4>NVIDIA "endorsement" przyciąga kolejnych partnerów</h4>
+          <p>$2B od NVIDIA to nie tylko gotówka — to sygnał dla całej branży. Spodziewać się można podobnych umów z AMD (MI400 clusters), Broadcom (custom ASICs), lub Meta/Google jako direct hyperscaler buyers. Jeden deal może pociągać kolejne.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🇺🇸</div>
+        <div class="catalyst-body">
+          <h4>US manufacturing + geopolityka = strategiczny asset</h4>
+          <p>USA inwestuje w krajowe zdolności produkcji fotonów (CHIPS Act, Strategic Manufacturing Initiative). Lumentum buduje fabrykę w USA — jedyna firma photonics z takimi zdolnościami w Ameryce. DOD/rząd mają powód do wspierania Lumentum jako supplier infrastruktury krytycznej.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S10 -->
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')">
+      <div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div>
+      <div class="section-toggle" id="s10-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🏭</div>
+        <div class="catalyst-body">
+          <h4>Koncentracja klientów — ryzyko "kolejnego Apple'a"</h4>
+          <p>Apple stanowił 30-40% revenue, odszedł → akcja do $88. Teraz NVIDIA i kilku hyperscalerów to 60%+ revenue. Jeśli NVIDIA zmieni strategię (np. wewnętrzna produkcja EML), lub duży hyperscaler wstrzyma CapEx AI — efekt będzie natychmiastowy i bolesny.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">⚙️</div>
+        <div class="catalyst-body">
+          <h4>Konkurenci doganiają w 200G EML</h4>
+          <p>Coherent, Mitsubishi, Sumitomo intensywnie inwestują w 200G EML. Monopol Lumentum ma termin ważności — 12–24 miesiące przewagi technologicznej. Jeśli Coherent lub nowy chiński dostawca dostarczy 200G EML w 2027, pricing power i marże Lumentum gwałtownie spadną.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">🧠</div>
+        <div class="catalyst-body">
+          <h4>AI model efficiency — mniej potrzeba bandwidth</h4>
+          <p>DeepSeek, efektywniejsze architektury LLM, model distillation — jeśli trenowanie wielkich modeli wymaga 10× mniej GPU i przepustowości, inwestycje w AI infrastructure zwalniają. Lumentum jest bardzo wrażliwy na tempo rozbudowy klastrów GPU.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">📈</div>
+        <div class="catalyst-body">
+          <h4>Wycena P/S 16× dyskontuje perfekcję</h4>
+          <p>Przy $730 i run rate $3,2B, P/S = 16×. To premium zarezerwowane dla spółek SaaS z 80%+ marżami brutto, nie hardware/photonics z 48% GM. Jakikolwiek miss przychodów w Q4 FY2026 lub Q1 FY2027 może spowodować gwałtowną repricingę do P/S 10–12× = $450–580.</p>
+        </div>
+      </div>
+      <div class="catalyst-item">
+        <div class="catalyst-icon">📉</div>
+        <div class="catalyst-body">
+          <h4>Technicznie w falling trend — MA sell signals</h4>
+          <p>Akcja ma techniczne sygnały sprzedaży z krótko- i długoterminowych średnich ruchomych. MACD 3-miesięczny w sell. Po rajdzie +1 129%, formowanie dna może potrwać 2–3 kwartały. Cierpliwość wymagana.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S11 -->
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')">
+      <div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div>
+      <div class="section-toggle" id="s11-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Firma</th><th>Revenue</th><th>Fokus</th><th>200G EML</th><th>Pozycja vs LITE</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Lumentum (LITE)</strong></td><td>~$3,2B run rate</td><td>EML, OCS, pump lasers</td><td style="color:var(--strong-buy)">✅ Jedyny w vol.</td><td>🥇 Leader w premium EML</td></tr>
+            <tr><td>Coherent (COHR)</td><td>$5,81B (FY2025)</td><td>Transceivers, EML</td><td style="color:var(--neutral)">⚠️ W rozwoju</td><td>Największy wolumenem, niższe marże</td></tr>
+            <tr><td>Mitsubishi Electric</td><td>segment private</td><td>EML lasery</td><td style="color:var(--sell)">❌ Za Lumentum</td><td>Japanese supplier, mniejszy udział</td></tr>
+            <tr><td>Sumitomo</td><td>segment private</td><td>EML, pump lasers</td><td style="color:var(--sell)">❌ Za Lumentum</td><td>Podobnie jak Mitsubishi</td></tr>
+            <tr><td>Broadcom (AVGO)</td><td>~$50B total</td><td>Custom ASICs, optical</td><td style="color:var(--sell)">❌ Inne podejście</td><td>Nie direct competitor w EML</td></tr>
+            <tr><td>Intel Photonics (IFS)</td><td>segment small</td><td>Si Photonics, CPO</td><td style="color:var(--sell)">❌ Inny segment</td><td>Co-Packaged Optics — inne zastosowanie</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-teal">
+        <strong>Kluczowa przewaga:</strong> W segmencie 200G EML (kluczowym dla 1.6T transceiverów), Lumentum nie ma konkurenta w produkcji seryjnej. To analogiczna pozycja jak ASML w EUV lithography — jedyny dostawca krytycznego komponentu, bez którego AI data centers nowej generacji nie mogą działać.
+      </div>
+    </div>
+  </div>
+
+  <!-- S12 -->
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')">
+      <div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div>
+      <div class="section-toggle" id="s12-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s12-body">
+      <h3>Poziomy kluczowe</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>52W minimum</td><td>$88,37</td><td>Dno przed AI optical supercycle — start rajdu +1 129%</td></tr>
+            <tr><td>ATH (maj 2026)</td><td>$1 085,68</td><td>Szczyt euforii po NVIDIA deal + Q3 rekordzie</td></tr>
+            <tr><td>Cena bieżąca (07.2026)</td><td>~$730</td><td>-33% od ATH | korekta po rajdzie</td></tr>
+            <tr><td>Wsparcie S1</td><td>~$700–710</td><td>Strefa korekty — intraday low z 4.07.2026: $710</td></tr>
+            <tr><td>Wsparcie S2</td><td>~$600–650</td><td>Silniejsze wsparcie przy pogłębieniu korekty</td></tr>
+            <tr><td>Opór R1</td><td>$837–$898</td><td>Strefa oporu po korekcie</td></tr>
+            <tr><td>Opór R2</td><td>$1 000 (okrągła)</td><td>Psychologiczna bariera</td></tr>
+            <tr><td>Opór R3 / ATH</td><td>$1 085</td><td>Powrót do ATH = nowe szczyty</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Wskaźniki techniczne — sygnały ostrzegawcze</h3>
+      <ul>
+        <li><strong>MA cross:</strong> Długoterminowa SMA powyżej krótkoterminowej = techniczny sygnał sprzedaży</li>
+        <li><strong>MACD 3M:</strong> W sell territory — momentum spada</li>
+        <li><strong>RSI:</strong> Znormalizowane po ATH — strefa neutralna/lekko bear</li>
+        <li><strong>Wolumen:</strong> Duże obroty przy spadkach 1 lipca (-6,63%) sugerują instytucjonalną dystrybucję</li>
+      </ul>
+
+      <div class="scenario-grid">
+        <div class="bull-box">
+          <h4>🐂 Bull techniczny</h4>
+          <ul>
+            <li>Hold $700–710 jako wsparcie</li>
+            <li>Q4 FY2026 earnings (sierpień 2026) = pozytywne zaskoczenie</li>
+            <li>Wybicie powyżej $900 → cel $1 000+</li>
+            <li>Nowy deal announcement → powrót do ATH</li>
+          </ul>
+        </div>
+        <div class="bear-box">
+          <h4>🐻 Bear techniczny</h4>
+          <ul>
+            <li>Przebicie $700 → test $600–650</li>
+            <li>Słabe Q4 lub miss guidance</li>
+            <li>Competitor news (Coherent EML launch)</li>
+            <li>Ogólna wyprzedaż AI stocks → test $500</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S13 -->
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')">
+      <div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div>
+      <div class="section-toggle" id="s13-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box">
+          <div class="period">Krótki termin (1–3 mies.)</div>
+          <div class="rating-text neutral">NEUTRALNA</div>
+          <div class="rating-note">Techniczne sygnały sprzedaży, korekta po +1 129%. Q4 FY2026 earnings (sierpień) = katalizator. Ryzyko dalszego spadku do $650–700.</div>
+        </div>
+        <div class="rating-box">
+          <div class="period">Średni termin (6–18 mies.)</div>
+          <div class="rating-text buy">KUPNO</div>
+          <div class="rating-note">OCS ramp $100M/Q, 1.6T ramp przyspiesza, marże do 50%+, NVIDIA deal wzmacnia pozycję. Cel $950–1 100.</div>
+        </div>
+        <div class="rating-box">
+          <div class="period">Długi termin (3–5 lat)</div>
+          <div class="rating-text strong-buy">MOCNE KUPNO</div>
+          <div class="rating-note">Jeśli monopol EML utrzyma się przez 1.6T→3.2T cykl i OCS stanie się standardem, LITE to $5-7B revenue spółka z 50%+ GM. Bull case $1 500–2 000.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <h3>Strategia wejścia</h3>
+      <ul>
+        <li><strong>Przy obecnej cenie $730:</strong> Rozważyć małą pozycję — przy dolnej granicy base case. Ryzyko korekty do $650 nadal realne</li>
+        <li><strong>Idealny punkt wejścia:</strong> $620–680 (głębsza korekta) — tam ryzyko/zysk jest wyraźnie asymetryczny</li>
+        <li><strong>Dokupowanie:</strong> Na każde silne Q — Q4 FY2026 (sierpień) i Q1 FY2027 (listopad) to kluczowe momenty</li>
+        <li><strong>Stop-loss mentalny:</strong> Przebicie $560 z wolumenem = rewizja tezy inwestycyjnej</li>
+      </ul>
+
+      <div class="fair-value-box">
+        <div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div>
+        <div class="fair-value-range">$950 – $1 200</div>
+        <div class="fair-value-note">Base case P/S 11–13× na FY2027E $4,5–5B | Analyst consensus: $1 111 | Bull case: $1 400–2 000 (OCS + EML full ramp)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S14 -->
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')">
+      <div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">PODSUMOWANIE (TL;DR)</div></div>
+      <div class="section-toggle" id="s14-toggle">▾</div>
+    </div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy">
+          <h4>✅ 3 powody, by kupić</h4>
+          <ul>
+            <li><strong>Monopol EML 200G = każdy AI cluster 1.6T zależy od Lumentum:</strong> Analogia do ASML w chipach — jedyny dostawca krytycznego komponentu bez alternatywy. Trend 1.6T to 2–3 letni strukturalny tailwind</li>
+            <li><strong>NVIDIA $2B = najsilniejsze możliwe potwierdzenie:</strong> Jensen Huang zainwestował $2 mld i podpisał multi-mld zakupy. To nie marketing — to strategiczny zakład na Lumentum jako kluczową infrastrukturę przyszłości AI</li>
+            <li><strong>Marże eksplodują (32%→48% GM w 5 kwartałów) + OCS to nowy engine:</strong> Hockey stick momentów jest rzadki w hardware — Lumentum właśnie w nim jest. OCS $400M+ backlog = dodatkowe przyspieszenie</li>
+          </ul>
+        </div>
+        <div class="thesis-avoid">
+          <h4>❌ 3 powody, by unikać</h4>
+          <ul>
+            <li><strong>P/S 16× + korekta techniczna:</strong> Po +1 129% rajdzie, akcja ma sell signals ze wszystkich MA i MACD. Krótkoterminowo ryzyko korekty do $600–650 jest realne</li>
+            <li><strong>Monopol EML ma datę ważności:</strong> Coherent i Mitsubishi intensywnie pracują nad 200G EML — okno monopolu to 12–18 miesięcy. Jak zamkną lukę, pricing power zniknie</li>
+            <li><strong>Koncentracja klientów — "kolejny Apple":</strong> NVIDIA + kilku hyperscalerów = 60%+ revenue. Utrata jednego to -30–40% ceny jak po Apple departure</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <h3>Thesis-breaker</h3>
+      <p><strong>🔴 Jeśli:</strong> Coherent lub chiński dostawca ogłosi masową produkcję 200G EML w 2027 LUB hyperscaler wstrzyma CapEx AI (DeepSeek v3 moment) LUB Q4 FY2026 miss poniżej $850M → korekta do $400–550.</p>
+
+      <h3>Thesis-confirmer</h3>
+      <p><strong>🟢 Jeśli:</strong> Q4 FY2026 revenue $900M+ z GM >49% + OCS $100M/Q target osiągnięty + dodatkowa umowa z AMD lub Meta → powrót do ATH $1 085 i wyżej w ciągu 6 miesięcy.</p>
+
+      <hr class="divider">
+      <div style="text-align:center; padding: 20px 0">
+        <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">OCENA KOŃCOWA</div>
+        <div class="rating-badge buy" style="display:inline-flex; font-size:20px; padding:14px 32px; margin-bottom:16px;">📈 KUPNO — idealny punkt wejścia $620–700</div>
+        <p style="color:var(--text-muted); max-width:700px; margin:0 auto; font-size:13px;">Przy $730 jesteś na dolnej granicy base case. LITE to pure play na AI optical supercycle z NVIDIA jako strategicznym partnerem, monopolem na krytycznym komponencie i rosnącymi marżami. Technicznie wymaga cierpliwości — głębsza korekta jest możliwa. Strategicznie: jedna z najbardziej przekonujących historii AI infrastructure poza bezpośrednimi producentami chipów.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+
+  Analiza wygenerowana: 3 lipca 2026 | Dane: Lumentum IR, SEC 8-K/10-Q, NVIDIA Newsroom, MLQ.ai, Yahoo Finance, MarketBeat | Nie stanowi porady inwestycyjnej
+</div>
+
+<script>
+function toggleSection(id) {
+  const body = document.getElementById(id + '-body');
+  const toggle = document.getElementById(id + '-toggle');
+  if (!body) return;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  body.style.display = isOpen ? 'none' : 'block';
+  toggle.classList.toggle('open', !isOpen);
+}
+function goSec(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+document.addEventListener('DOMContentLoaded', () => {
+  ['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14'].forEach(id => {
+    const b = document.getElementById(id + '-body');
+    if (b) b.style.display = 'none';
+  });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);
+        if (a) { a.classList.add('active'); a.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); }
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.section').forEach(s => obs.observe(s));
+});
+</script>
+<script>function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b</body></body>(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}</script><style>.section{scroll-margin-top:64px}</style></body>
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMD — Advanced Micro Devices | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#ed1c24; --accent2:#ff6b70; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#1a0507 0%,#0f1117 50%,#160608 100%); border-bottom:1px solid var(--border); padding:32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(237,28,36,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.buy { background:rgba(76,175,80,0.15); border:2px solid var(--buy); color:var(--buy); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.crimson { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#fff; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.crimson { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.strong-buy { color:var(--strong-buy); } .rating-box .rating-text.neutral { color:var(--neutral); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--strong-buy); } .bear-box ul li::before { color:var(--strong-sell); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(237,28,36,0.08),rgba(255,107,112,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(237,28,36,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .alert-danger { background:rgba(213,0,0,0.08); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(0,200,83,.15); color:#00c853; border:1px solid rgba(0,200,83,.4); }
+  .ck.no  { background:rgba(213,0,0,.13);  color:#ff6b6b; border:1px solid rgba(213,0,0,.35); }
+  .ck.wait{ background:rgba(255,215,64,.13);color:#ffd740; border:1px solid rgba(255,215,64,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#00c853; } .mon-dot.y { background:#ffd740; } .mon-dot.r { background:#ff6d00; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: AMD</div>
+    <div class="company-name">Advanced Micro Devices, Inc.</div>
+    <div class="company-sub">Instinct MI400/MI450 · EPYC · Szafy Helios · Umowa z Anthropic na 2 GW · Ryzen i konsole · Santa Clara, CA | CEO: Lisa Su</div>
+    <div class="header-meta">
+      <div class="rating-badge buy">📈 KUPNO</div>
+      <span class="meta-tag">AI accelerators</span>
+      <span class="meta-tag">Data Center +107%</span>
+      <span class="meta-tag">Wyniki 4 sierpnia</span>
+      <span class="meta-tag">Wysoka wycena</span>
+      <div class="price-display">
+        <div class="price-main">$493</div>
+        <div class="price-sub">6.08.2026 | 52W: $149,22–$584,73</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (06.08.2026)</div><div class="metric-value">$493</div><div class="metric-detail">-16% od ATH $584,73 | +230% od dna</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$865 mld</div><div class="metric-detail">+122% od początku roku</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">$11,5 mld</div><div class="metric-detail">Rekord | EPS GAAP $1,38, adj. $1,66</div></div>
+    <div class="metric-card"><div class="metric-label">Data Center Q2</div><div class="metric-value green">$6,7 mld</div><div class="metric-detail">+107% r/r | 58% przychodów grupy</div></div>
+    <div class="metric-card"><div class="metric-label">Marża brutto</div><div class="metric-value yellow">54%</div><div class="metric-detail">⚠️ Poniżej konsensusu 56% — koszty Helios</div></div>
+    <div class="metric-card"><div class="metric-label">Guidance Q3</div><div class="metric-value green">~$13 mld</div><div class="metric-detail">Podniesione | akceleracja w H2</div></div>
+    <div class="metric-card"><div class="metric-label">Anthropic</div><div class="metric-value crimson">2 GW</div><div class="metric-detail">MI450 w szafach Helios — kontrakt wieloletni</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value green">$592</div><div class="metric-detail">+20% | Strong Buy (51 analityków)</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest AMD w 2026 roku?</h3>
+      <p>Advanced Micro Devices to jedyny realny konkurent NVIDII w akceleratorach AI i jednocześnie firma, która odebrała Intelowi połowę rynku procesorów serwerowych. Pod kierownictwem <strong>Lisy Su</strong> przeszła jedną z najbardziej spektakularnych przemian w historii branży — z podmiotu na skraju bankructwa w 2014 roku do spółki wartej dziś <strong>około 865 miliardów dolarów</strong>. Siedziba: Santa Clara.</p>
+      <p>Rok 2026 jest w tej historii przełomowy z jednego powodu: <strong>segment centrów danych po raz pierwszy przekroczył połowę przychodów</strong> (58%) i rośnie o 107% rocznie. AMD przestało być producentem procesorów, który próbuje wejść w AI — stało się firmą AI, która nadal produkuje procesory.</p>
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>2025</td><td>Kurs w okolicach $149 (52-tygodniowe minimum) — rynek nie wierzył w zdolność AMD do konkurowania z NVIDIĄ</td><td style="color:var(--sell)">Dno</td></tr>
+          <tr><td>2025/26</td><td><strong>Umowa z OpenAI</strong> na wdrożenie MI450 wraz z instrumentami kapitałowymi — przełom w postrzeganiu spółki</td><td style="color:var(--strong-buy)">↑↑ Zmiana narracji</td></tr>
+          <tr><td>2026</td><td><strong>Partnerstwo z Anthropic: do 2 GW akceleratorów MI450 w szafach Helios</strong> plus wieloletnia współpraca nad optymalizacją ROCm z użyciem modeli Claude</td><td style="color:var(--strong-buy)">↑↑ Drugi wielki klient</td></tr>
+          <tr><td>2026</td><td>Premiera rodziny <strong>Instinct MI400</strong> — MI455X do trenowania i inferencji na dużą skalę, MI430X dla HPC i suwerennych projektów AI</td><td style="color:var(--buy)">↑ Portfolio gotowe</td></tr>
+          <tr><td>Do sierpnia 2026</td><td>Kurs +122% od początku roku, +170% w skali roku; szczyt $584,73</td><td style="color:var(--buy)">Hossa</td></tr>
+          <tr><td><strong>4 sierpnia 2026</strong></td><td><strong>Q2: przychody $11,5 mld, Data Center +107%, guidance Q3 podniesione do ~$13 mld — a kurs spadł o 7–9%</strong></td><td style="color:var(--neutral)">Sprzedaj na faktach</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Sedno sytuacji:</strong> AMD pobiło oczekiwania na przychodach, zysku i prognozie — a mimo to akcje spadły. Powód nie leży w wynikach, lecz w tym, że <strong>rynek wycenił coś znacznie lepszego</strong>. Jak ujął to jeden z analityków: „to był dobry wynik, ale wycena zakładała wynik wyjątkowy". Do tego doszła marża brutto 54% zamiast oczekiwanych 56% — efekt kosztów rozruchu platformy Helios.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Linia</th><th>Produkty</th><th>Pozycja rynkowa</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Instinct (akceleratory AI)</strong></td><td>MI400 / MI455X (trening), MI430X (HPC, sovereign AI), MI450</td><td>Jedyna realna alternatywa dla NVIDII</td><td>🔥 Rdzeń tezy inwestycyjnej</td></tr>
+          <tr><td><strong>Helios (szafy rackowe)</strong></td><td>Gotowe systemy rackowe pod klastry AI</td><td>Odpowiedź na NVL72 od NVIDII</td><td>⚡ Ramp trwa — obciąża marżę</td></tr>
+          <tr><td><strong>EPYC (procesory serwerowe)</strong></td><td>Kolejne generacje CPU dla centrów danych</td><td>Ok. połowy rynku serwerowego kosztem Intela</td><td>💰 Stabilny generator gotówki</td></tr>
+          <tr><td><strong>Ryzen / Radeon</strong></td><td>Procesory i karty do komputerów</td><td>Silna pozycja w segmencie klienckim</td><td>✅ Stabilny</td></tr>
+          <tr><td>Semi-custom</td><td>Układy do konsol PlayStation i Xbox</td><td>Praktyczny monopol</td><td>Dojna krowa, cykl konsolowy</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat — architektura x86 i pozycja jedynej alternatywy</h3>
+      <p>AMD ma dwie odrębne fosy. Pierwsza to <strong>licencja na architekturę x86</strong>, której poza Intelem nie ma nikt inny — to bariera prawna, nie technologiczna, i praktycznie nie do pokonania. Druga jest bardziej subtelna, ale w obecnym cyklu ważniejsza: <strong>hyperscalerzy potrzebują drugiego dostawcy</strong>. Nikt nie chce budować infrastruktury wartej setki miliardów dolarów, będąc całkowicie zależnym od jednej firmy i jej cen.</p>
+      <p>Największą słabością pozostaje <strong>oprogramowanie</strong>. CUDA od NVIDII to ekosystem budowany od 2006 roku, na którym wyrosło całe pokolenie badaczy. ROCm od AMD nadrabia dystans, a współpraca z Anthropic nad optymalizacją przy użyciu modeli Claude jest ciekawym skrótem — ale przewaga NVIDII w narzędziach wciąż jest realna.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Rynek akceleratorów AI:</strong> setki miliardów dolarów rocznie do końca dekady; nawet kilkanaście procent udziału oznacza dla AMD dziesiątki miliardów przychodu</li>
+        <li><strong>Dywersyfikacja dostawców:</strong> najsilniejszy strukturalny wiatr w plecy — hyperscalerzy i laboratoria AI świadomie budują drugie źródło dostaw, żeby nie zostać zakładnikiem jednego producenta</li>
+        <li><strong>Serwery x86:</strong> AMD systematycznie odbiera udziały Intelowi; to rynek dojrzały, ale wysoce marżowy i stabilny</li>
+        <li><strong>Suwerenna AI:</strong> rządy budujące własne centra obliczeniowe to nowy segment, w który celuje MI430X</li>
+        <li><strong>Cykliczność:</strong> półprzewodniki są cykliczne, ale obecny cykl jest napędzany inwestycjami infrastrukturalnymi, nie popytem konsumenckim — co go wydłuża, choć nie usuwa ryzyka</li>
+      </ul>
+      <div class="alert alert-success"><strong>Kluczowa obserwacja:</strong> AMD nie musi pokonać NVIDII, żeby teza inwestycyjna zadziałała. Wystarczy, że utrzyma pozycję <strong>wiarygodnego drugiego dostawcy</strong> na rynku, który rośnie szybciej niż zdolność jakiejkolwiek pojedynczej firmy do jego obsłużenia. To znacznie łatwiejsze zadanie niż zdetronizowanie lidera.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="chips"><span class="chip crimson">OpenAI (MI450, umowa wieloletnia)</span><span class="chip crimson">Anthropic (do 2 GW)</span><span class="chip">Meta, Microsoft, Oracle (EPYC i Instinct)</span><span class="chip">Rządy — sovereign AI</span><span class="chip">Sony, Microsoft (konsole)</span></div>
+      <p>Baza klientów AMD zmieniła charakter w ciągu dwóch lat. Wcześniej były to głównie firmy serwerowe kupujące procesory EPYC; dziś najważniejsze są <strong>laboratoria AI zamawiające moc obliczeniową w gigawatach</strong>. Umowy z OpenAI i Anthropic to kontrakty wieloletnie, obejmujące nie tylko sprzęt, ale i współpracę inżynieryjną nad oprogramowaniem.</p>
+      <div class="alert alert-warn"><strong>Ryzyko koncentracji:</strong> kilku klientów odpowiada za znaczącą część przyszłych przychodów z segmentu AI. To normalne w tej branży — NVIDIA ma ten sam problem — ale oznacza, że opóźnienie lub redukcja zamówień u jednego dużego odbiorcy natychmiast widać w prognozach. Dodatkowo obaj kluczowi klienci (OpenAI, Anthropic) sami finansują się kapitałem zewnętrznym.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Przychody</th><th>Data Center</th><th>Zysk / EPS</th></tr></thead>
+        <tbody>
+          <tr><td>Q2 2025</td><td>~$7,7 mld</td><td>~$3,2 mld</td><td>—</td></tr>
+          <tr><td><strong>Q2 2026</strong></td><td><strong>$11,5 mld</strong></td><td style="color:var(--strong-buy)"><strong>$6,7 mld (+107%)</strong></td><td>Netto $2,3 mld; EPS GAAP $1,38, adj. $1,66</td></tr>
+          <tr><td><strong>Q3 2026 (guidance)</strong></td><td><strong>~$13 mld</strong></td><td>akceleracja</td><td>—</td></tr>
+          <tr><td>H2 2026</td><td>zapowiedziane przyspieszenie</td><td>rdzeń wzrostu</td><td>Dalsza ekspansja zysku</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Skąd biorą się pieniądze</h3>
+      <p>AMD jest firmą <strong>fabless</strong> — projektuje układy, a produkcję zleca TSMC. To model o wysokiej marży i niskich nakładach inwestycyjnych, ale uzależniony od dostępności mocy produkcyjnych u jednego partnera na Tajwanie.</p>
+      <p>Struktura przychodów przesuwa się bardzo szybko: <strong>centra danych to już 58% obrotu</strong>, wobec około 40% rok wcześniej. Segment kliencki (Ryzen) i konsolowy zapewniają stabilną bazę, ale to akceleratory Instinct decydują dziś o wycenie spółki.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $493</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>~$865 mld</td><td>—</td></tr>
+          <tr><td>P/S (2026E ~$49 mld)</td><td><strong>~17,6×</strong></td><td style="color:var(--sell)">⚠️ Wysoko — porównywalnie z NVIDIĄ</td></tr>
+          <tr><td>P/S (2027E ~$70 mld)</td><td>~12,4×</td><td style="color:var(--neutral)">Rozsądniej, jeśli wzrost się utrzyma</td></tr>
+          <tr><td>Forward P/E (2026E, adj.)</td><td>ok. 60–67×</td><td style="color:var(--sell)">⚠️ Premia wymagająca perfekcji</td></tr>
+          <tr><td>Forward P/E (2027E, adj.)</td><td>ok. 38–45×</td><td style="color:var(--neutral)">Akceptowalne przy wzroście EPS &gt;50%</td></tr>
+          <tr><td>Marża brutto</td><td>54% (kons. 56%)</td><td style="color:var(--neutral)">Przejściowo obciążona kosztami Helios</td></tr>
+          <tr><td>Cel analityków</td><td>$592 (mediana), zakres do $606</td><td style="color:var(--buy)">+20–23% | Strong Buy, 51 analityków</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Uwaga do wyceny:</strong> podane mnożniki opierają się na szacunkach przychodów i zysku na lata 2026–2027, bo AMD znajduje się w fazie tak szybkiej zmiany, że dane historyczne niewiele mówią. Kluczowa obserwacja jest jednak niezależna od precyzji tych liczb: <strong>przy $493 płacisz za AMD mnożnik zbliżony do NVIDII, mimo że AMD ma znacznie mniejszy udział w rynku i słabszy ekosystem oprogramowania</strong>. To wycena zakładająca, że dogonienie lidera już się dzieje.</div>
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$560 – $650</div><div class="fair-value-note">Baza: P/S 15–17× na 2027E przy utrzymaniu tempa wzrostu Data Center | Konsensus $592 | Scenariusz negatywny (spowolnienie inwestycji AI, presja marż): $320–380 | Scenariusz pozytywny (udział w rynku akceleratorów rośnie, marża wraca powyżej 56%): $720–800 | Przy $493 potencjał +14–32%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Q2 2026</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto</td><td><strong>54%</strong></td><td style="color:var(--neutral)">Konsensus zakładał 56% — to główna przyczyna spadku kursu</td></tr>
+          <tr><td>Zysk operacyjny</td><td>$2,0 mld</td><td>Marża operacyjna ok. 17%</td></tr>
+          <tr><td>Zysk netto</td><td>$2,3 mld</td><td>EPS GAAP $1,38</td></tr>
+          <tr><td>EPS skorygowany</td><td>$1,66</td><td>Powyżej oczekiwań</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Dlaczego marża rozczarowała</h3>
+      <p>Spadek marży brutto do 54% wynika z <strong>kosztów uruchamiania platformy Helios</strong> — kompletnych szaf rackowych dla klastrów AI. Sprzedaż gotowych systemów, a nie samych układów, oznacza wliczanie w przychód komponentów o niskiej marży: pamięci, zasilania, chłodzenia, obudów. Przychód rośnie szybciej, ale procentowa marża spada.</p>
+      <div class="alert alert-info"><strong>To ważne rozróżnienie:</strong> niższa marża procentowa przy sprzedaży całych szaf nie oznacza gorszego biznesu — oznacza inny model sprzedaży. NVIDIA przeszła przez dokładnie to samo przy wprowadzaniu systemów NVL72. Pytanie brzmi, czy AMD potrafi z czasem podnieść marżę na tych systemach, czy zostanie sprzedawcą pudełek o cienkiej marży. Kolejne dwa kwartały dadzą odpowiedź.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <p>AMD utrzymuje <strong>bilans o konserwatywnej strukturze</strong> — z pozycją gotówkową liczoną w miliardach dolarów i niewielkim zadłużeniem netto. Jako firma fabless nie ponosi kosztów budowy fabryk, więc nakłady inwestycyjne pozostają niskie w stosunku do przychodów, a generowana gotówka jest wysoka.</p>
+      <p>Spółka prowadzi program skupu akcji własnych, choć rozwodnienie z tytułu wynagrodzeń w akcjach częściowo je neutralizuje — to standardowa cecha dużych firm technologicznych z Doliny Krzemowej i warto ją uwzględniać przy analizie zysku na akcję.</p>
+      <p>Realnym ograniczeniem nie jest kapitał, lecz <strong>dostęp do mocy produkcyjnych TSMC</strong> oraz do pamięci HBM. W środowisku, w którym cała branża walczy o te same wafle i te same kości pamięci, zdolność zabezpieczenia dostaw jest ważniejsza niż stan konta.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🚀</div><div class="catalyst-body"><h4>Segment centrów danych podwoił się w rok</h4><p>$6,7 mld w kwartale, wzrost o 107%, już 58% przychodów grupy. To nie jest zapowiedź przyszłości — to wynik, który AMD właśnie dowiozło.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🤝</div><div class="catalyst-body"><h4>OpenAI i Anthropic jako klienci zakotwiczający</h4><p>Do 2 GW akceleratorów MI450 dla Anthropic w szafach Helios plus wieloletnia umowa z OpenAI. Dwa najważniejsze laboratoria AI świata świadomie budują drugie źródło dostaw — i wybrały AMD.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔧</div><div class="catalyst-body"><h4>ROCm nadrabia dystans przy pomocy samej AI</h4><p>Współpraca z Anthropic obejmuje optymalizację oprogramowania z użyciem modeli Claude. Największa słabość AMD — ekosystem software'owy — jest adresowana narzędziem, które skraca lata pracy do miesięcy.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Prognoza podniesiona, przyspieszenie zapowiedziane na H2</h4><p>Guidance na Q3 to około $13 mld wobec $11,5 mld w Q2. Zarząd mówi wprost o akceleracji sprzedaży centrów danych w drugiej połowie roku.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🖥️</div><div class="catalyst-body"><h4>EPYC nadal odbiera rynek Intelowi</h4><p>Procesory serwerowe to stabilny, wysokomarżowy fundament, który finansuje ekspansję w AI i chroni wyniki, gdyby cykl inwestycji w akceleratory wyhamował.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">💰</div><div class="catalyst-body"><h4>Wycena wymaga perfekcji — i to już widać</h4><p>Reakcja na wyniki jest najlepszym dowodem: AMD pobiło wszystkie oczekiwania analityków, a akcje spadły o 7–9%, bo rynek liczył na więcej. Przy P/S około 17× i forward P/E powyżej 60× każdy kwartał musi być wyjątkowy, nie tylko dobry.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Marża pod presją modelu rackowego</h4><p>54% zamiast 56% to sygnał, że sprzedaż kompletnych systemów rozwadnia rentowność. Jeśli AMD nie odbuduje marży, wzrost przychodów przestanie się przekładać na proporcjonalny wzrost zysku.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🟩</div><div class="catalyst-body"><h4>NVIDIA nie stoi w miejscu</h4><p>Przewaga CUDA budowana od 2006 roku, własne rozwiązania sieciowe, kolejne generacje układów w rocznym rytmie i możliwość agresywnej reakcji cenowej. AMD goni cel, który się porusza.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Koncentracja na kilku klientach finansowanych zewnętrznie</h4><p>OpenAI i Anthropic to podmioty, które same pozyskują kapitał na inwestycje. Zacieśnienie finansowania sektora AI przełożyłoby się bezpośrednio na przesunięcia zamówień.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏭</div><div class="catalyst-body"><h4>Zależność od TSMC i dostępności HBM</h4><p>Cała produkcja u jednego partnera na Tajwanie, przy jednoczesnym niedoborze pamięci HBM w całej branży. To ryzyko jednocześnie operacyjne i geopolityczne.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>Rola w AI</th><th>Przewaga nad AMD</th><th>Słabość wobec AMD</th></tr></thead>
+        <tbody>
+          <tr><td><strong>AMD</strong></td><td>Akceleratory Instinct + EPYC</td><td>—</td><td>—</td></tr>
+          <tr><td>NVIDIA</td><td>🥇 Dominujący dostawca GPU</td><td>CUDA, sieć, skala, ekosystem</td><td>Klienci chcą alternatywy i niższych cen</td></tr>
+          <tr><td>Broadcom</td><td>Custom ASIC dla hyperscalerów</td><td>Bezpośrednie relacje z Google, Meta, OpenAI</td><td>Nie oferuje uniwersalnego GPU</td></tr>
+          <tr><td>Intel</td><td>CPU + Gaudi</td><td>Własne fabryki, wsparcie rządu USA</td><td>Traci rynek serwerowy, słaby w AI</td></tr>
+          <tr><td>Marvell</td><td>Custom silicon, optyka</td><td>Nisza interconnect</td><td>Inny segment łańcucha</td></tr>
+          <tr><td>Własne układy hyperscalerów</td><td>TPU, Trainium, MTIA</td><td>Optymalizacja pod własne obciążenia</td><td>Nie są sprzedawane na zewnątrz</td></tr>
+        </tbody>
+      </table></div>
+      <p>Pozycja: <strong>wyraźny numer dwa w akceleratorach uniwersalnych</strong> i realny beneficjent tego, że rynek nie chce monopolu. AMD konkuruje nie tyle wydajnością pojedynczego układu, ile dostępnością, ceną i gotowością do współpracy inżynieryjnej z klientem.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>52-tygodniowe minimum</td><td>$149,22</td><td>Punkt startu rajdu o ponad 230%</td></tr>
+          <tr><td>Szczyt 52-tygodniowy</td><td>$584,73</td><td>Maksimum przed wynikami</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$493</strong></td><td>-16% od szczytu, po reakcji na wyniki</td></tr>
+          <tr><td>Wsparcie S1</td><td>$460–475</td><td>Strefa dolna po spadku poearningsowym</td></tr>
+          <tr><td>Wsparcie S2</td><td>$400–420</td><td>Poziom konsolidacji z wiosny</td></tr>
+          <tr><td>Opór R1</td><td>$520–540</td><td>Domknięcie luki po wynikach</td></tr>
+          <tr><td>Opór R2</td><td>$584,73</td><td>Szczyt 52-tygodniowy</td></tr>
+          <tr><td>Opór R3</td><td>$592–606</td><td>Strefa celów analityków</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Obrona strefy $460–475</li><li>Q3 z przychodami powyżej $13 mld i marżą wracającą ku 56%</li><li>Nowa duża umowa na moc obliczeniową</li><li>Powrót do $584 i wyżej</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Przebicie $460 z wolumenem</li><li>Dalsza erozja marży brutto poniżej 54%</li><li>Ogólny odwrót od spółek AI</li><li>Test $400–420</li></ul></div>
+      </div>
+      <p>Techniczny obraz po wynikach jest osłabiony, ale trend długoterminowy pozostaje wzrostowy — kurs jest ponad trzykrotnie wyżej niż rok temu. Spadek o 12% w ostatnim miesiącu to w dużej mierze redukcja ryzyka przed publikacją, a nie zmiana kierunku. Kluczowy test to obrona okolic $460.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Katalizator właśnie się wypalił, sentyment osłabiony reakcją na wyniki. Brak nowego impulsu do wyników Q3 w listopadzie. Poczekaj na stabilizację powyżej $475.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Data Center +107%, guidance podniesione, kontrakty z OpenAI i Anthropic. Konsensus 51 analityków: Strong Buy, cel $592. Cel $560–650.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Trwała pozycja drugiego dostawcy na rynku, który nie chce monopolu. Ryzyko: cykliczność półprzewodników i wysoka baza wyceny.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia wejścia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji:</strong> 3–5% portfela — to spółka o dużej kapitalizacji, ale z betą znacznie powyżej rynku</li>
+        <li><strong>Pierwsza transza:</strong> $470–495 (poziom obecny, po korekcie poearningsowej)</li>
+        <li><strong>Druga transza:</strong> $420–450 przy głębszej korekcie sektora</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w okolicach $590 (konsensus), reszta powyżej $650</li>
+        <li><strong>Wyjście z tezy:</strong> marża brutto poniżej 52% przez dwa kwartały lub sygnały opóźnień w zamówieniach OpenAI i Anthropic</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$560 – $650</div><div class="fair-value-note">Scenariusz negatywny: $320–380 | Scenariusz pozytywny: $720–800</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Segment centrów danych podwoił się w rok</strong> — $6,7 mld w kwartale, +107%, już 58% przychodów; guidance na Q3 podniesione do około $13 mld</li>
+          <li><strong>OpenAI i Anthropic jako klienci zakotwiczający</strong> — do 2 GW MI450 w szafach Helios; dwa najważniejsze laboratoria AI świata budują drugie źródło dostaw i wybrały AMD</li>
+          <li><strong>Korekta o 16% od szczytu przy nienaruszonych fundamentach</strong> — konsensus 51 analityków to Strong Buy z celem $592 (+20%)</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Wycena wymaga perfekcji</strong> — pobicie wszystkich prognoz zakończyło się spadkiem o 7–9%, bo rynek liczył na wynik wyjątkowy, nie dobry</li>
+          <li><strong>Marża brutto 54% zamiast 56%</strong> — sprzedaż całych szaf Helios rozwadnia rentowność; bez odbudowy marży wzrost przychodów nie przełoży się na zysk</li>
+          <li><strong>NVIDIA z przewagą CUDA i zależność od TSMC</strong> — AMD goni ruchomy cel, mając całą produkcję u jednego partnera na Tajwanie</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> marża brutto poniżej 52% w kolejnych dwóch kwartałach albo informacja o przesunięciu zamówień przez OpenAI lub Anthropic → korekta w stronę $380–420.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> Q3 z przychodami powyżej $13 mld przy marży wracającej ku 56% i kolejnym dużym kontraktem na moc obliczeniową → powrót do $584 i atak na cele analityków.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">AMD przeszło w ciągu dwóch lat drogę, której większość spółek nie pokonuje nigdy: z producenta procesorów aspirującego do rynku AI stało się <strong>firmą AI, która nadal produkuje procesory</strong>. Segment centrów danych podwoił się rok do roku, osiągnął $6,7 mld w kwartale i odpowiada już za 58% przychodów grupy. Do tego doszły kontrakty, o jakich cztery lata temu nikt by nie pomyślał — OpenAI i Anthropic zamawiają moc obliczeniową liczoną w gigawatach, a Anthropic dodatkowo pomaga optymalizować oprogramowanie ROCm przy użyciu własnych modeli.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Problem nie leży więc w spółce, lecz w cenie. Wyniki z 4 sierpnia pokazały to w sposób podręcznikowy: AMD <strong>pobiło oczekiwania na przychodach, zysku i prognozie — i straciło 7–9%</strong>. Rynek wycenił nie dobry kwartał, lecz wyjątkowy, a marża brutto 54% zamiast 56% wystarczyła, by rozczarować. Przy około 17-krotności tegorocznej sprzedaży płacisz za AMD mnożnik zbliżony do NVIDII, mimo że AMD ma mniejszy udział w rynku i wciąż słabszy ekosystem narzędzi. To wycena, która zakłada, że dogonienie lidera jest przesądzone.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Skala w centrach danych.</strong> $6,7 mld kwartalnie przy wzroście o 107% i udziale 58% w przychodach — warunek spełniony z nawiązką.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Klienci zakotwiczający.</strong> OpenAI i Anthropic z kontraktami wieloletnimi i wolumenem liczonym w gigawatach. Wiarygodność jako drugiego dostawcy została potwierdzona rynkowo.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Odbudowa marży.</strong> Spadek do 54% wynika z rozruchu platformy Helios. Kluczowe pytanie: czy AMD zdoła podnieść rentowność sprzedaży całych szaf, czy zostanie dostawcą pudełek o cienkiej marży.</div></li>
+          <li><span class="ck wait">?</span><div><strong>ROCm dogoni CUDA.</strong> Współpraca z Anthropic to obiecujący skrót, ale ekosystem NVIDII budowany jest od 2006 roku i wciąż stanowi realną barierę.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Rozsądna wycena.</strong> Przy forward P/E powyżej 60× i mnożniku sprzedaży na poziomie lidera rynku nie ma marginesu bezpieczeństwa — każdy potknięcie kosztuje kilkanaście procent.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Listopad 2026</strong></td><td>Wyniki Q3 2026</td><td>Test guidance około $13 mld i — ważniejsze — kierunku marży brutto</td></tr>
+            <tr><td>H2 2026</td><td>Ramp dostaw MI450 i szaf Helios do OpenAI i Anthropic</td><td>Pierwsze realne wolumeny pokażą, czy AMD dowozi w terminie</td></tr>
+            <tr><td>H2 2026 – 2027</td><td>Potencjalne nowe umowy z hyperscalerami</td><td>Każdy kolejny duży klient potwierdza status drugiego dostawcy i podnosi prognozy</td></tr>
+            <tr><td>Na bieżąco</td><td>Premiery i ceny kolejnych generacji NVIDII</td><td>Agresywna reakcja lidera bezpośrednio uderza w marże AMD</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Przychody Data Center</td><td>$6,7 mld (+107% r/r)</td><td>wzrost poniżej 50% r/r</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża brutto</td><td>54%</td><td>&lt; 52%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Udział Data Center w przychodach</td><td>58%</td><td>spadek udziału</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Realizacja kontraktów AI (GW)</td><td>OpenAI + Anthropic do 2 GW</td><td>komunikaty o opóźnieniach</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Forward P/E</td><td>ok. 60×+ na 2026E</td><td>brak marginesu bezpieczeństwa</td><td><span class="mon-dot r"></span>Ryzyko</td></tr>
+            <tr><td>Kurs vs wsparcie $460</td><td>~7% powyżej</td><td>trwałe przebicie w dół</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji:</strong> 3–5% portfela — duża spółka, ale o zmienności wyraźnie wyższej niż rynek</li>
+          <li><strong>Pierwsza transza:</strong> $470–495, czyli poziom obecny po korekcie poearningsowej</li>
+          <li><strong>Druga transza:</strong> $420–450, jeśli sektor AI zaliczy szerszy odwrót</li>
+          <li><strong>Realizacja zysku:</strong> częściowa przy $590 (konsensus analityków), reszta powyżej $650</li>
+          <li><strong>Kluczowy warunek techniczny:</strong> obrona strefy $460 — jej trwałe przebicie otwiera drogę ku $420</li>
+          <li><strong>Wyjście z tezy:</strong> marża brutto poniżej 52% przez dwa kolejne kwartały albo opóźnienia w zamówieniach kluczowych klientów</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--buy)">📈 KUPNO — świetna spółka po uczciwej korekcie, ale bez marginesu błędu</div>
+        <p>AMD jest dziś jedną z niewielu firm zdolnych realnie konkurować z NVIDIĄ i jedyną, która robi to z uniwersalnymi akceleratorami. Fundamentalnie sytuacja jest bardzo mocna: przychody z centrów danych podwoiły się w rok, prognoza została podniesiona, a dwa najważniejsze laboratoria AI świata podpisały wieloletnie umowy. Sierpniowa korekta o 16% od szczytu wynikła z rozczarowania oczekiwań, nie z pogorszenia biznesu — a to zwykle lepszy moment na zakup niż euforia.</p>
+        <p>Zastrzeżenie dotyczy ceny, nie spółki. Przy około 17-krotności sprzedaży i forward P/E powyżej 60× <strong>AMD nie ma marginesu bezpieczeństwa</strong> — każdy kwartał musi być wyjątkowy, a nie tylko dobry, co właśnie zostało boleśnie zademonstrowane. Dlatego rozsądniejsze jest budowanie pozycji transzami i pilnowanie jednej liczby ważniejszej od przychodów: <strong>marży brutto</strong>. Jeśli wróci powyżej 56%, teza działa w pełni. Jeśli osunie się poniżej 52%, oznaczać to będzie, że AMD kupuje udział w rynku kosztem rentowności — a za to rynek nie zapłaci obecnych mnożników.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$560–650</b></div>
+          <div><span>Scenariusz negatywny</span><b>$320–380</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$720–800</b></div>
+          <div><span>Sugerowana pozycja</span><b>3–5% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3 — listopad</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 6 sierpnia 2026 | Cena od użytkownika: $493 | Dane: AMD IR (Q2 2026, 4 sierpnia), Nasdaq, StockAnalysis, Seeking Alpha, TradingKey | Mnożniki wyceny oparte na szacunkach — traktuj orientacyjnie | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WULF — TeraWulf | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#14b8a6; --accent2:#5eead4; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#04191a 0%,#0f1117 50%,#07171a 100%); border-bottom:1px solid var(--border); padding:32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(20,184,166,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#000; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
+  .rating-badge.buy { background:rgba(76,175,80,0.15); border:2px solid var(--buy); color:var(--buy); }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--buy); } .metric-value.red { color:var(--sell); } .metric-value.yellow { color:var(--neutral); } .metric-value.teal { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#000; font-size:11px; font-weight:700; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+  .chip { background:var(--surface2); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:4px 12px; border-radius:20px; }
+  .chip.green { border-color:var(--buy); color:var(--buy); } .chip.teal { border-color:var(--accent); color:var(--accent2); } .chip.yellow { border-color:var(--neutral); color:var(--neutral); } .chip.red { border-color:var(--sell); color:var(--sell); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.strong-buy { color:var(--strong-buy); } .rating-box .rating-text.neutral { color:var(--neutral); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--strong-buy); } .bear-box ul li::before { color:var(--strong-sell); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(20,184,166,0.08),rgba(94,234,212,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(20,184,166,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .alert-danger { background:rgba(213,0,0,0.10); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(0,200,83,.15); color:#00c853; border:1px solid rgba(0,200,83,.4); }
+  .ck.no  { background:rgba(213,0,0,.13);  color:#ff6b6b; border:1px solid rgba(213,0,0,.35); }
+  .ck.wait{ background:rgba(255,215,64,.13);color:#ffd740; border:1px solid rgba(255,215,64,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#00c853; } .mon-dot.y { background:#ffd740; } .mon-dot.r { background:#ff6d00; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: WULF</div>
+    <div class="company-name">TeraWulf Inc.</div>
+    <div class="company-sub">Kampus Lake Mariner (Nowy Jork) · Kolokacja AI/HPC · Kontrakty: Anthropic, Fluidstack (gwarancje Google), Core42 · Ex-kopacz bitcoina</div>
+    <div class="header-meta">
+      <div class="rating-badge buy">📈 KUPNO (spekulacyjne)</div>
+      <span class="meta-tag">AI Data Centers</span>
+      <span class="meta-tag">Kontrakty $27 mld</span>
+      <span class="meta-tag">Wysoka dźwignia</span>
+      <span class="meta-tag">Ekstremalna zmienność</span>
+      <div class="price-display">
+        <div class="price-main">~$17</div>
+        <div class="price-sub">10.08.2026 | 52W: $4,64–$29,84</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (10.08.2026)</div><div class="metric-value">~$17</div><div class="metric-detail">-43% od szczytu $29,84 | +266% od dna</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$8,4 mld</div><div class="metric-detail">52W: $4,64–$29,84</div></div>
+    <div class="metric-card"><div class="metric-label">Zakontraktowane przychody</div><div class="metric-value teal">ponad $27 mld</div><div class="metric-detail">Anthropic + Fluidstack + Core42</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value yellow">$44,8 mln</div><div class="metric-detail">HPC: $31,9 mln (71% całości)</div></div>
+    <div class="metric-card"><div class="metric-label">Strata netto Q2</div><div class="metric-value red">-$939,9 mln</div><div class="metric-detail">W tym $755,7 mln niegotówkowe (warranty Google)</div></div>
+    <div class="metric-card"><div class="metric-label">Forward P/E</div><div class="metric-value red">nie dotyczy</div><div class="metric-detail">Spółka nierentowna w ujęciu GAAP</div></div>
+    <div class="metric-card"><div class="metric-label">Moc rozliczana</div><div class="metric-value yellow">102 MW</div><div class="metric-detail">Z 378 MW zakontraktowanych u Fluidstack</div></div>
+    <div class="metric-card"><div class="metric-label">Cel analityków</div><div class="metric-value green">$38,39</div><div class="metric-detail">+126% | 18 analityków, Strong Buy</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest TeraWulf?</h3>
+      <p>TeraWulf (NASDAQ: WULF) to operator centrów danych, który przeszedł tę samą drogę co Core Scientific i MARA — z kopania bitcoina do kolokacji dla sztucznej inteligencji. Kluczowe aktywo to <strong>kampus Lake Mariner w stanie Nowy Jork</strong>, zasilany energią o zerowej emisji, gdzie spółka buduje kolejne hale danych oznaczane jako CB-3, CB-4 i CB-5.</p>
+      <p>Różnica wobec konkurentów jest zasadnicza i warto ją od razu podkreślić: <strong>TeraWulf ma już podpisane kontrakty na ponad 27 miliardów dolarów</strong> z trzema klientami — Anthropic, Fluidstack (z gwarancjami kredytowymi Google) oraz Core42. W drugim kwartale przychody z kolokacji AI stanowiły już <strong>71% całości</strong>. To najbardziej zaawansowany pivot w całej grupie ex-górników bitcoina.</p>
+      <h3>Kluczowe zdarzenia (12 miesięcy)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>2025</td><td>Kurs w okolicach $4,64 (52-tygodniowe dno) — spółka traktowana jako mały kopacz bitcoina</td><td style="color:var(--sell)">Dno</td></tr>
+          <tr><td><strong>Sierpień 2025</strong></td><td><strong>Umowy z Fluidstack na 378 MW w Lake Mariner, z gwarancjami kredytowymi Google</strong> wspierającymi zobowiązania najemcy</td><td style="color:var(--strong-buy)">↑↑ Przełom</td></tr>
+          <tr><td>2025/26</td><td>Kolejne kontrakty: Core42 oraz <strong>Anthropic</strong> — łączny portfel przekracza $27 mld</td><td style="color:var(--strong-buy)">↑↑ Skala</td></tr>
+          <tr><td>H1 2026</td><td>Rajd do szczytu $29,84; sektor ex-górników bije bitcoina o 70%</td><td style="color:var(--buy)">Hossa</td></tr>
+          <tr><td>Początek lipca 2026</td><td>Oddanie hali CB-3 — moc rozliczana rośnie z 81 do <strong>102 MW</strong>, co uruchamia $600 mln gwarancji Google</td><td style="color:var(--buy)">↑ Kamień milowy</td></tr>
+          <tr><td><strong>5 sierpnia 2026</strong></td><td><strong>Q2: przychody $44,8 mln, HPC 71% całości, strata netto $939,9 mln — z czego $755,7 mln to niegotówkowa wycena warrantów Google</strong></td><td style="color:var(--neutral)">Mylący nagłówek</td></tr>
+          <tr><td>6–10 sierpnia 2026</td><td>Bernstein podtrzymuje Outperform; Citizens obniża cel do $29; kurs osuwa się do okolic $17</td><td style="color:var(--neutral)">Korekta</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Najważniejsza rzecz do zrozumienia w tym raporcie:</strong> ogromna strata netto $939,9 mln wygląda katastrofalnie, ale <strong>$755,7 mln z niej to niegotówkowa zmiana wartości warrantów Google</strong>. Te warranty zyskały na wartości, ponieważ <em>kurs akcji wzrósł</em> — a wzrost wartości zobowiązania wobec Google księguje się jako strata. Paradoksalnie im lepiej radzi sobie akcja, tym większa „strata" w rachunku wyników. To nie jest utrata gotówki, tylko efekt księgowy sukcesu.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Linia</th><th>Opis</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Kolokacja AI/HPC</strong></td><td>Wynajem mocy i przestrzeni dla klastrów GPU; umowy dziesięcioletnie</td><td>🔥 $31,9 mln w Q2 — już 71% przychodów</td></tr>
+          <tr><td><strong>Kampus Lake Mariner</strong></td><td>Hale CB-3 (oddana), CB-4 (rozruch), CB-5 (start początek 2027)</td><td>⚡ 102 MW rozliczane, w budowie kolejne</td></tr>
+          <tr><td><strong>Kopanie bitcoina</strong></td><td>Historyczny rdzeń działalności</td><td>📉 Wygaszany — moc przenoszona do AI</td></tr>
+          <tr><td>Energia zeroemisyjna</td><td>Zasilanie z elektrowni wodnej i jądrowej w stanie Nowy Jork</td><td>Argument dla klientów wrażliwych na ślad węglowy</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Moat — dostęp do mocy plus podpisy pod umowami</h3>
+      <p>Fosa TeraWulf ma dwie warstwy. Pierwsza to ta sama co u Core Scientific i MARA: <strong>gotowe przyłącza energetyczne</strong> w czasach, gdy kolejka po nowe trwa w USA od czterech do siedmiu lat. Druga jest znacznie rzadsza — <strong>podpisane kontrakty typu take-or-pay na dziesięć lat z klientami pierwszej ligi</strong>, a w przypadku Fluidstack dodatkowo zabezpieczone gwarancjami Google.</p>
+      <p>Ta druga warstwa jest kluczowa. Megawaty ma wielu; umowy z Anthropic i wsparcie kredytowe Google ma dziś praktycznie tylko TeraWulf. Do tego dochodzi energia zeroemisyjna, która dla hyperscalerów deklarujących cele klimatyczne bywa warunkiem, a nie dodatkiem.</p>
+      <div class="alert alert-warn"><strong>Ograniczenie:</strong> to model kolokacyjny, czyli wynajem powierzchni i prądu. TeraWulf nie posiada procesorów ani oprogramowania — nie ma więc przewagi technologicznej, tylko lokalizacyjną i kontraktową. Marże w tym modelu są przewidywalne, ale nie spektakularne.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Deficyt mocy dla AI:</strong> ten sam trend, który napędza Bloom Energy i Core Scientific — brakuje gigawatów, a przyłączenie do sieci trwa lata</li>
+        <li><strong>Rynek kolokacji AI:</strong> operatorzy typu neocloud (Fluidstack, CoreWeave, Nebius) nie budują własnych obiektów, tylko je wynajmują — to trwały model</li>
+        <li><strong>Kontrakty dziesięcioletnie:</strong> zamieniają zmienny biznes energetyczny w strumień przypominający najem nieruchomości komercyjnych</li>
+        <li><strong>Energia zeroemisyjna w stanie Nowy Jork:</strong> przewaga regulacyjna i wizerunkowa wobec kampusów zasilanych gazem</li>
+        <li><strong>Cykliczność:</strong> historycznie skrajna (bitcoin), obecnie malejąca wraz z przechodzeniem na długoterminowe umowy najmu</li>
+      </ul>
+      <div class="alert alert-success"><strong>Pozycja w grupie porównawczej:</strong> spośród trzech analizowanych przez nas ex-górników bitcoina TeraWulf jest <strong>najdalej w przemianie</strong>. Core Scientific ma kontrakty z CoreWeave i AMD, MARA nie ma żadnego ogłoszonego najemcy AI, a TeraWulf ma portfel przekraczający $27 mld z trzema klientami — w tym z Anthropic i z gwarancjami Google.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Klient</th><th>Zakres</th><th>Zabezpieczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Fluidstack</strong></td><td>378 MW w Lake Mariner, umowy dziesięcioletnie</td><td style="color:var(--buy)">Gwarancje kredytowe Google — $600 mln już aktywne</td></tr>
+          <tr><td><strong>Anthropic</strong></td><td>Duże wdrożenie mocy obliczeniowej</td><td>Kontrakt długoterminowy</td></tr>
+          <tr><td><strong>Core42</strong></td><td>Kolokacja AI</td><td>Kontrakt długoterminowy</td></tr>
+          <tr><td>Łącznie</td><td colspan="2"><strong>Zakontraktowane przychody przekraczające $27 mld</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p>Model sprzedaży opiera się na kilku bardzo dużych umowach zamiast wielu małych. To daje przewidywalność, ale też koncentrację. Najciekawszym elementem konstrukcji jest <strong>wsparcie kredytowe Google</strong> dla zobowiązań Fluidstack — dzięki niemu ryzyko kontrahenta zostaje przeniesione z małego operatora chmury na jedną z najbardziej wiarygodnych firm świata.</p>
+      <div class="alert alert-success"><strong>Dlaczego gwarancje Google są tak istotne:</strong> w analizie Core Scientific wskazywałem, że kontrakt take-or-pay jest wart tyle, ile wypłacalność podpisującego. Fluidstack to stosunkowo młoda firma finansowana kapitałem zewnętrznym. Gwarancja Google zmienia ten kontrakt z ryzykownego w bankowalny — i to właśnie ona odblokowała finansowanie budowy kolejnych hal.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody ogółem</td><td><strong>$44,8 mln</strong></td><td>Wciąż niewielkie wobec skali kontraktów</td></tr>
+          <tr><td>— z czego kolokacja HPC</td><td><strong>$31,9 mln (71%)</strong></td><td style="color:var(--buy)">Przemiana modelu już widoczna w rachunku</td></tr>
+          <tr><td>— z czego kopanie bitcoina</td><td>ok. $12,9 mln</td><td>Malejący udział</td></tr>
+          <tr><td>Moc rozliczana</td><td>81 MW → <strong>102 MW</strong> (po CB-3, lipiec)</td><td>Z 378 MW zakontraktowanych u samego Fluidstack</td></tr>
+          <tr><td>Portfel kontraktowy</td><td><strong>ponad $27 mld</strong></td><td>Rozłożony na kolejne dziesięć lat</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Jak czytać te liczby</h3>
+      <p>Zestawienie $44,8 mln przychodów kwartalnych z portfelem $27 mld wygląda absurdalnie — i wymaga wyjaśnienia. Powód jest prosty: <strong>rozliczanych jest dopiero 102 MW mocy</strong>, podczas gdy same umowy z Fluidstack obejmują 378 MW, a do tego dochodzą kontrakty z Anthropic i Core42. Przychody pojawiają się dopiero w momencie oddania kolejnych hal do użytku.</p>
+      <p>Harmonogram wygląda następująco: CB-3 oddana w lipcu, CB-4 w fazie rozruchu z dostawami rozłożonymi na drugą połowę 2026 roku, CB-5 planowana na początek 2027. Każdy kolejny etap przekłada się bezpośrednio na skokowy wzrost przychodów.</p>
+      <div class="alert alert-info">Kupując dziś TeraWulf, <strong>nie kupujesz obecnych przychodów, lecz harmonogram budowy</strong>. Cała teza sprowadza się do pytania, czy spółka odda kolejne hale w terminie i w budżecie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $17</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>~$8,4 mld</td><td>—</td></tr>
+          <tr><td>Gotówka i środki ograniczone</td><td>~$3,0 mld</td><td style="color:var(--buy)">Bardzo duża poduszka</td></tr>
+          <tr><td>Dług długoterminowy</td><td>$3,02 mld</td><td style="color:var(--sell)">Wysoka dźwignia</td></tr>
+          <tr><td>Obligacje zamienne krótkoterminowe</td><td>$1,10 mld</td><td style="color:var(--sell)">Ryzyko rozwodnienia</td></tr>
+          <tr><td>Wartość przedsiębiorstwa (EV)</td><td>~$9,5 mld</td><td>—</td></tr>
+          <tr><td><strong>EV / zakontraktowane przychody ($27 mld)</strong></td><td><strong>ok. 0,35×</strong></td><td style="color:var(--buy)">✅ Najbardziej sensowna miara — bardzo nisko</td></tr>
+          <tr><td>P/S na bieżących przychodach</td><td>ponad 45×</td><td style="color:var(--sell)">⚠️ Bez znaczenia — rozliczane 102 z setek MW</td></tr>
+          <tr><td>Cel analityków (18 firm)</td><td>$38,39 · Strong Buy</td><td style="color:var(--strong-buy)">+126%; Morgan Stanley aż $72, Citizens $29</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td><strong>nie dotyczy</strong></td><td>Strata netto $939,9 mln w samym Q2</td></tr>
+          <tr><td><strong>Forward P/E (FY2026)</strong></td><td><strong>nie dotyczy</strong></td><td>Konsensus nie zakłada zysku netto w tym roku</td></tr>
+          <tr><td><strong>Forward P/E (FY2027)</strong></td><td><strong>brak wiarygodnych danych</strong></td><td>Zależny od tempa oddawania hal; rozrzut prognoz bardzo duży</td></tr>
+          <tr><td>Strata skorygowana o pozycje niegotówkowe</td><td>ok. -$184 mln</td><td>Po wyłączeniu $755,7 mln wyceny warrantów Google</td></tr>
+          <tr><td>Kiedy możliwy zysk</td><td>najwcześniej 2027–2028</td><td>Po uruchomieniu CB-4 i CB-5 oraz rozliczaniu setek megawatów</td></tr>
+          <tr><td>Peer: Core Scientific, MARA</td><td>również nierentowne</td><td>Cała grupa wyceniana przez pryzmat mocy i kontraktów, nie zysku</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> Forward P/E nie ma tu zastosowania i przez najbliższy rok mieć nie będzie — spółka jest w fazie budowy, a nie zbierania plonów. Właściwą miarą jest <strong>relacja wartości przedsiębiorstwa do zakontraktowanych przychodów, wynosząca około 0,35×</strong>. Dla porównania: przy analizie Core Scientific wskaźnik ten wynosił około 0,45×, a tam kontrakty były niższe. Uwaga na pułapkę: raportowana strata jest zawyżona o wycenę warrantów Google, która rośnie wraz z kursem akcji — po jej wyłączeniu strata operacyjna jest około pięciokrotnie mniejsza.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$22 – $32</div><div class="fair-value-note">Baza: EV/zakontraktowane przychody 0,45–0,60× przy terminowym oddawaniu hal | Konsensus $38,39, Citizens $29, Morgan Stanley $72 | Scenariusz negatywny (opóźnienia budowy, kolejne emisje, problemy najemcy): $9–12 | Scenariusz pozytywny (CB-4 i CB-5 w terminie, nowe kontrakty): $40–48 | Przy $17 potencjał od -35% do +90%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026</th><th>Q1 2026</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Strata netto (GAAP)</td><td>-$939,9 mln</td><td>-$427,6 mln</td><td>Nagłówek mylący</td></tr>
+          <tr><td>— w tym wycena warrantów Google</td><td><strong>-$755,7 mln</strong></td><td>-$216,3 mln</td><td style="color:var(--neutral)">Pozycja niegotówkowa</td></tr>
+          <tr><td>Strata po wyłączeniu warrantów</td><td>ok. -$184 mln</td><td>ok. -$211 mln</td><td style="color:var(--buy)">Realna skala jest pięciokrotnie mniejsza</td></tr>
+          <tr><td>Udział HPC w przychodach</td><td><strong>71%</strong></td><td>niższy</td><td style="color:var(--buy)">Przemiana modelu postępuje</td></tr>
+        </tbody>
+      </table></div>
+      <p>Mechanizm warrantów wymaga wyjaśnienia, bo jest kontrintuicyjny. Google otrzymało warranty na akcje TeraWulf w ramach pakietu wsparcia kredytowego. Zobowiązanie z ich tytułu wycenia się w każdym kwartale według wartości rynkowej — <strong>im wyżej stoi kurs akcji, tym droższe staje się to zobowiązanie i tym większa strata księgowa</strong>. Wzrost kursu w drugim kwartale wygenerował więc stratę $755,7 mln, mimo że z konta spółki nie wypłynął ani jeden dolar.</p>
+      <div class="alert alert-warn"><strong>Praktyczna wskazówka:</strong> przy TeraWulf ignoruj dolną linię rachunku wyników. Patrz na trzy rzeczy: <strong>liczbę rozliczanych megawatów</strong>, <strong>udział przychodów HPC</strong> oraz <strong>terminowość oddawania kolejnych hal</strong>. To one decydują o wartości spółki, a nie księgowe przeszacowania.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka i środki ograniczone</td><td><strong>~$3,0 mld</strong></td><td style="color:var(--buy)">Bardzo duża poduszka na budowę</td></tr>
+          <tr><td>Dług długoterminowy</td><td>$3,02 mld</td><td style="color:var(--sell)">Wysoka dźwignia</td></tr>
+          <tr><td>Obligacje zamienne krótkoterminowe</td><td>$1,10 mld</td><td style="color:var(--sell)">Zamiana na akcje rozwodni akcjonariuszy</td></tr>
+          <tr><td>Zadłużenie łącznie</td><td>ok. $4,12 mld</td><td>Przewyższa gotówkę o ok. $1,1 mld</td></tr>
+          <tr><td>Warranty Google</td><td>zobowiązanie wyceniane rynkowo</td><td style="color:var(--neutral)">Rośnie wraz z kursem akcji</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>To najbardziej zadłużona spółka z całej trójki ex-górników.</strong> Łączne zobowiązania rzędu $4,12 mld przy kapitalizacji około $8,4 mld oznaczają, że TeraWulf finansuje budowę gigawatów mocy głównie długiem i instrumentami zamiennymi. Poduszka $3,0 mld daje komfort na najbliższe kwartały, ale <strong>obligacje zamienne to odroczone rozwodnienie</strong> — przy wyższym kursie zostaną zamienione na akcje. Dodatkowo warranty Google stanowią kolejną warstwę potencjalnego rozwodnienia. Akcjonariusz powinien zakładać, że jego udział będzie się kurczył.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📜</div><div class="catalyst-body"><h4>Portfel kontraktowy ponad $27 mld — najlepszy w grupie</h4><p>Anthropic, Fluidstack i Core42 to trzy podpisane umowy długoterminowe. Dla porównania MARA nie ma ani jednego ogłoszonego najemcy AI, a Core Scientific ma dwóch. TeraWulf jest najdalej w przemianie.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔒</div><div class="catalyst-body"><h4>Gwarancje Google zmieniają ryzyko kontrahenta</h4><p>$600 mln wsparcia kredytowego dla zobowiązań Fluidstack już weszło w życie po oddaniu CB-3. To przenosi ryzyko z młodej firmy chmurowej na jedną z najbardziej wiarygodnych korporacji świata.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📊</div><div class="catalyst-body"><h4>Kolokacja to już 71% przychodów</h4><p>Przemiana nie jest zapowiedzią, lecz faktem widocznym w rachunku wyników. $31,9 mln z $44,8 mln pochodzi z wynajmu mocy dla AI, a nie z kopania bitcoina.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💰</div><div class="catalyst-body"><h4>Wycena 0,35× zakontraktowanych przychodów</h4><p>Rynek płaci dziś około jednej trzeciej wartości podpisanych już umów. Konsensus 18 analityków to $38,39, czyli ponad dwukrotność obecnego kursu, a Morgan Stanley celuje w $72.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏗️</div><div class="catalyst-body"><h4>Harmonogram budowy jako mechanizm wzrostu przychodów</h4><p>CB-4 w rozruchu z dostawami w drugiej połowie 2026, CB-5 na początku 2027. Każda oddana hala to skokowy przyrost rozliczanych megawatów i przychodów.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🏗️</div><div class="catalyst-body"><h4>Rozliczane jest 102 MW z setek zakontraktowanych</h4><p>Cała teza opiera się na terminowym oddawaniu kolejnych hal. Budowa centrów danych o wysokiej gęstości notorycznie się opóźnia — transformatory, chłodzenie, wykonawcy. Każdy kwartał poślizgu to przesunięte przychody przy niezmiennych kosztach odsetkowych.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💸</div><div class="catalyst-body"><h4>Zadłużenie $4,12 mld i wielowarstwowe rozwodnienie</h4><p>Dług długoterminowy $3,02 mld plus obligacje zamienne $1,10 mld plus warranty Google. Wszystkie trzy elementy oznaczają, że przyszły wzrost wartości będzie dzielony z wierzycielami i Google, a nie tylko z akcjonariuszami.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Trzech klientów odpowiada za cały portfel</h4><p>Anthropic, Fluidstack i Core42 to wszystko. Renegocjacja lub opóźnienie u jednego z nich uderza w prognozy nieproporcjonalnie mocno — a dwaj z nich sami finansują się kapitałem zewnętrznym.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎢</div><div class="catalyst-body"><h4>Zakres roczny od $4,64 do $29,84</h4><p>Kurs zmienił się w ciągu roku ponad sześciokrotnie. Przy takiej amplitudzie stop-loss jest iluzoryczny, a pozycja o rozsądnej wielkości musi być mała.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🫧</div><div class="catalyst-body"><h4>Pełna zależność od cyklu inwestycji w AI</h4><p>Kontrakty dziesięcioletnie zakładają, że popyt na moc obliczeniową będzie rósł nieprzerwanie. Zacieśnienie finansowania sektora AI przełożyłoby się na renegocjacje i wstrzymanie kolejnych etapów.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firma</th><th>Kontrakty AI</th><th>Skarbiec BTC</th><th>Pozycja vs TeraWulf</th></tr></thead>
+        <tbody>
+          <tr><td><strong>TeraWulf (WULF)</strong></td><td style="color:var(--buy)">ponad $27 mld: Anthropic, Fluidstack, Core42</td><td>marginalny</td><td>🥇 Najdalej w przemianie</td></tr>
+          <tr><td>Core Scientific (CORZ)</td><td>CoreWeave ok. 590 MW, AMD $14 mld</td><td>brak istotnego</td><td>Podobnie zaawansowany, przeszedł bankructwo</td></tr>
+          <tr><td>MARA Holdings</td><td style="color:var(--sell)">brak ogłoszonych</td><td>35 303 BTC</td><td>Najwięcej mocy w planach, najmniej dowodów</td></tr>
+          <tr><td>Riot Platforms</td><td>AMD, wdrożenie od 5 MW</td><td>ok. 15 700 BTC</td><td>Pierwszy kontrakt, mniejsza skala</td></tr>
+          <tr><td>Cipher, IREN, Applied Digital</td><td>różnie</td><td>różnie</td><td>Ten sam wyścig o najemców</td></tr>
+          <tr><td>Equinix, Digital Realty</td><td>klasyczne REIT-y</td><td>—</td><td>Tańszy kapitał, wolniejsi w AI</td></tr>
+        </tbody>
+      </table></div>
+      <p>Pozycja: <strong>lider przemiany wśród ex-górników bitcoina</strong>. Jeśli oceniać tę grupę po jednym kryterium — ile podpisanych umów AI ma każda spółka — TeraWulf wygrywa. Płaci za to jednak najwyższą dźwignią finansową w grupie.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Dno 52-tygodniowe</td><td>$4,64</td><td>Punkt startu wzrostu o ponad 260%</td></tr>
+          <tr><td>Szczyt 52-tygodniowy</td><td>$29,84</td><td>Maksimum z 2026 roku</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>~$17</strong></td><td>-43% od szczytu, korekta po wynikach</td></tr>
+          <tr><td>Wsparcie S1</td><td>$14–15</td><td>Strefa konsolidacji z wiosny</td></tr>
+          <tr><td>Wsparcie S2</td><td>$10–12</td><td>Poziom przy szerszym odwrocie od AI</td></tr>
+          <tr><td>Opór R1</td><td>$21–23</td><td>Poziomy sprzed korekty</td></tr>
+          <tr><td>Opór R2</td><td>$29</td><td>Szczyt roczny i cel Citizens</td></tr>
+          <tr><td>Opór R3</td><td>$38</td><td>Konsensus analityków</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Obrona strefy $14–15</li><li>Oddanie CB-4 zgodnie z harmonogramem</li><li>Nowy kontrakt lub rozszerzenie istniejącego</li><li>Powrót ku $23–29</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Przebicie $14 z wolumenem</li><li>Komunikat o opóźnieniu budowy</li><li>Nowa emisja akcji lub konwersja obligacji</li><li>Zejście ku $10–12</li></ul></div>
+      </div>
+      <p>Kurs oddał 43% od rocznego szczytu, ale wciąż jest ponad trzykrotnie wyżej niż rok temu. Zmienność pozostaje ekstremalna — to akcja poruszająca się w rytmie newsów kontraktowych i sentymentu do całego sektora AI.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Wyniki właśnie opublikowane, kurs w korekcie. Najbliższy realny katalizator to oddanie CB-4 w drugiej połowie roku. Zmienność bardzo wysoka.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO spekulacyjne</div><div class="rating-note">Portfel $27 mld przy wycenie 0,35× i konsensusie $38,39. Warunek: terminowe oddawanie hal CB-4 i CB-5.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO spekulacyjne</div><div class="rating-note">Umowy dziesięcioletnie z gwarancjami Google to profil zbliżony do infrastruktury. Ale dźwignia $4,12 mld każe trzymać pozycję małą.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia wejścia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji:</strong> 1–2% portfela — zakres roczny od $4,64 do $29,84 i zadłużenie $4,12 mld wykluczają większe zaangażowanie</li>
+        <li><strong>Pierwsza transza:</strong> $15–17 (poziom obecny, po korekcie o 43% od szczytu)</li>
+        <li><strong>Druga transza:</strong> $11–13 przy szerszym odwrocie od spółek AI</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w okolicach $29 (szczyt roczny), reszta bliżej konsensusu $38</li>
+        <li><strong>Kluczowy wskaźnik:</strong> liczba rozliczanych megawatów w każdym kolejnym raporcie — to jedyna metryka, która naprawdę mówi o postępie</li>
+        <li><strong>Wyjście z tezy:</strong> komunikat o istotnym opóźnieniu CB-4 lub CB-5, albo problemy finansowe któregoś z trzech najemców</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$22 – $32</div><div class="fair-value-note">Scenariusz negatywny: $9–12 | Scenariusz pozytywny: $40–48 | Konsensus: $38,39</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Najlepszy portfel kontraktowy w grupie</strong> — ponad $27 mld z Anthropic, Fluidstack i Core42, przy wycenie zaledwie 0,35× tych przychodów</li>
+          <li><strong>Gwarancje kredytowe Google</strong> — $600 mln wsparcia dla zobowiązań Fluidstack już aktywne; ryzyko kontrahenta przeniesione na wiarygodnego gracza</li>
+          <li><strong>Przemiana widoczna w liczbach</strong> — kolokacja AI to już 71% przychodów; konsensus 18 analityków $38,39, czyli ponad dwukrotność obecnego kursu</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Rozliczane 102 MW wobec setek zakontraktowanych</strong> — cała teza zależy od terminowej budowy, a opóźnienia w tej branży są regułą</li>
+          <li><strong>Zadłużenie $4,12 mld i trzy warstwy rozwodnienia</strong> — dług, obligacje zamienne i warranty Google; przyszły wzrost dzielony z wierzycielami</li>
+          <li><strong>Zakres roczny od $4,64 do $29,84</strong> przy zaledwie trzech klientach — koncentracja i zmienność na poziomie wykluczającym większą pozycję</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> komunikat o istotnym opóźnieniu CB-4 lub CB-5, renegocjacja kontraktu przez któregoś z trzech najemców albo duża nowa emisja akcji → zejście w okolice $9–12.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> oddanie CB-4 w terminie z wyraźnym skokiem rozliczanych megawatów powyżej 200 MW oraz utrzymanie udziału HPC powyżej 80% przychodów → ruch ku $29–38.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">TeraWulf to trzecia spółka z grupy ex-górników bitcoina, którą analizujemy — po Core Scientific i MARA — i jednocześnie <strong>ta, która zaszła najdalej w przemianie</strong>. Podczas gdy MARA wciąż nie ma ani jednego ogłoszonego najemcy AI, a Core Scientific ma dwóch, TeraWulf podpisał umowy z trzema klientami na łączną kwotę <strong>przekraczającą 27 miliardów dolarów</strong>: Anthropic, Fluidstack i Core42. Kolokacja dla sztucznej inteligencji odpowiada już za 71% przychodów, a nie za obietnice w prezentacji inwestorskiej. Do tego dochodzi element, którego nie ma nikt inny w tej grupie — <strong>gwarancje kredytowe Google</strong> zabezpieczające zobowiązania Fluidstack, z czego 600 milionów dolarów weszło w życie po oddaniu hali CB-3 w lipcu.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Haczyk jest jednak poważny i sprowadza się do jednej liczby: <strong>rozliczane jest dopiero 102 megawaty</strong>, podczas gdy same umowy z Fluidstack obejmują 378 MW, a portfel kontraktowy sięga dziesiątek miliardów. Cała różnica między tymi wartościami zależy od tego, czy kolejne hale — CB-4 w tym półroczu i CB-5 na początku 2027 — powstaną w terminie i w budżecie. Do tego spółka finansuje tę budowę zadłużeniem rzędu <strong>4,12 miliarda dolarów</strong>, w tym obligacjami zamiennymi, które przy wyższym kursie zamienią się w akcje. Kupując dziś TeraWulf, nie kupujesz przychodów ani zysków — kupujesz <strong>harmonogram budowy sfinansowany długiem</strong>.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Podpisane kontrakty.</strong> Ponad $27 mld z trzema klientami, w tym z Anthropic — warunek, którego MARA wciąż nie spełnia, tutaj jest zamknięty.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Zabezpieczenie ryzyka kontrahenta.</strong> Gwarancje Google na $600 mln już aktywne, co czyni kontrakt z Fluidstack bankowalnym.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Widoczna zmiana modelu.</strong> Kolokacja AI to 71% przychodów w Q2, a nie plan na przyszłość.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Terminowa budowa CB-4 i CB-5.</strong> Kluczowy warunek nierozstrzygnięty — CB-4 dopiero w rozruchu, CB-5 zaplanowana na początek 2027.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Kontrola nad rozwodnieniem.</strong> Dług $3,02 mld, obligacje zamienne $1,10 mld i warranty Google oznaczają, że akcjonariusz podzieli się przyszłym wzrostem.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>II połowa 2026</strong></td><td>Oddawanie hali CB-4 i start naliczania czynszu</td><td>Najważniejszy test wykonawczy — pokaże, czy harmonogram jest realny</td></tr>
+            <tr><td><strong>Listopad 2026</strong></td><td>Wyniki Q3</td><td>Sprawdzenie liczby rozliczanych megawatów i udziału przychodów HPC</td></tr>
+            <tr><td>Początek 2027</td><td>Start dostaw z CB-5</td><td>Kolejny skok mocy generującej przychody</td></tr>
+            <tr><td>Na bieżąco</td><td>Konwersja obligacji zamiennych</td><td>Każda konwersja to realne rozwodnienie akcjonariuszy</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Moc rozliczana (MW)</td><td>102 MW</td><td>brak przyrostu w kolejnym kwartale</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Udział przychodów HPC</td><td>71%</td><td>spadek poniżej 60%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Portfel kontraktowy</td><td>ponad $27 mld</td><td>renegocjacja lub anulowanie umowy</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Zadłużenie łączne</td><td>$4,12 mld</td><td>wzrost powyżej $5 mld</td><td><span class="mon-dot r"></span>Ryzyko</td></tr>
+            <tr><td>Gotówka</td><td>~$3,0 mld</td><td>spadek poniżej $1,5 mld</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Harmonogram CB-4 / CB-5</td><td>rozruch / początek 2027</td><td>komunikat o opóźnieniu</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji:</strong> 1–2% portfela — przy zakresie rocznym od $4,64 do $29,84 i zadłużeniu $4,12 mld to jedyna rozsądna skala</li>
+          <li><strong>Pierwsza transza:</strong> $15–17, czyli poziom obecny po korekcie o 43% od szczytu</li>
+          <li><strong>Druga transza:</strong> $11–13 przy szerszym odwrocie od spółek związanych z AI</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w okolicach $29 (szczyt roczny), reszta bliżej konsensusu $38</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> rozliczane megawaty w każdym raporcie kwartalnym — reszta to szum</li>
+          <li><strong>Wyjście z tezy:</strong> opóźnienie CB-4 lub CB-5, kłopoty finansowe najemcy albo duża nowa emisja akcji</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--buy)">📈 KUPNO spekulacyjne — najlepiej udokumentowany pivot w grupie, ale na kredyt</div>
+        <p>Jeśli oceniać ex-górników bitcoina po jednym kryterium — ile realnych umów AI mają podpisanych — TeraWulf wygrywa bezapelacyjnie. Portfel przekraczający 27 miliardów dolarów z Anthropic, Fluidstack i Core42, gwarancje Google, kolokacja stanowiąca już 71% przychodów oraz wycena na poziomie zaledwie 0,35-krotności zakontraktowanych przychodów. Konsensus osiemnastu analityków wynosi 38,39 dolara, czyli ponad dwukrotność obecnego kursu, a Morgan Stanley celuje aż w 72 dolary.</p>
+        <p>Trzeba jednak widzieć drugą stronę bilansu. Ta przewaga została kupiona <strong>zadłużeniem 4,12 miliarda dolarów</strong>, w tym obligacjami zamiennymi, które przy wyższym kursie rozwodnią akcjonariuszy — a warranty Google robią to samo. Do tego rozliczane jest zaledwie 102 megawaty z setek zakontraktowanych, więc wszystko zależy od tego, czy beton, transformatory i chłodzenie pojawią się na czas. Dlatego traktowałbym WULF jako <strong>małą pozycję o wysokiej dźwigni na tezę deficytu mocy dla AI</strong> — najlepiej udokumentowaną z całej grupy, ale też najbardziej wrażliwą na jakiekolwiek opóźnienie. Śledź megawaty, nie nagłówki o stratach.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno spekulacyjne</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$22–32</b></div>
+          <div><span>Scenariusz negatywny</span><b>$9–12</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$40–48</b></div>
+          <div><span>Sugerowana pozycja</span><b>1–2% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Oddanie CB-4 — II poł. 2026</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 10 sierpnia 2026 | Cena od użytkownika: $17 | Dane: TeraWulf IR (Q2 2026, 5 sierpnia), SEC 10-Q, GlobeNewswire, The Block, Blockspace, StockAnalysis | Uwaga: raportowana strata zawiera $755,7 mln niegotówkowej wyceny warrantów Google | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
