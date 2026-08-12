@@ -50,15 +50,16 @@ border-radius:12px;padding:16px 20px;margin-bottom:11px;text-decoration:none;col
 .p-spekulacyjna{background:rgba(244,63,94,.13);color:var(--spek);border:1px solid rgba(244,63,94,.32)}
 .p-porownanie{background:rgba(124,140,255,.13);color:var(--porown);border:1px solid rgba(124,140,255,.32)}
 .p-nieznana{background:var(--surface2);color:var(--text-muted);border:1px solid var(--border)}
+.p-archiwum{background:var(--surface2);color:var(--text-muted);border:1px solid var(--border)}
+.karta.arch{opacity:.6;border-style:dashed}
+.karta.arch:hover{opacity:1;border-style:solid}
+.karta.arch .k-ticker{color:var(--text-muted)}
 .p-nowy{background:rgba(0,212,170,.1);color:var(--accent2);border:1px solid rgba(0,212,170,.28)}
 .k-data{font-size:12px;color:var(--text-muted)}
 .wiek{font-size:10.5px;padding:2px 8px;border-radius:10px}
 .w-swieza{background:rgba(76,175,80,.1);color:var(--kupno)}
 .w-srednia{background:rgba(255,215,64,.1);color:var(--neutralna)}
 .w-stara{background:rgba(255,109,0,.12);color:var(--sprzedaz)}
-.hist{font-size:11.5px;color:var(--text-muted);margin-top:7px}
-.hist a{color:var(--accent2);text-decoration:none}
-.hist a:hover{text-decoration:underline}
 .k-prawa{width:140px;flex-shrink:0;text-align:right}
 .k-lbl{font-size:9.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
 .k-val{font-size:14px;font-weight:700;color:#fff}
@@ -96,6 +97,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <button class="f-btn" data-f="spekulacyjna">Spekulacyjna (3)</button>
       <button class="f-btn" data-f="sprzedaz">Sprzedaż (2)</button>
       <button class="f-btn" data-f="porownanie">Porównania (2)</button>
+      <button class="f-btn" data-f="archiwum">Archiwum (2)</button>
   </div>
   <div id="lista">
 
@@ -112,7 +114,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           <span class='pill p-nowy'>szablon 15 sekcji</span>
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$17</div>
@@ -133,7 +134,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           <span class='pill p-nowy'>szablon 15 sekcji</span>
         </div>
-        <div class="hist">Starsze wersje: <a href="CORZ_analiza_2026-07-30.html">2026-07-30</a></div>
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">$20,38</div>
@@ -154,7 +154,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           <span class='pill p-nowy'>szablon 15 sekcji</span>
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$20,05</div>
@@ -175,7 +174,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           <span class='pill p-nowy'>szablon 15 sekcji</span>
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$11,83</div>
@@ -196,7 +194,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           <span class='pill p-nowy'>szablon 15 sekcji</span>
         </div>
-        <div class="hist">Starsze wersje: <a href="BE_analiza_2026-07-30.html">2026-07-30</a></div>
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">$213</div>
@@ -217,7 +214,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           <span class='pill p-nowy'>szablon 15 sekcji</span>
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">$5,30</div>
@@ -238,7 +234,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           <span class='pill p-nowy'>szablon 15 sekcji</span>
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$11,75</div>
@@ -259,7 +254,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           <span class='pill p-nowy'>szablon 15 sekcji</span>
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$92</div>
@@ -280,7 +274,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           <span class='pill p-nowy'>szablon 15 sekcji</span>
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$3,74</div>
@@ -301,11 +294,50 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           <span class='pill p-nowy'>szablon 15 sekcji</span>
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">$493</div>
         <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$560 – $650</div>
+      </div>
+    </a>
+
+    <a class="karta arch" href="CORZ_analiza_2026-07-30.html" data-kat="archiwum" data-szukaj="corz core scientific, inc. nasdaq" data-data="2026-07-30" data-ticker="CORZ">
+      <div class="k-lewa">
+        <div class="k-ticker">CORZ</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Core Scientific, Inc.</div>
+        <div class="k-meta">
+          <span class="pill p-archiwum">Archiwum</span><span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-07-30</span>
+          <span class="wiek w-swieza">świeża</span>
+          
+        </div>
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">$21,00</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$28 – $36</div>
+      </div>
+    </a>
+
+    <a class="karta arch" href="BE_analiza_2026-07-30.html" data-kat="archiwum" data-szukaj="be bloom energy corporation nyse" data-data="2026-07-30" data-ticker="BE">
+      <div class="k-lewa">
+        <div class="k-ticker">BE</div>
+        <div class="k-gielda">NYSE</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">Bloom Energy Corporation</div>
+        <div class="k-meta">
+          <span class="pill p-archiwum">Archiwum</span><span class="pill p-neutralna">Neutralna</span>
+          <span class="k-data">2026-07-30</span>
+          <span class="wiek w-swieza">świeża</span>
+          
+        </div>
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">$222</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$180 – $290</div>
       </div>
     </a>
 
@@ -322,7 +354,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$200</div>
@@ -343,7 +374,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">$16,17</div>
@@ -364,7 +394,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">GDR $3 844</div>
@@ -385,7 +414,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~¥45-52 tys.</div>
@@ -406,7 +434,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$381,50</div>
@@ -427,7 +454,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">$3,78</div>
@@ -448,7 +474,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$14,40</div>
@@ -469,7 +494,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">€8,00 (~$9,30)</div>
@@ -490,7 +514,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$170</div>
@@ -511,7 +534,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$17</div>
@@ -532,7 +554,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$144</div>
@@ -553,7 +574,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$8,77</div>
@@ -574,7 +594,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-swieza">świeża</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">—</div>
@@ -595,7 +614,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-srednia">37 dni</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$364</div>
@@ -616,7 +634,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-srednia">37 dni</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$340</div>
@@ -637,7 +654,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-srednia">40 dni</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$147,76</div>
@@ -658,7 +674,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-srednia">40 dni</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$22,33</div>
@@ -679,7 +694,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-srednia">40 dni</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$730</div>
@@ -700,7 +714,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-srednia">42 dni</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">$52,31 / $11,74</div>
@@ -721,7 +734,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-srednia">55 dni</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">brak danych</div>
@@ -742,7 +754,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-srednia">56 dni</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">brak danych</div>
@@ -763,7 +774,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-srednia">64 dni</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">brak danych</div>
@@ -784,7 +794,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
           <span class="wiek w-srednia">64 dni</span>
           
         </div>
-        
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">~$1 030</div>
@@ -811,7 +820,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
   function odswiez(){
     var q=szukaj.value.trim().toLowerCase(), widoczne=0;
     karty.forEach(function(k){
-      var ok=(filtr==='wszystkie'||k.dataset.kat===filtr) &&
+      var ok=(filtr==='wszystkie' ? k.dataset.kat!=='archiwum' : k.dataset.kat===filtr) &&
              (!q||k.dataset.szukaj.indexOf(q)>-1);
       k.style.display=ok?'':'none'; if(ok)widoczne++;
     });
