@@ -5,18 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SNAP — Snap Inc. | Analiza Inwestycyjna 2026</title>
 <style>
-  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#facc15; --accent2:#fde047; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#00c853; --buy:#4caf50; --neutral:#ffd740; --sell:#ff6d00; --strong-sell:#d50000; --radius:12px; }
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --strong-buy:#34d399; --buy:#34d399; --neutral:#d99a52; --sell:#d99a52; --strong-sell:#db5448; --radius:12px; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
-  .header { background:linear-gradient(135deg,#1a1705 0%,#0f1117 50%,#161305 100%); border-bottom:1px solid var(--border); padding:40px 32px 32px; position:relative; overflow:hidden; }
-  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(250,204,21,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:40px 32px 32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
   .header-content { max-width:1100px; margin:0 auto; position:relative; }
   .ticker-badge { display:inline-block; background:var(--accent); color:#000; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
   .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
   .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
   .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
   .rating-badge { display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:10px 24px; border-radius:30px; }
-  .rating-badge.neutral { background:rgba(255,215,64,0.12); border:2px solid var(--neutral); color:var(--neutral); }
+  .rating-badge.neutral { background:rgba(217,154,82,0.12); border:2px solid var(--neutral); color:var(--neutral); }
   .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
   .price-display { margin-left:auto; text-align:right; }
   .price-main { font-size:30px; font-weight:800; color:#fff; }
@@ -67,20 +67,20 @@
   .rating-box .rating-text.buy { color:var(--buy); } .rating-box .rating-text.neutral { color:var(--neutral); } .rating-box .rating-text.sell { color:var(--sell); }
   .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
   .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
-  .bull-box, .thesis-buy { background:rgba(0,200,83,0.06); border:1px solid rgba(0,200,83,0.25); border-radius:10px; padding:18px; }
-  .bear-box, .thesis-avoid { background:rgba(213,0,0,0.06); border:1px solid rgba(213,0,0,0.2); border-radius:10px; padding:18px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
   .bull-box h4, .thesis-buy h4 { color:var(--strong-buy); margin-bottom:12px; }
   .bear-box h4, .thesis-avoid h4 { color:var(--strong-sell); margin-bottom:12px; }
   .bull-box ul li::before { color:var(--strong-buy); } .bear-box ul li::before { color:var(--strong-sell); }
-  .fair-value-box { background:linear-gradient(135deg,rgba(250,204,21,0.08),rgba(253,224,71,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-box { background:linear-gradient(135deg,rgba(217,154,82,0.08),rgba(217,154,82,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
   .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
   .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
   .fair-value-note { color:var(--text-muted); font-size:13px; }
   .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
-  .alert-warn { background:rgba(255,215,64,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
-  .alert-info { background:rgba(250,204,21,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
-  .alert-success { background:rgba(0,200,83,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
-  .alert-danger { background:rgba(213,0,0,0.08); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
+  .alert-warn { background:rgba(217,154,82,0.06); border-left:3px solid var(--neutral); color:var(--text-muted); }
+  .alert-info { background:rgba(217,154,82,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.06); border-left:3px solid var(--strong-buy); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.08); border-left:3px solid var(--strong-sell); color:var(--text-muted); }
   .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
   .catalyst-item:last-child { border-bottom:none; }
   .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
@@ -97,7 +97,7 @@
   .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
   .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
   .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
-  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
     display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
     color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
   .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
@@ -120,11 +120,11 @@
   .check-list li:last-child { border-bottom:none; }
   .check-list li::before { content:none; }
   .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
-  .ck.yes { background:rgba(0,200,83,.15); color:#00c853; border:1px solid rgba(0,200,83,.4); }
-  .ck.no  { background:rgba(213,0,0,.13);  color:#ff6b6b; border:1px solid rgba(213,0,0,.35); }
-  .ck.wait{ background:rgba(255,215,64,.13);color:#ffd740; border:1px solid rgba(255,215,64,.35); }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13);color:#d99a52; border:1px solid rgba(217,154,82,.35); }
   .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
-  .mon-dot.g { background:#00c853; } .mon-dot.y { background:#ffd740; } .mon-dot.r { background:#ff6d00; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#d99a52; }
   .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
   .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
   .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
@@ -133,9 +133,32 @@
   .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
   .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
 </style>
+
+<style id="tp-rating-bar">
+  :root { --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; }
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
 </head>
 <body>
-<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
 
 
 <div class="header">
@@ -145,7 +168,6 @@
     <div class="company-name">Snap Inc.</div>
     <div class="company-sub">Snapchat: 493M DAU · Snapchat+ i Lens+ (subskrypcje) · Specs — okulary AR za $2 195 · Santa Monica, CA | Kontrola głosów: Evan Spiegel</div>
     <div class="header-meta">
-      <div class="rating-badge neutral">⚖️ NEUTRALNA — poprawa fundamentów, ale kosztowny zakład na AR</div>
       <span class="meta-tag">Social media</span>
       <span class="meta-tag">Reklama</span>
       <span class="meta-tag">AR / Specs</span>
@@ -158,6 +180,8 @@
   </div>
 </div>
 
+
+<div class="rating-bar rb-uwaga" data-ocena="⚖️ NEUTRALNA — poprawa fundamentów, ale kosztowny zakład na AR"><div class="rb-in"><div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">poprawa fundamentów, ale kosztowny zakład na AR</span></div><div class="rb-sep"></div><div class="rb-item"><span>Fair value</span><b>$6,50 – $9</b></div><div class="rb-item"><span>Potencjał</span><b style="color:#d99a52">+23% do +70%</b></div><div class="rb-right">Horyzont 12–18 mies.</div></div></div>
 <nav class="nav-sticky">
   <div class="nav-inner">
     <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>

@@ -9,23 +9,23 @@
     --bg: #0f1117;
     --surface: #1a1d2e;
     --surface2: #242740;
-    --accent: #f97316;
-    --accent2: #fb923c;
+    --accent:#34d399;
+    --accent2:#a7f3d0;
     --text: #e8eaf6;
     --text-muted: #8892b0;
     --border: #2e3250;
-    --strong-buy: #00c853;
-    --buy: #4caf50;
-    --neutral: #ffd740;
-    --sell: #ff6d00;
-    --strong-sell: #d50000;
+    --strong-buy: #34d399;
+    --buy: #34d399;
+    --neutral: #d99a52;
+    --sell: #d99a52;
+    --strong-sell: #db5448;
     --radius: 12px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.7; }
 
   .header {
-    background: linear-gradient(135deg, #1a0a00 0%, #0f1117 50%, #1a1000 100%);
+    background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%);
     border-bottom: 1px solid var(--border);
     padding: 40px 32px 32px;
     position: relative; overflow: hidden;
@@ -33,7 +33,7 @@
   .header::before {
     content: ''; position: absolute; top: -50px; right: -50px;
     width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(249,115,22,0.10) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(52,211,153,0.10) 0%, transparent 70%);
     border-radius: 50%;
   }
   .header-content { max-width: 1100px; margin: 0 auto; position: relative; }
@@ -42,8 +42,8 @@
   .company-sub { color: var(--text-muted); font-size: 15px; margin-bottom: 20px; }
   .header-meta { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
   .rating-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 700; padding: 10px 24px; border-radius: 30px; }
-  .rating-badge.buy { background: rgba(76,175,80,0.15); border: 2px solid var(--buy); color: var(--buy); }
-  .rating-badge.neutral { background: rgba(255,215,64,0.12); border: 2px solid var(--neutral); color: var(--neutral); }
+  .rating-badge.buy { background: rgba(52,211,153,0.15); border: 2px solid var(--buy); color: var(--buy); }
+  .rating-badge.neutral { background: rgba(217,154,82,0.12); border: 2px solid var(--neutral); color: var(--neutral); }
   .meta-tag { background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; padding: 6px 14px; border-radius: 20px; }
   .price-display { margin-left: auto; text-align: right; }
   .price-main { font-size: 30px; font-weight: 800; color: #fff; }
@@ -94,15 +94,15 @@
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   th { background: var(--surface2); color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 10px 14px; text-align: left; }
   td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-muted); }
-  tr:hover td { background: rgba(249,115,22,0.03); }
+  tr:hover td { background: rgba(217,154,82,0.03); }
 
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
   .chip { background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted); font-size: 12px; padding: 4px 12px; border-radius: 20px; }
-  .chip.green { border-color: var(--buy); color: var(--buy); background: rgba(76,175,80,0.08); }
-  .chip.orange { border-color: var(--accent); color: var(--accent); background: rgba(249,115,22,0.08); }
-  .chip.teal { border-color: #10b981; color: #10b981; background: rgba(16,185,129,0.08); }
-  .chip.yellow { border-color: var(--neutral); color: var(--neutral); background: rgba(255,215,64,0.08); }
-  .chip.red { border-color: var(--sell); color: var(--sell); background: rgba(255,109,0,0.08); }
+  .chip.green { border-color: var(--buy); color: var(--buy); background: rgba(52,211,153,0.08); }
+  .chip.orange { border-color: var(--accent); color: var(--accent); background: rgba(217,154,82,0.08); }
+  .chip.teal { border-color: #34d399; color: #34d399; background: rgba(52,211,153,0.08); }
+  .chip.yellow { border-color: var(--neutral); color: var(--neutral); background: rgba(217,154,82,0.08); }
+  .chip.red { border-color: var(--sell); color: var(--sell); background: rgba(217,154,82,0.08); }
 
   .rating-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 14px; }
   .rating-box { background: var(--surface2); border-radius: 10px; padding: 18px; text-align: center; }
@@ -114,30 +114,30 @@
   .rating-box .rating-note { color: var(--text-muted); font-size: 12px; }
 
   .scenario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
-  .bull-box { background: rgba(0,200,83,0.06); border: 1px solid rgba(0,200,83,0.25); border-radius: 10px; padding: 18px; }
-  .bear-box { background: rgba(213,0,0,0.06); border: 1px solid rgba(213,0,0,0.2); border-radius: 10px; padding: 18px; }
+  .bull-box { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.25); border-radius: 10px; padding: 18px; }
+  .bear-box { background: rgba(219,84,72,0.06); border: 1px solid rgba(219,84,72,0.2); border-radius: 10px; padding: 18px; }
   .bull-box h4 { color: var(--strong-buy); margin-bottom: 12px; }
   .bear-box h4 { color: var(--strong-sell); margin-bottom: 12px; }
   .bull-box ul li::before { color: var(--strong-buy); }
   .bear-box ul li::before { color: var(--strong-sell); }
 
   .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
-  .thesis-buy { background: rgba(0,200,83,0.06); border: 1px solid rgba(0,200,83,0.2); border-radius: 10px; padding: 18px; }
-  .thesis-avoid { background: rgba(213,0,0,0.06); border: 1px solid rgba(213,0,0,0.2); border-radius: 10px; padding: 18px; }
+  .thesis-buy { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.2); border-radius: 10px; padding: 18px; }
+  .thesis-avoid { background: rgba(219,84,72,0.06); border: 1px solid rgba(219,84,72,0.2); border-radius: 10px; padding: 18px; }
   .thesis-buy h4 { color: var(--strong-buy); margin-bottom: 10px; }
   .thesis-avoid h4 { color: var(--strong-sell); margin-bottom: 10px; }
 
-  .fair-value-box { background: linear-gradient(135deg, rgba(249,115,22,0.08), rgba(251,146,60,0.06)); border: 1px solid var(--accent); border-radius: 12px; padding: 24px; margin-top: 16px; text-align: center; }
+  .fair-value-box { background: linear-gradient(135deg, rgba(217,154,82,0.08), rgba(217,154,82,0.06)); border: 1px solid var(--accent); border-radius: 12px; padding: 24px; margin-top: 16px; text-align: center; }
   .fair-value-label { color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
   .fair-value-range { font-size: 32px; font-weight: 800; color: var(--accent2); margin-bottom: 8px; }
   .fair-value-note { color: var(--text-muted); font-size: 13px; }
 
   .alert { border-radius: 8px; padding: 14px 18px; margin: 14px 0; font-size: 13px; }
-  .alert-info { background: rgba(249,115,22,0.06); border-left: 3px solid var(--accent); color: var(--text-muted); }
-  .alert-warn { background: rgba(255,215,64,0.06); border-left: 3px solid var(--neutral); color: var(--text-muted); }
-  .alert-success { background: rgba(0,200,83,0.06); border-left: 3px solid var(--strong-buy); color: var(--text-muted); }
-  .alert-danger { background: rgba(213,0,0,0.06); border-left: 3px solid var(--strong-sell); color: var(--text-muted); }
-  .alert-teal { background: rgba(16,185,129,0.06); border-left: 3px solid #10b981; color: var(--text-muted); }
+  .alert-info { background: rgba(217,154,82,0.06); border-left: 3px solid var(--accent); color: var(--text-muted); }
+  .alert-warn { background: rgba(217,154,82,0.06); border-left: 3px solid var(--neutral); color: var(--text-muted); }
+  .alert-success { background: rgba(52,211,153,0.06); border-left: 3px solid var(--strong-buy); color: var(--text-muted); }
+  .alert-danger { background: rgba(219,84,72,0.06); border-left: 3px solid var(--strong-sell); color: var(--text-muted); }
+  .alert-teal { background: rgba(52,211,153,0.06); border-left: 3px solid #34d399; color: var(--text-muted); }
 
   .catalyst-item { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
   .catalyst-item:last-child { border-bottom: none; }
@@ -145,8 +145,8 @@
   .catalyst-body h4 { color: var(--text); font-size: 14px; margin-bottom: 4px; }
   .catalyst-body p { color: var(--text-muted); font-size: 13px; margin: 0; }
 
-  .nvidia-badge { background: linear-gradient(135deg, rgba(118,185,0,0.15), rgba(249,115,22,0.08)); border: 1px solid #76b900; border-radius: 12px; padding: 20px 24px; margin: 14px 0; }
-  .nvidia-badge h4 { color: #76b900; font-size: 16px; margin-bottom: 8px; }
+  .nvidia-badge { background: linear-gradient(135deg, rgba(52,211,153,0.15), rgba(217,154,82,0.08)); border: 1px solid #34d399; border-radius: 12px; padding: 20px 24px; margin: 14px 0; }
+  .nvidia-badge h4 { color: #34d399; font-size: 16px; margin-bottom: 8px; }
 
   .divider { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
   .footer { text-align: center; padding: 32px 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
@@ -168,7 +168,7 @@
   .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
   .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
   .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
-  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
     display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
     color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
   .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
@@ -180,9 +180,32 @@
   .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
   @media (max-width:700px){ .tp-tag{ display:none; } }
 </style>
+
+<style id="tp-rating-bar">
+  :root { --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; }
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
 </head>
 <body>
-<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
 
 
 <div class="header">
@@ -192,7 +215,6 @@
     <div class="company-name">Coherent Corp.</div>
     <div class="company-sub">Największa firma photonics | 800G/1.6T Transceivers · Silicon Carbide (SiC) · OCS · NVIDIA $2B Partner · Saxonburg, PA | Dawniej II-VI Incorporated</div>
     <div class="header-meta">
-      <div class="rating-badge buy">📈 KUPNO</div>
       <span class="meta-tag">Photonics / Optics</span>
       <span class="meta-tag">AI Infrastructure</span>
       <span class="meta-tag">Silicon Carbide</span>
@@ -206,6 +228,8 @@
   </div>
 </div>
 
+
+<div class="rating-bar rb-kupno" data-ocena="📈 KUPNO"><div class="rb-in"><div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span></div><div class="rb-sep"></div><div class="rb-item"><span>Fair value</span><b>$380 – $450</b></div><div class="rb-item"><span>Potencjał</span><b style="color:#34d399">+12% do +32%</b></div><div class="rb-right">Horyzont 12–18 mies.</div></div></div>
 <nav class="nav-sticky">
   <div class="nav-inner">
     <a class="nav-link" onclick="goSec('s1')">Profil</a>

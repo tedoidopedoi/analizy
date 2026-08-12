@@ -12,13 +12,13 @@
     --border: #2e3150;
     --text: #e8eaf0;
     --muted: #8b90a0;
-    --accent: #6c63ff;
-    --accent2: #00d4aa;
-    --strong-buy: #00c853;
-    --buy: #4caf50;
-    --neutral: #ffd740;
-    --sell: #ff6d00;
-    --strong-sell: #d50000;
+    --accent:#34d399;
+    --accent2:#a7f3d0;
+    --strong-buy: #34d399;
+    --buy: #34d399;
+    --neutral: #d99a52;
+    --sell: #d99a52;
+    --strong-sell: #db5448;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -29,7 +29,7 @@
     font-size: 15px;
   }
   .header {
-    background: linear-gradient(135deg, #1a1d2e 0%, #242740 100%);
+    background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%);
     border-bottom: 1px solid var(--border);
     padding: 32px 48px;
     position: sticky;
@@ -174,16 +174,16 @@
     color: var(--text);
   }
   .comp-table tr:last-child td { border-bottom: none; }
-  .comp-table tr.highlight td { background: rgba(108,99,255,0.08); }
+  .comp-table tr.highlight td { background: rgba(52,211,153,0.08); }
   .comp-table tr:hover td { background: rgba(255,255,255,0.03); }
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 4px 0; }
   .bull-list, .bear-list { border-radius: 10px; padding: 16px 18px; }
-  .bull-list { background: rgba(0,200,83,0.07); border: 1px solid rgba(0,200,83,0.2); }
-  .bear-list { background: rgba(213,0,0,0.07); border: 1px solid rgba(213,0,0,0.2); }
+  .bull-list { background: rgba(52,211,153,0.07); border: 1px solid rgba(52,211,153,0.2); }
+  .bear-list { background: rgba(219,84,72,0.07); border: 1px solid rgba(219,84,72,0.2); }
   .bull-list h4 { color: var(--strong-buy); margin-top: 0; }
-  .bear-list h4 { color: #ff5252; margin-top: 0; }
+  .bear-list h4 { color: #db5448; margin-top: 0; }
   .bull-list li::marker { color: var(--strong-buy); }
-  .bear-list li::marker { color: #ff5252; }
+  .bear-list li::marker { color: #db5448; }
   .verdict-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0; }
   .verdict-card {
     background: var(--surface2);
@@ -202,8 +202,8 @@
   .reason-card h4 { margin-top: 0; }
   .reason-card ul { padding-left: 18px; }
   .thesis-breaker {
-    background: rgba(255,215,64,0.08);
-    border: 1px solid rgba(255,215,64,0.25);
+    background: rgba(217,154,82,0.08);
+    border: 1px solid rgba(217,154,82,0.25);
     border-radius: 10px;
     padding: 16px 18px;
   }
@@ -211,8 +211,8 @@
   .na { color: var(--muted); font-style: italic; }
   .footer { text-align: center; color: var(--muted); font-size: 0.78rem; padding: 32px; border-top: 1px solid var(--border); margin-top: 40px; }
   .fair-value-box {
-    background: rgba(108,99,255,0.1);
-    border: 1px solid rgba(108,99,255,0.3);
+    background: rgba(52,211,153,0.1);
+    border: 1px solid rgba(52,211,153,0.3);
     border-radius: 10px;
     padding: 16px 20px;
     margin-top: 16px;
@@ -235,7 +235,7 @@
   .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
   .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
   .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
-  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
     display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
     color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
   .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
@@ -249,7 +249,7 @@
 </style>
 </head>
 <body>
-<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
 
 
 <div class="header">
@@ -711,7 +711,7 @@
           </ul>
         </div>
         <div class="reason-card">
-          <h4 style="color: #ff5252;">❌ 3 powody, by unikać</h4>
+          <h4 style="color: #db5448;">❌ 3 powody, by unikać</h4>
           <ul>
             <li><strong>Custom ASIC risk</strong> — Google, Amazon, Microsoft masowo inwestują we własne chipy. 2027–2028 to punkt krytyczny.</li>
             <li><strong>Geopolityka Tajwan</strong> — 100% produkcji na TSMC. Eskalacja w Cieśninie = czarny łabędź dla całego NVDA.</li>

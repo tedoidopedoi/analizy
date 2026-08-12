@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TP Corp — Katalog analiz inwestycyjnych</title>
 <style>
-:root{--bg:#0f1117;--surface:#1a1d2e;--surface2:#242740;--accent:#00d4aa;--accent2:#5eead4;
---text:#e8eaf6;--text-muted:#8892b0;--border:#2e3250;--kupno:#4caf50;--neutralna:#ffd740;
---sprzedaz:#ff6d00;--spek:#f43f5e;--porown:#7c8cff;}
+:root{--bg:#0f1117;--surface:#1a1d2e;--surface2:#242740;--accent:#34d399;--accent2:#a7f3d0;
+--text:#e8eaf6;--text-muted:#8892b0;--border:#2e3250;--kupno:#34d399;--neutralna:#d99a52;
+--sprzedaz:#db5448;--spek:#d99a52;--porown:#8892b0;}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6}
 .tp-wm{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
@@ -33,7 +33,7 @@ padding:11px 15px;color:var(--text);font-size:14px;font-family:inherit}
 .f-btn{background:var(--surface);border:1px solid var(--border);color:var(--text-muted);font-size:12.5px;
 font-weight:600;padding:7px 15px;border-radius:20px;cursor:pointer;font-family:inherit}
 .f-btn:hover{color:var(--text);border-color:var(--accent)}
-.f-btn.akt{background:rgba(0,212,170,.13);border-color:var(--accent);color:var(--accent2)}
+.f-btn.akt{background:rgba(52,211,153,.13);border-color:var(--accent);color:var(--accent2)}
 .karta{display:flex;gap:18px;align-items:center;background:var(--surface);border:1px solid var(--border);
 border-radius:12px;padding:16px 20px;margin-bottom:11px;text-decoration:none;color:inherit}
 .karta:hover{border-color:var(--accent);background:var(--surface2)}
@@ -44,28 +44,28 @@ border-radius:12px;padding:16px 20px;margin-bottom:11px;text-decoration:none;col
 .k-nazwa{font-size:14.5px;font-weight:600;color:var(--text);margin-bottom:7px}
 .k-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .pill{font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:12px;letter-spacing:.4px;text-transform:uppercase}
-.p-kupno{background:rgba(76,175,80,.15);color:var(--kupno);border:1px solid rgba(76,175,80,.35)}
-.p-neutralna{background:rgba(255,215,64,.13);color:var(--neutralna);border:1px solid rgba(255,215,64,.32)}
-.p-sprzedaz{background:rgba(255,109,0,.13);color:var(--sprzedaz);border:1px solid rgba(255,109,0,.32)}
-.p-spekulacyjna{background:rgba(244,63,94,.13);color:var(--spek);border:1px solid rgba(244,63,94,.32)}
-.p-porownanie{background:rgba(124,140,255,.13);color:var(--porown);border:1px solid rgba(124,140,255,.32)}
+.p-kupno{background:rgba(52,211,153,.15);color:var(--kupno);border:1px solid rgba(52,211,153,.35)}
+.p-neutralna{background:rgba(217,154,82,.13);color:var(--neutralna);border:1px solid rgba(217,154,82,.32)}
+.p-sprzedaz{background:rgba(219,84,72,.13);color:var(--sprzedaz);border:1px solid rgba(219,84,72,.32)}
+.p-spekulacyjna{background:rgba(217,154,82,.13);color:var(--spek);border:1px solid rgba(217,154,82,.32)}
+.p-porownanie{background:rgba(136,146,176,.13);color:var(--porown);border:1px solid rgba(136,146,176,.32)}
 .p-nieznana{background:var(--surface2);color:var(--text-muted);border:1px solid var(--border)}
 .p-archiwum{background:var(--surface2);color:var(--text-muted);border:1px solid var(--border)}
 .karta.arch{opacity:.6;border-style:dashed}
 .karta.arch:hover{opacity:1;border-style:solid}
 .karta.arch .k-ticker{color:var(--text-muted)}
-.p-nowy{background:rgba(0,212,170,.1);color:var(--accent2);border:1px solid rgba(0,212,170,.28)}
+.p-nowy{background:rgba(52,211,153,.1);color:var(--accent2);border:1px solid rgba(52,211,153,.28)}
 .k-data{font-size:12px;color:var(--text-muted)}
 .wiek{font-size:10.5px;padding:2px 8px;border-radius:10px}
-.w-swieza{background:rgba(76,175,80,.1);color:var(--kupno)}
-.w-srednia{background:rgba(255,215,64,.1);color:var(--neutralna)}
-.w-stara{background:rgba(255,109,0,.12);color:var(--sprzedaz)}
+.w-swieza{background:rgba(52,211,153,.1);color:var(--kupno)}
+.w-srednia{background:rgba(217,154,82,.1);color:var(--neutralna)}
+.w-stara{background:rgba(219,84,72,.12);color:var(--sprzedaz)}
 .k-prawa{width:140px;flex-shrink:0;text-align:right}
 .k-lbl{font-size:9.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
 .k-val{font-size:14px;font-weight:700;color:#fff}
 .k-val.fv{color:var(--accent2)}
 .pusto{text-align:center;color:var(--text-muted);padding:40px;display:none}
-.disclaimer{background:rgba(255,215,64,.05);border:1px solid rgba(255,215,64,.2);border-left:3px solid var(--neutralna);
+.disclaimer{background:rgba(217,154,82,.05);border:1px solid rgba(217,154,82,.2);border-left:3px solid var(--neutralna);
 border-radius:9px;padding:15px 19px;margin:26px 0 0;font-size:12.5px;color:var(--text-muted)}
 .stopka{text-align:center;padding:28px 24px 40px;color:var(--text-muted);font-size:11.5px}
 @media(max-width:720px){.karta{flex-wrap:wrap;gap:12px}.k-lewa{width:auto}.k-prawa{width:100%;text-align:left;

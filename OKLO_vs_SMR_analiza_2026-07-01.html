@@ -7,24 +7,24 @@
 <style>
   :root {
     --bg: #0f1117; --surface: #1a1d2e; --surface2: #242740; --border: #2e3150;
-    --text: #e8eaf0; --muted: #8b90a0; --accent: #6c63ff; --accent2: #00d4aa;
-    --oklo: #6c63ff; --smr: #00b4d8;
-    --strong-buy: #00c853; --buy: #4caf50; --neutral: #ffd740; --sell: #ff6d00; --strong-sell: #d50000;
+    --text: #e8eaf0; --muted: #8b90a0; --accent:#34d399; --accent2:#a7f3d0;
+    --oklo: #34d399; --smr: #34d399;
+    --strong-buy: #34d399; --buy: #34d399; --neutral: #d99a52; --sell: #d99a52; --strong-sell: #db5448;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; line-height: 1.6; font-size: 15px; }
-  .header { background: linear-gradient(135deg, #1a1d2e 0%, #12142a 100%); border-bottom: 1px solid var(--border); padding: 28px 48px; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom: 1px solid var(--border); padding: 28px 48px; }
   .header-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 12px; }
   .header-left h1 { font-size: 1.8rem; font-weight: 700; }
   .header-left h1 .ok { color: var(--oklo); }
   .header-left h1 .vs { color: var(--muted); font-size: 1rem; margin: 0 8px; }
   .header-left h1 .sm { color: var(--smr); }
   .header-left p { color: var(--muted); font-size: 0.88rem; margin-top: 4px; }
-  .winner-badge { background: linear-gradient(135deg, #6c63ff, #9b59b6); color: #fff; padding: 10px 20px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; }
+  .winner-badge { background: linear-gradient(135deg, #34d399, #34d399); color: #fff; padding: 10px 20px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; }
   .verdict-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .vs-card { border-radius: 12px; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; }
-  .vs-card.oklo-card { background: rgba(108,99,255,0.12); border: 1px solid rgba(108,99,255,0.3); }
-  .vs-card.smr-card { background: rgba(0,180,216,0.08); border: 1px solid rgba(0,180,216,0.2); }
+  .vs-card.oklo-card { background: rgba(52,211,153,0.12); border: 1px solid rgba(52,211,153,0.3); }
+  .vs-card.smr-card { background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.2); }
   .vs-card .ticker { font-size: 1.2rem; font-weight: 800; }
   .vs-card.oklo-card .ticker { color: var(--oklo); }
   .vs-card.smr-card .ticker { color: var(--smr); }
@@ -47,8 +47,8 @@
   .section-body { padding: 24px; display: block; }
   .section-body.collapsed { display: none; }
   .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .col-oklo { background: rgba(108,99,255,0.06); border: 1px solid rgba(108,99,255,0.2); border-radius: 12px; padding: 18px 20px; }
-  .col-smr { background: rgba(0,180,216,0.05); border: 1px solid rgba(0,180,216,0.18); border-radius: 12px; padding: 18px 20px; }
+  .col-oklo { background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.2); border-radius: 12px; padding: 18px 20px; }
+  .col-smr { background: rgba(52,211,153,0.05); border: 1px solid rgba(52,211,153,0.18); border-radius: 12px; padding: 18px 20px; }
   .col-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
   .col-oklo .col-label { color: var(--oklo); }
   .col-smr .col-label { color: var(--smr); }
@@ -65,7 +65,7 @@
   .metric-table tr:last-child td { border-bottom: none; }
   .metric-table tr:hover td { background: rgba(255,255,255,0.02); }
   .metric-table td.win { color: var(--strong-buy); font-weight: 600; }
-  .metric-table td.lose { color: #ff5252; }
+  .metric-table td.lose { color: #db5448; }
   .metric-table td.tie { color: var(--neutral); }
   .metric-table .row-label { color: var(--muted); font-size: 0.82rem; }
   .score-bar { display: flex; gap: 8px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border); }
@@ -80,21 +80,21 @@
   .score-winner.oklo { color: var(--oklo); }
   .score-winner.smr { color: var(--smr); }
   .score-winner.tie { color: var(--muted); }
-  .verdict-final { background: linear-gradient(135deg, rgba(108,99,255,0.12), rgba(108,99,255,0.04)); border: 2px solid rgba(108,99,255,0.4); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
+  .verdict-final { background: linear-gradient(135deg, rgba(52,211,153,0.12), rgba(52,211,153,0.04)); border: 2px solid rgba(52,211,153,0.4); border-radius: 16px; padding: 28px; margin-bottom: 24px; }
   .verdict-final h3 { font-size: 1.2rem; font-weight: 700; color: var(--oklo); margin-bottom: 12px; }
-  .highlight-box { background: rgba(0,212,170,0.07); border: 1px solid rgba(0,212,170,0.2); border-radius: 10px; padding: 14px 18px; margin: 12px 0; font-size: 0.9rem; }
-  .warn-box { background: rgba(255,109,0,0.08); border: 1px solid rgba(255,109,0,0.3); border-radius: 10px; padding: 14px 18px; margin: 12px 0; font-size: 0.9rem; }
+  .highlight-box { background: rgba(52,211,153,0.07); border: 1px solid rgba(52,211,153,0.2); border-radius: 10px; padding: 14px 18px; margin: 12px 0; font-size: 0.9rem; }
+  .warn-box { background: rgba(217,154,82,0.08); border: 1px solid rgba(217,154,82,0.3); border-radius: 10px; padding: 14px 18px; margin: 12px 0; font-size: 0.9rem; }
   .warn-box strong { color: var(--sell); }
-  .danger-box { background: rgba(213,0,0,0.08); border: 1px solid rgba(213,0,0,0.3); border-radius: 10px; padding: 14px 18px; margin: 12px 0; font-size: 0.9rem; }
-  .danger-box strong { color: #ff5252; }
+  .danger-box { background: rgba(219,84,72,0.08); border: 1px solid rgba(219,84,72,0.3); border-radius: 10px; padding: 14px 18px; margin: 12px 0; font-size: 0.9rem; }
+  .danger-box strong { color: #db5448; }
   .risk-label { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; margin-left: 6px; }
-  .risk-high { background: rgba(213,0,0,0.2); color: #ff5252; }
-  .risk-med { background: rgba(255,109,0,0.2); color: var(--sell); }
-  .risk-low { background: rgba(0,200,83,0.2); color: var(--strong-buy); }
+  .risk-high { background: rgba(219,84,72,0.2); color: #db5448; }
+  .risk-med { background: rgba(217,154,82,0.2); color: var(--sell); }
+  .risk-low { background: rgba(52,211,153,0.2); color: var(--strong-buy); }
   .final-recs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
   .rec-card { border-radius: 12px; padding: 20px; }
-  .rec-card.oklo-rec { background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.3); }
-  .rec-card.smr-rec { background: rgba(0,180,216,0.07); border: 1px solid rgba(0,180,216,0.2); }
+  .rec-card.oklo-rec { background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); }
+  .rec-card.smr-rec { background: rgba(52,211,153,0.07); border: 1px solid rgba(52,211,153,0.2); }
   .rec-card .rc-ticker { font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; }
   .rec-card.oklo-rec .rc-ticker { color: var(--oklo); }
   .rec-card.smr-rec .rc-ticker { color: var(--smr); }
@@ -116,7 +116,7 @@
   .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
   .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
   .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
-  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#00d4aa);
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
     display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
     color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
   .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
@@ -130,7 +130,7 @@
 </style>
 </head>
 <body>
-<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#00d4aa)"/></svg></div>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
 
 
 <div class="header">
