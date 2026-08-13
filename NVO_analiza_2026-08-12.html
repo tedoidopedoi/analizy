@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVO — Novo Nordisk | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: NVO</div>
+    <div class="company-name">Novo Nordisk A/S</div>
+    <div class="company-sub">Farmacja · GLP-1, cukrzyca i otyłość · Ozempic · Wegovy · Rybelsus · Bagsværd, Dania</div>
+    <div class="header-meta">
+      <span class="meta-tag">Wycena 13,3× zysku</span>
+      <span class="meta-tag">-67% od szczytu z 2024</span>
+      <span class="meta-tag">Obniżka cen w 2027</span>
+      <span class="meta-tag">Dywidenda ~2,8%</span>
+      <div class="price-display">
+        <div class="price-main">$45,76</div>
+        <div class="price-sub">12.08.2026 | 52W: $35,12–$64,16</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — tanio, ale przed resetem cenowym 2027">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">tanio, ale przed resetem cenowym w 2027</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$50 – $60</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">+9% do +31%</b></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (12.08.2026)</div><div class="metric-value">$45,76</div><div class="metric-detail">-29% od szczytu 52W | +30% od dna $35,12</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$205 mld</div><div class="metric-detail">Szczyt wszech czasów: $137,40 (2024) → -67%</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">78,5 mld DKK</div><div class="metric-detail">+7% w stałych kursach</div></div>
+    <div class="metric-card"><div class="metric-label">Zysk operacyjny Q2</div><div class="metric-value green">33,4 mld DKK</div><div class="metric-detail">+11% w stałych kursach — powyżej oczekiwań</div></div>
+    <div class="metric-card"><div class="metric-label">Forward P/E</div><div class="metric-value em">~13,3×</div><div class="metric-detail">Mediana branży: 17,4× → dyskonto 24%</div></div>
+    <div class="metric-card"><div class="metric-label">Wegovy w tabletce</div><div class="metric-value green">5 mln recept</div><div class="metric-detail">~90% amerykańskiego rynku doustnego</div></div>
+    <div class="metric-card"><div class="metric-label">Dywidenda</div><div class="metric-value">~2,8%</div><div class="metric-detail">$1,29 rocznie na ADR</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus analityków</div><div class="metric-value yellow">$47 – $51</div><div class="metric-detail">Rozrzut $40,4 – $63,7</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest Novo Nordisk?</h3>
+      <p>Novo Nordisk to duński koncern farmaceutyczny z siedzibą w Bagsværd pod Kopenhagą, założony w 1923 roku, przez dekady światowy lider w leczeniu cukrzycy. Od 2021 roku jego losy określa jedna cząsteczka — <strong>semaglutyd</strong>, sprzedawany jako Ozempic w cukrzycy, Wegovy w otyłości i Rybelsus w postaci doustnej. Na fali boomu na leki odchudzające spółka stała się w 2023 roku <strong>najcenniejszą firmą w Europie</strong>.</p>
+      <p>Od tamtego czasu kurs spadł o <strong>67% wobec szczytu $137,40 z czerwca 2024 roku</strong>. To jedna z największych destrukcji wartości w europejskiej farmacji ostatniej dekady i przypadek, w którym cena akcji rozjechała się z wynikami operacyjnymi bardziej niż w jakiejkolwiek innej dużej spółce, którą analizowaliśmy.</p>
+      <h3>Dlaczego kurs jest tam, gdzie jest — kalendarz ciosów</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Reakcja</th></tr></thead>
+        <tbody>
+          <tr><td>3–4 lutego 2026</td><td>Prognoza na 2026: spadek sprzedaży i zysku o 5–13%. Prezes Mike Doustdar: <em>„będzie gorzej, zanim będzie lepiej"</em></td><td style="color:var(--ocena-sprzedaz)">↓↓ Załamanie zaufania</td></tr>
+          <tr><td><strong>23 lutego 2026</strong></td><td><strong>CagriSema zawodzi w badaniu REDEFINE 4</strong> — brak non-inferiority wobec tirzepatydu Lilly w obniżaniu HbA1c</td><td style="color:var(--ocena-sprzedaz)">↓↓ -16% w jeden dzień</td></tr>
+          <tr><td>24 lutego 2026</td><td>Zapowiedź obniżki cen listowych w USA o <strong>do 50% od 2027 roku</strong></td><td style="color:var(--ocena-uwaga)">↔ Wolumen za cenę</td></tr>
+          <tr><td>30 marca 2026</td><td>Dno 52-tygodniowe: <strong>$35,12</strong></td><td style="color:var(--ocena-sprzedaz)">Kapitulacja</td></tr>
+          <tr><td>Kwiecień 2026</td><td>FDA zatwierdza <strong>orforglipron</strong> Eli Lilly — pierwszą małocząsteczkową tabletkę GLP-1</td><td style="color:var(--ocena-sprzedaz)">↓ Nowy front</td></tr>
+          <tr><td>2026</td><td>Restrukturyzacja: <strong>9 000 etatów mniej</strong> (11% załogi), oszczędności 8 mld DKK rocznie</td><td style="color:var(--ocena-kupno)">↑ Dyscyplina kosztowa</td></tr>
+          <tr><td><strong>4 sierpnia 2026</strong></td><td><strong>Q2 powyżej oczekiwań, prognoza roczna PODNIESIONA</strong> — ale kurs spada o 6%</td><td style="color:var(--ocena-uwaga)">↔ Rynek patrzy dalej</td></tr>
+          <tr><td>Sierpień 2026</td><td><strong>Badanie ZEUS (ziltivekimab) nie powiodło się</strong> — brak redukcji zdarzeń sercowo-naczyniowych; odpisy 6,3 mld DKK</td><td style="color:var(--ocena-sprzedaz)">↓ -8,8%</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Zdanie, które streszcza tę spółkę:</strong> 4 sierpnia Novo pobiło oczekiwania i <em>podniosło</em> całoroczną prognozę — a kurs spadł o 6%. To znaczy, że rynek nie spiera się już o bieżące wyniki. <strong>Wycenia rok 2027</strong>: obniżkę cen o połowę, utratę udziałów na rzecz Eli Lilly i pipeline, który zawodzi.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Produkt</th><th>Wskazanie</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Ozempic</strong> (semaglutyd iniekcyjny)</td><td>Cukrzyca typu 2</td><td>Rdzeń przychodów, pod presją cenową</td></tr>
+          <tr><td><strong>Wegovy</strong> (semaglutyd iniekcyjny)</td><td>Otyłość</td><td>Traci udziały na rzecz Zepbound</td></tr>
+          <tr><td><strong>Wegovy w tabletce</strong></td><td>Otyłość, postać doustna</td><td>🔥 <strong>5 mln recept</strong>, ~90% rynku doustnego w USA</td></tr>
+          <tr><td>Rybelsus</td><td>Cukrzyca, postać doustna</td><td>Stabilny, obniżka ceny o 34% od 2027</td></tr>
+          <tr><td>CagriSema</td><td>Otyłość, nowa generacja</td><td style="color:var(--ocena-sprzedaz)">Nie osiągnął celu wobec tirzepatydu</td></tr>
+          <tr><td>Ziltivekimab</td><td>Stan zapalny, kardiologia</td><td style="color:var(--ocena-sprzedaz)">ZEUS nieudany; HERMES i ARTEMIS w toku</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — produkcja, nie cząsteczka</h3>
+      <p>Przewagą Novo nigdy nie był wyłącznie patent. Był nią <strong>przemysłowy aparat do wytwarzania peptydów</strong> — moce produkcyjne, których nie da się zbudować w dwa lata, oraz sieć dystrybucji leków iniekcyjnych zbudowana przez sto lat obecności w diabetologii. To realna bariera i ona nie zniknęła.</p>
+      <p>Problem w tym, że <strong>ta fosa broni złego zamku</strong>. Jeśli przyszłość rynku otyłości należy do tabletek małocząsteczkowych, wytwarzanych w klasycznej syntezie chemicznej za ułamek kosztu peptydu, przewaga produkcyjna Novo traci na znaczeniu. Właśnie tu leży strategiczna stawka sporu z Eli Lilly.</p>
+      <div class="alert alert-success"><strong>Wegovy w tabletce to prawdziwy sukces, nie narracja.</strong> Ponad 5 milionów recept od premiery, około 2,9 miliona w samym Q2, ponad 265 tysięcy tygodniowo i <strong>mniej więcej 90% amerykańskiego rynku doustnych leków na otyłość</strong>. To najszybszy start wolumenowy w historii GLP-1 w USA. Kłopot polega na tym, że przypada dokładnie na moment, w którym ceny lecą w dół.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Rynek otyłości pozostaje ogromny</strong> — szacunki mówią o skali przekraczającej $100 mld do 2030 roku; spór nie dotyczy wielkości tortu, tylko podziału i ceny za porcję</li>
+        <li><strong>Polityka cenowa w USA jako czynnik systemowy:</strong> porozumienia „most favored nation" z administracją, platforma TrumpRx, negocjacje w ramach Medicare — państwo stało się stroną w ustalaniu cen GLP-1</li>
+        <li><strong>Od 1 stycznia 2027</strong> cena listowa Wegovy, Ozempicu i Rybelsusa w USA wyniesie jednolicie <strong>$675</strong> — to spadek o 50% dla Wegovy i 34% dla pozostałych</li>
+        <li><strong>Medicare i Medicaid:</strong> cena wynegocjowana $274 miesięcznie od 2027, iniekcje GLP-1 od $245 w ramach porozumienia MFN</li>
+        <li><strong>Przez TrumpRx</strong> Ozempic ma potanieć z $1 000 do $350, a Wegovy z $1 350 do $350 miesięcznie</li>
+        <li><strong>Przejście na tabletki</strong> zmienia ekonomikę całej branży — niższy koszt wytworzenia, łatwiejsza dystrybucja, większa dostępność, ale też niższa cena jednostkowa</li>
+      </ul>
+      <div class="alert alert-warn"><strong>To nie jest zwykła presja cenowa.</strong> Obniżka o połowę wprowadzana jednego dnia, w porozumieniu z rządem, na najważniejszym rynku świata — takiego resetu nie da się zniwelować negocjacjami z płatnikami. Można go odrobić wyłącznie wolumenem, a to zajmuje kwartały i wymaga, żeby popyt faktycznie zareagował na niższą cenę.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <p>Model jest w pełni farmaceutyczny: sprzedaż przez hurtownie i apteki, z płatnościami pochodzącymi od ubezpieczycieli, programów rządowych i pacjentów płacących z własnej kieszeni. Kluczową zmienną nie jest liczba klientów, lecz <strong>refundacja</strong> — to ona decyduje, ilu pacjentów w ogóle sięgnie po lek.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Kanał</th><th>Sytuacja</th><th>Kierunek</th></tr></thead>
+        <tbody>
+          <tr><td>Ubezpieczenia komercyjne w USA</td><td>Rebaty korzystnie wpłynęły na Q2</td><td style="color:var(--ocena-uwaga)">Presja od 2027</td></tr>
+          <tr><td>Medicaid</td><td>Ograniczenie zakresu refundacji</td><td style="color:var(--ocena-sprzedaz)">Spadek</td></tr>
+          <tr><td>Medicare</td><td>Cena wynegocjowana $274/mies. od 2027</td><td style="color:var(--ocena-uwaga)">Wolumen za marżę</td></tr>
+          <tr><td>Pacjent płacący samodzielnie</td><td>TrumpRx: $350/mies.</td><td style="color:var(--ocena-kupno)">Nowy, duży segment</td></tr>
+          <tr><td>Rynki poza USA</td><td>Wzrost wolumenu GLP-1 we wszystkich regionach</td><td style="color:var(--ocena-kupno)">Stabilny</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Zmiana modelu, którą łatwo przeoczyć.</strong> Novo przechodzi od sprzedaży drogiego leku wąskiej grupie ubezpieczonych do sprzedaży taniego leku szerokiej populacji. To ekonomicznie zupełnie inny biznes — z niższą marżą jednostkową, ale potencjalnie znacznie większą bazą. Pytanie, na które nikt dziś nie zna odpowiedzi, brzmi: <strong>ilu pacjentów przybędzie przy cenie $350 zamiast $1 350?</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026</th><th>Dynamika</th></tr></thead>
+        <tbody>
+          <tr><td>Sprzedaż skorygowana</td><td><strong>78 488 mln DKK</strong></td><td style="color:var(--ocena-kupno)">+7% w stałych kursach</td></tr>
+          <tr><td>Skorygowany zysk operacyjny</td><td><strong>33 389 mln DKK</strong></td><td style="color:var(--ocena-kupno)">+11% w stałych kursach</td></tr>
+          <tr><td>Marża operacyjna</td><td>ok. 42,5%</td><td>Poziom charakterystyczny dla wielkiej farmacji</td></tr>
+          <tr><td>Wegovy w tabletce</td><td>ok. 3,2 mld DKK</td><td style="color:var(--ocena-kupno)">Nowe źródło, rośnie od zera</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Prognoza na 2026 — podniesiona, ale wciąż nie dodatnia</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Prognoza z lutego</th><th>Prognoza z 4 sierpnia</th></tr></thead>
+        <tbody>
+          <tr><td>Wzrost sprzedaży (stałe kursy)</td><td style="color:var(--ocena-sprzedaz)">-5% do -13%</td><td style="color:var(--ocena-uwaga)"><strong>0% do -6%</strong></td></tr>
+          <tr><td>Wzrost zysku operacyjnego</td><td style="color:var(--ocena-sprzedaz)">-4% do -12%</td><td style="color:var(--ocena-uwaga)"><strong>0% do -6%</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p>Podniesienie prognozy o mniej więcej sześć punktów procentowych w środku roku to sygnał, że sytuacja operacyjna jest lepsza, niż zakładał zarząd w lutym. <strong>Ale nawet górny koniec nowego widełek oznacza rok bez wzrostu.</strong> To spółka, która ma za sobą dekadę dwucyfrowych zwyżek — dla wielu portfeli była pozycją wzrostową, a nie wartościową, i ta zmiana kategorii jest częścią przeceny.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $45,76</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja (ADR)</td><td>~$205 mld</td><td>Ze szczytu przekraczającego $600 mld</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>~13,3×</strong></td><td style="color:var(--ocena-kupno)">✅ Mediana branży 17,4× — dyskonto 24%</td></tr>
+          <tr><td>Stopa dywidendy</td><td>ok. 2,8%</td><td style="color:var(--ocena-kupno)">$1,29 rocznie na ADR</td></tr>
+          <tr><td>Marża operacyjna</td><td>ok. 42%</td><td style="color:var(--ocena-kupno)">Wciąż w czołówce farmacji</td></tr>
+          <tr><td>Wzrost 2026 (prognoza)</td><td>0% do -6%</td><td style="color:var(--ocena-sprzedaz)">Rok bez wzrostu</td></tr>
+          <tr><td>Konsensus analityków</td><td>$47,24 – $51,19</td><td style="color:var(--ocena-uwaga)">Zaledwie +3% do +12%</td></tr>
+          <tr><td>Rozrzut celów</td><td>$40,36 – $63,71</td><td>Umiarkowana niezgoda</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>ok. 14–15×</td><td>Zysk jeszcze nie odzwierciedla obniżki cen</td></tr>
+          <tr><td><strong>Forward P/E (FY2026)</strong></td><td><strong>~13,3×</strong></td><td>Na skorygowanym zysku; prognoza 0% do -6% wzrostu</td></tr>
+          <tr><td><strong>Forward P/E (FY2027)</strong></td><td><strong>trudny do oszacowania</strong></td><td style="color:var(--ocena-sprzedaz)">Obniżka cen wchodzi 1 stycznia — konsensus mocno rozstrzelony</td></tr>
+          <tr><td>PEG</td><td><strong>nie dotyczy</strong></td><td>Przy zerowym lub ujemnym wzroście wskaźnik traci sens</td></tr>
+          <tr><td>Mediana branży (Drug Manufacturers)</td><td>17,4×</td><td style="color:var(--ocena-kupno)">Novo notowane 24% poniżej</td></tr>
+          <tr><td>Eli Lilly (konkurent)</td><td>wyraźnie wyżej</td><td>Rynek płaci premię za wygrywającego</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> 13,3-krotność zysku dla spółki z marżą operacyjną 42% i pozycją numer dwa na jednym z najszybciej rosnących rynków medycznych świata wygląda tanio — i jest tania <em>wobec dzisiejszych zysków</em>. Cała trudność polega na tym, że <strong>mianownik tego ułamka zmieni się 1 stycznia 2027 roku</strong>, gdy ceny w USA spadną o połowę. Jeśli wolumen tego nie zniweluje, dzisiejsze 13,3× okaże się w przyszłym roku osiemnastoma. Dlatego nie traktuję tego wskaźnika jako argumentu rozstrzygającego, tylko jako miarę tego, ile pesymizmu jest już w cenie.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$50 – $60</div><div class="fair-value-note">Baza: powrót mnożnika ku medianie branżowej 15–17× przy zysku obniżonym o kilkanaście procent w 2027 | Konsensus: $47,24–$51,19 | Scenariusz negatywny (obniżka cen mocniejsza od wolumenu, dalsza utrata udziałów): $35–40 | Scenariusz pozytywny (wolumen odrabia cenę, HERMES lub ARTEMIS wypada dobrze): $70–75 | Przy $45,76 potencjał od -23% do +64%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <p>Marża operacyjna w okolicach <strong>42%</strong> plasuje Novo w ścisłej czołówce światowej farmacji. Zysk operacyjny rósł w Q2 o 11% przy sprzedaży rosnącej o 7%, co oznacza, że dźwignia operacyjna nadal działa — koszty rosną wolniej niż przychody.</p>
+      <h3>Restrukturyzacja — realna, nie kosmetyczna</h3>
+      <p>Redukcja <strong>9 000 etatów, czyli 11% globalnego zatrudnienia</strong>, ma przynieść około 8 miliardów koron duńskich oszczędności rocznie. Kontekst jest tu istotny: zatrudnienie w Novo wzrosło w ciągu pięciu lat o 81%, w oczekiwaniu na wzrost, który się nie zmaterializował w zakładanej skali. To cięcie nie jest paniką, tylko cofnięciem wcześniejszej rozbudowy.</p>
+      <div class="alert alert-danger"><strong>Odpisy i nieudane badania kosztują podwójnie.</strong> Niepowodzenie ZEUS pociągnęło za sobą odpisy rzędu <strong>6,3 mld DKK</strong>, ale prawdziwy koszt jest strategiczny: ziltivekimab miał być odpowiedzią na pytanie „co poza GLP-1?". Jego porażka oznacza, że Novo pozostaje spółką jednej franczyzy — mierzącą się w niej z silniejszym konkurentem.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <p>Bilans jest tu <strong>najmniej kontrowersyjnym elementem całej analizy</strong>. Novo generuje wysokie, powtarzalne przepływy operacyjne przy marży przekraczającej 40%, nie ma problemu z obsługą zadłużenia i nieprzerwanie wypłaca dywidendę — obecnie $1,29 rocznie na ADR, co przy cenie $45,76 daje około 2,8%.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Element</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Zdolność do obsługi długu</td><td style="color:var(--ocena-kupno)">Bardzo dobra — dług nie jest tu tematem</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-kupno)">Silne, wspierane marżą 42%</td></tr>
+          <tr><td>Dywidenda</td><td style="color:var(--ocena-kupno)">Wypłacana, ok. 2,8% — płacisz za czekanie</td></tr>
+          <tr><td>Odpisy</td><td style="color:var(--ocena-uwaga)">6,3 mld DKK po ZEUS — jednorazowe, ale nie ostatnie</td></tr>
+          <tr><td>Nakłady na moce produkcyjne</td><td style="color:var(--ocena-uwaga)">Wysokie, budowane pod scenariusz sprzed przeceny</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Dlaczego to ma znaczenie:</strong> przy spółkach w tarapatach zwykle pytamy, czy przetrwają. Tutaj to pytanie nie występuje. Novo jest rentowne, wypłaca dywidendę i nie ma presji refinansowania. <strong>Spór dotyczy wyłącznie tego, ile będzie zarabiać za trzy lata</strong> — a to zupełnie inna kategoria ryzyka niż w przypadku spółek pokroju Core Scientific czy Redwire.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">💊</div><div class="catalyst-body"><h4>Wegovy w tabletce zdominowało nową kategorię</h4><p>Ponad 5 milionów recept, około 90% amerykańskiego rynku doustnych leków na otyłość i najszybszy start wolumenowy w historii GLP-1 w USA. Novo dowiodło, że potrafi wprowadzić produkt na skalę masową.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Prognoza podniesiona w środku roku</h4><p>Z przedziału -5% do -13% na 0% do -6% w stałych kursach. Zarząd był w lutym zbyt pesymistyczny, a Q2 przyniósł wzrost sprzedaży o 7% i zysku operacyjnego o 11%.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏷️</div><div class="catalyst-body"><h4>Wycena 13,3× przy marży 42%</h4><p>Dyskonto 24% wobec mediany branżowej dla spółki, która pozostaje numerem dwa na rynku mierzonym w setkach miliardów dolarów. Do tego dywidenda blisko 2,8%, czyli wynagrodzenie za cierpliwość.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">✂️</div><div class="catalyst-body"><h4>Cięcie kosztów o realnej skali</h4><p>9 000 etatów i 8 mld DKK oszczędności rocznie. Zatrudnienie rosło przez pięć lat o 81% — jest co redukować bez naruszania rdzenia działalności.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔬</div><div class="catalyst-body"><h4>Dwa badania kardiologiczne wciąż w grze</h4><p>HERMES w niewydolności serca i ARTEMIS po zawale — odczyty w pierwszej połowie 2027 roku. Ziltivekimab działał zgodnie z oczekiwaniami na markerach biologicznych, więc inne wskazania nie są przesądzone.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Obniżka cen o połowę wchodzi 1 stycznia 2027</h4><p>Cena listowa Wegovy spada o 50%, Ozempicu i Rybelsusa o 34%. To nie jest negocjowalna presja — to ustalona data i ustalona liczba. Odrobić da się to wyłącznie wolumenem.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🥇</div><div class="catalyst-body"><h4>Eli Lilly wygrywa wyścig</h4><p>Zepbound odbiera udziały Wegovy, a orforglipron — zatwierdzony w kwietniu 2026 — to pierwsza małocząsteczkowa tabletka GLP-1. Goldman Sachs szacuje, że do 2030 roku Lilly zgarnie 60% segmentu doustnego wobec 21% dla Novo.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🧪</div><div class="catalyst-body"><h4>Pipeline zawodzi seryjnie</h4><p>CagriSema nie osiągnął celu wobec tirzepatydu, ZEUS nie wykazał redukcji zdarzeń sercowo-naczyniowych mimo poprawnych markerów. Dwa duże niepowodzenia w pół roku to wzorzec, nie pech.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚖️</div><div class="catalyst-body"><h4>Pozew akcjonariuszy w toku</h4><p>Amerykański sąd dopuścił do dalszego rozpoznania część roszczeń związanych z komunikacją wokół badań CagriSema. Ryzyko finansowe umiarkowane, reputacyjne wyższe.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Jedna franczyza, jedna cząsteczka</h4><p>Po niepowodzeniu ziltivekimabu Novo pozostaje spółką semaglutydu. Brak drugiej nogi oznacza, że każdy problem w GLP-1 uderza w całość biznesu.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Novo Nordisk</th><th>Eli Lilly</th></tr></thead>
+        <tbody>
+          <tr><td>Lek iniekcyjny na otyłość</td><td>Wegovy — traci udziały</td><td style="color:var(--ocena-kupno)">Zepbound — zyskuje</td></tr>
+          <tr><td>Lek iniekcyjny w cukrzycy</td><td>Ozempic</td><td>Mounjaro — rośnie szybciej</td></tr>
+          <tr><td><strong>Tabletka na otyłość</strong></td><td style="color:var(--ocena-kupno)">Wegovy doustne — <strong>~90% rynku dziś</strong></td><td>Orforglipron — zatwierdzony IV.2026</td></tr>
+          <tr><td>Prognoza udziału w rynku doustnym 2030</td><td style="color:var(--ocena-sprzedaz)">21% (~$4 mld)</td><td style="color:var(--ocena-kupno)">60% (~$13,6 mld)</td></tr>
+          <tr><td>Technologia</td><td>Peptyd — droższy w produkcji</td><td style="color:var(--ocena-kupno)">Małocząsteczkowa — tańsza, łatwiejsza w skalowaniu</td></tr>
+          <tr><td>Wycena</td><td style="color:var(--ocena-kupno)">13,3× zysku forward</td><td>Wyraźnie wyżej</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Kluczowa asymetria.</strong> Dziś Novo ma 90% rynku doustnego, a prognozy mówią, że za cztery lata będzie miało 21%. To zestawienie oddaje istotę sporu: <strong>Novo weszło pierwsze, Lilly ma wejść lepiej</strong>. Prognoza Goldmana to jednak nadal prognoza — orforglipron musi jeszcze udowodnić skuteczność i tolerancję w codziennej praktyce, a wcześniejsze dane rozczarowały część inwestorów.</div>
+      <p>Warto też zauważyć rzecz, która umyka w narracji „Lilly wygrywa": <strong>21% rynku wartego kilkanaście miliardów dolarów to nadal duży biznes</strong> — większy niż cała dzisiejsza sprzedaż niejednej spółki z portfela. Pytanie nie brzmi, czy Novo przegra, tylko czy dzisiejsza cena zakłada porażkę większą niż prawdopodobna.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Szczyt wszech czasów</td><td>$137,40</td><td>25 czerwca 2024 — punkt odniesienia dla skali przeceny</td></tr>
+          <tr><td>Szczyt 52-tygodniowy</td><td>$64,16</td><td>23 stycznia 2026, przed lutowym załamaniem</td></tr>
+          <tr><td>Dno 52-tygodniowe</td><td><strong>$35,12</strong></td><td>30 marca 2026 — kapitulacja po CagriSema</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$45,76</strong></td><td>+30% od dna, -29% od szczytu 52W, -67% od ATH</td></tr>
+          <tr><td>Wsparcie S1</td><td>$42–44</td><td>Strefa konsolidacji po wynikach Q2</td></tr>
+          <tr><td>Wsparcie S2</td><td>$35–38</td><td>Rejon dna rocznego</td></tr>
+          <tr><td>Opór R1</td><td>$50–52</td><td>Dolny zakres celów analityków</td></tr>
+          <tr><td>Opór R2</td><td>$60–64</td><td>Szczyt 52-tygodniowy</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Obrona strefy $42–44</li><li>Q3 potwierdza tempo wolumenów</li><li>Wybicie ponad $52 → droga na $60</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Przebicie $42 z wolumenem</li><li>Sygnały słabości przed styczniem 2027</li><li>Ponowny test $35–38</li></ul></div>
+      </div>
+      <p>Kurs odbił o 30% od marcowego dna, ale nie wyszedł jeszcze z szerokiej konsolidacji. Struktura jest neutralna — <strong>rynek czeka na dane, nie na wykres</strong>.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Brak katalizatora do wyników Q3 w listopadzie. Im bliżej stycznia, tym mocniej ciąży obniżka cen. Trudny okres na wzrosty.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text neutral">NEUTRALNA z przechyłem pozytywnym</div><div class="rating-note">Wycena 13,3× i dywidenda 2,8% dają poduszkę, ale pierwsze półrocze 2027 pokaże pełny wpływ obniżki cen. Konsensus $47–51 jest ostrożny.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Rynek otyłości jest wystarczająco duży dla dwóch graczy. Novo z 20-procentowym udziałem i marżą 40% pozostaje bardzo dobrym biznesem — o ile cena go odzwierciedla.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji:</strong> 3–5% portfela — duża, rentowna spółka z dywidendą, ale z realnym ryzykiem strukturalnym</li>
+        <li><strong>Dokupienie:</strong> $40–43, czyli bliżej dolnej krawędzi konsolidacji, a nie w bieżącej strefie</li>
+        <li><strong>Druga transza:</strong> $35–38 przy ponownym teście dna rocznego</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $58–62 (szczyt 52-tygodniowy)</li>
+        <li><strong>Kluczowa data:</strong> <strong>styczeń 2027</strong> — wejście nowych cen; wyniki za pierwszy kwartał tego roku będą pierwszym prawdziwym testem tezy</li>
+        <li><strong>Wyjście z tezy:</strong> spadek wolumenów Wegovy mimo obniżki cen albo utrata przywództwa w segmencie doustnym</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$50 – $60</div><div class="fair-value-note">Scenariusz negatywny: $35–40 | Scenariusz pozytywny: $70–75 | Konsensus: $47,24–$51,19</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Tanio wobec jakości biznesu.</strong> 13,3× zysku przy marży operacyjnej 42% i dyskoncie 24% do mediany branżowej, z dywidendą blisko 2,8%</li>
+          <li><strong>Wegovy w tabletce działa.</strong> Ponad 5 mln recept i około 90% amerykańskiego rynku doustnego — najszybszy start wolumenowy w historii GLP-1</li>
+          <li><strong>Zarząd był zbyt pesymistyczny.</strong> Prognoza podniesiona w środku roku o około sześć punktów procentowych, Q2 powyżej oczekiwań</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>1 stycznia 2027 ceny w USA spadają o połowę.</strong> Data i skala są przesądzone; odrobić da się to wyłącznie wolumenem, którego nikt jeszcze nie zmierzył</li>
+          <li><strong>Eli Lilly wygrywa wyścig technologiczny.</strong> Prognozy dają jej 60% rynku doustnego w 2030 roku wobec 21% dla Novo</li>
+          <li><strong>Pipeline zawodzi seryjnie.</strong> CagriSema i ZEUS w ciągu pół roku; po ziltivekimabie Novo pozostaje spółką jednej cząsteczki</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> spadek wolumenów Wegovy mimo niższej ceny w pierwszym półroczu 2027 albo utrata przywództwa w segmencie doustnym na rzecz orforglipronu → powrót w rejon $35–40.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> wzrost liczby pacjentów po obniżce cen wystarczający, by utrzymać przychody na płaskim poziomie, plus pozytywny odczyt HERMES lub ARTEMIS w pierwszej połowie 2027 → re-rating ku $60–70.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Novo Nordisk jest przypadkiem, w którym <strong>dobra spółka i zły akcjonariat spotkały się w najgorszym możliwym momencie</strong>. Trzy lata temu była najcenniejszą firmą Europy i pozycją wzrostową w tysiącach portfeli. Dziś kurs jest o 67% niżej niż w czerwcu 2024, a spółka wciąż ma marżę operacyjną 42%, wypłaca dywidendę i sprzedaje najszybciej przyjmowaną tabletkę na otyłość w historii amerykańskiego rynku. Sprzedaż w drugim kwartale wzrosła o 7%, zysk operacyjny o 11%, a całoroczna prognoza została <strong>podniesiona</strong> — z przedziału od minus pięciu do minus trzynastu procent na zero do minus sześciu.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Rynek zareagował na tę poprawę <strong>sześcioprocentowym spadkiem</strong>. I to jest najważniejsza informacja w całej analizie: nikt już nie spiera się o bieżące wyniki. Spór dotyczy 1 stycznia 2027 roku, gdy cena listowa Wegovy w USA spadnie o połowę, a Ozempicu i Rybelsusa o jedną trzecią — na mocy porozumienia z administracją, którego nie da się renegocjować. Do tego dochodzi Eli Lilly z tabletką małocząsteczkową, tańszą w produkcji od peptydu, oraz pipeline Novo, który w ciągu pół roku zawiódł dwukrotnie: CagriSema nie dorównała tirzepatydowi, a ziltivekimab nie zmniejszył ryzyka zdarzeń sercowo-naczyniowych mimo poprawnych markerów.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Biznes nadal rośnie.</strong> Q2: sprzedaż +7%, zysk operacyjny +11% w stałych kursach, oba powyżej oczekiwań.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Nowy produkt się przyjął.</strong> Wegovy w tabletce: ponad 5 mln recept, ~90% amerykańskiego rynku doustnego, ponad 265 tys. recept tygodniowo.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Koszty pod kontrolą.</strong> 9 000 etatów mniej, 8 mld DKK oszczędności rocznie — cofnięcie rozbudowy, która wyprzedziła popyt.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Wolumen odrobi obniżkę ceny.</strong> Klucz do całej tezy. Przy cenie $350 zamiast $1 350 pacjentów powinno przybyć — ale nikt nie wie, ilu. Odpowiedź poznamy dopiero w wynikach za pierwszy kwartał 2027.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Utrzymanie pozycji w segmencie doustnym.</strong> Dziś 90% rynku, prognozy na 2030 mówią o 21%. Orforglipron musi jeszcze potwierdzić skuteczność w praktyce klinicznej.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Druga noga poza GLP-1.</strong> Po niepowodzeniu ZEUS Novo pozostaje spółką jednej franczyzy. HERMES i ARTEMIS dają szansę, ale dopiero w 2027 roku.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Listopad 2026</strong></td><td>Wyniki Q3 2026</td><td>Ostatni kwartał przed obniżką cen — test tempa wolumenów</td></tr>
+            <tr><td><strong>1 stycznia 2027</strong></td><td><strong>Wejście nowych cen w USA</strong></td><td>Wegovy -50%, Ozempic i Rybelsus -34%. Data przesądzona</td></tr>
+            <tr><td>Luty 2027</td><td>Wyniki roczne i prognoza na 2027</td><td>Pierwsza prognoza uwzględniająca pełny wpływ resetu cenowego</td></tr>
+            <tr><td><strong>I poł. 2027</strong></td><td>Odczyty badań HERMES i ARTEMIS</td><td>Ostatnia szansa ziltivekimabu na drugą nogę biznesu</td></tr>
+            <tr><td>Na bieżąco</td><td>Dane o receptach Wegovy i orforglipronu</td><td>Cotygodniowy wskaźnik tego, kto wygrywa segment doustny</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Tygodniowe recepty Wegovy doustnego</td><td>ponad 265 tys.</td><td>trwały spadek mimo niższej ceny</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Udział w rynku doustnym w USA</td><td>ok. 90%</td><td>&lt; 60% po wejściu orforglipronu</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża operacyjna</td><td>ok. 42%</td><td>&lt; 35%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Wzrost sprzedaży (stałe kursy)</td><td>+7% w Q2, prognoza roczna 0% do -6%</td><td>pogłębienie poniżej -10%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Udział Wegovy w rynku iniekcyjnym</td><td>spada na rzecz Zepbound</td><td>przyspieszenie utraty</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Pipeline poza GLP-1</td><td>ZEUS nieudany, dwa badania w toku</td><td>niepowodzenie HERMES i ARTEMIS</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji:</strong> 3–5% portfela — rentowna spółka z dywidendą, ale z nierozstrzygniętym ryzykiem strukturalnym</li>
+          <li><strong>Nie dokupywać w bieżącej strefie</strong> — po odbiciu o 30% od dna, a przed styczniowym resetem cen, relacja szansy do ryzyka nie jest korzystna</li>
+          <li><strong>Dokupienie:</strong> $40–43, a przy ponownej panice $35–38</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie $58–62</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> tygodniowe recepty na doustne Wegovy — to jedyny wskaźnik, który w czasie rzeczywistym mówi, czy wolumen odrabia cenę</li>
+          <li><strong>Wyjście z tezy:</strong> spadek wolumenów mimo niższej ceny albo utrata przywództwa w segmencie doustnym</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">⚖️ NEUTRALNA — dobry biznes, zły moment w kalendarzu</div>
+        <p>To nie jest spółka w tarapatach. Novo zarabia, ma marżę 42%, wypłaca dywidendę blisko 2,8% i właśnie podniosło prognozę. Wycena 13,3-krotności zysku przy dyskoncie 24% wobec branży wygląda na okazję — i byłaby nią, gdyby nie jedna data. <strong>1 stycznia 2027 roku cena listowa Wegovy w Stanach spada o połowę</strong>, a to nie jest presja negocjacyjna ani prognoza, tylko przesądzony fakt wynikający z porozumienia z administracją.</p>
+        <p>Cała teza sprowadza się więc do jednego pytania: <strong>ilu pacjentów przybędzie, gdy lek potanieje z $1 350 do $350 miesięcznie?</strong> Jeśli wolumen wzrośnie na tyle, by utrzymać przychody, dzisiejsza cena jest atrakcyjna. Jeśli nie — dzisiejsze 13,3× okaże się za rok osiemnastoma i akcje wrócą w rejon $35–40. Nikt nie zna tej odpowiedzi, łącznie z zarządem, a poznamy ją dopiero w wynikach za pierwszy kwartał 2027 roku. Dlatego neutralnie: <strong>trzymać, jeśli się ma, ale nie gonić przed styczniem</strong>. Cierpliwość jest tu opłacana dywidendą.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$50–60</b></div>
+          <div><span>Scenariusz negatywny</span><b>$35–40</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$70–75</b></div>
+          <div><span>Sugerowana pozycja</span><b>3–5% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3 — listopad</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 12 sierpnia 2026 | Cena od użytkownika: $45,76 | Dane: Novo Nordisk IR (Q2 2026, 4 sierpnia), SEC 6-K, GuruFocus, StockAnalysis, CNBC, Goldman Sachs | Wyniki podawane w koronach duńskich, wycena w USD dla ADR | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

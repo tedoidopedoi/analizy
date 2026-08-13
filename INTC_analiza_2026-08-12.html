@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INTC — Intel | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: INTC</div>
+    <div class="company-name">Intel Corporation</div>
+    <div class="company-sub">Półprzewodniki · procesory Xeon i Core · Intel Foundry (18A / 14A) · Santa Clara, Kalifornia</div>
+    <div class="header-meta">
+      <span class="meta-tag">Wzrost przychodów +25% r/r</span>
+      <span class="meta-tag">Najszybciej od 15 lat</span>
+      <span class="meta-tag">Foundry traci $2,1 mld kwartalnie</span>
+      <span class="meta-tag">Wycena skrajnie wysoka</span>
+      <div class="price-display">
+        <div class="price-main">$100,00</div>
+        <div class="price-sub">12.08.2026 | 52W: $21,36–$142,35</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — świetna przemiana, ekstremalna cena">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">przemiana prawdziwa, cena już ją zakłada</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$90 – $125</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-10% do +25%</b></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (12.08.2026)</div><div class="metric-value">$100,00</div><div class="metric-detail">-30% od szczytu $142,35 | +368% od dna $21,36</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~$509 mld</div><div class="metric-detail">5,08 mld akcji | ok. +170% od początku roku</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">$16,1 mld</div><div class="metric-detail">+25% r/r — najszybciej od blisko 15 lat</div></div>
+    <div class="metric-card"><div class="metric-label">Centra danych i AI</div><div class="metric-value green">$6,3 mld</div><div class="metric-detail">+59% r/r | +24% kw/kw</div></div>
+    <div class="metric-card"><div class="metric-label">Strata Foundry (Q2)</div><div class="metric-value red">-$2,1 mld</div><div class="metric-detail">Marża z -71,7% do -36,2% w rok</div></div>
+    <div class="metric-card"><div class="metric-label">Forward P/E</div><div class="metric-value red">67–122×</div><div class="metric-detail">Nasdaq-100: 26× | P/S 12 | EV/EBITDA 58</div></div>
+    <div class="metric-card"><div class="metric-label">Przychód zewnętrzny Foundry</div><div class="metric-value yellow">$293 mln</div><div class="metric-detail">Z $5,8 mld przychodów segmentu — 5%</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus analityków</div><div class="metric-value yellow">$114,88</div><div class="metric-detail">48 firm, ocena „trzymaj" | rozrzut $75–$200</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest dzisiejszy Intel?</h3>
+      <p>Intel to najstarszy z wielkich producentów półprzewodników — założony w 1968 roku w Santa Clara, przez dekady synonim procesora osobistego, a przez ostatnie dziesięć lat symbol utraconej przewagi technologicznej. Pod kierownictwem prezesa <strong>Lip-Bu Tana</strong> spółka realizuje jedną z najbardziej ryzykownych przemian w historii branży: próbę stania się <strong>odlewnią kontraktową</strong> zdolną konkurować z TSMC, przy jednoczesnym utrzymaniu własnego biznesu procesorowego.</p>
+      <p>W 2026 roku ta próba zaczęła przynosić efekty widoczne w liczbach. Przychody w drugim kwartale wzrosły o <strong>25% rok do roku — najszybciej od blisko piętnastu lat</strong> — a kurs akcji wzrósł od początku roku o mniej więcej 170%, z dna 52-tygodniowego na poziomie $21,36 do szczytu $142,35.</p>
+      <h3>Jak Intel dostał kapitał, którego potrzebował</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Inwestor</th><th>Kwota</th><th>Uwagi</th></tr></thead>
+        <tbody>
+          <tr><td>Sierpień 2025</td><td>SoftBank Group</td><td>$2,0 mld</td><td>Emisja prywatna</td></tr>
+          <tr><td><strong>2025</strong></td><td><strong>Rząd Stanów Zjednoczonych</strong></td><td><strong>$8,9 mld</strong></td><td>433,3 mln akcji po $20,47 — udział 9,9%</td></tr>
+          <tr><td>Wrzesień–grudzień 2025</td><td>NVIDIA</td><td>$5,0 mld</td><td>Emisja prywatna</td></tr>
+          <tr><td><strong>10 sierpnia 2026</strong></td><td><strong>Emisja publiczna</strong></td><td><strong>$15 mld</strong></td><td>Pierwsza publiczna sprzedaż akcji od debiutu w 1971 roku</td></tr>
+        </tbody>
+      </table></div>
+      <p>Rząd USA kupował po $20,47. Przy dzisiejszych $100 ta pozycja jest warta blisko pięć razy więcej — co jest jednocześnie miarą sukcesu programu i miarą tego, jak daleko zaszła wycena.</p>
+      <div class="alert alert-info"><strong>Kluczowe napięcie tej analizy:</strong> przemiana Intela jest <em>prawdziwa</em> — przychody rosną najszybciej od piętnastu lat, straty odlewni gwałtownie się kurczą, a rząd, NVIDIA i SoftBank są współwłaścicielami. Problem polega na tym, że <strong>cena akcji zakłada już, że wszystko się uda</strong>. To dokładne przeciwieństwo sytuacji, jaką widzimy w spółkach pokroju ServiceNow, gdzie rynek wycenia porażkę mimo dobrych wyników.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment</th><th>Opis</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Centra danych i AI</strong></td><td>Procesory Xeon, infrastruktura AI dla przedsiębiorstw</td><td>🔥 $6,3 mld, +59% r/r</td></tr>
+          <tr><td><strong>Procesory klienckie</strong></td><td>Core do komputerów osobistych</td><td>Stabilny rdzeń gotówkowy</td></tr>
+          <tr><td><strong>Intel Foundry</strong></td><td>Odlewnia kontraktowa — produkcja dla zewnętrznych klientów</td><td style="color:var(--ocena-sprzedaz)">$5,8 mld przychodu, strata $2,1 mld</td></tr>
+          <tr><td><strong>Proces 18A / 18A-P</strong></td><td>Nowa generacja litografii, produkcja próbna zgodnie z planem</td><td style="color:var(--ocena-kupno)">Terminowo</td></tr>
+          <tr><td><strong>Proces 14A</strong></td><td>Kolejny węzeł, kluczowy dla pozyskania klientów zewnętrznych</td><td style="color:var(--ocena-uwaga)">Rozmowy w toku</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — geografia i polityka, nie technologia</h3>
+      <p>Intel nie ma dziś przewagi technologicznej nad TSMC. Ma za to coś, czego TSMC mieć nie może: <strong>zaawansowane moce produkcyjne na terytorium Stanów Zjednoczonych, z rządem USA jako akcjonariuszem</strong>. W świecie, w którym łańcuch dostaw półprzewodników stał się kwestią bezpieczeństwa narodowego, to jest realna i trwała przewaga — niezależna od tego, czy 18A dorówna procesom tajwańskim.</p>
+      <div class="alert alert-warn"><strong>Ale uwaga na proporcje.</strong> Z $5,8 mld przychodów segmentu Foundry zaledwie <strong>$293 mln, czyli około 5%, pochodzi od klientów zewnętrznych</strong>. Reszta to produkcja dla samego Intela, rozliczana wewnętrznie. Cała teza o „Intelu jako drugiej odlewni świata" opiera się dziś na kwocie mniejszej niż kwartalne przychody niejednej średniej spółki technologicznej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Niedobór mocy w TSMC</strong> — ograniczenia u lidera sprawiają, że klienci szukają rezerwowego dostawcy; według doniesień Google i NVIDIA rozważały Intela w tej roli, co podniosło kurs o ponad 10% w jeden dzień</li>
+        <li><strong>Popyt na infrastrukturę AI</strong> — segment centrów danych rośnie o 59% rok do roku, a biznesy związane z AI o ponad 70%</li>
+        <li><strong>Polityka przemysłowa USA</strong> — udział rządu w akcjonariacie zmienia Intela z prywatnej spółki w element strategii państwa; to zarówno wsparcie, jak i ograniczenie swobody</li>
+        <li><strong>Cykliczność półprzewodników</strong> — branża pozostaje cykliczna, a obecna faza to szczyt inwestycji w AI, nie stan trwały</li>
+        <li><strong>Bariera wejścia w odlewnictwie</strong> — zbudowanie zaufania klientów do nowej odlewni zajmuje lata; TSMC budowało je dwie dekady</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Grupa</th><th>Sytuacja</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Klienci procesorów serwerowych</td><td>Popyt na Xeon rośnie wraz z inwestycjami w AI</td><td style="color:var(--ocena-kupno)">Realne przychody dziś</td></tr>
+          <tr><td>Producenci komputerów</td><td>Stabilny, dojrzały segment</td><td>Baza gotówkowa</td></tr>
+          <tr><td><strong>Klienci odlewni — podpisani</strong></td><td><strong>$293 mln przychodu zewnętrznego</strong></td><td style="color:var(--ocena-sprzedaz)">Wciąż śladowe</td></tr>
+          <tr><td>Apple</td><td>Doniesienia o zbliżaniu się do umowy</td><td style="color:var(--ocena-uwaga)">Niepotwierdzone</td></tr>
+          <tr><td>Google, NVIDIA</td><td>Rozważane jako dostawca rezerwowy przy ograniczeniach TSMC</td><td style="color:var(--ocena-uwaga)">Doniesienia prasowe</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Rzecz, którą trzeba powiedzieć wprost.</strong> 10 sierpnia Intel ogłosił emisję akcji za <strong>$15 mld na budowę mocy produkcyjnych dla klientów, którzy jeszcze niczego nie podpisali</strong>. Zarząd deklaruje „rosnącą pewność" co do zainteresowania węzłem 14A i celuje w kilka zobowiązań w drugiej połowie 2026 roku — ale na dziś są to rozmowy, nie kontrakty. Kupując Intela po $100, kupujesz przekonanie, że te podpisy się pojawią.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026</th><th>Wobec prognozy / roku</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td><strong>$16,1 mld</strong></td><td style="color:var(--ocena-kupno)">+25% r/r, o $1,8 mld powyżej prognozy</td></tr>
+          <tr><td>EPS non-GAAP</td><td><strong>$0,42</strong></td><td style="color:var(--ocena-kupno)">Prognoza zakładała $0,20 — ponad dwukrotnie lepiej</td></tr>
+          <tr><td>Marża brutto</td><td>41,8%</td><td style="color:var(--ocena-kupno)">280 pb powyżej prognozy</td></tr>
+          <tr><td>Centra danych i AI</td><td>$6,3 mld</td><td style="color:var(--ocena-kupno)">+59% r/r</td></tr>
+          <tr><td>Intel Foundry — przychód</td><td>$5,8 mld</td><td>+31%, ale zewnętrznie tylko $293 mln</td></tr>
+          <tr><td><strong>Intel Foundry — wynik</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$2,1 mld</strong></td><td>O $348 mln lepiej niż w Q1</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Prognoza na Q3 i nakłady</h3>
+      <ul>
+        <li>Przychody: <strong>$15,8–16,8 mld</strong></li>
+        <li>Marża brutto: około <strong>42%</strong></li>
+        <li>EPS: <strong>$0,38</strong></li>
+        <li>Nakłady inwestycyjne 2026: podniesione do <strong>ponad $20 mld</strong> wobec silniejszego popytu</li>
+      </ul>
+      <div class="alert alert-success"><strong>To był siódmy z rzędu kwartał powyżej oczekiwań.</strong> Wzrost przychodów o 25% przy prognozie pobitej o $1,8 mld i zysku ponad dwukrotnie wyższym od zapowiadanego to nie jest przypadek ani jednorazowy efekt. Operacyjnie Intel wykonuje plan lepiej, niż sam obiecywał — i to jest najsilniejszy argument za tą spółką.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $100</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>~$509 mld</td><td>5,08 mld akcji</td></tr>
+          <tr><td>P/S</td><td><strong>~12×</strong></td><td style="color:var(--ocena-sprzedaz)">Bardzo wysoko jak na producenta sprzętu</td></tr>
+          <tr><td>EV/EBITDA</td><td><strong>~58×</strong></td><td style="color:var(--ocena-sprzedaz)">Wielokrotność typowa dla software'u, nie dla fabryk</td></tr>
+          <tr><td>P/E trailing</td><td>ponad 900×</td><td style="color:var(--ocena-sprzedaz)">Zysk GAAP bliski zeru po restrukturyzacji</td></tr>
+          <tr><td>Wolne przepływy pieniężne</td><td style="color:var(--ocena-sprzedaz)">-$5,5 mld rocznie</td><td>Spółka pali gotówkę, nie generuje jej</td></tr>
+          <tr><td>Konsensus (48 analityków)</td><td>$114,88 · ocena „trzymaj"</td><td style="color:var(--ocena-uwaga)">+15% — umiarkowany</td></tr>
+          <tr><td>Rozrzut celów</td><td>$75 – $200</td><td style="color:var(--ocena-sprzedaz)">Skrajna niezgoda: BofA mówi o bańce, HSBC o $200</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM, GAAP)</td><td>ponad 900×</td><td style="color:var(--ocena-sprzedaz)">Bezużyteczny — zysk zniekształcony restrukturyzacją</td></tr>
+          <tr><td><strong>Forward P/E (FY2026, konsensus FactSet)</strong></td><td><strong>~67×</strong></td><td>EPS $1,49 — prognoza podniesiona o 38% w miesiąc</td></tr>
+          <tr><td><strong>Forward P/E (FY2026, prognoza Bernstein)</strong></td><td><strong>~122×</strong></td><td>EPS $0,82 przy przychodach $53,3 mld — znacznie ostrożniej</td></tr>
+          <tr><td>Forward P/E (FY2027, Bernstein)</td><td>~75×</td><td>EPS $1,33 przy przychodach $57,5 mld</td></tr>
+          <tr><td>Cel długoterminowy (BofA)</td><td>ponad $6 EPS do 2030</td><td>Przy 25× dałoby to około $150 — ale za cztery lata</td></tr>
+          <tr><td>Nasdaq-100 (odniesienie)</td><td><strong>26×</strong></td><td style="color:var(--ocena-sprzedaz)">Intel jest trzecią najdroższą spółką indeksu</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> rozpiętość od 67× do 122× na ten sam rok pokazuje, jak bardzo analitycy nie zgadzają się co do zdolności Intela do generowania zysku. To nie jest normalne dla spółki o kapitalizacji pół biliona dolarów. Kluczowa liczba brzmi jednak inaczej: <strong>Intel pali dziś około $5,5 mld wolnych przepływów rocznie</strong>, więc cała wycena opiera się na zyskach z lat 2028–2030, nie na tym, co spółka zarabia teraz. Analitycy Bank of America wprost porównali tę sytuację do Cisco u szczytu bańki internetowej — spółki, której biznes rósł dalej, a akcjonariusze czekali dwadzieścia lat na powrót do ceny zakupu.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$90 – $125</div><div class="fair-value-note">Baza: konsensus 48 analityków $114,88 przy ocenie „trzymaj" | Scenariusz negatywny (brak podpisów na 14A, wygaśnięcie entuzjazmu wobec AI): $60–75 | Scenariusz pozytywny (duży klient odlewni, Foundry blisko progu rentowności): $150–175 | Przy $100 potencjał od -40% do +75% — nietypowo szeroki rozrzut jak na spółkę tej wielkości</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <h3>Najważniejsza liczba w całej przemianie</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Marża operacyjna Intel Foundry</th></tr></thead>
+        <tbody>
+          <tr><td>Cztery kwartały temu</td><td style="color:var(--ocena-sprzedaz)">-71,7%</td></tr>
+          <tr><td>Q1 2026</td><td>strata $2,45 mld</td></tr>
+          <tr><td><strong>Q2 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>-36,2%</strong> (strata $2,1 mld)</td></tr>
+        </tbody>
+      </table></div>
+      <p>Poprawa marży odlewni z minus 71,7% do minus 36,2% w ciągu roku to <strong>najważniejszy pojedynczy wskaźnik w tej spółce</strong>. Zarząd przypisuje ją lepszym uzyskom, krótszym cyklom produkcyjnym i skali fabryk — czyli rzeczom, które wynikają z wykonania planu, a nie z koniunktury.</p>
+      <p>Jednocześnie marża brutto całej grupy wynosi 41,8%, a więc jest o 280 punktów bazowych wyższa od prognozy. Spółka jako całość wróciła na dodatnią marżę operacyjną — <strong>mimo że odlewnia nadal pochłania po 2 miliardy dolarów kwartalnie</strong>.</p>
+      <div class="alert alert-warn"><strong>Prosta arytmetyka, którą warto mieć w głowie:</strong> gdyby Intel Foundry przestał tracić i wyszedł na zero, do wyniku grupy wróciłoby około <strong>$8 mld rocznie</strong>. To jest cała teza byków wyrażona jedną liczbą. Pytanie brzmi, czy i kiedy to nastąpi — a przy $293 mln przychodów zewnętrznych droga do progu rentowności jest jeszcze bardzo długa.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitał pozyskany 2025–2026</td><td><strong>~$30,9 mld</strong></td><td>Rząd, NVIDIA, SoftBank i emisja publiczna</td></tr>
+          <tr><td>Emisja z 10 sierpnia 2026</td><td>$15 mld</td><td style="color:var(--ocena-uwaga)">Rozwodnienie ok. 3%; kurs spadł przed sesją o 5%</td></tr>
+          <tr><td>Nakłady inwestycyjne 2026</td><td>ponad $20 mld</td><td style="color:var(--ocena-sprzedaz)">Podniesione w trakcie roku</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$5,5 mld rocznie</strong></td><td>Spółka finansuje rozwój kapitałem, nie zyskiem</td></tr>
+          <tr><td>Zysk GAAP</td><td>bliski zeru</td><td>Efekt kosztów restrukturyzacji</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Warto docenić, jak nietypowa jest ta struktura właścicielska.</strong> Rząd Stanów Zjednoczonych z udziałem 9,9%, NVIDIA i SoftBank jako akcjonariusze mniejszościowi — Intel ma zaplecze kapitałowe, jakiego nie ma żaden konkurent. To realnie zmniejsza ryzyko, że zabraknie pieniędzy na dokończenie przemiany. <strong>Nie zmniejsza natomiast ryzyka, że przemiana się nie powiedzie</strong> — a przy palonych $5,5 mld rocznie kolejne emisje są bardziej prawdopodobne niż nie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Najszybszy wzrost od piętnastu lat</h4><p>Przychody $16,1 mld, +25% rok do roku, prognoza pobita o $1,8 mld, EPS ponad dwukrotnie wyższy od zapowiadanego. To siódmy kwartał z rzędu powyżej oczekiwań.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏭</div><div class="catalyst-body"><h4>Straty odlewni kurczą się szybko</h4><p>Marża operacyjna Intel Foundry poprawiła się z -71,7% do -36,2% w cztery kwartały. Wyjście na zero uwolniłoby około $8 mld rocznie do wyniku grupy.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚙️</div><div class="catalyst-body"><h4>18A-P w produkcji próbnej, terminowo</h4><p>Nowy węzeł osiągnął etap produkcji próbnej zgodnie z harmonogramem, z lepszymi parametrami wydajnościowymi i pełną zgodnością reguł projektowych. Terminowość to rzecz, której Intelowi brakowało przez dekadę.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🇺🇸</div><div class="catalyst-body"><h4>Rząd USA, NVIDIA i SoftBank w akcjonariacie</h4><p>Blisko $31 mld pozyskanego kapitału i wsparcie polityczne. W świecie, gdzie łańcuch dostaw chipów jest kwestią bezpieczeństwa narodowego, amerykańskie moce produkcyjne mają wartość niezależną od parametrów technicznych.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔌</div><div class="catalyst-body"><h4>Ograniczenia mocy w TSMC otwierają drzwi</h4><p>Doniesienia o rozważaniu Intela przez Google i NVIDIA jako dostawcy rezerwowego podniosły kurs o ponad 10% w jeden dzień. Zarząd celuje w kilka zobowiązań klientów na węzeł 14A w drugiej połowie 2026 roku.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">💰</div><div class="catalyst-body"><h4>Wycena bez precedensu dla producenta sprzętu</h4><p>P/S 12, EV/EBITDA 58, forward P/E od 67 do 122 razy wobec 26 dla całego Nasdaq-100. Intel jest trzecią najdroższą spółką indeksu. Bank of America porównał tę sytuację do Cisco u szczytu bańki internetowej.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔥</div><div class="catalyst-body"><h4>Spółka pali $5,5 mld gotówki rocznie</h4><p>Przy nakładach przekraczających $20 mld i zysku GAAP bliskim zeru cała wycena opiera się na zyskach z lat 2028–2030. To bardzo długi horyzont zaufania.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📝</div><div class="catalyst-body"><h4>Fabryki dla klientów, którzy nie podpisali</h4><p>Emisja $15 mld ma sfinansować moce produkcyjne pod zamówienia, których jeszcze nie ma. Przychód zewnętrzny odlewni to nadal tylko $293 mln — 5% przychodów segmentu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Rozwodnienie stało się metodą finansowania</h4><p>Po $8,9 mld od rządu, $5 mld od NVIDII i $2 mld od SoftBanku przyszła emisja publiczna za $15 mld — pierwsza od debiutu w 1971 roku. Przy trwającym spalaniu gotówki kolejne są prawdopodobne.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎢</div><div class="catalyst-body"><h4>Zmienność, która sama w sobie jest ryzykiem</h4><p>Zakres 52-tygodniowy od $21,36 do $142,35 — kurs zmieniał się w tym roku o setki procent w obie strony. Rozrzut celów analityków od $75 do $200 pokazuje, że nikt nie wie, ile ta spółka jest warta.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>Rola</th><th>Relacja do Intela</th></tr></thead>
+        <tbody>
+          <tr><td><strong>TSMC</strong></td><td>Lider odlewnictwa kontraktowego</td><td style="color:var(--ocena-sprzedaz)">Przewaga technologiczna i zaufanie budowane dwie dekady; ograniczenia mocy są jedyną szansą Intela</td></tr>
+          <tr><td><strong>NVIDIA</strong></td><td>Lider układów AI — i akcjonariusz Intela</td><td style="color:var(--ocena-uwaga)">Nietypowa relacja: konkurent w produktach, inwestor w kapitale</td></tr>
+          <tr><td><strong>AMD</strong></td><td>Bezpośredni rywal w procesorach</td><td>Odbierał Intelowi udziały przez lata; walka trwa</td></tr>
+          <tr><td><strong>Samsung Foundry</strong></td><td>Trzeci gracz w odlewnictwie</td><td>Podobne problemy z uzyskami i pozyskaniem klientów</td></tr>
+          <tr><td>Samsung, Micron, Kioxia</td><td>Pamięci</td><td>Inny segment, ale konkurują o ten sam budżet inwestycyjny w AI</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Prawdziwym konkurentem Intela nie jest AMD, tylko TSMC — i to nie w technologii, lecz w zaufaniu.</strong> Producent chipów powierzający projekt odlewni oddaje w jej ręce własność intelektualną i harmonogram premiery. Zmiana dostawcy to decyzja na lata, podejmowana z ogromną ostrożnością. Intel może mieć konkurencyjny proces i nadal nie dostać zamówień, jeśli klienci nie uwierzą w powtarzalność jego uzysków. <strong>To dlatego $293 mln przychodu zewnętrznego jest ważniejsze niż wszystkie parametry techniczne 18A.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Dno 52-tygodniowe</td><td>$21,36</td><td>Punkt wyjścia rajdu</td></tr>
+          <tr><td>Szczyt 52-tygodniowy</td><td><strong>$142,35</strong></td><td>Skrajny punkt euforii</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$100,00</strong></td><td>-30% od szczytu, +368% od dna</td></tr>
+          <tr><td>Wsparcie S1</td><td>$88–92</td><td>Poziom sprzed sierpniowej emisji</td></tr>
+          <tr><td>Wsparcie S2</td><td>$70–75</td><td>Dolny cel analityków</td></tr>
+          <tr><td>Opór R1</td><td>$113–118</td><td>Konsensus $114,88, szczyty z lipca</td></tr>
+          <tr><td>Opór R2</td><td>$142</td><td>Szczyt 52-tygodniowy</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Ogłoszenie dużego klienta odlewni</li><li>Wybicie ponad $118</li><li>Powrót w rejon $140</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Brak podpisów do końca roku</li><li>Przebicie $88 z wolumenem</li><li>Zejście ku $70–75</li></ul></div>
+      </div>
+      <div class="alert alert-danger"><strong>Zmienność tej skali sama w sobie jest informacją.</strong> Akcja, która w ciągu roku porusza się od $21 do $142 i z powrotem do $100, nie jest wyceniana przez analizę fundamentalną, lecz przez przepływ narracji. Przy takiej charakterystyce wielkość pozycji ma większe znaczenie niż moment wejścia.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Świeża emisja $15 mld ciąży podażą. Katalizatorem byłoby ogłoszenie klienta odlewni — możliwe w drugiej połowie roku, ale nie zaplanowane w kalendarzu.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Konsensus 48 analityków to „trzymaj" z celem $114,88. Wykonanie operacyjne jest bardzo dobre, ale wycena zakłada już sukces, którego dowodów jeszcze nie ma.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text neutral">NEUTRALNA z przechyłem pozytywnym</div><div class="rating-note">Jeśli Foundry wyjdzie na zero, do wyniku wraca ok. $8 mld rocznie, a prognoza BofA mówi o ponad $6 EPS do 2030. Ale to wymaga bezbłędnego wykonania przez cztery lata.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji:</strong> maksymalnie 3–4% portfela — przy zmienności od $21 do $142 w jeden rok większa pozycja przestaje być inwestycją, a staje się zakładem</li>
+        <li><strong>Nie dokupywać po $100</strong> — konsensus daje 15% potencjału przy scenariuszu negatywnym sięgającym -40%. Relacja szansy do ryzyka jest niekorzystna</li>
+        <li><strong>Rozważyć częściową realizację zysku</strong>, jeśli pozycja urosła ponad zakładany udział w portfelu — to naturalny moment na przywrócenie proporcji</li>
+        <li><strong>Ewentualne dokupienie:</strong> $70–80, czyli po realnej korekcie, a nie po 30-procentowym zejściu ze szczytu</li>
+        <li><strong>Jedna liczba do śledzenia:</strong> <strong>przychód zewnętrzny Intel Foundry</strong> — dziś $293 mln. To jedyny dowód, że teza działa</li>
+        <li><strong>Wyjście z tezy:</strong> brak ogłoszonego klienta na 14A do końca 2026 roku albo ponowne poszerzenie strat odlewni</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$90 – $125</div><div class="fair-value-note">Scenariusz negatywny: $60–75 | Scenariusz pozytywny: $150–175 | Konsensus: $114,88 („trzymaj")</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by trzymać</h4><ul>
+          <li><strong>Wykonanie jest lepsze od obietnic.</strong> Przychody +25% r/r, prognoza pobita o $1,8 mld, EPS ponad dwukrotnie powyżej zapowiedzi — siódmy kwartał z rzędu</li>
+          <li><strong>Odlewnia realnie się poprawia.</strong> Marża z -71,7% do -36,2% w rok; wyjście na zero uwolniłoby około $8 mld rocznie</li>
+          <li><strong>Zaplecze kapitałowe bez odpowiednika.</strong> Rząd USA, NVIDIA i SoftBank w akcjonariacie, blisko $31 mld pozyskane — pieniądze na dokończenie przemiany są</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by nie dokupować</h4><ul>
+          <li><strong>Wycena bez precedensu.</strong> P/S 12, EV/EBITDA 58, forward P/E 67–122× wobec 26× dla Nasdaq-100. Trzecia najdroższa spółka indeksu</li>
+          <li><strong>Fabryki dla klientów bez podpisów.</strong> $15 mld emisji na moce pod zamówienia, których nie ma; przychód zewnętrzny odlewni to wciąż tylko $293 mln</li>
+          <li><strong>Ujemne przepływy $5,5 mld rocznie.</strong> Wycena opiera się na zyskach z lat 2028–2030, a nie na dzisiejszej zdolności zarobkowej</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> brak ogłoszonego dużego klienta na węzeł 14A do końca 2026 roku albo ponowne poszerzenie strat odlewni → powrót w rejon $70–75.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> podpisany kontrakt z klientem klasy Apple, Google lub NVIDIA plus przychód zewnętrzny odlewni przekraczający $1 mld kwartalnie → droga ku $150.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Intel jest w tej chwili <strong>dokładnym przeciwieństwem większości spółek, które ostatnio analizowaliśmy</strong>. Zwykle mamy do czynienia z dobrym biznesem wycenianym tak, jakby miał zbankrutować. Tutaj jest odwrotnie: mamy przemianę, która naprawdę działa, wycenianą tak, jakby jej powodzenie było już przesądzone. Przychody w drugim kwartale wyniosły 16,1 miliarda dolarów i wzrosły o 25% rok do roku — <strong>najszybciej od blisko piętnastu lat</strong>. Prognoza została pobita o 1,8 miliarda, zysk na akcję okazał się ponad dwukrotnie wyższy od zapowiadanego, a marża odlewni poprawiła się w ciągu roku z minus 71,7% do minus 36,2%. To siódmy kwartał z rzędu powyżej oczekiwań.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">A teraz druga strona. Przy cenie 100 dolarów Intel jest wart <strong>509 miliardów dolarów, czyli dwanaście razy więcej niż jego roczne przychody</strong>, i jest trzecią najdroższą spółką w indeksie Nasdaq-100 przy wskaźniku EV/EBITDA na poziomie 58. Spali w tym roku około 5,5 miliarda dolarów wolnych przepływów, zysk księgowy ma bliski zeru, a 10 sierpnia ogłosił emisję akcji za 15 miliardów — pierwszą publiczną od debiutu w 1971 roku — <strong>żeby zbudować fabryki dla klientów, którzy jeszcze niczego nie podpisali</strong>. Przychód od zewnętrznych odbiorców odlewni wynosi 293 miliony dolarów, czyli około 5% przychodów całego segmentu. Analitycy Bank of America porównali tę wycenę do Cisco u szczytu bańki internetowej.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Wzrost przychodów wrócił.</strong> +25% rok do roku, centra danych i AI +59%, siódmy kwartał powyżej prognozy.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Straty odlewni maleją w tempie, które da się zmierzyć.</strong> Marża operacyjna z -71,7% do -36,2% w cztery kwartały, strata mniejsza o $348 mln kwartał do kwartału.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Technologia dowozi terminowo.</strong> 18A-P w produkcji próbnej zgodnie z harmonogramem — po dekadzie opóźnień to zmiana jakościowa.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Klienci zewnętrzni odlewni.</strong> Doniesienia o Apple, Google i NVIDII są zachęcające, ale $293 mln przychodu zewnętrznego to wciąż dowód, że nikt jeszcze naprawdę nie przyszedł.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Domknięcie luki gotówkowej.</strong> Przy -$5,5 mld przepływów rocznie i capexie ponad $20 mld kolejne emisje są bardziej prawdopodobne niż nie.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Wycena dająca margines bezpieczeństwa.</strong> Forward P/E między 67× a 122× wobec 26× dla Nasdaq-100. Rynek nie zostawił tu miejsca na potknięcie.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>II poł. 2026</strong></td><td>Zapowiadane zobowiązania klientów na węzeł 14A</td><td>Najważniejszy katalizator — dowód albo jego brak</td></tr>
+            <tr><td>Październik 2026</td><td>Wyniki Q3 (prognoza: $15,8–16,8 mld, EPS $0,38)</td><td>Czy seria siedmiu pobić prognozy się utrzyma</td></tr>
+            <tr><td>Na bieżąco</td><td>Doniesienia o umowie z Apple</td><td>Klient tej klasy zmieniłby postrzeganie odlewni jednym komunikatem</td></tr>
+            <tr><td>2027</td><td>Wdrożenie produkcyjne 14A</td><td>Moment prawdy dla całej strategii odlewniczej</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Przychód zewnętrzny Intel Foundry</strong></td><td>$293 mln</td><td>brak wzrostu przez dwa kwartały</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Marża operacyjna Foundry</td><td>-36,2% (było -71,7%)</td><td>ponowne pogorszenie</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Wzrost przychodów grupy</td><td>+25% r/r</td><td>&lt; 10%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża brutto</td><td>41,8%</td><td>&lt; 38%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Wolne przepływy pieniężne</td><td>-$5,5 mld rocznie</td><td>pogłębienie poniżej -$8 mld</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Liczba akcji</td><td>5,08 mld po emisji</td><td>kolejna emisja powyżej $10 mld</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji:</strong> maksymalnie 3–4% portfela — przy wahaniach od $21 do $142 w jeden rok większy udział przestaje być inwestycją</li>
+          <li><strong>Nie dokupywać po $100</strong> — konsensus daje 15% w górę przy scenariuszu negatywnym sięgającym -40%</li>
+          <li><strong>Jeśli pozycja mocno urosła</strong>, rozważyć częściową realizację i przywrócenie zakładanego udziału w portfelu; to decyzja o proporcjach, nie o spółce</li>
+          <li><strong>Dokupienie:</strong> $70–80 po realnej korekcie</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> przychód zewnętrzny Intel Foundry. Wszystko inne to narracja</li>
+          <li><strong>Wyjście z tezy:</strong> brak klienta na 14A do końca 2026 roku albo ponowne poszerzenie strat odlewni</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">⚖️ NEUTRALNA — przemiana prawdziwa, cena już ją zakłada</div>
+        <p>Chcę być tu precyzyjny, bo łatwo o nieporozumienie: <strong>to nie jest ocena negatywna wobec spółki</strong>. Intel wykonuje plan lepiej, niż sam obiecywał, siódmy kwartał z rzędu. Marża odlewni poprawiła się w rok o trzydzieści pięć punktów procentowych. Technologia dowozi terminowo, czego temu przedsiębiorstwu brakowało przez dekadę. Gdyby oceniać wyłącznie wykonanie, byłoby to kupno.</p>
+        <p>Ale wyceny nie da się oddzielić od spółki. Przy 509 miliardach dolarów kapitalizacji, dwunastokrotności przychodów i forward P/E między 67 a 122 razy <strong>rynek wycenił już nie postęp, lecz zwycięstwo</strong> — i zrobił to zanim pojawił się choć jeden duży klient odlewni. Kupując dziś, płacisz pełną cenę za wynik, który dopiero ma nastąpić, i przyjmujesz na siebie całe ryzyko po drodze. Konsensus 48 analityków brzmi „trzymaj" przy celu $114,88, a rozrzut od $75 do $200 uczciwie oddaje, jak mało kto tu cokolwiek wie. Jeśli już masz tę pozycję — trzymaj i pilnuj jej wielkości. Jeśli nie masz — <strong>$100 to nie jest miejsce, w którym się zaczyna</strong>.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$90–125</b></div>
+          <div><span>Scenariusz negatywny</span><b>$60–75</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$150–175</b></div>
+          <div><span>Sugerowana pozycja</span><b>maks. 3–4% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Klient 14A — II poł. 2026</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 12 sierpnia 2026 | Cena od użytkownika: $100,00 | Dane: Intel IR (Q2 2026, 23 lipca), SEC 8-K i FWP, StockAnalysis, GuruFocus, Bloomberg, konsensus 48 analityków (S&P Global) | Prognozy EPS: FactSet $1,49 / Bernstein $0,82 na 2026 | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
