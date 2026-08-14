@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORCL — Oracle | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: ORCL</div>
+    <div class="company-name">Oracle Corporation</div>
+    <div class="company-sub">Bazy danych i chmura · OCI · portfel zamówień $638 mld · główny dostawca mocy dla OpenAI · Austin, Teksas</div>
+    <div class="header-meta">
+      <span class="meta-tag">RPO $638 mld (+363% r/r)</span>
+      <span class="meta-tag">OCI +93% r/r</span>
+      <span class="meta-tag">FCF -$23,7 mld</span>
+      <span class="meta-tag">Rating S&amp;P obniżony do BBB-</span>
+      <div class="price-display">
+        <div class="price-main">$152,90</div>
+        <div class="price-sub">14.08.2026, 11:06 EDT | -37% w 52 tygodnie</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO spekulacyjne — największy portfel zamówień, najgorszy bilans">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO SPEKULACYJNE</span><span class="rb-qual">dźwignia i uzależnienie od OpenAI</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$180 – $220</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">+18% do +44%</b></div>
+    <div class="rb-right">Pozycja 2–4% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (14.08.2026)</div><div class="metric-value">$152,90</div><div class="metric-detail">-37% w 52 tygodnie | -56% od szczytu $345,72</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$440,4 mld</div><div class="metric-detail">EV $576,0 mld | 2,88 mld akcji</div></div>
+    <div class="metric-card"><div class="metric-label">Portfel zamówień (RPO)</div><div class="metric-value green">$638 mld</div><div class="metric-detail">+363% r/r | +$85 mld kw/kw</div></div>
+    <div class="metric-card"><div class="metric-label">Chmura OCI (Q4)</div><div class="metric-value green">+93% r/r</div><div class="metric-detail">$5,8 mld | wykorzystanie GPU 97,5%</div></div>
+    <div class="metric-card"><div class="metric-label">Wolne przepływy (TTM)</div><div class="metric-value red">-$23,7 mld</div><div class="metric-detail">Capex $55,7 mld przy przepływach $32,0 mld</div></div>
+    <div class="metric-card"><div class="metric-label">Forward P/E</div><div class="metric-value em">19,4×</div><div class="metric-detail">PEG 0,66 | P/E bieżące 26,8×</div></div>
+    <div class="metric-card"><div class="metric-label">Zadłużenie</div><div class="metric-value red">$167,4 mld</div><div class="metric-detail">Dług netto -$135,5 mld | D/E 3,89</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (44 analityków)</div><div class="metric-value green">$247,17</div><div class="metric-detail">+62% | ocena „kupuj"</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest dzisiejszy Oracle?</h3>
+      <p>Oracle to spółka założona w 1977 roku przez Larry'ego Ellisona, przez cztery dekady synonim korporacyjnej bazy danych. Dziś jest czymś zupełnie innym: <strong>jednym z największych na świecie dostawców mocy obliczeniowej dla sztucznej inteligencji</strong>, budującym centra danych w tempie, jakiego nie widziano w historii tej firmy. Siedziba: Austin w Teksasie. Ellison i osoby powiązane kontrolują ponad 40% akcji.</p>
+      <p>Skala przemiany jest widoczna w jednej liczbie. <strong>Portfel zamówień (RPO) sięgnął $638 miliardów — wzrost o 363% rok do roku</strong>, a w samym czwartym kwartale przybyło go $85 miliardów. To największy portfel zakontraktowanych przychodów w całej branży AI.</p>
+      <p>A kurs akcji spadł w tym czasie o <strong>37% w skali roku i o 56% od szczytu $345,72</strong>. Ta rozbieżność jest sednem całej analizy.</p>
+      <h3>Co się wydarzyło</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>2025</td><td>Szczyt notowań $345,72 na fali kontraktów AI</td><td>Punkt odniesienia</td></tr>
+          <tr><td>2025–2026</td><td><strong>Umowa z OpenAI</strong> — wieloletni kontrakt na moc obliczeniową o wartości liczonej w setkach miliardów</td><td style="color:var(--ocena-kupno)">↑↑ Skok RPO</td></tr>
+          <tr><td><strong>10 czerwca 2026</strong></td><td><strong>Wyniki Q4 FY2026:</strong> przychody $19,2 mld (+21%), OCI +93% do $5,8 mld, RPO $638 mld</td><td style="color:var(--ocena-kupno)">↑ Rekord</td></tr>
+          <tr><td>Czerwiec 2026</td><td>Capex za rok obrotowy: <strong>$55,7 mld</strong> wobec zapowiadanych $50 mld; plan pozyskania kolejnych $40 mld</td><td style="color:var(--ocena-sprzedaz)">↓ -7% po sesji</td></tr>
+          <tr><td>2026</td><td><strong>S&amp;P obniża rating do BBB-</strong> — jeden stopień nad poziomem spekulacyjnym</td><td style="color:var(--ocena-sprzedaz)">↓↓ Sygnał ostrzegawczy</td></tr>
+          <tr><td>Lipiec 2026</td><td>Narastający niepokój rynku obligacji wokół finansowania inwestycji w AI</td><td style="color:var(--ocena-sprzedaz)">↓ Presja sektorowa</td></tr>
+          <tr><td>Sierpień 2026</td><td>Kurs $152,90 — spadek o 28% od początku roku mimo rekordowego portfela</td><td style="color:var(--ocena-uwaga)">Rozjazd wyceny i danych</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Zdanie, które streszcza tę spółkę:</strong> Oracle ma jednocześnie <strong>największy portfel zamówień w branży AI i najsłabszy bilans wśród dużych spółek technologicznych</strong>. Rynek zdecydował, że drugie jest ważniejsze od pierwszego — i całe pytanie brzmi, czy ma rację.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment</th><th>Opis</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>OCI — chmura infrastrukturalna</strong></td><td>Moc obliczeniowa i GPU dla obciążeń AI oraz migracji baz danych</td><td>🔥 $5,8 mld w Q4, <strong>+93% r/r</strong></td></tr>
+          <tr><td>Aplikacje chmurowe</td><td>Fusion, NetSuite — ERP i systemy branżowe</td><td>Chmura ogółem +47%</td></tr>
+          <tr><td>Baza danych</td><td>Historyczny rdzeń, licencje i wsparcie</td><td>Dojrzały, stabilna gotówka</td></tr>
+          <tr><td>Autonomous Database</td><td>Baza w modelu zarządzanym, migracja do OCI</td><td>Motor przenoszenia klientów do chmury</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — baza danych, nie centra danych</h3>
+      <p>Przewaga Oracle nie polega na tym, że jego chmura jest lepsza od Amazona czy Microsoftu. Polega na tym, że <strong>największe przedsiębiorstwa świata trzymają swoje dane w bazach Oracle od dwudziestu lat</strong> i przeniesienie ich gdzie indziej to projekt na lata. Oracle wykorzystuje tę pozycję, żeby migrować klientów do własnej chmury.</p>
+      <p>Drugą, nową przewagą jest coś, co jeszcze niedawno nie istniało: <strong>zdolność do budowania mocy obliczeniowej w tempie i skali, na jaką decyduje się niewielu</strong>. Wykorzystanie GPU na poziomie 97,5% oznacza, że podaż nadal nie nadąża za popytem — Oracle sprzedaje wszystko, co zdąży zbudować.</p>
+      <div class="alert alert-warn"><strong>Ale to jest fosa kupowana za dług.</strong> Amazon, Microsoft i Google finansują swoje centra danych z bieżących przepływów. Oracle finansuje je z pożyczek — zadłużenie sięga $167 mld, a w ostatnich dwunastu miesiącach spółka zaciągnęła netto $40 mld nowego długu. To zupełnie inny profil ryzyka niż u konkurentów, mimo podobnej strategii.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Deficyt mocy obliczeniowej dla AI</strong> — ten sam trend, który napędza Core Scientific, TeraWulf i Bloom Energy; wykorzystanie GPU u Oracle na poziomie 97,5% potwierdza, że popyt przewyższa podaż</li>
+        <li><strong>Rynek obligacji zaczął się niepokoić</strong> — skala zadłużania się spółek finansujących inwestycje w AI stała się w 2026 roku samodzielnym tematem dla inwestorów w dług, a obniżka ratingu Oracle jest tego wyrazem</li>
+        <li><strong>Konsolidacja dostawców mocy dla AI</strong> — liczba podmiotów zdolnych dostarczyć gigawaty jest ograniczona, co daje Oracle pozycję negocjacyjną</li>
+        <li><strong>Migracja baz danych do chmury</strong> — wieloletni, przewidywalny strumień niezależny od koniunktury na AI</li>
+        <li><strong>Ryzyko cyklu</strong> — jeśli inwestycje w AI zwolnią, Oracle zostanie z centrami danych wybudowanymi za pożyczone pieniądze</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Stan</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td><strong>RPO — portfel zamówień</strong></td><td><strong>$638 mld</strong>, +363% r/r</td><td style="color:var(--ocena-kupno)">Największy w branży AI</td></tr>
+          <tr><td>Przyrost kwartalny</td><td>+$85 mld w Q4</td><td style="color:var(--ocena-kupno)">Tempo nie słabnie</td></tr>
+          <tr><td><strong>Udział OpenAI w RPO</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>blisko połowy</strong></td><td>Skrajna koncentracja</td></tr>
+          <tr><td>Część opłacona z góry lub ze sprzętem klienta</td><td><strong>$75 mld</strong></td><td style="color:var(--ocena-kupno)">Zmniejsza ryzyko kontrahenta</td></tr>
+          <tr><td>Wykorzystanie GPU</td><td>97,5%</td><td style="color:var(--ocena-kupno)">Sprzedaje wszystko, co zbuduje</td></tr>
+          <tr><td>Klienci bazodanowi</td><td>Tysiące dużych przedsiębiorstw</td><td>Rozproszone, stabilne</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Ryzyko koncentracji, którego nie da się przemilczeć.</strong> Około połowa portfela zamówień pochodzi od <strong>jednego klienta — OpenAI</strong>. To spółka, która sama finansuje się kapitałem zewnętrznym i której zdolność do regulowania zobowiązań na dekadę do przodu jest przedmiotem sporu. Oracle buduje za pożyczone pieniądze infrastrukturę dla podmiotu, którego model biznesowy dopiero się kształtuje.</div>
+      <div class="alert alert-success"><strong>Czynnik łagodzący, o którym rzadko się mówi:</strong> <strong>$75 miliardów z tego portfela zostało już opłacone z góry albo dotyczy sprzętu dostarczonego przez samego klienta</strong>. To istotnie zmienia rozkład ryzyka — Oracle nie finansuje całości z własnej kieszeni, a część kontraktów ma zabezpieczenie gotówkowe.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q4 FY2026 / TTM</th><th>Dynamika</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody Q4</td><td><strong>$19,2 mld</strong></td><td style="color:var(--ocena-kupno)">+21% r/r</td></tr>
+          <tr><td><strong>Chmura infrastrukturalna (OCI)</strong></td><td><strong>$5,8 mld</strong></td><td style="color:var(--ocena-kupno)">+93% r/r</td></tr>
+          <tr><td>Chmura ogółem</td><td>—</td><td style="color:var(--ocena-kupno)">+47%</td></tr>
+          <tr><td>EPS Q4</td><td>$1,45</td><td>—</td></tr>
+          <tr><td>Przychody TTM</td><td>$67,36 mld</td><td>Zysk netto $16,98 mld</td></tr>
+          <tr><td>EPS TTM</td><td>$5,83</td><td>Marża netto 25,37%</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Prognoza na rok obrotowy 2027</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Prognoza</th><th>Uwagi</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td><strong>$90 mld</strong></td><td>Wobec $67,36 mld za ostatnie 12 mies. — wzrost o jedną trzecią</td></tr>
+          <tr><td>EPS non-GAAP</td><td><strong>$8,05</strong></td><td style="color:var(--ocena-kupno)">Podniesiona; wzrost o 18%</td></tr>
+          <tr><td>Cel do 2030</td><td>31% CAGR przychodów, 28% CAGR zysku</td><td>Potwierdzony przez zarząd</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Warto zestawić te liczby z ceną.</strong> Przy prognozie EPS $8,05 na rok obrotowy 2027 i kursie $152,90 <strong>spółka jest wyceniana na 19-krotność zysku przyszłorocznego</strong>, przy zapowiadanym wzroście przychodów o jedną trzecią. To nie jest wycena spółki, w którą rynek wierzy.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $152,90</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$440,42 mld</td><td>EV $575,96 mld — różnica to dług</td></tr>
+          <tr><td>P/E bieżące</td><td>26,80×</td><td>EPS TTM $5,83</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>19,40×</strong></td><td style="color:var(--ocena-kupno)">Na prognozie EPS $8,05 na FY2027</td></tr>
+          <tr><td><strong>PEG</strong></td><td><strong>0,66</strong></td><td style="color:var(--ocena-kupno)">✅ Wyraźnie poniżej 1,0</td></tr>
+          <tr><td>P/S</td><td>6,68× (forward 5,01×)</td><td>Umiarkowanie</td></tr>
+          <tr><td>EV/EBITDA</td><td>19,58×</td><td style="color:var(--ocena-uwaga)">EV zawiera $167 mld długu</td></tr>
+          <tr><td>P/B</td><td>11,98×</td><td style="color:var(--ocena-sprzedaz)">Kapitał własny tylko $43,06 mld</td></tr>
+          <tr><td>P/FCF</td><td><strong>nie dotyczy</strong></td><td style="color:var(--ocena-sprzedaz)">Wolne przepływy ujemne</td></tr>
+          <tr><td>Dywidenda</td><td>$2,00 · 1,31%</td><td style="color:var(--ocena-kupno)">12 lat wzrostu, wypłata 34% zysku</td></tr>
+          <tr><td>Altman Z-Score</td><td><strong>2,18</strong></td><td style="color:var(--ocena-sprzedaz)">Poniżej 3 — podwyższone ryzyko finansowe</td></tr>
+          <tr><td>Konsensus (44 analityków)</td><td>$247,17 · „kupuj"</td><td style="color:var(--ocena-kupno)">+62%</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>26,80×</td><td>Zysk netto $16,98 mld, EPS $5,83</td></tr>
+          <tr><td><strong>Forward P/E (FY2027)</strong></td><td><strong>19,40×</strong></td><td>Prognoza spółki: EPS non-GAAP $8,05, przychody $90 mld</td></tr>
+          <tr><td><strong>PEG</strong></td><td><strong>0,66</strong></td><td style="color:var(--ocena-kupno)">Prognoza wzrostu zysku +27,45% w 3 lata, przychodów +39,29%</td></tr>
+          <tr><td>EV/EBITDA</td><td>19,58×</td><td style="color:var(--ocena-uwaga)">Bardziej miarodajne od P/E przy tym zadłużeniu</td></tr>
+          <tr><td>P/FCF</td><td>nie dotyczy</td><td style="color:var(--ocena-sprzedaz)">FCF -$23,69 mld — wskaźnik traci sens</td></tr>
+          <tr><td>Microsoft, Amazon, Google (odniesienie)</td><td>wyższe mnożniki</td><td>Ale przy dodatnich przepływach i niższej dźwigni</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> tu tkwi cały spór o tę spółkę. <strong>Patrząc na zysk, Oracle jest tani</strong> — 19,4-krotność zysku przyszłorocznego przy PEG 0,66 to wycena spółki o niskim wzroście, a nie takiej, która zapowiada przychody wyższe o jedną trzecią. <strong>Patrząc na przepływy, Oracle jest niewyceniany w ogóle</strong>, bo wskaźnik P/FCF nie istnieje przy ujemnych wolnych przepływach. Różnica bierze się stąd, że zysk księgowy nie uwzględnia $55,7 mld nakładów inwestycyjnych, które trzeba było sfinansować pożyczkami. Przy tak zadłużonym bilansie <strong>miarodajniejszy jest EV/EBITDA na poziomie 19,58×</strong> — bo uwzględnia $167 mld długu, którego kapitalizacja nie pokazuje.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$180 – $220</div><div class="fair-value-note">Baza: 22–27× prognozowanego EPS $8,05 na FY2027, z dyskontem za dźwignię i koncentrację klienta | Konsensus 44 analityków: $247,17 („kupuj") — moim zdaniem zbyt optymistyczny wobec ryzyka bilansowego | Scenariusz negatywny (problemy OpenAI, dalsza obniżka ratingu, emisja akcji): $95–120 | Scenariusz pozytywny (portfel się konwertuje, przepływy wracają na plus): $260–300 | Przy $152,90 potencjał od -38% do +96%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Poziom (TTM)</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Brutto</td><td><strong>65,82%</strong></td><td style="color:var(--ocena-kupno)">Wysoka, typowa dla oprogramowania</td></tr>
+          <tr><td>Operacyjna</td><td>33,23%</td><td style="color:var(--ocena-kupno)">Bardzo dobra</td></tr>
+          <tr><td>Netto</td><td>25,37%</td><td style="color:var(--ocena-kupno)">Zysk $16,98 mld</td></tr>
+          <tr><td>EBITDA</td><td>44,39%</td><td>EBITDA $29,90 mld</td></tr>
+          <tr><td>Wolne przepływy</td><td style="color:var(--ocena-sprzedaz)"><strong>ujemne</strong></td><td>-$23,69 mld, czyli -$8,22 na akcję</td></tr>
+          <tr><td>ROE</td><td><strong>53,38%</strong></td><td style="color:var(--ocena-uwaga)">Zawyżone przez niski kapitał własny</td></tr>
+          <tr><td>ROIC</td><td>11,48%</td><td>Bardziej miarodajne od ROE</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Rachunek, który wyjaśnia wszystko.</strong> Przepływy z działalności operacyjnej wyniosły <strong>$31,98 mld</strong> — to bardzo dobry wynik. Nakłady inwestycyjne wyniosły jednak <strong>$55,66 mld</strong>, czyli o 74% więcej, niż firma zarobiła gotówki. Różnica to <strong>-$23,69 mld wolnych przepływów</strong>, sfinansowana zaciągnięciem netto $40,21 mld nowego długu. Oracle nie ma problemu z rentownością — ma problem z tempem, w jakim inwestuje względem tego, co zarabia.</p></div>
+      <p>Uczciwie trzeba dodać, że wysokie ROE na poziomie 53% jest tu w dużej mierze artefaktem księgowym: kapitał własny stopniał do $43,06 mld przy zadłużeniu $167,43 mld, więc każdy zysk dzieli się przez małą podstawę. <strong>ROIC na poziomie 11,48% pokazuje realną efektywność</strong> i jest tylko nieznacznie powyżej średniego ważonego kosztu kapitału, który wynosi 10,64%.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$31,89 mld</td><td>Wobec zadłużenia — niewiele</td></tr>
+          <tr><td><strong>Zadłużenie ogółem</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$167,43 mld</strong></td><td>Dług netto -$135,54 mld, czyli -$47,05 na akcję</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-sprzedaz)"><strong>3,89</strong></td><td>Bardzo wysoko</td></tr>
+          <tr><td>Dług / EBITDA</td><td>5,60</td><td style="color:var(--ocena-sprzedaz)">Powyżej progu komfortu</td></tr>
+          <tr><td>Pokrycie odsetek</td><td>4,48</td><td style="color:var(--ocena-uwaga)">Wystarczające, ale bez zapasu</td></tr>
+          <tr><td>Wskaźnik bieżącej płynności</td><td>1,12</td><td style="color:var(--ocena-uwaga)">Cienko</td></tr>
+          <tr><td>Kapitał własny</td><td>$43,06 mld</td><td>$13,04 na akcję</td></tr>
+          <tr><td><strong>Rating S&amp;P</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>BBB-</strong></td><td>Jeden stopień nad poziomem spekulacyjnym</td></tr>
+          <tr><td>Altman Z-Score</td><td>2,18</td><td style="color:var(--ocena-sprzedaz)">Poniżej 3</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>To jest najsłabszy punkt tej spółki i powód, dla którego kurs spadł o 56% od szczytu.</strong> Oracle zadłużył się na $167 miliardów, żeby zbudować centra danych, a wskaźnik dług do kapitału własnego wynosi 3,89. <strong>Agencja S&amp;P obniżyła rating do BBB-</strong>, czyli o jeden stopień od utraty statusu inwestycyjnego. Spadek poniżej tego progu oznaczałby wyższy koszt finansowania i przymusową sprzedaż obligacji przez część funduszy — w momencie, gdy spółka planuje pozyskać kolejne $40 miliardów.</div>
+      <p>Warto jednak zachować proporcje. Oracle generuje $31,98 mld przepływów operacyjnych rocznie, ma marżę operacyjną 33% i wypłaca dywidendę rosnącą od dwunastu lat przy wskaźniku wypłaty 34%. <strong>To nie jest spółka na krawędzi</strong> — to spółka, która świadomie postawiła wszystko na jeden zakład i pożyczyła na to pieniądze.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📦</div><div class="catalyst-body"><h4>Największy portfel zamówień w branży AI</h4><p>$638 mld zakontraktowanych przychodów, wzrost o 363% rok do roku i o $85 mld w samym czwartym kwartale. Żadna inna spółka nie ma takiej widoczności przychodów na lata do przodu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🚀</div><div class="catalyst-body"><h4>OCI rośnie o 93% przy pełnym wykorzystaniu mocy</h4><p>Chmura infrastrukturalna osiągnęła $5,8 mld w kwartale, a wykorzystanie GPU wynosi 97,5% — Oracle sprzedaje wszystko, co zdąży uruchomić. Wąskim gardłem jest budowa, nie popyt.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏷️</div><div class="catalyst-body"><h4>Wycena 19,4× zysku przyszłorocznego przy PEG 0,66</h4><p>Prognoza spółki na rok obrotowy 2027 to $90 mld przychodów i EPS $8,05. Rynek wycenia to jak spółkę o niskim wzroście, mimo zapowiadanego skoku o jedną trzecią.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💵</div><div class="catalyst-body"><h4>$75 mld portfela już opłacone lub zabezpieczone sprzętem</h4><p>Część dużych kontraktów AI została przedpłacona albo klient sam dostarczył GPU. To istotnie zmniejsza ryzyko, że Oracle zostanie z niesprzedaną mocą.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📊</div><div class="catalyst-body"><h4>Konsensus 44 analityków: $247 z rekomendacją kupna</h4><p>Prognozy zakładają wzrost przychodów o 39,29% i zysku o 27,45% w ciągu trzech lat. Do tego dywidenda rosnąca dwunasty rok z rzędu.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🔻</div><div class="catalyst-body"><h4>Wolne przepływy ujemne na $23,7 mld</h4><p>Przepływy operacyjne $31,98 mld przy nakładach $55,66 mld. Lukę zasypano zaciągnięciem netto $40,21 mld długu. To nie jest stan, który da się utrzymywać w nieskończoność.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚠️</div><div class="catalyst-body"><h4>Rating BBB- i zadłużenie $167 mld</h4><p>Jeden stopień nad poziomem spekulacyjnym. Dług do kapitału własnego 3,89, dług do EBITDA 5,60, Altman Z-Score 2,18. Kolejna obniżka podniosłaby koszt finansowania w najgorszym możliwym momencie.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Blisko połowa portfela to jeden klient</h4><p>OpenAI odpowiada za około połowę RPO. Spółka finansowana kapitałem zewnętrznym, o modelu biznesowym wciąż się kształtującym, zobowiązała się na dekadę do przodu. To ryzyko łańcuchowe najwyższego rzędu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Kolejne $40 mld do pozyskania</h4><p>Plan finansowania zakłada emisję długu i akcji. Pierwsze pogłębi dźwignię, drugie rozwodni akcjonariuszy — a rynek już zareagował spadkiem o 7% na samą zapowiedź.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏗️</div><div class="catalyst-body"><h4>Nakłady przekraczają zapowiedzi</h4><p>Capex wyniósł $55,7 mld wobec zapowiadanych $50 mld. Przekroczenie budżetu o 11% przy tej skali to $5,7 mld, które trzeba było pożyczyć dodatkowo.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>Pozycja w chmurze</th><th>Kluczowa różnica wobec Oracle</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Oracle</strong></td><td>Czwarty gracz, najszybciej rosnący</td><td>RPO $638 mld, OCI +93%, ale FCF -$23,7 mld i dług $167 mld</td></tr>
+          <tr><td><strong>Amazon (AWS)</strong></td><td>Lider rynku</td><td style="color:var(--ocena-sprzedaz)">Finansuje centra danych z bieżących przepływów</td></tr>
+          <tr><td><strong>Microsoft (Azure)</strong></td><td>Drugi gracz, partner OpenAI</td><td style="color:var(--ocena-sprzedaz)">Bilans bez porównania mocniejszy</td></tr>
+          <tr><td><strong>Google Cloud</strong></td><td>Trzeci gracz</td><td>Własne układy TPU, niezależność od NVIDII</td></tr>
+          <tr><td>CoreWeave, Nebius</td><td>Wyspecjalizowane chmury AI</td><td>Podobny profil dźwigni, mniejsza skala</td></tr>
+          <tr><td>SAP (odniesienie)</td><td>Oprogramowanie korporacyjne</td><td>Backlog +27% przy dodatnich przepływach i braku długu</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Najważniejsze porównanie w tej sekcji.</strong> Amazon, Microsoft i Google robią dokładnie to samo co Oracle — budują gigantyczne moce dla AI. Różnica polega na tym, że <strong>oni finansują to z bieżących przepływów, a Oracle z pożyczek</strong>. Przy sprzyjającym scenariuszu ta dźwignia da Oracle wyższą stopę zwrotu niż konkurentom. Przy niesprzyjającym — to Oracle pierwszy będzie miał problem.</div>
+      <p>Warto też zauważyć niuans dotyczący OpenAI: <strong>Microsoft jest jego inwestorem, a Oracle dostawcą mocy</strong>. To dwie zupełnie różne pozycje w tej samej relacji. Microsoft ma udział w potencjalnym sukcesie; Oracle ma należność.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Szczyt 52-tygodniowy</td><td>$345,72</td><td>Punkt odniesienia dla skali przeceny</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$152,90</strong></td><td>-56% od szczytu, -37% w 52 tygodnie, -28% od początku roku</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$152,42</td><td style="color:var(--ocena-uwaga)">Kurs dokładnie na niej — punkt równowagi</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$176,15</td><td style="color:var(--ocena-sprzedaz)">Kurs 13% poniżej — trend średnioterminowy spadkowy</td></tr>
+          <tr><td>RSI (14)</td><td>58,17</td><td>Neutralnie, lekko powyżej środka</td></tr>
+          <tr><td>Beta</td><td>1,72</td><td style="color:var(--ocena-uwaga)">Zmienność wyraźnie wyższa od rynku</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>1,74% akcji</td><td>Wzrosła z 41,97 do 50,14 mln sztuk</td></tr>
+          <tr><td>Opór R1</td><td>$176</td><td>Średnia 200-sesyjna</td></tr>
+          <tr><td>Opór R2</td><td>$200–210</td><td>Poziom psychologiczny</td></tr>
+          <tr><td>Wsparcie S1</td><td>$140–145</td><td>Dołki z lipca</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Wyniki 8 września potwierdzają konwersję portfela</li><li>Wybicie ponad średnią 200-sesyjną ($176)</li><li>Droga ku $200–210</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Kolejna obniżka ratingu albo emisja akcji</li><li>Przebicie $140 z wolumenem</li><li>Zejście ku $110–120</li></ul></div>
+      </div>
+      <p>Kurs stoi dokładnie na średniej 50-sesyjnej i 13% poniżej 200-sesyjnej — układ neutralny w krótkim terminie przy wciąż spadkowym trendzie średnioterminowym. <strong>Wzrost krótkiej sprzedaży o 20% w miesiąc</strong> pokazuje, że część rynku aktywnie gra na dalszą przecenę.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Kluczowa data to 8 września — wyniki Q1 FY2027. Do tego czasu brak katalizatora, a ryzyko emisji akcji albo obniżki ratingu wisi nad kursem.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO spekulacyjne</div><div class="rating-note">19,4× zysku przyszłorocznego i PEG 0,66 przy portfelu $638 mld. Warunek: przepływy muszą zacząć wracać ku zeru, a rating się utrzymać.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO spekulacyjne</div><div class="rating-note">Jeśli portfel się skonwertuje, Oracle stanie się czwartą wielką chmurą świata z przychodami rzędu $150 mld. Jeśli nie — zostanie z długiem i pustymi serwerowniami.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: maksymalnie 2–4% portfela.</strong> Przy dźwigni 3,89 i ratingu BBB- to nie jest pozycja fundamentowa, mimo wielkości spółki</li>
+        <li><strong>Dokupienie:</strong> $135–145, czyli przy teście lipcowych dołków</li>
+        <li><strong>Druga transza:</strong> $110–120 przy realizacji scenariusza negatywnego</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $195–215</li>
+        <li><strong>Kluczowa liczba:</strong> <strong>wolne przepływy pieniężne</strong> — dziś -$23,7 mld. Powrót ku zeru byłby potwierdzeniem tezy; pogłębienie poniżej -$30 mld jej zaprzeczeniem</li>
+        <li><strong>Wyjście z tezy:</strong> obniżka ratingu poniżej poziomu inwestycyjnego, problemy finansowe OpenAI albo emisja akcji rozwadniająca ponad 5%</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$180 – $220</div><div class="fair-value-note">Scenariusz negatywny: $95–120 | Scenariusz pozytywny: $260–300 | Konsensus 44 analityków: $247,17</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Portfel zamówień $638 mld</strong> — największy w branży AI, wzrost o 363% r/r, z czego $75 mld już opłacone lub zabezpieczone sprzętem klienta</li>
+          <li><strong>Wycena 19,4× zysku przyszłorocznego przy PEG 0,66</strong> — rynek wycenia spółkę jak wolnorosnącą, mimo prognozy przychodów $90 mld i wzrostu o jedną trzecią</li>
+          <li><strong>Popyt przewyższa podaż.</strong> OCI +93%, wykorzystanie GPU 97,5% — wąskim gardłem jest budowa, nie sprzedaż</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Wolne przepływy -$23,7 mld</strong> przy zadłużeniu $167 mld i ratingu BBB- — jeden stopień nad poziomem spekulacyjnym</li>
+          <li><strong>Blisko połowa portfela to OpenAI</strong> — spółka finansowana kapitałem zewnętrznym, zobowiązana na dekadę do przodu</li>
+          <li><strong>Kolejne $40 mld do pozyskania</strong> w długu i akcjach; capex już przekroczył zapowiedzi o $5,7 mld</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> obniżka ratingu poniżej poziomu inwestycyjnego, ujawnienie problemów finansowych OpenAI albo pogłębienie ujemnych przepływów poniżej -$30 mld → zejście w rejon $95–120.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> wyniki z 8 września pokazujące konwersję portfela na przychody przy wolnych przepływach zmierzających ku zeru → droga ku $200–220.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Oracle jest dziś <strong>najbardziej skrajnym przypadkiem, jaki analizowaliśmy w tym zbiorze</strong> — i to w obie strony naraz. Portfel zakontraktowanych przychodów sięga <strong>638 miliardów dolarów</strong>, urósł o 363% w rok i o 85 miliardów w samym ostatnim kwartale. Chmura infrastrukturalna rośnie o 93%, a wykorzystanie procesorów graficznych wynosi 97,5%, co znaczy tyle, że firma sprzedaje wszystko, co zdąży uruchomić. Prognoza na rok obrotowy 2027 mówi o 90 miliardach przychodów i zysku na akcję 8,05 dolara, a wycena wynosi 19,4-krotność tego zysku przy wskaźniku PEG 0,66. Czterdziestu czterech analityków wycenia akcje na 247 dolarów, czyli o 62% wyżej niż dziś.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">A teraz druga strona, która wyjaśnia, dlaczego kurs jest mimo to <strong>56% poniżej szczytu</strong>. Oracle wydał w minionym roku obrotowym <strong>55,7 miliarda dolarów na centra danych, zarabiając w tym czasie 32 miliardy gotówki z działalności operacyjnej</strong>. Różnica — <strong>ujemne wolne przepływy na poziomie 23,7 miliarda</strong> — została sfinansowana zaciągnięciem netto 40 miliardów nowego długu. Zadłużenie sięga 167 miliardów przy kapitale własnym 43 miliardów, agencja S&amp;P obniżyła rating do <strong>BBB-, czyli o jeden stopień od utraty statusu inwestycyjnego</strong>, a spółka zapowiada pozyskanie kolejnych 40 miliardów. Do tego dochodzi rzecz, o której trudno mówić spokojnie: <strong>blisko połowa tego rekordowego portfela pochodzi od jednego klienta — OpenAI</strong>.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Popyt jest realny i przewyższa podaż.</strong> OCI +93% r/r, wykorzystanie GPU 97,5%, RPO +363% — to nie są obietnice, tylko podpisane umowy.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Rentowność operacyjna nienaruszona.</strong> Marża brutto 65,82%, operacyjna 33,23%, zysk netto 16,98 mld dolarów, dywidenda rośnie dwunasty rok.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Część ryzyka już zabezpieczona.</strong> 75 miliardów portfela zostało przedpłacone albo dotyczy sprzętu dostarczonego przez klienta.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Powrót przepływów ku zeru.</strong> Dziś -23,7 mld. Dopóki capex przewyższa przepływy operacyjne o 74%, dług będzie rósł.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Utrzymanie ratingu inwestycyjnego.</strong> BBB- to ostatni stopień. Kolejna obniżka podniosłaby koszt finansowania w najgorszym momencie.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Rozproszenie ryzyka klienta.</strong> Połowa portfela w rękach jednego kontrahenta o niepewnym finansowaniu to koncentracja, której nie da się obronić.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>8 września 2026</strong></td><td>Wyniki Q1 roku obrotowego 2027</td><td>Pierwszy sprawdzian konwersji portfela na przychody i kierunku przepływów</td></tr>
+            <tr><td>Rok obrotowy 2027</td><td>Pozyskanie zapowiedzianych $40 mld</td><td>Proporcja długu do akcji przesądzi o skali rozwodnienia</td></tr>
+            <tr><td>Na bieżąco</td><td>Decyzje agencji ratingowych</td><td>BBB- to ostatni stopień inwestycyjny</td></tr>
+            <tr><td>Na bieżąco</td><td>Sytuacja finansowa OpenAI</td><td>Połowa portfela zależy od jednego podmiotu</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Wolne przepływy pieniężne</strong></td><td>-$23,69 mld</td><td>pogłębienie poniżej -$30 mld</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Rating S&amp;P</td><td>BBB-</td><td>obniżka poniżej poziomu inwestycyjnego</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Dług / EBITDA</td><td>5,60</td><td>&gt; 6,5</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Portfel zamówień (RPO)</td><td>$638 mld, +363% r/r</td><td>spadek kwartał do kwartału</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Wzrost OCI</td><td>+93% r/r</td><td>&lt; 40%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża operacyjna</td><td>33,23%</td><td>&lt; 25%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji: maksymalnie 2–4% portfela.</strong> Mimo że to spółka warta 440 miliardów, profil ryzyka ma bliższy spółce spekulacyjnej niż fundamentowi portfela</li>
+          <li><strong>Nie dokupywać przed 8 września</strong> — wyniki pokażą kierunek przepływów, a to jest jedyna liczba, która dziś naprawdę decyduje</li>
+          <li><strong>Dokupienie:</strong> $135–145 przy teście lipcowych dołków; druga transza $110–120 przy scenariuszu negatywnym</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie $195–215</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> wolne przepływy pieniężne. Portfel zamówień jest imponujący, ale to przepływy decydują, czy spółka dotrwa do momentu, w którym się skonwertuje</li>
+          <li><strong>Wyjście z tezy:</strong> obniżka ratingu poniżej poziomu inwestycyjnego albo problemy OpenAI</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">📈 KUPNO SPEKULACYJNE — rekordowy portfel kupiony na kredyt</div>
+        <p>Oracle postawił wszystko na jeden zakład: że popyt na moc obliczeniową dla sztucznej inteligencji utrzyma się na tyle długo, by zwróciły się centra danych zbudowane za pożyczone pieniądze. Dotychczasowe dane mówią, że zakład idzie dobrze — portfel zamówień sięga 638 miliardów, chmura rośnie o 93%, a moce są wykorzystane w 97,5%. Przy 19,4-krotności zysku przyszłorocznego i wskaźniku PEG 0,66 <strong>wycena zakłada, że coś pójdzie nie tak</strong>, a konsensus czterdziestu czterech analityków wskazuje 62% w górę.</p>
+        <p>Nie nazywam tego jednak zwykłym kupnem i nie zgadzam się z celem 247 dolarów. <strong>Spółka z ujemnymi przepływami na 23,7 miliarda, zadłużeniem 167 miliardów, ratingiem o jeden stopień od poziomu spekulacyjnego i połową portfela w rękach jednego klienta nie zasługuje na wycenę bez dyskonta</strong> — niezależnie od tego, jak dobre są jej perspektywy. Dlatego fair value ustawiam na 180–220 dolarów, a wielkość pozycji ograniczam do 2–4% portfela. To zakład wart podjęcia w rozsądnej skali, ale nie taki, przy którym można zasnąć spokojnie. Kluczowa data to 8 września.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno spekulacyjne</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$180–220</b></div>
+          <div><span>Scenariusz negatywny</span><b>$95–120</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$260–300</b></div>
+          <div><span>Sugerowana pozycja</span><b>2–4% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki — 8 września</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 14 sierpnia 2026 | Cena: $152,90 (14.08, 11:06 EDT) | Zastępuje wersję z 3 lipca 2026 | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 14.08.2026</strong>, Oracle IR (Q4 FY2026, 10 czerwca), komunikaty prasowe | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
