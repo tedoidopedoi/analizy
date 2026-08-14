@@ -54,6 +54,9 @@ border-radius:12px;padding:16px 20px;margin-bottom:11px;text-decoration:none;col
 .karta.arch{opacity:.6;border-style:dashed}
 .karta.arch:hover{opacity:1;border-style:solid}
 .karta.arch .k-ticker{color:var(--text-muted)}
+.p-odswiez{background:rgba(219,84,72,.14);color:#db5448;border:1px solid rgba(219,84,72,.4)}
+.p-przejrzyj{background:rgba(217,154,82,.13);color:#d99a52;border:1px solid rgba(217,154,82,.35)}
+.p-fv{background:rgba(52,211,153,.12);color:var(--accent2);border:1px solid rgba(52,211,153,.3)}
 .p-nowy{background:rgba(52,211,153,.1);color:var(--accent2);border:1px solid rgba(52,211,153,.28)}
 .k-data{font-size:12px;color:var(--text-muted)}
 .wiek{font-size:10.5px;padding:2px 8px;border-radius:10px}
@@ -90,6 +93,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <option value="ticker">Sortuj: ticker A–Z</option>
     </select>
   </div>
+  <div class="alert-swiez"><span>&#9888;</span><span><b>4</b> do odświeżenia · 6 do przejrzenia — kurs mocno odjechał od ceny z analizy albo raport się zestarzał</span><span class="sw-data">stan 2026-08-14</span></div>
   <div class="filtry">
       <button class="f-btn akt" data-f="portfel">W portfelu TP Corp (13)</button>
       <button class="f-btn" data-f="obserwowane">Obserwowane (14)</button>
@@ -168,15 +172,15 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Intel Corporation</div>
         <div class="k-meta">
-          <span class="pill p-neutralna">Neutralna</span>
+          <span class="pill p-neutralna">Neutralna</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-08-12</span>
           <span class="wiek w-swieza">świeża</span>
           <span class='pill p-nowy'>szablon 15 sekcji</span>
         </div>
       </div>
       <div class="k-prawa">
-        <div class="k-lbl">Cena analizy</div><div class="k-val">$100,00</div>
-        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$90 – $125</div>
+        <div class="k-lbl">Cena analizy</div><div class="k-val">$104,56</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">$95 – $130</div>
       </div>
     </a>
 
@@ -228,7 +232,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">SentinelOne, Inc.</div>
         <div class="k-meta">
-          <span class="pill p-neutralna">Neutralna</span>
+          <span class="pill p-neutralna">Neutralna</span><span class="pill p-przejrzyj">Przejrzyj · kurs +16%</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-08-07</span>
           <span class="wiek w-swieza">świeża</span>
           <span class='pill p-nowy'>szablon 15 sekcji</span>
@@ -248,7 +252,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Redwire Corporation</div>
         <div class="k-meta">
-          <span class="pill p-spekulacyjna">Spekulacyjna</span>
+          <span class="pill p-spekulacyjna">Spekulacyjna</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-08-07</span>
           <span class="wiek w-swieza">świeża</span>
           <span class='pill p-nowy'>szablon 15 sekcji</span>
@@ -268,7 +272,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Bloom Energy Corporation</div>
         <div class="k-meta">
-          <span class="pill p-neutralna">Neutralna</span>
+          <span class="pill p-neutralna">Neutralna</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-08-07</span>
           <span class="wiek w-swieza">świeża</span>
           <span class='pill p-nowy'>szablon 15 sekcji</span>
@@ -308,7 +312,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">MARA Holdings, Inc.</div>
         <div class="k-meta">
-          <span class="pill p-neutralna">Neutralna</span>
+          <span class="pill p-neutralna">Neutralna</span><span class="pill p-przejrzyj">Przejrzyj · kurs -22%</span>
           <span class="k-data">2026-08-06</span>
           <span class="wiek w-swieza">świeża</span>
           <span class='pill p-nowy'>szablon 15 sekcji</span>
@@ -428,7 +432,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Veeva Systems Inc.</div>
         <div class="k-meta">
-          <span class="pill p-kupno">Kupno</span>
+          <span class="pill p-kupno">Kupno</span><span class="pill p-przejrzyj">Przejrzyj · kurs +23%</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-07-30</span>
           <span class="wiek w-swieza">świeża</span>
           
@@ -468,7 +472,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Samsung Electronics Co., Ltd.</div>
         <div class="k-meta">
-          <span class="pill p-kupno">Kupno</span>
+          <span class="pill p-kupno">Kupno</span><span class="pill p-odswiez">Do odświeżenia · kurs +26%</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-07-30</span>
           <span class="wiek w-swieza">świeża</span>
           
@@ -476,7 +480,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
       <div class="k-prawa">
         <div class="k-lbl">Cena analizy</div><div class="k-val">GDR $3 844</div>
-        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">₩400 000 – ₩470 000</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">GDR $4 500 – $5 300  ·  KRX ₩400–470 tys.</div>
       </div>
     </a>
 
@@ -488,7 +492,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Kioxia Holdings Corporation</div>
         <div class="k-meta">
-          <span class="pill p-spekulacyjna">Spekulacyjna</span>
+          <span class="pill p-spekulacyjna">Spekulacyjna</span><span class="pill p-przejrzyj">Przejrzyj · kurs +19%</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-07-30</span>
           <span class="wiek w-swieza">świeża</span>
           
@@ -548,7 +552,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Navitas Semiconductor</div>
         <div class="k-meta">
-          <span class="pill p-sprzedaz">Sprzedaż</span>
+          <span class="pill p-sprzedaz">Sprzedaż</span><span class="pill p-fv">powyżej górnego fair value</span>
           <span class="k-data">2026-07-21</span>
           <span class="wiek w-swieza">świeża</span>
           
@@ -568,7 +572,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Nokia Oyj</div>
         <div class="k-meta">
-          <span class="pill p-kupno">Kupno</span>
+          <span class="pill p-kupno">Kupno</span><span class="pill p-odswiez">Do odświeżenia · kurs +34%</span>
           <span class="k-data">2026-07-21</span>
           <span class="wiek w-swieza">świeża</span>
           
@@ -588,7 +592,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Marvell Technology, Inc.</div>
         <div class="k-meta">
-          <span class="pill p-kupno">Kupno</span>
+          <span class="pill p-kupno">Kupno</span><span class="pill p-odswiez">Do odświeżenia · kurs +30%</span>
           <span class="k-data">2026-07-21</span>
           <span class="wiek w-swieza">świeża</span>
           
@@ -608,7 +612,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">LightPath Technologies, Inc.</div>
         <div class="k-meta">
-          <span class="pill p-neutralna">Neutralna</span>
+          <span class="pill p-neutralna">Neutralna</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-07-21</span>
           <span class="wiek w-swieza">świeża</span>
           
@@ -628,7 +632,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Guidewire Software, Inc.</div>
         <div class="k-meta">
-          <span class="pill p-kupno">Kupno</span>
+          <span class="pill p-kupno">Kupno</span><span class="pill p-przejrzyj">Przejrzyj · kurs +23%</span>
           <span class="k-data">2026-07-21</span>
           <span class="wiek w-swieza">świeża</span>
           
@@ -648,7 +652,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">BlackBerry Limited</div>
         <div class="k-meta">
-          <span class="pill p-neutralna">Neutralna</span>
+          <span class="pill p-neutralna">Neutralna</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-07-21</span>
           <span class="wiek w-swieza">świeża</span>
           
@@ -688,7 +692,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Lam Research Corporation</div>
         <div class="k-meta">
-          <span class="pill p-neutralna">Neutralna</span>
+          <span class="pill p-neutralna">Neutralna</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-07-06</span>
           <span class="wiek w-srednia">39 dni</span>
           
@@ -748,7 +752,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Everspin Technologies, Inc.</div>
         <div class="k-meta">
-          <span class="pill p-neutralna">Neutralna</span>
+          <span class="pill p-neutralna">Neutralna</span><span class="pill p-przejrzyj">Przejrzyj · kurs -21%</span>
           <span class="k-data">2026-07-03</span>
           <span class="wiek w-srednia">42 dni</span>
           
@@ -768,7 +772,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Lumentum Holdings Inc.</div>
         <div class="k-meta">
-          <span class="pill p-kupno">Kupno</span>
+          <span class="pill p-kupno">Kupno</span><span class="pill p-odswiez">Do odświeżenia · kurs +27%</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-07-03</span>
           <span class="wiek w-srednia">42 dni</span>
           
