@@ -146,6 +146,26 @@
   .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
   @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
 </style>
+<style id="tp-changelog">
+  .tp-changelog { max-width:1100px; margin:0 auto 44px; padding:0 24px; position:relative; z-index:1; }
+  .cl-box { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--ocena-uwaga);
+    border-radius:10px; padding:20px 24px; }
+  .cl-box > h4 { font-size:11px; font-weight:800; letter-spacing:1.4px; text-transform:uppercase;
+    color:var(--ocena-uwaga); margin:0 0 4px; }
+  .cl-lead { font-size:12.5px; color:var(--text-muted); margin:0 0 14px; }
+  .cl-item { border-top:1px solid var(--border); padding-top:13px; margin-top:13px; }
+  .cl-item:first-of-type { border-top:none; padding-top:0; margin-top:0; }
+  .cl-date { font-size:10px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase;
+    color:var(--text-muted); margin-bottom:8px; }
+  .cl-list { list-style:none; padding:0; margin:0; }
+  .cl-list li { font-size:12.5px; color:var(--text-muted); padding:5px 0 5px 16px; position:relative;
+    border-bottom:1px solid rgba(255,255,255,.03); }
+  .cl-list li:last-child { border-bottom:none; }
+  .cl-list li::before { content:'·'; position:absolute; left:2px; color:var(--ocena-uwaga); font-weight:800; }
+  .cl-list li strong { color:var(--text); }
+  .cl-why { font-size:12.5px; color:var(--text-muted); margin:12px 0 0; padding-top:11px;
+    border-top:1px solid var(--border); font-style:italic; }
+</style>
 </head>
 <body>
 <div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
@@ -562,8 +582,29 @@
 </main>
 <div class="footer">
 <div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
-Analiza: 12 sierpnia 2026 · <strong>korekta danych 14 sierpnia 2026</strong> | Cena: $104,56 (zamknięcie 13.08); pierwotna wersja sporządzona przy cenie $100 podanej przez użytkownika 12.08 | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 14.08.2026</strong>, Intel IR (Q2 2026, 23 lipca), Business Wire, SEC<br><br><strong>Co zostało poprawione 14.08:</strong> emisja akcji $15 mld → <strong>$20 mld</strong> (210,5 mln akcji po $95,00, rząd USA nie uczestniczył); kapitalizacja $509 mld → <strong>$549,41 mld</strong>; liczba akcji 5,08 → <strong>5,25 mld</strong>; forward P/E „67–122×" → <strong>62,93×</strong>; P/S 12 → <strong>9,63</strong>; EV/EBITDA 58 → <strong>46,33</strong>; <strong>wolne przepływy „-$5,5 mld" → +$2,83 mld</strong> (błąd rzeczowy); dodano PEG 0,91 i Altman Z-Score 2,23. Przyczyna: pierwotna wersja opierała się na omówieniach prasowych zamiast na danych pobranych bezpośrednio ze źródła. | Nie stanowi porady inwestycyjnej
+Analiza: 12 sierpnia 2026 · <strong>korekta danych 14 sierpnia 2026</strong> | Cena: $104,56 (zamknięcie 13.08); pierwotna wersja sporządzona przy cenie $100 podanej przez użytkownika 12.08 | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 14.08.2026</strong>, Intel IR (Q2 2026, 23 lipca), Business Wire, SEC | Nie stanowi porady inwestycyjnej
 </div>
+<div class="tp-changelog">
+  <div class="cl-box">
+    <h4>Dziennik korekt</h4>
+    <p class="cl-lead">Każda zmiana wprowadzona po pierwotnej publikacji raportu jest tu odnotowana. Historia nie jest przepisywana po cichu.</p>
+    <div class="cl-item">
+      <div class="cl-date">14 sierpnia 2026</div>
+      <ul class="cl-list">
+      <li>emisja akcji $15 mld → <strong>$20 mld</strong> (210,5 mln akcji po $95,00, rząd USA nie uczestniczył)</li>
+      <li>kapitalizacja $509 mld → <strong>$549,41 mld</strong></li>
+      <li>liczba akcji 5,08 → <strong>5,25 mld</strong></li>
+      <li>forward P/E „67–122×" → <strong>62,93×</strong></li>
+      <li>P/S 12 → <strong>9,63</strong></li>
+      <li>EV/EBITDA 58 → <strong>46,33</strong></li>
+      <li><strong>wolne przepływy „-$5,5 mld" → +$2,83 mld</strong> (błąd rzeczowy)</li>
+      <li>dodano PEG 0,91 i Altman Z-Score 2,23. Przyczyna: pierwotna wersja opierała się na omówieniach prasowych zamiast na danych pobranych bezpośrednio ze źródła.</li>
+      </ul>
+      <p class="cl-why">Przyczyna: pierwotna wersja opierała się na omówieniach prasowych zamiast na danych pobranych bezpośrednio ze źródła. Od tej korekty obowiązuje zasada pobierania strony z danymi przed wyszukiwaniem kontekstu.</p>
+    </div>
+  </div>
+</div>
+
 <script>
 function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
 function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
