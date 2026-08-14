@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAP — SAP SE | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">XETRA: SAP</div>
+    <div class="company-name">SAP SE</div>
+    <div class="company-sub">Oprogramowanie dla przedsiębiorstw · chmurowy ERP · Joule i agenci AI · Walldorf, Niemcy</div>
+    <div class="header-meta">
+      <span class="meta-tag">Backlog chmurowy +27%</span>
+      <span class="meta-tag">Ofiara „SaaSpocalypse"</span>
+      <span class="meta-tag">P/E o połowę niższe od średniej</span>
+      <span class="meta-tag">Partner Anthropic</span>
+      <div class="price-display">
+        <div class="price-main">€177,00</div>
+        <div class="price-sub">12.08.2026 | 52W: €127,50–€244,30</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — backlog przyspiesza, wycena o połowę niższa">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">neutralnie w krótkim terminie</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>€205 – €235</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">+16% do +33%</b></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (12.08.2026)</div><div class="metric-value">€177,00</div><div class="metric-detail">-28% od szczytu 52W | +39% od dna €127,50</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">~€209 mld</div><div class="metric-detail">-42% od szczytu €306,60 z lipca 2025</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody z chmury Q2</div><div class="metric-value green">€6,3 mld</div><div class="metric-detail">+24% w stałych kursach</div></div>
+    <div class="metric-card"><div class="metric-label">Backlog chmurowy</div><div class="metric-value green">€22,9 mld</div><div class="metric-detail">+27% r/r — przyspieszenie wobec Q1</div></div>
+    <div class="metric-card"><div class="metric-label">Cloud ERP Suite</div><div class="metric-value em">€5,5 mld</div><div class="metric-detail">+27% | 88% całej chmury</div></div>
+    <div class="metric-card"><div class="metric-label">P/E prognozowane 2026</div><div class="metric-value em">~19,3×</div><div class="metric-detail">Średnia historyczna: 39,3× → połowa</div></div>
+    <div class="metric-card"><div class="metric-label">Zysk operacyjny 2026</div><div class="metric-value yellow">€11,8–12,2 mld</div><div class="metric-detail">Prognoza obniżona — rozwodnienie z przejęć</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus analityków</div><div class="metric-value green">€201–222</div><div class="metric-detail">24 kupuj / 0 sprzedaj</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest SAP?</h3>
+      <p>SAP SE z Walldorf to największa europejska spółka programistyczna i światowy lider systemów ERP — oprogramowania, na którym duże przedsiębiorstwa prowadzą księgowość, łańcuch dostaw, produkcję i kadry. Założona w 1972 roku przez pięciu byłych inżynierów IBM, przez pięć dekad zbudowała pozycję, w której <strong>wymiana SAP-a jest dla korporacji operacją porównywalną z przeszczepem układu nerwowego</strong>.</p>
+      <p>Ostatnie lata to przejście z licencji wieczystych na model chmurowy. Dziś <strong>przychody z chmury sięgają €6,3 mld kwartalnie i rosną o 24%</strong>, a Cloud ERP Suite stanowi już 88% tej kwoty. Mimo to kurs akcji jest o <strong>42% niżej niż w szczycie z lipca 2025 roku</strong>, gdy sięgał €306,60.</p>
+      <h3>Dlaczego kurs jest tam, gdzie jest</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Zdarzenie</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td>Lipiec 2025</td><td>Szczyt notowań: <strong>€306,60</strong></td><td>Punkt odniesienia</td></tr>
+          <tr><td><strong>Luty 2026</strong></td><td><strong>„SaaSpocalypse"</strong> — przecena całego sektora oprogramowania po premierze Claude Cowork; obawa, że agenci AI zastąpią licencje na stanowisko</td><td style="color:var(--ocena-sprzedaz)">↓↓ Kompresja mnożników</td></tr>
+          <tr><td>Maj 2026</td><td><strong>Sapphire 2026:</strong> ogłoszenie „Autonomous Enterprise" — ponad 200 agentów AI, partnerstwo z Anthropic, NVIDIA i Palantirem, migracja księgi głównej JPMorgan na SAP</td><td style="color:var(--ocena-uwaga)">↔ Kurs mimo to na rocznym minimum</td></tr>
+          <tr><td>Maj 2026</td><td>Ujawnienie strategii AI — wymóg przeniesienia co najmniej połowy wydatków na utrzymanie do chmury w zamian za dostęp do Joule</td><td style="color:var(--ocena-sprzedaz)">↓ -4,6%, tarcia z klientami</td></tr>
+          <tr><td><strong>23 lipca 2026</strong></td><td><strong>Q2: backlog chmurowy €22,9 mld, +27% — przyspieszenie.</strong> Ale prognoza zysku operacyjnego obniżona przez rozwodnienie z przejęć Dremio i Prior Labs</td><td style="color:var(--ocena-uwaga)">↔ Dobre przychody, gorszy zysk</td></tr>
+          <tr><td>Sierpień 2026</td><td>Kurs €177 — blisko dolnej części rocznego zakresu</td><td style="color:var(--ocena-uwaga)">Odbicie od dna €127,50</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Ironia, której nie sposób pominąć.</strong> Przecena, która zabrała SAP-owi ponad 40% wartości, zaczęła się w lutym od premiery platformy Claude Cowork firmy Anthropic. Trzy miesiące później, na własnej konferencji Sapphire, <strong>SAP ogłosił Anthropic swoim partnerem i uczynił Claude'a podstawowym silnikiem rozumowania</strong> dla ponad dwustu agentów Joule. Firma, której produkt wywołał przecenę, dostarcza dziś technologię mającą ją odwrócić.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Opis</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cloud ERP Suite</strong></td><td>S/4HANA Cloud, RISE with SAP — rdzeń oferty chmurowej</td><td>🔥 €5,5 mld, +27%, 88% chmury</td></tr>
+          <tr><td>Licencje lokalne (on-premise)</td><td>Historyczna baza, wygaszana</td><td>Malejąca, migrowana do chmury</td></tr>
+          <tr><td><strong>Joule i agenci AI</strong></td><td>224 agentów i 51 asystentów wbudowanych w procesy</td><td style="color:var(--ocena-uwaga)">Wdrażane, monetyzacja nieudowodniona</td></tr>
+          <tr><td>Business Technology Platform</td><td>Warstwa integracyjna i deweloperska</td><td>Fundament ekosystemu partnerów</td></tr>
+          <tr><td>Przejęcia 2026</td><td>Dremio (dane), Prior Labs (AI)</td><td style="color:var(--ocena-sprzedaz)">Rozwadniają zysk o ponad €100 mln</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — koszt zmiany, nie funkcje</h3>
+      <p>Przewaga SAP-a nie polega na tym, że jego oprogramowanie jest najlepsze. Polega na tym, że <strong>jest wpisane w sposób działania przedsiębiorstwa</strong>. Migracja z SAP-a to projekt na kilka lat, kosztujący dziesiątki milionów i obarczony ryzykiem zatrzymania produkcji. Dlatego wskaźniki utrzymania klientów w tej branży są tak wysokie, a decyzje zapadają raz na dekadę.</p>
+      <p>To ma bezpośrednie znaczenie w sporze o agentyczną AI. Agent bez dostępu do danych transakcyjnych przedsiębiorstwa nie zaplanuje łańcucha dostaw ani nie zamknie miesiąca księgowego. <strong>SAP posiada te dane</strong> — i to jest powód, dla którego partnerstwa z Anthropic, NVIDIĄ i Palantirem mają sens: model dostarcza rozumowania, SAP dostarcza kontekstu.</p>
+      <div class="alert alert-warn"><strong>Ale sposób monetyzacji budzi opór.</strong> Nowa strategia wymaga od klientów z instalacjami lokalnymi przeniesienia <strong>co najmniej połowy wydatków na utrzymanie do chmury</strong>, żeby w ogóle uzyskać dostęp do narzędzi AI. Do tego dochodzi rozliczanie AI według zużycia, które odbiera klientom to, co najbardziej cenili w modelu subskrypcyjnym — przewidywalność rachunku. Kurs spadł o 4,6% w dniu ujawnienia tej strategii i to nie był przypadek.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Migracja do chmury wciąż trwa</strong> — znaczna część bazy klientów SAP-a nadal pracuje na instalacjach lokalnych, co daje wieloletni, przewidywalny strumień konwersji</li>
+        <li><strong>Przewartościowanie całego sektora po lutym 2026</strong> — „SaaSpocalypse" objęła wszystkich dostawców oprogramowania korporacyjnego, niezależnie od jakości wyników</li>
+        <li><strong>Nowy model rozliczeń</strong> — branża odchodzi od licencji na stanowisko ku rozliczaniu pracy wykonanej przez agentów; kto pierwszy przestawi cennik bez utraty klientów, ten wygrywa</li>
+        <li><strong>Europejski suwerenny stos technologiczny</strong> — SAP jest jedynym europejskim dostawcą tej skali, co w warunkach napięć wokół zależności od amerykańskiej chmury ma rosnącą wartość polityczną</li>
+        <li><strong>Kurs walutowy</strong> — SAP raportuje w euro przy znacznej ekspozycji na dolara, więc prognozy podawane są w stałych kursach; ruchy walutowe potrafią zaburzyć obraz</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <p>Baza klientów SAP-a to największe przedsiębiorstwa świata — koncerny przemysłowe, sieci handlowe, banki. Rozproszenie jest bardzo wysokie: żaden pojedynczy klient nie ma istotnego udziału w przychodach, a umowy zawierane są na wiele lat.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Q2 2026</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Backlog chmurowy (current cloud backlog)</strong></td><td><strong>€22,9 mld</strong>, +27% r/r</td><td style="color:var(--ocena-kupno)">Przyspieszenie wobec Q1 — najważniejsza liczba</td></tr>
+          <tr><td>Przychody z chmury</td><td>€6,3 mld, +24% cc</td><td style="color:var(--ocena-kupno)">Backlog rośnie szybciej niż przychody</td></tr>
+          <tr><td>Cloud ERP Suite</td><td>€5,5 mld, +27%</td><td style="color:var(--ocena-kupno)">88% chmury — rdzeń rośnie najszybciej</td></tr>
+          <tr><td>Nowe wdrożenie referencyjne</td><td>JPMorgan — migracja księgi głównej</td><td style="color:var(--ocena-kupno)">Bank tej klasy to mocna rekomendacja</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Najsilniejszy argument w całej analizie.</strong> Backlog chmurowy — zakontraktowane przychody do rozliczenia w najbliższych dwunastu miesiącach — wzrósł o 27% i <strong>przyspieszył wobec pierwszego kwartału</strong>, odwracając wcześniejszą tendencję, w której rósł wolniej niż same przychody. Gdyby agenci AI faktycznie zjadali rynek oprogramowania korporacyjnego, ta liczba załamałaby się jako pierwsza. Zamiast tego nabrała tempa.</div>
+      <div class="alert alert-warn"><strong>Zastrzeżenie, o którym trzeba pamiętać.</strong> Zarząd zapowiada, że w skali całego roku wzrost backlogu w stałych kursach <strong>lekko wyhamuje</strong> wobec 25% z 2025 roku. Dobry kwartał to jeszcze nie trend, a umowy wieloletnie sprawiają, że ewentualne osłabienie popytu ujawnia się z opóźnieniem.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026</th><th>Dynamika</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody z chmury</td><td><strong>€6,3 mld</strong></td><td style="color:var(--ocena-kupno)">+24% w stałych kursach</td></tr>
+          <tr><td>Cloud ERP Suite</td><td>€5,5 mld</td><td style="color:var(--ocena-kupno)">+27%, udział 88%</td></tr>
+          <tr><td>Backlog chmurowy</td><td>€22,9 mld</td><td style="color:var(--ocena-kupno)">+27% (26% cc)</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Prognoza na 2026</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Prognoza</th><th>Odniesienie</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody z chmury</td><td><strong>€25,8–26,2 mld</strong> cc</td><td style="color:var(--ocena-kupno)">+23% do +25% wobec €21,02 mld w 2025</td></tr>
+          <tr><td>Zysk operacyjny non-IFRS</td><td><strong>€11,8–12,2 mld</strong> cc</td><td style="color:var(--ocena-sprzedaz)">Obniżony — ponad €100 mln rozwodnienia z przejęć</td></tr>
+          <tr><td>Wzrost backlogu chmurowego</td><td>lekkie wyhamowanie</td><td style="color:var(--ocena-uwaga)">Wobec 25% w 2025 roku</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>To jest źródło rozczarowania rynku.</strong> Przychody rosną zgodnie z planem, ale <strong>prognoza zysku operacyjnego została obniżona</strong> — bo przejęcia Dremio i Prior Labs, zamknięte w lipcu, rozwadniają wynik o ponad €100 mln. Kwota w skali SAP-a niewielka, ale symbolika istotna: spółka kupuje kompetencje AI za bieżącą rentowność, w momencie, gdy rynek pyta właśnie o rentowność inwestycji w AI.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy €177</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>~€209 mld</td><td>Największa spółka technologiczna Europy</td></tr>
+          <tr><td><strong>P/E prognozowane 2026</strong></td><td><strong>~19,3×</strong></td><td style="color:var(--ocena-kupno)">✅ Średnia historyczna 39,3× — wycena o połowę niższa</td></tr>
+          <tr><td>Wzrost przychodów z chmury</td><td>+24% cc</td><td style="color:var(--ocena-kupno)">Dwucyfrowy, stabilny</td></tr>
+          <tr><td>Wzrost backlogu</td><td>+27%</td><td style="color:var(--ocena-kupno)">Szybszy niż przychody — dobry znak</td></tr>
+          <tr><td>Konsensus (27 analityków)</td><td>€201,49 – €222,52</td><td style="color:var(--ocena-kupno)">+14% do +26%</td></tr>
+          <tr><td>Rekomendacje</td><td><strong>24 kupuj / 0 sprzedaj</strong></td><td style="color:var(--ocena-kupno)">Rzadka jednomyślność</td></tr>
+          <tr><td>Rozrzut celów</td><td>€131 – €305</td><td style="color:var(--ocena-uwaga)">Szeroki, ale bez rekomendacji sprzedaży</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>wyżej niż forward</td><td>Zysk obciążony kosztami przejęć i transformacji</td></tr>
+          <tr><td><strong>Forward P/E (FY2026)</strong></td><td><strong>~19,3×</strong></td><td>Na zysku non-IFRS, prognoza €11,8–12,2 mld cc</td></tr>
+          <tr><td><strong>Średnia historyczna SAP</strong></td><td><strong>39,3×</strong></td><td style="color:var(--ocena-kupno)">Spółka notowana z 51-procentowym dyskontem do własnej historii</td></tr>
+          <tr><td>PEG (orientacyjnie)</td><td>poniżej 1,0</td><td>Przy wzroście chmury 23–25% mnożnik 19× daje PEG &lt; 1</td></tr>
+          <tr><td>ServiceNow (odniesienie)</td><td>ok. 30× FY2026</td><td>Inny profil wzrostu, ale wyższy mnożnik przy podobnym problemie narracyjnym</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> najbardziej wymowna liczba w tej tabeli to <strong>19,3× wobec średniej historycznej 39,3×</strong>. Rynek wycenia dziś SAP-a mniej więcej o połowę taniej, niż robił to przeciętnie przez lata — mimo że przychody z chmury rosną o 24%, a zakontraktowany backlog o 27% i przyspiesza. Trzeba przy tym uczciwie powiedzieć, że średnia historyczna obejmuje okres, w którym rynek płacił za oprogramowanie korporacyjne mnożniki dziś uznawane za nadmierne. <strong>Powrót do 39× nie jest bazowym scenariuszem</strong> — ale przedział 24–28× przy utrzymanym tempie wzrostu wydaje się w pełni uzasadniony i to on wyznacza mój zakres wartości godziwej.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">€205 – €235</div><div class="fair-value-note">Baza: mnożnik 24–28× zysku non-IFRS przy wzroście chmury 23–25% | Konsensus 27 analityków: €201,49–€222,52 przy 24 rekomendacjach kupna i zerowej sprzedaży | Scenariusz negatywny (druga fala przeceny sektora, wyhamowanie backlogu): €140–155 | Scenariusz pozytywny (monetyzacja AI ruszy, powrót ku 32×): €270–290 | Przy €177 potencjał od -21% do +64%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <p>SAP prowadzi jednocześnie dwie kosztowne operacje: <strong>migrację bazy klientów z licencji lokalnych do chmury</strong> oraz <strong>budowę warstwy AI</strong>. Pierwsza przejściowo obniża marżę, bo przychód rozkłada się w czasie zamiast wpływać jednorazowo. Druga wymaga inwestycji i przejęć.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Wpływ na wynik</th></tr></thead>
+        <tbody>
+          <tr><td>Przejście na chmurę</td><td style="color:var(--ocena-kupno)">Docelowo wyższa jakość przychodów, przejściowo niższa marża</td></tr>
+          <tr><td>Przejęcia Dremio i Prior Labs</td><td style="color:var(--ocena-sprzedaz)">Ponad €100 mln rozwodnienia zysku operacyjnego w 2026</td></tr>
+          <tr><td>Koszty infrastruktury AI</td><td style="color:var(--ocena-uwaga)">Rosnące — ten sam problem, co u innych dostawców SaaS</td></tr>
+          <tr><td>Prognoza zysku operacyjnego</td><td>€11,8–12,2 mld cc — obniżona</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Warto zauważyć wzorzec.</strong> Presja marżowa u SAP-a ma to samo źródło, co u ServiceNow: <strong>koszt obsługi obciążeń AI plus rozwodnienie z przejęć kompetencji</strong>. To nie jest problem jednej spółki, tylko koszt wejścia całej branży w erę agentów. Różnica polega na tym, że ServiceNow przebił własną prognozę marży, a SAP swoją obniżył — i rynek to zauważył.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <p>Bilans SAP-a nie jest przedmiotem sporu. Spółka generuje wysokie przepływy operacyjne, ma zdrową strukturę kapitału i stać ją na finansowanie przejęć z bieżącej działalności — czego dowodem są zamknięte w lipcu transakcje Dremio i Prior Labs.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Element</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Zdolność do obsługi zobowiązań</td><td style="color:var(--ocena-kupno)">Bardzo dobra — dług nie jest tematem</td></tr>
+          <tr><td>Przepływy z działalności operacyjnej</td><td style="color:var(--ocena-kupno)">Silne, wspierane modelem subskrypcyjnym</td></tr>
+          <tr><td>Zdolność akwizycyjna</td><td style="color:var(--ocena-kupno)">Przejęcia finansowane bez naruszania bilansu</td></tr>
+          <tr><td>Backlog jako zabezpieczenie</td><td style="color:var(--ocena-kupno)">€22,9 mld zakontraktowanych przychodów na 12 miesięcy</td></tr>
+          <tr><td>Rozwodnienie z przejęć</td><td style="color:var(--ocena-uwaga)">Ponad €100 mln w 2026 — odczuwalne w prognozie</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Kontekst, który warto mieć.</strong> W dzisiejszych analizach Intela i Novo Nordisk bilans był istotnym elementem ryzyka — Intel pali 5,5 miliarda dolarów rocznie, Novo zaciągnęło dług na przejęcie. <strong>W przypadku SAP-a bilans po prostu nie stanowi problemu</strong>. Spór dotyczy wyłącznie tempa wzrostu i mnożnika, co jest zdecydowanie łatwiejszą kategorią ryzyka.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📊</div><div class="catalyst-body"><h4>Backlog chmurowy przyspiesza, nie zwalnia</h4><p>€22,9 mld i +27% rok do roku, z przyspieszeniem wobec pierwszego kwartału. To odwrócenie wcześniejszej tendencji i najsilniejszy dowód, że popyt się nie załamał.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏷️</div><div class="catalyst-body"><h4>Wycena o połowę niższa od historycznej</h4><p>P/E 19,3× wobec średniej 39,3×. Przy wzroście chmury o 23–25% rocznie daje to wskaźnik PEG poniżej jedności — rzadkość w oprogramowaniu korporacyjnym tej skali.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🤖</div><div class="catalyst-body"><h4>Autonomous Enterprise z mocnym zapleczem</h4><p>224 agentów i 51 asystentów, Claude od Anthropic jako główny silnik rozumowania, do tego NVIDIA i Palantir. SAP nie buduje modeli — dostarcza dane i procesy, na których one działają.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏦</div><div class="catalyst-body"><h4>JPMorgan migruje księgę główną na SAP</h4><p>Bank tej klasy przenoszący system finansowy to rekomendacja mocniejsza niż jakakolwiek kampania marketingowa — i dowód, że migracje do chmury nadal się dzieją.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🇪🇺</div><div class="catalyst-body"><h4>Jedyny europejski gracz tej skali</h4><p>W warunkach rosnącej wrażliwości na zależność od amerykańskiej infrastruktury chmurowej pozycja SAP-a jako europejskiego dostawcy ERP nabiera wartości wykraczającej poza parametry produktu.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">⚠️</div><div class="catalyst-body"><h4>Sposób monetyzacji AI zraża klientów</h4><p>Wymóg przeniesienia co najmniej połowy wydatków na utrzymanie do chmury w zamian za dostęp do Joule, plus rozliczanie według zużycia, odbiera klientom przewidywalność rachunku. Kurs spadł o 4,6% w dniu ujawnienia tej strategii.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Obniżona prognoza zysku</h4><p>Przejęcia Dremio i Prior Labs rozwadniają wynik operacyjny o ponad €100 mln. SAP kupuje kompetencje AI za bieżącą rentowność właśnie wtedy, gdy rynek pyta o zwrot z inwestycji w AI.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🐌</div><div class="catalyst-body"><h4>Zapowiedziane wyhamowanie backlogu</h4><p>Zarząd sam sygnalizuje, że w skali roku wzrost zakontraktowanych przychodów lekko spowolni wobec 25% z 2025. Jeden dobry kwartał to jeszcze nie odwrócenie trendu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🤔</div><div class="catalyst-body"><h4>Pytanie o kategorię pozostaje otwarte</h4><p>Jeśli agenci AI faktycznie zmniejszą liczbę potrzebnych licencji, umowy wieloletnie opóźnią skutki o kwartały. Backlog jest wskaźnikiem opóźnionym i może wyglądać zdrowo długo po tym, jak popyt się zmieni.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏢</div><div class="catalyst-body"><h4>Konkurencja z każdej strony</h4><p>Oracle, Microsoft i Salesforce atakują różne części stosu, a wyspecjalizowani dostawcy podgryzają pojedyncze moduły. SAP broni pozycji kosztem zmiany, nie przewagą funkcjonalną.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>Pozycja</th><th>Relacja do SAP-a</th></tr></thead>
+        <tbody>
+          <tr><td><strong>SAP</strong></td><td>Lider ERP dla dużych przedsiębiorstw</td><td>Chmura +24%, backlog +27%, P/E 19,3×</td></tr>
+          <tr><td><strong>Oracle</strong></td><td>ERP, bazy danych, infrastruktura chmurowa</td><td style="color:var(--ocena-uwaga)">Bezpośredni rywal w ERP, mocniejszy w infrastrukturze</td></tr>
+          <tr><td><strong>Microsoft</strong></td><td>Dynamics, Power Platform, Copilot</td><td style="color:var(--ocena-sprzedaz)">Atakuje pakietem; ten sam mechanizm, co wobec ServiceNow</td></tr>
+          <tr><td><strong>Salesforce</strong></td><td>CRM, Agentforce</td><td>Sąsiedni segment, ta sama przecena sektorowa</td></tr>
+          <tr><td>Workday, Infor</td><td>Kadry i ERP w wybranych branżach</td><td>Podgryzają moduły, nie zastępują rdzenia</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Ta sama obserwacja, co przy ServiceNow.</strong> Prawdziwym konkurentem SAP-a przestał być inny dostawca ERP. Nowym punktem odniesienia jest pytanie, czy ogólny agent AI z dostępem do danych firmowych nie zastąpi wyspecjalizowanej platformy. Dlatego <strong>Salesforce, ServiceNow i SAP spadały razem</strong>, mimo że częściowo ze sobą konkurują — rynek przestał wyceniać pozycję konkurencyjną, a zaczął wyceniać przetrwanie kategorii.</div>
+      <p>Argument SAP-a w tym sporze jest jednak najmocniejszy z całej trójki: <strong>agent może zastąpić interfejs, ale nie zastąpi księgi głównej</strong>. Ktoś musi przechowywać zapisy transakcji, obsługiwać zamknięcie miesiąca i odpowiadać przed audytorem. To jest warstwa, której agenci potrzebują, a nie taka, którą wypierają.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Szczyt historyczny</td><td>€306,60</td><td>Lipiec 2025 — punkt odniesienia dla skali przeceny</td></tr>
+          <tr><td>Szczyt 52-tygodniowy</td><td>€244,30</td><td>Przed lutowym załamaniem sektora</td></tr>
+          <tr><td>Dno 52-tygodniowe</td><td><strong>€127,50</strong></td><td>Minimum po „SaaSpocalypse"</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>€177,00</strong></td><td>+39% od dna, -28% od szczytu 52W, -42% od ATH</td></tr>
+          <tr><td>Wsparcie S1</td><td>€165–170</td><td>Strefa konsolidacji po wynikach Q2</td></tr>
+          <tr><td>Wsparcie S2</td><td>€140–150</td><td>Rejon powrotu paniki sektorowej</td></tr>
+          <tr><td>Opór R1</td><td>€200–210</td><td>Dolny zakres celów analityków</td></tr>
+          <tr><td>Opór R2</td><td>€244</td><td>Szczyt 52-tygodniowy</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Obrona strefy €165–170</li><li>Q3 z backlogiem powyżej 25%</li><li>Wybicie ponad €200 → droga na €244</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Przebicie €165 z wolumenem</li><li>Wyhamowanie backlogu poniżej 20%</li><li>Powrót ku €140–150</li></ul></div>
+      </div>
+      <p>Kurs odbił o 39% od lutowego dna, ale pozostaje w dolnej połowie rocznego zakresu. Struktura jest neutralna z lekkim przechyłem w górę — <strong>rynek czeka na dowód monetyzacji AI, nie na sygnał techniczny</strong>.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Brak katalizatora do wyników Q3 w październiku. Obniżona prognoza zysku i tarcia wokół monetyzacji AI ciążą na sentymencie.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">P/E 19,3× przy wzroście chmury 23–25% i backlogu +27%. Konsensus €201–222 przy 24 rekomendacjach kupna i zerowej sprzedaży.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Warstwa danych transakcyjnych przedsiębiorstwa jest tym, czego agenci AI potrzebują, a nie tym, co wypierają. Koszt zmiany dostawcy pozostaje ogromny.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji:</strong> 4–7% portfela — duża, rentowna spółka o przewidywalnych przychodach; ryzyko dotyczy tempa, nie przetrwania</li>
+        <li><strong>Dokupienie:</strong> €165–175, czyli w obecnej strefie lub nieco niżej</li>
+        <li><strong>Druga transza:</strong> €140–150 przy powrocie paniki sektorowej</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie €225–245</li>
+        <li><strong>Kluczowa liczba:</strong> <strong>wzrost backlogu chmurowego</strong> — dziś 27%; zarząd zapowiada lekkie wyhamowanie, więc utrzymanie powyżej 22% będzie potwierdzeniem tezy</li>
+        <li><strong>Wyjście z tezy:</strong> wzrost backlogu poniżej 18% przez dwa kwartały albo widoczna utrata klientów z powodu polityki cenowej AI</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">€205 – €235</div><div class="fair-value-note">Scenariusz negatywny: €140–155 | Scenariusz pozytywny: €270–290 | Konsensus: €201,49–€222,52</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Backlog przyspiesza.</strong> €22,9 mld i +27% rok do roku, szybciej niż same przychody i szybciej niż w poprzednim kwartale — popyt się nie załamał</li>
+          <li><strong>Wycena o połowę niższa od historycznej.</strong> P/E 19,3× wobec średniej 39,3×, przy wzroście chmury 23–25% rocznie</li>
+          <li><strong>Jednomyślność analityków.</strong> 24 rekomendacje kupna, zero sprzedaży, cele €201–222 — rzadkie przy spółce blisko rocznego minimum</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Monetyzacja AI zraża klientów.</strong> Wymóg przeniesienia połowy wydatków na utrzymanie do chmury i rozliczanie według zużycia odbierają przewidywalność rachunku</li>
+          <li><strong>Prognoza zysku obniżona.</strong> Ponad €100 mln rozwodnienia z przejęć — spółka kupuje kompetencje AI kosztem bieżącej rentowności</li>
+          <li><strong>Pytanie o kategorię otwarte.</strong> Backlog to wskaźnik opóźniony; przy umowach wieloletnich osłabienie popytu ujawni się dopiero przy odnowieniach</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> wzrost backlogu chmurowego poniżej 18% przez dwa kwartały z rzędu albo udokumentowana utrata klientów z powodu polityki cenowej wokół Joule → powrót w rejon €140–155.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> utrzymanie wzrostu backlogu powyżej 22% i pierwsze konkretne dane o przychodach z agentów AI → re-rating ku €230–250.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">SAP jest trzecią spółką analizowaną dziś, w której wszystko sprowadza się do jednego pytania o sztuczną inteligencję — i pierwszą, w której <strong>dane odpowiadają na nie najbardziej przekonująco</strong>. Przychody z chmury wzrosły w drugim kwartale o 24% do 6,3 miliarda euro, Cloud ERP Suite o 27% i stanowi już 88% całej chmury, a zakontraktowany backlog na najbliższe dwanaście miesięcy sięgnął <strong>22,9 miliarda euro i wzrósł o 27%, przyspieszając wobec pierwszego kwartału</strong> i odwracając wcześniejszą tendencję, w której rósł wolniej niż przychody. Mimo to kurs jest 42% poniżej szczytu z lipca 2025, a wycena wynosi 19,3-krotność zysku wobec średniej historycznej sięgającej 39,3.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Uczciwie trzeba jednak wskazać, czym SAP różni się na niekorzyść od ServiceNow, które analizowaliśmy rano. ServiceNow <strong>podniosło</strong> prognozę i przebiło własne założenia marżowe. SAP prognozę zysku operacyjnego <strong>obniżył</strong>, bo lipcowe przejęcia Dremio i Prior Labs rozwadniają wynik o ponad sto milionów euro. Do tego doszła decyzja, która wywołała realne tarcia: żeby uzyskać dostęp do narzędzi AI, klienci z instalacjami lokalnymi muszą przenieść <strong>co najmniej połowę wydatków na utrzymanie do chmury</strong>, a samo AI rozliczane jest według zużycia. To odbiera odbiorcom dokładnie to, co najbardziej cenili w subskrypcji — przewidywalność rachunku. Kurs spadł tego dnia o 4,6% i była to reakcja uzasadniona.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Popyt się utrzymuje i przyspiesza.</strong> Backlog chmurowy €22,9 mld, +27% r/r, szybciej niż w Q1 i szybciej niż same przychody.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Rdzeń rośnie najszybciej.</strong> Cloud ERP Suite +27%, udział 88% — nie rośnie peryferium, tylko serce oferty.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Wycena daje margines.</strong> P/E 19,3× wobec średniej 39,3×, 24 rekomendacje kupna i ani jednej sprzedaży.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Monetyzacja agentów AI.</strong> 224 agentów i Claude jako silnik rozumowania to solidna podstawa techniczna, ale przychodów z tego jeszcze nie widać w sprawozdaniach.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Klienci zaakceptują nowy model cenowy.</strong> Wymuszanie migracji w zamian za dostęp do AI to taktyka, która może przyspieszyć konwersję albo popchnąć część bazy ku konkurencji.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Rentowność bez rozwodnienia.</strong> Prognoza zysku operacyjnego obniżona przez przejęcia — w roku, w którym rynek pyta właśnie o zwrot z inwestycji w AI.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Październik 2026</strong></td><td>Wyniki Q3 2026</td><td>Czy backlog utrzyma tempo mimo zapowiadanego wyhamowania</td></tr>
+            <tr><td>Styczeń 2027</td><td>Wyniki roczne i prognoza na 2027</td><td>Pierwsza prognoza obejmująca pełny rok z agentami AI w ofercie</td></tr>
+            <tr><td>Na bieżąco</td><td>Wdrożenia referencyjne klasy JPMorgan</td><td>Każdy taki klient osłabia tezę o zmierzchu oprogramowania korporacyjnego</td></tr>
+            <tr><td>2027</td><td>Pierwsze duże odnowienia umów po erze agentów</td><td>Moment prawdy dla całego sektora, nie tylko SAP-a</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Wzrost backlogu chmurowego</strong></td><td>+27% r/r</td><td>&lt; 18% przez dwa kwartały</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Wzrost przychodów z chmury</td><td>+24% cc</td><td>&lt; 15%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Udział Cloud ERP Suite</td><td>88% chmury</td><td>spadek udziału</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Zysk operacyjny non-IFRS</td><td>prognoza €11,8–12,2 mld — obniżona</td><td>kolejna obniżka</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Reakcja klientów na model cenowy AI</td><td>udokumentowane tarcia</td><td>odejścia dużych klientów</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Przychody z agentów AI</td><td>brak wyodrębnionych danych</td><td>brak raportowania w 2027</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji:</strong> 4–7% portfela — ryzyko dotyczy tempa wzrostu, nie przetrwania spółki</li>
+          <li><strong>Dokupienie:</strong> €165–175, czyli w obecnej strefie lub nieco niżej</li>
+          <li><strong>Druga transza:</strong> €140–150 przy powrocie paniki sektorowej</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie €225–245</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> wzrost backlogu chmurowego. Zarząd zapowiada lekkie wyhamowanie — utrzymanie powyżej 22% będzie potwierdzeniem tezy, zejście poniżej 18% jej zaprzeczeniem</li>
+          <li><strong>Wyjście z tezy:</strong> backlog poniżej 18% przez dwa kwartały albo udokumentowane odejścia klientów z powodu polityki cenowej wokół Joule</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">📈 KUPNO — najmocniejsze dane w całej trójce, najniższa wycena</div>
+        <p>Z trzech spółek analizowanych dzisiaj SAP ma <strong>najlepszą relację twardych danych do zapłaconej ceny</strong>. Backlog chmurowy rośnie o 27% i przyspiesza, rdzeń oferty rośnie o 27%, a wycena wynosi 19,3-krotność zysku wobec średniej historycznej sięgającej 39,3. Dwudziestu czterech analityków zaleca kupno, żaden sprzedaż — przy kursie 42% poniżej szczytu. Argument merytoryczny jest przy tym mocniejszy niż u konkurentów: <strong>agent AI może zastąpić interfejs, ale nie zastąpi księgi głównej</strong>. Ktoś musi przechowywać zapisy transakcji i odpowiadać przed audytorem, a to jest warstwa, której agenci potrzebują, nie taka, którą wypierają.</p>
+        <p>Dwie rzeczy nie pozwalają jednak na ocenę mocniejszą niż zwykłe kupno. Po pierwsze, <strong>SAP obniżył prognozę zysku</strong>, podczas gdy ServiceNow swoją podniosło — kupowanie kompetencji AI kosztem bieżącej rentowności jest strategicznie zrozumiałe, ale rynek ma prawo pytać o zwrot. Po drugie, sposób monetyzacji AI, wymuszający migrację do chmury w zamian za dostęp do Joule, jest zagraniem ryzykownym wobec bazy klientów przyzwyczajonej do przewidywalności. To może przyspieszyć konwersję albo otworzyć drzwi konkurencji — i dowiemy się tego dopiero przy odnowieniach umów. Kupować stopniowo, patrzeć na backlog.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>€205–235</b></div>
+          <div><span>Scenariusz negatywny</span><b>€140–155</b></div>
+          <div><span>Scenariusz pozytywny</span><b>€270–290</b></div>
+          <div><span>Sugerowana pozycja</span><b>4–7% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3 — październik</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 12 sierpnia 2026 | Cena od użytkownika: €177,00 (XETRA) | Dane: SAP IR (Q2 2026, 23 lipca), SEC 6-K, SAP News Center, StockAnalysis, konsensus 27 analityków | Wszystkie kwoty w euro; prognozy spółki w stałych kursach walutowych | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
