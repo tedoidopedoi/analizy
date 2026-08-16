@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVDA — NVIDIA Corporation | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: NVDA</div>
+    <div class="company-name">NVIDIA Corporation</div>
+    <div class="company-sub">Półprzewodniki · akceleratory i sieci dla centrów danych · platforma CUDA · Santa Clara, Kalifornia</div>
+    <div class="header-meta">
+      <span class="meta-tag">Przychody +85% r/r</span>
+      <span class="meta-tag">Forward P/E 22,6</span>
+      <span class="meta-tag">PEG 0,51</span>
+      <span class="meta-tag">ROIC 104,7%</span>
+      <div class="price-display">
+        <div class="price-main">$225,16</div>
+        <div class="price-sub">zamknięcie 14.08.2026 | +24% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Moc obliczeniowa dla AI</span><span class="temat">Półprzewodniki</span><span class="temat">Sieci i łączność</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — najlepsza relacja jakości do ceny w całym koszyku AI">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">pozycja rdzeniowa</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$280 – $320</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">+24% do +42%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>26 sierpnia 2026</b><em>za 10 dni · potwierdzone</em></div>
+    <div class="rb-right">Pozycja 8–12% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (14.08.2026)</div><div class="metric-value">$225,16</div><div class="metric-detail">+24% w 52 tyg. | powyżej obu średnich</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$5,45 bln</div><div class="metric-detail">EV $5,41 bln | 24,22 mld akcji</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q1 FY27</div><div class="metric-value green">$81,6 mld</div><div class="metric-detail">+85% r/r | prognoza Q2: $91 mld</div></div>
+    <div class="metric-card"><div class="metric-label">Centra danych</div><div class="metric-value green">$75,2 mld</div><div class="metric-detail">+92% r/r, +21% kw/kw</div></div>
+    <div class="metric-card"><div class="metric-label">Forward P/E · PEG</div><div class="metric-value em">22,6× · 0,51</div><div class="metric-detail">PEG poniżej 1 — rzadkość przy tej skali</div></div>
+    <div class="metric-card"><div class="metric-label">Marża wolnych przepływów</div><div class="metric-value green">46,97%</div><div class="metric-detail">$119,08 mld gotówki rocznie</div></div>
+    <div class="metric-card"><div class="metric-label">ROIC vs koszt kapitału</div><div class="metric-value green">104,7% vs 16,4%</div><div class="metric-detail">Sześciokrotność kosztu pieniądza</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (61 analityków)</div><div class="metric-value green">$302,83</div><div class="metric-detail">+34,5% | mocne kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Punkt wyjścia tej analizy</h3>
+      <p>NVIDIA nie wymaga przedstawiania. Wymaga natomiast zestawienia z resztą portfela, bo <strong>przez ostatni rok stała się w nim najtańszą spółką względem tempa wzrostu</strong> — i większość rynku tego nie zauważyła.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>Kurs, 52 tyg.</th><th>Forward P/E</th><th>ROIC vs koszt kapitału</th><th>Marża FCF</th></tr></thead>
+        <tbody>
+          <tr><td><strong>NVIDIA</strong></td><td><strong>+24%</strong></td><td style="color:var(--ocena-kupno)"><strong>22,6×</strong></td><td style="color:var(--ocena-kupno)"><strong>104,7% vs 16,4%</strong></td><td style="color:var(--ocena-kupno)"><strong>46,97%</strong></td></tr>
+          <tr><td>Marvell</td><td>+180%</td><td style="color:var(--ocena-sprzedaz)">48,8×</td><td style="color:var(--ocena-sprzedaz)">6,9% vs 16,3%</td><td>19,10%</td></tr>
+          <tr><td>Nokia</td><td>+157%</td><td style="color:var(--ocena-uwaga)">24,3×</td><td style="color:var(--ocena-uwaga)">6,4% vs 8,2%</td><td style="color:var(--ocena-sprzedaz)">2,62%</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>To jest najważniejsza obserwacja z tych trzech raportów.</strong> Rynek przez ostatni rok kupował <em>pochodne</em> tematu sztucznej inteligencji — dostawców krzemu na zamówienie i sprzętu sieciowego — a zostawił z tyłu spółkę, która ten temat stworzyła. Marvell urósł o 180% i notowany jest przy 48,8-krotności zysku przyszłorocznego, nie zarabiając własnego kosztu kapitału. NVIDIA urosła o 24%, notowana jest przy 22,6-krotności, <strong>zarabia sześciokrotność kosztu kapitału i zamienia 47 centów z każdego dolara sprzedaży w wolną gotówkę</strong>.</div>
+
+      <h3>Co się zmieniło od analizy z 9 czerwca</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>9 czerwca 2026</th><th>16 sierpnia 2026</th><th>Kierunek</th></tr></thead>
+        <tbody>
+          <tr><td>Cena</td><td>$214,75</td><td>$225,16</td><td>+4,8%</td></tr>
+          <tr><td>Kapitalizacja</td><td>$5,22 bln</td><td>$5,45 bln</td><td>+4,4%</td></tr>
+          <tr><td><strong>P/E bieżące</strong></td><td>38,1×</td><td><strong>34,48×</strong></td><td style="color:var(--ocena-kupno)"><strong>↓ Spadło mimo wzrostu kursu</strong></td></tr>
+          <tr><td>Forward P/E</td><td>20,6×</td><td>22,59×</td><td style="color:var(--ocena-uwaga)">↑ Lekko wyżej</td></tr>
+          <tr><td>EV/EBITDA</td><td>27,6×</td><td>32,71×</td><td style="color:var(--ocena-uwaga)">↑</td></tr>
+          <tr><td>Marża brutto</td><td>73,5%</td><td>74,15%</td><td style="color:var(--ocena-kupno)">↑ Mimo skali</td></tr>
+          <tr><td>Przychody</td><td>$130,5 mld (FY25)</td><td><strong>$253,49 mld</strong> (12 mies.)</td><td style="color:var(--ocena-kupno)">↑↑ Niemal podwojenie</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Trzeci wiersz zasługuje na uwagę.</strong> Kurs wzrósł, a wskaźnik ceny do zysku <em>spadł</em> z 38,1 do 34,48. To znaczy tylko jedno: <strong>zysk rósł szybciej niż cena</strong>. W ciągu dwóch miesięcy spółka stała się tańsza, choć jest droższa nominalnie.</p>
+
+      <h3>Wyniki Q1 FY2027 — 20 maja</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Dynamika</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td><strong>$81,6 mld</strong></td><td style="color:var(--ocena-kupno)">+85% r/r</td></tr>
+          <tr><td>Centra danych</td><td><strong>$75,2 mld</strong></td><td style="color:var(--ocena-kupno)">+92% r/r, +21% kw/kw</td></tr>
+          <tr><td>&nbsp;&nbsp;— obliczenia</td><td>$60 mld</td><td style="color:var(--ocena-kupno)">+77% r/r</td></tr>
+          <tr><td>&nbsp;&nbsp;— sieci</td><td>$15 mld</td><td style="color:var(--ocena-kupno)">Niemal potrojenie r/r</td></tr>
+          <tr><td>Marża brutto (non-GAAP)</td><td>75%</td><td>Utrzymana</td></tr>
+          <tr><td>Wolne przepływy</td><td>$48,6 mld</td><td>W jednym kwartale</td></tr>
+          <tr><td><strong>Prognoza na Q2</strong></td><td><strong>$91 mld</strong></td><td style="color:var(--ocena-kupno)">Z całkowitym wyłączeniem Chin</td></tr>
+        </tbody>
+      </table></div>
+      <p>Dyrektor finansowa Colette Kress określiła rampę GB300 NVL72 jako <strong>najszybsze wprowadzenie produktu w historii spółki</strong>. Kolejna architektura, <strong>Vera Rubin</strong>, ma ruszyć w trzecim kwartale roku obrotowego 2027 i przyspieszyć w czwartym, z pierwszymi wdrożeniami w AWS, Azure, Google Cloud, Oracle Cloud i CoreWeave.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Opis</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Blackwell / GB300 NVL72</strong></td><td>Obecna generacja akceleratorów, sprzedawana w postaci całych szaf</td><td style="color:var(--ocena-kupno)">Najszybsza rampa produktu w historii spółki</td></tr>
+          <tr><td><strong>Vera Rubin</strong></td><td>Następna architektura</td><td>Start Q3 FY2027, rampa Q4 — AWS, Azure, Google, Oracle, CoreWeave</td></tr>
+          <tr><td><strong>Sieci</strong></td><td>InfiniBand, Ethernet, NVLink — spinanie tysięcy układów w jeden klaster</td><td style="color:var(--ocena-kupno)">$15 mld, niemal potrojenie r/r</td></tr>
+          <tr><td><strong>CUDA</strong></td><td>Warstwa programowa — dwie dekady bibliotek i narzędzi</td><td>Rdzeń fosy</td></tr>
+          <tr><td>Procesory Grace</td><td>Własne CPU dla centrów danych</td><td>Rosnący dodatek do platformy</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — dlaczego to nie jest wyłącznie sprzedaż układów</h3>
+      <p>Gdyby NVIDIA sprzedawała same akceleratory, konkurencja dawno by ją dogoniła. Sprzedaje jednak <strong>trzy rzeczy naraz i żadnej osobno</strong>: krzem, sieć spinającą go w klaster oraz warstwę programową CUDA, na której powstała praktycznie cała współczesna infrastruktura uczenia maszynowego.</p>
+      <p>Najbardziej niedoceniana jest część środkowa. <strong>Przychody z sieci niemal potroiły się rok do roku i wynoszą 15 miliardów dolarów kwartalnie</strong> — same w sobie stanowią biznes większy niż całe centra danych Marvella. Klaster liczący dziesiątki tysięcy układów jest problemem sieciowym co najmniej tak samo jak obliczeniowym, a to obszar, w którym NVIDIA zbudowała przewagę po cichu.</p>
+      <div class="alert alert-success"><strong>Test skuteczności fosy właśnie się odbył.</strong> Spółka straciła w praktyce cały rynek chiński — <strong>zero układów H20 dostarczonych w Q1 wobec 4,6 miliarda dolarów rok wcześniej</strong> — i mimo to zaprognozowała 91 miliardów przychodu na kolejny kwartał, całkowicie wyłączając Chiny z rachunku. Utrata jednego z największych rynków świata nie przerwała wzrostu. Niewiele spółek przeszłoby taki test.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Nakłady operatorów chmury</strong> — Amazon zapowiedział 220 mld dolarów wydatków inwestycyjnych na 2026, Alphabet podniósł prognozę do około 200 mld. Microsoft, Meta, Alphabet i Amazon łącznie deklarują ponad 200 mld na samą infrastrukturę AI</li>
+        <li><strong>Udział rynkowy powyżej 80%</strong> w segmencie akceleratorów najwyższej klasy</li>
+        <li><strong>Chiny wyłączone z rachunku</strong> — zero dostaw H20 w Q1, licencjonowanie H200 niepewne, cała sprzedaż w Chinach usunięta z prognoz. To jednocześnie ryzyko i darmowa opcja</li>
+        <li><strong>Środowisko ograniczone podażą, nie popytem</strong> — operatorzy chmury sami mówią o niedoborze mocy, nie o nadmiarze</li>
+        <li><strong>Konkurencja ze strony krzemu na zamówienie</strong> — Google z TPU, Amazon z Trainium, programy realizowane przez Marvella i Broadcom. To najpoważniejszy strukturalny wyłom w pozycji NVIDII</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Grupa</th><th>Charakterystyka</th><th>Kierunek</th></tr></thead>
+        <tbody>
+          <tr><td>Operatorzy chmury</td><td>Amazon, Microsoft, Google, Oracle, CoreWeave — pierwsze wdrożenia Vera Rubin</td><td style="color:var(--ocena-kupno)">↑ Nakłady ponad $200 mld łącznie</td></tr>
+          <tr><td>Twórcy modeli</td><td>Laboratoria budujące modele graniczne</td><td style="color:var(--ocena-kupno)">↑ Setki tysięcy układów Blackwell wdrożonych</td></tr>
+          <tr><td>Przedsiębiorstwa i sektor publiczny</td><td>Wdrożenia własne, projekty państwowe</td><td style="color:var(--ocena-kupno)">↑ Dywersyfikacja poza chmurę</td></tr>
+          <tr><td><strong>Chiny</strong></td><td>Zero dostaw H20 w Q1 wobec $4,6 mld rok wcześniej</td><td style="color:var(--ocena-sprzedaz)">↓ Wyłączone z prognoz</td></tr>
+        </tbody>
+      </table></div>
+      <p>Struktura właścicielska: instytucje posiadają 70,36% akcji, osoby powiązane ze spółką 3,91% — nietypowo dużo jak na spółkę tej wielkości i sygnał, że kierownictwo ma realny udział w wyniku.</p>
+      <div class="alert alert-warn"><strong>Koncentracja odbiorców jest wysoka i to prawdziwe ryzyko.</strong> Kilku operatorów chmury odpowiada za znaczną część przychodów, a każdy z nich <strong>jednocześnie finansuje własne układy dedykowane</strong> — dokładnie te, które projektują Marvell i Broadcom. Klient, dostawca i konkurent w jednej osobie. Dopóki popyt przewyższa podaż, wszyscy kupują wszystko; przy pierwszym spowolnieniu to napięcie stanie się widoczne.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 mies.)</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td><strong>$253,49 mld</strong></td><td style="color:var(--ocena-kupno)">Prognoza wzrostu 3-letniego: +47,30%</td></tr>
+          <tr><td>Zysk brutto</td><td>$187,95 mld</td><td>Marża 74,15%</td></tr>
+          <tr><td>Zysk operacyjny</td><td>$162,29 mld</td><td style="color:var(--ocena-kupno)">Marża 64,02%</td></tr>
+          <tr><td>Zysk netto</td><td><strong>$159,61 mld</strong></td><td style="color:var(--ocena-kupno)">Marża 62,97%, EPS $6,53</td></tr>
+          <tr><td>Wolne przepływy</td><td><strong>$119,08 mld</strong></td><td style="color:var(--ocena-kupno)">Marża 46,97%</td></tr>
+          <tr><td>Nakłady inwestycyjne</td><td>$6,57 mld</td><td style="color:var(--ocena-kupno)">Zaledwie 2,6% przychodów</td></tr>
+          <tr><td>Efektywna stopa podatkowa</td><td>15,75%</td><td>Niska</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Zapowiedź, którą warto zapisać.</strong> Zarząd deklaruje „pełne przekonanie" o osiągnięciu <strong>biliona dolarów łącznych przychodów z architektur Blackwell i Rubin w latach 2025–2027</strong>. To nie jest prognoza kwartalna ani ambicja na dekadę — to konkretna liczba na konkretny, trzyletni okres, z produktami już w produkcji albo z potwierdzonymi klientami. Przy przychodach 253 miliardów za ostatnie dwanaście miesięcy taka skala jest wykonalna, ale nie zostawia miejsca na potknięcie w rampie Rubina.</div>
+      <p>Warto też zauważyć rzecz przeciwną do Oracle: <strong>NVIDIA finansuje ten wzrost bez kapitału zewnętrznego</strong>. Nakłady inwestycyjne to 6,57 miliarda przy 119 miliardach wolnych przepływów. Liczba akcji <em>spadła</em> o 1,11% w ciągu roku dzięki skupom.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $225,16</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$5,45 bln</td><td>EV $5,41 bln</td></tr>
+          <tr><td>P/E bieżące</td><td>34,48×</td><td>EPS $6,53 — spadło z 38,1× w czerwcu</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>22,59×</strong></td><td style="color:var(--ocena-kupno)">Niżej niż Marvell (48,8×) i Nokia (24,3×)</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-kupno)"><strong>0,51</strong></td><td>Poniżej 1 — wzrost nie jest w pełni wyceniony</td></tr>
+          <tr><td>P/S</td><td>21,51× (forward 12,47×)</td><td style="color:var(--ocena-uwaga)">Wysoko nominalnie, ale marża netto 63%</td></tr>
+          <tr><td>P/FCF</td><td>45,80×</td><td>Wobec 116,75× u Marvella i 96,68× u Nokii</td></tr>
+          <tr><td>EV/EBITDA</td><td>32,71×</td><td style="color:var(--ocena-uwaga)">Wzrosło z 27,6× w czerwcu</td></tr>
+          <tr><td>P/B</td><td>27,90×</td><td style="color:var(--ocena-uwaga)">Wysoko — spółka niemal bez aktywów trwałych</td></tr>
+          <tr><td><strong>ROIC vs WACC</strong></td><td style="color:var(--ocena-kupno)"><strong>104,67% vs 16,40%</strong></td><td>Sześciokrotność kosztu kapitału</td></tr>
+          <tr><td>Altman Z-Score</td><td><strong>44,16</strong></td><td style="color:var(--ocena-kupno)">Skrajnie wysoko</td></tr>
+          <tr><td>Konsensus (61 analityków)</td><td>$302,83 · mocne kupno</td><td style="color:var(--ocena-kupno)">+34,5%</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>34,48×</td><td>Zysk netto $159,61 mld, EPS $6,53</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>22,59×</strong></td><td>Implikuje zysk na akcję około $9,97</td></tr>
+          <tr><td>Forward P/S</td><td>12,47×</td><td>Wobec 21,51× na przychodach bieżących</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-kupno)"><strong>0,51</strong></td><td>Prognoza wzrostu zysku +49,25%, przychodów +47,30%</td></tr>
+          <tr><td>Marvell (odniesienie)</td><td>48,83× · PEG 1,32</td><td style="color:var(--ocena-sprzedaz)">Dwukrotnie drożej przy niższej rentowności</td></tr>
+          <tr><td>Nokia (odniesienie)</td><td>24,32× · PEG b.d.</td><td style="color:var(--ocena-uwaga)">Drożej przy wzroście przychodów +5,67% w 3 lata</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> wskaźnik PEG równy 0,51 oznacza, że cena rośnie wolniej niż zysk — rynek nie wycenił w pełni prognozowanego tempa wzrostu. Przy spółce wartej 5,45 biliona dolarów jest to nietypowe i wynika z dwóch obaw: <strong>utraty Chin oraz konkurencji ze strony układów dedykowanych</strong>. Obie są realne, ale obie są też w cenie — a mnożnik 22,6 przy marży netto 63% i zwrocie z kapitału 104,67% opisuje spółkę wycenianą jak dojrzała, nie jak rosnąca o 85% rocznie.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$280 – $320</div><div class="fair-value-note">Baza: 28–32× zysku prognozowanego (około $9,97 na akcję) przy utrzymanej marży brutto powyżej 73% | Konsensus 61 analityków: $302,83 („mocne kupno") — mieści się w środku tego przedziału | Scenariusz negatywny (trwała utrata Chin, spowolnienie nakładów operatorów chmury, przejęcie udziałów przez układy dedykowane): $165–185 | Scenariusz pozytywny (otwarcie Chin dla H200, rampa Rubina przed planem): $370–400 | Przy $225,16 potencjał od -27% do +78%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>NVIDIA</th><th>Marvell</th><th>Nokia</th></tr></thead>
+        <tbody>
+          <tr><td>Brutto</td><td style="color:var(--ocena-kupno)"><strong>74,15%</strong></td><td>51,50%</td><td>45,50%</td></tr>
+          <tr><td>Operacyjna</td><td style="color:var(--ocena-kupno)"><strong>64,02%</strong></td><td>16,41%</td><td>8,97%</td></tr>
+          <tr><td>Netto</td><td style="color:var(--ocena-kupno)"><strong>62,97%</strong></td><td>28,99%</td><td>3,47%</td></tr>
+          <tr><td>Wolne przepływy</td><td style="color:var(--ocena-kupno)"><strong>46,97%</strong></td><td>19,10%</td><td>2,62%</td></tr>
+          <tr><td>ROIC</td><td style="color:var(--ocena-kupno)"><strong>104,67%</strong></td><td>6,87%</td><td>6,41%</td></tr>
+          <tr><td>Zysk na pracownika</td><td style="color:var(--ocena-kupno)"><strong>$3,80 mln</strong></td><td>$337,8 tys.</td><td>$10,4 tys.</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Ostatni wiersz najlepiej oddaje różnicę skali.</strong> Każdy z 42 tysięcy pracowników NVIDII generuje 3,8 miliona dolarów zysku. U Marvella jest to 338 tysięcy, u Nokii 10,4 tysiąca. NVIDIA zarabia na jednym pracowniku około <strong>365 razy więcej niż Nokia</strong> — nie dlatego, że ma lepszych ludzi, tylko dlatego, że sprzedaje warstwę, w której skupia się wartość całego łańcucha.</p>
+      <div class="alert alert-warn"><strong>Marża 64% na poziomie operacyjnym jest jednocześnie największym ryzykiem tej spółki.</strong> Taki poziom nie jest stanem naturalnym w półprzewodnikach — to renta wynikająca z braku alternatywy. Każdy udany układ dedykowany, każdy TPU i każdy Trainium działa na tę marżę erozyjnie. Teza inwestycyjna nie polega na tym, że marża się utrzyma, tylko że <strong>będzie się obniżać wolniej, niż rośnie wolumen</strong>. Dotychczas tak było: marża brutto wzrosła z 73,5% w czerwcu do 74,15%.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$53,17 mld</td><td style="color:var(--ocena-kupno)">Bardzo wysoko</td></tr>
+          <tr><td>Zadłużenie</td><td>$12,81 mld</td><td style="color:var(--ocena-kupno)">Gotówka netto <strong>+$40,36 mld</strong></td></tr>
+          <tr><td>Dług / kapitał własny</td><td>0,07</td><td style="color:var(--ocena-kupno)">Praktycznie zerowe</td></tr>
+          <tr><td>Dług / EBITDA</td><td>0,08</td><td style="color:var(--ocena-kupno)">Bez znaczenia</td></tr>
+          <tr><td>Pokrycie odsetek</td><td><strong>544,58</strong></td><td style="color:var(--ocena-kupno)">Odsetki są pozycją symboliczną</td></tr>
+          <tr><td>Wskaźnik bieżącej płynności</td><td>3,44</td><td style="color:var(--ocena-kupno)">Bardzo dobrze</td></tr>
+          <tr><td>Liczba akcji</td><td>24,22 mld</td><td style="color:var(--ocena-kupno)"><strong>-1,11% r/r</strong> — skupy przewyższają emisję</td></tr>
+          <tr><td>Altman Z-Score</td><td><strong>44,16</strong></td><td style="color:var(--ocena-kupno)">Wielokrotność progu bezpieczeństwa</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Warto to zestawić z resztą koszyka.</strong> Oracle finansuje swoją ekspozycję na sztuczną inteligencję długiem 167 miliardów dolarów. Intel pozyskał 36 miliardów kapitału i rozwodnił akcjonariuszy. Nokia rozwadnia o 2,76% rocznie przy dywidendzie pochłaniającej 80% zysku. <strong>NVIDIA generuje 119 miliardów wolnej gotówki rocznie, ma 40 miliardów gotówki netto i zmniejsza liczbę akcji.</strong> W tej grupie jest jedyną spółką, która całą tę falę finansuje z własnej kieszeni i jeszcze oddaje pieniądze akcjonariuszom.</div>
+      <p>Jedyna pozycja wymagająca uwagi to <strong>wskaźnik ceny do wartości księgowej 27,90</strong>. Wynika on z tego, że NVIDIA prawie nie posiada aktywów trwałych — produkcję zleca odlewniom, a jej wartość leży w projektach i oprogramowaniu. Przy takiej strukturze wskaźnik ten nie mówi wiele.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">💵</div><div class="catalyst-body"><h4>Wskaźnik PEG 0,51 przy skali 5,45 biliona dolarów</h4><p>Cena rośnie wolniej niż zysk. Wskaźnik bieżący spadł z 38,1 do 34,48 mimo wzrostu kursu — spółka staje się tańsza w miarę upływu czasu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏗️</div><div class="catalyst-body"><h4>Bilion dolarów z Blackwell i Rubin do 2027</h4><p>Zarząd deklaruje „pełne przekonanie". Vera Rubin startuje w Q3 FY2027 z wdrożeniami w AWS, Azure, Google Cloud, Oracle i CoreWeave.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🇨🇳</div><div class="catalyst-body"><h4>Chiny jako darmowa opcja</h4><p>Zero dostaw H20 w Q1 wobec $4,6 mld rok wcześniej, a mimo to prognoza $91 mld na Q2. Chiny są całkowicie wyłączone z rachunku — każde złagodzenie ograniczeń to czysty dodatek.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🌐</div><div class="catalyst-body"><h4>Sieci jako drugi, niedoceniany filar</h4><p>$15 mld kwartalnie, niemal potrojenie r/r. Sam ten segment jest większy niż całe centra danych Marvella.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💰</div><div class="catalyst-body"><h4>Rentowność, której nikt w tej grupie nie ma blisko</h4><p>ROIC 104,67% wobec kosztu kapitału 16,40%, marża wolnych przepływów 46,97%, gotówka netto $40,36 mld, liczba akcji spadająca o 1,11% rocznie.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🔧</div><div class="catalyst-body"><h4>Układy dedykowane u własnych klientów</h4><p>Google z TPU, Amazon z Trainium, programy realizowane przez Marvella i Broadcom. Klienci NVIDII finansują jej konkurencję — to najpoważniejszy strukturalny wyłom.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Marża operacyjna 64% jest rentą, nie stanem naturalnym</h4><p>Taki poziom w półprzewodnikach wynika z braku alternatywy. Każdy udany układ dedykowany działa na nią erozyjnie.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏦</div><div class="catalyst-body"><h4>Zależność od nakładów kilku firm</h4><p>Amazon $220 mld, Alphabet $200 mld — to imponujące liczby, ale pochodzą od garstki podmiotów. Zmiana nastawienia jednego z nich przenosi się natychmiast na prognozy.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🇨🇳</div><div class="catalyst-body"><h4>Chiny mogą pozostać zamknięte na stałe</h4><p>Licencjonowanie H200 jest niepewne, a rynek chiński równolegle buduje własne rozwiązania. Opcja może nigdy nie zostać zrealizowana.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📅</div><div class="catalyst-body"><h4>Wyniki 26 sierpnia i zmienność</h4><p>Beta 2,21 — dwukrotnie wyższa od rynku. Przy poprzednich wynikach kurs spadł mimo rekordowego kwartału. Oczekiwania są wysokie niezależnie od mnożnika.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>Rola</th><th>Relacja do NVIDII</th></tr></thead>
+        <tbody>
+          <tr><td><strong>NVIDIA</strong></td><td>Platforma: krzem, sieć, oprogramowanie</td><td>Ponad 80% udziału w akceleratorach najwyższej klasy</td></tr>
+          <tr><td><strong>AMD</strong></td><td>Bezpośredni rywal w akceleratorach</td><td style="color:var(--ocena-uwaga)">Realna alternatywa, ale bez odpowiednika CUDA</td></tr>
+          <tr><td><strong>Broadcom, Marvell</strong></td><td>Krzem na zamówienie dla operatorów chmury</td><td style="color:var(--ocena-sprzedaz)">Główne zagrożenie strukturalne — i obie masz w portfelu</td></tr>
+          <tr><td>Google (TPU), Amazon (Trainium)</td><td>Klienci projektujący własne układy</td><td style="color:var(--ocena-sprzedaz)">Odbiorca i konkurent jednocześnie</td></tr>
+          <tr><td>Intel</td><td>Próba powrotu do gry</td><td style="color:var(--ocena-kupno)">Na razie bez znaczenia w tym segmencie</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Warto zauważyć, jak ustawiony jest Twój portfel.</strong> Trzymasz jednocześnie NVIDIĘ oraz Marvella i Broadcom, czyli <strong>obie strony tego samego sporu</strong> — dostawcę platformy i dostawców alternatywy dla niej. To nie jest błąd; to sensowne zabezpieczenie, bo jeśli układy dedykowane przejmą część rynku, zyskasz po drugiej stronie. Warto tylko wiedzieć, że tak jest, i nie traktować tych trzech pozycji jako niezależnych zakładów. <strong>Łącznie z AMD, Intelem, Oracle i Nokią to siedem pozycji na jedną falę wydatków.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$225,16</strong></td><td>+24% w 52 tygodnie</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$206,52</td><td style="color:var(--ocena-kupno)">Kurs 9,0% powyżej</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$194,92</td><td style="color:var(--ocena-kupno)">Kurs 15,5% powyżej</td></tr>
+          <tr><td>RSI (14)</td><td>63,03</td><td style="color:var(--ocena-uwaga)">Blisko górnej strefy, ale bez wykupienia</td></tr>
+          <tr><td>Beta</td><td>2,21</td><td style="color:var(--ocena-sprzedaz)">Zmienność dwukrotnie wyższa od rynku</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>1,21% akcji</td><td style="color:var(--ocena-kupno)">Spadek z 324,1 do 292,7 mln w miesiąc</td></tr>
+          <tr><td>Średni wolumen</td><td>120,1 mln akcji</td><td>Najpłynniejszy walor w portfelu</td></tr>
+          <tr><td>Wsparcie S1</td><td>$206</td><td>Średnia 50-sesyjna</td></tr>
+          <tr><td>Wsparcie S2</td><td>$195</td><td>Średnia 200-sesyjna</td></tr>
+          <tr><td>Opór R1</td><td>$280</td><td>Dolny zakres fair value</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Wyniki 26 sierpnia potwierdzające prognozę $91 mld</li><li>Sygnały o licencjach na H200 do Chin</li><li>Droga ku $280 i celowi analityków $303</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Ostrożna prognoza na Q3 albo sygnał presji marżowej</li><li>Zejście poniżej średniej 200-sesyjnej ($195)</li><li>Powrót w rejon $165–185</li></ul></div>
+      </div>
+      <p><strong>Układ techniczny jest tu najczystszy z całej trójki.</strong> W przeciwieństwie do Marvella i Nokii, które notowane są poniżej swoich średnich 50-sesyjnych, NVIDIA znajduje się powyżej obu. RSI 63 pokazuje siłę bez wykupienia, a krótka sprzedaż spadła o niemal 10% w miesiąc.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Kurs powyżej obu średnich, RSI 63 bez wykupienia, krótka sprzedaż maleje. Wyniki 26 sierpnia to ryzyko, ale mnożnik 22,6× daje poduszkę, jakiej nie ma Marvell przy 48,8×.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">PEG 0,51, rampa Vera Rubin od Q3 FY2027, konsensus 61 analityków na poziomie $302,83. Chiny jako darmowa opcja poza rachunkiem.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Bilion dolarów z Blackwell i Rubin do 2027, ROIC 104,67%, gotówka netto $40 mld. Ryzykiem jest erozja marży ze strony układów dedykowanych, nie kondycja spółki.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: 8–12% portfela.</strong> Największa w tym koszyku — to jedyna z siedmiu spółek AI, która ma jednocześnie wzrost, rentowność i bilans</li>
+        <li><strong>Można dokupywać przy obecnej cenie</strong> — w odróżnieniu od Marvella, gdzie odradzam wejście przed 27 sierpnia. Różnicę robi mnożnik: 22,6× wobec 48,8×</li>
+        <li><strong>Dokupienie:</strong> $205–210 przy cofnięciu do średniej 50-sesyjnej; druga transza $190–195 przy średniej 200-sesyjnej</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $300–320</li>
+        <li><strong>Jedna liczba do śledzenia:</strong> <strong>marża brutto</strong>. Dziś 74,15%, w czerwcu 73,5%. Dopóki rośnie, teza o braku realnej alternatywy się broni. Spadek poniżej 70% będzie pierwszym sygnałem, że układy dedykowane zaczęły działać</li>
+        <li><strong>Wyjście z tezy:</strong> marża brutto poniżej 70%, obniżenie prognozy przez któregoś z dużych operatorów chmury albo utrata programu u kluczowego klienta</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$280 – $320</div><div class="fair-value-note">Scenariusz negatywny: $165–185 | Scenariusz pozytywny: $370–400 | Konsensus 61 analityków: $302,83</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>PEG 0,51 przy wzroście przychodów o 85%.</strong> Wskaźnik bieżący spadł z 38,1 do 34,48 mimo wzrostu kursu — zysk rośnie szybciej niż cena</li>
+          <li><strong>Rentowność bez odpowiednika w tej grupie.</strong> ROIC 104,67% wobec kosztu kapitału 16,40%, marża wolnych przepływów 46,97%, $119 mld gotówki rocznie, liczba akcji spadająca</li>
+          <li><strong>Bilion dolarów z Blackwell i Rubin do 2027</strong> przy Chinach całkowicie wyłączonych z prognoz — utracony rynek jest darmową opcją, nie ubytkiem</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Klienci finansują konkurencję.</strong> Google z TPU, Amazon z Trainium, programy Broadcomu i Marvella — najpoważniejszy strukturalny wyłom</li>
+          <li><strong>Marża operacyjna 64% to renta, nie stan naturalny.</strong> Każdy udany układ dedykowany działa na nią erozyjnie</li>
+          <li><strong>Koncentracja i zmienność.</strong> Garstka operatorów chmury decyduje o prognozach, beta 2,21, a przy poprzednich wynikach kurs spadł mimo rekordowego kwartału</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> marża brutto poniżej 70% albo obniżenie prognozy nakładów przez dużego operatora chmury → zejście w rejon $165–185.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> potwierdzenie prognozy $91 mld 26 sierpnia plus rampa Rubina zgodnie z planem → droga ku $300–320.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Napisałem dziś trzy raporty i dopiero zestawienie ich obok siebie pokazuje rzecz, której nie widać z osobna. <strong>Marvell urósł przez rok o 180%, Nokia o 157%, a NVIDIA o 24%</strong> — przy czym to NVIDIA rośnie najszybciej fundamentalnie: przychody o 85% rok do roku, centra danych o 92%, sieci niemal potrojone. Rynek przez ostatni rok kupował pochodne tematu sztucznej inteligencji, zostawiając z tyłu spółkę, która ten temat stworzyła i wciąż zbiera z niego największą część wartości.</p>
+
+      <p class="sum-lead">Liczby są nieporównywalne z resztą koszyka. <strong>Marża operacyjna 64,02%, marża wolnych przepływów 46,97%, 119 miliardów dolarów gotówki rocznie, zwrot z zainwestowanego kapitału 104,67% przy koszcie kapitału 16,40%.</strong> Marvell, wyceniany dwukrotnie drożej, ma ten zwrot na poziomie 6,87% — czyli poniżej własnego kosztu pieniądza. NVIDIA zarabia sześciokrotność swojego. Do tego wskaźnik PEG wynosi 0,51, a wskaźnik ceny do zysku spadł od czerwca z 38,1 do 34,48 <em>mimo</em> wzrostu kursu, bo zysk rósł szybciej niż cena.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Powody tej dysproporcji są realne i nie należy ich lekceważyć. Spółka <strong>straciła w praktyce cały rynek chiński</strong> — zero dostaw H20 w pierwszym kwartale wobec 4,6 miliarda rok wcześniej — a jej najwięksi klienci równolegle finansują własne układy dedykowane, te same, które projektują Marvell i Broadcom. Marża 64% jest rentą wynikającą z braku alternatywy, a nie trwałą cechą branży. Ale <strong>obie te obawy są już w cenie</strong>, a spółka mimo utraty Chin zaprognozowała 91 miliardów przychodu na kolejny kwartał.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Wzrost jest rekordowy i przyspiesza.</strong> $81,6 mld przychodów w kwartale (+85%), centra danych $75,2 mld (+92%), sieci $15 mld — niemal potrojenie.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Rentowność bez odpowiednika.</strong> ROIC 104,67% wobec WACC 16,40%, marża FCF 46,97%, zysk na pracownika $3,80 mln.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Bilans i zwrot dla akcjonariusza.</strong> Gotówka netto $40,36 mld, Altman 44,16, liczba akcji spadająca o 1,11% rocznie.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Test odporności zdany.</strong> Utrata całego rynku chińskiego nie przerwała wzrostu — prognoza $91 mld powstała z Chinami wyłączonymi z rachunku.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Rampa Vera Rubin.</strong> Start Q3 FY2027, wdrożenia u pięciu największych operatorów. Bilion dolarów z Blackwell i Rubin do 2027 nie zostawia miejsca na potknięcie.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Utrzymanie marży wobec układów dedykowanych.</strong> Dotychczas rosła — z 73,5% w czerwcu do 74,15%. To jest jedyna liczba, którą naprawdę trzeba śledzić.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>26 sierpnia 2026</strong></td><td>Wyniki Q2 FY2027 — data potwierdzona</td><td>Sprawdzian prognozy $91 mld i poziomu marży brutto</td></tr>
+            <tr><td>Q3 FY2027</td><td>Start dostaw Vera Rubin</td><td>Pierwsze wdrożenia w AWS, Azure, Google Cloud, Oracle, CoreWeave</td></tr>
+            <tr><td>Q4 FY2027</td><td>Rampa Vera Rubin</td><td>Podstawa celu biliona dolarów z obu architektur</td></tr>
+            <tr><td>Bez terminu</td><td>Licencje na eksport H200 do Chin</td><td>Rynek całkowicie wyłączony z prognoz — każde otwarcie to czysty dodatek</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Marża brutto</strong></td><td>74,15% (czerwiec: 73,5%)</td><td>&lt; 70%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Wzrost przychodów z centrów danych</td><td>+92% r/r</td><td>&lt; 40%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża wolnych przepływów</td><td>46,97%</td><td>&lt; 35%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>ROIC vs koszt kapitału</td><td>104,67% vs 16,40%</td><td>zawężenie różnicy</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Nakłady operatorów chmury</td><td>ponad $200 mld łącznie</td><td>obniżenie prognozy</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Chiny</td><td>zero dostaw, poza prognozą</td><td>—</td><td><span class="mon-dot y"></span>Opcja</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji: 8–12% portfela</strong> — największa w koszyku AI, bo to jedyna spółka mająca jednocześnie wzrost, rentowność i bilans</li>
+          <li><strong>Można dokupywać przy obecnej cenie.</strong> W odróżnieniu od Marvella, gdzie odradzam wejście przed wynikami — różnicę robi mnożnik 22,6× wobec 48,8×</li>
+          <li><strong>Dokupienie:</strong> $205–210 przy średniej 50-sesyjnej; druga transza $190–195 przy dwustusesyjnej</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie $300–320</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> marża brutto. Dopóki rośnie, teza o braku realnej alternatywy się broni</li>
+          <li><strong>Uwaga portfelowa:</strong> NVIDIA, Marvell, Broadcom, AMD, Intel, Oracle i Nokia to siedem pozycji na jedną falę wydatków. Trzymasz obie strony sporu o układy dedykowane — to sensowne zabezpieczenie, ale warto o nim wiedzieć</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">📈 KUPNO — najlepsza relacja jakości do ceny w całym koszyku</div>
+        <p>NVIDIA jest dziś jednocześnie największą spółką w portfelu i najtańszą względem tempa wzrostu. Rośnie o 85% rocznie, zamienia 47 centów z każdego dolara sprzedaży w wolną gotówkę, zarabia sześciokrotność kosztu własnego kapitału i zmniejsza liczbę akcji — a notowana jest przy 22,6-krotności zysku przyszłorocznego i wskaźniku PEG 0,51. <strong>To zestaw parametrów, którego nie ma żadna inna pozycja w tym koszyku, a większość z nich jest przy tym wyceniona wyżej.</strong></p>
+        <p>Ryzyka są prawdziwe: klienci budują własne układy, marża 64% jest rentą, a nie prawem natury, i wystarczy, że jeden duży operator chmury obniży prognozę wydatków. Ale spółka właśnie przeszła najtrudniejszy możliwy test — <strong>straciła cały rynek chiński i mimo to zapowiedziała 91 miliardów przychodu na kolejny kwartał</strong>. Kurs jest powyżej obu średnich, krótka sprzedaż maleje, a mnożnik daje poduszkę na wypadek rozczarowania 26 sierpnia. Jeśli miałbym dziś dołożyć do jednej pozycji w tym portfelu, byłaby to ta.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$280–320</b></div>
+          <div><span>Scenariusz negatywny</span><b>$165–185</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$370–400</b></div>
+          <div><span>Sugerowana pozycja</span><b>8–12% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki — 26 sierpnia</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 16 sierpnia 2026 | Cena: $225,16 (zamknięcie 14.08.2026) | Zastępuje wersję z 9 czerwca 2026 | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 16.08.2026</strong>, NVIDIA IR (wyniki Q1 FY2027, 20 maja) | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
