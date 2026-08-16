@@ -147,6 +147,28 @@
   .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
   @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
 </style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
 </head>
 <body>
 <div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
@@ -163,10 +185,11 @@
       <span class="meta-tag">FCF -$23,7 mld</span>
       <span class="meta-tag">Rating S&amp;P obniżony do BBB-</span>
       <div class="price-display">
-        <div class="price-main">$152,90</div>
-        <div class="price-sub">14.08.2026, 11:06 EDT | -37% w 52 tygodnie</div>
+        <div class="price-main">$150,52</div>
+        <div class="price-sub">zamknięcie 14.08.2026 | -37% w 52 tygodnie</div>
       </div>
     </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Chmura i centra danych</span><span class="temat">Moc obliczeniowa dla AI</span><span class="temat">Oprogramowanie i SaaS</span></div>
   </div>
 </div>
 
@@ -175,7 +198,9 @@
     <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO SPEKULACYJNE</span><span class="rb-qual">dźwignia i uzależnienie od OpenAI</span></div>
     <div class="rb-sep"></div>
     <div class="rb-item"><span>Fair value</span><b>$180 – $220</b></div>
-    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">+18% do +44%</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">+20% do +46%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>8 września 2026</b><em>za 25 dni · Q1 FY2027</em></div>
     <div class="rb-right">Pozycja 2–4% portfela</div>
   </div>
 </div>
@@ -188,7 +213,7 @@
 
 <div class="summary-wrapper">
   <div class="summary-grid">
-    <div class="metric-card"><div class="metric-label">Cena (14.08.2026)</div><div class="metric-value">$152,90</div><div class="metric-detail">-37% w 52 tygodnie | -56% od szczytu $345,72</div></div>
+    <div class="metric-card"><div class="metric-label">Cena (14.08.2026)</div><div class="metric-value">$150,52</div><div class="metric-detail">-56% od szczytu $345,72 | +31% od dna $114,99</div></div>
     <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$440,4 mld</div><div class="metric-detail">EV $576,0 mld | 2,88 mld akcji</div></div>
     <div class="metric-card"><div class="metric-label">Portfel zamówień (RPO)</div><div class="metric-value green">$638 mld</div><div class="metric-detail">+363% r/r | +$85 mld kw/kw</div></div>
     <div class="metric-card"><div class="metric-label">Chmura OCI (Q4)</div><div class="metric-value green">+93% r/r</div><div class="metric-detail">$5,8 mld | wykorzystanie GPU 97,5%</div></div>
@@ -218,7 +243,7 @@
           <tr><td>Czerwiec 2026</td><td>Capex za rok obrotowy: <strong>$55,7 mld</strong> wobec zapowiadanych $50 mld; plan pozyskania kolejnych $40 mld</td><td style="color:var(--ocena-sprzedaz)">↓ -7% po sesji</td></tr>
           <tr><td>2026</td><td><strong>S&amp;P obniża rating do BBB-</strong> — jeden stopień nad poziomem spekulacyjnym</td><td style="color:var(--ocena-sprzedaz)">↓↓ Sygnał ostrzegawczy</td></tr>
           <tr><td>Lipiec 2026</td><td>Narastający niepokój rynku obligacji wokół finansowania inwestycji w AI</td><td style="color:var(--ocena-sprzedaz)">↓ Presja sektorowa</td></tr>
-          <tr><td>Sierpień 2026</td><td>Kurs $152,90 — spadek o 28% od początku roku mimo rekordowego portfela</td><td style="color:var(--ocena-uwaga)">Rozjazd wyceny i danych</td></tr>
+          <tr><td>Sierpień 2026</td><td>Kurs $150,52 — odbicie o 31% od lipcowego dna, wciąż 56% pod szczytem</td><td style="color:var(--ocena-uwaga)">Rozjazd wyceny i danych</td></tr>
         </tbody>
       </table></div>
       <div class="alert alert-info"><strong>Zdanie, które streszcza tę spółkę:</strong> Oracle ma jednocześnie <strong>największy portfel zamówień w branży AI i najsłabszy bilans wśród dużych spółek technologicznych</strong>. Rynek zdecydował, że drugie jest ważniejsze od pierwszego — i całe pytanie brzmi, czy ma rację.</div>
@@ -299,7 +324,7 @@
           <tr><td>Cel do 2030</td><td>31% CAGR przychodów, 28% CAGR zysku</td><td>Potwierdzony przez zarząd</td></tr>
         </tbody>
       </table></div>
-      <div class="alert alert-info"><strong>Warto zestawić te liczby z ceną.</strong> Przy prognozie EPS $8,05 na rok obrotowy 2027 i kursie $152,90 <strong>spółka jest wyceniana na 19-krotność zysku przyszłorocznego</strong>, przy zapowiadanym wzroście przychodów o jedną trzecią. To nie jest wycena spółki, w którą rynek wierzy.</div>
+      <div class="alert alert-info"><strong>Warto zestawić te liczby z ceną.</strong> Przy prognozie EPS $8,05 na rok obrotowy 2027 i kursie $150,52 <strong>spółka jest wyceniana na 19-krotność zysku przyszłorocznego</strong>, przy zapowiadanym wzroście przychodów o jedną trzecią. To nie jest wycena spółki, w którą rynek wierzy.</div>
     </div>
   </div>
 
@@ -307,7 +332,7 @@
     <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
     <div class="section-body" id="s6-body">
       <div class="table-wrap"><table>
-        <thead><tr><th>Wskaźnik</th><th>Przy $152,90</th><th>Ocena</th></tr></thead>
+        <thead><tr><th>Wskaźnik</th><th>Przy $150,52</th><th>Ocena</th></tr></thead>
         <tbody>
           <tr><td>Kapitalizacja</td><td>$440,42 mld</td><td>EV $575,96 mld — różnica to dług</td></tr>
           <tr><td>P/E bieżące</td><td>26,80×</td><td>EPS TTM $5,83</td></tr>
@@ -337,7 +362,7 @@
       </table></div>
       <p><strong>Jak to czytać:</strong> tu tkwi cały spór o tę spółkę. <strong>Patrząc na zysk, Oracle jest tani</strong> — 19,4-krotność zysku przyszłorocznego przy PEG 0,66 to wycena spółki o niskim wzroście, a nie takiej, która zapowiada przychody wyższe o jedną trzecią. <strong>Patrząc na przepływy, Oracle jest niewyceniany w ogóle</strong>, bo wskaźnik P/FCF nie istnieje przy ujemnych wolnych przepływach. Różnica bierze się stąd, że zysk księgowy nie uwzględnia $55,7 mld nakładów inwestycyjnych, które trzeba było sfinansować pożyczkami. Przy tak zadłużonym bilansie <strong>miarodajniejszy jest EV/EBITDA na poziomie 19,58×</strong> — bo uwzględnia $167 mld długu, którego kapitalizacja nie pokazuje.</p>
 
-      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$180 – $220</div><div class="fair-value-note">Baza: 22–27× prognozowanego EPS $8,05 na FY2027, z dyskontem za dźwignię i koncentrację klienta | Konsensus 44 analityków: $247,17 („kupuj") — moim zdaniem zbyt optymistyczny wobec ryzyka bilansowego | Scenariusz negatywny (problemy OpenAI, dalsza obniżka ratingu, emisja akcji): $95–120 | Scenariusz pozytywny (portfel się konwertuje, przepływy wracają na plus): $260–300 | Przy $152,90 potencjał od -38% do +96%</div></div>
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$180 – $220</div><div class="fair-value-note">Baza: 22–27× prognozowanego EPS $8,05 na FY2027, z dyskontem za dźwignię i koncentrację klienta | Konsensus 44 analityków: $247,17 („kupuj") — moim zdaniem zbyt optymistyczny wobec ryzyka bilansowego | Scenariusz negatywny (problemy OpenAI, dalsza obniżka ratingu, emisja akcji): $95–120 | Scenariusz pozytywny (portfel się konwertuje, przepływy wracają na plus): $260–300 | Przy $150,52 potencjał od -37% do +99%</div></div>
     </div>
   </div>
 
@@ -427,11 +452,56 @@
   <div class="section" id="s12">
     <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
     <div class="section-body" id="s12-body">
+      <div class="tp-chart">
+        <div class="tp-chart-head"><b>Kurs — ostatnie 3 miesiące</b><span>od $236,34 (4 czerwca) przez dno $114,99 (24 lipca) do $150,52 (14 sierpnia)</span></div>
+        <svg viewBox="0 0 940 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block" role="img" aria-label="Wykres kursu z zaznaczonym przedziałem wartości godziwej">
+<line x1="58" y1="296.0" x2="848" y2="296.0" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="300.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$105</text>
+<line x1="58" y1="227.5" x2="848" y2="227.5" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="231.5" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$140</text>
+<line x1="58" y1="159.0" x2="848" y2="159.0" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="163.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$176</text>
+<line x1="58" y1="90.5" x2="848" y2="90.5" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="94.5" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$211</text>
+<line x1="58" y1="22.0" x2="848" y2="22.0" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="26.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$246</text>
+<rect x="58" y="72.7" width="790" height="77.9" fill="#34d399" opacity="0.10"/>
+<line x1="58" y1="72.7" x2="848" y2="72.7" stroke="#34d399" stroke-width="1" stroke-dasharray="5 4" opacity="0.65"/>
+<line x1="58" y1="150.6" x2="848" y2="150.6" stroke="#34d399" stroke-width="1" stroke-dasharray="5 4" opacity="0.65"/>
+<text x="856" y="115.6" font-size="10.5" fill="#34d399" font-family="Segoe UI,system-ui,sans-serif" font-weight="700">FAIR VALUE</text>
+<text x="856" y="129.6" font-size="10" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$180–$220</text>
+<polygon points="58,296 58.0,40.9 69.1,85.0 102.5,88.6 113.6,100.3 124.8,109.2 135.9,142.6 147.0,142.5 180.4,126.0 191.5,134.3 202.6,143.7 213.8,142.2 258.3,160.2 269.4,179.4 280.5,194.3 291.7,204.2 302.8,211.8 336.2,213.3 347.3,215.7 358.4,223.6 369.5,227.9 414.1,221.1 425.2,225.3 436.3,227.5 447.4,220.2 458.6,227.2 491.9,244.9 503.1,251.9 514.2,243.0 525.3,259.2 536.5,254.9 569.8,264.7 581.0,253.6 592.1,256.0 603.2,267.3 614.3,277.1 647.7,267.5 658.8,267.4 670.0,271.8 681.1,252.6 692.2,248.1 725.6,224.8 736.7,217.2 747.9,219.9 759.0,221.7 770.1,214.8 803.5,206.9 814.6,217.8 825.7,202.6 836.9,196.8 848.0,207.9 848,296" fill="#34d399" opacity="0.07"/>
+<polyline points="58.0,40.9 69.1,85.0 102.5,88.6 113.6,100.3 124.8,109.2 135.9,142.6 147.0,142.5 180.4,126.0 191.5,134.3 202.6,143.7 213.8,142.2 258.3,160.2 269.4,179.4 280.5,194.3 291.7,204.2 302.8,211.8 336.2,213.3 347.3,215.7 358.4,223.6 369.5,227.9 414.1,221.1 425.2,225.3 436.3,227.5 447.4,220.2 458.6,227.2 491.9,244.9 503.1,251.9 514.2,243.0 525.3,259.2 536.5,254.9 569.8,264.7 581.0,253.6 592.1,256.0 603.2,267.3 614.3,277.1 647.7,267.5 658.8,267.4 670.0,271.8 681.1,252.6 692.2,248.1 725.6,224.8 736.7,217.2 747.9,219.9 759.0,221.7 770.1,214.8 803.5,206.9 814.6,217.8 825.7,202.6 836.9,196.8 848.0,207.9" fill="none" stroke="#34d399" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="124.8" y1="22" x2="124.8" y2="296" stroke="#d99a52" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+<circle cx="124.8" cy="109.2" r="5" fill="#d99a52" stroke="#0f1117" stroke-width="2"/>
+<text x="133.8" y="35" text-anchor="start" font-size="10.5" fill="#d99a52" font-family="Segoe UI,system-ui,sans-serif" font-weight="700">Wyniki Q4 · 10.06</text>
+<line x1="369.5" y1="22" x2="369.5" y2="296" stroke="#8892b0" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+<circle cx="369.5" cy="227.9" r="5" fill="#8892b0" stroke="#0f1117" stroke-width="2"/>
+<text x="378.5" y="35" text-anchor="start" font-size="10.5" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif" font-weight="700">Poprzednia analiza · 03.07</text>
+<line x1="614.3" y1="22" x2="614.3" y2="296" stroke="#db5448" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+<circle cx="614.3" cy="277.1" r="5" fill="#db5448" stroke="#0f1117" stroke-width="2"/>
+<text x="605.3" y="35" text-anchor="end" font-size="10.5" fill="#db5448" font-family="Segoe UI,system-ui,sans-serif" font-weight="700">Dno · 24.07</text>
+<line x1="848.0" y1="22" x2="848.0" y2="296" stroke="#34d399" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+<circle cx="848.0" cy="207.9" r="5" fill="#34d399" stroke="#0f1117" stroke-width="2"/>
+<text x="839.0" y="35" text-anchor="end" font-size="10.5" fill="#34d399" font-family="Segoe UI,system-ui,sans-serif" font-weight="700">Ta analiza · 14.08</text>
+<text x="58.0" y="318" text-anchor="start" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">04.06.2026</text>
+<text x="491.9" y="318" text-anchor="middle" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">13.07.2026</text>
+<text x="848.0" y="318" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">14.08.2026</text>
+<circle cx="848.0" cy="207.9" r="4" fill="#34d399"/>
+</svg>
+        <div class="tp-chart-legend">
+          <span><i style="background:#34d399"></i>kurs zamknięcia</span>
+          <span><i style="background:#34d399;opacity:.25"></i>przedział fair value $180–220</span>
+          <span><i style="background:#d99a52"></i>wyniki kwartalne</span>
+          <span><i style="background:#db5448"></i>minimum okresu</span>
+        </div>
+        <p class="tp-chart-note"><strong>Co widać na wykresie:</strong> przecena zaczęła się od wyników Q4 z 10 czerwca i trwała bez przerwy do 24 lipca, gdy kurs dotknął <strong>$114,99 — o 52% niżej niż sześć tygodni wcześniej</strong>. Od tego momentu trwa odbicie o mniej więcej 31%, ale kurs nadal jest poniżej dolnej granicy mojej wyceny. Poprzednia analiza powstała 3 lipca, mniej więcej w połowie spadku — przy cenie $147,76, która była wtedy kursem z 29 czerwca, a nie z dnia sporządzenia raportu. To dobry przykład, dlaczego wprowadziliśmy stemple daty przy danych.</p>
+      </div>
       <div class="table-wrap"><table>
         <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
         <tbody>
           <tr><td>Szczyt 52-tygodniowy</td><td>$345,72</td><td>Punkt odniesienia dla skali przeceny</td></tr>
-          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$152,90</strong></td><td>-56% od szczytu, -37% w 52 tygodnie, -28% od początku roku</td></tr>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$150,52</strong></td><td>-56% od szczytu, +31% od dna $114,99 z 24 lipca</td></tr>
           <tr><td>Średnia 50-sesyjna</td><td>$152,42</td><td style="color:var(--ocena-uwaga)">Kurs dokładnie na niej — punkt równowagi</td></tr>
           <tr><td>Średnia 200-sesyjna</td><td>$176,15</td><td style="color:var(--ocena-sprzedaz)">Kurs 13% poniżej — trend średnioterminowy spadkowy</td></tr>
           <tr><td>RSI (14)</td><td>58,17</td><td>Neutralnie, lekko powyżej środka</td></tr>
@@ -574,7 +644,7 @@
 </main>
 <div class="footer">
 <div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
-Analiza: 14 sierpnia 2026 | Cena: $152,90 (14.08, 11:06 EDT) | Zastępuje wersję z 3 lipca 2026 | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 14.08.2026</strong>, Oracle IR (Q4 FY2026, 10 czerwca), komunikaty prasowe | Nie stanowi porady inwestycyjnej
+Analiza: 14 sierpnia 2026 | Cena: $150,52 (zamknięcie 14.08.2026) | Zastępuje wersję z 3 lipca 2026 | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 14.08.2026</strong>, Oracle IR (Q4 FY2026, 10 czerwca), komunikaty prasowe | Nie stanowi porady inwestycyjnej
 </div>
 <script>
 function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
