@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MRVL — Marvell Technology | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: MRVL</div>
+    <div class="company-name">Marvell Technology, Inc.</div>
+    <div class="company-sub">Półprzewodniki · układy dedykowane dla centrów danych · łączność optyczna i pamięci AI · Santa Clara, Kalifornia</div>
+    <div class="header-meta">
+      <span class="meta-tag">+180% w 52 tygodnie</span>
+      <span class="meta-tag">Centra danych 76% przychodów</span>
+      <span class="meta-tag">Forward P/E 48,8×</span>
+      <span class="meta-tag">Wyniki za 11 dni</span>
+      <div class="price-display">
+        <div class="price-main">$222,02</div>
+        <div class="price-sub">zamknięcie 14.08.2026 | +180% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Półprzewodniki</span><span class="temat">Moc obliczeniowa dla AI</span><span class="temat">Optyka i fotonika</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — wzrost wyjątkowy, cena już wymagająca">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">neutralnie do wyników 27 sierpnia</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$240 – $285</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">+8% do +28%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>27 sierpnia 2026</b><em>za 11 dni · potwierdzone</em></div>
+    <div class="rb-right">Pozycja 3–5% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (14.08.2026)</div><div class="metric-value">$222,02</div><div class="metric-detail">+180% w 52 tyg. | 7% pod średnią 50-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$194,4 mld</div><div class="metric-detail">EV $195,9 mld | 875,8 mln akcji</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q1 FY27</div><div class="metric-value green">$2,418 mld</div><div class="metric-detail">+28% r/r — rekord</div></div>
+    <div class="metric-card"><div class="metric-label">Centra danych</div><div class="metric-value green">$1,83 mld</div><div class="metric-detail">+27% r/r | 76% przychodów</div></div>
+    <div class="metric-card"><div class="metric-label">Forward P/E</div><div class="metric-value yellow">48,8×</div><div class="metric-detail">P/S 22,3 | EV/EBITDA 72,2 | PEG 1,32</div></div>
+    <div class="metric-card"><div class="metric-label">Układy dedykowane</div><div class="metric-value em">$10 mld</div><div class="metric-detail">Cel rocznych przychodów do FY2029</div></div>
+    <div class="metric-card"><div class="metric-label">ROIC vs koszt kapitału</div><div class="metric-value red">6,9% vs 16,3%</div><div class="metric-detail">Spółka nie zarabia kosztu kapitału</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (43 analityków)</div><div class="metric-value green">$256,91</div><div class="metric-detail">+15,7% | mocne kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest Marvell?</h3>
+      <p>Marvell projektuje układy scalone dla infrastruktury — nie procesory ogólnego przeznaczenia, lecz <strong>krzem szyty na miarę pod konkretnego klienta</strong>: akceleratory AI dla operatorów chmury, kontrolery pamięci, układy łączności optycznej i sieciowej. Siedziba w Santa Clara, około 7 500 pracowników, przychody na pracownika przekraczające 1,1 miliona dolarów.</p>
+      <p>To spółka, która w ciągu roku <strong>zyskała 180% wartości</strong> — z okolic $79 do $222. Kapitalizacja sięga 194 miliardów dolarów przy przychodach 8,72 miliarda za ostatnie dwanaście miesięcy.</p>
+      <h3>Co się zmieniło od poprzedniej analizy</h3>
+      <p>Poprzedni raport powstał 21 lipca przy cenie około $170. Od tego czasu kurs wzrósł o <strong>30%</strong>, głównie w dwóch skokach:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Reakcja</th></tr></thead>
+        <tbody>
+          <tr><td>27 maja 2026</td><td>Wyniki Q1 FY2027: rekordowe $2,418 mld (+28% r/r), centra danych $1,83 mld (+27%)</td><td style="color:var(--ocena-kupno)">↑ Podniesiona prognoza roczna</td></tr>
+          <tr><td><strong>4 sierpnia 2026</strong></td><td><strong>Portfolio pamięci dla AI na konferencji FMS 2026</strong> — od nośników serwerowych po CXL i pamięć optyczną współdzieloną</td><td style="color:var(--ocena-kupno)">↑↑ +12,8% w jeden dzień</td></tr>
+          <tr><td>10–12 sierpnia</td><td>Kolejne wzrosty na platformie pamięciowej adresującej wąskie gardła w obciążeniach agentowych</td><td style="color:var(--ocena-kupno)">↑ Kontynuacja</td></tr>
+          <tr><td>Sierpień 2026</td><td>Inwestycja $250 mln w Indiach — Bangalur i Hajdarabad, podwojenie zatrudnienia w R&amp;D</td><td>↔ Rozbudowa zaplecza</td></tr>
+          <tr><td>Sierpień 2026</td><td>Morgan Stanley wskazuje układ Frozen v2 Google'a jako potencjalną szansę na kolejny kontrakt</td><td style="color:var(--ocena-kupno)">↑ Opcja</td></tr>
+          <tr><td><strong>27 sierpnia 2026</strong></td><td><strong>Wyniki Q2 FY2027 — data potwierdzona</strong></td><td style="color:var(--ocena-uwaga)">Najbliższy katalizator</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Napięcie tej analizy:</strong> Marvell dostarcza wzrost, o jakim większość spółek półprzewodnikowych może pomarzyć — przychody +28%, centra danych +27%, ścieżka do <strong>10 miliardów dolarów rocznych przychodów z układów dedykowanych do roku obrotowego 2029</strong>. Jednocześnie płacisz za to 48,8-krotność zysku przyszłorocznego i 22-krotność przychodów, a <strong>zwrot z zainwestowanego kapitału wynosi 6,9% przy koszcie kapitału 16,3%</strong>. Spółka rośnie znakomicie, ale na razie nie zarabia własnego kosztu pieniądza.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Opis</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Układy dedykowane (XPU)</strong></td><td>Akceleratory AI projektowane pod konkretnego operatora chmury</td><td>🔥 Cel: ponad $10 mld rocznie do FY2029</td></tr>
+          <tr><td><strong>Programy towarzyszące XPU</strong></td><td>Karty sieciowe, układy CXL, elementy obudowy rozwiązania</td><td>Ponad 10 programów wchodzi w wyższe wolumeny</td></tr>
+          <tr><td><strong>Łączność optyczna</strong></td><td>Układy do transmisji danych wewnątrz i między centrami danych</td><td>Historyczna przewaga technologiczna</td></tr>
+          <tr><td><strong>Pamięci dla AI</strong></td><td>Nowe portfolio z FMS 2026 — CXL, pamięć optyczna współdzielona</td><td style="color:var(--ocena-kupno)">Świeży katalizator, +12,8% w dzień ogłoszenia</td></tr>
+          <tr><td>Komunikacja i pozostałe</td><td>Sieci operatorskie, motoryzacja, przemysł</td><td>$585,1 mln, +29% r/r</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — bycie wpisanym w cudzy projekt</h3>
+      <p>Przewaga Marvella nie polega na tym, że jego układy są najszybsze. Polega na tym, że <strong>są zaprojektowane wspólnie z klientem i wbudowane w architekturę jego centrum danych</strong>. Operator chmury, który powierza Marvellowi projekt akceleratora, wiąże się na kilka lat — zmiana dostawcy oznacza przeprojektowanie całej platformy.</p>
+      <p>To tłumaczy, dlaczego zarząd mówi o „widoczności" przychodów na trzy lata do przodu. Programy, o których mowa w prognozie na rok obrotowy 2029, są już zakontraktowane albo w fazie projektowania.</p>
+      <div class="alert alert-warn"><strong>Druga strona tej fosy:</strong> zależność działa w obie strony i jest asymetryczna. Klientów zdolnych zamówić układ dedykowany na skalę przemysłową jest na świecie kilku, a każdy z nich <strong>może w każdej chwili zacząć projektować własny krzem</strong>. Google robi to od lat z układami TPU, Amazon z Trainium. Marvell zarabia dopóty, dopóki opłaca im się kupować zamiast budować.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Przesunięcie od układów uniwersalnych ku dedykowanym</strong> — operatorzy chmury szukają tańszej alternatywy dla procesorów NVIDII na zadania powtarzalne, zwłaszcza inferencję</li>
+        <li><strong>Wąskie gardło przeniosło się z obliczeń na pamięć i łączność</strong> — obciążenia agentowe wymagają szybkiego dostępu do dużych zbiorów; stąd sierpniowy skok po ogłoszeniu portfolio pamięciowego</li>
+        <li><strong>Nakłady operatorów chmury</strong> — zarząd zakłada spowolnienie ich wzrostu do przedziału trzydziestu kilku procent, przy jednoczesnym <strong>przyspieszeniu własnych przychodów z centrów danych do 55%</strong></li>
+        <li><strong>Cykliczność półprzewodników</strong> — branża pozostaje cykliczna, a obecna faza to szczyt inwestycji, nie stan trwały</li>
+        <li><strong>Koncentracja geograficzna produkcji</strong> — Marvell projektuje, wytwarzaniem zajmują się odlewnie azjatyckie, głównie TSMC</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <p>Marvell sprzedaje garstce największych odbiorców na świecie. Instytucje finansowe posiadają 81,4% akcji, udział osób powiązanych ze spółką to zaledwie 0,18% — to spółka w rękach funduszy, nie założycieli.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Stan</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td>Centra danych</td><td><strong>$1,83 mld</strong> (+27% r/r)</td><td style="color:var(--ocena-kupno)">76% przychodów — rdzeń biznesu</td></tr>
+          <tr><td>Komunikacja i pozostałe</td><td>$585,1 mln (+29%)</td><td>Stabilna reszta</td></tr>
+          <tr><td>Program flagowy XPU</td><td>w produkcji</td><td>Główny motor roku obrotowego 2027</td></tr>
+          <tr><td>Programy towarzyszące</td><td>ponad 10 wchodzi w wolumeny</td><td style="color:var(--ocena-kupno)">Rozszerzenie poza sam akcelerator</td></tr>
+          <tr><td>Nowy program Tier 1</td><td>wchodzi w produkcję w FY2028</td><td style="color:var(--ocena-kupno)">Podstawa podwojenia przychodów</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Ryzyko, którego spółka nie ujawnia wprost.</strong> Marvell nie podaje udziału poszczególnych klientów, ale przy takiej strukturze rynku <strong>kilku odbiorców odpowiada za większość przychodów z centrów danych</strong>. Utrata jednego programu flagowego to nie jest uszczerbek na marży — to jest wyrwa w prognozie na trzy lata. Przy wycenie zakładającej 48-krotność zysku rynek nie zostawił miejsca na taki scenariusz.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q1 FY2027 / TTM</th><th>Dynamika</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody kwartalne</td><td><strong>$2,418 mld</strong></td><td style="color:var(--ocena-kupno)">+28% r/r, rekord</td></tr>
+          <tr><td>Centra danych</td><td>$1,83 mld</td><td style="color:var(--ocena-kupno)">+27% r/r</td></tr>
+          <tr><td>Przychody TTM</td><td>$8,72 mld</td><td>Zysk netto $2,53 mld</td></tr>
+          <tr><td>EPS TTM</td><td>$2,89</td><td>Marża netto 28,99%</td></tr>
+          <tr><td>Wolne przepływy</td><td>$1,67 mld</td><td style="color:var(--ocena-kupno)">Marża FCF 19,10%</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Prognozy — to jest właściwa treść tej analizy</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Zapowiedź zarządu</th></tr></thead>
+        <tbody>
+          <tr><td>FY2027 (bieżący)</td><td>Przychody z układów dedykowanych <strong>+20% r/r</strong></td></tr>
+          <tr><td><strong>FY2028</strong></td><td><strong>Podwojenie przychodów z układów dedykowanych</strong>; łączne przychody podniesione do <strong>$16,5 mld</strong>; centra danych przyspieszają do <strong>+55%</strong></td></tr>
+          <tr><td><strong>FY2029</strong></td><td>Ponad <strong>$10 mld</strong> rocznych przychodów z samych układów dedykowanych</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Skala tej zapowiedzi zasługuje na chwilę uwagi.</strong> Przychody za ostatnie dwanaście miesięcy wynoszą 8,72 miliarda dolarów. Prognoza na rok obrotowy 2028 mówi o <strong>16,5 miliarda</strong> — czyli o podwojeniu w dwa lata. A samo FY2029 ma przynieść ponad 10 miliardów z jednej tylko linii biznesowej. Jeśli to się zmaterializuje, dzisiejsza wycena okaże się rozsądna. Cała rzecz w tym słowie „jeśli".</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $222,02</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$194,44 mld</td><td>EV $195,87 mld</td></tr>
+          <tr><td>P/E bieżące</td><td>76,69×</td><td style="color:var(--ocena-sprzedaz)">EPS TTM $2,89</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>48,83×</strong></td><td style="color:var(--ocena-uwaga)">Wysoko, choć nie skrajnie jak na tempo wzrostu</td></tr>
+          <tr><td><strong>PEG</strong></td><td><strong>1,32</strong></td><td style="color:var(--ocena-uwaga)">Powyżej 1,0 — wzrost nie jest darmowy</td></tr>
+          <tr><td>P/S</td><td>22,31× (forward 15,28×)</td><td style="color:var(--ocena-sprzedaz)">Bardzo wysoko</td></tr>
+          <tr><td>EV/EBITDA</td><td>72,22×</td><td style="color:var(--ocena-sprzedaz)">EBITDA $2,71 mld</td></tr>
+          <tr><td>P/FCF</td><td>116,75×</td><td style="color:var(--ocena-sprzedaz)">FCF $1,67 mld</td></tr>
+          <tr><td><strong>ROIC vs WACC</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>6,87% vs 16,25%</strong></td><td>Kapitał nie zarabia własnego kosztu</td></tr>
+          <tr><td>Altman Z-Score</td><td>5,8</td><td style="color:var(--ocena-kupno)">Powyżej 3 — bilans zdrowy</td></tr>
+          <tr><td>Konsensus (43 analityków)</td><td>$256,91 · mocne kupno</td><td style="color:var(--ocena-kupno)">+15,7%</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>76,69×</td><td>Zysk netto $2,53 mld, EPS $2,89</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>48,83×</strong></td><td>Konsensus zysku na najbliższe 12 miesięcy</td></tr>
+          <tr><td>Forward P/S</td><td>15,28×</td><td>Wobec 22,31× na przychodach bieżących</td></tr>
+          <tr><td><strong>PEG</strong></td><td><strong>1,32</strong></td><td>Prognoza wzrostu zysku +48,79% w 3 lata, przychodów +42,15%</td></tr>
+          <tr><td>Broadcom (odniesienie)</td><td>niższy mnożnik</td><td>Podobny model, większa skala, rentowniejszy kapitał</td></tr>
+          <tr><td>Altman Z-Score</td><td>5,8</td><td style="color:var(--ocena-kupno)">Ryzyko finansowe znikome</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> forward P/E na poziomie 48,8 przy prognozowanym wzroście zysku o 48,79% w trzy lata daje wskaźnik PEG 1,32 — <strong>drogo, ale nie absurdalnie</strong>. Wycena zakłada, że zapowiedzi się zmaterializują. Znacznie bardziej niepokoi mnie inna para liczb: <strong>zwrot z zainwestowanego kapitału 6,87% przy średnim ważonym koszcie kapitału 16,25%</strong>. To znaczy, że Marvell obecnie <em>niszczy</em> wartość na każdym zainwestowanym dolarze — rośnie, ale nie zarabia jeszcze tego, ile kosztuje go pieniądz. Przy spółkach w fazie budowy skali to normalne i powinno się poprawić wraz z rampą układów dedykowanych. Ale dopóki się nie poprawi, wysokie mnożniki opierają się na obietnicy, nie na dowodzie.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$240 – $285</div><div class="fair-value-note">Baza: 40–45× zysku prognozowanego na rok obrotowy 2028 przy przychodach $16,5 mld i utrzymanej marży netto | Konsensus 43 analityków: $256,91 („mocne kupno") | Scenariusz negatywny (spowolnienie nakładów na AI, utrata programu, rozczarowanie 27 sierpnia): $150–175 | Scenariusz pozytywny (rampa układów dedykowanych szybsza od zapowiedzi, nowy klient Tier 1): $320–350 | Przy $222,02 potencjał od -32% do +58%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Poziom (TTM)</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Brutto</td><td>51,50%</td><td style="color:var(--ocena-uwaga)">Niżej niż u NVIDII czy Broadcomu — cena krzemu na zamówienie</td></tr>
+          <tr><td>Operacyjna</td><td>16,41%</td><td style="color:var(--ocena-uwaga)">Obciążona amortyzacją i pracami rozwojowymi</td></tr>
+          <tr><td>Netto</td><td>28,99%</td><td>Wyższa od operacyjnej — efekt pozycji jednorazowych i podatku</td></tr>
+          <tr><td>Wolne przepływy</td><td>19,10%</td><td style="color:var(--ocena-kupno)">$1,67 mld przy nakładach zaledwie $391 mln</td></tr>
+          <tr><td>ROE</td><td>16,03%</td><td>Przyzwoicie</td></tr>
+          <tr><td><strong>ROIC</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>6,87%</strong></td><td>Poniżej kosztu kapitału 16,25%</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Rzecz, którą trzeba wyjaśnić:</strong> marża netto 28,99% jest wyższa od operacyjnej 16,41%, co zdarza się rzadko i zwykle oznacza pozycje spoza działalności podstawowej — tu głównie niską efektywną stopę podatkową 13,29% oraz przychody finansowe. <strong>Miarodajna jest marża operacyjna</strong>, a ta pokazuje, że projektowanie układów na zamówienie jest kosztowne: prace rozwojowe pochłaniają znaczną część zysku brutto.</p></div>
+      <p>Model jest za to <strong>bardzo lekki kapitałowo</strong>. Nakłady inwestycyjne to zaledwie 391 milionów dolarów przy przychodach 8,72 miliarda — Marvell projektuje, a produkcję zleca odlewniom. Stąd marża wolnych przepływów 19,10% mimo umiarkowanej marży operacyjnej.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$3,84 mld</td><td style="color:var(--ocena-kupno)">Komfortowo</td></tr>
+          <tr><td>Zadłużenie</td><td>$5,28 mld</td><td>Dług netto -$1,43 mld</td></tr>
+          <tr><td>Dług / kapitał własny</td><td>0,29</td><td style="color:var(--ocena-kupno)">Niski</td></tr>
+          <tr><td>Dług / EBITDA</td><td>1,89</td><td style="color:var(--ocena-kupno)">Bezpiecznie</td></tr>
+          <tr><td>Wskaźnik bieżącej płynności</td><td>3,28</td><td style="color:var(--ocena-kupno)">Bardzo dobrze</td></tr>
+          <tr><td>Pokrycie odsetek</td><td>6,92</td><td style="color:var(--ocena-kupno)">Solidne</td></tr>
+          <tr><td>Kapitał własny</td><td>$18,22 mld</td><td>$20,80 na akcję</td></tr>
+          <tr><td>Altman Z-Score</td><td><strong>5,8</strong></td><td style="color:var(--ocena-kupno)">Powyżej 3 — brak sygnałów ryzyka</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Warto to zestawić z Oracle i Intelem.</strong> Wszystkie trzy spółki są zakładem na tę samą falę wydatków na sztuczną inteligencję, ale finansują ją zupełnie inaczej. Oracle ma dług 167 miliardów i rating o krok od poziomu spekulacyjnego. Intel pozyskał 36 miliardów kapitału i rozwadnia akcjonariuszy. <strong>Marvell ma dług do kapitału własnego 0,29, wskaźnik Altmana 5,8 i generuje 1,67 miliarda wolnych przepływów.</strong> Ryzyko jest tu wyłącznie w wycenie i w koncentracji klientów — nie w bilansie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Podwojenie przychodów w dwa lata według prognozy zarządu</h4><p>Z 8,72 mld dolarów za ostatnie dwanaście miesięcy do <strong>16,5 mld w roku obrotowym 2028</strong>, przy przyspieszeniu przychodów z centrów danych do 55%.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔧</div><div class="catalyst-body"><h4>Ponad $10 mld z układów dedykowanych do FY2029</h4><p>Zarząd deklaruje „widoczność" opartą na programach już zakontraktowanych. Ponad 10 programów towarzyszących wchodzi w wyższe wolumeny, a nowy klient Tier 1 startuje w FY2028.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🧠</div><div class="catalyst-body"><h4>Wejście w pamięci dla AI</h4><p>Portfolio ogłoszone na FMS 2026 adresuje wąskie gardło, które przesunęło się z mocy obliczeniowej na dostęp do danych. Rynek zareagował wzrostem o 12,8% w jeden dzień.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏦</div><div class="catalyst-body"><h4>Bilans bez zarzutu</h4><p>Wskaźnik Altmana 5,8, dług do kapitału 0,29, płynność bieżąca 3,28, wolne przepływy 1,67 mld przy nakładach zaledwie 391 mln. Model lekki kapitałowo.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Jednomyślność analityków</h4><p>Czterdziestu trzech analityków, konsensus „mocne kupno", cel $256,91. Prognozy zakładają wzrost przychodów o 42,15% i zysku o 48,79% w trzy lata.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">💰</div><div class="catalyst-body"><h4>Wycena po rajdzie o 180%</h4><p>Forward P/E 48,83, P/S 22,31, EV/EBITDA 72,22, P/FCF 116,75. Kurs urósł w rok z okolic $79 do $222 — większość dobrych wiadomości jest już w cenie.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Kapitał nie zarabia własnego kosztu</h4><p>ROIC 6,87% przy koszcie kapitału 16,25%. Spółka rośnie, ale każdy zainwestowany dolar przynosi mniej, niż kosztuje. Do czasu poprawy tej relacji wycena opiera się na obietnicy.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎲</div><div class="catalyst-body"><h4>Kilku klientów decyduje o wszystkim</h4><p>Odbiorców zdolnych zamówić układ dedykowany na skalę przemysłową jest garstka, a każdy z nich może zacząć projektować własny krzem. Google robi to z TPU, Amazon z Trainium.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📅</div><div class="catalyst-body"><h4>Wyniki 27 sierpnia jako zdarzenie binarne</h4><p>Przy mnożniku 48-krotnym rozczarowanie kosztuje znacznie więcej niż pozytywne zaskoczenie daje. Kurs jest już 7% poniżej średniej 50-sesyjnej, a krótka sprzedaż wzrosła z 32,5 do 35,8 mln akcji.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔄</div><div class="catalyst-body"><h4>Cykliczność i zależność od nakładów operatorów chmury</h4><p>Zarząd sam zakłada spowolnienie wzrostu wydatków klientów. Marvell obiecuje rosnąć szybciej mimo tego — to wymaga zdobywania udziałów, a nie tylko płynięcia z prądem.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>Rola</th><th>Relacja do Marvella</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Marvell</strong></td><td>Układy dedykowane i łączność</td><td>Przychody +28%, centra danych 76%, forward P/E 48,8</td></tr>
+          <tr><td><strong>Broadcom</strong></td><td>Główny rywal w krzemie na zamówienie</td><td style="color:var(--ocena-sprzedaz)">Większa skala, rentowniejszy kapitał, niższy mnożnik</td></tr>
+          <tr><td><strong>NVIDIA</strong></td><td>Układy uniwersalne dla AI</td><td>Marvell żyje z tego, że nie każde zadanie wymaga najdroższego procesora</td></tr>
+          <tr><td>Klienci projektujący sami</td><td>Google (TPU), Amazon (Trainium)</td><td style="color:var(--ocena-sprzedaz)">Jednocześnie odbiorcy i potencjalna konkurencja</td></tr>
+          <tr><td>Coherent, Lumentum</td><td>Optyka dla centrów danych</td><td>Sąsiedni segment, ta sama fala popytu</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Właściwym punktem odniesienia jest Broadcom.</strong> Obie spółki robią to samo — projektują krzem na zamówienie dla operatorów chmury. Broadcom ma większą skalę, wyższą rentowność kapitału i notowany jest przy niższym mnożniku. <strong>Marvell jest zakładem na to, że nadrobi dystans</strong>, a nie na to, że wygra. Przy dzisiejszej wycenie warto mieć tę różnicę z tyłu głowy.</div>
+      <p>Warto też zauważyć, że w Twoim portfelu Broadcom i Marvell występują <strong>obok siebie</strong> — a to w dużej mierze ta sama ekspozycja, tylko z dwóch stron tego samego rynku.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="tp-chart">
+        <div class="tp-chart-head"><b>Kurs — ostatnie 12 miesięcy</b><span>zakres $62.87 – $310.58 | ostatnie zamknięcie $222.02</span></div>
+        <svg viewBox="0 0 940 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block" role="img" aria-label="Wykres kursu z zaznaczonym przedziałem wartości godziwej">
+<line x1="58" y1="296.0" x2="848" y2="296.0" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="300.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$43</text>
+<line x1="58" y1="227.5" x2="848" y2="227.5" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="231.5" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$115</text>
+<line x1="58" y1="159.0" x2="848" y2="159.0" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="163.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$187</text>
+<line x1="58" y1="90.5" x2="848" y2="90.5" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="94.5" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$259</text>
+<line x1="58" y1="22.0" x2="848" y2="22.0" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="26.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$330</text>
+<rect x="58" y="65.3" width="790" height="42.9" fill="#34d399" opacity="0.10"/>
+<line x1="58" y1="65.3" x2="848" y2="65.3" stroke="#34d399" stroke-width="1" stroke-dasharray="5 4" opacity="0.65"/>
+<line x1="58" y1="108.2" x2="848" y2="108.2" stroke="#34d399" stroke-width="1" stroke-dasharray="5 4" opacity="0.65"/>
+<text x="856" y="90.7" font-size="10.5" fill="#34d399" font-family="Segoe UI,system-ui,sans-serif" font-weight="700">FAIR VALUE</text>
+<text x="856" y="104.7" font-size="10" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$240–$285</text>
+<polygon points="58,296 58.0,264.4 73.0,267.4 88.1,277.1 103.1,276.7 118.1,272.8 133.1,266.2 148.2,257.7 163.2,254.8 178.2,255.4 193.2,253.2 208.3,256.8 223.4,247.7 238.4,250.4 253.4,254.6 268.5,263.2 283.5,251.8 298.5,242.7 313.6,256.5 328.6,256.9 343.6,254.7 358.6,251.8 373.7,257.7 388.7,260.3 403.7,260.5 418.7,261.8 433.8,260.5 448.8,262.1 463.8,261.3 478.9,259.2 493.9,251.6 508.9,253.3 523.9,253.2 539.0,246.6 553.9,234.9 568.9,214.5 584.0,203.9 599.0,180.4 614.0,179.8 629.0,174.8 644.1,168.4 659.1,149.8 674.1,141.6 689.1,85.8 704.2,70.3 719.2,40.9 734.2,82.7 749.2,103.2 764.3,112.2 779.3,157.1 794.3,151.8 809.4,158.2 824.4,128.5 839.4,125.3 848.0,125.3 848,296" fill="#34d399" opacity="0.07"/>
+<polyline points="58.0,264.4 73.0,267.4 88.1,277.1 103.1,276.7 118.1,272.8 133.1,266.2 148.2,257.7 163.2,254.8 178.2,255.4 193.2,253.2 208.3,256.8 223.4,247.7 238.4,250.4 253.4,254.6 268.5,263.2 283.5,251.8 298.5,242.7 313.6,256.5 328.6,256.9 343.6,254.7 358.6,251.8 373.7,257.7 388.7,260.3 403.7,260.5 418.7,261.8 433.8,260.5 448.8,262.1 463.8,261.3 478.9,259.2 493.9,251.6 508.9,253.3 523.9,253.2 539.0,246.6 553.9,234.9 568.9,214.5 584.0,203.9 599.0,180.4 614.0,179.8 629.0,174.8 644.1,168.4 659.1,149.8 674.1,141.6 689.1,85.8 704.2,70.3 719.2,40.9 734.2,82.7 749.2,103.2 764.3,112.2 779.3,157.1 794.3,151.8 809.4,158.2 824.4,128.5 839.4,125.3 848.0,125.3" fill="none" stroke="#34d399" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="848.0" y1="22" x2="848.0" y2="296" stroke="#34d399" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+<circle cx="848.0" cy="125.3" r="5" fill="#34d399" stroke="#0f1117" stroke-width="2"/>
+<text x="839.0" y="35" text-anchor="end" font-size="10.5" fill="#34d399" font-family="Segoe UI,system-ui,sans-serif" font-weight="700">Ta analiza · 16.08</text>
+<text x="58.0" y="318" text-anchor="start" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">11.08.2025</text>
+<text x="463.8" y="318" text-anchor="middle" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">16.02.2026</text>
+<text x="848.0" y="318" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">14.08.2026</text>
+<circle cx="848.0" cy="125.3" r="4" fill="#34d399"/>
+</svg>
+        <div class="tp-chart-legend"><span><i style="background:#34d399"></i>kurs zamknięcia (tygodniowo)</span><span><i style="background:#34d399;opacity:.25"></i>przedział fair value</span></div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$222,02</strong></td><td>+180% w 52 tygodnie</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$238,10</td><td style="color:var(--ocena-uwaga)">Kurs 7% poniżej — krótkoterminowa korekta</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$141,45</td><td style="color:var(--ocena-kupno)">Kurs 57% powyżej — trend długoterminowy silny</td></tr>
+          <tr><td>RSI (14)</td><td>53,67</td><td>Neutralnie</td></tr>
+          <tr><td>Beta</td><td>2,25</td><td style="color:var(--ocena-sprzedaz)">Zmienność ponad dwukrotnie wyższa od rynku</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>4,09% akcji</td><td style="color:var(--ocena-uwaga)">Wzrost z 32,5 do 35,8 mln sztuk w miesiąc</td></tr>
+          <tr><td>Wsparcie S1</td><td>$195–205</td><td>Poziom sprzed sierpniowego skoku</td></tr>
+          <tr><td>Opór R1</td><td>$238</td><td>Średnia 50-sesyjna</td></tr>
+          <tr><td>Opór R2</td><td>$257</td><td>Konsensus analityków</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Wyniki 27 sierpnia powyżej oczekiwań</li><li>Odzyskanie średniej 50-sesyjnej ($238)</li><li>Droga ku $257 i wyżej</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Rozczarowanie 27 sierpnia</li><li>Przebicie $195 z wolumenem</li><li>Zejście ku $150–175</li></ul></div>
+      </div>
+      <p>Układ jest niejednoznaczny: kurs poniżej średniej 50-sesyjnej, ale 57% powyżej dwustusesyjnej. <strong>Trend długoterminowy pozostaje silny, krótkoterminowo trwa korekta</strong> — a rosnąca krótka sprzedaż pokazuje, że część rynku obstawia jej pogłębienie po wynikach.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Wyniki 27 sierpnia to zdarzenie binarne przy mnożniku 48-krotnym. Kurs pod średnią 50-sesyjną, krótka sprzedaż rośnie. Jedenaście dni to zły moment na wchodzenie całością.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Podwojenie przychodów do $16,5 mld w FY2028 i konsensus $256,91 przy rekomendacji „mocne kupno". Warunek: rampa układów dedykowanych zgodnie z zapowiedzią.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Ponad $10 mld z układów dedykowanych do FY2029 przy bilansie bez zarzutu. Warunkiem jest poprawa ROIC powyżej kosztu kapitału.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: 3–5% portfela.</strong> Bilans zdrowy, więc więcej niż przy Oracle — ale zmienność ponad dwukrotnie wyższa od rynku każe zachować umiar</li>
+        <li><strong>Nie dokupywać przed 27 sierpnia</strong> — przy 48-krotności zysku rozczarowanie kosztuje więcej, niż pozytywne zaskoczenie daje</li>
+        <li><strong>Dokupienie:</strong> $195–205 przy cofnięciu do poziomów sprzed sierpniowego skoku</li>
+        <li><strong>Druga transza:</strong> $150–175 przy realizacji scenariusza negatywnego</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $270–290</li>
+        <li><strong>Jedna liczba do śledzenia:</strong> <strong>ROIC względem kosztu kapitału</strong>. Dziś 6,87% wobec 16,25%. Zejście tej różnicy do zera będzie dowodem, że rampa działa; jej pogłębienie — że skala nie przekłada się na rentowność</li>
+        <li><strong>Wyjście z tezy:</strong> utrata programu flagowego, obniżenie prognozy na FY2028 albo wzrost przychodów z centrów danych poniżej 20%</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$240 – $285</div><div class="fair-value-note">Scenariusz negatywny: $150–175 | Scenariusz pozytywny: $320–350 | Konsensus 43 analityków: $256,91</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Podwojenie przychodów w dwa lata</strong> — z $8,72 mld do $16,5 mld w FY2028, przy przyspieszeniu centrów danych do 55% i ścieżce do $10 mld z układów dedykowanych do FY2029</li>
+          <li><strong>Bilans bez zarzutu.</strong> Altman 5,8, dług do kapitału 0,29, wolne przepływy $1,67 mld przy nakładach $391 mln — model lekki kapitałowo</li>
+          <li><strong>Nowy front w pamięciach dla AI</strong> — portfolio z FMS 2026 adresuje wąskie gardło, które przesunęło się z obliczeń na dostęp do danych</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Wycena po rajdzie o 180%.</strong> Forward P/E 48,8, P/S 22,3, EV/EBITDA 72,2, P/FCF 116,8 — dobre wiadomości są w cenie</li>
+          <li><strong>ROIC 6,87% przy koszcie kapitału 16,25%</strong> — spółka na razie nie zarabia własnego kosztu pieniądza</li>
+          <li><strong>Kilku klientów decyduje o prognozie</strong>, a każdy z nich może zacząć projektować własny krzem, tak jak Google z TPU i Amazon z Trainium</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> obniżenie prognozy na FY2028, utrata programu flagowego albo wzrost przychodów z centrów danych poniżej 20% → zejście w rejon $150–175.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> wyniki 27 sierpnia potwierdzające rampę układów dedykowanych plus poprawa ROIC ku kosztowi kapitału → droga ku $270–290.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Marvell dostarcza wzrost, o jakim większość spółek półprzewodnikowych może tylko marzyć. Przychody kwartalne sięgnęły rekordowych <strong>2,418 miliarda dolarów przy wzroście o 28%</strong>, centra danych urosły o 27% i odpowiadają już za 76% biznesu, a zarząd zapowiada <strong>podwojenie przychodów do 16,5 miliarda w roku obrotowym 2028</strong> i ponad 10 miliardów z samych układów dedykowanych do 2029. Bilans jest przy tym wzorowy — wskaźnik Altmana 5,8, zadłużenie do kapitału 0,29, wolne przepływy 1,67 miliarda przy nakładach inwestycyjnych zaledwie 391 milionów. Czterdziestu trzech analityków wystawia rekomendację „mocne kupno".</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Cena tego wzrostu jest jednak wysoka i warto ją nazwać po imieniu. Kurs wzrósł w ciągu roku o <strong>180%</strong>, a wskaźniki wynoszą 48,8-krotność zysku przyszłorocznego, 22-krotność przychodów i 72-krotność EBITDA. Najbardziej niepokoi mnie przy tym para liczb, która rzadko pojawia się w komentarzach rynkowych: <strong>zwrot z zainwestowanego kapitału wynosi 6,87% przy średnim ważonym koszcie kapitału 16,25%</strong>. W tej chwili Marvell nie zarabia tego, ile kosztuje go pieniądz. Przy spółce budującej skalę to zrozumiałe i powinno się poprawić wraz z rampą — ale dopóki się nie poprawi, cała wycena opiera się na zapowiedzi, a nie na dowodzie.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Wzrost jest realny i przyspiesza.</strong> Rekordowe przychody +28% r/r, centra danych +27%, komunikacja +29%.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Bilans nie stanowi ryzyka.</strong> Altman 5,8, dług do kapitału 0,29, płynność 3,28, dodatnie wolne przepływy z marżą 19,10%.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Nowy obszar wzrostu.</strong> Portfolio pamięci dla AI z FMS 2026 — rynek nagrodził je wzrostem o 12,8% w jeden dzień.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Rampa układów dedykowanych zgodnie z planem.</strong> Ponad 10 programów towarzyszących i nowy klient Tier 1 w FY2028 — to zapowiedzi, których realizację poznamy dopiero w kolejnych kwartałach.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Wyniki 27 sierpnia.</strong> Data potwierdzona, mnożnik 48-krotny, kurs pod średnią 50-sesyjną, krótka sprzedaż rosnąca. Zdarzenie binarne za jedenaście dni.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Rentowność kapitału powyżej jego kosztu.</strong> ROIC 6,87% wobec WACC 16,25%. To jest najsłabszy punkt tej spółki i jedyna liczba, która naprawdę wymaga poprawy.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>27 sierpnia 2026</strong></td><td>Wyniki Q2 FY2027 — data potwierdzona</td><td>Pierwszy sprawdzian rampy po sierpniowym rajdzie</td></tr>
+            <tr><td>FY2028 (od lutego 2027)</td><td>Wejście nowego klienta Tier 1 w produkcję</td><td>Podstawa zapowiedzianego podwojenia przychodów z układów dedykowanych</td></tr>
+            <tr><td>Na bieżąco</td><td>Decyzje o kolejnych programach, np. Frozen v2 u Google'a</td><td>Każdy nowy program przesuwa prognozę na 2029</td></tr>
+            <tr><td>Na bieżąco</td><td>Nakłady operatorów chmury</td><td>Zarząd zakłada ich spowolnienie przy własnym przyspieszeniu — to wymaga zdobywania udziałów</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>ROIC vs koszt kapitału</strong></td><td>6,87% vs 16,25%</td><td>pogłębienie różnicy</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Wzrost przychodów z centrów danych</td><td>+27% r/r</td><td>&lt; 20%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża brutto</td><td>51,50%</td><td>&lt; 45%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Wolne przepływy</td><td>$1,67 mld (marża 19,10%)</td><td>spadek poniżej 12%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Prognoza FY2028</td><td>$16,5 mld przychodów</td><td>każde obniżenie</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Krótka sprzedaż</td><td>4,09% akcji, rośnie</td><td>powyżej 7%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji: 3–5% portfela</strong> — bilans pozwala na więcej niż przy Oracle, ale zmienność ponad dwukrotnie wyższa od rynku każe zachować umiar</li>
+          <li><strong>Nie dokupywać przed 27 sierpnia.</strong> Jedenaście dni do wyników przy mnożniku 48-krotnym to zła relacja szansy do ryzyka</li>
+          <li><strong>Dokupienie:</strong> $195–205 przy cofnięciu do poziomów sprzed sierpniowego skoku; druga transza $150–175</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie $270–290</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> ROIC względem kosztu kapitału. Wszystko inne w tej spółce wygląda dobrze — to jest jedyne miejsce, gdzie liczby jeszcze się nie spinają</li>
+          <li><strong>Uwaga portfelowa:</strong> Broadcom i Marvell to w dużej mierze ta sama ekspozycja. Sprawdź, ile łącznie ważą</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">📈 KUPNO — znakomita spółka w niewygodnym momencie</div>
+        <p>Marvell jest jedną z lepiej prowadzonych spółek w tym zbiorze. Rośnie o 28% rocznie, ma zdrowy bilans, lekki model kapitałowy i realną, zakontraktowaną ścieżkę do podwojenia przychodów w dwa lata. Gdyby oceniać wyłącznie jakość biznesu, byłoby to mocne kupno bez zastrzeżeń.</p>
+        <p>Problem leży w momencie. <strong>Kurs urósł o 180% w rok, wskaźniki sięgnęły 48-krotności zysku, a za jedenaście dni spółka publikuje wyniki</strong> — przy takiej wycenie rozczarowanie kosztuje wielokrotnie więcej, niż pozytywne zaskoczenie daje. Do tego dochodzi jedyna liczba, która w tej analizie naprawdę mnie niepokoi: zwrot z kapitału poniżej jego kosztu. Dlatego kupno w perspektywie średnio- i długoterminowej, ale <strong>neutralnie do 27 sierpnia i bez dokupowania przed tą datą</strong>. Jeśli już masz pozycję, nie ma powodu jej ruszać.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$240–285</b></div>
+          <div><span>Scenariusz negatywny</span><b>$150–175</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$320–350</b></div>
+          <div><span>Sugerowana pozycja</span><b>3–5% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki — 27 sierpnia</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 16 sierpnia 2026 | Cena: $222,02 (zamknięcie 14.08.2026) | Zastępuje wersję z 21 lipca 2026 | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 16.08.2026</strong>, Marvell IR (Q1 FY2027, 27 maja), FMS 2026 | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

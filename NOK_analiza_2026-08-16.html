@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOK — Nokia Oyj | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: NOK</div>
+    <div class="company-name">Nokia Oyj</div>
+    <div class="company-sub">Infrastruktura sieciowa · optyka i sieci IP dla centrów danych · sieci mobilne · Espoo, Finlandia</div>
+    <div class="company-sub" style="margin-top:6px;font-size:0.86rem;opacity:0.85"><strong>Wszystkie kwoty w USD</strong> — notowanie nowojorskie. Poprzedni raport podawał cenę w euro, co zaburzało porównanie.</div>
+    <div class="header-meta">
+      <span class="meta-tag">+157% w 52 tygodnie</span>
+      <span class="meta-tag">AI i chmura +105% r/r</span>
+      <span class="meta-tag">Forward P/E 24,3</span>
+      <span class="meta-tag">Marża FCF 2,6%</span>
+      <div class="price-display">
+        <div class="price-main">$10,76</div>
+        <div class="price-sub">zamknięcie 14.08.2026 | +157% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Optyka i fotonika</span><span class="temat">Moc obliczeniowa dla AI</span><span class="temat">Sieci i łączność</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — historia AI prawdziwa, ale wciąż mała część spółki">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">trzymać, nie dokupywać po rajdzie</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$11,50 – $13,50</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">+7% do +25%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>23 lipca 2026</b><em>Q3 — koniec października</em></div>
+    <div class="rb-right">Pozycja 2–3% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (14.08.2026)</div><div class="metric-value">$10,76</div><div class="metric-detail">+157% w 52 tyg. | 8% pod średnią 50-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$59,8 mld</div><div class="metric-detail">EV $57,9 mld | 5,60 mld akcji</div></div>
+    <div class="metric-card"><div class="metric-label">AI i chmura — przychody</div><div class="metric-value green">€446 mln</div><div class="metric-detail">+105% r/r w Q2 2026</div></div>
+    <div class="metric-card"><div class="metric-label">AI i chmura — zamówienia</div><div class="metric-value em">€2,8 mld</div><div class="metric-detail">Wpłynęły w samym Q2 — sześciokrotność sprzedaży</div></div>
+    <div class="metric-card"><div class="metric-label">Forward P/E</div><div class="metric-value">24,3×</div><div class="metric-detail">Wobec 73,97× na zysku bieżącym</div></div>
+    <div class="metric-card"><div class="metric-label">Marża wolnych przepływów</div><div class="metric-value red">2,62%</div><div class="metric-detail">$619 mln z $23,3 mld przychodów</div></div>
+    <div class="metric-card"><div class="metric-label">Gotówka netto</div><div class="metric-value green">+$2,02 mld</div><div class="metric-detail">Dług / kapitał 0,16 | Piotroski 8</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (11 analityków)</div><div class="metric-value green">$15,02</div><div class="metric-detail">+39,6% | kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Kim jest dzisiejsza Nokia?</h3>
+      <p>Nokia od dawna nie robi telefonów. Dziś jest dostawcą <strong>infrastruktury sieciowej</strong> — sprzętu optycznego i routerów IP, którymi łączy się centra danych, oraz stacji bazowych dla operatorów komórkowych. Zatrudnia 78 tysięcy osób, przychody sięgają 23,3 miliarda dolarów rocznie.</p>
+      <p>Przez ostatni rok kurs wzrósł o <strong>157%</strong>. Rynek przestał wyceniać Nokię jako powolnego dostawcę dla telekomów, a zaczął jako <strong>beneficjenta budowy centrów danych pod sztuczną inteligencję</strong>. Ta zmiana narracji jest w tej analizie sprawą najważniejszą — i wymaga sprawdzenia, ile w niej faktów.</p>
+
+      <div class="alert alert-warn"><strong>Sprostowanie walutowe wobec poprzedniego raportu.</strong> Analiza z 21 lipca (zaktualizowana 30 lipca) podawała cenę <strong>€8,00</strong>, podczas gdy monitor świeżości porównywał ją z ceną w dolarach. Stąd wykazany „dryf" o 32,7% — w rzeczywistości zawyżony, bo mieszał dwie waluty. <strong>Rzeczywista zmiana od poprzedniego raportu wynosi około +15%</strong> po sprowadzeniu do wspólnej waluty. Od tego raportu Nokia jest prowadzona wyłącznie w dolarach, zgodnie z notowaniem nowojorskim.</div>
+
+      <h3>Co się wydarzyło — wyniki z 23 lipca</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026</th><th>Dynamika</th></tr></thead>
+        <tbody>
+          <tr><td>Sprzedaż netto</td><td>—</td><td style="color:var(--ocena-kupno)">+9% w ujęciu stałowalutowym</td></tr>
+          <tr><td>Porównywalna marża operacyjna</td><td>9%</td><td style="color:var(--ocena-kupno)">Rozszerzenie</td></tr>
+          <tr><td>Zysk</td><td>—</td><td style="color:var(--ocena-kupno)">+18%</td></tr>
+          <tr><td><strong>AI i chmura — przychody</strong></td><td><strong>€446 mln</strong></td><td style="color:var(--ocena-kupno)">+105% r/r</td></tr>
+          <tr><td><strong>AI i chmura — zamówienia</strong></td><td><strong>€2,8 mld</strong></td><td style="color:var(--ocena-kupno)">Wpłynęły w jednym kwartale</td></tr>
+          <tr><td>Infrastruktura sieciowa</td><td>€2,04 mld</td><td style="color:var(--ocena-kupno)">+12% r/r</td></tr>
+          <tr><td>Sieci optyczne</td><td>€868 mln</td><td style="color:var(--ocena-kupno)">+20% r/r</td></tr>
+          <tr><td>Sieci IP</td><td>€679 mln</td><td style="color:var(--ocena-kupno)">+16% r/r</td></tr>
+        </tbody>
+      </table></div>
+      <p>Nowy prezes <strong>Justin Hotard</strong> — z przeszłością w Intelu i HPE — nazywa to „superscyklem sztucznej inteligencji" i wokół tego zbudował strategię spółki.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Co robi</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Sieci optyczne</strong></td><td>Transmisja danych między centrami danych na duże odległości</td><td style="color:var(--ocena-kupno)">€868 mln, +20% r/r — najszybciej rosnący obszar</td></tr>
+          <tr><td><strong>Sieci IP</strong></td><td>Routery i przełączniki, tkanina łącząca serwery</td><td style="color:var(--ocena-kupno)">€679 mln, +16% r/r</td></tr>
+          <tr><td>Sieci mobilne</td><td>Stacje bazowe 5G dla operatorów</td><td style="color:var(--ocena-uwaga)">Rynek dojrzały, rosnący jednocyfrowo</td></tr>
+          <tr><td><strong>Platforma AI-RAN</strong></td><td>Sieć radiowa definiowana programowo zamiast sprzętowo</td><td>Nowa — obiecuje podwojenie efektywności widmowej</td></tr>
+          <tr><td>Licencje patentowe</td><td>Portfel patentów telekomunikacyjnych</td><td style="color:var(--ocena-kupno)">Stabilny, wysokomarżowy strumień</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — inżynieria, której trudno kupić z półki</h3>
+      <p>Optyka dalekiego zasięgu to wąska specjalizacja. Liczba firm potrafiących budować sprzęt do połączeń między centrami danych na setki kilometrów jest niewielka, a klienci nie zmieniają dostawcy z kwartału na kwartał, bo sprzęt wpisuje się w architekturę całej sieci.</p>
+      <div class="alert alert-info"><strong>Ale fosa nie przekłada się na rentowność.</strong> Nokia ma dobrą technologię i słabą zdolność zamiany jej na gotówkę. Marża brutto 45,50% wygląda przyzwoicie, ale operacyjna to już 8,97%, netto <strong>3,47%</strong>, a marża wolnych przepływów <strong>2,62%</strong>. To spółka, która sprzedaje za 23,3 miliarda dolarów rocznie i zostawia sobie z tego 619 milionów gotówki. Historia Nokii ostatnich dwudziestu lat to w dużej mierze historia dobrej inżynierii i przeciętnego zwrotu dla akcjonariusza.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Łączenie centrów danych</strong> — modele sztucznej inteligencji przerosły pojedynczy budynek, więc operatorzy spinają kampusy światłowodami. To bezpośrednio napędza sprzedaż optyki</li>
+        <li><strong>Tkanina wewnątrz centrum danych</strong> — sieci IP obsługują komunikację między tysiącami akceleratorów; wraz ze skalą klastrów rośnie zapotrzebowanie na przepustowość</li>
+        <li><strong>Rynek sieci mobilnych jest dojrzały</strong> — cykl 5G ma za sobą szczyt inwestycji, operatorzy ograniczają nakłady</li>
+        <li><strong>Ograniczona konkurencja z Chin</strong> — wykluczenie Huawei z rynków zachodnich pozostaje dla Nokii i Ericssona strukturalną przewagą</li>
+        <li><strong>Ryzyko kursowe</strong> — Nokia rozlicza się w euro, a znaczna część kosztów i przychodów jest w innych walutach; wskaźnik cena/sprzedaż liczony na przyszłość (2,74) jest wyższy niż bieżący (2,57), co sygnalizuje spodziewany spadek przychodów w dolarach</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <p>Nokia sprzedaje dwóm bardzo różnym grupom, które dziś ciągną w przeciwne strony.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Grupa</th><th>Charakterystyka</th><th>Kierunek</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Operatorzy centrów danych</strong></td><td>Firmy budujące infrastrukturę AI — nowy, rosnący odbiorca</td><td style="color:var(--ocena-kupno)">↑↑ +105% r/r, zamówienia €2,8 mld</td></tr>
+          <tr><td>Operatorzy telekomunikacyjni</td><td>Historyczny rdzeń klientów, cykl 5G po szczycie</td><td style="color:var(--ocena-uwaga)">↔ Wzrost jednocyfrowy</td></tr>
+          <tr><td>Sektor publiczny i przemysł</td><td>Sieci prywatne, obronność, energetyka</td><td>↔ Stabilnie</td></tr>
+        </tbody>
+      </table></div>
+      <p>Akcje w rękach instytucji to 54,63% — wyraźnie mniej niż typowe dla dużych spółek technologicznych, co odzwierciedla obecność licznych inwestorów indywidualnych.</p>
+      <div class="alert alert-success"><strong>Najciekawsza liczba w całym raporcie kwartalnym.</strong> W segmencie AI i chmury Nokia zrealizowała <strong>€446 milionów sprzedaży, ale przyjęła €2,8 miliarda zamówień</strong> — sześciokrotnie więcej. Zamówienia to nie przychód i część z nich rozłoży się na lata, ale taka relacja nie zdarza się w spółce stagnującej. To najmocniejszy dowód, że popyt jest realny, a nie tylko opowiedziany na konferencji wynikowej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (TTM)</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$23,30 mld</td><td>Prognoza wzrostu 3-letniego: zaledwie +5,67%</td></tr>
+          <tr><td>Zysk brutto</td><td>$10,60 mld</td><td>Marża 45,50%</td></tr>
+          <tr><td>Zysk operacyjny</td><td>$2,09 mld</td><td style="color:var(--ocena-uwaga)">Marża 8,97%</td></tr>
+          <tr><td>Zysk netto</td><td>$808,87 mln</td><td style="color:var(--ocena-sprzedaz)">Marża 3,47%, EPS $0,14</td></tr>
+          <tr><td>Wolne przepływy</td><td>$618,85 mln</td><td style="color:var(--ocena-sprzedaz)">Marża 2,62%</td></tr>
+          <tr><td>Przepływy operacyjne</td><td>$1,31 mld</td><td>Nakłady inwestycyjne $692,89 mln</td></tr>
+          <tr><td>Efektywna stopa podatkowa</td><td>32,96%</td><td style="color:var(--ocena-uwaga)">Wysoka — zjada niemal jedną trzecią zysku brutto</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Tu leży sedno problemu z Nokią.</strong> Prognozowany wzrost przychodów na najbliższe trzy lata to <strong>5,67% łącznie</strong> — nie rocznie. Segment AI i chmury rośnie o 105%, ale przy €446 milionach na kwartał odpowiada za <strong>mniej niż jedną dziesiątą całej spółki</strong>. Reszta, czyli sieci mobilne i pozostałe działalności, praktycznie stoi w miejscu. Żeby wzrost tego małego segmentu przełożył się na wynik całej Nokii, musi on rosnąć w tym tempie jeszcze kilka lat.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $10,76</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$59,83 mld</td><td>EV $57,89 mld</td></tr>
+          <tr><td>P/E bieżące</td><td>73,97×</td><td style="color:var(--ocena-sprzedaz)">EPS $0,14 — baza zysku bardzo niska</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>24,32×</strong></td><td style="color:var(--ocena-uwaga)">Zakłada mocne odbicie zysku</td></tr>
+          <tr><td>P/S</td><td>2,57× (forward 2,74×)</td><td style="color:var(--ocena-uwaga)">Prognoza wyższa od bieżącej — spodziewany spadek przychodów w USD</td></tr>
+          <tr><td>P/B</td><td>2,46×</td><td>Wartość księgowa $4,33 na akcję</td></tr>
+          <tr><td>EV/EBITDA</td><td>19,45×</td><td style="color:var(--ocena-uwaga)">Wysoko jak na tempo wzrostu</td></tr>
+          <tr><td><strong>P/FCF</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>96,68×</strong></td><td>Konwersja gotówkowa jest słaba</td></tr>
+          <tr><td>ROIC vs WACC</td><td>6,41% vs 8,19%</td><td style="color:var(--ocena-uwaga)">Poniżej kosztu kapitału, ale różnica niewielka</td></tr>
+          <tr><td>Dywidenda</td><td>$0,11 · 1,02%</td><td style="color:var(--ocena-uwaga)">Wypłata 80,56% zysku — trzeci rok wzrostu</td></tr>
+          <tr><td>Altman Z-Score</td><td><strong>2,29</strong></td><td style="color:var(--ocena-uwaga)">Poniżej 3 — patrz sekcja 8</td></tr>
+          <tr><td>Piotroski F-Score</td><td><strong>8</strong></td><td style="color:var(--ocena-kupno)">Bardzo wysoko — fundamenty się poprawiają</td></tr>
+          <tr><td>Konsensus (11 analityków)</td><td>$15,02 · kupno</td><td style="color:var(--ocena-kupno)">+39,6%</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — na czym opiera się ta liczba</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>73,97×</td><td>Zysk netto $808,87 mln, EPS $0,14</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>24,32×</strong></td><td>Implikuje potrojenie zysku na akcję</td></tr>
+          <tr><td>Prognoza wzrostu zysku (3 lata)</td><td>+18,26%</td><td>Głównie z rozszerzenia marży, nie ze sprzedaży</td></tr>
+          <tr><td>Prognoza wzrostu przychodów (3 lata)</td><td>+5,67%</td><td style="color:var(--ocena-sprzedaz)">Bardzo skromnie</td></tr>
+          <tr><td>Ericsson (odniesienie)</td><td>podobny profil</td><td>Ten sam rynek, te same ograniczenia marżowe</td></tr>
+          <tr><td>Piotroski F-Score</td><td>8 na 9</td><td style="color:var(--ocena-kupno)">Poprawa rentowności, zadłużenia i efektywności</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> przepaść między wskaźnikiem bieżącym 73,97 a przyszłym 24,32 mówi wszystko. Rynek nie wycenia dzisiejszych zysków Nokii — <strong>wycenia założenie, że zysk na akcję potroi się w ciągu roku</strong> dzięki rozszerzeniu marży operacyjnej. Wyniki z 23 lipca ten kierunek potwierdzają: marża porównywalna wzrosła do 9%, zysk o 18%. Ale to jest wycena kredytu zaufania, a nie faktu. Przy przychodach rosnących o 5,67% w trzy lata cała nadzieja spoczywa na marży.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$11,50 – $13,50</div><div class="fair-value-note">Baza: 22–25× zysku prognozowanego przy dalszym rozszerzeniu marży operacyjnej ku 10–11% | Konsensus 11 analityków: $15,02 („kupno") — wycena wyraźnie bardziej optymistyczna od mojej | Scenariusz negatywny (zahamowanie zamówień z centrów danych, presja marżowa w sieciach mobilnych): $8,00–9,00 | Scenariusz pozytywny (realizacja portfela €2,8 mld i marża powyżej 11%): $15,00–16,50 | Przy $10,76 potencjał od -26% do +53%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Poziom (TTM)</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Brutto</td><td>45,50%</td><td>Przyzwoicie jak na producenta sprzętu</td></tr>
+          <tr><td>Operacyjna</td><td>8,97%</td><td style="color:var(--ocena-uwaga)">W Q2 porównywalna sięgnęła 9% — rośnie</td></tr>
+          <tr><td>EBITDA</td><td>12,77%</td><td style="color:var(--ocena-uwaga)">Cienko</td></tr>
+          <tr><td>Netto</td><td>3,47%</td><td style="color:var(--ocena-sprzedaz)">Obciążona podatkiem 32,96%</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>2,62%</strong></td><td>$618,85 mln z $23,30 mld sprzedaży</td></tr>
+          <tr><td>ROE</td><td>3,45%</td><td style="color:var(--ocena-sprzedaz)">Bardzo nisko</td></tr>
+          <tr><td>ROIC</td><td>6,41%</td><td style="color:var(--ocena-uwaga)">Poniżej kosztu kapitału 8,19%</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$298,7 tys.</td><td style="color:var(--ocena-uwaga)">Zysk na pracownika: $10,4 tys.</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Ostatni wiersz tej tabeli warto przeczytać dwa razy.</strong> Każdy z 78 tysięcy pracowników Nokii generuje niemal 300 tysięcy dolarów przychodu, ale zostawia spółce <strong>10,4 tysiąca zysku</strong> — około trzech i pół procenta. Dla porównania Marvell, przy podobnej ekspozycji na tę samą falę wydatków, osiąga 338 tysięcy zysku na pracownika przy 7,5 tysiącach zatrudnionych.</p>
+      <div class="alert alert-warn"><strong>To nie jest zarzut wobec zarządu — to opis modelu.</strong> Nokia wytwarza i serwisuje sprzęt na całym świecie, co wymaga ludzi, fabryk i wsparcia lokalnego. Spółka projektująca układy scalone tego nie potrzebuje. <strong>Rozszerzenie marży jest możliwe, ale ma sufit</strong> — i ten sufit leży znacznie niżej niż u firm, z którymi Nokia dzieli dziś w oczach rynku etykietę „spółki od AI".</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$5,86 mld</td><td style="color:var(--ocena-kupno)">Solidnie</td></tr>
+          <tr><td>Zadłużenie</td><td>$3,84 mld</td><td style="color:var(--ocena-kupno)">Gotówka netto <strong>+$2,02 mld</strong></td></tr>
+          <tr><td>Dług / kapitał własny</td><td>0,16</td><td style="color:var(--ocena-kupno)">Bardzo niski</td></tr>
+          <tr><td>Dług / EBITDA</td><td>1,19</td><td style="color:var(--ocena-kupno)">Bezpiecznie</td></tr>
+          <tr><td>Wskaźnik bieżącej płynności</td><td>1,51</td><td style="color:var(--ocena-kupno)">W porządku</td></tr>
+          <tr><td>Pokrycie odsetek</td><td>8,36</td><td style="color:var(--ocena-kupno)">Dobrze</td></tr>
+          <tr><td>Kapitał własny</td><td>$24,33 mld</td><td>$4,33 na akcję</td></tr>
+          <tr><td>Liczba akcji</td><td>5,60 mld</td><td style="color:var(--ocena-uwaga)"><strong>+2,76% r/r</strong> — rozwodnienie</td></tr>
+          <tr><td>Altman Z-Score</td><td><strong>2,29</strong></td><td style="color:var(--ocena-uwaga)">Poniżej progu 3</td></tr>
+          <tr><td>Piotroski F-Score</td><td><strong>8</strong></td><td style="color:var(--ocena-kupno)">Prawie maksimum</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Dwa wskaźniki, które mówią coś przeciwnego — i warto wiedzieć, któremu wierzyć.</strong> Wskaźnik Altmana wynosi 2,29, a przy wartościach poniżej 3 formalnie sygnalizuje podwyższone ryzyko niewypłacalności. <strong>W przypadku Nokii jest to jednak sygnał mylący.</strong> Formuła Altmana silnie waży rentowność względem aktywów, a Nokia ma bardzo duży bilans przy cienkiej marży — stąd niska ocena. Realne ryzyko upadłości jest znikome: spółka ma <strong>2,02 miliarda dolarów gotówki netto</strong>, zadłużenie do kapitału własnego 0,16 i pokrycie odsetek 8,36. Znacznie bardziej miarodajny jest tu <strong>Piotroski F-Score równy 8 na 9</strong>, który mierzy kierunek zmian i pokazuje spółkę wyraźnie poprawiającą fundamenty.</div>
+      <p>Jedno zastrzeżenie realne: <strong>liczba akcji rośnie o 2,76% rocznie</strong>, a dywidenda pochłania 80,56% zysku. Nokia wypłaca akcjonariuszom więcej, niż wygodnie zarabia, i jednocześnie ich rozwadnia.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📦</div><div class="catalyst-body"><h4>Portfel zamówień €2,8 mld w segmencie AI i chmury</h4><p>Zamówienia przyjęte w jednym kwartale przy sprzedaży €446 mln — sześciokrotnie więcej. To najmocniejszy dowód, że popyt jest realny.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔦</div><div class="catalyst-body"><h4>Optyka rośnie o 20%, sieci IP o 16%</h4><p>Infrastruktura sieciowa jako całość +12% r/r. Łączenie centrów danych światłowodami to bezpośrednia konsekwencja tego, że modele AI przerosły pojedynczy budynek.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📊</div><div class="catalyst-body"><h4>Marża rzeczywiście się rozszerza</h4><p>Porównywalna marża operacyjna sięgnęła 9%, zysk wzrósł o 18%, Piotroski F-Score wynosi 8 na 9. Poprawa nie jest deklaracją, tylko widać ją w liczbach.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🛡️</div><div class="catalyst-body"><h4>Bilans i niska zmienność</h4><p>Gotówka netto +$2,02 mld, zadłużenie do kapitału 0,16, dywidenda rosnąca trzeci rok. Beta 0,76 — jedyna pozycja w tym koszyku AI, która porusza się spokojniej niż rynek.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Konsensus widzi $15,02</h4><p>Jedenastu analityków, rekomendacja „kupno", cel o 39,6% powyżej ceny. Krótka sprzedaż spadła w miesiąc z 59,7 do 36,6 mln akcji — pesymiści wychodzą.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🔍</div><div class="catalyst-body"><h4>Segment AI to mniej niż jedna dziesiąta spółki</h4><p>€446 mln kwartalnie przy około €5 mld przychodów ogółem. Rośnie o 105%, ale musi rosnąć w tym tempie jeszcze kilka lat, żeby zmienić obraz całości.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💧</div><div class="catalyst-body"><h4>Nokia niemal nie generuje gotówki</h4><p>Marża wolnych przepływów 2,62%, cena do wolnych przepływów 96,68. Ze sprzedaży 23,3 mld dolarów zostaje 619 mln — a dywidenda pochłania 80,56% zysku.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🐌</div><div class="catalyst-body"><h4>Prognoza wzrostu przychodów: 5,67% w trzy lata</h4><p>Nie rocznie — łącznie. Cała nadzieja na wynik spoczywa na rozszerzeniu marży, która w tym modelu biznesowym ma niski sufit.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Kurs po wzroście o 157%</h4><p>Rynek już przecenił Nokię z powolnego dostawcy dla telekomów na spółkę od AI. Wskaźnik przyszłego zysku 24,32 przy tempie wzrostu jednocyfrowym nie jest okazją.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">✂️</div><div class="catalyst-body"><h4>Rozwodnienie i cykl 5G po szczycie</h4><p>Liczba akcji rośnie o 2,76% rocznie. Sieci mobilne — wciąż większość biznesu — mierzą się ze schyłkiem cyklu inwestycyjnego operatorów.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>Rola</th><th>Relacja do Nokii</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Nokia</strong></td><td>Optyka, sieci IP, sieci mobilne</td><td>Marża operacyjna 8,97%, forward P/E 24,3, beta 0,76</td></tr>
+          <tr><td><strong>Ericsson</strong></td><td>Najbliższy odpowiednik</td><td>Ten sam rynek, te same ograniczenia marżowe</td></tr>
+          <tr><td><strong>Cisco</strong></td><td>Sieci IP i przełączniki</td><td style="color:var(--ocena-sprzedaz)">Znacznie wyższa marża i konwersja gotówkowa</td></tr>
+          <tr><td>Huawei</td><td>Globalny rywal</td><td style="color:var(--ocena-kupno)">Wykluczony z rynków zachodnich — strukturalna przewaga Nokii</td></tr>
+          <tr><td>Coherent, Lumentum</td><td>Komponenty optyczne</td><td>Dostawcy niżej w łańcuchu, ta sama fala popytu</td></tr>
+          <tr><td>Marvell, Broadcom</td><td>Krzem dla centrów danych</td><td style="color:var(--ocena-uwaga)">Ta sama teza inwestycyjna, wielokrotnie wyższa rentowność</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Zestawienie, które warto mieć przed oczami.</strong> W Twoim portfelu Nokia, Marvell, Broadcom, AMD, Intel i Oracle to <strong>sześć zakładów na tę samą falę wydatków na sztuczną inteligencję</strong>. Nokia jest wśród nich najmniej zmienna (beta 0,76) i najsłabiej rentowna (marża netto 3,47%). Nie jest to argument przeciwko niej — raczej wskazówka, jaką rolę pełni: <strong>to jest defensywna, a nie ofensywna część tej ekspozycji</strong>.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="tp-chart">
+        <div class="tp-chart-head"><b>Kurs — ostatnie 12 miesięcy</b><span>zakres $4.20 – $15.47 | ostatnie zamknięcie $10.76</span></div>
+        <svg viewBox="0 0 940 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block" role="img" aria-label="Wykres kursu z zaznaczonym przedziałem wartości godziwej">
+<line x1="58" y1="296.0" x2="848" y2="296.0" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="300.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$3</text>
+<line x1="58" y1="227.5" x2="848" y2="227.5" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="231.5" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$7</text>
+<line x1="58" y1="159.0" x2="848" y2="159.0" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="163.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$10</text>
+<line x1="58" y1="90.5" x2="848" y2="90.5" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="94.5" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$13</text>
+<line x1="58" y1="22.0" x2="848" y2="22.0" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="26.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$16</text>
+<rect x="58" y="82.2" width="790" height="41.9" fill="#34d399" opacity="0.10"/>
+<line x1="58" y1="82.2" x2="848" y2="82.2" stroke="#34d399" stroke-width="1" stroke-dasharray="5 4" opacity="0.65"/>
+<line x1="58" y1="124.1" x2="848" y2="124.1" stroke="#34d399" stroke-width="1" stroke-dasharray="5 4" opacity="0.65"/>
+<text x="856" y="107.1" font-size="10.5" fill="#34d399" font-family="Segoe UI,system-ui,sans-serif" font-weight="700">FAIR VALUE</text>
+<text x="856" y="121.1" font-size="10" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$12–$14</text>
+<polygon points="58,296 58.0,277.1 73.0,274.8 88.1,275.0 103.1,269.8 118.1,270.6 133.1,265.8 148.2,267.5 163.2,262.4 178.2,253.6 193.2,244.8 208.3,233.1 223.4,220.3 238.4,221.8 253.4,224.1 268.5,240.6 283.5,237.7 298.5,237.9 313.6,233.7 328.6,228.9 343.6,226.4 358.6,228.7 373.7,229.3 388.7,227.9 403.7,223.2 418.7,230.4 433.8,217.0 448.8,217.8 463.8,202.3 478.9,203.3 493.9,202.9 508.9,192.4 523.9,197.9 539.0,197.9 553.9,180.3 568.9,166.9 584.0,149.0 599.0,145.9 614.0,86.4 629.0,96.4 644.1,72.8 659.1,40.9 674.1,54.1 689.1,63.7 704.2,54.9 719.2,82.4 734.2,92.5 749.2,112.2 764.3,104.4 779.3,153.0 794.3,174.4 809.4,173.6 824.4,169.0 839.4,139.6 848.0,139.6 848,296" fill="#34d399" opacity="0.07"/>
+<polyline points="58.0,277.1 73.0,274.8 88.1,275.0 103.1,269.8 118.1,270.6 133.1,265.8 148.2,267.5 163.2,262.4 178.2,253.6 193.2,244.8 208.3,233.1 223.4,220.3 238.4,221.8 253.4,224.1 268.5,240.6 283.5,237.7 298.5,237.9 313.6,233.7 328.6,228.9 343.6,226.4 358.6,228.7 373.7,229.3 388.7,227.9 403.7,223.2 418.7,230.4 433.8,217.0 448.8,217.8 463.8,202.3 478.9,203.3 493.9,202.9 508.9,192.4 523.9,197.9 539.0,197.9 553.9,180.3 568.9,166.9 584.0,149.0 599.0,145.9 614.0,86.4 629.0,96.4 644.1,72.8 659.1,40.9 674.1,54.1 689.1,63.7 704.2,54.9 719.2,82.4 734.2,92.5 749.2,112.2 764.3,104.4 779.3,153.0 794.3,174.4 809.4,173.6 824.4,169.0 839.4,139.6 848.0,139.6" fill="none" stroke="#34d399" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="848.0" y1="22" x2="848.0" y2="296" stroke="#34d399" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+<circle cx="848.0" cy="139.6" r="5" fill="#34d399" stroke="#0f1117" stroke-width="2"/>
+<text x="839.0" y="35" text-anchor="end" font-size="10.5" fill="#34d399" font-family="Segoe UI,system-ui,sans-serif" font-weight="700">Ta analiza · 16.08</text>
+<text x="58.0" y="318" text-anchor="start" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">11.08.2025</text>
+<text x="463.8" y="318" text-anchor="middle" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">16.02.2026</text>
+<text x="848.0" y="318" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">14.08.2026</text>
+<circle cx="848.0" cy="139.6" r="4" fill="#34d399"/>
+</svg>
+        <div class="tp-chart-legend"><span><i style="background:#34d399"></i>kurs zamknięcia (tygodniowo)</span><span><i style="background:#34d399;opacity:.25"></i>przedział fair value</span></div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$10,76</strong></td><td>+157% w 52 tygodnie</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$11,75</td><td style="color:var(--ocena-uwaga)">Kurs 8,4% poniżej — korekta trwa</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$9,37</td><td style="color:var(--ocena-kupno)">Kurs 14,8% powyżej — trend wciąż wzrostowy</td></tr>
+          <tr><td>RSI (14)</td><td>54,09</td><td>Neutralnie</td></tr>
+          <tr><td>Beta</td><td>0,76</td><td style="color:var(--ocena-kupno)">Zmienność niższa od rynku</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>0,65% akcji</td><td style="color:var(--ocena-kupno)">Spadek z 59,7 do 36,6 mln w miesiąc</td></tr>
+          <tr><td>Średni wolumen</td><td>89,9 mln akcji</td><td>Bardzo płynny walor</td></tr>
+          <tr><td>Wsparcie S1</td><td>$9,37</td><td>Średnia 200-sesyjna</td></tr>
+          <tr><td>Opór R1</td><td>$11,75</td><td>Średnia 50-sesyjna</td></tr>
+          <tr><td>Opór R2</td><td>$13,50</td><td>Górny zakres fair value</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Odzyskanie średniej 50-sesyjnej ($11,75)</li><li>Wyniki Q3 potwierdzające realizację portfela zamówień</li><li>Droga ku $13,50 i celowi analityków $15</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Zamówienia z centrów danych nie zamieniają się w przychód</li><li>Przebicie średniej 200-sesyjnej ($9,37)</li><li>Powrót do $8,00–9,00</li></ul></div>
+      </div>
+      <p>Obraz jest podobny do Marvella: <strong>kurs poniżej średniej 50-sesyjnej, ale wyraźnie powyżej dwustusesyjnej</strong>. Różnica polega na tym, że Nokia jest walorem o niskiej zmienności, więc korekty przebiegają tu łagodniej. Znaczący jest spadek krótkiej sprzedaży o niemal 40% w ciągu miesiąca.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Po wzroście o 157% i przy kursie pod średnią 50-sesyjną brak przewagi. Kolejne wyniki dopiero pod koniec października — brak katalizatora.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Portfel €2,8 mld w segmencie AI plus rozszerzająca się marża dają realną ścieżkę do $13,50. Warunek: zamówienia zamieniają się w przychód.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Prognoza wzrostu przychodów +5,67% w trzy lata i marża wolnych przepływów 2,62%. Nokia ma za sobą dwie dekady dobrej inżynierii i przeciętnych zwrotów.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: 2–3% portfela.</strong> Rola defensywna w ramach ekspozycji na AI — niska zmienność, ale i niska rentowność</li>
+        <li><strong>Trzymać istniejącą pozycję</strong> — teza się poprawiła, nie pogorszyła</li>
+        <li><strong>Nie dokupywać po $10,76.</strong> Brak katalizatora do końca października, kurs pod średnią 50-sesyjną</li>
+        <li><strong>Dokupienie:</strong> $9,30–9,60, przy zejściu do średniej 200-sesyjnej</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $13,00–13,50</li>
+        <li><strong>Jedna liczba do śledzenia:</strong> <strong>udział segmentu AI i chmury w przychodach ogółem</strong>. Dziś poniżej 10%. Przekroczenie 15% będzie momentem, w którym narracja przestaje wyprzedzać rachunek wyników</li>
+        <li><strong>Wyjście z tezy:</strong> spadek zamówień w segmencie AI, cofnięcie marży operacyjnej poniżej 8% albo obniżenie prognozy rocznej</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$11,50 – $13,50</div><div class="fair-value-note">Scenariusz negatywny: $8,00–9,00 | Scenariusz pozytywny: $15,00–16,50 | Konsensus 11 analityków: $15,02</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Zamówienia €2,8 mld przy sprzedaży €446 mln</strong> w segmencie AI i chmury — sześciokrotność, twardy dowód realnego popytu</li>
+          <li><strong>Marża rzeczywiście rośnie.</strong> Porównywalna operacyjna 9%, zysk +18%, Piotroski F-Score 8 na 9, optyka +20%, sieci IP +16%</li>
+          <li><strong>Bilans i spokój.</strong> Gotówka netto +$2,02 mld, zadłużenie do kapitału 0,16, beta 0,76 — defensywna część ekspozycji na AI</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Segment AI to poniżej 10% spółki.</strong> Rośnie o 105%, ale prognoza przychodów całej Nokii to +5,67% w trzy lata</li>
+          <li><strong>Nokia nie generuje gotówki.</strong> Marża wolnych przepływów 2,62%, P/FCF 96,68, dywidenda pochłania 80,56% zysku</li>
+          <li><strong>Kurs po wzroście o 157%.</strong> Przecenienie z dostawcy dla telekomów na spółkę od AI już się dokonało</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> spadek zamówień w segmencie AI albo cofnięcie marży operacyjnej poniżej 8% → powrót w rejon $8,00–9,00.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> udział AI i chmury powyżej 15% przychodów przy marży operacyjnej powyżej 11% → droga ku $15,00.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Nokia zrobiła coś, czego od niej nie oczekiwano: <strong>znalazła sobie miejsce w budowie infrastruktury dla sztucznej inteligencji</strong>. Przychody z segmentu AI i chmury wzrosły o 105% do €446 milionów, sieci optyczne o 20%, sieci IP o 16%, a porównywalna marża operacyjna rozszerzyła się do 9% przy zysku wyższym o 18%. Najmocniejsza liczba nie jest jednak w rachunku wyników, tylko obok niego: w jednym kwartale spółka przyjęła <strong>2,8 miliarda euro zamówień</strong> w tym segmencie — sześciokrotnie więcej, niż w nim sprzedała. Popyt jest realny i zakontraktowany.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Problem polega na skali. <strong>Segment AI i chmury to wciąż mniej niż jedna dziesiąta Nokii</strong>, a prognoza wzrostu przychodów całej spółki na najbliższe trzy lata wynosi 5,67% — nie rocznie, tylko łącznie. Reszta biznesu, głównie sieci mobilne, stoi w miejscu po szczycie cyklu 5G. Do tego dochodzi trwała słabość tego modelu: <strong>ze sprzedaży 23,3 miliarda dolarów Nokia zostawia sobie 619 milionów wolnych przepływów</strong>, czyli 2,62%, a dywidenda pochłania 80,56% zysku przy liczbie akcji rosnącej o 2,76% rocznie. Kurs tymczasem urósł o 157%, więc przecenienie z powolnego dostawcy dla telekomów na spółkę od AI już się dokonało.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Popyt jest realny i zakontraktowany.</strong> €2,8 mld zamówień w segmencie AI w jednym kwartale przy €446 mln sprzedaży.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Marża się rozszerza.</strong> Porównywalna operacyjna 9%, zysk +18%, Piotroski F-Score 8 na 9.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Bilans nie stanowi ryzyka.</strong> Gotówka netto +$2,02 mld, dług do kapitału 0,16, pokrycie odsetek 8,36.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Zamiana zamówień na przychód.</strong> Portfel jest, ale realizacja rozłoży się na lata. Pierwszy sprawdzian pod koniec października.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Potrojenie zysku na akcję.</strong> Tego wymaga przejście ze wskaźnika 73,97 na 24,32. Kierunek potwierdzony, skala jeszcze nie.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Konwersja na gotówkę.</strong> Marża wolnych przepływów 2,62% i P/FCF 96,68. To jest strukturalna cecha modelu, nie chwilowa słabość.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>23 lipca 2026</td><td>Wyniki Q2 — już opublikowane</td><td>Podstawa tej analizy: AI +105%, marża 9%, zamówienia €2,8 mld</td></tr>
+            <tr><td><strong>Koniec października 2026</strong></td><td>Wyniki Q3 — najbliższy sprawdzian</td><td>Czy zamówienia zamieniają się w przychód i czy marża utrzymuje kierunek</td></tr>
+            <tr><td>Na bieżąco</td><td>Wdrożenia platformy AI-RAN</td><td>Próba przedefiniowania rynku sieci radiowych na model programowy</td></tr>
+            <tr><td>Na bieżąco</td><td>Nakłady operatorów centrów danych</td><td>Bezpośrednio napędzają sprzedaż optyki i sieci IP</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Udział AI i chmury w przychodach</strong></td><td>poniżej 10%</td><td>brak wzrostu udziału</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Zamówienia w segmencie AI</td><td>€2,8 mld w Q2</td><td>spadek kwartał do kwartału</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Porównywalna marża operacyjna</td><td>9%</td><td>&lt; 8%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Marża wolnych przepływów</strong></td><td>2,62%</td><td>brak poprawy</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Liczba akcji</td><td>+2,76% r/r</td><td>przyspieszenie rozwodnienia</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Wskaźnik wypłaty dywidendy</td><td>80,56%</td><td>powyżej 100%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji: 2–3% portfela</strong> — rola defensywna w ramach ekspozycji na sztuczną inteligencję</li>
+          <li><strong>Trzymać, nie dokupywać po $10,76.</strong> Teza się poprawiła, ale kurs już to odzwierciedla, a najbliższy katalizator jest dopiero pod koniec października</li>
+          <li><strong>Dokupienie:</strong> $9,30–9,60, przy zejściu do średniej 200-sesyjnej</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie $13,00–13,50</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> udział segmentu AI i chmury w przychodach. Dziś poniżej 10% — przekroczenie 15% będzie momentem, w którym rachunek wyników dogoni narrację</li>
+          <li><strong>Uwaga portfelowa:</strong> Nokia, Marvell, Broadcom, AMD, Intel i Oracle to sześć zakładów na tę samą falę. Nokia jest wśród nich najspokojniejsza i najmniej rentowna</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">⚖️ NEUTRALNA — dobra historia, wciąż mała względem całości</div>
+        <p>Nokia zasłużyła na część tego wzrostu. Segment AI i chmury podwoił sprzedaż, zebrał 2,8 miliarda euro zamówień w jednym kwartale, optyka rośnie o 20%, a marża operacyjna faktycznie się rozszerza. Zarząd pod kierunkiem Justina Hotarda robi to, co obiecał, i widać to w liczbach, nie tylko w prezentacjach.</p>
+        <p>Ale <strong>rynek wycenił już całą tę poprawę, i to z zapasem</strong>. Kurs urósł o 157%, a wskaźnik przyszłego zysku 24,32 zakłada potrojenie zysku na akcję przy przychodach rosnących o niecałe 6% w trzy lata. Nokia pozostaje spółką o marży wolnych przepływów 2,62%, wypłacającą 80% zysku w dywidendzie i rozwadniającą akcjonariuszy o blisko 3% rocznie. <strong>Trzymać — to sensowna, spokojna część ekspozycji na sztuczną inteligencję. Ale nie dokupywać po tej cenie</strong>; lepszy moment przyjdzie bliżej średniej dwustusesyjnej albo po wynikach z końca października.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$11,50–13,50</b></div>
+          <div><span>Scenariusz negatywny</span><b>$8,00–9,00</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$15,00–16,50</b></div>
+          <div><span>Sugerowana pozycja</span><b>2–3% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3 — koniec października</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 16 sierpnia 2026 | Cena: $10,76 (zamknięcie 14.08.2026) | Zastępuje wersję z 21 lipca 2026 | <strong>Zmiana waluty: raport prowadzony w USD wg notowania NYSE</strong> | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 16.08.2026</strong>, Nokia IR (raport Q2 i półroczny 2026, 23 lipca) | Nie stanowi porady inwestycyjnej
+<div class="tp-changelog"><b>Dziennik korekt</b><ul><li><strong>16.08.2026</strong> — raport przeliczony na dolary. Poprzednia wersja podawała cenę €8,00, przez co monitor świeżości porównywał euro z dolarami i wykazał dryf 32,7% zamiast rzeczywistych około 15%. Od tej wersji Nokia jest prowadzona wyłącznie w USD, zgodnie z notowaniem NYSE.</li></ul></div>
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
