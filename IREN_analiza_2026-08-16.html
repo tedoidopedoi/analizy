@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IREN — IREN Limited | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: IREN</div>
+    <div class="company-name">IREN Limited</div>
+    <div class="company-sub">Centra danych · konwersja mocy z kopania bitcoina na obciążenia AI · Sydney, Australia</div>
+    <div class="header-meta">
+      <span class="meta-tag">+149% w 52 tygodnie</span>
+      <span class="meta-tag">Wynik operacyjny -29,4%</span>
+      <span class="meta-tag">Krótka sprzedaż 31,8% obrotu</span>
+      <span class="meta-tag">Beta 4,30</span>
+      <div class="price-display">
+        <div class="price-main">$44,06</div>
+        <div class="price-sub">zamknięcie 14.08.2026 | +149% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Moc obliczeniowa dla AI</span><span class="temat">Chmura i centra danych</span><span class="temat">Bitcoin i kopalnie</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — zysk nie pochodzi z działalności, wycena skrajna">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">trzymać zysk, nie dokupywać</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$38 – $56</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-14% do +27%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>27 sierpnia 2026</b><em>za 11 dni · potwierdzone</em></div>
+    <div class="rb-right">Pozycja 1–2% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (14.08.2026)</div><div class="metric-value">$44,06</div><div class="metric-detail">+149% w 52 tyg. | poniżej obu średnich</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$15,75 mld</div><div class="metric-detail">EV $17,50 mld | 357,4 mln akcji</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody (12 mies.)</div><div class="metric-value">$757,1 mln</div><div class="metric-detail">Prognoza wzrostu 3-letniego: +131%</div></div>
+    <div class="metric-card"><div class="metric-label">Wynik operacyjny</div><div class="metric-value red">-$222,3 mln</div><div class="metric-detail">Marża operacyjna -29,36%</div></div>
+    <div class="metric-card"><div class="metric-label">Wynik netto</div><div class="metric-value yellow">+$158,1 mln</div><div class="metric-detail">Dodatni wyłącznie spoza działalności</div></div>
+    <div class="metric-card"><div class="metric-label">EV/EBITDA</div><div class="metric-value red">118,9×</div><div class="metric-detail">Dług/EBITDA 26,94 | pokrycie odsetek -5,56</div></div>
+    <div class="metric-card"><div class="metric-label">Krótka sprzedaż</div><div class="metric-value red">31,8%</div><div class="metric-detail">wolnego obrotu — jedna z najwyższych na rynku</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (16 analityków)</div><div class="metric-value green">$81,73</div><div class="metric-detail">+85,5% | kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Czym jest IREN</h3>
+      <p>IREN zaczynał jako kopalnia bitcoina w Australii i przekształca się w operatora centrów danych dla sztucznej inteligencji. Logika tej zmiany jest prosta: <strong>kopalnia to hala pełna prądu, chłodzenia i przyłączy energetycznych</strong> — czyli dokładnie to, czego potrzebują klastry obliczeniowe, tylko z inną zawartością szaf. Spółka zatrudnia 257 osób i generuje 757 milionów dolarów przychodu rocznie, czyli blisko 3 miliony na pracownika.</p>
+      <p>Kurs wzrósł przez rok o <strong>149%</strong>, a od momentu Twojego zakupu po średniej cenie $5,10 — o ponad siedmiokrotnie. To najlepsza pozycja w Twoim portfelu i właśnie dlatego warto ją przeanalizować spokojnie, zamiast przyjmować, że skoro działa, to musi być dobra.</p>
+
+      <div class="alert alert-danger"><strong>Jedna liczba, od której trzeba zacząć.</strong> IREN wykazuje zysk netto <strong>158 milionów dolarów</strong> — i to on daje wskaźnik ceny do zysku na poziomie 81. Ale <strong>wynik operacyjny wynosi minus 222 miliony</strong>. Oznacza to, że działalność podstawowa przynosi stratę, a cały zysk pochodzi z pozycji <em>poniżej</em> linii operacyjnej — w przypadku spółki trzymającej bitcoina niemal na pewno z przeszacowania jego wartości. <strong>To nie jest zysk z prowadzenia biznesu, tylko z posiadania aktywa, którego cena wzrosła.</strong> Każdy wskaźnik oparty na zysku netto jest przy takiej strukturze mylący.</div>
+
+      <h3>Gdzie jesteśmy w cyklu</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wymiar</th><th>Stan</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td>Kurs vs 52 tygodnie</td><td>+148,51%</td><td style="color:var(--ocena-kupno)">Jeden z najlepszych wyników w portfelu</td></tr>
+          <tr><td>Kurs vs średnia 50-sesyjna</td><td>$44,06 wobec $44,89</td><td style="color:var(--ocena-uwaga)">Poniżej — korekta</td></tr>
+          <tr><td>Kurs vs średnia 200-sesyjna</td><td>$44,06 wobec $47,09</td><td style="color:var(--ocena-sprzedaz)">Poniżej — trend osłabł</td></tr>
+          <tr><td>Nakłady inwestycyjne</td><td>-$2,71 mld</td><td style="color:var(--ocena-sprzedaz)">Przy przepływach operacyjnych $392 mln</td></tr>
+          <tr><td>Liczba akcji</td><td>+52,27% r/r</td><td style="color:var(--ocena-sprzedaz)">Kwartalnie +11,98%</td></tr>
+          <tr><td><strong>Wyniki</strong></td><td><strong>27 sierpnia 2026</strong></td><td style="color:var(--ocena-uwaga)">Za 11 dni — ten sam dzień co Marvell</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Opis</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Moc przyłączeniowa</strong></td><td>Zabezpieczone przyłącza energetyczne i grunty pod centra danych</td><td style="color:var(--ocena-kupno)">Rzeczywisty, rzadki zasób</td></tr>
+          <tr><td><strong>Konwersja na AI</strong></td><td>Przebudowa hal kopalnianych na klastry obliczeniowe</td><td style="color:var(--ocena-uwaga)">W toku — źródło nakładów $2,71 mld</td></tr>
+          <tr><td>Kopanie bitcoina</td><td>Historyczna działalność, wciąż generuje przychód</td><td>Zmienna zależna od kursu kryptowaluty</td></tr>
+          <tr><td>Portfel bitcoina</td><td>Aktywa bilansowe podlegające przeszacowaniu</td><td style="color:var(--ocena-uwaga)">Źródło całego wykazanego zysku netto</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — energia, nie technologia</h3>
+      <p>Przewaga IREN nie leży w tym, co spółka potrafi zbudować, tylko w tym, <strong>gdzie ma prąd</strong>. Zabezpieczone przyłącza energetyczne o dużej mocy są dziś w wielu miejscach trudniejsze do zdobycia niż same akceleratory — czas oczekiwania na przyłącze liczy się w latach. Kto ma moc, ten może budować.</p>
+      <div class="alert alert-warn"><strong>Ale energia to fosa, którą się wynajmuje, a nie taką, którą się buduje.</strong> Przyłącze daje przewagę czasową, nie technologiczną — i nie chroni marży, gdy pojawi się konkurencja z innym przyłączem. Widać to w liczbach: marża brutto wynosi wprawdzie 68,40%, ale <strong>marża operacyjna to minus 29,36%</strong>. Koszty utrzymania i przebudowy zjadają cały zysk brutto z nawiązką. Sam dostęp do prądu nie tworzy jeszcze rentownego biznesu.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Niedobór mocy przyłączeniowej</strong> — realne, wieloletnie ograniczenie budowy centrów danych; to jest właściwy powód, dla którego kopalnie bitcoina stały się celem zainteresowania</li>
+        <li><strong>Nakłady na infrastrukturę AI</strong> — Amazon 220 mld, Alphabet około 200 mld dolarów w 2026; popyt na gotową moc jest realny</li>
+        <li><strong>Podwójna ekspozycja na cykl</strong> — IREN zależy jednocześnie od kursu bitcoina (przychody i wycena aktywów) oraz od nakładów na AI (przyszłość biznesu). To dwa różne cykle, które mogą się rozejść</li>
+        <li><strong>Koszt kapitału 22,45%</strong> — najwyższy spośród wszystkich spółek w Twoim portfelu; rynek wycenia tu bardzo wysokie ryzyko</li>
+        <li><strong>Zmienność strukturalna</strong> — beta 4,30 oznacza, że kurs porusza się ponad czterokrotnie mocniej niż rynek. To nie jest cecha przejściowa</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Stan</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td>Przychód na pracownika</td><td>$2,95 mln</td><td style="color:var(--ocena-kupno)">Biznes kapitałochłonny, nie ludziochłonny</td></tr>
+          <tr><td>Udział instytucji</td><td>60,77%</td><td>Osoby powiązane: 13,57%</td></tr>
+          <tr><td>Prognoza wzrostu przychodów</td><td>+131,32% w 3 lata</td><td style="color:var(--ocena-kupno)">Najwyższa w portfelu</td></tr>
+          <tr><td>Liczba akcji</td><td style="color:var(--ocena-sprzedaz)">+52,27% r/r</td><td>Kwartalnie +11,98% — tempo rośnie</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>31,81% wolnego obrotu</strong></td><td>Wzrost z 93,7 do 98,2 mln akcji</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Krótka sprzedaż na poziomie 31,81% wolnego obrotu wymaga komentarza.</strong> Prawie co trzecia akcja dostępna w obrocie jest sprzedana na krótko, a liczba ta w ciągu miesiąca wzrosła. To działa w obie strony i warto rozumieć obie. <strong>W dół:</strong> to jest wyraźny, rosnący sygnał, że znaczna część rynku spodziewa się spadku — a ci inwestorzy zwykle przeanalizowali sprawozdania dokładniej niż przeciętny uczestnik rynku. <strong>W górę:</strong> przy dobrych wynicach 27 sierpnia domykanie tych pozycji może wywołać gwałtowny wzrost niezwiązany z fundamentami. Nie należy jednak mylić takiego ruchu z potwierdzeniem tezy inwestycyjnej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 mies.)</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$757,07 mln</td><td>Prognoza wzrostu: +131,32% w 3 lata</td></tr>
+          <tr><td>Zysk brutto</td><td>$517,82 mln</td><td style="color:var(--ocena-kupno)">Marża 68,40%</td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$222,27 mln</strong></td><td>Marża -29,36%</td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td style="color:var(--ocena-kupno)">+$157,20 mln</td><td>Różnica: około $379 mln spoza działalności</td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-uwaga)">+$158,05 mln</td><td>EPS $0,54 — jakość zysku niska</td></tr>
+          <tr><td>EBITDA</td><td>$147,18 mln</td><td style="color:var(--ocena-uwaga)">Marża 19,44%</td></tr>
+          <tr><td>Przepływy operacyjne</td><td>+$392,47 mln</td><td>Dodatnie</td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$2,71 mld</strong></td><td>Siedmiokrotność przepływów operacyjnych</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$2,32 mld</strong></td><td>-$6,49 na akcję przy kursie $44,06</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Zestawienie dwóch wierszy z tej tabeli mówi wszystko o skali przedsięwzięcia.</strong> Przepływy operacyjne wynoszą 392 miliony dolarów, a nakłady inwestycyjne 2,71 miliarda — <strong>siedmiokrotnie więcej</strong>. Różnicę, czyli 2,32 miliarda rocznie, spółka finansuje długiem (zaciągnięto netto 2,05 mld) i emisją akcji (+52,27% w rok). IREN buduje przyszłość za pieniądze, których nie zarabia — co samo w sobie nie jest zarzutem, ale wyznacza granicę, do której teza może być realizowana bez zewnętrznego wsparcia.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $44,06</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$15,75 mld</td><td>EV $17,50 mld</td></tr>
+          <tr><td>P/E</td><td>81,11×</td><td style="color:var(--ocena-sprzedaz)">Na zysku, który nie pochodzi z działalności</td></tr>
+          <tr><td>P/S</td><td>20,80× (forward 8,32×)</td><td style="color:var(--ocena-sprzedaz)">Bardzo wysoko</td></tr>
+          <tr><td>EV/Sales</td><td>23,11×</td><td style="color:var(--ocena-sprzedaz)">Wyżej niż NVIDIA (21,35×)</td></tr>
+          <tr><td><strong>EV/EBITDA</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>118,89×</strong></td><td>Ponad trzykrotność NVIDII (32,71×)</td></tr>
+          <tr><td>P/B</td><td>5,64×</td><td>Wartość księgowa $7,81 na akcję</td></tr>
+          <tr><td><strong>Dług / EBITDA</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>26,94</strong></td><td>Skrajnie wysoko</td></tr>
+          <tr><td>Pokrycie odsetek</td><td style="color:var(--ocena-sprzedaz)">-5,56</td><td>Wynik operacyjny nie pokrywa odsetek</td></tr>
+          <tr><td><strong>ROIC vs WACC</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-5,92% vs 22,45%</strong></td><td>Największa przepaść w portfelu</td></tr>
+          <tr><td>Altman Z-Score</td><td style="color:var(--ocena-uwaga)">1,42</td><td>Poniżej 3, ale lepiej niż CoreWeave (0,29)</td></tr>
+          <tr><td>Piotroski F-Score</td><td>5 na 9</td><td>Średnio</td></tr>
+          <tr><td>Konsensus (16 analityków)</td><td>$81,73 · kupno</td><td style="color:var(--ocena-kupno)">+85,5% — rozbieżność z moją oceną</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Dlaczego nie podaję Forward P/E</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing</td><td>81,11×</td><td style="color:var(--ocena-sprzedaz)">Oparte na zysku spoza działalności</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>brak</strong></td><td>Analitycy nie prognozują zysku netto</td></tr>
+          <tr><td>P/S bieżące</td><td>20,80×</td><td>Przychody $757,07 mln</td></tr>
+          <tr><td><strong>Forward P/S</strong></td><td><strong>8,32×</strong></td><td>Implikuje przychody około $1,89 mld</td></tr>
+          <tr><td>Prognoza wzrostu przychodów (3 lata)</td><td>+131,32%</td><td style="color:var(--ocena-kupno)">Bardzo wysoka</td></tr>
+          <tr><td>CoreWeave (odniesienie)</td><td>forward P/S 3,00×</td><td style="color:var(--ocena-uwaga)">Ta sama teza, wycena blisko trzykrotnie niższa</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> brak prognozowanego wskaźnika ceny do zysku nie jest przeoczeniem — <strong>szesnastu analityków po prostu nie prognozuje, kiedy IREN zacznie zarabiać z działalności</strong>. Sensowną miarą pozostaje więc cena do sprzedaży, a ta w ujęciu przyszłym wynosi 8,32 wobec 3,00 u CoreWeave, który realizuje tę samą tezę przy dziesięciokrotnie większych przychodach i portfelu zamówień na 104 miliardy dolarów. <strong>IREN jest wyceniony znacznie drożej niż jego bezpośredni odpowiednik.</strong></p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$38 – $56</div><div class="fair-value-note">Baza: 7–11× przychodów prognozowanych przy założeniu realizacji konwersji na AI i utrzymania marży brutto powyżej 60% | Konsensus 16 analityków: $81,73 („kupno") — <strong>znacznie powyżej mojego szacunku</strong>; różnica bierze się z tego, że przypisuję mniejszą wartość zyskowi spoza działalności i wyżej wyceniam ryzyko rozwodnienia | Scenariusz negatywny (spadek kursu bitcoina, opóźnienie konwersji, kolejna emisja akcji): $20–26 | Scenariusz pozytywny (kontrakty AI zamieniające moc na stały przychód, dodatni wynik operacyjny): $75–85 | Przy $44,06 potencjał od -55% do +93%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>IREN</th><th>CoreWeave</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Brutto</td><td>68,40%</td><td>67,42%</td><td style="color:var(--ocena-kupno)">Porównywalnie dobrze</td></tr>
+          <tr><td><strong>EBITDA</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>19,44%</strong></td><td style="color:var(--ocena-kupno)">49,92%</td><td>Tu drogi się rozchodzą</td></tr>
+          <tr><td>Operacyjna</td><td style="color:var(--ocena-sprzedaz)">-29,36%</td><td>-2,66%</td><td>IREN dziesięciokrotnie głębiej pod kreską</td></tr>
+          <tr><td>Netto</td><td style="color:var(--ocena-uwaga)">+20,88%</td><td>-25,40%</td><td>Dodatnia tylko dzięki przeszacowaniom</td></tr>
+          <tr><td>ROIC</td><td style="color:var(--ocena-sprzedaz)">-5,92%</td><td>-0,34%</td><td>Koszt kapitału IREN: 22,45%</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>To zestawienie jest ważniejsze niż jakikolwiek pojedynczy wskaźnik.</strong> IREN i CoreWeave realizują tę samą tezę i mają niemal identyczną marżę brutto — 68,40% wobec 67,42%. Ale na poziomie EBITDA CoreWeave osiąga 49,92%, a IREN <strong>19,44%</strong>. Oznacza to, że IREN ponosi dużo wyższe koszty poniżej linii zysku brutto: utrzymania, energii, przebudowy. <strong>Konwersja kopalni na centrum danych AI okazuje się droższa, niż wygląda z zewnątrz.</strong></p>
+      <div class="alert alert-danger"><strong>Zwrot z kapitału jest tu najsłabszym punktem w całym Twoim portfelu.</strong> ROIC wynosi minus 5,92% przy średnim ważonym koszcie kapitału 22,45%. Dla porównania: NVIDIA ma ROIC 104,67% przy koszcie 16,40%, a Marvell — który krytykowałem w osobnym raporcie za to, że nie zarabia własnego kosztu pieniądza — ma przynajmniej 6,87%. <strong>IREN nie tylko nie zarabia kosztu kapitału, ale zwraca ujemnie, przy najwyższym koszcie kapitału w portfelu.</strong> To jest definicja niszczenia wartości na kapitale — uzasadniona wyłącznie wtedy, gdy faza budowy naprawdę się skończy.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$2,21 mld</td><td style="color:var(--ocena-kupno)">Solidna poduszka</td></tr>
+          <tr><td>Zadłużenie</td><td>$3,96 mld</td><td>Dług netto -$1,75 mld, czyli -$4,90 na akcję</td></tr>
+          <tr><td><strong>Wskaźnik bieżącej płynności</strong></td><td style="color:var(--ocena-kupno)"><strong>3,72</strong></td><td>Znacznie lepiej niż CoreWeave (0,46)</td></tr>
+          <tr><td>Kapitał obrotowy</td><td style="color:var(--ocena-kupno)">+$1,77 mld</td><td>Dodatni</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-uwaga)">1,49</td><td>Wysoko, ale nie skrajnie</td></tr>
+          <tr><td><strong>Dług / EBITDA</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>26,94</strong></td><td>Spłata z bieżącego zysku nierealna</td></tr>
+          <tr><td>Pokrycie odsetek</td><td style="color:var(--ocena-sprzedaz)">-5,56</td><td>Wynik operacyjny ujemny</td></tr>
+          <tr><td>Liczba akcji</td><td style="color:var(--ocena-sprzedaz)">+52,27% r/r</td><td>Kwartalnie +11,98% — tempo rośnie</td></tr>
+          <tr><td>Altman Z-Score</td><td style="color:var(--ocena-uwaga)">1,42</td><td>Piotroski 5 na 9</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Bilans IREN jest wyraźnie zdrowszy od CoreWeave i warto to uczciwie odnotować.</strong> Płynność bieżąca 3,72 wobec 0,46, kapitał obrotowy dodatni 1,77 miliarda wobec ujemnego 11,4 miliarda, dług 3,96 miliarda wobec 51,6 miliarda, wskaźnik Altmana 1,42 wobec 0,29. <strong>IREN nie stoi przed ryzykiem niewypłacalności w najbliższym czasie</strong> — ma dwa miliardy gotówki i przepływy operacyjne dodatnie.</div>
+      <p>Problemem nie jest więc wypłacalność, tylko <strong>rozwodnienie</strong>. Liczba akcji rośnie o 52,27% rocznie, a w ostatnim kwartale o 11,98%, czyli w tempie przyspieszającym. Przy nakładach 2,71 miliarda i przepływach operacyjnych 392 milionów kolejne emisje są praktycznie pewne. <strong>Twój udział w spółce topnieje szybciej, niż większość inwestorów zdaje sobie sprawę</strong> — nawet gdy kurs rośnie.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">⚡</div><div class="catalyst-body"><h4>Moc przyłączeniowa jako zasób deficytowy</h4><p>Czas oczekiwania na duże przyłącze energetyczne liczy się w latach. IREN ma je już zabezpieczone — to realna, trudna do odtworzenia przewaga czasowa.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Prognoza wzrostu przychodów +131% w trzy lata</h4><p>Najwyższa w całym Twoim portfelu. Konwersja mocy na obciążenia AI daje przychód wielokrotnie wyższy z tego samego megawata niż kopanie bitcoina.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏦</div><div class="catalyst-body"><h4>Bilans mocniejszy, niż sugeruje profil ryzyka</h4><p>Gotówka $2,21 mld, płynność bieżąca 3,72, kapitał obrotowy dodatni $1,77 mld. Znacznie bezpieczniej niż CoreWeave.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Konsensus na $81,73</h4><p>Szesnastu analityków, rekomendacja „kupno", cel o 85,5% powyżej ceny. To znacznie więcej, niż wynika z mojego szacunku — warto znać obie liczby.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔥</div><div class="catalyst-body"><h4>Krótka sprzedaż 31,81% wolnego obrotu</h4><p>Przy dobrych wynikach 27 sierpnia domykanie tych pozycji może wywołać bardzo gwałtowny ruch w górę — niezależnie od fundamentów.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🎭</div><div class="catalyst-body"><h4>Zysk netto nie pochodzi z działalności</h4><p>Wynik operacyjny -$222,27 mln, wynik netto +$158,05 mln. Różnicę robi około $379 mln spoza linii operacyjnej — najpewniej przeszacowanie bitcoina. Wskaźnik P/E 81 opiera się na zysku papierowym.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💸</div><div class="catalyst-body"><h4>Rozwodnienie 52,27% rocznie i przyspieszające</h4><p>W ostatnim kwartale +11,98%. Przy nakładach $2,71 mld wobec przepływów operacyjnych $392 mln kolejne emisje są nieuniknione.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📊</div><div class="catalyst-body"><h4>EV/EBITDA 118,89 — trzykrotność NVIDII</h4><p>Forward P/S 8,32 wobec 3,00 u CoreWeave, który realizuje tę samą tezę dziesięciokrotnie większą skalą i portfelem zamówień na $104 mld.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🌊</div><div class="catalyst-body"><h4>Zwrot z kapitału -5,92% przy koszcie 22,45%</h4><p>Największa przepaść w całym portfelu. Dla porównania NVIDIA: +104,67% przy koszcie 16,40%.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎢</div><div class="catalyst-body"><h4>Beta 4,30 i podwójna ekspozycja na cykl</h4><p>Kurs porusza się ponad czterokrotnie mocniej niż rynek, a spółka zależy jednocześnie od kursu bitcoina i od nakładów na AI — dwóch cykli, które mogą się rozejść.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>Przychody</th><th>Forward P/S</th><th>Marża EBITDA</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>IREN</strong></td><td>$757 mln</td><td style="color:var(--ocena-sprzedaz)">8,32×</td><td style="color:var(--ocena-sprzedaz)">19,44%</td><td>Najdroższy przy najniższej marży</td></tr>
+          <tr><td><strong>CoreWeave</strong></td><td>$7,59 mld</td><td style="color:var(--ocena-kupno)">3,00×</td><td style="color:var(--ocena-kupno)">49,92%</td><td>Ta sama teza, lepsza wycena — masz w portfelu</td></tr>
+          <tr><td>Oracle</td><td>znacznie większe</td><td>—</td><td>—</td><td style="color:var(--ocena-uwaga)">Ten sam model, dług $167 mld — masz w portfelu</td></tr>
+          <tr><td>MARA Holdings</td><td>—</td><td>—</td><td>—</td><td>Kopalnia bitcoina bez pełnej konwersji — masz w portfelu</td></tr>
+          <tr><td>TeraWulf, Core Scientific</td><td>—</td><td>—</td><td>—</td><td>Ta sama konwersja, obserwowane</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Bezpośrednie porównanie z CoreWeave jest dla IREN niekorzystne.</strong> Obie spółki robią to samo, obie masz w portfelu. CoreWeave ma <strong>dziesięciokrotnie wyższe przychody, dwuipółkrotnie wyższą marżę EBITDA i wycenę blisko trzykrotnie niższą</strong> mierzoną ceną do sprzedaży w ujęciu przyszłym — a do tego portfel zamówień na 104 miliardy dolarów, którego IREN nie ma czym przebić. Jedyne, w czym IREN wypada lepiej, to bilans: płynność 3,72 wobec 0,46 i Altman 1,42 wobec 0,29. <strong>Jeśli chcesz mieć ekspozycję na tę tezę, pytanie brzmi raczej „która z tych dwóch", a nie „obie".</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$44,06</strong></td><td>+148,51% w 52 tygodnie</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$44,89</td><td style="color:var(--ocena-uwaga)">Kurs 1,8% poniżej</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$47,09</td><td style="color:var(--ocena-sprzedaz)">Kurs 6,4% poniżej — trend osłabł</td></tr>
+          <tr><td>RSI (14)</td><td>54,86</td><td>Neutralnie</td></tr>
+          <tr><td><strong>Beta</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>4,30</strong></td><td>Najwyższa w portfelu — ruchy 4× silniejsze od rynku</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>31,81% wolnego obrotu</strong></td><td>Wzrost z 93,7 do 98,2 mln akcji</td></tr>
+          <tr><td>Średni wolumen</td><td>47,8 mln akcji</td><td>Bardzo płynny mimo wielkości</td></tr>
+          <tr><td>Wsparcie S1</td><td>$38</td><td>Dolny zakres fair value</td></tr>
+          <tr><td>Opór R1</td><td>$47</td><td>Średnia 200-sesyjna</td></tr>
+          <tr><td>Opór R2</td><td>$56</td><td>Górny zakres fair value</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Dobre wyniki 27 sierpnia</li><li>Domykanie krótkich pozycji (31,8% obrotu)</li><li>Odzyskanie $47 i droga ku $56</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Kolejna emisja akcji albo słabsze wyniki</li><li>Spadek kursu bitcoina odbierający zysk księgowy</li><li>Zejście ku $20–26</li></ul></div>
+      </div>
+      <p><strong>To jedyna z dzisiejszych spółek notowana poniżej obu średnich.</strong> NVIDIA jest powyżej obu, CoreWeave powyżej obu po skoku, Marvell i Nokia poniżej pięćdziesięciosesyjnej ale powyżej dwustusesyjnej. IREN jest pod jedną i drugą — trend wzrostowy, który dał 149% w rok, wyraźnie stracił impet.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Kurs poniżej obu średnich, wyniki 27 sierpnia przy becie 4,30 to zdarzenie o bardzo szerokim rozrzucie. Krótka sprzedaż 31,8% działa w obie strony.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Prognoza wzrostu +131% jest realna, ale wycena już ją zawiera: forward P/S 8,32 wobec 3,00 u CoreWeave przy dziesięciokrotnie mniejszej skali.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Moc przyłączeniowa to realna przewaga, ale ROIC -5,92% przy koszcie kapitału 22,45% i rozwodnieniu 52% rocznie wymaga, by faza budowy naprawdę się zakończyła.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: 1–2% portfela.</strong> Masz dziś około 2,3% — to rozsądny poziom dla spółki o becie 4,30 i nie ma potrzeby go zmieniać</li>
+        <li><strong>Trzymać zysk, nie dokupywać.</strong> Jesteś na plusie ponad 760%; przy wycenie forward P/S 8,32 i kursie poniżej obu średnich dokładanie kapitału nie ma uzasadnienia</li>
+        <li><strong>Rozważ zabezpieczenie części zysku</strong> — sprzedaż jednej trzeciej pozycji zwraca kilkakrotność pierwotnego wkładu i pozostawia resztę jako darmową opcję. To decyzja o zarządzaniu ryzykiem, nie o tezie</li>
+        <li><strong>Dokupienie:</strong> tylko poniżej $38, i tylko po potwierdzeniu dodatniego wyniku operacyjnego</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $55–60</li>
+        <li><strong>Jedna liczba do śledzenia:</strong> <strong>wynik operacyjny</strong>. Dziś minus 222 miliony. Przejście na dodatni będzie momentem, w którym ta spółka przestanie być zakładem, a stanie się przedsiębiorstwem</li>
+        <li><strong>Wyjście z tezy:</strong> kolejna duża emisja akcji, brak poprawy wyniku operacyjnego przez dwa kwartały albo istotny spadek kursu bitcoina</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$38 – $56</div><div class="fair-value-note">Scenariusz negatywny: $20–26 | Scenariusz pozytywny: $75–85 | Konsensus 16 analityków: $81,73 — znacznie powyżej mojego szacunku</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by trzymać</h4><ul>
+          <li><strong>Moc przyłączeniowa jest zasobem deficytowym.</strong> Czas oczekiwania na duże przyłącze liczy się w latach — IREN ma je zabezpieczone</li>
+          <li><strong>Prognoza wzrostu przychodów +131% w trzy lata</strong> — najwyższa w portfelu; konwersja megawata z bitcoina na AI wielokrotnie zwiększa przychód</li>
+          <li><strong>Bilans bezpieczniejszy, niż sugeruje profil ryzyka.</strong> Gotówka $2,21 mld, płynność bieżąca 3,72, kapitał obrotowy dodatni $1,77 mld</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by nie dokupywać</h4><ul>
+          <li><strong>Zysk nie pochodzi z działalności.</strong> Wynik operacyjny -$222 mln przy netto +$158 mln — różnicę robi przeszacowanie aktywów</li>
+          <li><strong>Wyceniony drożej niż CoreWeave</strong> przy dziesięciokrotnie mniejszych przychodach i dwuipółkrotnie niższej marży EBITDA</li>
+          <li><strong>Rozwodnienie 52,27% rocznie i przyspieszające.</strong> ROIC -5,92% przy koszcie kapitału 22,45% — największa przepaść w portfelu</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> kolejna duża emisja akcji, brak poprawy wyniku operacyjnego przez dwa kwartały albo istotny spadek kursu bitcoina → zejście w rejon $20–26.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> dodatni wynik operacyjny plus długoterminowe kontrakty AI zamieniające moc na stały przychód → droga ku $75–85.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">IREN jest Twoją najlepszą pozycją — kurs wzrósł o 149% w rok i ponad siedmiokrotnie od momentu zakupu. Warto zacząć od uczciwego stwierdzenia: <strong>ta inwestycja była trafiona i teza, która za nią stała, okazała się słuszna</strong>. Moc przyłączeniowa rzeczywiście stała się zasobem deficytowym, konwersja kopalni bitcoina na centra danych AI rzeczywiście podnosi przychód z megawata, a prognoza wzrostu przychodów o 131% w trzy lata jest najwyższa w całym Twoim portfelu.</p>
+
+      <p class="sum-lead" style="border-color:var(--ocena-sprzedaz)">Ale liczby, które widzę dzisiaj, każą postawić inne pytanie niż „czy dokupić". <strong>Wynik operacyjny wynosi minus 222 miliony dolarów, podczas gdy wynik netto to plus 158 milionów</strong> — całą różnicę, około 379 milionów, robią pozycje spoza działalności podstawowej, u spółki trzymającej bitcoina niemal na pewno przeszacowanie jego wartości. To znaczy, że wskaźnik ceny do zysku na poziomie 81 opiera się na zysku papierowym, a działalność jako taka wciąż przynosi stratę. Do tego dochodzi rozwodnienie <strong>52,27% rocznie i przyspieszające</strong> — w ostatnim kwartale o 11,98% — oraz zwrot z kapitału minus 5,92% przy jego koszcie 22,45%, czyli największa przepaść w Twoim portfelu.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Najbardziej kłopotliwe jest jednak porównanie z CoreWeave, którego też masz. <strong>Obie spółki realizują tę samą tezę. CoreWeave ma dziesięciokrotnie wyższe przychody, dwuipółkrotnie wyższą marżę EBITDA, portfel zamówień na 104 miliardy dolarów — i jest wyceniony blisko trzykrotnie taniej</strong> mierząc ceną do sprzedaży w ujęciu przyszłym: 3,00 wobec 8,32. IREN wygrywa jedynie bilansem, i to wyraźnie: płynność bieżąca 3,72 wobec 0,46. Ale to argument za bezpieczeństwem pozycji, nie za jej wyceną.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Moc przyłączeniowa jest realną przewagą.</strong> Czas oczekiwania na duże przyłącze liczy się w latach, a IREN ma je zabezpieczone.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Bilans bezpieczny.</strong> Gotówka $2,21 mld, płynność bieżąca 3,72, kapitał obrotowy dodatni $1,77 mld, przepływy operacyjne +$392 mln.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Popyt na moc jest realny.</strong> Nakłady operatorów chmury przekraczają $200 mld w 2026 roku.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Konwersja na kontrakty AI.</strong> Nakłady $2,71 mld już poniesiono; pozostaje pytanie, kiedy zamienią się w stały przychód.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Koniec fazy rozwodnienia.</strong> +52,27% rocznie i przyspieszające. Przy nakładach siedmiokrotnie wyższych od przepływów kolejne emisje są niemal pewne.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Zysk z działalności.</strong> Wynik operacyjny -$222,27 mln, ROIC -5,92% przy koszcie kapitału 22,45%. Tu nic się jeszcze nie spina.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>27 sierpnia 2026</strong></td><td>Wyniki kwartalne — data potwierdzona</td><td>Przy becie 4,30 i krótkiej sprzedaży 31,8% obrotu rozrzut reakcji będzie bardzo szeroki. Ten sam dzień co Marvell</td></tr>
+            <tr><td>Na bieżąco</td><td>Ogłoszenia kontraktów AI</td><td>Jedyna rzecz, która może zamienić moc na przewidywalny przychód</td></tr>
+            <tr><td>Na bieżąco</td><td>Emisje akcji</td><td>Przy nakładach siedmiokrotnie wyższych od przepływów operacyjnych kolejna jest kwestią czasu</td></tr>
+            <tr><td>Na bieżąco</td><td>Kurs bitcoina</td><td>Wpływa jednocześnie na przychody i na wykazywany zysk netto</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Wynik operacyjny</strong></td><td>-$222,27 mln</td><td>brak poprawy przez 2 kwartały</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>ROIC vs koszt kapitału</strong></td><td>-5,92% vs 22,45%</td><td>pogłębienie różnicy</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Liczba akcji</td><td>+52,27% r/r, +11,98% kw/kw</td><td>dalsze przyspieszenie</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Marża brutto</td><td>68,40%</td><td>&lt; 60%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Płynność bieżąca</td><td>3,72</td><td>&lt; 2,0</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Krótka sprzedaż</td><td>31,81% wolnego obrotu</td><td>powyżej 40%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji: 1–2% portfela.</strong> Masz około 2,3% — rozsądnie jak na betę 4,30, nie ma potrzeby zmieniać</li>
+          <li><strong>Trzymać, nie dokupywać.</strong> Plus ponad 760% i wycena droższa niż u większego, rentowniejszego CoreWeave</li>
+          <li><strong>Rozważ zabezpieczenie części zysku</strong> — sprzedaż jednej trzeciej zwraca wielokrotność pierwotnego wkładu, a reszta zostaje darmową opcją. To decyzja o ryzyku, nie o tezie</li>
+          <li><strong>Dokupienie:</strong> tylko poniżej $38 i tylko po potwierdzeniu dodatniego wyniku operacyjnego</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie $55–60</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> wynik operacyjny. Przejście na dodatni zamieni tę spółkę z zakładu w przedsiębiorstwo</li>
+          <li><strong>Uwaga portfelowa:</strong> IREN, CoreWeave i Oracle to trzy warianty tego samego zakładu na tanie finansowanie budowy centrów danych — łącznie około 11% portfela</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">⚖️ NEUTRALNA — świetna inwestycja, która przestała być tania</div>
+        <p>Kupiłeś IREN po $5,10 i dziś kosztuje $44,06. Teza była trafna, moc przyłączeniowa okazała się zasobem deficytowym, a konwersja na obciążenia AI działa. Nie ma tu nic do skrytykowania w decyzji sprzed roku.</p>
+        <p>Dziś jednak liczby wyglądają inaczej. <strong>Działalność podstawowa przynosi stratę 222 milionów dolarów, a wykazywany zysk pochodzi z przeszacowania aktywów, nie z prowadzenia biznesu.</strong> Liczba akcji rośnie o 52% rocznie i przyspiesza, zwrot z kapitału jest ujemny przy koszcie 22,45%, a wycena mierzona ceną do sprzedaży jest blisko trzykrotnie wyższa niż u CoreWeave — spółki dziesięciokrotnie większej, rentowniejszej i z portfelem zamówień na 104 miliardy dolarów. Do tego kurs jest poniżej obu średnich, a krótka sprzedaż sięga 31,8% wolnego obrotu i rośnie.</p>
+        <p><strong>Trzymać — pozycja jest rozsądnej wielkości i teza wciąż może się dopełnić. Ale nie dokupywać, i rozważyć zabezpieczenie części tak dużego zysku</strong>, bo przy becie 4,30 droga w dół bywa równie szybka jak ta, która Cię tu przywiodła.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$38–56</b></div>
+          <div><span>Scenariusz negatywny</span><b>$20–26</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$75–85</b></div>
+          <div><span>Sugerowana pozycja</span><b>1–2% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki — 27 sierpnia</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 16 sierpnia 2026 | Cena: $44,06 (zamknięcie 14.08.2026) | Pierwsza analiza IREN | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 16.08.2026</strong> | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

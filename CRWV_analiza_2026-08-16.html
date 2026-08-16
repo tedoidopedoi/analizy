@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRWV — CoreWeave | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: CRWV</div>
+    <div class="company-name">CoreWeave, Inc.</div>
+    <div class="company-sub">Chmura wyspecjalizowana w AI · wynajem mocy obliczeniowej · Livingston, New Jersey</div>
+    <div class="header-meta">
+      <span class="meta-tag">Przychody +112% r/r</span>
+      <span class="meta-tag">Portfel zamówień $104 mld</span>
+      <span class="meta-tag">Dług $51,6 mld</span>
+      <span class="meta-tag">Altman 0,29</span>
+      <div class="price-display">
+        <div class="price-main">$105,26</div>
+        <div class="price-sub">zamknięcie 14.08.2026 | -11% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Chmura i centra danych</span><span class="temat">Moc obliczeniowa dla AI</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO SPEKULACYJNE — ogromny portfel zamówień na kruchym bilansie">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO SPEKULACYJNE</span><span class="rb-qual">ryzyko kredytowe realne</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$120 – $155</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">+14% do +47%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>11 sierpnia 2026</b><em>kurs +20% od tego dnia</em></div>
+    <div class="rb-right">Pozycja maks. 2–3% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (14.08.2026)</div><div class="metric-value">$105,26</div><div class="metric-detail">+20% od wyników z 11 sierpnia</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja / EV</div><div class="metric-value">$58,1 / $104,1 mld</div><div class="metric-detail">Różnicę robi dług</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">$2,6 mld</div><div class="metric-detail">+112% r/r</div></div>
+    <div class="metric-card"><div class="metric-label">Portfel zamówień</div><div class="metric-value em">$104,2 mld</div><div class="metric-detail">+246% r/r | 13,7× przychodów rocznych</div></div>
+    <div class="metric-card"><div class="metric-label">Marża EBITDA</div><div class="metric-value green">49,92%</div><div class="metric-detail">Marża brutto 67,42%</div></div>
+    <div class="metric-card"><div class="metric-label">Wolne przepływy</div><div class="metric-value red">-$13,66 mld</div><div class="metric-detail">Nakłady $20,57 mld rocznie</div></div>
+    <div class="metric-card"><div class="metric-label">Zadłużenie</div><div class="metric-value red">$51,61 mld</div><div class="metric-detail">Altman 0,29 | pokrycie odsetek -0,11</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (38 analityków)</div><div class="metric-value green">$143,26</div><div class="metric-detail">+36,1% | kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Czym jest CoreWeave</h3>
+      <p>CoreWeave wynajmuje moc obliczeniową do trenowania i uruchamiania modeli sztucznej inteligencji. Nie projektuje układów jak Marvell ani nie sprzedaje oprogramowania — <strong>kupuje akceleratory, buduje wokół nich centra danych i sprzedaje dostęp na kontrakty wieloletnie</strong>. To najbliższy odpowiednik dewelopera nieruchomości w tym koszyku: kapitał wchodzi na początku, przychód spływa latami.</p>
+      <p>Przychody za ostatnie dwanaście miesięcy wynoszą 7,59 miliarda dolarów przy 2 189 pracownikach — <strong>3,47 miliona dolarów przychodu na osobę</strong>. Skala jest efektem tego, że biznes jest kapitałochłonny, a nie ludziochłonny.</p>
+
+      <div class="alert alert-info"><strong>Twoja pozycja wygląda inaczej, niż pokazuje eksport z rachunku.</strong> W pliku z 11 sierpnia CoreWeave jest wyceniony na $87,75, czyli 9,5% pod Twoją ceną nabycia. Ale <strong>wyniki ukazały się 11 sierpnia po zamknięciu sesji</strong> i kurs skoczył o około 20% — w piątek 14 sierpnia zamknął się na $105,26. Przy średniej cenie zakupu $96,97 pozycja jest <strong>na plusie około 8,6%</strong>, a nie na minusie.</div>
+
+      <h3>Wyniki Q2 2026 — 11 sierpnia</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Dynamika</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody kwartalne</td><td><strong>$2,6 mld</strong></td><td style="color:var(--ocena-kupno)">+112% r/r — rekord</td></tr>
+          <tr><td><strong>Portfel zamówień</strong></td><td><strong>$104,2 mld</strong></td><td style="color:var(--ocena-kupno)">+246% r/r, z $30,1 mld</td></tr>
+          <tr><td>Nowe zobowiązania w Q3</td><td>ponad $25 mld</td><td style="color:var(--ocena-kupno)">Poza powyższą kwotą</td></tr>
+          <tr><td>Prognoza na Q3</td><td>$3,4–3,6 mld</td><td style="color:var(--ocena-kupno)">+158% w środku przedziału</td></tr>
+          <tr><td>Prognoza roczna 2026</td><td>$12,4–13,2 mld</td><td style="color:var(--ocena-kupno)">Podniesiona</td></tr>
+          <tr><td>Skorygowany dochód operacyjny 2026</td><td>$960 mln – $1,15 mld</td><td>Dodatni</td></tr>
+          <tr><td><strong>Skorygowana strata netto Q2</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$567 mln</strong></td><td style="color:var(--ocena-sprzedaz)">Z -$130 mln rok wcześniej — koszty odsetek</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Te dwie ostatnie liczby to cała ta spółka w skrócie.</strong> Portfel zamówień urósł do 104 miliardów dolarów, a strata potroiła się — <strong>i to nie dlatego, że biznes działa źle, tylko dlatego, że odsetki od długu rosną szybciej niż przychody</strong>. CoreWeave ma zakontraktowane trzynastokrotność swoich rocznych przychodów, ale żeby ten portfel obsłużyć, musi najpierw wybudować infrastrukturę za pieniądze, których nie ma.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Element</th><th>Opis</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Klastry obliczeniowe</strong></td><td>Centra danych zaprojektowane wyłącznie pod obciążenia AI</td><td style="color:var(--ocena-kupno)">Marża brutto 67,42%</td></tr>
+          <tr><td><strong>Kontrakty wieloletnie</strong></td><td>Zobowiązania klientów na lata z góry</td><td style="color:var(--ocena-kupno)">Portfel $104,2 mld</td></tr>
+          <tr><td>Warstwa programowa</td><td>Orkiestracja, kolejkowanie zadań, zarządzanie klastrem</td><td>Wyróżnik wobec ogólnych chmur</td></tr>
+          <tr><td>Dostęp do sprzętu</td><td>Wczesny dostęp do nowych generacji akceleratorów</td><td style="color:var(--ocena-kupno)">Wdrożenia Vera Rubin wśród pierwszych</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — wąska, ale prawdziwa</h3>
+      <p>Przewaga CoreWeave polega na <strong>szybkości uruchamiania mocy i na wyspecjalizowaniu</strong>. Wielkie chmury muszą obsługiwać wszystkie rodzaje obciążeń; CoreWeave robi jedno i robi to szybciej. Do tego dochodzi dostęp do sprzętu — spółka znalazła się wśród pierwszych wdrożeń architektury Vera Rubin, obok Amazona, Microsoftu, Google'a i Oracle'a.</p>
+      <div class="alert alert-danger"><strong>Ale to jest fosa o ograniczonej trwałości.</strong> CoreWeave nie ma nic, czego nie mógłby zbudować Microsoft czy Amazon — ma tylko przewagę czasową i skłonność do brania na siebie ryzyka, którego wielkie chmury brać nie muszą. <strong>Kiedy popyt przewyższa podaż, taka rola jest bardzo dochodowa. Kiedy podaż dogoni popyt, znika pierwsza.</strong> Cała teza sprowadza się do pytania, czy CoreWeave zdąży spłacić dług z kontraktów, zanim to nastąpi.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Niedobór mocy obliczeniowej</strong> — operatorzy chmury sami mówią o środowisku ograniczonym podażą; to bezpośrednio tworzy przestrzeń dla CoreWeave</li>
+        <li><strong>Nakłady na infrastrukturę AI</strong> — Amazon 220 mld, Alphabet około 200 mld dolarów w 2026. CoreWeave jest po stronie, która tę infrastrukturę buduje, a nie po stronie, która ją zamawia</li>
+        <li><strong>Koszt pieniądza jest tu zmienną kluczową</strong> — przy 51,6 mld długu każdy punkt procentowy oprocentowania to setki milionów rocznie</li>
+        <li><strong>Ryzyko nadpodaży</strong> — jeśli budowa mocy wyprzedzi popyt, ceny najmu spadną, a kontrakty podpisane dziś okażą się najlepszymi, jakie spółka miała</li>
+        <li><strong>Cykliczność finansowania</strong> — model działa tak długo, jak długo rynek długu chce finansować kolejne rundy. To warunek zewnętrzny, na który zarząd nie ma wpływu</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Stan</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Portfel zamówień</strong></td><td>$104,2 mld</td><td style="color:var(--ocena-kupno)">13,7× przychodów rocznych</td></tr>
+          <tr><td>Wzrost portfela</td><td>z $30,1 mld rok wcześniej</td><td style="color:var(--ocena-kupno)">+246%</td></tr>
+          <tr><td>Nowe zobowiązania w Q3</td><td>ponad $25 mld</td><td style="color:var(--ocena-kupno)">Tempo się utrzymuje</td></tr>
+          <tr><td>Udział instytucji</td><td>53,59%</td><td>Osoby powiązane: 20,11%</td></tr>
+          <tr><td>Liczba akcji</td><td><strong>+75,59% r/r</strong></td><td style="color:var(--ocena-sprzedaz)">Rozwodnienie ogromne</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Portfel zamówień jest realnym aktywem, ale nie jest gwarancją.</strong> Kontrakty na 104 miliardy dolarów zawierają odbiorcy, którzy sami są w fazie inwestycyjnej i sami finansują się długiem albo kapitałem od inwestorów. <strong>Jakość tego portfela zależy od tego, kto go podpisał</strong> — a spółka nie ujawnia struktury odbiorców. W scenariuszu, w którym finansowanie sektora AI się zacieśnia, zamówienia i zdolność CoreWeave do ich obsłużenia psują się jednocześnie, a nie po kolei.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 mies.)</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$7,59 mld</td><td style="color:var(--ocena-kupno)">Prognoza wzrostu 3-letniego: +99,36%</td></tr>
+          <tr><td>Zysk brutto</td><td>$5,12 mld</td><td style="color:var(--ocena-kupno)">Marża 67,42%</td></tr>
+          <tr><td>EBITDA</td><td>$3,79 mld</td><td style="color:var(--ocena-kupno)">Marża 49,92%</td></tr>
+          <tr><td>Wynik operacyjny</td><td style="color:var(--ocena-sprzedaz)">-$202 mln</td><td>Po amortyzacji $3,99 mld</td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-sprzedaz)">-$1,93 mld</td><td>Strata na akcję -$3,70</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-kupno)">+$6,91 mld</td><td>Biznes generuje gotówkę</td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$20,57 mld</strong></td><td>Trzykrotność przepływów operacyjnych</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$13,66 mld</strong></td><td>-$24,76 na akcję</td></tr>
+          <tr><td>Zaciągnięty dług netto</td><td>+$17,14 mld</td><td>Tak sfinansowano różnicę</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Warto zrozumieć, skąd bierze się strata, bo to zmienia jej wymowę.</strong> Na poziomie EBITDA CoreWeave zarabia 3,79 miliarda dolarów przy marży blisko 50%, a przepływy operacyjne wynoszą <strong>dodatnie 6,91 miliarda</strong>. Biznes jako taki działa. Strata bierze się z dwóch pozycji poniżej: <strong>amortyzacji 3,99 miliarda</strong> od sprzętu kupionego w poprzednich latach oraz <strong>kosztów odsetek</strong> od 51,6 miliarda długu. To nie jest spółka, która przepala pieniądze na działalności — to spółka, która przepala je na finansowaniu wzrostu.</div>
+      <p>Różnica ma znaczenie praktyczne: gdyby CoreWeave przestał dziś inwestować, generowałby gotówkę. Problem w tym, że wtedy przestałby też realizować portfel zamówień, na którym opiera się cała wycena.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $105,26</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$58,05 mld</td><td style="color:var(--ocena-uwaga)">EV <strong>$104,08 mld</strong> — dług prawie podwaja wycenę</td></tr>
+          <tr><td>P/E</td><td>brak</td><td style="color:var(--ocena-sprzedaz)">Spółka nierentowna</td></tr>
+          <tr><td>P/S</td><td>7,65× (forward <strong>3,00×</strong>)</td><td style="color:var(--ocena-kupno)">Przepaść oznacza podwojenie przychodów</td></tr>
+          <tr><td>EV/Sales</td><td>13,71×</td><td style="color:var(--ocena-uwaga)">Właściwsza miara przy tym długu</td></tr>
+          <tr><td>EV/EBITDA</td><td>27,47×</td><td style="color:var(--ocena-uwaga)">Znośnie jak na tempo wzrostu</td></tr>
+          <tr><td>P/B</td><td>11,54×</td><td style="color:var(--ocena-sprzedaz)">Kapitał własny tylko $5,02 mld</td></tr>
+          <tr><td><strong>Dług / kapitał własny</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>10,27</strong></td><td>Na każdego dolara kapitału przypada 10 długu</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-0,11</strong></td><td>Wynik operacyjny nie pokrywa odsetek</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>0,29</strong></td><td>Strefa wysokiego ryzyka niewypłacalności</td></tr>
+          <tr><td>Piotroski F-Score</td><td style="color:var(--ocena-sprzedaz)">2 na 9</td><td>Bardzo nisko</td></tr>
+          <tr><td>Konsensus (38 analityków)</td><td>$143,26 · kupno</td><td style="color:var(--ocena-kupno)">+36,1%</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/S zamiast Forward P/E — bo zysku nie ma</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/S bieżące</td><td>7,65×</td><td>Przychody $7,59 mld</td></tr>
+          <tr><td><strong>Forward P/S</strong></td><td><strong>3,00×</strong></td><td>Implikuje przychody około $19,4 mld</td></tr>
+          <tr><td>Prognoza roczna 2026</td><td>$12,4–13,2 mld</td><td style="color:var(--ocena-kupno)">Podniesiona po Q2</td></tr>
+          <tr><td>Prognoza wzrostu przychodów (3 lata)</td><td>+99,36%</td><td style="color:var(--ocena-kupno)">Podwojenie rocznie</td></tr>
+          <tr><td>EV/EBITDA</td><td>27,47×</td><td>Jedyna miara zysku, która ma tu sens</td></tr>
+          <tr><td>Forward P/E</td><td>brak</td><td style="color:var(--ocena-sprzedaz)">Rentowność netto nieprzewidywana</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> spadek wskaźnika ceny do sprzedaży z 7,65 na 3,00 w ujęciu przyszłym oznacza, że rynek zakłada <strong>podwojenie przychodów w ciągu roku</strong> — co jest spójne z prognozą zarządu i z portfelem zamówień. Wycena kapitału nie jest więc wygórowana. <strong>Wygórowane jest zadłużenie</strong>: wartość przedsiębiorstwa to 104 miliardy przy kapitalizacji 58, więc niemal połowę tej spółki „posiadają" wierzyciele. Przy pokryciu odsetek na poziomie -0,11 i wskaźniku Altmana 0,29 rynek długu wycenia tu realne ryzyko niewypłacalności, a nie teoretyczne.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$120 – $155</div><div class="fair-value-note">Baza: 3,5–4,5× przychodów prognozowanych na 2027 przy utrzymaniu marży EBITDA powyżej 45% i dostępie do finansowania na obecnych warunkach | Konsensus 38 analityków: $143,26 („kupno") | Scenariusz negatywny (zacieśnienie rynku długu, refinansowanie po wyższym koszcie, opóźnienia w realizacji portfela): $40–55 | Scenariusz pozytywny (portfel realizowany zgodnie z planem, przejście na dodatni wynik netto): $190–220 | Przy $105,26 potencjał od -62% do +109%</div></div>
+      <p style="color:var(--text-muted);font-size:.88rem"><em>Zwróć uwagę na rozpiętość scenariuszy — od -62% do +109%. To nie jest niedbałość szacunku, tylko wierny obraz tej spółki. Przy dźwigni 10 do 1 niewielka zmiana założeń o koszcie pieniądza przekłada się na wielokrotnie większą zmianę wartości kapitału.</em></p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Poziom</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Brutto</td><td>67,42%</td><td style="color:var(--ocena-kupno)">Bardzo wysoko jak na infrastrukturę</td></tr>
+          <tr><td><strong>EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>49,92%</strong></td><td>Biznes operacyjnie zdrowy</td></tr>
+          <tr><td>Operacyjna</td><td style="color:var(--ocena-sprzedaz)">-2,66%</td><td>Po amortyzacji $3,99 mld</td></tr>
+          <tr><td>Netto</td><td style="color:var(--ocena-sprzedaz)">-25,40%</td><td>Po kosztach odsetek</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$3,47 mln</td><td>Strata na pracownika: $880,8 tys.</td></tr>
+          <tr><td>ROE</td><td style="color:var(--ocena-sprzedaz)">-43,60%</td><td>ROIC -0,34%</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Ta tabela opowiada historię w czterech krokach.</strong> Z każdego dolara przychodu zostaje 67 centów zysku brutto. Po kosztach ogólnych zostaje 50 centów na poziomie EBITDA. Po amortyzacji sprzętu — <strong>minus 3 centy</strong>. Po odsetkach — <strong>minus 25 centów</strong>. Cała rentowność tej spółki znika w dwóch pozycjach: zużyciu sprzętu i koszcie pieniądza.</p>
+      <div class="alert alert-warn"><strong>Amortyzacja zasługuje tu na osobną uwagę.</strong> Wynosi 3,99 miliarda dolarów rocznie, czyli ponad połowę przychodów. Odzwierciedla ona założenie o okresie użytkowania akceleratorów — a to założenie jest w tej branży sporne. <strong>Jeśli sprzęt starzeje się szybciej, niż zakłada harmonogram amortyzacji, dzisiejsze wyniki są zawyżone.</strong> Przy tempie, w jakim NVIDIA wprowadza kolejne architektury — Blackwell, potem Vera Rubin w ciągu roku — to ryzyko nie jest teoretyczne.</p></div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$5,54 mld</td><td>Wobec ujemnych przepływów $13,66 mld rocznie</td></tr>
+          <tr><td><strong>Zadłużenie</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$51,61 mld</strong></td><td>Dług netto -$46,03 mld, czyli -$83,46 na akcję</td></tr>
+          <tr><td>Kapitał własny</td><td>$5,02 mld</td><td>$9,12 na akcję przy kursie $105,26</td></tr>
+          <tr><td><strong>Dług / kapitał własny</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>10,27</strong></td><td>Dług/EBITDA 9,22</td></tr>
+          <tr><td><strong>Wskaźnik bieżącej płynności</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>0,46</strong></td><td>Kapitał obrotowy -$11,40 mld</td></tr>
+          <tr><td>Pokrycie odsetek</td><td style="color:var(--ocena-sprzedaz)">-0,11</td><td>Odsetki spłacane z nowego długu</td></tr>
+          <tr><td>Liczba akcji</td><td style="color:var(--ocena-sprzedaz)">+75,59% r/r</td><td>Kwartalnie +4,55%</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>0,29</strong></td><td>Piotroski 2 na 9</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Ta sekcja jest powodem, dla którego rekomendacja brzmi „spekulacyjne", a nie zwykłe kupno.</strong> Wskaźnik bieżącej płynności 0,46 oznacza, że <strong>zobowiązania wymagalne w ciągu roku przewyższają majątek obrotowy ponad dwukrotnie</strong>, a kapitał obrotowy jest ujemny o 11,4 miliarda dolarów. Wskaźnik Altmana 0,29 to poziom, przy którym modele przypisują wysokie prawdopodobieństwo niewypłacalności w horyzoncie dwóch lat. Krótka sprzedaż obejmuje 18,88% akcji w wolnym obrocie — część rynku obstawia właśnie ten scenariusz.</div>
+      <p>Trzeba jednak uczciwie dodać drugą stronę: <strong>to jest bilans przedsiębiorstwa w fazie budowy, a nie w kryzysie</strong>. Przepływy operacyjne są dodatnie i wynoszą 6,91 miliarda, dług został zaciągnięty pod konkretne kontrakty, a portfel zamówień urósł do 104 miliardów. Modele takie jak Altman nie odróżniają spółki tonącej od spółki, która świadomie lewaruje wzrost. Nie znaczy to, że ryzyko nie istnieje — znaczy tylko, że jego źródłem jest <strong>tempo, a nie kondycja</strong>.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📦</div><div class="catalyst-body"><h4>Portfel zamówień $104,2 mld — trzynastokrotność rocznych przychodów</h4><p>Wzrost o 246% z 30,1 mld rok wcześniej, plus ponad 25 mld nowych zobowiązań już w trzecim kwartale. Przychód jest zakontraktowany, nie prognozowany.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🚀</div><div class="catalyst-body"><h4>Podwojenie przychodów co roku</h4><p>Q2 +112% r/r, prognoza Q3 zakłada +158%, prognoza roczna podniesiona do 12,4–13,2 mld. Konsensus mówi o wzroście 99,36% rocznie przez trzy lata.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💚</div><div class="catalyst-body"><h4>Biznes operacyjnie zarabia</h4><p>Marża brutto 67,42%, EBITDA 49,92%, przepływy operacyjne dodatnie 6,91 mld. Strata bierze się z amortyzacji i odsetek, nie z działalności.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚡</div><div class="catalyst-body"><h4>Wczesny dostęp do nowego sprzętu</h4><p>CoreWeave znalazł się wśród pierwszych wdrożeń architektury Vera Rubin, obok Amazona, Microsoftu, Google'a i Oracle'a — w towarzystwie kilkusetkrotnie większych firm.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Kurs odzyskał obie średnie</h4><p>Po wynikach z 11 sierpnia kurs skoczył o 20% i jest powyżej średniej 50-sesyjnej ($90,66) oraz 200-sesyjnej ($92,95). Krótka sprzedaż spadła z 64,4 do 61,3 mln akcji.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🏚️</div><div class="catalyst-body"><h4>Dług $51,6 mld przy kapitale własnym $5,0 mld</h4><p>Dźwignia 10 do 1, pokrycie odsetek -0,11, wskaźnik Altmana 0,29. Odsetki są dziś spłacane z nowego długu, nie z zysku.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💧</div><div class="catalyst-body"><h4>Wolne przepływy -$13,66 mld rocznie</h4><p>Nakłady 20,57 mld to trzykrotność przepływów operacyjnych. Spółka musi pozyskiwać kapitał nieprzerwanie — to warunek działania, nie wybór.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">✂️</div><div class="catalyst-body"><h4>Liczba akcji wzrosła o 75,59% w rok</h4><p>Nawet jeśli spółka odniesie sukces, Twój udział w niej maleje w tempie, które trudno nadrobić wzrostem kursu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⏳</div><div class="catalyst-body"><h4>Amortyzacja $3,99 mld opiera się na spornym założeniu</h4><p>Jeśli akceleratory starzeją się szybciej, niż zakłada harmonogram — a NVIDIA wprowadza nową architekturę co roku — dzisiejsze wyniki są zawyżone.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Klienci są w tej samej sytuacji co spółka</h4><p>Portfel zamówień podpisali odbiorcy sami finansujący się długiem i kapitałem zewnętrznym. Przy zacieśnieniu finansowania sektora zamówienia i zdolność ich obsługi psują się jednocześnie.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>Rola</th><th>Relacja do CoreWeave</th></tr></thead>
+        <tbody>
+          <tr><td><strong>CoreWeave</strong></td><td>Chmura wyspecjalizowana w AI</td><td>Portfel $104 mld, dług $51,6 mld, Altman 0,29</td></tr>
+          <tr><td><strong>Amazon, Microsoft, Google</strong></td><td>Wielkie chmury ogólnego przeznaczenia</td><td style="color:var(--ocena-sprzedaz)">Mogą zbudować to samo z własnych przepływów</td></tr>
+          <tr><td><strong>Oracle</strong></td><td>Ten sam model, większa skala</td><td style="color:var(--ocena-uwaga)">Też finansuje się długiem — masz go w portfelu</td></tr>
+          <tr><td><strong>IREN</strong></td><td>Kopalnia bitcoina przechodząca na AI</td><td style="color:var(--ocena-uwaga)">Ta sama teza, też w Twoim portfelu</td></tr>
+          <tr><td>TeraWulf, Core Scientific</td><td>Podobna konwersja mocy na AI</td><td>Obserwowane, nie w portfelu</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Zestawienie, które warto zobaczyć wprost.</strong> W Twoim portfelu <strong>CoreWeave, Oracle i IREN to trzy warianty tego samego zakładu</strong>: budowa infrastruktury AI finansowana długiem. Oracle ma 167 miliardów długu i rating o krok od poziomu spekulacyjnego, CoreWeave 51,6 miliarda przy wskaźniku Altmana 0,29, IREN 3,96 miliarda przy Altmanie 1,42. Łącznie to około <strong>11% portfela w spółkach, których teza opiera się na dostępności taniego finansowania</strong>. Nie chodzi o to, że każda z osobna jest zła — chodzi o to, że wszystkie trzy zawiodą z tego samego powodu i w tym samym momencie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$105,26</strong></td><td>-10,61% w 52 tygodnie mimo skoku po wynikach</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$90,66</td><td style="color:var(--ocena-kupno)">Kurs 16,1% powyżej</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$92,95</td><td style="color:var(--ocena-kupno)">Kurs 13,2% powyżej</td></tr>
+          <tr><td>RSI (14)</td><td>62,81</td><td style="color:var(--ocena-uwaga)">Podwyższone po skoku</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>18,88% wolnego obrotu</strong></td><td>Spadek z 64,4 do 61,3 mln akcji</td></tr>
+          <tr><td>Średni wolumen</td><td>31,1 mln akcji</td><td>Bardzo płynny</td></tr>
+          <tr><td>Wsparcie S1</td><td>$93</td><td>Średnia 200-sesyjna</td></tr>
+          <tr><td>Wsparcie S2</td><td>$87</td><td>Poziom sprzed wyników</td></tr>
+          <tr><td>Opór R1</td><td>$120</td><td>Dolny zakres fair value</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Utrzymanie się powyżej $93</li><li>Domykanie krótkich pozycji (18,9% obrotu)</li><li>Droga ku $120 i celowi analityków $143</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Sygnały o kosztownym refinansowaniu długu</li><li>Przebicie $87 z wolumenem</li><li>Zejście ku $40–55</li></ul></div>
+      </div>
+      <p><strong>Warto zwrócić uwagę na krótką sprzedaż.</strong> Blisko jedna piąta wolnego obrotu jest sprzedana na krótko — to poziom, przy którym dobre wiadomości potrafią wywołać gwałtowne wzrosty z powodu domykania pozycji, a nie zmiany fundamentów. Sierpniowy skok o 20% mógł mieć w sobie ten element.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text buy">KUPNO SPEKULACYJNE</div><div class="rating-note">Wyniki za sobą, portfel zamówień potwierdzony, kurs powyżej obu średnich, krótka sprzedaż na 18,9% obrotu jako potencjalne paliwo. Bez katalizatora ryzyka do końca października.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO SPEKULACYJNE</div><div class="rating-note">Portfel $104 mld i podwojenie przychodów uzasadniają cel $120–155. Warunek jednoznaczny: dostęp do finansowania na obecnych warunkach.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Fosa jest wąska — wielkie chmury mogą zbudować to samo z własnych przepływów. Przy dźwigni 10 do 1 i rozwodnieniu 75% rocznie horyzont pięcioletni jest zakładem, nie inwestycją.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: maksymalnie 2–3% portfela.</strong> Masz dziś około 4,4% — to o włos za dużo jak na wskaźnik Altmana 0,29</li>
+        <li><strong>Nie dokupywać po skoku o 20%.</strong> Wyniki są już w cenie, a kolejny katalizator dopiero pod koniec października</li>
+        <li><strong>Rozważ zrównanie pozycji do 2–3%</strong> przy okazji obecnego odbicia — jesteś na plusie 8,6%, więc jest to możliwe bez straty</li>
+        <li><strong>Dokupienie:</strong> tylko poniżej $90, przy zejściu do średnich, i tylko jeśli warunki finansowania się nie pogorszą</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $140–155</li>
+        <li><strong>Jedna liczba do śledzenia:</strong> <strong>koszt odsetek w relacji do EBITDA</strong>. Dziś odsetki przewyższają wynik operacyjny. Każde refinansowanie po wyższej stopie przesuwa moment osiągnięcia rentowności o kolejne kwartały</li>
+        <li><strong>Wyjście z tezy:</strong> spowolnienie wzrostu portfela zamówień, emisja akcji po cenie niższej od rynkowej albo informacja o renegocjacji warunków długu</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$120 – $155</div><div class="fair-value-note">Scenariusz negatywny: $40–55 | Scenariusz pozytywny: $190–220 | Konsensus 38 analityków: $143,26</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Portfel zamówień $104,2 mld</strong> — trzynastokrotność rocznych przychodów, wzrost o 246% r/r, plus ponad $25 mld nowych zobowiązań w Q3</li>
+          <li><strong>Podwojenie przychodów co roku.</strong> Q2 +112%, prognoza Q3 +158%, roczna podniesiona do $12,4–13,2 mld</li>
+          <li><strong>Biznes operacyjnie zarabia.</strong> Marża brutto 67,42%, EBITDA 49,92%, przepływy operacyjne dodatnie $6,91 mld</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Dług $51,6 mld przy kapitale $5,0 mld.</strong> Altman 0,29, pokrycie odsetek -0,11, płynność bieżąca 0,46, kapitał obrotowy -$11,4 mld</li>
+          <li><strong>Wolne przepływy -$13,66 mld rocznie</strong> — spółka musi pozyskiwać kapitał nieprzerwanie, a to warunek zewnętrzny</li>
+          <li><strong>Rozwodnienie 75,59% w rok.</strong> Nawet przy sukcesie spółki Twój udział w niej szybko maleje</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> informacja o refinansowaniu na gorszych warunkach, emisja poniżej ceny rynkowej albo zatrzymanie wzrostu portfela zamówień → zejście w rejon $40–55.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> przejście na dodatni wynik netto przy utrzymanym tempie wzrostu portfela → droga ku $150 i wyżej.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">CoreWeave to najbardziej skrajna pozycja w Twoim portfelu i warto to powiedzieć wprost. Z jednej strony <strong>portfel zamówień wart 104,2 miliarda dolarów</strong> — trzynastokrotność rocznych przychodów, wzrost o 246% rok do roku, plus ponad 25 miliardów nowych zobowiązań już w trzecim kwartale. Przychody podwajają się co roku, marża EBITDA sięga 49,92%, a przepływy operacyjne są dodatnie i wynoszą 6,91 miliarda. Popyt jest realny, zakontraktowany i rośnie szybciej, niż spółka jest w stanie go obsłużyć.</p>
+
+      <p class="sum-lead" style="border-color:var(--ocena-sprzedaz)">Z drugiej strony <strong>51,6 miliarda dolarów długu przy kapitale własnym 5,0 miliarda</strong>. Wskaźnik Altmana 0,29, pokrycie odsetek -0,11, płynność bieżąca 0,46, kapitał obrotowy ujemny o 11,4 miliarda. Wolne przepływy wynoszą minus 13,66 miliarda rocznie, a liczba akcji wzrosła w rok o 75,59%. <strong>Odsetki są dziś spłacane z nowego długu, nie z zysku</strong> — i to jest zdanie, które trzeba przeczytać dwa razy, zanim podejmie się decyzję o wielkości tej pozycji.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Uczciwie trzeba jednak dodać kontekst: <strong>to jest bilans przedsiębiorstwa w budowie, a nie w kryzysie</strong>. Dług zaciągnięto pod konkretne kontrakty, biznes operacyjnie generuje gotówkę, a nakłady 20,57 miliarda to inwestycja w realizację portfela, nie przepalanie pieniędzy. Modele takie jak Altman nie odróżniają spółki tonącej od spółki świadomie lewarującej wzrost. Źródłem ryzyka jest tu <strong>tempo, a nie kondycja</strong> — ale przy dźwigni 10 do 1 tempo w zupełności wystarczy, żeby zaszkodzić.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Popyt jest zakontraktowany.</strong> Portfel $104,2 mld (+246% r/r) plus ponad $25 mld nowych zobowiązań w Q3.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Biznes operacyjnie zarabia.</strong> Marża brutto 67,42%, EBITDA 49,92%, przepływy operacyjne +$6,91 mld.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Wzrost przyspiesza.</strong> Q2 +112% r/r, prognoza Q3 zakłada +158%, prognoza roczna podniesiona po wynikach.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Dostęp do finansowania na obecnych warunkach.</strong> To warunek zewnętrzny — zależy od rynku długu, nie od zarządu.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Okres użytkowania sprzętu zgodny z harmonogramem amortyzacji.</strong> $3,99 mld rocznie opiera się na założeniu spornym przy rocznym cyklu architektur NVIDII.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Samofinansowanie.</strong> Wolne przepływy -$13,66 mld, płynność bieżąca 0,46, odsetki spłacane z nowego długu. Tu nic się jeszcze nie spina.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>11 sierpnia 2026</td><td>Wyniki Q2 — już opublikowane</td><td>Portfel $104,2 mld, przychody +112%, kurs +20%</td></tr>
+            <tr><td>Koniec października 2026</td><td>Wyniki Q3</td><td>Sprawdzian prognozy $3,4–3,6 mld i tempa wzrostu portfela</td></tr>
+            <tr><td>Na bieżąco</td><td>Emisje długu i refinansowania</td><td>Najważniejsza informacja o tej spółce nie pojawia się w raporcie kwartalnym, tylko w komunikatach o finansowaniu</td></tr>
+            <tr><td>Na bieżąco</td><td>Nakłady operatorów chmury</td><td>Determinują popyt na moc wynajmowaną przez CoreWeave</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Pokrycie odsetek</strong></td><td>-0,11</td><td>brak poprawy przez 2 kwartały</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Płynność bieżąca</strong></td><td>0,46</td><td>&lt; 0,40</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Portfel zamówień</td><td>$104,2 mld (+246%)</td><td>zatrzymanie wzrostu</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża EBITDA</td><td>49,92%</td><td>&lt; 40%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Liczba akcji</td><td>+75,59% r/r</td><td>emisja poniżej ceny rynkowej</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Krótka sprzedaż</td><td>18,88% wolnego obrotu</td><td>powyżej 25%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji: maksymalnie 2–3% portfela.</strong> Masz dziś około 4,4% — przy wskaźniku Altmana 0,29 to o włos za dużo</li>
+          <li><strong>Rozważ zrównanie do 2–3% przy obecnym odbiciu.</strong> Jesteś na plusie 8,6%, więc można to zrobić bez realizowania straty</li>
+          <li><strong>Nie dokupywać po skoku o 20%</strong> — wyniki są w cenie, kolejny katalizator dopiero pod koniec października</li>
+          <li><strong>Dokupienie:</strong> tylko poniżej $90 i tylko przy niepogorszonych warunkach finansowania</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie $140–155</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> koszt odsetek wobec EBITDA. To jest jedyna rzecz, która zdecyduje o losie tej spółki</li>
+          <li><strong>Uwaga portfelowa:</strong> CoreWeave, Oracle i IREN to trzy warianty tego samego zakładu na tanie finansowanie — łącznie około 11% portfela. Zawiodą z tego samego powodu i w tym samym momencie</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">📈 KUPNO SPEKULACYJNE — trzymać mniejszą pozycję, nie dokupywać</div>
+        <p>Portfel zamówień na 104 miliardy dolarów przy rocznych przychodach 7,59 miliarda to liczba, której nie da się zignorować. Popyt jest realny, zakontraktowany, rośnie o 246% rocznie, a biznes na poziomie operacyjnym generuje gotówkę przy marży EBITDA bliskiej 50%. Gdyby oceniać samą działalność, byłoby to jednoznaczne kupno.</p>
+        <p>Ale <strong>CoreWeave nie jest zakładem na popyt — jest zakładem na dostępność finansowania</strong>. Przy 51,6 miliarda długu, kapitale własnym 5 miliardów, ujemnych wolnych przepływach 13,66 miliarda i odsetkach spłacanych z nowego długu, o losie tej spółki zdecyduje rynek kredytowy, a nie rynek mocy obliczeniowej. Dlatego rekomendacja brzmi „kupno spekulacyjne" i dlatego <strong>proponuję zmniejszenie pozycji z obecnych 4,4% do 2–3%</strong> — obecne odbicie pozwala to zrobić bez straty. To pozycja, którą warto mieć, ale nie taka, przy której chce się mieć rację za wszelką cenę.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno spekulacyjne</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$120–155</b></div>
+          <div><span>Scenariusz negatywny</span><b>$40–55</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$190–220</b></div>
+          <div><span>Sugerowana pozycja</span><b>maks. 2–3% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3 — koniec października</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 16 sierpnia 2026 | Cena: $105,26 (zamknięcie 14.08.2026) | Pierwsza samodzielna analiza CRWV | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 16.08.2026</strong>, CoreWeave IR (wyniki Q2 2026, 11 sierpnia) | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
