@@ -36,6 +36,29 @@ padding:11px 15px;color:var(--text);font-size:14px;font-family:inherit}
 font-weight:600;padding:7px 15px;border-radius:20px;cursor:pointer;font-family:inherit}
 .f-btn:hover{color:var(--text);border-color:var(--accent)}
 .f-btn.akt{background:rgba(52,211,153,.13);border-color:var(--accent);color:var(--accent2)}
+.kal{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:20px}
+.kal h3{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-muted);margin:0 0 13px;font-weight:700}
+.kal-lista{display:flex;flex-direction:column;gap:6px}
+.kal-row{display:grid;grid-template-columns:118px 1fr auto;gap:14px;align-items:center;padding:9px 12px;
+border-radius:8px;background:rgba(255,255,255,.02);border:1px solid transparent;text-decoration:none;color:inherit}
+.kal-row:hover{background:rgba(255,255,255,.05);border-color:var(--accent)}
+.kal-row.kal-blisko{background:rgba(217,154,82,.08);border-color:rgba(217,154,82,.25)}
+.kal-row.kal-skup{background:rgba(219,84,72,.09);border-color:rgba(219,84,72,.34)}
+.kal-d b{display:block;font-size:13.5px;font-weight:700}
+.kal-d em{display:block;font-style:normal;font-size:11px;color:var(--text-muted);margin-top:1px}
+.kal-tk{font-weight:700;font-size:13.5px}
+.kal-tk em{display:block;font-style:normal;font-weight:400;font-size:11.5px;color:var(--text-muted);margin-top:1px}
+.kal-pf{font-size:11.5px;padding:3px 10px;border-radius:20px;background:rgba(52,211,153,.13);color:var(--accent2);white-space:nowrap}
+.kal-obs{font-size:11.5px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.05);color:var(--text-muted);white-space:nowrap}
+.kal-warn{margin-top:13px;padding:11px 14px;border-radius:8px;background:rgba(219,84,72,.1);
+border:1px solid rgba(219,84,72,.3);font-size:12.8px;line-height:1.55}
+.tematy{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+.t-btn{background:var(--surface);border:1px solid var(--border);color:var(--text-muted);font-size:11.8px;
+font-weight:600;padding:6px 13px;border-radius:20px;cursor:pointer;font-family:inherit;display:flex;gap:7px;align-items:center}
+.t-btn em{font-style:normal;font-weight:400;font-size:10.5px;opacity:.62}
+.t-btn:hover{color:var(--text);border-color:var(--accent)}
+.t-btn.akt{background:rgba(52,211,153,.13);border-color:var(--accent);color:var(--accent2)}
+@media(max-width:640px){.kal-row{grid-template-columns:96px 1fr}.kal-pf,.kal-obs{grid-column:2}}
 .karta{display:flex;gap:18px;align-items:center;background:var(--surface);border:1px solid var(--border);
 border-radius:12px;padding:16px 20px;margin-bottom:11px;text-decoration:none;color:inherit}
 .karta:hover{border-color:var(--accent);background:var(--surface2)}
@@ -83,7 +106,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
 <div class="header"><div class="header-in">
   <div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div>
   <h1>Katalog analiz inwestycyjnych</h1>
-  <div class="sub">38 spółek · 45 raportów łącznie · aktualizacja 16.08.2026</div>
+  <div class="sub">38 spółek · 45 raportów łącznie · aktualizacja 17.08.2026</div>
   <a class="pf-link" href="portfel.html">Widok portfela — ekspozycja tematyczna i pozycje →</a>
 </div></div>
 
@@ -96,6 +119,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <option value="ticker">Sortuj: ticker A–Z</option>
     </select>
   </div>
+  <div class="kal"><h3>Nadchodzące wyniki</h3><div class="kal-lista"><a class="kal-row kal-blisko" href="ASPI_analiza_2026-07-27.html"><span class="kal-d"><b>21 sierpnia</b><em>za 4 dni</em></span><span class="kal-tk">ASPI<em>ASP Isotopes Inc.</em></span><span class="kal-pf">w portfelu · 1.8%</span></a><a class="kal-row kal-blisko kal-skup" title="Publikuje razem z innymi spółkami tematu: Moc obliczeniowa dla AI" href="NVDA_analiza_2026-08-16.html"><span class="kal-d"><b>26 sierpnia</b><em>za 9 dni</em></span><span class="kal-tk">NVDA<em>NVIDIA Corporation</em></span><span class="kal-obs">obserwowana</span></a><a class="kal-row kal-blisko kal-skup" title="Publikuje razem z innymi spółkami tematu: Oprogramowanie i SaaS" href="VEEV_analiza_2026-07-30.html"><span class="kal-d"><b>26 sierpnia</b><em>za 9 dni</em></span><span class="kal-tk">VEEV<em>Veeva Systems Inc.</em></span><span class="kal-obs">obserwowana</span></a><a class="kal-row kal-blisko kal-skup" title="Publikuje razem z innymi spółkami tematu: Moc obliczeniowa dla AI" href="MRVL_analiza_2026-08-16.html"><span class="kal-d"><b>27 sierpnia</b><em>za 10 dni</em></span><span class="kal-tk">MRVL<em>Marvell Technology, Inc.</em></span><span class="kal-pf">w portfelu · 2.9%</span></a><a class="kal-row kal-blisko kal-skup" title="Publikuje razem z innymi spółkami tematu: Moc obliczeniowa dla AI" href="IREN_analiza_2026-08-16.html"><span class="kal-d"><b>27 sierpnia</b><em>za 10 dni</em></span><span class="kal-tk">IREN<em>IREN Limited</em></span><span class="kal-pf">w portfelu · 2.1%</span></a><a class="kal-row kal-blisko kal-skup" title="Publikuje razem z innymi spółkami tematu: Oprogramowanie i SaaS" href="S_SentinelOne_analiza_2026-08-07.html"><span class="kal-d"><b>27 sierpnia</b><em>za 10 dni</em></span><span class="kal-tk">S<em>SentinelOne, Inc.</em></span><span class="kal-obs">obserwowana</span></a><a class="kal-row" href="AVGO_analiza_2026-07-27.html"><span class="kal-d"><b>2 września</b><em>za 16 dni</em></span><span class="kal-tk">AVGO<em>Broadcom Inc.</em></span><span class="kal-obs">obserwowana</span></a><a class="kal-row" href="GWRE_analiza_2026-07-21.html"><span class="kal-d"><b>3 września</b><em>za 17 dni</em></span><span class="kal-tk">GWRE<em>Guidewire Software, Inc.</em></span><span class="kal-obs">obserwowana</span></a><a class="kal-row" href="ORCL_analiza_2026-08-14.html"><span class="kal-d"><b>8 września</b><em>za 22 dni</em></span><span class="kal-tk">ORCL<em>Oracle Corporation</em></span><span class="kal-pf">w portfelu · 5.0%</span></a><a class="kal-row" href="LPTH_analiza_2026-07-21.html"><span class="kal-d"><b>24 września</b><em>za 38 dni</em></span><span class="kal-tk">LPTH<em>LightPath Technologies, Inc.</em></span><span class="kal-obs">obserwowana</span></a></div><div class="kal-warn">&#9888; <b>3 spółki publikują w odstępie najwyżej dwóch dni w tym samym temacie</b> — IREN, MRVL, NVDA (moc obliczeniowa dla AI). Bezpośrednio dotyczy to 2 pozycji, czyli 5.0% wartości akcji. Cały temat waży jednak <b>45% Twojego portfela</b> — realna ekspozycja na te publikacje jest więc wielokrotnie większa niż same pozycje publikujących spółek.</div></div>
   <div class="filtry">
       <button class="f-btn akt" data-f="portfel">W portfelu TP Corp (13)</button>
       <button class="f-btn" data-f="obserwowane">Obserwowane (14)</button>
@@ -104,9 +128,12 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <button class="f-btn" data-f="porownania">Porównania (2)</button>
       <button class="f-btn" data-f="archiwum">Archiwum (7)</button>
   </div>
+  <div class="tematy">
+      <button class="t-btn akt" data-t="">Wszystkie tematy</button><button class="t-btn" data-t="moc">Moc obliczeniowa dla AI<em>15 analiz · 45% portfela</em></button><button class="t-btn" data-t="polprzew">Półprzewodniki<em>10 analiz · 34% portfela</em></button><button class="t-btn" data-t="saas">Oprogramowanie i SaaS<em>8 analiz · 23% portfela</em></button><button class="t-btn" data-t="chmura">Chmura i centra danych<em>6 analiz · 19% portfela</em></button><button class="t-btn" data-t="konsument">Konsument i platformy<em>4 analiz · 12% portfela</em></button><button class="t-btn" data-t="bitcoin">Bitcoin i kopalnie<em>4 analiz · 7% portfela</em></button><button class="t-btn" data-t="farmacja">Farmacja i biotech<em>3 analiz · 7% portfela</em></button><button class="t-btn" data-t="pamieci">Pamięci<em>3 analiz · 3% portfela</em></button><button class="t-btn" data-t="optyka">Optyka i fotonika<em>5 analiz · 3% portfela</em></button><button class="t-btn" data-t="fintech">Fintech<em>3 analiz · 3% portfela</em></button><button class="t-btn" data-t="chlodzenie">Zasilanie i chłodzenie<em>2 analiz · 2% portfela</em></button><button class="t-btn" data-t="kosmos">Kosmos i obronność<em>2 analiz · 2% portfela</em></button>
+  </div>
   <div id="lista">
 
-    <a class="karta" href="NVDA_analiza_2026-08-16.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="nvda nvidia corporation nasdaq" data-data="2026-08-16" data-ticker="NVDA">
+    <a class="karta" href="NVDA_analiza_2026-08-16.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="nvda nvidia corporation nasdaq" data-data="2026-08-16" data-ticker="NVDA" data-tematy="polprzew moc">
       <div class="k-lewa">
         <div class="k-ticker">NVDA</div>
         <div class="k-gielda">NASDAQ</div>
@@ -126,7 +153,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="NOK_analiza_2026-08-16.html" data-kat="neutralna" data-zakl="portfel" data-szukaj="nok nokia oyj nyse" data-data="2026-08-16" data-ticker="NOK">
+    <a class="karta" href="NOK_analiza_2026-08-16.html" data-kat="neutralna" data-zakl="portfel" data-szukaj="nok nokia oyj nyse" data-data="2026-08-16" data-ticker="NOK" data-tematy="moc polprzew">
       <div class="k-lewa">
         <div class="k-ticker">NOK</div>
         <div class="k-gielda">NYSE</div>
@@ -146,7 +173,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="MRVL_analiza_2026-08-16.html" data-kat="kupno" data-zakl="portfel" data-szukaj="mrvl marvell technology, inc. nasdaq" data-data="2026-08-16" data-ticker="MRVL">
+    <a class="karta" href="MRVL_analiza_2026-08-16.html" data-kat="kupno" data-zakl="portfel" data-szukaj="mrvl marvell technology, inc. nasdaq" data-data="2026-08-16" data-ticker="MRVL" data-tematy="polprzew moc optyka">
       <div class="k-lewa">
         <div class="k-ticker">MRVL</div>
         <div class="k-gielda">NASDAQ</div>
@@ -166,7 +193,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="IREN_analiza_2026-08-16.html" data-kat="neutralna" data-zakl="niewiem" data-szukaj="iren iren limited nasdaq" data-data="2026-08-16" data-ticker="IREN">
+    <a class="karta" href="IREN_analiza_2026-08-16.html" data-kat="neutralna" data-zakl="niewiem" data-szukaj="iren iren limited nasdaq" data-data="2026-08-16" data-ticker="IREN" data-tematy="moc chmura bitcoin">
       <div class="k-lewa">
         <div class="k-ticker">IREN</div>
         <div class="k-gielda">NASDAQ</div>
@@ -186,7 +213,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="CRWV_analiza_2026-08-16.html" data-kat="kupno" data-zakl="niewiem" data-szukaj="crwv coreweave, inc. nasdaq" data-data="2026-08-16" data-ticker="CRWV">
+    <a class="karta" href="CRWV_analiza_2026-08-16.html" data-kat="kupno" data-zakl="niewiem" data-szukaj="crwv coreweave, inc. nasdaq" data-data="2026-08-16" data-ticker="CRWV" data-tematy="chmura moc">
       <div class="k-lewa">
         <div class="k-ticker">CRWV</div>
         <div class="k-gielda">NASDAQ</div>
@@ -206,7 +233,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="ORCL_analiza_2026-08-14.html" data-kat="kupno" data-zakl="portfel" data-szukaj="orcl oracle corporation nyse" data-data="2026-08-14" data-ticker="ORCL">
+    <a class="karta" href="ORCL_analiza_2026-08-14.html" data-kat="kupno" data-zakl="portfel" data-szukaj="orcl oracle corporation nyse" data-data="2026-08-14" data-ticker="ORCL" data-tematy="chmura moc saas">
       <div class="k-lewa">
         <div class="k-ticker">ORCL</div>
         <div class="k-gielda">NYSE</div>
@@ -226,7 +253,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="SAP_analiza_2026-08-12.html" data-kat="kupno" data-zakl="portfel" data-szukaj="sap sap se xetra" data-data="2026-08-12" data-ticker="SAP">
+    <a class="karta" href="SAP_analiza_2026-08-12.html" data-kat="kupno" data-zakl="portfel" data-szukaj="sap sap se xetra" data-data="2026-08-12" data-ticker="SAP" data-tematy="saas chmura">
       <div class="k-lewa">
         <div class="k-ticker">SAP</div>
         <div class="k-gielda">XETRA</div>
@@ -246,7 +273,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="NVO_analiza_2026-08-12.html" data-kat="neutralna" data-zakl="portfel" data-szukaj="nvo novo nordisk a/s nyse" data-data="2026-08-12" data-ticker="NVO">
+    <a class="karta" href="NVO_analiza_2026-08-12.html" data-kat="neutralna" data-zakl="portfel" data-szukaj="nvo novo nordisk a/s nyse" data-data="2026-08-12" data-ticker="NVO" data-tematy="farmacja">
       <div class="k-lewa">
         <div class="k-ticker">NVO</div>
         <div class="k-gielda">NYSE</div>
@@ -266,7 +293,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="NOW_analiza_2026-08-12.html" data-kat="kupno" data-zakl="portfel" data-szukaj="now servicenow, inc. nyse" data-data="2026-08-12" data-ticker="NOW">
+    <a class="karta" href="NOW_analiza_2026-08-12.html" data-kat="kupno" data-zakl="portfel" data-szukaj="now servicenow, inc. nyse" data-data="2026-08-12" data-ticker="NOW" data-tematy="saas">
       <div class="k-lewa">
         <div class="k-ticker">NOW</div>
         <div class="k-gielda">NYSE</div>
@@ -286,7 +313,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="INTC_analiza_2026-08-12.html" data-kat="neutralna" data-zakl="portfel" data-szukaj="intc intel corporation nasdaq" data-data="2026-08-12" data-ticker="INTC">
+    <a class="karta" href="INTC_analiza_2026-08-12.html" data-kat="neutralna" data-zakl="portfel" data-szukaj="intc intel corporation nasdaq" data-data="2026-08-12" data-ticker="INTC" data-tematy="polprzew moc">
       <div class="k-lewa">
         <div class="k-ticker">INTC</div>
         <div class="k-gielda">NASDAQ</div>
@@ -306,7 +333,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="WULF_analiza_2026-08-10.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="wulf terawulf inc. nasdaq" data-data="2026-08-10" data-ticker="WULF">
+    <a class="karta" href="WULF_analiza_2026-08-10.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="wulf terawulf inc. nasdaq" data-data="2026-08-10" data-ticker="WULF" data-tematy="moc chmura bitcoin">
       <div class="k-lewa">
         <div class="k-ticker">WULF</div>
         <div class="k-gielda">NASDAQ</div>
@@ -326,7 +353,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="CORZ_analiza_2026-08-10.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="corz core scientific, inc. nasdaq" data-data="2026-08-10" data-ticker="CORZ">
+    <a class="karta" href="CORZ_analiza_2026-08-10.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="corz core scientific, inc. nasdaq" data-data="2026-08-10" data-ticker="CORZ" data-tematy="moc chmura bitcoin">
       <div class="k-lewa">
         <div class="k-ticker">CORZ</div>
         <div class="k-gielda">NASDAQ</div>
@@ -346,7 +373,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="S_SentinelOne_analiza_2026-08-07.html" data-kat="neutralna" data-zakl="niewiem" data-szukaj="s sentinelone, inc. nyse" data-data="2026-08-07" data-ticker="S">
+    <a class="karta" href="S_SentinelOne_analiza_2026-08-07.html" data-kat="neutralna" data-zakl="niewiem" data-szukaj="s sentinelone, inc. nyse" data-data="2026-08-07" data-ticker="S" data-tematy="saas">
       <div class="k-lewa">
         <div class="k-ticker">S</div>
         <div class="k-gielda">NYSE</div>
@@ -366,7 +393,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="RDW_analiza_2026-08-07.html" data-kat="spekulacyjna" data-zakl="portfel" data-szukaj="rdw redwire corporation nyse" data-data="2026-08-07" data-ticker="RDW">
+    <a class="karta" href="RDW_analiza_2026-08-07.html" data-kat="spekulacyjna" data-zakl="portfel" data-szukaj="rdw redwire corporation nyse" data-data="2026-08-07" data-ticker="RDW" data-tematy="kosmos">
       <div class="k-lewa">
         <div class="k-ticker">RDW</div>
         <div class="k-gielda">NYSE</div>
@@ -386,7 +413,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="BE_analiza_2026-08-07.html" data-kat="neutralna" data-zakl="obserwowane" data-szukaj="be bloom energy corporation nyse" data-data="2026-08-07" data-ticker="BE">
+    <a class="karta" href="BE_analiza_2026-08-07.html" data-kat="neutralna" data-zakl="obserwowane" data-szukaj="be bloom energy corporation nyse" data-data="2026-08-07" data-ticker="BE" data-tematy="chlodzenie moc">
       <div class="k-lewa">
         <div class="k-ticker">BE</div>
         <div class="k-gielda">NYSE</div>
@@ -406,7 +433,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="SNAP_analiza_2026-08-06.html" data-kat="neutralna" data-zakl="wstepnienie" data-szukaj="snap snap inc. nyse" data-data="2026-08-06" data-ticker="SNAP">
+    <a class="karta" href="SNAP_analiza_2026-08-06.html" data-kat="neutralna" data-zakl="wstepnienie" data-szukaj="snap snap inc. nyse" data-data="2026-08-06" data-ticker="SNAP" data-tematy="konsument saas">
       <div class="k-lewa">
         <div class="k-ticker">SNAP</div>
         <div class="k-gielda">NYSE</div>
@@ -426,7 +453,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="MARA_analiza_2026-08-06.html" data-kat="neutralna" data-zakl="portfel" data-szukaj="mara mara holdings, inc. nasdaq" data-data="2026-08-06" data-ticker="MARA">
+    <a class="karta" href="MARA_analiza_2026-08-06.html" data-kat="neutralna" data-zakl="portfel" data-szukaj="mara mara holdings, inc. nasdaq" data-data="2026-08-06" data-ticker="MARA" data-tematy="bitcoin moc">
       <div class="k-lewa">
         <div class="k-ticker">MARA</div>
         <div class="k-gielda">NASDAQ</div>
@@ -446,7 +473,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="HOOD_analiza_2026-08-06.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="hood robinhood markets, inc. nasdaq" data-data="2026-08-06" data-ticker="HOOD">
+    <a class="karta" href="HOOD_analiza_2026-08-06.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="hood robinhood markets, inc. nasdaq" data-data="2026-08-06" data-ticker="HOOD" data-tematy="fintech">
       <div class="k-lewa">
         <div class="k-ticker">HOOD</div>
         <div class="k-gielda">NASDAQ</div>
@@ -466,7 +493,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="GRAB_analiza_2026-08-06.html" data-kat="kupno" data-zakl="portfel" data-szukaj="grab grab holdings limited nasdaq" data-data="2026-08-06" data-ticker="GRAB">
+    <a class="karta" href="GRAB_analiza_2026-08-06.html" data-kat="kupno" data-zakl="portfel" data-szukaj="grab grab holdings limited nasdaq" data-data="2026-08-06" data-ticker="GRAB" data-tematy="konsument fintech">
       <div class="k-lewa">
         <div class="k-ticker">GRAB</div>
         <div class="k-gielda">NASDAQ</div>
@@ -486,7 +513,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="AMD_analiza_2026-08-06.html" data-kat="kupno" data-zakl="portfel" data-szukaj="amd advanced micro devices, inc. nasdaq" data-data="2026-08-06" data-ticker="AMD">
+    <a class="karta" href="AMD_analiza_2026-08-06.html" data-kat="kupno" data-zakl="portfel" data-szukaj="amd advanced micro devices, inc. nasdaq" data-data="2026-08-06" data-ticker="AMD" data-tematy="polprzew moc">
       <div class="k-lewa">
         <div class="k-ticker">AMD</div>
         <div class="k-gielda">NASDAQ</div>
@@ -506,7 +533,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta arch" href="CORZ_analiza_2026-07-30.html" data-kat="archiwum" data-zakl="archiwum" data-szukaj="corz core scientific, inc. nasdaq" data-data="2026-07-30" data-ticker="CORZ">
+    <a class="karta arch" href="CORZ_analiza_2026-07-30.html" data-kat="archiwum" data-zakl="archiwum" data-szukaj="corz core scientific, inc. nasdaq" data-data="2026-07-30" data-ticker="CORZ" data-tematy="moc chmura bitcoin">
       <div class="k-lewa">
         <div class="k-ticker">CORZ</div>
         <div class="k-gielda">NASDAQ</div>
@@ -526,7 +553,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta arch" href="BE_analiza_2026-07-30.html" data-kat="archiwum" data-zakl="archiwum" data-szukaj="be bloom energy corporation nyse" data-data="2026-07-30" data-ticker="BE">
+    <a class="karta arch" href="BE_analiza_2026-07-30.html" data-kat="archiwum" data-zakl="archiwum" data-szukaj="be bloom energy corporation nyse" data-data="2026-07-30" data-ticker="BE" data-tematy="chlodzenie moc">
       <div class="k-lewa">
         <div class="k-ticker">BE</div>
         <div class="k-gielda">NYSE</div>
@@ -546,7 +573,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="VEEV_analiza_2026-07-30.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="veev veeva systems inc. nyse" data-data="2026-07-30" data-ticker="VEEV">
+    <a class="karta" href="VEEV_analiza_2026-07-30.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="veev veeva systems inc. nyse" data-data="2026-07-30" data-ticker="VEEV" data-tematy="saas farmacja">
       <div class="k-lewa">
         <div class="k-ticker">VEEV</div>
         <div class="k-gielda">NYSE</div>
@@ -566,7 +593,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="SOFI_analiza_2026-07-30.html" data-kat="neutralna" data-zakl="wstepnienie" data-szukaj="sofi sofi technologies, inc. nasdaq" data-data="2026-07-30" data-ticker="SOFI">
+    <a class="karta" href="SOFI_analiza_2026-07-30.html" data-kat="neutralna" data-zakl="wstepnienie" data-szukaj="sofi sofi technologies, inc. nasdaq" data-data="2026-07-30" data-ticker="SOFI" data-tematy="fintech">
       <div class="k-lewa">
         <div class="k-ticker">SOFI</div>
         <div class="k-gielda">NASDAQ</div>
@@ -586,7 +613,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="SMSN_analiza_2026-07-30.html" data-kat="kupno" data-zakl="portfel" data-szukaj="smsn samsung electronics co., ltd. lse gdr / krx" data-data="2026-07-30" data-ticker="SMSN">
+    <a class="karta" href="SMSN_analiza_2026-07-30.html" data-kat="kupno" data-zakl="portfel" data-szukaj="smsn samsung electronics co., ltd. lse gdr / krx" data-data="2026-07-30" data-ticker="SMSN" data-tematy="pamieci polprzew konsument">
       <div class="k-lewa">
         <div class="k-ticker">SMSN</div>
         <div class="k-gielda">LSE GDR / KRX</div>
@@ -594,7 +621,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Samsung Electronics Co., Ltd.</div>
         <div class="k-meta">
-          <span class="pill p-kupno">Kupno</span><span class="pill p-odswiez">Do odświeżenia · kurs +26%</span><span class="pill p-fv">w przedziale fair value</span>
+          <span class="pill p-kupno">Kupno</span><span class="pill p-odswiez">Do odświeżenia · kurs +30%</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-07-30</span>
           <span class="wiek w-swieza">świeża</span>
           
@@ -606,7 +633,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="KIOXIA_analiza_2026-07-30.html" data-kat="spekulacyjna" data-zakl="obserwowane" data-szukaj="kioxia kioxia holdings corporation tse 285a" data-data="2026-07-30" data-ticker="KIOXIA">
+    <a class="karta" href="KIOXIA_analiza_2026-07-30.html" data-kat="spekulacyjna" data-zakl="obserwowane" data-szukaj="kioxia kioxia holdings corporation tse 285a" data-data="2026-07-30" data-ticker="KIOXIA" data-tematy="pamieci">
       <div class="k-lewa">
         <div class="k-ticker">KIOXIA</div>
         <div class="k-gielda">TSE 285A</div>
@@ -614,7 +641,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Kioxia Holdings Corporation</div>
         <div class="k-meta">
-          <span class="pill p-spekulacyjna">Spekulacyjna</span><span class="pill p-przejrzyj">Przejrzyj · kurs +19%</span><span class="pill p-fv">w przedziale fair value</span>
+          <span class="pill p-spekulacyjna">Spekulacyjna</span><span class="pill p-odswiez">Do odświeżenia · kurs +37%</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-07-30</span>
           <span class="wiek w-swieza">świeża</span>
           
@@ -626,7 +653,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="AVGO_analiza_2026-07-27.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="avgo broadcom inc. nasdaq" data-data="2026-07-27" data-ticker="AVGO">
+    <a class="karta" href="AVGO_analiza_2026-07-27.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="avgo broadcom inc. nasdaq" data-data="2026-07-27" data-ticker="AVGO" data-tematy="polprzew moc optyka">
       <div class="k-lewa">
         <div class="k-ticker">AVGO</div>
         <div class="k-gielda">NASDAQ</div>
@@ -646,7 +673,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="ASPI_analiza_2026-07-27.html" data-kat="spekulacyjna" data-zakl="portfel" data-szukaj="aspi asp isotopes inc. nasdaq" data-data="2026-07-27" data-ticker="ASPI">
+    <a class="karta" href="ASPI_analiza_2026-07-27.html" data-kat="spekulacyjna" data-zakl="portfel" data-szukaj="aspi asp isotopes inc. nasdaq" data-data="2026-07-27" data-ticker="ASPI" data-tematy="farmacja">
       <div class="k-lewa">
         <div class="k-ticker">ASPI</div>
         <div class="k-gielda">NASDAQ</div>
@@ -666,7 +693,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta arch" href="NOK_analiza_2026-07-21.html" data-kat="archiwum" data-zakl="archiwum" data-szukaj="nok nokia oyj nyse" data-data="2026-07-21" data-ticker="NOK">
+    <a class="karta arch" href="NOK_analiza_2026-07-21.html" data-kat="archiwum" data-zakl="archiwum" data-szukaj="nok nokia oyj nyse" data-data="2026-07-21" data-ticker="NOK" data-tematy="moc polprzew">
       <div class="k-lewa">
         <div class="k-ticker">NOK</div>
         <div class="k-gielda">NYSE</div>
@@ -686,7 +713,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta arch" href="MRVL_analiza_2026-07-21.html" data-kat="archiwum" data-zakl="archiwum" data-szukaj="mrvl marvell technology, inc. nasdaq" data-data="2026-07-21" data-ticker="MRVL">
+    <a class="karta arch" href="MRVL_analiza_2026-07-21.html" data-kat="archiwum" data-zakl="archiwum" data-szukaj="mrvl marvell technology, inc. nasdaq" data-data="2026-07-21" data-ticker="MRVL" data-tematy="polprzew moc optyka">
       <div class="k-lewa">
         <div class="k-ticker">MRVL</div>
         <div class="k-gielda">NASDAQ</div>
@@ -706,7 +733,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="NVTS_analiza_2026-07-21.html" data-kat="sprzedaz" data-zakl="obserwowane" data-szukaj="nvts navitas semiconductor nasdaq" data-data="2026-07-21" data-ticker="NVTS">
+    <a class="karta" href="NVTS_analiza_2026-07-21.html" data-kat="sprzedaz" data-zakl="obserwowane" data-szukaj="nvts navitas semiconductor nasdaq" data-data="2026-07-21" data-ticker="NVTS" data-tematy="polprzew chlodzenie">
       <div class="k-lewa">
         <div class="k-ticker">NVTS</div>
         <div class="k-gielda">NASDAQ</div>
@@ -726,7 +753,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="LPTH_analiza_2026-07-21.html" data-kat="neutralna" data-zakl="obserwowane" data-szukaj="lpth lightpath technologies, inc. nasdaq" data-data="2026-07-21" data-ticker="LPTH">
+    <a class="karta" href="LPTH_analiza_2026-07-21.html" data-kat="neutralna" data-zakl="obserwowane" data-szukaj="lpth lightpath technologies, inc. nasdaq" data-data="2026-07-21" data-ticker="LPTH" data-tematy="optyka">
       <div class="k-lewa">
         <div class="k-ticker">LPTH</div>
         <div class="k-gielda">NASDAQ</div>
@@ -746,7 +773,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="GWRE_analiza_2026-07-21.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="gwre guidewire software, inc. nyse" data-data="2026-07-21" data-ticker="GWRE">
+    <a class="karta" href="GWRE_analiza_2026-07-21.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="gwre guidewire software, inc. nyse" data-data="2026-07-21" data-ticker="GWRE" data-tematy="saas">
       <div class="k-lewa">
         <div class="k-ticker">GWRE</div>
         <div class="k-gielda">NYSE</div>
@@ -766,7 +793,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="BB_analiza_2026-07-21.html" data-kat="neutralna" data-zakl="niewiem" data-szukaj="bb blackberry limited nyse" data-data="2026-07-21" data-ticker="BB">
+    <a class="karta" href="BB_analiza_2026-07-21.html" data-kat="neutralna" data-zakl="niewiem" data-szukaj="bb blackberry limited nyse" data-data="2026-07-21" data-ticker="BB" data-tematy="saas">
       <div class="k-lewa">
         <div class="k-ticker">BB</div>
         <div class="k-gielda">NYSE</div>
@@ -786,7 +813,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="POROWNANIE_6_spolek_2026-07-21.html" data-kat="porownanie" data-zakl="porownania" data-szukaj="6 spółek cohr · lpth · mrvl · nvts · bb · nok — porównanie mix" data-data="2026-07-21" data-ticker="6 SPÓŁEK">
+    <a class="karta" href="POROWNANIE_6_spolek_2026-07-21.html" data-kat="porownanie" data-zakl="porownania" data-szukaj="6 spółek cohr · lpth · mrvl · nvts · bb · nok — porównanie mix" data-data="2026-07-21" data-ticker="6 SPÓŁEK" data-tematy="">
       <div class="k-lewa">
         <div class="k-ticker">6 spółek</div>
         <div class="k-gielda">MIX</div>
@@ -806,7 +833,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="LRCX_analiza_2026-07-06.html" data-kat="neutralna" data-zakl="obserwowane" data-szukaj="lrcx lam research corporation nasdaq" data-data="2026-07-06" data-ticker="LRCX">
+    <a class="karta" href="LRCX_analiza_2026-07-06.html" data-kat="neutralna" data-zakl="obserwowane" data-szukaj="lrcx lam research corporation nasdaq" data-data="2026-07-06" data-ticker="LRCX" data-tematy="polprzew">
       <div class="k-lewa">
         <div class="k-ticker">LRCX</div>
         <div class="k-gielda">NASDAQ</div>
@@ -816,7 +843,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
         <div class="k-meta">
           <span class="pill p-neutralna">Neutralna</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-07-06</span>
-          <span class="wiek w-srednia">41 dni</span>
+          <span class="wiek w-srednia">42 dni</span>
           
         </div>
       </div>
@@ -826,7 +853,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="COHR_analiza_2026-07-06.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="cohr coherent corp. nyse" data-data="2026-07-06" data-ticker="COHR">
+    <a class="karta" href="COHR_analiza_2026-07-06.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="cohr coherent corp. nyse" data-data="2026-07-06" data-ticker="COHR" data-tematy="optyka moc">
       <div class="k-lewa">
         <div class="k-ticker">COHR</div>
         <div class="k-gielda">NYSE</div>
@@ -836,7 +863,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
         <div class="k-meta">
           <span class="pill p-kupno">Kupno</span>
           <span class="k-data">2026-07-06</span>
-          <span class="wiek w-srednia">41 dni</span>
+          <span class="wiek w-srednia">42 dni</span>
           
         </div>
       </div>
@@ -846,7 +873,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta arch" href="ORCL_analiza_2026-07-03.html" data-kat="archiwum" data-zakl="archiwum" data-szukaj="orcl oracle corporation nyse" data-data="2026-07-03" data-ticker="ORCL">
+    <a class="karta arch" href="ORCL_analiza_2026-07-03.html" data-kat="archiwum" data-zakl="archiwum" data-szukaj="orcl oracle corporation nyse" data-data="2026-07-03" data-ticker="ORCL" data-tematy="chmura moc saas">
       <div class="k-lewa">
         <div class="k-ticker">ORCL</div>
         <div class="k-gielda">NYSE</div>
@@ -856,7 +883,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
         <div class="k-meta">
           <span class="pill p-archiwum">Archiwum</span><span class="pill p-kupno">Kupno</span>
           <span class="k-data">2026-07-03</span>
-          <span class="wiek w-srednia">44 dni</span>
+          <span class="wiek w-srednia">45 dni</span>
           
         </div>
       </div>
@@ -866,7 +893,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="MRAM_analiza_2026-07-03.html" data-kat="neutralna" data-zakl="wstepnienie" data-szukaj="mram everspin technologies, inc. nasdaq" data-data="2026-07-03" data-ticker="MRAM">
+    <a class="karta" href="MRAM_analiza_2026-07-03.html" data-kat="neutralna" data-zakl="wstepnienie" data-szukaj="mram everspin technologies, inc. nasdaq" data-data="2026-07-03" data-ticker="MRAM" data-tematy="polprzew pamieci">
       <div class="k-lewa">
         <div class="k-ticker">MRAM</div>
         <div class="k-gielda">NASDAQ</div>
@@ -874,9 +901,9 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Everspin Technologies, Inc.</div>
         <div class="k-meta">
-          <span class="pill p-neutralna">Neutralna</span><span class="pill p-przejrzyj">Przejrzyj · kurs -15%</span><span class="pill p-fv">w przedziale fair value</span>
+          <span class="pill p-neutralna">Neutralna</span><span class="pill p-przejrzyj">Przejrzyj · kurs -15%, 45 dni</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-07-03</span>
-          <span class="wiek w-srednia">44 dni</span>
+          <span class="wiek w-srednia">45 dni</span>
           
         </div>
       </div>
@@ -886,7 +913,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="LITE_analiza_2026-07-03.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="lite lumentum holdings inc. nasdaq" data-data="2026-07-03" data-ticker="LITE">
+    <a class="karta" href="LITE_analiza_2026-07-03.html" data-kat="kupno" data-zakl="obserwowane" data-szukaj="lite lumentum holdings inc. nasdaq" data-data="2026-07-03" data-ticker="LITE" data-tematy="optyka moc">
       <div class="k-lewa">
         <div class="k-ticker">LITE</div>
         <div class="k-gielda">NASDAQ</div>
@@ -894,9 +921,9 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       <div class="k-srodek">
         <div class="k-nazwa">Lumentum Holdings Inc.</div>
         <div class="k-meta">
-          <span class="pill p-kupno">Kupno</span><span class="pill p-odswiez">Do odświeżenia · kurs +27%</span><span class="pill p-fv">w przedziale fair value</span>
+          <span class="pill p-kupno">Kupno</span><span class="pill p-odswiez">Do odświeżenia · kurs +27%, 45 dni</span><span class="pill p-fv">w przedziale fair value</span>
           <span class="k-data">2026-07-03</span>
-          <span class="wiek w-srednia">44 dni</span>
+          <span class="wiek w-srednia">45 dni</span>
           
         </div>
       </div>
@@ -906,7 +933,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="OKLO_vs_SMR_analiza_2026-07-01.html" data-kat="porownanie" data-zakl="porownania" data-szukaj="oklo vs smr oklo vs nuscale power — porównanie nyse" data-data="2026-07-01" data-ticker="OKLO VS SMR">
+    <a class="karta" href="OKLO_vs_SMR_analiza_2026-07-01.html" data-kat="porownanie" data-zakl="porownania" data-szukaj="oklo vs smr oklo vs nuscale power — porównanie nyse" data-data="2026-07-01" data-ticker="OKLO VS SMR" data-tematy="">
       <div class="k-lewa">
         <div class="k-ticker">OKLO vs SMR</div>
         <div class="k-gielda">NYSE</div>
@@ -916,7 +943,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
         <div class="k-meta">
           <span class="pill p-porownanie">Porównanie</span>
           <span class="k-data">2026-07-01</span>
-          <span class="wiek w-srednia">46 dni</span>
+          <span class="wiek w-srednia">47 dni</span>
           
         </div>
       </div>
@@ -926,7 +953,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta" href="RR_analiza_2026-06-18.html" data-kat="sprzedaz" data-zakl="wstepnienie" data-szukaj="rr richtech robotics inc. nasdaq" data-data="2026-06-18" data-ticker="RR">
+    <a class="karta" href="RR_analiza_2026-06-18.html" data-kat="sprzedaz" data-zakl="wstepnienie" data-szukaj="rr richtech robotics inc. nasdaq" data-data="2026-06-18" data-ticker="RR" data-tematy="kosmos">
       <div class="k-lewa">
         <div class="k-ticker">RR</div>
         <div class="k-gielda">NASDAQ</div>
@@ -936,26 +963,6 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
         <div class="k-meta">
           <span class="pill p-sprzedaz">Sprzedaż</span>
           <span class="k-data">2026-06-18</span>
-          <span class="wiek w-srednia">59 dni</span>
-          
-        </div>
-      </div>
-      <div class="k-prawa">
-        <div class="k-lbl">Cena analizy</div><div class="k-val">brak danych</div>
-        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">brak danych</div>
-      </div>
-    </a>
-
-    <a class="karta" href="CPNG_analiza_2026-06-17.html" data-kat="nieznana" data-zakl="niewiem" data-szukaj="cpng coupang, inc. nyse" data-data="2026-06-17" data-ticker="CPNG">
-      <div class="k-lewa">
-        <div class="k-ticker">CPNG</div>
-        <div class="k-gielda">NYSE</div>
-      </div>
-      <div class="k-srodek">
-        <div class="k-nazwa">Coupang, Inc.</div>
-        <div class="k-meta">
-          <span class="pill p-nieznana">Nieznana</span>
-          <span class="k-data">2026-06-17</span>
           <span class="wiek w-srednia">60 dni</span>
           
         </div>
@@ -966,17 +973,17 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta arch" href="NVDA_analiza_2026-06-09.html" data-kat="archiwum" data-zakl="archiwum" data-szukaj="nvda nvidia corporation nasdaq" data-data="2026-06-09" data-ticker="NVDA">
+    <a class="karta" href="CPNG_analiza_2026-06-17.html" data-kat="nieznana" data-zakl="niewiem" data-szukaj="cpng coupang, inc. nyse" data-data="2026-06-17" data-ticker="CPNG" data-tematy="konsument">
       <div class="k-lewa">
-        <div class="k-ticker">NVDA</div>
-        <div class="k-gielda">NASDAQ</div>
+        <div class="k-ticker">CPNG</div>
+        <div class="k-gielda">NYSE</div>
       </div>
       <div class="k-srodek">
-        <div class="k-nazwa">NVIDIA Corporation</div>
+        <div class="k-nazwa">Coupang, Inc.</div>
         <div class="k-meta">
-          <span class="pill p-archiwum">Archiwum</span><span class="pill p-kupno">Kupno</span>
-          <span class="k-data">2026-06-09</span>
-          <span class="wiek w-srednia">68 dni</span>
+          <span class="pill p-nieznana">Nieznana</span>
+          <span class="k-data">2026-06-17</span>
+          <span class="wiek w-srednia">61 dni</span>
           
         </div>
       </div>
@@ -986,7 +993,27 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
       </div>
     </a>
 
-    <a class="karta arch" href="NOW_analiza_2026-06-09.html" data-kat="archiwum" data-zakl="archiwum" data-szukaj="now servicenow, inc. nyse" data-data="2026-06-09" data-ticker="NOW">
+    <a class="karta arch" href="NVDA_analiza_2026-06-09.html" data-kat="archiwum" data-zakl="archiwum" data-szukaj="nvda nvidia corporation nasdaq" data-data="2026-06-09" data-ticker="NVDA" data-tematy="polprzew moc">
+      <div class="k-lewa">
+        <div class="k-ticker">NVDA</div>
+        <div class="k-gielda">NASDAQ</div>
+      </div>
+      <div class="k-srodek">
+        <div class="k-nazwa">NVIDIA Corporation</div>
+        <div class="k-meta">
+          <span class="pill p-archiwum">Archiwum</span><span class="pill p-kupno">Kupno</span>
+          <span class="k-data">2026-06-09</span>
+          <span class="wiek w-srednia">69 dni</span>
+          
+        </div>
+      </div>
+      <div class="k-prawa">
+        <div class="k-lbl">Cena analizy</div><div class="k-val">brak danych</div>
+        <div class="k-lbl" style="margin-top:8px">Fair value</div><div class="k-val fv">brak danych</div>
+      </div>
+    </a>
+
+    <a class="karta arch" href="NOW_analiza_2026-06-09.html" data-kat="archiwum" data-zakl="archiwum" data-szukaj="now servicenow, inc. nyse" data-data="2026-06-09" data-ticker="NOW" data-tematy="saas">
       <div class="k-lewa">
         <div class="k-ticker">NOW</div>
         <div class="k-gielda">NYSE</div>
@@ -996,7 +1023,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
         <div class="k-meta">
           <span class="pill p-archiwum">Archiwum</span><span class="pill p-kupno">Kupno</span>
           <span class="k-data">2026-06-09</span>
-          <span class="wiek w-srednia">68 dni</span>
+          <span class="wiek w-srednia">69 dni</span>
           
         </div>
       </div>
@@ -1008,7 +1035,7 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
   </div>
   <div class="pusto" id="pusto">Brak analiz spełniających kryteria.</div>
 
-  <div class="alert-swiez"><span>&#9888;</span><span><b>2</b> do odświeżenia · 6 do przejrzenia — kurs mocno odjechał od ceny z analizy albo raport się zestarzał</span><span class="sw-data">stan 2026-08-16</span></div>
+  <div class="alert-swiez"><span>&#9888;</span><span><b>3</b> do odświeżenia · 5 do przejrzenia — kurs mocno odjechał od ceny z analizy albo raport się zestarzał</span><span class="sw-data">stan 2026-08-17</span></div>
   <div class="disclaimer">
     <strong>Zastrzeżenie.</strong> Analizy własne przygotowane do użytku prywatnego. Nie stanowią rekomendacji
     inwestycyjnej w rozumieniu obowiązujących przepisów ani porady inwestycyjnej. Każdy raport odzwierciedla stan
@@ -1023,16 +1050,17 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
   var lista=document.getElementById('lista'), pusto=document.getElementById('pusto'),
       szukaj=document.getElementById('szukaj'), sortuj=document.getElementById('sortuj'),
       karty=Array.prototype.slice.call(lista.querySelectorAll('.karta')),
-      akt=document.querySelector('.f-btn.akt'), filtr=akt?akt.dataset.f:'portfel';
+      akt=document.querySelector('.f-btn.akt'), filtr=akt?akt.dataset.f:'portfel', temat='';
   function odswiez(){
     var q=szukaj.value.trim().toLowerCase(), widoczne=0;
     karty.forEach(function(k){
       var ok=(q ? k.dataset.zakl!=='archiwum' : k.dataset.zakl===filtr) &&
-             (!q||k.dataset.szukaj.indexOf(q)>-1);
+             (!q||k.dataset.szukaj.indexOf(q)>-1) &&
+             (!temat||(' '+(k.dataset.tematy||'')+' ').indexOf(' '+temat+' ')>-1);
       k.style.display=ok?'':'none'; if(ok)widoczne++;
     });
     pusto.style.display=widoczne?'none':'block';
-    pusto.textContent=q?'Nic nie pasuje do wyszukiwania.':'Ta zakładka jest pusta.';
+    pusto.textContent=q?'Nic nie pasuje do wyszukiwania.':(temat?'Brak analiz w tym temacie w tej zakładce.':'Ta zakładka jest pusta.');
   }
   function przesortuj(){
     var t=sortuj.value, s=karty.slice();
@@ -1049,6 +1077,12 @@ display:flex;gap:22px;border-top:1px solid var(--border);padding-top:10px}.k-pra
     b.addEventListener('click',function(){
       document.querySelectorAll('.f-btn').forEach(function(x){x.classList.remove('akt');});
       b.classList.add('akt'); filtr=b.dataset.f; odswiez();
+    });
+  });
+  document.querySelectorAll('.t-btn').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.t-btn').forEach(function(x){x.classList.remove('akt');});
+      b.classList.add('akt'); temat=b.dataset.t||''; odswiez();
     });
   });
   odswiez();
