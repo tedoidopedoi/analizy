@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASPI — ASP Isotopes | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: ASPI</div>
+    <div class="company-name">ASP Isotopes Inc.</div>
+    <div class="company-sub">Wzbogacanie izotopów · paliwo jądrowe HALEU i lit-6 · krzem-28 dla półprzewodników · Waszyngton</div>
+    <div class="header-meta">
+      <span class="meta-tag">-61% w 52 tygodnie</span>
+      <span class="meta-tag">Rozwodnienie +55% r/r</span>
+      <span class="meta-tag">Altman 0,85</span>
+      <span class="meta-tag">Krótka sprzedaż 20% obrotu</span>
+      <div class="price-display">
+        <div class="price-main">$4,27</div>
+        <div class="price-sub">zamknięcie 14.08.2026 | -61% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Energia jądrowa</span><span class="temat">Półprzewodniki</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — spekulacja na kontrakcie, który jeszcze nie istnieje">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">wysoce spekulacyjna</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$3,00 – $5,50</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-30% do +29%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>21 sierpnia 2026</b><em>data szacowana, nie potwierdzona</em></div>
+    <div class="rb-right">Pozycja maks. 1–2% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (14.08.2026)</div><div class="metric-value">$4,27</div><div class="metric-detail">-61,3% w 52 tyg. | 28% pod średnią 200-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$654,6 mln</div><div class="metric-detail">EV $669,3 mln | 153,3 mln akcji</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody (12 mies.)</div><div class="metric-value">$30,85 mln</div><div class="metric-detail">Q2 2026: $5,12 mln, +328% r/r</div></div>
+    <div class="metric-card"><div class="metric-label">Marża brutto</div><div class="metric-value red">18,32%</div><div class="metric-detail">Marża operacyjna -312,31%</div></div>
+    <div class="metric-card"><div class="metric-label">Strata netto (12 mies.)</div><div class="metric-value red">-$132,05 mln</div><div class="metric-detail">Czterokrotność rocznych przychodów</div></div>
+    <div class="metric-card"><div class="metric-label">Rozwodnienie</div><div class="metric-value red">+54,9%</div><div class="metric-detail">r/r | +16,2% w samym kwartale</div></div>
+    <div class="metric-card"><div class="metric-label">Gotówka netto</div><div class="metric-value red">-$14,65 mln</div><div class="metric-detail">Gotówka $254,9 mln, dług $269,5 mln</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (3 analityków)</div><div class="metric-value">$13,00</div><div class="metric-detail">+204% — pokrycie bardzo cienkie</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Czym jest ASP Isotopes</h3>
+      <p>ASP Isotopes wzbogaca izotopy — czyli rozdziela odmiany tego samego pierwiastka różniące się masą. Brzmi niszowo i takie jest, ale kilka z tych izotopów ma dziś strategiczne znaczenie. Spółka działa w dwóch obszarach: <strong>paliwo jądrowe</strong> (uran HALEU i lit-6, przez spółkę Quantum Leap Energy) oraz <strong>materiały zaawansowane</strong>, w tym krzem-28 dla przemysłu półprzewodnikowego.</p>
+      <p>Zatrudnia 271 osób i wygenerowała 30,85 miliona dolarów przychodu w ciągu ostatnich dwunastu miesięcy. To jest spółka w fazie budowy — <strong>przychód na pracownika wynosi 114 tysięcy dolarów, a strata na pracownika 487 tysięcy</strong>.</p>
+
+      <div class="alert alert-danger"><strong>Zacznę od tego, co zmieniło się najbardziej: kurs spadł o 61% w ciągu roku.</strong> Twoja pozycja jest na minusie <strong>20,9%</strong> (600 sztuk po średniej $5,40, dziś $4,27), co oznacza, że kupowałeś już po sporym spadku. Spółka pozostaje przy tym najbardziej spekulacyjną pozycją w portfelu obok Arqit — ze wskaźnikiem Altmana 0,85, rozwodnieniem 55% rocznie i krótką sprzedażą obejmującą jedną piątą wolnego obrotu.</div>
+
+      <div class="alert alert-warn"><strong>Uwaga do daty wyników.</strong> StockAnalysis podaje 21 sierpnia jako datę <em>szacowaną</em>, nie potwierdzoną. Tymczasem dane za drugi kwartał 2026 są już dostępne w źródłach zewnętrznych — przychód 5,12 miliona dolarów przy stracie netto 33,6 miliona. <strong>Możliwe więc, że raport już się ukazał</strong>, a wskazana data jest algorytmicznym szacunkiem. Przed czwartkiem warto to zweryfikować bezpośrednio w relacjach inwestorskich spółki.</div>
+
+      <h3>Co pokazał drugi kwartał 2026</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026</th><th>Dynamika</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td><strong>$5,12 mln</strong></td><td style="color:var(--ocena-kupno)">+328% r/r</td></tr>
+          <tr><td>Strata netto</td><td>-$33,6 mln</td><td style="color:var(--ocena-kupno)">Zawężona o 55% r/r</td></tr>
+          <tr><td>Strata na akcję</td><td>-$0,27</td><td style="color:var(--ocena-kupno)">Wobec -$1,03 rok wcześniej</td></tr>
+          <tr><td>Strata za 2025 (cały rok)</td><td style="color:var(--ocena-sprzedaz)">-$175,09 mln</td><td style="color:var(--ocena-sprzedaz)">Prawie pięciokrotność straty z 2024</td></tr>
+          <tr><td><strong>Zamiana obligacji QLE na akcje</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$109,2 mln → 23,2 mln akcji</strong></td><td style="color:var(--ocena-sprzedaz)">Główne źródło rozwodnienia</td></tr>
+        </tbody>
+      </table></div>
+      <p>Kierunek jest właściwy — przychody rosną czterokrotnie, strata się zawęża. Ale skala pozostaje nieporównywalna: <strong>5,12 miliona przychodu wobec 33,6 miliona straty w tym samym kwartale</strong>.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Opis</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>HALEU</strong></td><td>Uran nisko wzbogacony o wysokiej zawartości — paliwo dla reaktorów nowej generacji</td><td style="color:var(--ocena-uwaga)">Zakład planowany na 2027, jeszcze nie istnieje</td></tr>
+          <tr><td><strong>Lit-6</strong></td><td>Składnik paliwa dla reaktorów i technologii fuzyjnych</td><td>W rozwoju przez Quantum Leap Energy</td></tr>
+          <tr><td><strong>Krzem-28</strong></td><td>Izotopowo czysty krzem — lepsze przewodnictwo cieplne w układach scalonych</td><td style="color:var(--ocena-kupno)">Źródło bieżących przychodów</td></tr>
+          <tr><td>Iterb-176, węgiel-14</td><td>Izotopy dla medycyny nuklearnej i diagnostyki</td><td>Uzupełnienie oferty</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — bariera regulacyjna, nie technologiczna</h3>
+      <p>Wzbogacanie uranu podlega ścisłej kontroli i licencjonowaniu, a liczba podmiotów zdolnych je prowadzić na Zachodzie jest bardzo mała. To jest realna bariera wejścia. Do tego dochodzi <strong>polityczna wola uniezależnienia się od rosyjskich dostaw paliwa jądrowego</strong>, która stworzyła ten rynek w obecnym kształcie.</p>
+      <div class="alert alert-warn"><strong>Problem w tym, że fosa chroni rynek, którego spółka jeszcze nie obsługuje.</strong> Umowa ramowa z TerraPower z października 2024 przewiduje finansowanie budowy zakładu HALEU i odbiór całej produkcji przez dziesięć lat — ale <strong>zakład ma powstać dopiero w 2027, a umowa ramowa nie jest umową ostateczną</strong>. Cała teza inwestycyjna opiera się na kontrakcie, który na razie jest zapisem intencji, i na fabryce, która jeszcze nie stoi.</div>
+      <p>Tymczasem bieżące przychody pochodzą głównie z materiałów zaawansowanych, a ich marża brutto wynosi <strong>18,32%</strong>. To jest niski poziom jak na produkt o tak wąskiej specjalizacji i sugeruje, że dzisiejsza działalność nie ma jeszcze siły cenowej.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Odbudowa zachodniego łańcucha paliwa jądrowego</strong> — wycofywanie się z rosyjskich dostaw stworzyło lukę, którą ktoś musi wypełnić. To najmocniejszy argument za istnieniem tej spółki</li>
+        <li><strong>Reaktory małej mocy</strong> — projekty takie jak TerraPower wymagają HALEU, którego podaż na Zachodzie jest dziś praktycznie zerowa</li>
+        <li><strong>Zapotrzebowanie na krzem-28</strong> — lepsze odprowadzanie ciepła ma znaczenie przy rosnącej gęstości mocy w układach dla sztucznej inteligencji</li>
+        <li><strong>Horyzont jest długi i regulowany</strong> — w energetyce jądrowej opóźnienia liczy się w latach, nie kwartałach, a każdy etap wymaga zgód</li>
+        <li><strong>Finansowanie jako warunek przetrwania</strong> — przy wypalaniu 65,8 miliona dolarów gotówki rocznie spółka zależy od rynku kapitałowego, nie od klientów</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Stan</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td><strong>TerraPower</strong></td><td>Umowa ramowa z X 2024</td><td style="color:var(--ocena-uwaga)">Finansowanie zakładu + odbiór na 10 lat — ale bez umowy ostatecznej</td></tr>
+          <tr><td>Przychody roczne</td><td>$30,85 mln</td><td>Głównie materiały zaawansowane</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$113,8 tys.</td><td style="color:var(--ocena-sprzedaz)">Strata na pracownika: $487,3 tys.</td></tr>
+          <tr><td>Udział instytucji</td><td>43,91%</td><td>Osoby powiązane: 13,43%</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>20,07% wolnego obrotu</strong></td><td>Wzrost z 24,2 do 26,6 mln akcji</td></tr>
+          <tr><td>Pokrycie analityczne</td><td>3 analityków</td><td style="color:var(--ocena-uwaga)">Cel $13,00, ale jeden z nich zaleca sprzedaż</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Konsensus „mocne kupno” z celem 204% powyżej ceny wymaga komentarza.</strong> Opiera się na <strong>trzech analitykach</strong> — przy NVIDII jest ich 61, przy Marvellu 43. Przy tak cienkim pokryciu średnia jest bardzo wrażliwa na pojedynczą opinię, a przynajmniej jeden z tych trzech zaleca sprzedaż ze względu na ryzyko wykonawcze. <strong>Nie traktowałbym tego celu jako wiarygodnej wskazówki wyceny</strong> — to raczej odzwierciedlenie tego, jak wyglądałaby spółka, gdyby wszystko poszło zgodnie z planem.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 mies.)</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$30,85 mln</td><td style="color:var(--ocena-kupno)">Prognoza wzrostu 3-letniego: +120,99%</td></tr>
+          <tr><td>Zysk brutto</td><td>$5,65 mln</td><td style="color:var(--ocena-sprzedaz)">Marża 18,32%</td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$96,35 mln</strong></td><td>Marża -312,31%</td></tr>
+          <tr><td>Strata netto</td><td style="color:var(--ocena-sprzedaz)">-$132,05 mln</td><td>-$1,22 na akcję</td></tr>
+          <tr><td>EBITDA</td><td style="color:var(--ocena-sprzedaz)">-$91,51 mln</td><td>Marża -296,60%</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-sprzedaz)">-$52,37 mln</td><td>Nakłady -$13,43 mln</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$65,80 mln</strong></td><td>-$0,43 na akcję przy kursie $4,27</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Zestawienie, które najlepiej opisuje tę spółkę.</strong> Przychód roczny wynosi 30,85 miliona dolarów. Strata netto — <strong>132,05 miliona</strong>, czyli ponad czterokrotność przychodu. Z każdego dolara sprzedaży zostaje 18 centów zysku brutto, ale koszty operacyjne pochłaniają ponad trzykrotność całej sprzedaży. <strong>To nie jest przedsiębiorstwo, które chwilowo nie zarabia — to projekt budowlany finansowany ze sprzedaży akcji.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $4,27</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$654,63 mln</td><td>EV $669,28 mln</td></tr>
+          <tr><td>P/E</td><td>brak</td><td style="color:var(--ocena-sprzedaz)">Spółka głęboko nierentowna</td></tr>
+          <tr><td>P/S</td><td>21,22× (forward 14,34×)</td><td style="color:var(--ocena-sprzedaz)">Bardzo wysoko przy marży brutto 18%</td></tr>
+          <tr><td>EV/Sales</td><td>21,69×</td><td style="color:var(--ocena-sprzedaz)">Wyżej niż NVIDIA (21,35×)</td></tr>
+          <tr><td>P/B</td><td>2,10×</td><td style="color:var(--ocena-uwaga)">Wartość księgowa $2,03 na akcję</td></tr>
+          <tr><td>EV/EBITDA</td><td>brak</td><td style="color:var(--ocena-sprzedaz)">EBITDA ujemna: -$91,51 mln</td></tr>
+          <tr><td>Wskaźnik bieżącej płynności</td><td>3,87</td><td style="color:var(--ocena-kupno)">Jedyna mocna liczba w tej tabeli</td></tr>
+          <tr><td>Dług / kapitał własny</td><td>0,98</td><td style="color:var(--ocena-uwaga)">Pokrycie odsetek -24,66</td></tr>
+          <tr><td><strong>ROIC vs WACC</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-17,86% vs 17,44%</strong></td><td>Kapitał niszczony w tempie 35 pkt proc. rocznie</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>0,85</strong></td><td>Głęboka strefa ryzyka; Piotroski 2 na 9</td></tr>
+          <tr><td>Konsensus (3 analityków)</td><td>$13,00</td><td style="color:var(--ocena-uwaga)">Pokrycie zbyt cienkie, by na nim polegać</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/S zamiast Forward P/E — bo zysku nie ma i nie jest prognozowany</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/S bieżące</td><td>21,22×</td><td>Przychody $30,85 mln</td></tr>
+          <tr><td><strong>Forward P/S</strong></td><td><strong>14,34×</strong></td><td>Implikuje przychody około $45,6 mln</td></tr>
+          <tr><td>Forward P/E</td><td>brak</td><td style="color:var(--ocena-sprzedaz)">Analitycy nie prognozują rentowności</td></tr>
+          <tr><td>Prognoza wzrostu przychodów (3 lata)</td><td>+120,99%</td><td style="color:var(--ocena-kupno)">Wysoka, ale z bardzo niskiej bazy</td></tr>
+          <tr><td>Marża brutto</td><td>18,32%</td><td style="color:var(--ocena-sprzedaz)">Nawet przy wzroście sprzedaży zysk będzie skromny</td></tr>
+          <tr><td>Rozwodnienie</td><td>+54,91% r/r</td><td style="color:var(--ocena-sprzedaz)">Zjada wzrost wartości na akcję</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> mnożnik ceny do sprzedaży na poziomie 21 przy marży brutto 18% jest trudny do obrony jakąkolwiek arytmetyką. Dla porównania NVIDIA notowana jest przy podobnym mnożniku przychodów, ale <strong>z marżą brutto 74% i zyskiem netto 63%</strong>. Wycena ASPI nie odnosi się do dzisiejszej działalności — odnosi się do <strong>zakładu HALEU, który ma powstać w 2027 roku</strong>. Kupując te akcje, kupujesz opcję na to, że budowa się uda, umowa z TerraPower stanie się wiążąca, a rozwodnienie po drodze nie pochłonie większości korzyści.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$3,00 – $5,50</div><div class="fair-value-note">Baza: wartość księgowa $2,03 na akcję powiększona o opcję na projekt HALEU, przy uwzględnieniu dalszego rozwodnienia rzędu 25–50% rocznie | Konsensus 3 analityków: $13,00 — <strong>odrzucam ten poziom jako oparty na zbyt cienkim pokryciu</strong> i zakładający pełne powodzenie projektu | Scenariusz negatywny (emisja po niższym kursie, brak umowy ostatecznej z TerraPower, opóźnienie zakładu): $1,50–2,20 | Scenariusz pozytywny (wiążąca umowa z TerraPower i budowa zgodnie z harmonogramem): $9,00–12,00 | Przy $4,27 potencjał od -65% do +181%</div></div>
+      <p style="color:var(--text-muted);font-size:.88rem"><em>Rozpiętość od -65% do +181% nie jest niedbałością szacunku. Tak wygląda spółka, której wartość zależy od jednego zdarzenia binarnego: albo zakład powstaje i kontrakt się materializuje, albo nie.</em></p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Poziom</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Brutto</td><td style="color:var(--ocena-sprzedaz)">18,32%</td><td>Bardzo nisko jak na wyspecjalizowany materiał</td></tr>
+          <tr><td>Operacyjna</td><td style="color:var(--ocena-sprzedaz)">-312,31%</td><td>Koszty trzykrotnie przewyższają sprzedaż</td></tr>
+          <tr><td>EBITDA</td><td style="color:var(--ocena-sprzedaz)">-296,60%</td><td>-$91,51 mln</td></tr>
+          <tr><td>ROE</td><td style="color:var(--ocena-sprzedaz)">-90,35%</td><td>ROA -17,01%</td></tr>
+          <tr><td>ROIC</td><td style="color:var(--ocena-sprzedaz)">-17,86%</td><td>Przy koszcie kapitału 17,44%</td></tr>
+          <tr><td>Rotacja aktywów</td><td style="color:var(--ocena-sprzedaz)">0,09</td><td>Aktywa niemal nie generują sprzedaży</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Marża brutto 18,32% zasługuje na osobną uwagę</strong>, bo jest najbardziej niepokojącą liczbą w tej sekcji — bardziej niż strata operacyjna. Stratę operacyjną w fazie budowy da się wytłumaczyć: spółka ponosi koszty przyszłej zdolności produkcyjnej. Ale marża brutto mierzy rentowność tego, co spółka <em>już sprzedaje</em>. Osiemnaście procent oznacza, że <strong>nawet dojrzała działalność ASPI ledwie zarabia na materiale i jego wytworzeniu</strong>.</p>
+      <div class="alert alert-warn"><strong>Co to znaczy praktycznie.</strong> Gdyby przychody wzrosły dziesięciokrotnie, do 308 milionów dolarów, przy tej samej marży brutto dałoby to 56 milionów zysku brutto — wciąż mniej niż dzisiejsze koszty operacyjne. <strong>Rentowność wymaga więc jednocześnie wzrostu skali i poprawy marży</strong>, a nie samego wzrostu. To dwa warunki, nie jeden.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$254,90 mln</td><td style="color:var(--ocena-kupno)">Pozornie duża poduszka</td></tr>
+          <tr><td>Zadłużenie</td><td>$269,54 mln</td><td style="color:var(--ocena-sprzedaz)">Przewyższa gotówkę</td></tr>
+          <tr><td><strong>Gotówka netto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$14,65 mln</strong></td><td>-$0,10 na akcję</td></tr>
+          <tr><td>Kapitał własny</td><td>$274,79 mln</td><td>$2,03 na akcję przy kursie $4,27</td></tr>
+          <tr><td>Kapitał obrotowy</td><td style="color:var(--ocena-kupno)">+$201,89 mln</td><td>Płynność bieżąca 3,87</td></tr>
+          <tr><td>Pokrycie odsetek</td><td style="color:var(--ocena-sprzedaz)">-24,66</td><td>Odsetki płacone z kapitału</td></tr>
+          <tr><td>Wypalanie gotówki</td><td style="color:var(--ocena-sprzedaz)">-$65,80 mln rocznie</td><td>Przy gotówce $254,9 mln</td></tr>
+          <tr><td>Liczba akcji</td><td style="color:var(--ocena-sprzedaz)">+54,91% r/r</td><td>+16,24% w samym kwartale</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>0,85</strong></td><td>Piotroski 2 na 9</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Tu jest pułapka, w którą łatwo wpaść.</strong> Gotówka 254,9 miliona dolarów przy kapitalizacji 654,6 miliona wygląda jak solidne zabezpieczenie — <strong>39% wyceny w gotówce</strong>. Ale spółka ma jednocześnie 269,5 miliona długu, więc <strong>gotówka netto jest ujemna i wynosi -14,65 miliona</strong>. Ta poduszka nie należy do akcjonariuszy, tylko do wierzycieli. Przy wypalaniu 65,8 miliona rocznie zapas wystarcza na jakieś trzy do czterech lat, ale każdy dolar wydany na budowę zakładu ten okres skraca.</div>
+      <p>Warto też zauważyć, skąd wzięła się część długu i rozwodnienia naraz: <strong>zamiana obligacji zamiennych Quantum Leap Energy o wartości 109,2 miliona dolarów na około 23,2 miliona nowych akcji</strong>. To zdjęło zobowiązanie z bilansu, ale kosztem udziałów dotychczasowych akcjonariuszy — i tłumaczy skok liczby akcji o 16,24% w jednym kwartale.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🤝</div><div class="catalyst-body"><h4>TerraPower — finansowanie budowy i odbiór na dziesięć lat</h4><p>Umowa ramowa przewiduje, że TerraPower sfinansuje zakład HALEU i odbierze całą produkcję przez dekadę po uruchomieniu w 2027. Przekształcenie jej w umowę wiążącą byłoby przełomem dla tej tezy.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🛡️</div><div class="catalyst-body"><h4>Bariera regulacyjna jest realna</h4><p>Wzbogacanie uranu wymaga licencji, a liczba zachodnich podmiotów zdolnych je prowadzić jest minimalna. Odejście od rosyjskich dostaw stworzyło lukę podażową, której nie da się szybko zapełnić.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Przychody rosną czterokrotnie</h4><p>Q2 2026: $5,12 mln, +328% r/r. Strata netto zawężona o 55%, strata na akcję z -$1,03 do -$0,27. Kierunek jest właściwy, nawet jeśli skala pozostaje mała.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💧</div><div class="catalyst-body"><h4>Płynność bieżąca 3,87 i kapitał obrotowy $202 mln</h4><p>Mimo wszystkich zastrzeżeń spółka nie stoi przed ścianą płynności w najbliższych kwartałach. Ma czas, żeby dowieźć projekt.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔥</div><div class="catalyst-body"><h4>Krótka sprzedaż 20% wolnego obrotu</h4><p>Przy pozytywnym rozstrzygnięciu — na przykład podpisaniu wiążącej umowy — domykanie tych pozycji mogłoby wywołać bardzo gwałtowny ruch w górę. Przy becie 3,62 tym bardziej.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">✂️</div><div class="catalyst-body"><h4>Rozwodnienie 54,91% rocznie</h4><p>W samym kwartale +16,24%. Zamiana obligacji QLE za $109,2 mln na 23,2 mln akcji to jedno zdarzenie; przy wypalaniu $65,8 mln rocznie kolejne są niemal pewne. Twój udział topnieje szybciej, niż rośnie wartość spółki.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Strata czterokrotnie wyższa od przychodów</h4><p>$132,05 mln straty przy $30,85 mln sprzedaży, marża operacyjna -312%. Altman 0,85, Piotroski 2 na 9 — to poziomy przypisywane spółkom w poważnych tarapatach.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏗️</div><div class="catalyst-body"><h4>Cała teza opiera się na fabryce, która nie istnieje</h4><p>Zakład HALEU planowany na 2027, umowa z TerraPower wciąż ramowa. W energetyce jądrowej opóźnienia mierzy się w latach, a każdy etap wymaga zgód regulatora.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💸</div><div class="catalyst-body"><h4>Gotówka netto jest ujemna</h4><p>Poduszka $254,9 mln jest równoważona długiem $269,5 mln. Pokrycie odsetek -24,66 oznacza, że odsetki płacone są z kapitału, nie z zysku.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📊</div><div class="catalyst-body"><h4>Marża brutto 18% podważa model docelowy</h4><p>Nawet dziesięciokrotny wzrost sprzedaży przy tej marży nie pokryłby dzisiejszych kosztów operacyjnych. Rentowność wymaga wzrostu i poprawy marży jednocześnie.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Podmiot</th><th>Rola</th><th>Relacja do ASPI</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ASP Isotopes</strong></td><td>Wzbogacanie izotopów, HALEU w budowie</td><td>Przychody $30,85 mln, Altman 0,85</td></tr>
+          <tr><td><strong>Centrus Energy</strong></td><td>Amerykański producent HALEU</td><td style="color:var(--ocena-sprzedaz)">Ma już działającą produkcję i kontrakty rządowe</td></tr>
+          <tr><td><strong>Urenco</strong></td><td>Europejskie konsorcjum wzbogacania</td><td style="color:var(--ocena-sprzedaz)">Nieporównywalna skala i doświadczenie</td></tr>
+          <tr><td><strong>Orano</strong></td><td>Francuski gracz cyklu paliwowego</td><td style="color:var(--ocena-sprzedaz)">Zaplecze państwowe</td></tr>
+          <tr><td>OKLO</td><td>Reaktory małej mocy — odbiorca paliwa</td><td style="color:var(--ocena-uwaga)">Ta sama teza jądrowa, też w Twoim portfelu</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>ASPI jest w tej grupie zdecydowanie najmniejszym i najsłabiej ufundowanym podmiotem.</strong> Centrus Energy prowadzi już produkcję HALEU i ma umowy z amerykańskim rządem; Urenco i Orano działają od dekad przy wsparciu państwowym. ASPI konkuruje z nimi <strong>projektem, nie zakładem</strong>. W Twoim portfelu masz też OKLO, które reprezentuje drugą stronę tego samego rynku — reaktory potrzebujące paliwa. <strong>Razem to około 3,9% portfela w jednej, bardzo długoterminowej tezie o odbudowie zachodniego cyklu jądrowego.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="tp-chart">
+        <div class="tp-chart-head"><b>Kurs — ostatnie 12 miesięcy</b><span>zakres $3.87 – $10.55 | ostatnie zamknięcie $4.27</span></div>
+        <svg viewBox="0 0 940 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block" role="img" aria-label="Wykres kursu z zaznaczonym przedziałem wartości godziwej">
+<line x1="58" y1="296.0" x2="848" y2="296.0" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="300.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$2</text>
+<line x1="58" y1="227.5" x2="848" y2="227.5" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="231.5" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$5</text>
+<line x1="58" y1="159.0" x2="848" y2="159.0" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="163.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$7</text>
+<line x1="58" y1="90.5" x2="848" y2="90.5" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="94.5" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$9</text>
+<line x1="58" y1="22.0" x2="848" y2="22.0" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="26.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$11</text>
+<rect x="58" y="198.9" width="790" height="78.2" fill="#34d399" opacity="0.10"/>
+<line x1="58" y1="198.9" x2="848" y2="198.9" stroke="#34d399" stroke-width="1" stroke-dasharray="5 4" opacity="0.65"/>
+<line x1="58" y1="277.1" x2="848" y2="277.1" stroke="#34d399" stroke-width="1" stroke-dasharray="5 4" opacity="0.65"/>
+<text x="856" y="242.0" font-size="10.5" fill="#34d399" font-family="Segoe UI,system-ui,sans-serif" font-weight="700">FAIR VALUE</text>
+<text x="856" y="256.0" font-size="10" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$3–$6</text>
+<polygon points="58,296 58.0,79.7 73.0,78.4 88.1,80.6 103.1,114.4 118.1,96.6 133.1,62.5 148.2,40.9 163.2,78.8 178.2,54.0 193.2,57.8 208.3,63.7 223.4,54.0 238.4,89.4 253.4,117.2 268.5,184.2 283.5,176.4 298.5,166.4 313.6,185.1 328.6,180.7 343.6,190.8 358.6,194.8 373.7,136.0 388.7,128.8 403.7,105.7 418.7,172.6 433.8,188.9 448.8,207.6 463.8,208.3 478.9,203.9 493.9,197.3 508.9,205.8 523.9,238.9 539.0,234.2 553.9,236.7 568.9,230.8 584.0,203.0 599.0,203.6 614.0,209.8 629.0,202.6 644.1,189.5 659.1,197.3 674.1,127.6 689.1,161.0 704.2,166.0 719.2,146.3 734.2,177.9 749.2,194.8 764.3,214.2 779.3,249.6 794.3,249.9 809.4,245.8 824.4,232.4 839.4,237.4 848.0,237.4 848,296" fill="#34d399" opacity="0.07"/>
+<polyline points="58.0,79.7 73.0,78.4 88.1,80.6 103.1,114.4 118.1,96.6 133.1,62.5 148.2,40.9 163.2,78.8 178.2,54.0 193.2,57.8 208.3,63.7 223.4,54.0 238.4,89.4 253.4,117.2 268.5,184.2 283.5,176.4 298.5,166.4 313.6,185.1 328.6,180.7 343.6,190.8 358.6,194.8 373.7,136.0 388.7,128.8 403.7,105.7 418.7,172.6 433.8,188.9 448.8,207.6 463.8,208.3 478.9,203.9 493.9,197.3 508.9,205.8 523.9,238.9 539.0,234.2 553.9,236.7 568.9,230.8 584.0,203.0 599.0,203.6 614.0,209.8 629.0,202.6 644.1,189.5 659.1,197.3 674.1,127.6 689.1,161.0 704.2,166.0 719.2,146.3 734.2,177.9 749.2,194.8 764.3,214.2 779.3,249.6 794.3,249.9 809.4,245.8 824.4,232.4 839.4,237.4 848.0,237.4" fill="none" stroke="#34d399" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="848.0" y1="22" x2="848.0" y2="296" stroke="#34d399" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+<circle cx="848.0" cy="237.4" r="5" fill="#34d399" stroke="#0f1117" stroke-width="2"/>
+<text x="839.0" y="35" text-anchor="end" font-size="10.5" fill="#34d399" font-family="Segoe UI,system-ui,sans-serif" font-weight="700">Ta analiza · 17.08</text>
+<text x="58.0" y="318" text-anchor="start" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">11.08.2025</text>
+<text x="463.8" y="318" text-anchor="middle" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">16.02.2026</text>
+<text x="848.0" y="318" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">14.08.2026</text>
+<circle cx="848.0" cy="237.4" r="4" fill="#34d399"/>
+</svg>
+        <div class="tp-chart-legend"><span><i style="background:#34d399"></i>kurs zamknięcia (tygodniowo)</span><span><i style="background:#34d399;opacity:.25"></i>przedział fair value</span></div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$4,27</strong></td><td style="color:var(--ocena-sprzedaz)">-61,29% w 52 tygodnie</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$5,22</td><td style="color:var(--ocena-sprzedaz)">Kurs 18,2% poniżej</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$5,92</td><td style="color:var(--ocena-sprzedaz)">Kurs 27,9% poniżej</td></tr>
+          <tr><td>RSI (14)</td><td>45,57</td><td>Neutralnie — brak wyprzedania</td></tr>
+          <tr><td><strong>Beta</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>3,62</strong></td><td>Ruchy ponad trzykrotnie silniejsze od rynku</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>20,07% wolnego obrotu</strong></td><td>Rośnie; 6,52 dnia do pokrycia</td></tr>
+          <tr><td>Wartość księgowa</td><td>$2,03 na akcję</td><td style="color:var(--ocena-uwaga)">Twarde wsparcie fundamentalne</td></tr>
+          <tr><td>Wsparcie S1</td><td>$3,80–4,00</td><td>Okolice tegorocznych minimów</td></tr>
+          <tr><td>Opór R1</td><td>$5,22</td><td>Średnia 50-sesyjna</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Wiążąca umowa z TerraPower</li><li>Domykanie krótkich pozycji (20% obrotu)</li><li>Powrót nad $5,22 i wyżej</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Kolejna emisja akcji po niższym kursie</li><li>Przebicie $3,80</li><li>Zejście ku wartości księgowej $2,03</li></ul></div>
+      </div>
+      <p><strong>To jedyna pozycja w portfelu notowana poniżej obu średnich i to wyraźnie</strong> — 18% pod pięćdziesięciosesyjną i 28% pod dwustusesyjną. RSI 45,57 pokazuje przy tym, że nie ma tu wyprzedania, które zapowiadałoby odbicie techniczne. Trend jest po prostu spadkowy.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Kurs poniżej obu średnich, RSI bez wyprzedania, ryzyko kolejnej emisji. Przy becie 3,62 i krótkiej sprzedaży 20% obrotu ruch może być gwałtowny w obie strony.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Wszystko zależy od jednego zdarzenia: czy umowa z TerraPower stanie się wiążąca. Bez tego rozwodnienie 55% rocznie zjada każdą poprawę wyników.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Rynek HALEU jest realny i deficytowy, ale ASPI konkuruje projektem z podmiotami mającymi działające zakłady i zaplecze państwowe. Opcja, nie inwestycja.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: maksymalnie 1–2% portfela.</strong> Masz 1,8% — to górna granica tego, co uznałbym za rozsądne przy wskaźniku Altmana 0,85</li>
+        <li><strong>Nie uśredniać w dół.</strong> Jesteś na minusie 20,9%; przy rozwodnieniu 55% rocznie dokupowanie oznacza kupowanie coraz mniejszego udziału w tej samej spółce</li>
+        <li><strong>Nie dokupywać przed wynikami</strong> — a najpierw sprawdź w relacjach inwestorskich, czy raport za Q2 już się nie ukazał</li>
+        <li><strong>Dokupienie:</strong> wyłącznie po ogłoszeniu wiążącej umowy z TerraPower, nawet jeśli kurs będzie wtedy wyższy. Zapłacisz więcej za znacznie mniejsze ryzyko</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $8–9, gdyby projekt ruszył</li>
+        <li><strong>Jedna liczba do śledzenia:</strong> <strong>liczba akcji</strong>. Nie przychody, nie strata — liczba akcji. Dziś 153,31 mln po wzroście o 54,91% w rok. Jeśli to tempo się utrzyma, nawet udany projekt da niewiele na akcję</li>
+        <li><strong>Wyjście z tezy:</strong> emisja akcji po cenie istotnie niższej od rynkowej, odsunięcie terminu zakładu poza 2027 albo rozejście się z TerraPower</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$3,00 – $5,50</div><div class="fair-value-note">Scenariusz negatywny: $1,50–2,20 | Scenariusz pozytywny: $9,00–12,00 | Konsensus 3 analityków: $13,00 — odrzucony jako oparty na zbyt cienkim pokryciu</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by trzymać</h4><ul>
+          <li><strong>TerraPower.</strong> Umowa ramowa na sfinansowanie zakładu HALEU i odbiór całej produkcji przez dziesięć lat — przekształcenie jej w wiążącą zmieniłoby wszystko</li>
+          <li><strong>Bariera regulacyjna jest prawdziwa.</strong> Zachodnich podmiotów zdolnych wzbogacać uran jest garstka, a luka po dostawach rosyjskich pozostaje niezapełniona</li>
+          <li><strong>Przychody +328% r/r, strata zawężona o 55%.</strong> Płynność bieżąca 3,87 daje czas na dowiezienie projektu</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by nie dokupywać</h4><ul>
+          <li><strong>Rozwodnienie 54,91% rocznie</strong>, w tym +16,24% w jednym kwartale. Udział akcjonariusza topnieje szybciej, niż buduje się wartość</li>
+          <li><strong>Strata czterokrotnie wyższa od przychodów</strong> przy marży brutto 18,32%, Altmanie 0,85 i ROIC -17,86% wobec kosztu kapitału 17,44%</li>
+          <li><strong>Gotówka netto jest ujemna.</strong> Poduszka $254,9 mln jest równoważona długiem $269,5 mln — należy do wierzycieli, nie do Ciebie</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> emisja akcji poniżej ceny rynkowej, przesunięcie zakładu poza 2027 albo rozejście się z TerraPower → zejście ku wartości księgowej $2,03.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> wiążąca umowa z TerraPower i potwierdzony harmonogram budowy → droga ku $9–12.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">ASP Isotopes jest zakładem na jedno zdarzenie: czy do 2027 roku powstanie zakład produkcji HALEU i czy umowa ramowa z TerraPower stanie się umową wiążącą. Wszystko inne w tej spółce jest wobec tego pytania wtórne. Rynek jest realny — odejście Zachodu od rosyjskiego paliwa jądrowego stworzyło lukę podażową, a bariera regulacyjna dla wzbogacania uranu jest jedną z najwyższych, jakie istnieją.</p>
+
+      <p class="sum-lead" style="border-color:var(--ocena-sprzedaz)">Bieżące liczby są jednak trudne do obrony. Przy przychodach 30,85 miliona dolarów strata netto wynosi <strong>132,05 miliona</strong>, czyli ponad czterokrotność sprzedaży. Marża brutto to zaledwie 18,32%, marża operacyjna minus 312%, a zwrot z kapitału minus 17,86% przy jego koszcie 17,44%. Wskaźnik Altmana wynosi 0,85, Piotroski 2 na 9, a liczba akcji wzrosła w rok o <strong>54,91%</strong>, w tym o 16,24% w samym ostatnim kwartale — głównie przez zamianę obligacji Quantum Leap Energy o wartości 109,2 miliona na 23,2 miliona nowych akcji.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Uważaj przy tym na jedną pułapkę. Gotówka 254,9 miliona przy kapitalizacji 654,6 miliona wygląda jak poduszka pokrywająca 39% wyceny — ale spółka ma równocześnie 269,5 miliona długu, więc <strong>gotówka netto jest ujemna</strong>. Ta poduszka należy do wierzycieli. Odrzucam też konsensus analityków na poziomie 13 dolarów: opiera się na <strong>trzech</strong> opiniach, z których przynajmniej jedna jest sprzedażowa, i zakłada pełne powodzenie projektu.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Rynek istnieje i jest deficytowy.</strong> Luka po rosyjskich dostawach paliwa jądrowego pozostaje niezapełniona, a bariera licencyjna realna.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Kierunek wyników jest właściwy.</strong> Q2 2026: przychody $5,12 mln (+328% r/r), strata netto zawężona o 55%, strata na akcję z -$1,03 do -$0,27.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Nie ma ściany płynności.</strong> Płynność bieżąca 3,87, kapitał obrotowy $201,89 mln — czas na dowiezienie projektu jest.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Umowa z TerraPower.</strong> Wciąż ramowa. To jest jedyne zdarzenie, które naprawdę rozstrzyga o wartości tych akcji.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Zakład HALEU do 2027.</strong> W energetyce jądrowej opóźnienia liczy się w latach, a każdy etap wymaga zgody regulatora.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Ochrona udziału akcjonariusza.</strong> +54,91% akcji rocznie przy wypalaniu $65,8 mln gotówki. Tu nic nie wskazuje na poprawę.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>21 sierpnia 2026</strong></td><td>Wyniki kwartalne — <strong>data szacowana</strong></td><td>Zweryfikuj w relacjach inwestorskich; dane za Q2 mogły już zostać opublikowane</td></tr>
+            <tr><td>Bez terminu</td><td><strong>Umowa ostateczna z TerraPower</strong></td><td>Jedyne zdarzenie, które przesuwa tę spółkę z kategorii opcji do kategorii przedsiębiorstwa</td></tr>
+            <tr><td>2027</td><td>Planowane uruchomienie zakładu HALEU</td><td>Początek odbioru produkcji przez dziesięć lat</td></tr>
+            <tr><td>Na bieżąco</td><td>Emisje akcji i zamiany obligacji</td><td>Przy wypalaniu $65,8 mln rocznie kolejne są niemal pewne</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Liczba akcji</strong></td><td>153,31 mln (+54,91% r/r)</td><td>emisja poniżej ceny rynkowej</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Marża brutto</strong></td><td>18,32%</td><td>brak poprawy przez rok</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Gotówka netto</td><td>-$14,65 mln</td><td>dalsze pogłębienie</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Umowa z TerraPower</td><td>ramowa</td><td>rozwiązanie term sheetu</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Przychody kwartalne</td><td>$5,12 mln (+328% r/r)</td><td>spadek kw/kw</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Płynność bieżąca</td><td>3,87</td><td>&lt; 2,0</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji: maksymalnie 1–2% portfela.</strong> Masz 1,8% — górna granica rozsądku przy Altmanie 0,85</li>
+          <li><strong>Nie uśredniać w dół</strong> mimo straty 20,9%. Przy rozwodnieniu 55% rocznie dokupujesz coraz mniejszy udział w tej samej spółce</li>
+          <li><strong>Sprawdź datę wyników</strong> w relacjach inwestorskich — 21 sierpnia to szacunek, a dane za Q2 mogły już wyjść</li>
+          <li><strong>Dokupienie:</strong> wyłącznie po wiążącej umowie z TerraPower, nawet po wyższym kursie</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie $8–9, gdyby projekt ruszył</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> liczba akcji. Nie przychody i nie strata</li>
+          <li><strong>Uwaga portfelowa:</strong> ASPI i OKLO to razem około 3,9% portfela w tej samej, bardzo długoterminowej tezie o odbudowie zachodniego cyklu jądrowego</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">⚖️ NEUTRALNA — opcja na projekt, nie udział w przedsiębiorstwie</div>
+        <p>Trzymanie 1,8% portfela w spółce, która buduje coś potencjalnie bardzo wartościowego, jest decyzją obronialną. Rynek HALEU jest realny, bariera wejścia wysoka, a umowa z TerraPower — gdyby stała się wiążąca — zmieniłaby profil tej spółki z gruntu. Kupiłeś już po znacznym spadku i strata 20,9% jest w kontekście tego ryzyka umiarkowana.</p>
+        <p>Ale trzeba nazwać rzecz po imieniu: <strong>to nie jest inwestycja w przedsiębiorstwo, tylko opcja na projekt budowlany</strong>. Spółka traci czterokrotność swoich przychodów, zarabia 18 centów brutto na dolarze sprzedaży, ma ujemną gotówkę netto i zwiększa liczbę akcji o ponad połowę rocznie. Wskaźnik Altmana 0,85 i Piotroski 2 to poziomy, przy których modele przypisują wysokie prawdopodobieństwo poważnych kłopotów.</p>
+        <p><strong>Trzymać w obecnej wielkości, nie uśredniać w dół, a dokupować dopiero po podpisaniu wiążącej umowy z TerraPower</strong> — nawet jeśli kurs będzie wtedy o połowę wyższy. Zapłacisz więcej, ale za coś, co istnieje.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$3,00–5,50</b></div>
+          <div><span>Scenariusz negatywny</span><b>$1,50–2,20</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$9,00–12,00</b></div>
+          <div><span>Sugerowana pozycja</span><b>maks. 1–2% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki — 21 sierpnia (szacunek)</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 sierpnia 2026 | Cena: $4,27 (zamknięcie 14.08.2026) | Zastępuje wersję z 27 lipca 2026 | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 17.08.2026</strong>, ASP Isotopes IR, doniesienia o wynikach Q2 2026 | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
