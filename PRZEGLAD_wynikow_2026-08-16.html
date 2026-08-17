@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Przed sezonem wyników · 21.08–08.09.2026 | TP Corp</title>
+<!-- tp-typ: notatka -->
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+<style id="tp-notatka">
+.nt{max-width:1080px;margin:0 auto;padding:0 24px 80px}
+.nt h2{font-size:.95rem;letter-spacing:.09em;text-transform:uppercase;color:var(--text-muted);margin:46px 0 16px;font-weight:700}
+.nt h3{font-size:1.02rem;margin:26px 0 10px}
+.nt p{line-height:1.72;margin:0 0 14px}
+.blok{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:14px}
+.blok.klucz{border-color:rgba(219,84,72,.4);background:rgba(219,84,72,.06)}
+.blok.info{border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.05)}
+.blok h4{margin:0 0 10px;font-size:1.06rem}
+.dzien{display:inline-block;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 11px;
+border-radius:20px;background:rgba(255,255,255,.06);color:var(--text-muted);margin-bottom:9px}
+.dzien.pilny{background:rgba(219,84,72,.16);color:#e8877d}
+table.nt-t{width:100%;border-collapse:collapse;font-size:.86rem;margin:6px 0 4px}
+table.nt-t th{text-align:left;padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.13);
+color:var(--text-muted);font-size:.71rem;text-transform:uppercase;letter-spacing:.06em}
+table.nt-t td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:top}
+table.nt-t tr:hover td{background:rgba(255,255,255,.02)}
+.num{text-align:right;white-space:nowrap}.dod{color:var(--ocena-kupno)}.uje{color:var(--ocena-sprzedaz)}
+.pow{display:inline-block;margin-bottom:20px;font-size:.82rem;color:var(--text-muted);text-decoration:none}
+.pow:hover{color:var(--accent)}
+</style></head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header"><div class="header-content">
+  <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Notatka · do użytku wewnętrznego</div></div>
+  <div class="ticker-badge">PRZEGLĄD</div>
+  <div class="company-name">Przed sezonem wyników</div>
+  <div class="company-sub">21 sierpnia – 8 września 2026 · dziewięć publikacji, z czego trzy w jednej tezie ważącej 45% portfela</div>
+  <div class="header-meta">
+    <span class="meta-tag">NVDA 26.08</span>
+    <span class="meta-tag">MRVL i IREN 27.08</span>
+    <span class="meta-tag">Temat AI = 54,6% rachunku</span>
+    <span class="meta-tag">Dźwignia 1,21×</span>
+  </div>
+</div></div>
+
+<div class="summary-wrapper"><div class="summary-grid">
+  <div class="metric-card"><div class="metric-label">Publikacji w oknie</div><div class="metric-value">9</div><div class="metric-detail">21 sierpnia – 8 września</div></div>
+  <div class="metric-card"><div class="metric-label">Twoich pozycji</div><div class="metric-value">4</div><div class="metric-detail">ASPI, MRVL, IREN, ORCL</div></div>
+  <div class="metric-card"><div class="metric-label">Temat „moc obliczeniowa dla AI”</div><div class="metric-value red">54,6%</div><div class="metric-detail">wartości rachunku, w 10 pozycjach</div></div>
+  <div class="metric-card"><div class="metric-label">Dźwignia brutto</div><div class="metric-value yellow">1,21×</div><div class="metric-detail">Akcje $144 158 wobec kapitału $119 612</div></div>
+</div></div>
+
+<div class="nt">
+<a class="pow" href="index.html">← Katalog analiz</a>
+
+<h2>1. Kalendarz</h2>
+<div class="table-wrap"><table class="nt-t">
+  <thead><tr><th>Data</th><th>Spółka</th><th>Status</th><th class="num">Udział</th><th class="num">Wynik</th><th>Temat</th></tr></thead>
+  <tbody>
+    <tr><td><strong>21 sierpnia</strong><br><span style="color:var(--text-muted);font-size:.78rem">za 4 dni</span></td><td><strong>ASPI</strong><br><span style="color:var(--text-muted);font-size:.78rem">ASP Isotopes</span></td><td>w portfelu</td><td class="num">1,8%</td><td class="num uje">-20,3%</td><td>Energia jądrowa</td></tr>
+    <tr><td><strong>26 sierpnia</strong></td><td><strong>NVDA</strong><br><span style="color:var(--text-muted);font-size:.78rem">NVIDIA</span></td><td>obserwowana</td><td class="num">—</td><td class="num">—</td><td style="color:var(--ocena-sprzedaz)">Moc obliczeniowa dla AI</td></tr>
+    <tr><td>26 sierpnia</td><td><strong>VEEV</strong><br><span style="color:var(--text-muted);font-size:.78rem">Veeva Systems</span></td><td>obserwowana</td><td class="num">—</td><td class="num">—</td><td>Oprogramowanie i SaaS</td></tr>
+    <tr><td><strong>27 sierpnia</strong></td><td><strong>MRVL</strong><br><span style="color:var(--text-muted);font-size:.78rem">Marvell</span></td><td>w portfelu</td><td class="num">2,9%</td><td class="num dod">+4,5%</td><td style="color:var(--ocena-sprzedaz)">Moc obliczeniowa dla AI</td></tr>
+    <tr><td><strong>27 sierpnia</strong></td><td><strong>IREN</strong><br><span style="color:var(--text-muted);font-size:.78rem">IREN Limited</span></td><td>w portfelu</td><td class="num">2,1%</td><td class="num dod">+686,6%</td><td style="color:var(--ocena-sprzedaz)">Moc obliczeniowa dla AI</td></tr>
+    <tr><td>27 sierpnia</td><td><strong>S</strong><br><span style="color:var(--text-muted);font-size:.78rem">SentinelOne</span></td><td>obserwowana</td><td class="num">—</td><td class="num">—</td><td>Oprogramowanie i SaaS</td></tr>
+    <tr><td>2 września</td><td><strong>AVGO</strong><br><span style="color:var(--text-muted);font-size:.78rem">Broadcom</span></td><td>obserwowana</td><td class="num">—</td><td class="num">—</td><td>Półprzewodniki</td></tr>
+    <tr><td>3 września</td><td><strong>GWRE</strong><br><span style="color:var(--text-muted);font-size:.78rem">Guidewire</span></td><td>obserwowana</td><td class="num">—</td><td class="num">—</td><td>Oprogramowanie i SaaS</td></tr>
+    <tr><td><strong>8 września</strong></td><td><strong>ORCL</strong><br><span style="color:var(--text-muted);font-size:.78rem">Oracle</span></td><td>w portfelu</td><td class="num">5,0%</td><td class="num uje">-11,8%</td><td style="color:var(--ocena-sprzedaz)">Moc obliczeniowa dla AI</td></tr>
+  </tbody>
+</table></div>
+<p style="color:var(--text-muted);font-size:.84rem">Udziały i wyniki liczone z eksportu z 11 sierpnia. MRVL i IREN wzrosły od tego czasu, więc ich rzeczywiste udziały są nieco wyższe.</p>
+
+<h2>2. Dlaczego to jedno wydarzenie, a nie dziewięć</h2>
+
+<div class="blok klucz">
+  <h4>26 sierpnia decyduje o pozostałych</h4>
+  <p><strong>NVIDII nie masz w portfelu</strong> — a to jej wyniki są w tym oknie najważniejsze dla Twojego rachunku. Odpowiada za ponad 80% rynku akceleratorów najwyższej klasy, więc jej prognoza jest de facto prognozą nakładów całego sektora. Marvell i IREN publikują nazajutrz, już po tym, jak rynek przewartościuje całą tezę.</p>
+  <p>Dziesięć Twoich pozycji należy do tematu mocy obliczeniowej dla AI — <strong>AMD, INTC, ORCL, CRWV, MARA, MRVL, APH, OKLO, IREN i NOK</strong>. To 45,3% wartości akcji i <strong>54,6% wartości rachunku</strong>. Publikują tylko trzy z nich, ale porusza się zwykle cała grupa.</p>
+</div>
+
+<h3>Twoje pozycje stoją po obu stronach jednego sporu</h3>
+<p>Warto to rozpisać, bo z pojedynczych raportów tego nie widać. Toczy się spór o to, czy operatorzy chmury będą kupować gotowe akceleratory NVIDII, czy zamawiać krzem projektowany na miarę. <strong>Twoje pozycje obstawiają obie odpowiedzi jednocześnie</strong> — i to znaczy, że wynik NVIDII nie przełoży się na nie w jednym kierunku.</p>
+
+<div class="table-wrap"><table class="nt-t">
+  <thead><tr><th>Jeśli NVIDIA pokaże…</th><th>Dobrze dla</th><th>Gorzej dla</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Marżę brutto powyżej 74% i mocną prognozę</strong><br><span style="color:var(--text-muted);font-size:.79rem">brak realnej konkurencji, budowa trwa</span></td><td class="dod">CRWV, IREN, ORCL, APH, OKLO — rośnie cała infrastruktura</td><td class="uje">MRVL, AMD, INTC — teza o przejmowaniu udziałów słabnie</td></tr>
+    <tr><td><strong>Marżę poniżej 70%</strong><br><span style="color:var(--text-muted);font-size:.79rem">krzem na zamówienie zaczyna działać</span></td><td class="dod">MRVL, AMD, INTC — potwierdzenie tezy</td><td class="uje">Nastroje wobec całego sektora zwykle siadają mimo to</td></tr>
+    <tr><td><strong>Sygnał hamowania nakładów klientów</strong><br><span style="color:var(--text-muted);font-size:.79rem">scenariusz najgorszy</span></td><td>—</td><td class="uje">Wszystkie dziesięć pozycji naraz</td></tr>
+  </tbody>
+</table></div>
+<p>Pierwszy wiersz to sytuacja, w której zarabiasz na sześciu pozycjach i tracisz na trzech. Trzeci to jedyny, w którym nie ma się gdzie schować — i właśnie dlatego warto go przeliczyć zawczasu.</p>
+
+<h2>3. Arytmetyka ekspozycji</h2>
+<p>Poniższe liczby nie są prognozą ani rekomendacją — to mechaniczne przeliczenie, co dany ruch tematu zrobiłby z wartością rachunku przy obecnej strukturze. Rachunek ma 119 612 dolarów kapitału przy 144 158 dolarów w akcjach, czyli <strong>dźwignię brutto 1,21×</strong>. Ta dźwignia działa w obie strony.</p>
+
+<div class="table-wrap"><table class="nt-t">
+  <thead><tr><th>Ruch tematu AI</th><th class="num">Zmiana wartości</th><th class="num">Rachunek po</th><th class="num">Zmiana kapitału</th></tr></thead>
+  <tbody>
+    <tr><td>-10%</td><td class="num uje">-$6 529</td><td class="num">$113 083</td><td class="num uje">-5,5%</td></tr>
+    <tr><td>-15%</td><td class="num uje">-$9 793</td><td class="num">$109 819</td><td class="num uje">-8,2%</td></tr>
+    <tr><td><strong>-25%</strong></td><td class="num uje">-$16 322</td><td class="num">$103 290</td><td class="num uje"><strong>-13,6%</strong></td></tr>
+    <tr><td>-40%</td><td class="num uje">-$26 115</td><td class="num">$93 497</td><td class="num uje">-21,8%</td></tr>
+  </tbody>
+</table></div>
+<p>Dla skali: <strong>Marvell notowany jest przy 48,8-krotności zysku przyszłorocznego, a CoreWeave ma wskaźnik Altmana 0,29</strong>. Ruch o 25% w dół w takim koszyku po rozczarowaniu nie jest scenariuszem skrajnym — to zwykła reakcja na obniżoną prognozę.</p>
+
+<div class="blok info">
+  <h4>Druga strona tego samego rachunku</h4>
+  <p>Ta sama arytmetyka działa w górę i warto o tym pamiętać, żeby nie czytać powyższej tabeli jednostronnie. Wzrost tematu o 15% to <strong>+9 793 dolarów, czyli +8,2% wartości rachunku</strong>. Koncentracja jest właśnie tym, co dało Ci wynik otwarty +39 811 dolarów — ta sama cecha, która tworzy ryzyko, zbudowała dotychczasowy zysk.</p>
+</div>
+
+<h2>4. Progi dla Twoich pozycji</h2>
+
+<div class="blok">
+  <div class="dzien pilny">21 sierpnia · za 4 dni</div>
+  <h4>ASP Isotopes — najbliższe i najbardziej zaniedbane</h4>
+  <p>Pozycja 1,8% portfela, <strong>-20,3%</strong>, a raport pochodzi z 27 lipca i jest w starym formacie czternastosekcyjnym. To jedyna spółka publikująca w tym tygodniu i jednocześnie ta, o której mam najmniej aktualną wiedzę. <strong>Mogę ją odświeżyć przed publikacją</strong> — daj znać, jeśli chcesz.</p>
+</div>
+
+<div class="blok">
+  <div class="dzien pilny">27 sierpnia · za 10 dni</div>
+  <h4>Marvell — cena $222,02, fair value $240–285</h4>
+  <p>Ocena: kupno w średnim i długim terminie, neutralnie do wyników. Kurs jest 7% poniżej średniej pięćdziesięciosesyjnej, a mnożnik 48,8 nie zostawia miejsca na rozczarowanie.</p>
+  <p><strong>Potwierdza tezę:</strong> wzrost przychodów z centrów danych powyżej 25% oraz utrzymanie prognozy 16,5 miliarda dolarów na rok obrotowy 2028.<br>
+  <strong>Łamie tezę:</strong> wzrost centrów danych poniżej 20%, jakiekolwiek obniżenie prognozy na FY2028 albo utrata programu flagowego. Zejście w rejon 150–175 dolarów.<br>
+  <strong>Liczba do sprawdzenia:</strong> zwrot z zainwestowanego kapitału. Dziś 6,87% przy koszcie 16,25% — to najsłabszy punkt tej spółki.</p>
+</div>
+
+<div class="blok">
+  <div class="dzien pilny">27 sierpnia · za 10 dni</div>
+  <h4>IREN — cena $44,06, fair value $38–56</h4>
+  <p>Ocena: neutralna. Pozycja jest na plusie ponad 760%, kurs poniżej obu średnich, a krótka sprzedaż obejmuje <strong>31,8% wolnego obrotu</strong> — przy becie 4,30 reakcja na wyniki będzie gwałtowna w którąkolwiek stronę.</p>
+  <p><strong>Potwierdza tezę:</strong> poprawa wyniku operacyjnego, dziś minus 222 miliony dolarów, oraz ogłoszenie długoterminowych kontraktów AI.<br>
+  <strong>Łamie tezę:</strong> kolejna duża emisja akcji albo brak poprawy wyniku operacyjnego. Zejście w rejon 20–26 dolarów.<br>
+  <strong>Liczba do sprawdzenia:</strong> czy zysk netto nadal pochodzi z przeszacowania bitcoina, a nie z działalności. To jest sedno mojej ostrożności wobec tej spółki.</p>
+</div>
+
+<div class="blok">
+  <div class="dzien">8 września · za 22 dni</div>
+  <h4>Oracle — pozycja 5,0%, wynik -11,8%</h4>
+  <p>Największa z publikujących pozycji i największy dług w całym koszyku — 167 miliardów dolarów przy ratingu o krok od poziomu spekulacyjnego. Publikuje jako ostatnia, już po tym, jak NVIDIA, Marvell i Broadcom ustawią oczekiwania wobec całego tematu.</p>
+</div>
+
+<h2>5. Drugie skupisko — SaaS</h2>
+<p>Veeva 26 sierpnia i SentinelOne 27 sierpnia to osobna grupa, obie tylko obserwowane. Ale oprogramowanie i SaaS to <strong>23% Twojego portfela</strong> przez ServiceNow, Oracle i SAP — a <strong>ServiceNow jest Twoją drugą pozycją co do wielkości, 13,2%</strong>. Sam nie publikuje w tym oknie, więc te dwa raporty są jedynym bieżącym sygnałem o kondycji tego segmentu.</p>
+<p>Warto zauważyć, że <strong>Oracle należy do obu tematów naraz</strong> — jest jednocześnie zakładem na infrastrukturę AI i na oprogramowanie. Przy 5% portfela reaguje na oba zestawy wiadomości.</p>
+
+<h2>6. Co warto rozstrzygnąć przed, a co zostawić na po</h2>
+<div class="table-wrap"><table class="nt-t">
+  <thead><tr><th>Przed publikacjami</th><th>Po publikacjach</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Wielkość pozycji — decyzje o rozmiarze podejmuje się przed zdarzeniem, nie po. Z moich analiz wynikają dwie: <strong>CoreWeave z 4,4% do 2–3%</strong> przy obecnym odbiciu i rozważenie zabezpieczenia części zysku na <strong>IREN</strong>.</td>
+      <td>Odświeżenie raportów MRVL i IREN o rzeczywiste dane — progi z sekcji 4 dają gotową listę tego, co sprawdzić.</td>
+    </tr>
+    <tr>
+      <td>Odświeżenie <strong>ASPI</strong>, jeśli chcesz mieć aktualny obraz przed 21 sierpnia.</td>
+      <td>Weryfikacja tezy o krzemie na zamówienie na podstawie marży NVIDII — i ewentualna korekta ocen dla MRVL, AMD i INTC.</td>
+    </tr>
+    <tr>
+      <td>Świadomość, że <strong>nie masz pozycji w NVIDII</strong>, czyli w spółce, która w tej grupie ma najlepsze parametry i najniższą wycenę względem wzrostu.</td>
+      <td>Aktualizacja rejestru trafności — sezon wyników to najlepszy moment, żeby sprawdzić, ile moje oceny były warte.</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<div class="blok klucz" style="margin-top:26px">
+  <h4>Jedno zdanie na koniec</h4>
+  <p>Ta notatka nie mówi, że coś się wydarzy — mówi, że <strong>przy 54,6% wartości rachunku w jednej tezie i dźwigni 1,21× trzy publikacje w dwa dni są jednym zdarzeniem o dużej wadze</strong>, a nie trzema drobnymi. Co z tego wynika dla wielkości Twoich pozycji, jest Twoją decyzją; moim zadaniem było pokazać skalę, zanim ona się zmaterializuje. Nie jestem doradcą inwestycyjnym i nie znam Twojej sytuacji poza tym plikiem.</p>
+</div>
+
+</div>
+
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Notatka: 16 sierpnia 2026 | Okno: 21 sierpnia – 8 września 2026 | Ceny i udziały: eksport z rachunku z 11.08.2026, kursy z zamknięcia 14.08.2026 | Daty wyników: StockAnalysis / Yahoo Finance — <strong>stan danych na 16.08.2026</strong> | Nie stanowi porady inwestycyjnej
+</div>
+</body>
+</html>
