@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMZN — Amazon.com | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: AMZN</div>
+    <div class="company-name">Amazon.com, Inc.</div>
+    <div class="company-sub">Chmura AWS · handel elektroniczny · reklama · własne układy Trainium i Graviton · Seattle</div>
+    <div class="header-meta">
+      <span class="meta-tag">AWS +36,7% r/r</span>
+      <span class="meta-tag">Portfel AWS $496 mld</span>
+      <span class="meta-tag">Nakłady $220 mld w 2026</span>
+      <span class="meta-tag">Wolne przepływy ujemne</span>
+      <div class="price-display">
+        <div class="price-main">$262,65</div>
+        <div class="price-sub">zamknięcie 14.08.2026 | +17% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Chmura i centra danych</span><span class="temat">Moc obliczeniowa dla AI</span><span class="temat">Konsument i platformy</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — AWS przyspiesza piąty kwartał z rzędu, ale zysk wymaga uważnego czytania">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">pozycja rdzeniowa</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$295 – $335</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">+12% do +28%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>30 lipca 2026</b><em>Q3 — koniec października</em></div>
+    <div class="rb-right">Pozycja 4–6% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (14.08.2026)</div><div class="metric-value">$262,65</div><div class="metric-detail">+17,0% w 52 tyg. | powyżej obu średnich</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$2,83 bln</div><div class="metric-detail">EV $2,96 bln | 10,79 mld akcji</div></div>
+    <div class="metric-card"><div class="metric-label">AWS — wzrost</div><div class="metric-value green">+36,7%</div><div class="metric-detail">Piąty kwartał przyspieszenia z rzędu</div></div>
+    <div class="metric-card"><div class="metric-label">Portfel zamówień AWS</div><div class="metric-value em">$496 mld</div><div class="metric-detail">Wzrost trzycyfrowy</div></div>
+    <div class="metric-card"><div class="metric-label">P/E bieżące vs przyszłe</div><div class="metric-value yellow">21,1 → 28,3</div><div class="metric-detail">Wyjątek — zwykle jest odwrotnie</div></div>
+    <div class="metric-card"><div class="metric-label">Wolne przepływy</div><div class="metric-value red">-$11,63 mld</div><div class="metric-detail">Nakłady $173 mld > przepływy $161 mld</div></div>
+    <div class="metric-card"><div class="metric-label">ROIC vs koszt kapitału</div><div class="metric-value yellow">11,94% vs 11,33%</div><div class="metric-detail">Różnica zaledwie 0,6 pkt proc.</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (60 analityków)</div><div class="metric-value green">$326,07</div><div class="metric-detail">+24,2% | mocne kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Dlaczego ta pozycja jest ważniejsza, niż wygląda</h3>
+      <p>Amazon to 3,8% Twojego portfela, ale jego znaczenie dla całości jest znacznie większe. <strong>To ta spółka wydaje pieniądze, z których żyje dziesięć Twoich pozostałych pozycji.</strong> Zapowiedziane na 2026 rok nakłady inwestycyjne w wysokości <strong>220 miliardów dolarów</strong> trafiają do dostawców układów, sprzętu sieciowego, optyki i mocy obliczeniowej — czyli dokładnie tam, gdzie masz ulokowane 45% wartości akcji.</p>
+      <p>Twoja pozycja jest na plusie około <strong>52%</strong> (20 akcji po średniej 173,00 dolara).</p>
+
+      <h3>Co pokazał drugi kwartał 2026 — wyniki z 30 lipca</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026</th><th>Dynamika</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td><strong>$200,6 mld</strong></td><td style="color:var(--ocena-kupno)">+20% r/r</td></tr>
+          <tr><td>Zysk operacyjny</td><td><strong>$27,5 mld</strong></td><td style="color:var(--ocena-kupno)">+43% r/r</td></tr>
+          <tr><td><strong>Wzrost AWS</strong></td><td><strong>+36,7% r/r</strong></td><td style="color:var(--ocena-kupno)">Piąty kwartał przyspieszenia z rzędu</td></tr>
+          <tr><td>AWS — tempo roczne</td><td>$169 mld</td><td style="color:var(--ocena-kupno)">Portfel zamówień $496 mld, wzrost trzycyfrowy</td></tr>
+          <tr><td>AWS — przychody z AI</td><td>ponad $25 mld rocznie</td><td style="color:var(--ocena-kupno)">Wzrost trzycyfrowy</td></tr>
+          <tr><td><strong>Własne układy (Trainium, Graviton)</strong></td><td><strong>ponad $25 mld rocznie</strong></td><td style="color:var(--ocena-uwaga)">Konkurencja dla dostawców krzemu</td></tr>
+          <tr><td><strong>Nakłady na 2026</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$220 mld</strong></td><td>Podniesione z ok. $200 mld — „wyższy koszt pamięci”</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Przyspieszenie AWS piąty kwartał z rzędu to najmocniejsza liczba w tym raporcie.</strong> Przy tempie rocznym 169 miliardów dolarów wzrost o 36,7% oznacza, że biznes tej skali <em>nabiera</em> rozpędu zamiast go tracić — a portfel zamówień na 496 miliardów, czyli blisko trzykrotność rocznych przychodów AWS, mówi, że popyt jest zakontraktowany, nie tylko oczekiwany.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Opis</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>AWS</strong></td><td>Chmura obliczeniowa — rdzeń zysku operacyjnego</td><td style="color:var(--ocena-kupno)">$169 mld rocznie, +36,7%, portfel $496 mld</td></tr>
+          <tr><td><strong>Trainium i Graviton</strong></td><td>Własne układy do trenowania modeli i procesory serwerowe</td><td style="color:var(--ocena-kupno)">Ponad $25 mld tempa rocznego</td></tr>
+          <tr><td>Handel elektroniczny</td><td>Większość przychodów, mniejszość zysku</td><td>Niska marża, ogromna skala</td></tr>
+          <tr><td>Reklama</td><td>Wysokomarżowy dodatek do handlu</td><td style="color:var(--ocena-kupno)">Rośnie szybciej niż handel</td></tr>
+          <tr><td>Prime i subskrypcje</td><td>Powtarzalny przychód wiążący klienta</td><td>Fundament lojalności</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — trzy różne, wzajemnie się wzmacniające</h3>
+      <p>Amazon ma rzadko spotykaną strukturę przewag. <strong>W chmurze</strong> to koszt zmiany dostawcy i efekt skali — przeniesienie infrastruktury z AWS jest projektem na kwartały. <strong>W handlu</strong> to sieć logistyczna, której odtworzenie kosztowałoby dziesiątki miliardów. <strong>W reklamie</strong> to dane o rzeczywistych zakupach, których nie ma żaden inny gracz.</p>
+      <div class="alert alert-info"><strong>Najciekawszy element to jednak własny krzem.</strong> Trainium i Graviton osiągnęły łącznie tempo ponad 25 miliardów dolarów rocznie. Amazon <strong>projektuje dziś układy, które konkurują z tym, co sam kupuje</strong> — a to dokładnie ta teza, na której opiera się Twoja pozycja w Marvellu. Warto zauważyć, że w Twoim portfelu obie strony tego sporu są reprezentowane: Amazon buduje alternatywę, Marvell projektuje układy dedykowane dla operatorów chmury, a Intel i AMD walczą o resztę rynku.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Chmura ograniczona podażą, nie popytem</strong> — przyspieszenie AWS piąty kwartał z rzędu przy portfelu zamówień 496 miliardów pokazuje, że wąskim gardłem jest moc, a nie chęć klientów</li>
+        <li><strong>Nakłady 220 miliardów dolarów w 2026</strong> — podniesione z około 200 miliardów, przy czym prezes Andy Jassy wskazał wprost przyczynę: <strong>wyższy koszt pamięci</strong></li>
+        <li><strong>Własny krzem jako dźwignia marży</strong> — im więcej obciążeń przejmie Trainium, tym mniej Amazon zapłaci zewnętrznym dostawcom</li>
+        <li><strong>Handel elektroniczny dojrzały</strong> — rośnie w tempie zbliżonym do gospodarki, a jego rola w wyniku maleje na rzecz chmury i reklamy</li>
+        <li><strong>Presja regulacyjna</strong> — postępowania antymonopolowe pozostają stałym elementem otoczenia, dotąd bez wpływu na wyniki</li>
+      </ul>
+      <div class="alert alert-warn"><strong>Zdanie o koszcie pamięci warto zapamiętać, bo dotyczy Twojego portfela dwa razy.</strong> Amazon podniósł prognozę nakładów o dwadzieścia miliardów dolarów <em>głównie dlatego, że pamięci podrożały</em>. Dla Amazona to koszt. Ale dla <strong>Samsunga, którego masz w portfelu z ekspozycją na pamięci</strong>, to przychód. Największy nabywca infrastruktury na świecie mówi wprost, że płaci za pamięć więcej niż zakładał — trudno o mocniejsze potwierdzenie tezy po drugiej stronie tej transakcji.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Stan</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Portfel zamówień AWS</strong></td><td>$496 mld</td><td style="color:var(--ocena-kupno)">Blisko trzykrotność rocznych przychodów AWS</td></tr>
+          <tr><td>Przychody roczne</td><td>$775,68 mld</td><td>Prognoza wzrostu 3-letniego: +15,11%</td></tr>
+          <tr><td>Zatrudnienie</td><td>1 576 000 osób</td><td style="color:var(--ocena-uwaga)">Przychód na osobę $492 tys., zysk $86 tys.</td></tr>
+          <tr><td>Udział instytucji</td><td>68,29%</td><td>Osoby powiązane: 8,94% — wysoko jak na tę skalę</td></tr>
+          <tr><td>Liczba akcji</td><td>+0,88% r/r</td><td style="color:var(--ocena-kupno)">Rozwodnienie minimalne</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>0,91% akcji</td><td style="color:var(--ocena-kupno)">Spadek ze 106,6 do 98,4 mln</td></tr>
+        </tbody>
+      </table></div>
+      <p>Baza klientów jest tu ekstremalnie zdywersyfikowana — od setek milionów konsumentów po dziesiątki tysięcy firm w chmurze. <strong>To odwrotność problemu, który opisywałem przy Marvellu i CoreWeave</strong>, gdzie kilku odbiorców decyduje o prognozie. Amazon nie ma ryzyka koncentracji klientów.</p>
+      <div class="alert alert-info"><strong>Warto docenić skalę portfela zamówień AWS.</strong> Kwota 496 miliardów dolarów przy rocznym tempie 169 miliardów oznacza blisko trzy lata zakontraktowanej sprzedaży. Dla porównania CoreWeave, którego masz w portfelu, ma portfel 104 miliardów przy przychodach 7,59 miliarda — relacja jest tam wprawdzie wyższa, ale w liczbach bezwzględnych <strong>sam portfel AWS jest pięciokrotnie większy niż cały CoreWeave wraz z jego zamówieniami</strong>.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 mies.)</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$775,68 mld</td><td>Q2: $200,6 mld, +20% r/r</td></tr>
+          <tr><td>Zysk brutto</td><td>$393,81 mld</td><td>Marża 50,77%</td></tr>
+          <tr><td><strong>Zysk operacyjny</strong></td><td><strong>$93,71 mld</strong></td><td>Marża 12,08% | Q2 +43% r/r</td></tr>
+          <tr><td><strong>Wynik przed opodatkowaniem</strong></td><td style="color:var(--ocena-uwaga)"><strong>$174,90 mld</strong></td><td>O $81,19 mld więcej niż operacyjny</td></tr>
+          <tr><td>Zysk netto</td><td>$135,28 mld</td><td>EPS $12,44, marża 17,44%</td></tr>
+          <tr><td>EBITDA</td><td>$168,91 mld</td><td>Marża 21,78%</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-kupno)">$161,40 mld</td><td>Amortyzacja $75,20 mld</td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$173,03 mld</strong></td><td>Prognoza na 2026: $220 mld</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$11,63 mld</strong></td><td>-$1,08 na akcję</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Czwarty wiersz tej tabeli jest najważniejszą rzeczą, jaką znalazłem w tym raporcie.</strong> Zysk operacyjny wynosi 93,71 miliarda dolarów, a wynik przed opodatkowaniem — <strong>174,90 miliarda</strong>. Różnica <strong>81,19 miliarda</strong> pochodzi spoza działalności podstawowej i stanowi <strong>46% wyniku przed opodatkowaniem</strong>. To głównie przeszacowania inwestycji kapitałowych. Efekt jest taki, że raportowany zysk na akcję 12,44 dolara — i wynikający z niego wskaźnik ceny do zysku 21,1 — <strong>daje obraz spółki znacznie tańszej, niż jest w rzeczywistości</strong>.</div>
+      <p>Gdyby policzyć zysk wyłącznie z działalności operacyjnej, przy tej samej efektywnej stopie podatkowej 22,65%, wyszłoby <strong>72,48 miliarda dolarów, czyli 6,72 dolara na akcję — i wskaźnik ceny do zysku na poziomie 39,1</strong> zamiast 21,1. To jest ta sama pułapka, którą opisywałem przy IREN, tylko na zupełnie innej skali i z lepszym zakończeniem: u Amazona działalność operacyjna rośnie o 43% rocznie, więc luka między tymi dwiema miarami będzie się zamykać.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $262,65</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$2,83 bln</td><td>EV $2,96 bln</td></tr>
+          <tr><td>P/E bieżące</td><td>21,12×</td><td style="color:var(--ocena-uwaga)">Zawyżone przez zyski spoza działalności</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>28,26×</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyżej niż bieżące</strong> — rzadki układ</td></tr>
+          <tr><td>P/E z samej działalności operacyjnej</td><td style="color:var(--ocena-sprzedaz)">ok. 39×</td><td>Wyliczenie własne — patrz sekcja 5</td></tr>
+          <tr><td>PEG</td><td>1,36</td><td style="color:var(--ocena-uwaga)">Prognoza wzrostu zysku +23,17%</td></tr>
+          <tr><td>P/S</td><td>3,65× (forward 3,21×)</td><td style="color:var(--ocena-kupno)">Nisko jak na spółkę technologiczną</td></tr>
+          <tr><td>EV/EBITDA</td><td>17,53×</td><td style="color:var(--ocena-kupno)">Poniżej NVIDII (32,71×)</td></tr>
+          <tr><td>P/FCF</td><td style="color:var(--ocena-sprzedaz)">brak</td><td>Wolne przepływy ujemne</td></tr>
+          <tr><td><strong>ROIC vs WACC</strong></td><td style="color:var(--ocena-uwaga)"><strong>11,94% vs 11,33%</strong></td><td>Zaledwie 0,6 pkt proc. przewagi</td></tr>
+          <tr><td>ROE</td><td style="color:var(--ocena-kupno)">30,56%</td><td>Pokrycie odsetek 28,13</td></tr>
+          <tr><td>Altman Z-Score</td><td style="color:var(--ocena-kupno)">4,17</td><td>Powyżej progu 3; Piotroski 6</td></tr>
+          <tr><td>Konsensus (60 analityków)</td><td>$326,07 · mocne kupno</td><td style="color:var(--ocena-kupno)">+24,2%</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — dlaczego jest wyższy od bieżącego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara zysku</th><th>EPS</th><th>Implikowane P/E</th><th>Co obejmuje</th></tr></thead>
+        <tbody>
+          <tr><td>Raportowany (12 mies.)</td><td>$12,44</td><td>21,1×</td><td>Z zyskami spoza działalności ($81,19 mld)</td></tr>
+          <tr><td><strong>Prognozowany</strong></td><td><strong>ok. $9,29</strong></td><td><strong>28,3×</strong></td><td>Analitycy zakładają zanik zysków jednorazowych</td></tr>
+          <tr><td>Z samej działalności operacyjnej</td><td>$6,72</td><td>39,1×</td><td>Wyliczenie własne, stopa podatkowa 22,65%</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> wskaźnik przyszłego zysku wyższy od bieżącego to układ rzadki i zwykle niepokojący — oznacza, że rynek spodziewa się <em>spadku</em> zysku. Tutaj jednak nie chodzi o pogorszenie biznesu, tylko o <strong>zanik zysków księgowych spoza działalności podstawowej</strong>. Prognozowane 9,29 dolara na akcję jest niższe od raportowanych 12,44, ale <strong>wyraźnie wyższe od 6,72 dolara wypracowanych operacyjnie</strong>. Innymi słowy: analitycy zakładają, że działalność podstawowa dorośnie do poziomu, który dziś podtrzymują przeszacowania. Wyniki za drugi kwartał — zysk operacyjny plus 43% — ten kierunek potwierdzają.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$295 – $335</div><div class="fair-value-note">Baza: 30–34× zysku prognozowanego (ok. $9,29–10,00 na akcję) przy utrzymaniu tempa wzrostu AWS powyżej 30% i marży operacyjnej powyżej 12% | Konsensus 60 analityków: $326,07 („mocne kupno”) — mieści się w górnej części przedziału | Scenariusz negatywny (spowolnienie AWS poniżej 25%, nakłady bez zwrotu, presja regulacyjna): $200–225 | Scenariusz pozytywny (AWS utrzymuje 36%+, nakłady zaczynają spadać, marża operacyjna powyżej 15%): $380–410 | Przy $262,65 potencjał od -24% do +56%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Amazon</th><th>NVIDIA</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Brutto</td><td>50,77%</td><td>74,15%</td><td>Handel obniża średnią</td></tr>
+          <tr><td>Operacyjna</td><td style="color:var(--ocena-uwaga)">12,08%</td><td>64,02%</td><td style="color:var(--ocena-kupno)">Ale w Q2 wzrosła o 43% r/r</td></tr>
+          <tr><td>Netto</td><td>17,44%</td><td>62,97%</td><td style="color:var(--ocena-uwaga)">Wyższa od operacyjnej — patrz sekcja 5</td></tr>
+          <tr><td>EBITDA</td><td>21,78%</td><td>65,29%</td><td>Amortyzacja $75,20 mld</td></tr>
+          <tr><td>Wolne przepływy</td><td style="color:var(--ocena-sprzedaz)">ujemne</td><td style="color:var(--ocena-kupno)">46,97%</td><td>Nakłady $173 mld</td></tr>
+          <tr><td>ROIC</td><td style="color:var(--ocena-uwaga)">11,94%</td><td>104,67%</td><td>Koszt kapitału Amazona: 11,33%</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>To zestawienie jest niesprawiedliwe i celowo takie zostawiam</strong>, bo pokazuje coś ważnego o strukturze Twojego portfela. Amazon i NVIDIA żyją z tego samego zjawiska, ale zajmują w nim skrajnie różne miejsca. NVIDIA <strong>sprzedaje</strong> moc obliczeniową przy marży operacyjnej 64% i zwrocie z kapitału 104,67%. Amazon <strong>ją kupuje i odsprzedaje jako usługę</strong>, przy marży 12,08% i zwrocie 11,94% wobec kosztu kapitału 11,33%.</p>
+      <div class="alert alert-warn"><strong>Różnica 0,6 punktu między zwrotem z kapitału a jego kosztem jest tu najsłabszym miejscem.</strong> Amazon tworzy wartość, ale bardzo cienkim marginesem — a właśnie zwiększa nakłady do 220 miliardów dolarów rocznie. <strong>Jeśli te inwestycje nie zaczną zarabiać powyżej kosztu kapitału, różnica zejdzie do zera lub poniżej.</strong> Kierunek na razie jest właściwy: zysk operacyjny wzrósł w Q2 o 43%, a AWS przyspiesza piąty kwartał z rzędu. Ale to jest liczba, którą trzeba obserwować bardziej niż samą wielkość nakładów.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$122,99 mld</td><td>Kapitał obrotowy tylko $7,99 mld</td></tr>
+          <tr><td>Zadłużenie</td><td>$251,64 mld</td><td style="color:var(--ocena-uwaga)">Dług netto -$128,65 mld</td></tr>
+          <tr><td>Zaciągnięty dług netto</td><td style="color:var(--ocena-uwaga)">+$75,16 mld</td><td>Tak finansowane są nakłady</td></tr>
+          <tr><td>Dług / kapitał własny</td><td>0,46</td><td style="color:var(--ocena-kupno)">Umiarkowanie</td></tr>
+          <tr><td>Dług / EBITDA</td><td>1,35</td><td style="color:var(--ocena-kupno)">Bezpiecznie</td></tr>
+          <tr><td>Pokrycie odsetek</td><td>28,13</td><td style="color:var(--ocena-kupno)">Bardzo wysoko</td></tr>
+          <tr><td>Wskaźnik bieżącej płynności</td><td style="color:var(--ocena-uwaga)">1,03</td><td>Wskaźnik szybki 0,84</td></tr>
+          <tr><td>Kapitał własny</td><td>$551,62 mld</td><td>$51,16 na akcję</td></tr>
+          <tr><td>Altman Z-Score</td><td style="color:var(--ocena-kupno)">4,17</td><td>Piotroski 6 na 9</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Bilans jest zdrowy, ale wart uważnego spojrzenia.</strong> Wskaźnik Altmana 4,17 i pokrycie odsetek 28,13 to poziomy bezpieczne. Jednocześnie jednak dług netto wynosi <strong>-128,65 miliarda dolarów</strong> i rośnie — w ostatnich dwunastu miesiącach spółka zaciągnęła netto 75,16 miliarda. <strong>Amazon finansuje budowę centrów danych długiem</strong>, tak jak Oracle i CoreWeave, tylko z zupełnie innej pozycji wyjściowej: przy EBITDA 168,91 miliarda relacja długu do zysku wynosi 1,35, podczas gdy u CoreWeave 9,22.</p></div>
+      <p>Warto też zauważyć wskaźnik bieżącej płynności 1,03 — bardzo nisko jak na spółkę tej wielkości. To cecha modelu Amazona: <strong>spółka pobiera pieniądze od klientów, zanim zapłaci dostawcom</strong>, więc ujemny cykl konwersji gotówki jest tu przewagą, a nie problemem.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🚀</div><div class="catalyst-body"><h4>AWS przyspiesza piąty kwartał z rzędu</h4><p>+36,7% r/r przy tempie rocznym $169 mld. Biznes tej skali nabiera rozpędu zamiast go tracić — to rzadkie zjawisko i najmocniejszy sygnał w całym raporcie.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📦</div><div class="catalyst-body"><h4>Portfel zamówień AWS na $496 mld</h4><p>Blisko trzykrotność rocznych przychodów chmury, wzrost trzycyfrowy. Popyt jest zakontraktowany, nie prognozowany.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔧</div><div class="catalyst-body"><h4>Własny krzem przekroczył $25 mld tempa rocznego</h4><p>Trainium i Graviton obniżają zależność od zewnętrznych dostawców i działają wprost na marżę AWS. Do tego przychody AWS z AI również przekroczyły $25 mld przy wzroście trzycyfrowym.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Zysk operacyjny +43% r/r</h4><p>Przy przychodach rosnących o 20% oznacza to realną dźwignię operacyjną. Luka między zyskiem raportowanym a operacyjnym będzie się zamykać.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🛡️</div><div class="catalyst-body"><h4>Brak ryzyka koncentracji i rozwodnienia</h4><p>Setki milionów klientów, liczba akcji rośnie o zaledwie 0,88% rocznie, krótka sprzedaż 0,91% i maleje. Sześćdziesięciu analityków z rekomendacją „mocne kupno”.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">💧</div><div class="catalyst-body"><h4>Wolne przepływy są ujemne: -$11,63 mld</h4><p>Nakłady $173 mld przewyższyły przepływy operacyjne $161 mld, a prognoza na 2026 to $220 mld. Największa spółka technologiczna świata nie generuje dziś wolnej gotówki.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚖️</div><div class="catalyst-body"><h4>Zwrot z kapitału ledwie powyżej jego kosztu</h4><p>ROIC 11,94% wobec WACC 11,33% — margines 0,6 pkt proc. Przy nakładach rosnących do $220 mld ta różnica może zejść do zera, jeśli inwestycje nie zaczną zarabiać.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎭</div><div class="catalyst-body"><h4>46% wyniku przed opodatkowaniem pochodzi spoza działalności</h4><p>$81,19 mld z $174,90 mld to przeszacowania inwestycji. Wskaźnik P/E 21,1 wygląda tanio, ale na samej działalności operacyjnej wynosi około 39.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏦</div><div class="catalyst-body"><h4>Dług netto -$128,65 mld i rośnie</h4><p>W ostatnim roku zaciągnięto netto $75,16 mld. Budowa centrów danych finansowana jest długiem — bezpiecznie przy EBITDA $169 mld, ale to zmiana charakteru bilansu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🐌</div><div class="catalyst-body"><h4>Kurs +17% w rok — słabiej niż Nasdaq</h4><p>Mimo przyspieszenia AWS akcje pozostają w tyle za indeksem. Rynek najwyraźniej wycenia koszt tych nakładów wyżej niż płynące z nich korzyści.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>Rola</th><th>Relacja do Amazona</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Amazon (AWS)</strong></td><td>Największa chmura świata</td><td>$169 mld rocznie, +36,7%, portfel $496 mld</td></tr>
+          <tr><td><strong>Microsoft Azure</strong></td><td>Główny rywal w chmurze</td><td style="color:var(--ocena-uwaga)">Silniejsza pozycja w przedsiębiorstwach</td></tr>
+          <tr><td><strong>Google Cloud</strong></td><td>Trzeci gracz</td><td style="color:var(--ocena-uwaga)">Własne układy TPU, podobna strategia</td></tr>
+          <tr><td><strong>Oracle</strong></td><td>Chmura finansowana długiem</td><td style="color:var(--ocena-sprzedaz)">Masz w portfelu — dług $167 mld</td></tr>
+          <tr><td><strong>CoreWeave</strong></td><td>Chmura wyspecjalizowana w AI</td><td style="color:var(--ocena-uwaga)">Masz w portfelu — portfel $104 mld</td></tr>
+          <tr><td>NVIDIA, Marvell, Samsung</td><td>Dostawcy Amazona</td><td style="color:var(--ocena-kupno)">Żyją z jego nakładów $220 mld</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Ta tabela pokazuje coś, czego z pojedynczych analiz nie widać.</strong> Amazon zajmuje w Twoim portfelu miejsce szczególne, bo jest jednocześnie <strong>klientem, konkurentem i beneficjentem</strong> tej samej fali. Jego nakłady 220 miliardów dolarów napędzają Marvella, Samsunga i pośrednio wszystkie Twoje pozycje półprzewodnikowe. Jego układy Trainium o tempie ponad 25 miliardów rocznie konkurują z NVIDIĄ, której nie masz. A jego AWS rywalizuje z Oracle i CoreWeave, które masz oba.</p>
+      <p style="margin-top:10px">Praktyczny wniosek jest taki: <strong>Amazon jest w tym portfelu najbliższy roli zabezpieczenia</strong>. Jeśli własny krzem operatorów chmury wygra, Amazon zyskuje, a Marvell traci. Jeśli budowa infrastruktury wyhamuje, tracą wszystkie pozycje — ale Amazon najmniej, bo dwie trzecie jego przychodów pochodzi z handlu i reklamy.</p></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$262,65</strong></td><td>+16,96% w 52 tygodnie</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$248,17</td><td style="color:var(--ocena-kupno)">Kurs 5,8% powyżej</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$237,70</td><td style="color:var(--ocena-kupno)">Kurs 10,5% powyżej</td></tr>
+          <tr><td>RSI (14)</td><td>53,49</td><td style="color:var(--ocena-kupno)">Neutralnie — dużo miejsca w obie strony</td></tr>
+          <tr><td>Beta</td><td>1,45</td><td style="color:var(--ocena-uwaga)">Umiarkowana jak na tę grupę</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>0,91% akcji</td><td style="color:var(--ocena-kupno)">Spadek ze 106,6 do 98,4 mln</td></tr>
+          <tr><td>Średni wolumen</td><td>46,3 mln akcji</td><td>Bardzo płynny</td></tr>
+          <tr><td>Wsparcie S1</td><td>$248</td><td>Średnia 50-sesyjna</td></tr>
+          <tr><td>Wsparcie S2</td><td>$238</td><td>Średnia 200-sesyjna</td></tr>
+          <tr><td>Opór R1</td><td>$295</td><td>Dolny zakres fair value</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Utrzymanie tempa AWS powyżej 30% w Q3</li><li>Sygnały o szczycie nakładów inwestycyjnych</li><li>Droga ku $295 i celowi analityków $326</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Spowolnienie AWS poniżej 25%</li><li>Kolejne podniesienie nakładów bez wzrostu marży</li><li>Przebicie $238 i zejście ku $200–225</li></ul></div>
+      </div>
+      <p><strong>Układ techniczny jest tu najspokojniejszy z całej dzisiejszej trójki.</strong> Kurs powyżej obu średnich, RSI 53,49 bez wychyleń w żadną stronę, krótka sprzedaż poniżej jednego procenta i malejąca. Dla porównania SBSW ma RSI 67,68, a ASPI jest 28% pod średnią dwustusesyjną.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Kurs powyżej obu średnich, RSI 53,49 bez wykupienia, wyniki za sobą, krótka sprzedaż maleje. Kolejny katalizator dopiero pod koniec października.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Portfel AWS $496 mld i przyspieszenie piąty kwartał z rzędu uzasadniają cel $295–335. Konsensus 60 analityków: $326,07.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Trzy niezależne fosy: chmura, logistyka, reklama. Warunkiem jest, by nakłady $220 mld zaczęły zarabiać powyżej kosztu kapitału.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: 4–6% portfela.</strong> Masz 3,8% — to trochę mało jak na spółkę o tej jakości i najniższym ryzyku pojedynczego zdarzenia w całym portfelu</li>
+        <li><strong>Można dokupywać przy obecnej cenie.</strong> RSI 53,49 i brak katalizatora do końca października dają spokojne okno</li>
+        <li><strong>Dokupienie:</strong> $248 przy średniej 50-sesyjnej, druga transza $238 przy dwustusesyjnej</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $320–335</li>
+        <li><strong>Jedna liczba do śledzenia:</strong> <strong>zwrot z zainwestowanego kapitału względem jego kosztu</strong>. Dziś 11,94% wobec 11,33%, czyli 0,6 punktu zapasu. Przy nakładach rosnących do 220 miliardów to jest właściwy miernik tego, czy ta budowa się opłaca — ważniejszy niż sama wielkość nakładów</li>
+        <li><strong>Wyjście z tezy:</strong> spowolnienie AWS poniżej 25%, zejście różnicy ROIC–WACC poniżej zera albo trzecie z rzędu podniesienie nakładów bez poprawy marży operacyjnej</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$295 – $335</div><div class="fair-value-note">Scenariusz negatywny: $200–225 | Scenariusz pozytywny: $380–410 | Konsensus 60 analityków: $326,07</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>AWS przyspiesza piąty kwartał z rzędu</strong> do +36,7% przy tempie $169 mld rocznie i portfelu zamówień $496 mld rosnącym trzycyfrowo</li>
+          <li><strong>Zysk operacyjny +43% r/r</strong> przy przychodach +20% — realna dźwignia operacyjna, a własny krzem przekroczył $25 mld tempa rocznego</li>
+          <li><strong>Trzy niezależne fosy i brak ryzyka koncentracji.</strong> Rozwodnienie 0,88% rocznie, Altman 4,17, pokrycie odsetek 28,13, 60 analityków z rekomendacją „mocne kupno”</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Wolne przepływy ujemne: -$11,63 mld.</strong> Nakłady $173 mld przewyższają przepływy operacyjne, a prognoza na 2026 to $220 mld</li>
+          <li><strong>ROIC 11,94% ledwie powyżej WACC 11,33%</strong> — margines 0,6 pkt proc. przy rosnących nakładach</li>
+          <li><strong>46% wyniku przed opodatkowaniem pochodzi spoza działalności.</strong> P/E 21,1 wygląda tanio, ale operacyjnie wynosi około 39</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> spowolnienie AWS poniżej 25% albo zejście różnicy między zwrotem z kapitału a jego kosztem poniżej zera → zejście w rejon $200–225.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> utrzymanie tempa AWS powyżej 30% przy pierwszych sygnałach szczytu nakładów → droga ku $326 i wyżej.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Amazon był drugą co do wielkości luką w Twoim portfelu i okazuje się pozycją o znaczeniu wykraczającym poza swoje 3,8%. <strong>To ta spółka wydaje pieniądze, z których żyje dziesięć Twoich pozostałych pozycji</strong> — zapowiedziane na 2026 rok nakłady w wysokości 220 miliardów dolarów trafiają do dostawców krzemu, optyki i pamięci, czyli dokładnie tam, gdzie masz ulokowane 45% wartości akcji.</p>
+
+      <p class="sum-lead">Sam biznes wygląda mocno. <strong>AWS przyspieszył piąty kwartał z rzędu, do 36,7% rok do roku</strong>, przy tempie rocznym 169 miliardów i portfelu zamówień 496 miliardów rosnącym trzycyfrowo. Zysk operacyjny wzrósł w drugim kwartale o 43% przy przychodach wyższych o 20%, a własne układy Trainium i Graviton przekroczyły 25 miliardów tempa rocznego. Rozwodnienie wynosi zaledwie 0,88% rocznie, wskaźnik Altmana 4,17, a sześćdziesięciu analityków wystawia rekomendację „mocne kupno” z celem 326,07 dolara.</p>
+
+      <p class="sum-lead" style="border-color:var(--ocena-sprzedaz)">Są jednak trzy rzeczy, które trzeba nazwać. <strong>Wolne przepływy są ujemne i wynoszą -11,63 miliarda dolarów</strong> — nakłady 173 miliardów przewyższyły przepływy operacyjne 161 miliardów, a w tym roku mają sięgnąć 220 miliardów. <strong>Zwrot z zainwestowanego kapitału to 11,94% przy jego koszcie 11,33%</strong>, czyli zaledwie 0,6 punktu zapasu. I wreszcie kwestia, która najbardziej zmienia obraz wyceny: <strong>46% wyniku przed opodatkowaniem, czyli 81,19 miliarda dolarów, pochodzi spoza działalności podstawowej</strong>. Wskaźnik ceny do zysku 21,1 wygląda przez to tanio — na samej działalności operacyjnej wynosi około 39.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>AWS przyspiesza, nie zwalnia.</strong> +36,7% r/r, piąty kwartał z rzędu, tempo roczne $169 mld, portfel zamówień $496 mld.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Dźwignia operacyjna działa.</strong> Zysk operacyjny +43% przy przychodach +20%; własny krzem ponad $25 mld tempa rocznego.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Bilans i akcjonariat bez zarzutu.</strong> Altman 4,17, pokrycie odsetek 28,13, rozwodnienie 0,88% rocznie, krótka sprzedaż poniżej 1% i maleje.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Zwrot z nakładów $220 mld.</strong> ROIC 11,94% wobec WACC 11,33% — margines cienki, a inwestycje rosną.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Domknięcie luki między zyskiem raportowanym a operacyjnym.</strong> Analitycy zakładają EPS $9,29 wobec $12,44 raportowanych i $6,72 operacyjnych.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Generowanie wolnej gotówki.</strong> -$11,63 mld za ostatnie 12 miesięcy przy nakładach rosnących do $220 mld.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>30 lipca 2026</td><td>Wyniki Q2 — już opublikowane</td><td>AWS +36,7%, zysk operacyjny +43%, nakłady podniesione do $220 mld</td></tr>
+            <tr><td><strong>Koniec października 2026</strong></td><td>Wyniki Q3</td><td>Czy AWS utrzyma tempo powyżej 30% i czy pojawi się sygnał szczytu nakładów</td></tr>
+            <tr><td>Na bieżąco</td><td>Rozwój Trainium</td><td>Każdy punkt udziału własnego krzemu to wyższa marża AWS i niższe przychody dostawców</td></tr>
+            <tr><td>Na bieżąco</td><td>Ceny pamięci</td><td>To one podniosły prognozę nakładów o $20 mld — koszt dla Amazona, przychód dla Samsunga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Wzrost AWS</strong></td><td>+36,7% r/r</td><td>&lt; 25%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>ROIC vs koszt kapitału</strong></td><td>11,94% vs 11,33%</td><td>różnica poniżej zera</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Marża operacyjna</td><td>12,08%, w Q2 zysk +43%</td><td>spadek dwa kwartały z rzędu</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Wolne przepływy</strong></td><td>-$11,63 mld</td><td>brak poprawy w 2027</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Nakłady inwestycyjne</td><td>$220 mld w 2026</td><td>kolejne podniesienie bez wzrostu marży</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Portfel zamówień AWS</td><td>$496 mld</td><td>zatrzymanie wzrostu</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji: 4–6% portfela.</strong> Masz 3,8% — to trochę mało jak na spółkę o najniższym ryzyku pojedynczego zdarzenia w całym zestawie</li>
+          <li><strong>Można dokupywać przy obecnej cenie.</strong> RSI 53,49, brak katalizatora do końca października</li>
+          <li><strong>Dokupienie:</strong> $248 przy średniej 50-sesyjnej, druga transza $238 przy dwustusesyjnej</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie $320–335</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> różnica między zwrotem z kapitału a jego kosztem, dziś 0,6 punktu. To ona powie, czy nakłady $220 mld się opłacają</li>
+          <li><strong>Uwaga portfelowa:</strong> Amazon jest jednocześnie klientem, konkurentem i beneficjentem tej samej fali. To najbliższe zabezpieczenia, co masz — jeśli własny krzem operatorów chmury wygra, Amazon zyskuje, a Marvell traci</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">📈 KUPNO — pozycja rdzeniowa, warta zwiększenia</div>
+        <p>Amazon rośnie tam, gdzie to najbardziej wartościowe. AWS przyspiesza piąty kwartał z rzędu do 36,7%, ma zakontraktowane 496 miliardów dolarów zamówień i przekroczył 25 miliardów rocznych przychodów z samej sztucznej inteligencji. Zysk operacyjny rośnie o 43% przy przychodach wyższych o 20%, a spółka niemal nie rozwadnia akcjonariuszy. Sześćdziesięciu analityków widzi 24% przestrzeni w górę.</p>
+        <p>Trzeba jednak wiedzieć, że <strong>wskaźnik ceny do zysku 21 jest tu iluzją</strong> — niemal połowa wyniku przed opodatkowaniem pochodzi z przeszacowań, a na samej działalności operacyjnej mnożnik wynosi około 39. Do tego wolne przepływy są ujemne, bo nakłady sięgnęły 173 miliardów i rosną do 220, a zwrot z kapitału przewyższa jego koszt o zaledwie 0,6 punktu. To nie jest spółka tania — to spółka dobra, wyceniona rozsądnie, w środku bardzo kosztownej budowy.</p>
+        <p><strong>Trzymać i rozważyć zwiększenie z 3,8% do 4–6%.</strong> W portfelu, w którym 45% zależy od nakładów na sztuczną inteligencję, warto mieć większy udział w spółce, która te nakłady <em>ponosi</em> i czerpie z nich zysk, a nie tylko w tych, które je otrzymują.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$295–335</b></div>
+          <div><span>Scenariusz negatywny</span><b>$200–225</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$380–410</b></div>
+          <div><span>Sugerowana pozycja</span><b>4–6% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3 — koniec października</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 sierpnia 2026 | Cena: $262,65 (zamknięcie 14.08.2026) | Pierwsza analiza AMZN | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 17.08.2026</strong>, Amazon IR (wyniki Q2 2026, 30 lipca) | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

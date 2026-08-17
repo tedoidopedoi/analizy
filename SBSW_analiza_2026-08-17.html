@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBSW — Sibanye Stillwater | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: SBSW</div>
+    <div class="company-name">Sibanye Stillwater Limited</div>
+    <div class="company-sub">Wydobycie metali z grupy platynowców · złoto · Johannesburg, RPA i Montana, USA</div>
+    <div class="company-sub" style="margin-top:6px;font-size:0.86rem;opacity:0.85"><strong>Uwaga: notowanie w formie kwitu depozytowego — 1 ADR odpowiada 4 akcjom zwykłym.</strong> Wskaźniki „na akcję” z serwisów danych dotyczą akcji zwykłej i nie należy ich odnosić wprost do ceny kwitu.</div>
+    <div class="header-meta">
+      <span class="meta-tag">Forward P/E 4,08</span>
+      <span class="meta-tag">EV/EBITDA 4,62</span>
+      <span class="meta-tag">ROIC 14,2% vs WACC 8,8%</span>
+      <span class="meta-tag">Beta 0,92</span>
+      <div class="price-display">
+        <div class="price-main">$10,77</div>
+        <div class="price-sub">zamknięcie 14.08.2026 za kwit | +25,8% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Surowce i metale</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — najtańsza pozycja w portfelu i jedyna prawdziwa dywersyfikacja">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">cykliczna, zależna od cen metali</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$11,50 – $15,00</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">+7% do +39%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>1 września 2026</b><em>data szacowana</em></div>
+    <div class="rb-right">Pozycja 4–6% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena za kwit (14.08.2026)</div><div class="metric-value">$10,77</div><div class="metric-detail">+25,8% w 52 tyg. | 15% pod średnią 200-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$7,61 mld</div><div class="metric-detail">EV $9,54 mld | ok. 707 mln kwitów</div></div>
+    <div class="metric-card"><div class="metric-label">EV/EBITDA</div><div class="metric-value green">4,62×</div><div class="metric-detail">Forward P/E 4,08 — najniżej w portfelu</div></div>
+    <div class="metric-card"><div class="metric-label">ROIC vs koszt kapitału</div><div class="metric-value green">14,2% vs 8,8%</div><div class="metric-detail">Dodatnia różnica — rzadkość w tym portfelu</div></div>
+    <div class="metric-card"><div class="metric-label">EBITDA Q1 2026</div><div class="metric-value green">+393%</div><div class="metric-detail">R12,4 mld (≈$762 mln) przy koszyku +87% r/r</div></div>
+    <div class="metric-card"><div class="metric-label">Wolne przepływy</div><div class="metric-value red">$86,7 mln</div><div class="metric-detail">Marża 1,08% — nakłady $1,26 mld</div></div>
+    <div class="metric-card"><div class="metric-label">Wynik netto (12 mies.)</div><div class="metric-value red">-$312,3 mln</div><div class="metric-detail">Mimo zysku operacyjnego $606,8 mln</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (5 analityków)</div><div class="metric-value green">$13,06</div><div class="metric-detail">+21,3% | kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Czym jest Sibanye Stillwater</h3>
+      <p>Sibanye Stillwater wydobywa <strong>metale z grupy platynowców</strong> — platynę, pallad i rod — oraz złoto. Działa w Republice Południowej Afryki i w amerykańskiej Montanie, zatrudnia niemal <strong>58 tysięcy osób</strong> i generuje 7,83 miliarda dolarów przychodu rocznie. To zupełnie inny rodzaj przedsiębiorstwa niż reszta Twojego portfela: przemysł ciężki, kapitałochłonny, cykliczny i zależny od cen surowców.</p>
+
+      <div class="alert alert-danger"><strong>Zacznę od pułapki, w którą łatwo wpaść przy tej spółce.</strong> SBSW notowany jest w Nowym Jorku jako <strong>kwit depozytowy odpowiadający czterem akcjom zwykłym</strong>. Serwisy danych podają część wskaźników na akcję zwykłą — na przykład stratę 0,11 dolara i wartość księgową 0,84 dolara — a te liczby zestawione z ceną 10,77 dolara za kwit dają zupełnie fałszywy obraz. Sprawdziłem przelicznik dwiema drogami: kapitalizacja 7,61 miliarda podzielona przez cenę daje około <strong>707 milionów kwitów</strong>, co przy 2,83 miliarda akcji zwykłych daje dokładnie 4,01. Kontrola przez wartość księgową potwierdza: 2,67 miliarda kapitału własnego na 707 milionów kwitów to 3,78 dolara na kwit, czyli wskaźnik ceny do wartości księgowej 2,85 — dokładnie tyle, ile podaje źródło. <strong>W tym raporcie posługuję się wielkościami na poziomie całej spółki</strong>, żeby uniknąć tego błędu.</div>
+
+      <h3>Dlaczego ta pozycja jest w Twoim portfelu ważniejsza, niż sugeruje jej wielkość</h3>
+      <p>SBSW stanowi 5,1% portfela i jest <strong>jedyną poważną pozycją poza technologią</strong>. Przy 45% wartości akcji ulokowanych w jednej tezie o mocy obliczeniowej dla sztucznej inteligencji, to jest praktycznie cała Twoja dywersyfikacja. Beta 0,92 oznacza zmienność zbliżoną do rynku — dla porównania IREN ma 4,30, ASPI 3,62, a Marvell 2,25.</p>
+      <p>Twoja pozycja jest na plusie około <strong>59%</strong> (700 kwitów po średniej 6,77 dolara).</p>
+
+      <h3>Co pokazał pierwszy kwartał 2026</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q1 2026</th><th>Dynamika</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Skorygowana EBITDA</strong></td><td><strong>R12,4 mld (≈$762 mln)</strong></td><td style="color:var(--ocena-kupno)">+393% r/r</td></tr>
+          <tr><td>Średnia cena koszyka 4E</td><td>—</td><td style="color:var(--ocena-kupno)">+87% r/r</td></tr>
+          <tr><td>Produkcja PGM (4E)</td><td>—</td><td style="color:var(--ocena-kupno)">+2% r/r</td></tr>
+          <tr><td>Koszt wydobycia (AISC)</td><td>$1 507 za uncję 4E</td><td style="color:var(--ocena-kupno)">Bez zmian r/r — dyscyplina kosztowa</td></tr>
+          <tr><td>Przychody 2025 (cały rok)</td><td>R129,7 mld (≈$7,3 mld)</td><td style="color:var(--ocena-kupno)">+14% mimo niższej produkcji</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>To jest bardzo mocny kwartał i warto zrozumieć jego mechanikę.</strong> Produkcja wzrosła o 2%, a koszt jednostkowy nie zmienił się wcale — natomiast cena koszyka metali poszła w górę o 87%. Przy stałych kosztach i wyższej cenie <strong>cały przyrost przychodu spływa prosto na poziom zysku operacyjnego</strong>, stąd skok EBITDA o 393%. Tak działa dźwignia operacyjna w górnictwie i dlatego te spółki potrafią zmieniać wynik skokowo, bez żadnej zmiany w samej działalności.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Opis</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Platyna</strong></td><td>Katalizatory, przemysł, biżuteria, coraz częściej elektrolizery wodorowe</td><td style="color:var(--ocena-kupno)">Deficyt strukturalny prognozowany do 2029</td></tr>
+          <tr><td><strong>Pallad</strong></td><td>Katalizatory w silnikach benzynowych i hybrydach</td><td style="color:var(--ocena-kupno)">Odbicie ceny po latach spadków</td></tr>
+          <tr><td>Rod i pozostałe platynowce</td><td>Wąskie zastosowania przemysłowe, bardzo zmienne ceny</td><td>Element koszyka 4E</td></tr>
+          <tr><td>Złoto</td><td>Kopalnie w RPA</td><td>Stabilizator przychodów</td></tr>
+          <tr><td><strong>Operacje w Montanie</strong></td><td>Jedyne wydobycie platynowców w USA</td><td style="color:var(--ocena-uwaga)">Restart po wcześniejszym ograniczeniu</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — geologia, której nie da się odtworzyć</h3>
+      <p>Złóż platynowców o skali przemysłowej jest na świecie bardzo niewiele i leżą głównie w RPA oraz Rosji. Nowej kopalni nie buduje się w reakcji na wysoką cenę — od decyzji do produkcji mijają lata, a nakłady są ogromne. <strong>To sprawia, że podaż jest wyjątkowo nieelastyczna</strong>, a niedobory utrzymują się długo.</p>
+      <div class="alert alert-info"><strong>Operacje w Montanie zasługują na osobną uwagę.</strong> To jedyne wydobycie platynowców na terenie Stanów Zjednoczonych. W świecie, w którym łańcuchy dostaw metali strategicznych stały się kwestią bezpieczeństwa, a znaczna część światowej podaży pochodzi z Rosji, ta kopalnia ma wartość wykraczającą poza samą ekonomię wydobycia. Jednocześnie jest droga w utrzymaniu i to ona w ostatnich latach ciążyła wynikom.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Zjawisko</th><th>Skala</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Deficyt platyny 2025</strong></td><td>1,08–1,1 mln uncji</td><td style="color:var(--ocena-kupno)">Wzrost z 921 tys. uncji rok wcześniej</td></tr>
+          <tr><td>Prognoza deficytu 2026</td><td>240 tys. uncji</td><td style="color:var(--ocena-uwaga)">Wyraźnie płytszy niż w 2025</td></tr>
+          <tr><td>Deficyty do 2029</td><td>348–689 tys. uncji rocznie</td><td style="color:var(--ocena-kupno)">Prognoza World Platinum Investment Council</td></tr>
+          <tr><td><strong>Zapasy naziemne</strong></td><td>ok. 4 miesiące popytu</td><td style="color:var(--ocena-kupno)">Bardzo niski bufor</td></tr>
+          <tr><td>Podaż pierwotna</td><td>6,2 mln uncji (2019) → 4,7 mln (2034)</td><td style="color:var(--ocena-kupno)">Strukturalny spadek</td></tr>
+          <tr><td>Produkcja RPA</td><td>-5% r/r (I–X 2025)</td><td style="color:var(--ocena-uwaga)">Zalania, awarie, starzejące się szyby</td></tr>
+          <tr><td><strong>Cena platyny</strong></td><td>+127% w 2025, szczyt ≈$2 878 w I 2026</td><td style="color:var(--ocena-sprzedaz)">Cofnięcie do ok. $2 000 pod koniec kwietnia</td></tr>
+          <tr><td>Pallad</td><td>+57% r/r</td><td style="color:var(--ocena-kupno)">Odbicie po latach spadków</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Dwa wiersze z tej tabeli trzeba czytać razem.</strong> Platyna zdrożała w 2025 o 127% i w styczniu 2026 sięgnęła około 2 878 dolarów za uncję — <strong>po czym cofnęła się do mniej więcej 2 000 dolarów do końca kwietnia</strong>. To jest jedyne wyjaśnienie, jakiego potrzebuje wykres kursu SBSW: spółka jest o 25,8% wyżej niż rok temu, ale jednocześnie <strong>15% poniżej swojej średniej dwustusesyjnej</strong>. Kurs poszedł za metalem w górę, a potem razem z nim spadł. Prognozowany deficyt na 2026 rok — 240 tysięcy uncji wobec 1,08 miliona w 2025 — sugeruje, że najostrzejsza faza niedoboru jest już za nami.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <p>Sibanye nie ma klientów w zwykłym sensie — sprzedaje towar giełdowy po cenie rynkowej. <strong>Nie ma siły cenowej, nie ma kontraktów długoterminowych chroniących marżę i nie ma portfela zamówień.</strong> Przychód to iloczyn wydobytych uncji i ceny, na którą spółka nie ma wpływu.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Stan</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody (12 mies.)</td><td>$7,83 mld</td><td>Prognoza wzrostu 3-letniego: tylko +6,95%</td></tr>
+          <tr><td>Udział instytucji</td><td><strong>99,73%</strong></td><td style="color:var(--ocena-uwaga)">Praktycznie brak akcjonariatu detalicznego</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$135,4 tys.</td><td style="color:var(--ocena-uwaga)">Strata na pracownika: $5,4 tys.</td></tr>
+          <tr><td>Zatrudnienie</td><td>57 857 osób</td><td>Ogromna baza kosztowa o charakterze stałym</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>2,00% akcji</td><td style="color:var(--ocena-kupno)">Niska — brak wyraźnego zakładu przeciw spółce</td></tr>
+          <tr><td>Pokrycie analityczne</td><td>5 analityków, cel $13,06</td><td style="color:var(--ocena-kupno)">Rekomendacja „kupno”</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Zatrudnienie 58 tysięcy osób to najważniejsza cecha struktury kosztowej tej spółki.</strong> Koszty pracy w górnictwie południowoafrykańskim są w praktyce stałe — zwolnienia są trudne, a układy zbiorowe sztywne. Oznacza to <strong>dźwignię operacyjną działającą w obie strony</strong>: przy rosnących cenach metali zysk eksploduje, jak w pierwszym kwartale, ale przy spadających cenach koszty zostają i wynik szybko schodzi pod kreskę. Dokładnie to widać w danych za ostatnie dwanaście miesięcy, które obejmują jeszcze okres niższych cen.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 mies.)</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$7,83 mld</td><td>R129,7 mld za 2025, +14%</td></tr>
+          <tr><td>Zysk brutto</td><td>$1,92 mld</td><td>Marża 24,58%</td></tr>
+          <tr><td><strong>EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>$2,07 mld</strong></td><td>Marża 26,38%</td></tr>
+          <tr><td>Zysk operacyjny</td><td style="color:var(--ocena-kupno)">$606,81 mln</td><td>Marża 7,75%</td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td style="color:var(--ocena-sprzedaz)">-$24,82 mln</td><td>Różnica ok. $632 mln poniżej linii operacyjnej</td></tr>
+          <tr><td><strong>Wynik netto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$312,31 mln</strong></td><td>Po podatku $261,40 mln mimo straty</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-kupno)">$1,34 mld</td><td>Amortyzacja $1,49 mld</td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-sprzedaz)">-$1,26 mld</td><td>94% przepływów operacyjnych</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$86,71 mln</strong></td><td>Marża 1,08%</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Tu leży najsłabsze miejsce tej spółki i warto je zrozumieć dokładnie.</strong> Na poziomie operacyjnym Sibanye zarabia 606,81 miliona dolarów, a EBITDA sięga 2,07 miliarda. Ale wynik przed opodatkowaniem to już <strong>minus 24,82 miliona</strong> — czyli poniżej linii operacyjnej ubywa około <strong>632 milionów dolarów</strong>. To głównie koszty odsetek i odpisy wartości aktywów, chroniczne w tej spółce od lat. Do tego dochodzi podatek 261,40 miliona zapłacony <em>mimo</em> straty netto, co jest typowe przy działalności w wielu jurysdykcjach. Efekt końcowy: strata 312,31 miliona przy solidnej działalności podstawowej.</div>
+      <p>Druga słabość to <strong>nakłady inwestycyjne pochłaniające 94% przepływów operacyjnych</strong>. Z 1,34 miliarda gotówki z działalności zostaje 86,71 miliona wolnych przepływów. Kopalnie wymagają nieustannych nakładów odtworzeniowych — to nie jest inwestycja we wzrost, tylko koszt utrzymania zdolności produkcyjnej.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $10,77 za kwit</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$7,61 mld</td><td>EV $9,54 mld</td></tr>
+          <tr><td>P/E bieżące</td><td>brak</td><td style="color:var(--ocena-sprzedaz)">Strata netto -$312,31 mln</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-kupno)"><strong>4,08×</strong></td><td>Najniżej w całym portfelu</td></tr>
+          <tr><td><strong>EV/EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>4,62×</strong></td><td>Dla porównania NVIDIA 32,71×</td></tr>
+          <tr><td>EV/Sales</td><td>1,22×</td><td style="color:var(--ocena-kupno)">P/S 0,97×</td></tr>
+          <tr><td>P/B</td><td>2,85×</td><td style="color:var(--ocena-uwaga)">Wartość księgowa ok. $3,78 na kwit</td></tr>
+          <tr><td><strong>P/FCF</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>87,72×</strong></td><td>EV/FCF 110,07 — słaba konwersja gotówkowa</td></tr>
+          <tr><td><strong>ROIC vs WACC</strong></td><td style="color:var(--ocena-kupno)"><strong>14,17% vs 8,76%</strong></td><td>Dodatnia różnica 5,4 pkt proc.</td></tr>
+          <tr><td>Dług / EBITDA</td><td>1,28</td><td style="color:var(--ocena-kupno)">Bezpiecznie</td></tr>
+          <tr><td>Pokrycie odsetek</td><td>2,52</td><td style="color:var(--ocena-uwaga)">Cienko</td></tr>
+          <tr><td>Altman Z-Score</td><td>1,66</td><td style="color:var(--ocena-uwaga)">Piotroski 6 na 9</td></tr>
+          <tr><td>Dywidenda</td><td>$0,25 · 2,31%</td><td style="color:var(--ocena-kupno)">Wypłacana mimo straty księgowej</td></tr>
+          <tr><td>Konsensus (5 analityków)</td><td>$13,06 · kupno</td><td style="color:var(--ocena-kupno)">+21,3%</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing</td><td>brak</td><td>Spółka na minusie w ujęciu netto</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-kupno)"><strong>4,08×</strong></td><td>Rynek zakłada powrót do zyskowności</td></tr>
+          <tr><td>Prognoza wzrostu zysku (3 lata)</td><td>+33,65%</td><td style="color:var(--ocena-kupno)">Z niskiej bazy</td></tr>
+          <tr><td>Prognoza wzrostu przychodów (3 lata)</td><td>+6,95%</td><td style="color:var(--ocena-uwaga)">Wzrost ma pochodzić z marży, nie z wolumenu</td></tr>
+          <tr><td>EV/EBITDA</td><td>4,62×</td><td style="color:var(--ocena-kupno)">Miara odporniejsza na pozycje jednorazowe</td></tr>
+          <tr><td>Nokia (odniesienie)</td><td>forward P/E 24,32×</td><td>Sześciokrotnie drożej przy słabszym ROIC</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> wskaźnik przyszłego zysku na poziomie 4,08 oznacza, że rynek spodziewa się powrotu do rentowności, ale wycenia go bardzo tanio — bo wie, że zysk górnika jest funkcją ceny metalu i może zniknąć równie szybko, jak się pojawił. <strong>Miarą właściwszą jest tu EV/EBITDA 4,62</strong>, bo pomija odpisy i koszty finansowe, które w tej spółce zaburzają wynik netto. Najbardziej przekonuje mnie jednak co innego: <strong>zwrot z zainwestowanego kapitału 14,17% przy jego koszcie 8,76%</strong>. To dodatnia różnica 5,4 punktu — w Twoim portfelu poza NVIDIĄ nie ma drugiej takiej spółki, a Marvell, CoreWeave, IREN i Nokia mają tę relację ujemną.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$11,50 – $15,00</div><div class="fair-value-note">Baza: EBITDA na poziomie $2,5 mld (pomiędzy $2,07 mld za ostatnie 12 mies. a $3,05 mld wynikającym z annualizacji Q1) przy mnożniku 4,0–4,5× i długu netto $1,61 mld, w przeliczeniu na ok. 707 mln kwitów | Konsensus 5 analityków: $13,06 („kupno”) — mieści się w środku przedziału | Scenariusz negatywny (koszyk PGM wraca do poziomów z 2024, problemy operacyjne w RPA): $7,00–9,50 | Scenariusz pozytywny (deficyt utrzymuje się, koszyk broni poziomów z Q1, Montana dowozi): $17,00–20,00 | Przy $10,77 potencjał od -35% do +86%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Poziom (12 mies.)</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Brutto</td><td>24,58%</td><td>Typowo dla górnictwa</td></tr>
+          <tr><td><strong>EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>26,38%</strong></td><td>Solidnie</td></tr>
+          <tr><td>Operacyjna</td><td>7,75%</td><td style="color:var(--ocena-uwaga)">Po amortyzacji $1,49 mld</td></tr>
+          <tr><td>Netto</td><td style="color:var(--ocena-sprzedaz)">-3,99%</td><td>Po odsetkach, odpisach i podatku</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>1,08%</strong></td><td>Nakłady zjadają 94% przepływów operacyjnych</td></tr>
+          <tr><td>ROIC</td><td style="color:var(--ocena-kupno)">14,17%</td><td>Przy koszcie kapitału 8,76%</td></tr>
+          <tr><td>ROE</td><td style="color:var(--ocena-sprzedaz)">-10,25%</td><td>Konsekwencja straty netto</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Zestawienie ROIC i ROE wygląda na sprzeczne, a nie jest.</strong> Zwrot z zainwestowanego kapitału wynosi dodatnie 14,17%, a zwrot z kapitału własnego ujemne 10,25%. Różnica bierze się stąd, że <strong>ROIC mierzy efektywność działalności operacyjnej wobec całego zaangażowanego kapitału, a ROE dochodzi dopiero po odsetkach, odpisach i podatku</strong>. Innymi słowy: kopalnie Sibanye pracują dobrze, ale struktura finansowa i odpisy zjadają wynik po drodze. To ważne rozróżnienie, bo wskazuje, gdzie leży problem — nie w wydobyciu, tylko w bilansie i w historycznych decyzjach o przejęciach.</div>
+      <p>Warto też zauważyć skalę dźwigni operacyjnej. W pierwszym kwartale wzrost ceny koszyka o 87% przy produkcji wyższej o 2% i niezmienionym koszcie jednostkowym przełożył się na <strong>wzrost EBITDA o 393%</strong>. Ta sama mechanika zadziała odwrotnie, jeśli ceny metali spadną.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$1,04 mld</td><td>Kapitał obrotowy $1,61 mld</td></tr>
+          <tr><td>Zadłużenie</td><td>$2,65 mld</td><td style="color:var(--ocena-uwaga)">Dług netto -$1,61 mld</td></tr>
+          <tr><td>Dług / kapitał własny</td><td>0,99</td><td style="color:var(--ocena-uwaga)">Podwyższone, ale nie skrajne</td></tr>
+          <tr><td><strong>Dług / EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>1,28</strong></td><td>Bezpieczny poziom lewarowania</td></tr>
+          <tr><td>Wskaźnik bieżącej płynności</td><td>1,78</td><td style="color:var(--ocena-uwaga)">Wskaźnik szybki tylko 0,84</td></tr>
+          <tr><td>Pokrycie odsetek</td><td style="color:var(--ocena-uwaga)">2,52</td><td>Cienko jak na spółkę cykliczną</td></tr>
+          <tr><td>Kapitał własny</td><td>$2,67 mld</td><td>ok. $3,78 na kwit</td></tr>
+          <tr><td>Altman Z-Score</td><td style="color:var(--ocena-uwaga)">1,66</td><td style="color:var(--ocena-kupno)">Piotroski 6 na 9 — fundamenty się poprawiają</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Bilans jest przeciętny, ale nie alarmujący.</strong> Dług do EBITDA na poziomie 1,28 to poziom komfortowy — dla porównania IREN ma 26,94, a CoreWeave 9,22. Niepokoi natomiast <strong>pokrycie odsetek 2,52</strong> przy spółce, której zysk zależy od cen surowców. Przy spadku koszyka o jedną trzecią ten wskaźnik zbliżyłby się do jedności. Wskaźnik szybkiej płynności 0,84 pokazuje z kolei, że znaczna część majątku obrotowego to zapasy metalu, a nie gotówka.</div>
+      <p>Na plus: spółka <strong>wypłaca dywidendę 2,31% mimo straty księgowej</strong>, co przy dodatnich przepływach operacyjnych 1,34 miliarda jest wykonalne, choć przy wolnych przepływach 86,71 miliona pozostawia niewiele zapasu.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">💰</div><div class="catalyst-body"><h4>Najtańsza spółka w portfelu przy dodatnim zwrocie z kapitału</h4><p>EV/EBITDA 4,62 i forward P/E 4,08 przy ROIC 14,17% wobec kosztu kapitału 8,76%. Poza NVIDIĄ żadna inna pozycja nie ma dodatniej różnicy między tymi dwiema wielkościami.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⛏️</div><div class="catalyst-body"><h4>Deficyt platyny utrzymuje się do 2029</h4><p>Prognoza 348–689 tys. uncji rocznie, zapasy naziemne na poziomie zaledwie czterech miesięcy popytu, podaż pierwotna kurcząca się z 6,2 do 4,7 mln uncji do 2034.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚡</div><div class="catalyst-body"><h4>Dźwignia operacyjna działa bardzo silnie</h4><p>Q1 2026: koszyk +87%, produkcja +2%, koszt jednostkowy bez zmian — a EBITDA wzrosła o 393% do R12,4 mld. Każdy kolejny procent ceny metalu spływa niemal w całości na zysk.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🛡️</div><div class="catalyst-body"><h4>Jedyna prawdziwa dywersyfikacja w portfelu</h4><p>Beta 0,92 wobec 4,30 przy IREN i 3,62 przy ASPI. Przy 45% wartości akcji w jednej tezie o sztucznej inteligencji ta pozycja jest praktycznie całym Twoim zabezpieczeniem.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🇺🇸</div><div class="catalyst-body"><h4>Montana jako aktywo strategiczne</h4><p>Jedyne wydobycie platynowców w Stanach Zjednoczonych, w czasie gdy zależność od rosyjskiej podaży metali stała się kwestią bezpieczeństwa.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Cena metalu już się cofnęła</h4><p>Platyna ze szczytu ≈$2 878 w styczniu do ok. $2 000 pod koniec kwietnia. Prognozowany deficyt na 2026 to 240 tys. uncji wobec 1,08 mln w 2025 — najostrzejsza faza niedoboru jest prawdopodobnie za nami.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💧</div><div class="catalyst-body"><h4>Wolne przepływy to zaledwie 1,08% przychodów</h4><p>Nakłady $1,26 mld pochłaniają 94% przepływów operacyjnych. Z 7,83 mld sprzedaży zostaje 86,71 mln gotówki — kopalnie wymagają nieustannych nakładów odtworzeniowych.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🕳️</div><div class="catalyst-body"><h4>632 mln dolarów ubywa poniżej linii operacyjnej</h4><p>Zysk operacyjny $606,81 mln, a wynik przed opodatkowaniem już -$24,82 mln. Odsetki i odpisy są w tej spółce problemem chronicznym, nie jednorazowym.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🇿🇦</div><div class="catalyst-body"><h4>Ryzyko operacyjne w Republice Południowej Afryki</h4><p>Produkcja RPA -5% r/r od stycznia do października 2025 przez zalania i awarie. Starzejące się szyby, rosnące koszty i 58 tys. pracowników o w praktyce stałym koszcie.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚖️</div><div class="catalyst-body"><h4>Pokrycie odsetek 2,52 przy spółce cyklicznej</h4><p>Przy spadku koszyka o jedną trzecią wskaźnik zbliżyłby się do jedności. Altman 1,66, wskaźnik szybkiej płynności 0,84.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>Rola</th><th>Relacja do Sibanye</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Sibanye Stillwater</strong></td><td>Platynowce i złoto, RPA i USA</td><td>EV/EBITDA 4,62, ROIC 14,17%, dług/EBITDA 1,28</td></tr>
+          <tr><td><strong>Anglo American Platinum</strong></td><td>Największy producent platynowców</td><td style="color:var(--ocena-sprzedaz)">Lepszy bilans i niższe koszty jednostkowe</td></tr>
+          <tr><td><strong>Impala Platinum</strong></td><td>Bezpośredni rywal z RPA</td><td>Podobna ekspozycja na to samo ryzyko krajowe</td></tr>
+          <tr><td>Norilsk Nickel</td><td>Rosyjski producent palladu</td><td style="color:var(--ocena-kupno)">Objęty ograniczeniami — sprzyja producentom zachodnim</td></tr>
+          <tr><td>Northam Platinum</td><td>Mniejszy gracz z RPA</td><td>Nowsze kopalnie, niższe koszty</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Sibanye jest w tej grupie graczem o wyższym ryzyku i wyższej dźwigni.</strong> Ma starsze kopalnie, więcej długu i większą bazę kosztową niż Anglo American Platinum czy Northam. Odwrotną stroną tej samej cechy jest to, że <strong>przy rosnących cenach metali reaguje mocniej niż konkurenci</strong> — dokładnie to pokazał wzrost EBITDA o 393% w pierwszym kwartale. Kupując Sibanye, kupujesz bardziej lewarowaną ekspozycję na ten sam koszyk metali.</div>
+      <p>Warto zauważyć, że ograniczenia nałożone na rosyjską podaż palladu działają na korzyść wszystkich producentów zachodnich, w tym operacji w Montanie.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena za kwit</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$10,77</strong></td><td>+25,82% w 52 tygodnie</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$9,24</td><td style="color:var(--ocena-kupno)">Kurs 16,6% powyżej — odbicie trwa</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$12,60</td><td style="color:var(--ocena-sprzedaz)">Kurs 14,5% poniżej — po wcześniejszym załamaniu</td></tr>
+          <tr><td>RSI (14)</td><td>67,68</td><td style="color:var(--ocena-uwaga)">Blisko strefy wykupienia</td></tr>
+          <tr><td>Beta</td><td>0,92</td><td style="color:var(--ocena-kupno)">Najniższa zmienność w portfelu po Nokii</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>2,00% akcji</td><td style="color:var(--ocena-kupno)">Niska</td></tr>
+          <tr><td>Wsparcie S1</td><td>$9,24</td><td>Średnia 50-sesyjna</td></tr>
+          <tr><td>Opór R1</td><td>$12,60</td><td>Średnia 200-sesyjna</td></tr>
+          <tr><td>Opór R2</td><td>$13,06</td><td>Konsensus analityków</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Koszyk PGM broni poziomów z Q1</li><li>Odzyskanie średniej 200-sesyjnej ($12,60)</li><li>Droga ku $15 i wyżej</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Dalsze cofanie cen platyny i palladu</li><li>Przebicie $9,24 w dół</li><li>Zejście ku $7,00–9,50</li></ul></div>
+      </div>
+      <p><strong>Układ jest nietypowy i wart uwagi:</strong> kurs jest 16,6% <em>powyżej</em> średniej pięćdziesięciosesyjnej, ale wciąż 14,5% <em>poniżej</em> dwustusesyjnej. To sygnatura spółki, która mocno spadła i teraz odbija. RSI 67,68 pokazuje, że odbicie jest już zaawansowane. <strong>Przestrzeń do średniej dwustusesyjnej wynosi około 17%</strong> i pokrywa się z górną częścią mojego przedziału wartości godziwej.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">RSI 67,68 po silnym odbiciu od średniej 50-sesyjnej, wyniki dopiero 1 września. Krótkoterminowo więcej zrobiła już cena metalu niż spółka.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">EV/EBITDA 4,62 i forward P/E 4,08 przy deficycie platyny utrzymującym się do 2029. Konsensus $13,06 mieści się w środku mojego przedziału.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Podaż pierwotna kurczy się strukturalnie do 2034, a złóż nie da się odtworzyć. Warunkiem jest opanowanie kosztów finansowych i odpisów.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: 4–6% portfela.</strong> Masz 5,1% — to właściwy poziom i nie zmniejszałbym go, bo jest to jedyna realna przeciwwaga dla 45% ulokowanych w tezie o sztucznej inteligencji</li>
+        <li><strong>Można dokupywać, ale nie po RSI 67,68.</strong> Odbicie od średniej 50-sesyjnej jest już zaawansowane</li>
+        <li><strong>Dokupienie:</strong> $9,20–9,60, przy powrocie do średniej 50-sesyjnej</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $14–15, czyli powyżej średniej dwustusesyjnej</li>
+        <li><strong>Jedna liczba do śledzenia:</strong> <strong>cena koszyka 4E</strong>. Nie produkcja, nie koszty — koszyk. W Q1 wzrósł o 87% i to samo wyjaśnia skok EBITDA o 393%. Wszystko inne w tej spółce jest wobec niego wtórne</li>
+        <li><strong>Wyjście z tezy:</strong> trwały spadek koszyka poniżej poziomów z 2025, pogorszenie pokrycia odsetek poniżej 2,0 albo poważna awaria operacyjna w RPA</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$11,50 – $15,00</div><div class="fair-value-note">Scenariusz negatywny: $7,00–9,50 | Scenariusz pozytywny: $17,00–20,00 | Konsensus 5 analityków: $13,06</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Najtańsza pozycja w portfelu przy dodatnim zwrocie z kapitału.</strong> EV/EBITDA 4,62, forward P/E 4,08, ROIC 14,17% wobec kosztu kapitału 8,76%</li>
+          <li><strong>Deficyt platyny do 2029</strong> przy zapasach naziemnych na poziomie czterech miesięcy popytu i podaży pierwotnej kurczącej się do 4,7 mln uncji w 2034</li>
+          <li><strong>Jedyna prawdziwa dywersyfikacja.</strong> Beta 0,92 przy 45% portfela w jednej tezie technologicznej — ta pozycja jest praktycznie całym zabezpieczeniem</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Wolne przepływy to 1,08% przychodów.</strong> Nakłady $1,26 mld pochłaniają 94% przepływów operacyjnych — kopalnie trzeba nieustannie odtwarzać</li>
+          <li><strong>632 mln dolarów ubywa poniżej linii operacyjnej</strong> na odsetkach i odpisach, zamieniając zysk operacyjny $606,81 mln w stratę netto $312,31 mln</li>
+          <li><strong>Cena metalu już się cofnęła</strong> — platyna z ≈$2 878 do ok. $2 000, a prognoza deficytu na 2026 spada do 240 tys. uncji z 1,08 mln</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> trwały spadek koszyka 4E poniżej poziomów z 2025 albo pokrycie odsetek poniżej 2,0 → zejście w rejon $7,00–9,50.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> utrzymanie koszyka na poziomach z Q1 przy dyscyplinie kosztowej → droga ku $15 i średniej dwustusesyjnej.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Sibanye Stillwater była największą luką w Twoim portfelu — 5,1% wartości bez żadnej analizy — i okazuje się jedną z ciekawszych pozycji w całym zestawie. <strong>To najtańsza spółka, jaką masz</strong>: wskaźnik wartości przedsiębiorstwa do EBITDA wynosi 4,62, a przyszłego zysku 4,08. Dla porównania NVIDIA notowana jest przy 32,71, a Nokia przy 24,32. Co ważniejsze, <strong>zwrot z zainwestowanego kapitału sięga 14,17% przy jego koszcie 8,76%</strong> — dodatnia różnica 5,4 punktu, jakiej poza NVIDIĄ nie ma tu żadna inna spółka. Marvell, CoreWeave, IREN i Nokia mają tę relację ujemną.</p>
+
+      <p class="sum-lead">Pierwszy kwartał 2026 pokazał, na czym polega ta inwestycja. Produkcja wzrosła o 2%, koszt jednostkowy nie zmienił się wcale, a cena koszyka metali poszła w górę o 87% — i <strong>EBITDA wzrosła o 393%</strong>. Przy prawie stałych kosztach każdy kolejny procent ceny metalu spływa niemal w całości na zysk. Za tym stoi realne zjawisko: deficyt platyny wyniósł w 2025 roku 1,08 miliona uncji, zapasy naziemne stopniały do <strong>czterech miesięcy popytu</strong>, a podaż pierwotna ma się kurczyć z 6,2 miliona uncji do 4,7 miliona do roku 2034.</p>
+
+      <p class="sum-lead" style="border-color:var(--ocena-sprzedaz)">Trzeba jednak nazwać trzy słabości. <strong>Wolne przepływy to zaledwie 1,08% przychodów</strong> — z 1,34 miliarda gotówki operacyjnej nakłady odtworzeniowe zabierają 1,26 miliarda. <strong>Poniżej linii operacyjnej ubywa około 632 milionów dolarów</strong> na odsetkach i odpisach, przez co zysk operacyjny 606,81 miliona zamienia się w stratę netto 312,31 miliona. I wreszcie <strong>cena metalu już się cofnęła</strong>: platyna ze szczytu około 2 878 dolarów w styczniu do mniej więcej 2 000 pod koniec kwietnia, a prognozowany deficyt na 2026 rok spada do 240 tysięcy uncji. To tłumaczy, dlaczego kurs jest 15% poniżej średniej dwustusesyjnej mimo wzrostu o 26% w skali roku.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Wycena jest wyjątkowo niska.</strong> EV/EBITDA 4,62, forward P/E 4,08, EV/Sales 1,22 — najtaniej w całym portfelu.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Kapitał pracuje efektywnie.</strong> ROIC 14,17% wobec WACC 8,76%. Problem leży w bilansie, nie w kopalniach.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Deficyt jest strukturalny.</strong> Prognozy WPIC mówią o niedoborach do 2029, a złóż platynowców nie da się szybko odtworzyć.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Utrzymanie ceny koszyka.</strong> Q1 był wyjątkowy dzięki wzrostowi o 87%, ale platyna zdążyła już oddać jedną trzecią szczytu.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Stabilność operacyjna w RPA.</strong> Produkcja spadła o 5% w 2025 przez zalania i awarie; szyby się starzeją, a 58 tys. pracowników to koszt w praktyce stały.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Konwersja na wolną gotówkę.</strong> Marża FCF 1,08%, P/FCF 87,72. Nakłady odtworzeniowe pochłaniają niemal wszystko.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1 września 2026</strong></td><td>Wyniki — data szacowana</td><td>Sprawdzian, czy dźwignia operacyjna z Q1 utrzymała się przy niższym koszyku</td></tr>
+            <tr><td>Na bieżąco</td><td><strong>Cena koszyka 4E</strong></td><td>Jedyna zmienna, która naprawdę decyduje o wyniku tej spółki</td></tr>
+            <tr><td>Na bieżąco</td><td>Restart operacji w Montanie</td><td>Jedyne wydobycie platynowców w USA — aktywo o wartości strategicznej</td></tr>
+            <tr><td>Na bieżąco</td><td>Ograniczenia wobec rosyjskiego palladu</td><td>Działają na korzyść producentów zachodnich</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Cena koszyka 4E</strong></td><td>+87% r/r w Q1</td><td>powrót do poziomów z 2024</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td><strong>Marża wolnych przepływów</strong></td><td>1,08%</td><td>brak poprawy</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Pokrycie odsetek</td><td>2,52</td><td>&lt; 2,0</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>ROIC vs koszt kapitału</td><td>14,17% vs 8,76%</td><td>zejście różnicy do zera</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Dług / EBITDA</td><td>1,28</td><td>&gt; 2,5</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Koszt wydobycia (AISC)</td><td>$1 507 za uncję 4E</td><td>wzrost powyżej $1 700</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji: 4–6% portfela.</strong> Masz 5,1% i nie zmniejszałbym tego — to jedyna realna przeciwwaga dla koncentracji technologicznej</li>
+          <li><strong>Nie dokupywać przy RSI 67,68.</strong> Odbicie od średniej 50-sesyjnej jest zaawansowane</li>
+          <li><strong>Dokupienie:</strong> $9,20–9,60, przy powrocie do średniej 50-sesyjnej</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie $14–15</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> cena koszyka 4E. Nie produkcja i nie koszty</li>
+          <li><strong>Uwaga techniczna:</strong> pamiętaj, że 1 kwit ADR to 4 akcje zwykłe — wskaźniki „na akcję” z serwisów danych trzeba mnożyć przez cztery, zanim odniesie się je do ceny kwitu</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">📈 KUPNO — najtańsza pozycja w portfelu i jedyna prawdziwa przeciwwaga</div>
+        <p>Trzymasz 5,1% portfela w spółce, która jest jednocześnie najtańsza z całego zestawu, ma dodatni zwrot z kapitału ponad jego kosztem i działa na rynku o strukturalnym deficycie utrzymującym się według prognoz do 2029 roku. Przy 45% wartości akcji ulokowanych w jednej tezie o sztucznej inteligencji i przy becie 0,92 <strong>to jest praktycznie cała Twoja dywersyfikacja</strong> — i akurat okazuje się, że jest ona solidna, a nie przypadkowa.</p>
+        <p>Trzeba jednak rozumieć, co się kupuje. To nie jest spółka, która buduje wartość przez wzrost — prognoza przychodów na trzy lata to zaledwie 6,95%. To <strong>lewarowana ekspozycja na cenę koszyka platynowców</strong>, ze starszymi kopalniami, wysoką bazą kosztową i chronicznym obciążeniem odsetkami i odpisami. Przy rosnących cenach metali reaguje mocniej niż konkurenci, przy spadających — również.</p>
+        <p><strong>Trzymać w obecnej wielkości. Dokupować przy cofnięciu do okolic $9,20–9,60, nie przy dzisiejszym RSI 67,68.</strong> A jeśli miałbym wskazać jedną rzecz do obserwowania, to cena koszyka 4E — bo wszystko inne w tej spółce jest wobec niej wtórne.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$11,50–15,00</b></div>
+          <div><span>Scenariusz negatywny</span><b>$7,00–9,50</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$17,00–20,00</b></div>
+          <div><span>Sugerowana pozycja</span><b>4–6% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki — 1 września (szacunek)</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 sierpnia 2026 | Cena: $10,77 za kwit ADR (zamknięcie 14.08.2026) | Pierwsza analiza SBSW | <strong>1 ADR = 4 akcje zwykłe</strong> | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 17.08.2026</strong>, Sibanye-Stillwater IR (Q1 2026), World Platinum Investment Council | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
