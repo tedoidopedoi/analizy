@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNH — UnitedHealth Group | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: UNH</div>
+    <div class="company-name">UnitedHealth Group Incorporated</div>
+    <div class="company-sub">Ubezpieczenia zdrowotne i usługi medyczne · UnitedHealthcare i Optum · Minnetonka, Minnesota</div>
+    <div class="header-meta">
+      <span class="meta-tag">RSI 33,3 — najniżej w serii</span>
+      <span class="meta-tag">Rentowność FCF 6,84%</span>
+      <span class="meta-tag">Dywidenda 16 lat wzrostu</span>
+      <span class="meta-tag">Beta 0,63</span>
+      <div class="price-display">
+        <div class="price-main">$384,85</div>
+        <div class="price-sub">zamknięcie 20.08.2026 | +27% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Ochrona zdrowia</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — wyprzedana spółka po podniesionej prognozie">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">druga realna przeciwwaga w portfelu</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$430 – $490</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">+12% do +27%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>16 lipca 2026</b><em>Q3 — połowa października</em></div>
+    <div class="rb-right">Pozycja 2–4% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (20.08.2026)</div><div class="metric-value">$384,85</div><div class="metric-detail">+26,5% w 52 tyg. | 7% pod średnią 50-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$345,4 mld</div><div class="metric-detail">Przychody $450,5 mld — największe w portfelu</div></div>
+    <div class="metric-card"><div class="metric-label">Skorygowany zysk Q2</div><div class="metric-value green">$6,38</div><div class="metric-detail">30% powyżej oczekiwań | zysk operacyjny +55%</div></div>
+    <div class="metric-card"><div class="metric-label">Wskaźnik kosztów medycznych</div><div class="metric-value green">86,7%</div><div class="metric-detail">Z 89,4% — najniżej od dwóch lat</div></div>
+    <div class="metric-card"><div class="metric-label">RSI (14)</div><div class="metric-value yellow">33,26</div><div class="metric-detail">Najniżej z całej dzisiejszej serii</div></div>
+    <div class="metric-card"><div class="metric-label">Rentowność wolnych przepływów</div><div class="metric-value green">6,84%</div><div class="metric-detail">$23,62 mld, czyli $26,31 na akcję</div></div>
+    <div class="metric-card"><div class="metric-label">Dywidenda</div><div class="metric-value green">2,41%</div><div class="metric-detail">16 lat wzrostu | najwyższa w portfelu</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (27 analityków)</div><div class="metric-value green">$475,23</div><div class="metric-detail">+23,5% | kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Czym jest UnitedHealth</h3>
+      <p>UnitedHealth to <strong>największy amerykański ubezpieczyciel zdrowotny</strong>, działający w dwóch pionach: UnitedHealthcare sprzedaje polisy, a Optum świadczy usługi medyczne, zarządza aptekami i analizuje dane. Spółka zatrudnia <strong>390 tysięcy osób</strong> i generuje <strong>450,53 miliarda dolarów przychodu</strong> — najwięcej z całego Twojego portfela, ponad połowę tego, co NVIDIA i Amazon razem.</p>
+      <p>Twoja pozycja to 6 akcji po średniej 319,00 dolara — jesteś na plusie <strong>20,6%</strong>. Uwaga: w eksporcie z 11 sierpnia było to +26,3%, więc kurs od tamtej pory spadł o 4,5%.</p>
+
+      <div class="alert alert-success"><strong>To jest w tym portfelu rzecz rzadka: dobra spółka, która właśnie podniosła prognozę, a jej akcje są wyprzedane.</strong> Wskaźnik RSI wynosi <strong>33,26 — najniżej ze wszystkich dziewięciu spółek analizowanych w tej serii</strong> — a kurs jest 7,1% poniżej średniej pięćdziesięciosesyjnej. Jednocześnie w lipcu spółka pokazała skorygowany zysk na akcję <strong>30% powyżej oczekiwań</strong> i podniosła prognozę roczną.</div>
+
+      <h3>Co pokazał drugi kwartał 2026 — wyniki z 16 lipca</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026</th><th>Dynamika</th></tr></thead>
+        <tbody>
+          <tr><td>Skorygowany zysk na akcję</td><td><strong>$6,38</strong></td><td style="color:var(--ocena-kupno)">30% powyżej oczekiwań rynku</td></tr>
+          <tr><td>Zysk operacyjny</td><td><strong>$8,0 mld</strong></td><td style="color:var(--ocena-kupno)">+55% r/r</td></tr>
+          <tr><td><strong>Wskaźnik kosztów medycznych</strong></td><td><strong>86,7%</strong></td><td style="color:var(--ocena-kupno)">Z 89,4% rok wcześniej — najniżej od 2 lat</td></tr>
+          <tr><td>Wpływ inwestycji w AI</td><td>-270 punktów bazowych</td><td style="color:var(--ocena-kupno)">$1,5 mld na automatyzację autoryzacji świadczeń</td></tr>
+          <tr><td>Medicare Advantage</td><td>marże powyżej 3%</td><td style="color:var(--ocena-kupno)">Utrzymanie klientów lepsze od oczekiwań</td></tr>
+          <tr><td><strong>Prognoza roczna 2026</strong></td><td><strong>$19,50–20,00 na akcję</strong></td><td style="color:var(--ocena-kupno)">Podniesiona</td></tr>
+          <tr><td><strong>Segment komercyjny</strong></td><td style="color:var(--ocena-sprzedaz)">koszty powyżej 11%</td><td style="color:var(--ocena-sprzedaz)">Odbudowa marży przesunięta poza 2027</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Warto zatrzymać się przy czwartym wierszu, bo to nietypowe zastosowanie sztucznej inteligencji.</strong> UnitedHealth zainwestował <strong>1,5 miliarda dolarów w automatyzację autoryzacji świadczeń</strong> i przypisuje temu obniżenie wskaźnika kosztów medycznych o 270 punktów bazowych. Przy przychodach 450 miliardów każdy punkt bazowy tego wskaźnika to około 45 milionów dolarów rocznie — <strong>270 punktów oznacza więc rząd wielkości ponad 12 miliardów</strong>. To jedyna spółka w Twoim portfelu, która na sztucznej inteligencji <em>oszczędza</em>, zamiast na niej zarabiać albo w nią inwestować.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Opis</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>UnitedHealthcare</strong></td><td>Ubezpieczenia zdrowotne — komercyjne, Medicare, Medicaid</td><td style="color:var(--ocena-uwaga)">Segment komercyjny pod presją kosztów</td></tr>
+          <tr><td><strong>Medicare Advantage</strong></td><td>Prywatne plany dla seniorów finansowane przez państwo</td><td style="color:var(--ocena-kupno)">Marże powyżej 3%, retencja lepsza od oczekiwań</td></tr>
+          <tr><td><strong>Optum Health</strong></td><td>Własne przychodnie i lekarze</td><td style="color:var(--ocena-kupno)">Integracja pionowa — kontrola kosztów</td></tr>
+          <tr><td>Optum Rx</td><td>Zarządzanie świadczeniami aptecznymi</td><td>Skala daje siłę negocjacyjną wobec producentów leków</td></tr>
+          <tr><td>Optum Insight</td><td>Dane i analityka dla systemu ochrony zdrowia</td><td style="color:var(--ocena-kupno)">Najwyższa marża w grupie</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — integracja pionowa i skala</h3>
+      <p>Przewaga UnitedHealth polega na tym, że <strong>jest jednocześnie płatnikiem i świadczeniodawcą</strong>. Ubezpiecza pacjenta, a potem leczy go we własnej przychodni, wydaje mu lek przez własną aptekę i analizuje jego dane własnym oprogramowaniem. Każde ogniwo tego łańcucha obniża koszt następnego.</p>
+      <div class="alert alert-info"><strong>Praktyczny dowód działania tej fosy widać w wynikach.</strong> Wskaźnik kosztów medycznych spadł z 89,4% do <strong>86,7%</strong> — najniżej od dwóch lat. W ubezpieczeniach zdrowotnych to jest <em>ta</em> liczba: mówi, ile z każdego dolara składki wraca do pacjenta w postaci świadczeń. Poprawa o 2,7 punktu procentowego przy przychodach 450 miliardów przekłada się wprost na zysk operacyjny, który wzrósł o 55%.</div>
+      <p>Skala daje przy tym drugą przewagę, trudniejszą do skopiowania: <strong>przy 390 tysiącach pracowników i 450 miliardach przychodu inwestycja 1,5 miliarda w automatyzację jest zaokrągleniem</strong>, a mniejszy konkurent nie może sobie na nią pozwolić.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Starzejące się społeczeństwo</strong> — każdego dnia kolejni Amerykanie wchodzą w wiek uprawniający do Medicare, co powiększa rynek programów Medicare Advantage</li>
+        <li><strong>Presja kosztowa w segmencie komercyjnym</strong> — koszty medyczne rosną powyżej 11%, a odbudowa marży w tym pionie została przesunięta poza 2027 rok</li>
+        <li><strong>Koszty Medicare poniżej pierwotnych założeń</strong> — spółka spodziewa się, że trend za 2026 rok wypadnie poniżej zakładanych około 10%</li>
+        <li><strong>Ryzyko regulacyjne i polityczne</strong> — ubezpieczenia zdrowotne w USA są stale przedmiotem sporu politycznego, a stawki Medicare Advantage ustala państwo</li>
+        <li><strong>Automatyzacja jako dźwignia marży</strong> — inwestycja 1,5 mld dolarów obniżyła wskaźnik kosztów o 270 punktów bazowych; to zjawisko dopiero się zaczyna</li>
+      </ul>
+      <div class="alert alert-warn"><strong>Napięcie między dwoma pionami jest kluczowe dla oceny tej spółki.</strong> Medicare Advantage idzie znacznie lepiej, niż zakładano — marże powyżej 3%, utrzymanie klientów lepsze od prognoz, koszty poniżej założeń. Segment komercyjny idzie gorzej: <strong>koszty medyczne uparcie przekraczają 11%, a odbudowa rentowności została odsunięta poza 2027 rok</strong>. Spółka podniosła prognozę mimo tego drugiego, co znaczy, że pierwszy pion z nawiązką kompensuje słabość drugiego.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Stan</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody roczne</td><td><strong>$450,53 mld</strong></td><td>Największe w Twoim portfelu</td></tr>
+          <tr><td>Prognoza wzrostu przychodów</td><td style="color:var(--ocena-uwaga)">+2,77% w 3 lata</td><td style="color:var(--ocena-kupno)">Ale zysku: +16,69%</td></tr>
+          <tr><td>Zatrudnienie</td><td>390 000 osób</td><td>Przychód na osobę $1,16 mln, zysk $36,2 tys.</td></tr>
+          <tr><td>Medicare Advantage</td><td style="color:var(--ocena-uwaga)">spadek o ok. 1,1 mln uczestników</td><td style="color:var(--ocena-kupno)">Ale marże powyżej 3% — świadoma selekcja</td></tr>
+          <tr><td>Udział instytucji</td><td>88,91%</td><td>Osoby powiązane: 0,17%</td></tr>
+          <tr><td>Liczba akcji</td><td style="color:var(--ocena-kupno)">-1,47% r/r</td><td>Skup akcji, zwrot łączny 3,88%</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-kupno)">1,68% akcji</td><td>Spadek z 18,41 do 15,09 mln</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Spadek liczby uczestników Medicare Advantage o 1,1 miliona brzmi źle, a jest dobrą wiadomością</strong> — i warto to wyjaśnić. Ubezpieczyciel może rosnąć na dwa sposoby: przyjmując wszystkich albo przyjmując tych, których leczenie kosztuje mniej niż składka. UnitedHealth wyraźnie wybrał drugą drogę: <strong>rezygnuje z nierentownych planów i klientów, a marża Medicare przekroczyła w efekcie 3%</strong>. Prognoza wzrostu przychodów na trzy lata wynosi zaledwie 2,77%, ale zysku — 16,69%. To jest spółka poprawiająca jakość, a nie skalę.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 mies.)</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td><strong>$450,53 mld</strong></td><td>Prognoza wzrostu: +2,77% w 3 lata</td></tr>
+          <tr><td>Zysk brutto</td><td>$88,86 mld</td><td>Marża 19,72%</td></tr>
+          <tr><td>Zysk operacyjny</td><td>$24,10 mld</td><td style="color:var(--ocena-uwaga)">Marża 5,35% — typowo dla ubezpieczeń</td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td style="color:var(--ocena-uwaga)">$17,44 mld</td><td>O $6,66 mld niżej — odsetki od długu $73 mld</td></tr>
+          <tr><td>Zysk netto</td><td>$14,12 mld</td><td>EPS $15,53; stopa podatkowa 14,50%</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-kupno)">$27,02 mld</td><td>Nakłady tylko $3,40 mld</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>$23,62 mld</strong></td><td>$26,31 na akcję, rentowność 6,84%</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Ostatni wiersz jest sercem tezy inwestycyjnej.</strong> Marża operacyjna 5,35% wygląda skromnie i taka właśnie jest w ubezpieczeniach — ale przy przychodach 450 miliardów przekłada się na <strong>23,62 miliarda dolarów wolnej gotówki rocznie, czyli 26,31 dolara na akcję</strong>. Przy kursie 384,85 daje to <strong>rentowność wolnych przepływów 6,84%</strong>, wyższą niż u jakiejkolwiek innej spółki w Twoim portfelu. Dla porównania NVIDIA ma 2,18%, ASML 1,74%, a Amazon ujemną.</div>
+      <p>Model jest przy tym lekki kapitałowo: nakłady inwestycyjne wynoszą 3,40 miliarda przy przychodach 450 miliardów, czyli <strong>0,75%</strong>. Ubezpieczyciel nie buduje fabryk — sprzedaje obietnicę pokrycia kosztów i zarabia na tym, że potrafi je oszacować lepiej niż konkurencja.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $384,85</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$345,44 mld</td><td>EV $390,18 mld</td></tr>
+          <tr><td>P/E bieżące</td><td>24,78×</td><td>EPS $15,53</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-kupno)"><strong>18,08×</strong></td><td>Prognoza spółki: $19,50–20,00 na akcję</td></tr>
+          <tr><td>PEG</td><td>1,42</td><td style="color:var(--ocena-uwaga)">Wzrost zysku +16,69% w 3 lata</td></tr>
+          <tr><td>P/S</td><td style="color:var(--ocena-kupno)">0,77×</td><td>EV/Sales 0,87 — typowo dla ubezpieczeń</td></tr>
+          <tr><td><strong>P/FCF</strong></td><td style="color:var(--ocena-kupno)"><strong>14,63×</strong></td><td>Rentowność wolnych przepływów 6,84%</td></tr>
+          <tr><td>EV/EBITDA</td><td>14,62×</td><td style="color:var(--ocena-uwaga)">EV/FCF 16,52</td></tr>
+          <tr><td>P/B</td><td>3,54×</td><td>Wartość księgowa $108,78 na akcję</td></tr>
+          <tr><td><strong>ROIC vs WACC</strong></td><td style="color:var(--ocena-kupno)"><strong>11,37% vs 7,17%</strong></td><td>Przewaga 4,2 pkt proc.</td></tr>
+          <tr><td><strong>Dywidenda</strong></td><td style="color:var(--ocena-kupno)"><strong>$9,28 · 2,41%</strong></td><td>16 lat wzrostu, wypłata 59,74%</td></tr>
+          <tr><td>Piotroski F-Score</td><td>6 na 9</td><td style="color:var(--ocena-uwaga)">Altman nie ma zastosowania dla ubezpieczycieli</td></tr>
+          <tr><td>Konsensus (27 analityków)</td><td style="color:var(--ocena-kupno)">$475,23 · kupno</td><td>+23,5%</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing</td><td>24,78×</td><td>EPS $15,53 za ostatnie 12 miesięcy</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>18,08×</strong></td><td>Implikuje EPS około $21,29</td></tr>
+          <tr><td><strong>Prognoza spółki na 2026</strong></td><td><strong>$19,50–20,00</strong></td><td style="color:var(--ocena-kupno)">Podniesiona po Q2 — daje P/E 19,2–19,7</td></tr>
+          <tr><td>Skorygowany EPS w Q2</td><td>$6,38 (30% powyżej oczekiwań)</td><td style="color:var(--ocena-kupno)">Zysk operacyjny +55% r/r</td></tr>
+          <tr><td><strong>PEG</strong></td><td><strong>1,42</strong></td><td>Wzrost zysku +16,69%, przychodów tylko +2,77%</td></tr>
+          <tr><td>Nokia (odniesienie)</td><td>forward P/E 24,32</td><td style="color:var(--ocena-uwaga)">Drożej przy słabszej rentowności</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> spadek wskaźnika z 24,78 na 18,08 oznacza, że rynek spodziewa się wyraźnej poprawy zysku — i prognoza spółki to potwierdza, wskazując 19,50–20,00 dolara na akcję wobec 15,53 osiągniętych w ostatnich dwunastu miesiącach. <strong>Przy dolnej granicy prognozy dzisiejsza cena odpowiada dziewiętnastokrotności zysku</strong>, przy rentowności wolnych przepływów 6,84% i dywidendzie 2,41%. To nie jest okazja stulecia, ale jest to solidna wycena spółki, która właśnie pokazała wynik o 30% lepszy od oczekiwań.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$430 – $490</div><div class="fair-value-note">Baza: 21–23× zysku prognozowanego na 2027 (ok. $21 na akcję przy realizacji prognozy $19,50–20,00 za 2026 i dalszej poprawie wskaźnika kosztów medycznych) oraz 16–18× wolnych przepływów wynoszących $26,31 na akcję | Konsensus 27 analityków: $475,23 („kupno”) — mieści się w górnej części przedziału | Scenariusz negatywny (koszty komercyjne dalej powyżej 11%, niekorzystne stawki Medicare, presja regulacyjna): $290–320 | Scenariusz pozytywny (dalsza poprawa wskaźnika kosztów i odbudowa marży komercyjnej przed 2027): $540–580 | Przy $384,85 potencjał od -25% do +51%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>UNH</th><th>Sibanye</th><th>NVIDIA</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Marża operacyjna</td><td style="color:var(--ocena-uwaga)">5,35%</td><td>7,75%</td><td style="color:var(--ocena-kupno)">64,02%</td><td>Ubezpieczenia mają strukturalnie niską marżę</td></tr>
+          <tr><td><strong>Rentowność FCF</strong></td><td style="color:var(--ocena-kupno)"><strong>6,84%</strong></td><td>1,14%</td><td>2,18%</td><td>Najwyżej w całym portfelu</td></tr>
+          <tr><td>ROIC</td><td>11,37%</td><td>14,17%</td><td style="color:var(--ocena-kupno)">104,67%</td><td>Koszt kapitału UNH: 7,17%</td></tr>
+          <tr><td><strong>Różnica ROIC–WACC</strong></td><td style="color:var(--ocena-kupno)"><strong>+4,2 pkt</strong></td><td>+5,4 pkt</td><td>+88,3 pkt</td><td>Dodatnia — tworzy wartość</td></tr>
+          <tr><td><strong>Beta</strong></td><td style="color:var(--ocena-kupno)"><strong>0,63</strong></td><td>0,92</td><td>2,21</td><td>Druga najniższa w portfelu</td></tr>
+          <tr><td>Dywidenda</td><td style="color:var(--ocena-kupno)">2,41%, 16 lat wzrostu</td><td>2,31%</td><td>0,44%</td><td>Najwyższa i najbardziej stabilna</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Marża operacyjna 5,35% wygląda słabo dopóki nie zestawi się jej z rentownością wolnych przepływów.</strong> Ubezpieczyciel zarabia niewiele na każdym dolarze składki, ale przepuszcza przez siebie ogromne kwoty i prawie nie potrzebuje kapitału — nakłady inwestycyjne to 0,75% przychodów. Efekt: <strong>6,84% rentowności wolnych przepływów, najwięcej w całym Twoim portfelu</strong>.</p>
+      <div class="alert alert-success"><strong>Najważniejsza liczba w tej sekcji to jednak beta 0,63.</strong> Przy 52% portfela ulokowanych w jednej tezie technologicznej i przy pozycjach o becie 4,30 (IREN), 3,62 (ASPI) czy 2,21 (Marvell), <strong>UnitedHealth jest — obok Sibanye — jedyną spółką, która nie porusza się razem z resztą</strong>. Ochrona zdrowia nie zależy od nakładów operatorów chmury, a starzejące się społeczeństwo generuje popyt niezależny od cyklu koniunkturalnego.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$31,47 mld</td><td>Kapitał obrotowy ujemny: -$24,96 mld</td></tr>
+          <tr><td>Zadłużenie</td><td>$73,33 mld</td><td style="color:var(--ocena-uwaga)">Dług netto -$44,74 mld</td></tr>
+          <tr><td>Dług / kapitał własny</td><td>0,69</td><td style="color:var(--ocena-kupno)">Umiarkowanie</td></tr>
+          <tr><td>Dług / EBITDA</td><td>2,59</td><td style="color:var(--ocena-uwaga)">Pokrycie odsetek 6,19</td></tr>
+          <tr><td><strong>Wskaźnik bieżącej płynności</strong></td><td style="color:var(--ocena-uwaga)"><strong>0,78</strong></td><td>Cecha modelu ubezpieczeniowego — patrz komentarz</td></tr>
+          <tr><td>Kapitał własny</td><td>$105,95 mld</td><td>$108,78 na akcję</td></tr>
+          <tr><td>Liczba akcji</td><td style="color:var(--ocena-kupno)">-1,47% r/r</td><td>Skup akcji, zwrot łączny 3,88%</td></tr>
+          <tr><td>Piotroski F-Score</td><td>6 na 9</td><td style="color:var(--ocena-uwaga)">Altman nieprzydatny dla ubezpieczycieli</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Wskaźnik bieżącej płynności 0,78 i ujemny kapitał obrotowy wyglądają alarmująco, a nie są problemem</strong> — i warto wiedzieć, dlaczego. Ubezpieczyciel <strong>pobiera składki z góry, a wypłaca świadczenia z opóźnieniem</strong>, więc jego zobowiązania krótkoterminowe są z definicji wysokie. Te pieniądze to rezerwy na przyszłe roszczenia, a nie długi handlowe. Przy przepływach operacyjnych 27,02 miliarda dolarów rocznie i pokryciu odsetek 6,19 płynność nie jest tu zagrożeniem. <strong>Wskaźnik Altmana w ogóle nie ma zastosowania do ubezpieczycieli</strong>, dlatego serwis go nie podaje.</div>
+      <p>Zadłużenie 73,33 miliarda przy EBITDA 26,68 miliarda daje wskaźnik 2,59 — poziom umiarkowany, choć wyższy niż u Amphenola (1,95) czy Foxa (1,88). Spółka konsekwentnie skupuje akcje, zmniejszając ich liczbę o 1,47% rocznie.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Wskaźnik kosztów medycznych najniżej od dwóch lat</h4><p>86,7% wobec 89,4% rok wcześniej, w tym 270 punktów bazowych dzięki inwestycji $1,5 mld w automatyzację autoryzacji. Zysk operacyjny wzrósł przez to o 55%.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💵</div><div class="catalyst-body"><h4>Rentowność wolnych przepływów 6,84%</h4><p>$23,62 mld gotówki rocznie, czyli $26,31 na akcję, przy nakładach inwestycyjnych zaledwie 0,75% przychodów. Najwyższa rentowność FCF w całym Twoim portfelu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Prognoza podniesiona do $19,50–20,00 na akcję</h4><p>Wobec $15,53 osiągniętych w ostatnich dwunastu miesiącach. Skorygowany zysk w Q2 przebił oczekiwania o 30%.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🛡️</div><div class="catalyst-body"><h4>Beta 0,63 i dywidenda rosnąca 16 lat</h4><p>Obok Sibanye jedyna spółka w portfelu niezwiązana z technologią. Dywidenda 2,41% przy wypłacie 59,74%, plus skup akcji — łączny zwrot 3,88%.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Wyprzedanie przy dobrych wynikach</h4><p>RSI 33,26 — najniżej z całej serii — i kurs 7,1% poniżej średniej 50-sesyjnej. Konsensus 27 analityków wskazuje $475,23, czyli 23,5% wyżej.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🏥</div><div class="catalyst-body"><h4>Segment komercyjny nie odbuduje marży przed 2027</h4><p>Koszty medyczne uparcie przekraczają 11%, a spółka sama przesunęła termin poprawy rentowności tego pionu poza 2027 rok.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏛️</div><div class="catalyst-body"><h4>Ryzyko regulacyjne i polityczne</h4><p>Stawki Medicare Advantage ustala państwo, a ubezpieczenia zdrowotne są w USA stałym przedmiotem sporu politycznego. To ryzyko, na które spółka nie ma wpływu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📊</div><div class="catalyst-body"><h4>Przychody praktycznie nie rosną</h4><p>Prognoza +2,77% w trzy lata. Cała poprawa zysku ma pochodzić z marży, a ta zależy od wskaźnika kosztów medycznych — najbardziej nieprzewidywalnej zmiennej w tej branży.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">👥</div><div class="catalyst-body"><h4>Kurcząca się baza Medicare Advantage</h4><p>Spadek o około 1,1 mln uczestników w skali roku. To świadoma selekcja poprawiająca marżę, ale ogranicza przyszłą bazę wzrostu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏦</div><div class="catalyst-body"><h4>Dług $73,33 mld i pokrycie odsetek 6,19</h4><p>Dług do EBITDA 2,59 — wyżej niż u Amphenola czy Foxa. Odsetki zabierają rocznie $6,66 mld z zysku operacyjnego.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>Rola</th><th>Relacja do UnitedHealth</th></tr></thead>
+        <tbody>
+          <tr><td><strong>UnitedHealth</strong></td><td>Ubezpieczenia + usługi medyczne</td><td>Największy, zintegrowany pionowo</td></tr>
+          <tr><td><strong>Elevance Health</strong></td><td>Ubezpieczenia zdrowotne</td><td style="color:var(--ocena-uwaga)">Mniejsza skala, słabsza integracja pionowa</td></tr>
+          <tr><td><strong>CVS Health / Aetna</strong></td><td>Apteki + ubezpieczenia</td><td style="color:var(--ocena-uwaga)">Podobny model, trudniejsza integracja</td></tr>
+          <tr><td>Cigna, Humana</td><td>Ubezpieczenia, Medicare Advantage</td><td>Bezpośredni rywale o tych samych klientów</td></tr>
+          <tr><td>Novo Nordisk</td><td>Leki, w tym na otyłość</td><td style="color:var(--ocena-uwaga)">Masz w portfelu — po drugiej stronie stołu kosztowego</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Ciekawa zależność w Twoim portfelu:</strong> UnitedHealth i Novo Nordisk siedzą po przeciwnych stronach tego samego rachunku. Novo zarabia na sprzedaży drogich leków, a UnitedHealth jest jednym z największych podmiotów, które za nie płacą. <strong>Wzrost cen i wolumenu leków na otyłość podnosi przychody Novo i wskaźnik kosztów medycznych UnitedHealth.</strong> To nie jest problem — obie pozycje są niewielkie, a łącznie dają 6,6% portfela w ochronie zdrowia. Warto jednak wiedzieć, że częściowo się znoszą, co akurat jest zaletą przy tak skoncentrowanym portfelu.</div>
+      <p>Przewagą UnitedHealth nad rywalami jest <strong>Optum</strong> — pion usługowy, którego konkurenci nie zbudowali w porównywalnej skali. Dzięki niemu spółka kontroluje koszty po obu stronach: jako płatnik i jako świadczeniodawca.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$384,85</strong></td><td>+26,50% w 52 tygodnie</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$414,14</td><td style="color:var(--ocena-uwaga)">Kurs 7,1% poniżej</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$347,71</td><td style="color:var(--ocena-kupno)">Kurs 10,7% powyżej — trend wzrostowy</td></tr>
+          <tr><td><strong>RSI (14)</strong></td><td style="color:var(--ocena-kupno)"><strong>33,26</strong></td><td>Najniżej z dziewięciu spółek serii; blisko wyprzedania</td></tr>
+          <tr><td><strong>Beta</strong></td><td style="color:var(--ocena-kupno)"><strong>0,63</strong></td><td>Druga najniższa w portfelu po Foxie</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-kupno)">1,68% akcji</td><td>Spadek z 18,41 do 15,09 mln</td></tr>
+          <tr><td>Wsparcie S1</td><td>$347,71</td><td>Średnia 200-sesyjna</td></tr>
+          <tr><td>Opór R1</td><td>$414,14</td><td>Średnia 50-sesyjna</td></tr>
+          <tr><td>Opór R2</td><td>$475,23</td><td>Konsensus analityków</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Utrzymanie wskaźnika kosztów poniżej 87% w Q3</li><li>Odzyskanie średniej 50-sesyjnej ($414)</li><li>Droga ku $475 — celowi analityków</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Pogorszenie kosztów w segmencie komercyjnym</li><li>Niekorzystne stawki Medicare na 2027</li><li>Przebicie $348 i zejście ku $290–320</li></ul></div>
+      </div>
+      <p><strong>To najlepszy technicznie moment z całej dziewiątki.</strong> RSI 33,26 przy kursie wciąż 10,7% powyżej średniej dwustusesyjnej oznacza korektę w trendzie wzrostowym, a nie załamanie. Dla porównania Amphenol ma RSI 41,14, ASML 49,19, a Fox aż 70,03. <strong>Do tego krótka sprzedaż spadła o 18% w miesiąc</strong> — pesymiści wychodzą, a nie dochodzą.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">RSI 33,26 przy kursie powyżej średniej dwustusesyjnej, świeżo podniesiona prognoza i krótka sprzedaż malejąca o 18% w miesiąc. Najlepsze zestawienie ceny i wyników w całej serii.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Prognoza $19,50–20,00 na akcję daje P/E poniżej 20 przy rentowności wolnych przepływów 6,84%. Konsensus 27 analityków wskazuje $475,23.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Integracja pionowa, starzejące się społeczeństwo i automatyzacja obniżająca koszty. Ryzykiem jest polityka, nie model biznesowy.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: 2–4% portfela.</strong> Masz zaledwie 1,7% — <strong>to za mało jak na jedną z dwóch realnych przeciwwag dla 52% ulokowanych w tezie o sztucznej inteligencji</strong></li>
+        <li><strong>To najlepszy kandydat do zwiększenia z całej dzisiejszej serii.</strong> Wyprzedanie przy podniesionej prognozie zdarza się rzadko, a beta 0,63 obniża ryzyko całego portfela, zamiast je podnosić</li>
+        <li><strong>Dokupienie:</strong> obecne poziomy $380–390; druga transza $348–355 przy średniej 200-sesyjnej</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $470–490</li>
+        <li><strong>Jedna liczba do śledzenia:</strong> <strong>wskaźnik kosztów medycznych</strong>. Dziś 86,7% po spadku z 89,4%. To jedyna liczba, która naprawdę decyduje o zysku ubezpieczyciela — każdy punkt procentowy przy przychodach 450 mld to około 4,5 mld dolarów</li>
+        <li><strong>Wyjście z tezy:</strong> wskaźnik kosztów powyżej 89%, obniżenie prognozy rocznej albo niekorzystne stawki Medicare Advantage na 2027</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$430 – $490</div><div class="fair-value-note">Scenariusz negatywny: $290–320 | Scenariusz pozytywny: $540–580 | Konsensus 27 analityków: $475,23</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Wyprzedanie przy dobrych wynikach.</strong> RSI 33,26 — najniżej w serii — po kwartale z zyskiem 30% powyżej oczekiwań i podniesioną prognozą do $19,50–20,00</li>
+          <li><strong>Rentowność wolnych przepływów 6,84%</strong> — najwyższa w portfelu — plus dywidenda 2,41% rosnąca szesnasty rok i skup akcji</li>
+          <li><strong>Beta 0,63.</strong> Obok Sibanye jedyna pozycja niezwiązana z technologią przy 52% portfela w jednej tezie</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by uważać</h4><ul>
+          <li><strong>Segment komercyjny nie odbuduje marży przed 2027</strong> — koszty medyczne uparcie powyżej 11%</li>
+          <li><strong>Przychody praktycznie nie rosną</strong> (+2,77% w trzy lata). Cała poprawa zysku zależy od wskaźnika kosztów medycznych</li>
+          <li><strong>Ryzyko polityczne i regulacyjne</strong> — stawki Medicare Advantage ustala państwo, a branża jest stałym przedmiotem sporu w USA</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> wskaźnik kosztów medycznych powyżej 89% albo obniżenie prognozy rocznej → zejście w rejon $290–320.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> utrzymanie wskaźnika poniżej 87% w Q3 przy realizacji prognozy $19,50–20,00 → droga ku $475 i wyżej.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">UnitedHealth jest w tej serii przypadkiem najrzadszym: <strong>dobra spółka, która właśnie podniosła prognozę, a jej akcje są wyprzedane</strong>. W lipcu pokazała skorygowany zysk na akcję 6,38 dolara, o 30% powyżej oczekiwań, przy zysku operacyjnym wyższym o 55%. Wskaźnik kosztów medycznych spadł z 89,4% do <strong>86,7%</strong>, najniżej od dwóch lat, a spółka podniosła prognozę roczną do 19,50–20,00 dolara na akcję wobec 15,53 osiągniętych w ostatnich dwunastu miesiącach. A wskaźnik RSI wynosi <strong>33,26 — najniżej ze wszystkich dziewięciu spółek, które analizowałem</strong>.</p>
+
+      <p class="sum-lead">Za poprawą stoi rzecz, na którą warto zwrócić uwagę: <strong>inwestycja 1,5 miliarda dolarów w automatyzację autoryzacji świadczeń obniżyła wskaźnik kosztów o 270 punktów bazowych</strong>. Przy przychodach 450 miliardów każdy punkt bazowy wart jest około 45 milionów rocznie. To jedyna spółka w Twoim portfelu, która na sztucznej inteligencji <em>oszczędza</em>, zamiast na niej zarabiać albo w nią inwestować — i akurat u niej efekt jest natychmiast widoczny w rachunku wyników.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Najważniejszy argument jest jednak portfelowy. <strong>Masz w tej spółce zaledwie 1,7% portfela</strong>, podczas gdy 52% ulokowane jest w jednej tezie o mocy obliczeniowej dla sztucznej inteligencji. UnitedHealth ma betę <strong>0,63</strong>, rentowność wolnych przepływów <strong>6,84%</strong> — najwyższą w całym zestawie — i dywidendę rosnącą nieprzerwanie od szesnastu lat. Obok Sibanye jest to jedyna pozycja, która nie porusza się razem z resztą portfela.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Koszty medyczne spadają.</strong> Wskaźnik 86,7% wobec 89,4% rok wcześniej, w tym 270 pb dzięki automatyzacji.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Prognoza podniesiona.</strong> $19,50–20,00 na akcję za 2026, po wyniku Q2 lepszym od oczekiwań o 30%.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Gotówka i zwrot dla akcjonariusza.</strong> $23,62 mld wolnych przepływów, rentowność 6,84%, dywidenda 2,41% rosnąca 16 lat, skup akcji.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Medicare Advantage powyżej oczekiwań.</strong> Marże ponad 3%, retencja lepsza od prognoz, koszty poniżej zakładanych 10%.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Odbudowa marży komercyjnej.</strong> Koszty powyżej 11%, termin poprawy przesunięty poza 2027 rok.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Wzrost przychodów.</strong> +2,77% w trzy lata — cała poprawa zysku musi pochodzić z marży.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>16 lipca 2026</td><td>Wyniki Q2 — już opublikowane</td><td>Zysk 30% powyżej oczekiwań, wskaźnik kosztów 86,7%, prognoza podniesiona</td></tr>
+            <tr><td><strong>Połowa października 2026</strong></td><td>Wyniki Q3</td><td>Sprawdzian, czy wskaźnik kosztów utrzyma się poniżej 87%</td></tr>
+            <tr><td>Jesień 2026</td><td>Stawki Medicare Advantage na 2027</td><td>Ustalane przez państwo — kluczowe dla marży najważniejszego segmentu</td></tr>
+            <tr><td>Na bieżąco</td><td>Efekty automatyzacji</td><td>Inwestycja $1,5 mld dała już 270 pb; skala tego zjawiska dopiero się rozwija</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Wskaźnik kosztów medycznych</strong></td><td>86,7% (z 89,4%)</td><td>powyżej 89%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Prognoza roczna</td><td>$19,50–20,00 na akcję</td><td>każde obniżenie</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Rentowność wolnych przepływów</td><td>6,84%</td><td>&lt; 4%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marże Medicare Advantage</td><td>powyżej 3%</td><td>poniżej 2%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Koszty w segmencie komercyjnym</strong></td><td>powyżej 11%</td><td>brak poprawy w 2027</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Dług / EBITDA</td><td>2,59</td><td>&gt; 3,5</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji: 2–4% portfela.</strong> Masz 1,7% — to za mało jak na jedną z dwóch realnych przeciwwag w portfelu</li>
+          <li><strong>Najlepszy kandydat do zwiększenia z całej dzisiejszej serii</strong> — wyprzedanie przy podniesionej prognozie, a beta 0,63 obniża ryzyko całości</li>
+          <li><strong>Dokupienie:</strong> obecne poziomy $380–390; druga transza $348–355 przy średniej 200-sesyjnej</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie $470–490</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> wskaźnik kosztów medycznych. Każdy punkt procentowy to około $4,5 mld</li>
+          <li><strong>Uwaga portfelowa:</strong> UnitedHealth i Novo Nordisk siedzą po przeciwnych stronach tego samego rachunku — Novo sprzedaje drogie leki, UNH za nie płaci. Razem 6,6% portfela w ochronie zdrowia, częściowo się znoszą</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">📈 KUPNO — najlepsze zestawienie ceny i wyników w całej serii</div>
+        <p>Przeanalizowałem dziś dziewięć spółek i UnitedHealth wypada w jednym istotnym wymiarze najlepiej: <strong>jako jedyna jest wyprzedana mimo świeżo podniesionej prognozy</strong>. Wskaźnik RSI 33,26 przy kursie wciąż 10,7% powyżej średniej dwustusesyjnej to korekta w trendzie wzrostowym, a nie załamanie. Krótka sprzedaż spadła w miesiąc o 18%, a dwudziestu siedmiu analityków widzi 23,5% przestrzeni.</p>
+        <p>Do tego dochodzą liczby, które w tym portfelu są rzadkie: <strong>rentowność wolnych przepływów 6,84%, dywidenda 2,41% rosnąca szesnasty rok z rzędu i beta 0,63</strong>. Zastrzeżenia są realne — segment komercyjny nie odbuduje marży przed 2027 rokiem, przychody praktycznie nie rosną, a stawki Medicare ustala państwo — ale żadne z nich nie podważa modelu biznesowego.</p>
+        <p><strong>Zwiększyłbym tę pozycję z 1,7% do 3–4%.</strong> Nie dlatego, że spodziewam się tu spektakularnych zwrotów, tylko dlatego, że przy 52% portfela w jednej tezie technologicznej brakuje Ci właśnie takich pozycji: tanich, generujących gotówkę i poruszających się niezależnie od reszty. Gotówka ze sprzedaży Roku pochodziła spoza tezy o sztucznej inteligencji — <strong>to jest naturalne miejsce, żeby ją tam zostawić</strong>.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$430–490</b></div>
+          <div><span>Scenariusz negatywny</span><b>$290–320</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$540–580</b></div>
+          <div><span>Sugerowana pozycja</span><b>2–4% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3 — połowa października</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 21 sierpnia 2026 | Cena: $384,85 (zamknięcie 20.08.2026) | Pierwsza analiza UNH | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 21.08.2026</strong>, UnitedHealth Group IR (wyniki Q2 2026, 16 lipca) | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

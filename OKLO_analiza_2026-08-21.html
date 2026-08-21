@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OKLO — Oklo Inc. | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: OKLO</div>
+    <div class="company-name">Oklo Inc.</div>
+    <div class="company-sub">Reaktory jądrowe małej mocy · zasilanie centrów danych · izotopy · Santa Clara, Kalifornia</div>
+    <div class="header-meta">
+      <span class="meta-tag">-36% w 52 tygodnie</span>
+      <span class="meta-tag">Gotówka $3,0 mld</span>
+      <span class="meta-tag">Przychody $1,21 mln</span>
+      <span class="meta-tag">Rozwodnienie +29,9%</span>
+      <div class="price-display">
+        <div class="price-main">$41,66</div>
+        <div class="price-sub">zamknięcie 20.08.2026 | -36% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Energia jądrowa</span><span class="temat">Zasilanie i chłodzenie</span><span class="temat">Moc obliczeniowa dla AI</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — mocny bilans i realny postęp, ale emisja akcji dławi kurs">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">pierwsze przychody dopiero w 2028</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$32 – $50</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-23% do +20%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>7 sierpnia 2026</b><em>uruchomienie Aurora-INL: 2028</em></div>
+    <div class="rb-right">Pozycja 1–2% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (20.08.2026)</div><div class="metric-value">$41,66</div><div class="metric-detail">-36,3% w 52 tyg. | 39% pod średnią 200-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja / EV</div><div class="metric-value">$7,75 / $5,29 mld</div><div class="metric-detail">Różnicę robi gotówka</div></div>
+    <div class="metric-card"><div class="metric-label">Płynność</div><div class="metric-value green">$3,0 mld</div><div class="metric-detail">Na 30 czerwca 2026, z papierami wartościowymi</div></div>
+    <div class="metric-card"><div class="metric-label">Zapas gotówki</div><div class="metric-value green">~11 lat</div><div class="metric-detail">ASPI: 0,6 roku | ARQQ: 0,6 roku</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody (12 mies.)</div><div class="metric-value red">$1,21 mln</div><div class="metric-detail">Strata operacyjna $217,6 mln</div></div>
+    <div class="metric-card"><div class="metric-label">Rozwodnienie</div><div class="metric-value red">+29,85%</div><div class="metric-detail">$1,9 mld pozyskane emisją bieżącą w 2026</div></div>
+    <div class="metric-card"><div class="metric-label">Krótka sprzedaż</div><div class="metric-value red">20,30%</div><div class="metric-detail">wolnego obrotu, wzrost z 24,4 do 30,3 mln</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (25 analityków)</div><div class="metric-value green">$79,88</div><div class="metric-detail">+91,7% | kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Czym jest Oklo</h3>
+      <p>Oklo buduje <strong>małe reaktory jądrowe</strong> zaprojektowane tak, by zasilać pojedyncze obiekty przemysłowe — przede wszystkim centra danych. Model biznesowy jest nietypowy: spółka nie zamierza sprzedawać reaktorów, tylko <strong>sprzedawać prąd na podstawie umów wieloletnich</strong>, zachowując własność instalacji. Zatrudnia 215 osób.</p>
+      <p>Twoja pozycja to 65 akcji po średniej 57,08 dolara. Przy dzisiejszym kursie jesteś na minusie <strong>27%</strong> — w eksporcie z 11 sierpnia było to jeszcze minus 17%, więc <strong>od tamtej pory kurs spadł o kolejne 12%</strong>.</p>
+
+      <div class="alert alert-info"><strong>Ta analiza zastępuje porównanie Oklo z NuScale z 1 lipca</strong> — pierwsza samodzielna ocena tej spółki w Twoim katalogu.</div>
+
+      <h3>Rozejście, które trzeba wyjaśnić</h3>
+      <p>Oklo osiągnęło w sierpniu <strong>pierwszy stan krytyczny reaktora</strong> w obiekcie izotopowym Groves — jedenaście miesięcy po wbiciu łopaty i 229 dni po rozpoczęciu zasadniczej budowy. To realny, techniczny kamień milowy, którego większość konkurentów nie ma. A kurs jest <strong>36% niżej niż rok temu i 39% poniżej średniej dwustusesyjnej</strong>.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wydarzenie</th><th>Stan</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Pierwszy stan krytyczny (Groves)</strong></td><td>osiągnięty, sierpień 2026</td><td style="color:var(--ocena-kupno)">11 mies. od wbicia łopaty, 229 dni od startu budowy</td></tr>
+          <tr><td><strong>Aurora-INL (75 MWe)</strong></td><td>uruchomienie planowane na <strong>2028</strong></td><td style="color:var(--ocena-kupno)">Zgoda Departamentu Energii na wstępną analizę bezpieczeństwa</td></tr>
+          <tr><td>Aurora-Ohio (1,2 GWe)</td><td>przygotowanie do zgłoszenia w NRC</td><td style="color:var(--ocena-uwaga)">Faza przedwnioskowa</td></tr>
+          <tr><td>Eielson Air Force Base (5 MWe)</td><td>faza przedwnioskowa</td><td>Kontrakt wojskowy na Alasce</td></tr>
+          <tr><td>Płynność na 30 czerwca</td><td style="color:var(--ocena-kupno)">$3,0 mld</td><td style="color:var(--ocena-sprzedaz)">w tym <strong>$1,9 mld z emisji bieżącej w 2026</strong></td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Ostatni wiersz tłumaczy całe to rozejście.</strong> Oklo pozyskało w 2026 roku <strong>1,9 miliarda dolarów przez program emisji bieżącej</strong> — mechanizm, w którym spółka sprzedaje akcje na rynku w sposób ciągły, po cenie rynkowej. Efekt: liczba akcji wzrosła o <strong>29,85% w rok</strong>, a każdy wzrost kursu spotyka się z nową podażą papierów. <strong>Spółka może mieć znakomite wiadomości i wciąż tanieć</strong>, bo sama jest największym sprzedającym. To jest mechanizm, którego nie widać w żadnym komunikacie o kamieniach milowych.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Projekt</th><th>Moc</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Aurora-INL</strong></td><td>75 MWe</td><td style="color:var(--ocena-kupno)">Zgoda DOE, uruchomienie 2028</td></tr>
+          <tr><td><strong>Aurora-Ohio</strong></td><td>1,2 GWe</td><td style="color:var(--ocena-uwaga)">Przed zgłoszeniem do NRC</td></tr>
+          <tr><td>Eielson AFB (Alaska)</td><td>5 MWe + 60 MWth</td><td style="color:var(--ocena-uwaga)">Faza przedwnioskowa</td></tr>
+          <tr><td><strong>Groves — izotopy</strong></td><td>—</td><td style="color:var(--ocena-kupno)">Pierwszy stan krytyczny osiągnięty</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Model: sprzedaż prądu, nie reaktorów</h3>
+      <p>To rozwiązanie ma sens ekonomiczny. Operator centrum danych nie chce być właścicielem reaktora — chce mieć prąd. Oklo zachowuje instalację, bierze na siebie licencjonowanie i eksploatację, a sprzedaje energię na kontrakt. <strong>Przy powodzeniu daje to przychód powtarzalny i przewidywalny przez dekady.</strong></p>
+      <div class="alert alert-warn"><strong>Cena tego modelu jest jednak wysoka i widać ją w rachunkach.</strong> Skoro Oklo zachowuje własność reaktorów, to <strong>samo ponosi cały koszt budowy</strong> — stąd nakłady inwestycyjne 158,9 miliona dolarów i ujemne wolne przepływy 275,8 miliona rocznie, przy przychodach 1,21 miliona. Model sprzedaży reaktorów dawałby gotówkę przy dostawie; model sprzedaży prądu wymaga sfinansowania każdego obiektu z góry i czekania na zwrot przez dwadzieścia lat.</div>
+      <p>Osiągnięcie pierwszego stanu krytycznego w Groves po 229 dniach budowy to jednak dowód, że <strong>spółka potrafi coś zbudować i uruchomić</strong> — a w energetyce jądrowej, gdzie projekty notorycznie się ślizgają, to nie jest oczywiste.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Niedobór mocy dla centrów danych jest realny i udokumentowany</strong> — Caterpillar, którego masz w portfelu, ma z tego tytułu portfel zamówień 72,1 mld dolarów przy czasach realizacji sięgających 2030 roku</li>
+        <li><strong>Sieć energetyczna nie nadąża</strong> — to dokładnie ta luka, którą Oklo chce wypełnić reaktorami przy obiekcie</li>
+        <li><strong>Proces licencyjny NRC jest długi i nieprzewidywalny</strong> — pojawiły się komentarze o wydłużeniu harmonogramu, a to w tej branży najczęstsza przyczyna rozczarowań</li>
+        <li><strong>Wsparcie polityczne dla energetyki jądrowej</strong> — zgoda Departamentu Energii dla Aurora-INL i kontrakt na bazie sił powietrznych pokazują przychylność administracji</li>
+        <li><strong>Konkurencja rozwiązań dostępnych od zaraz</strong> — Caterpillar dostarcza turbiny gazowe <em>dzisiaj</em>, Oklo obiecuje reaktory <em>w 2028</em>; klient potrzebujący mocy w przyszłym roku nie ma wyboru</li>
+      </ul>
+      <div class="alert alert-warn"><strong>Ta ostatnia różnica jest w Twoim portfelu widoczna wprost.</strong> Caterpillar i Oklo rozwiązują ten sam problem — brak prądu dla centrów danych. Caterpillar ma zamówienia na 72 miliardy dolarów i zysk operacyjny 13,94 miliarda. Oklo ma przychód 1,21 miliona i pierwszą elektrownię planowaną na 2028 rok. <strong>Obie pozycje są zakładem na tę samą potrzebę, ale jedna już z niej żyje, a druga dopiero chce.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Stan</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody roczne</td><td style="color:var(--ocena-sprzedaz)">$1,21 mln</td><td>Praktycznie spółka przedprzychodowa</td></tr>
+          <tr><td>Przychód na pracownika</td><td style="color:var(--ocena-sprzedaz)">$5,6 tys.</td><td>Strata na pracownika: $710,6 tys.</td></tr>
+          <tr><td>Zatrudnienie</td><td>215 osób</td><td>Zespół inżynierski, nie handlowy</td></tr>
+          <tr><td>Osoby powiązane</td><td style="color:var(--ocena-kupno)">15,26%</td><td>Instytucje: 44,27%</td></tr>
+          <tr><td><strong>Liczba akcji</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+29,85% r/r</strong></td><td>+3,46% w samym kwartale</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>20,30% wolnego obrotu</strong></td><td>Wzrost z 24,37 do 30,33 mln akcji</td></tr>
+          <tr><td>Pokrycie analityczne</td><td style="color:var(--ocena-kupno)">25 analityków</td><td>Cel $79,88, rekomendacja „kupno”</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Dwadzieścia pięć domów maklerskich śledzi spółkę o przychodach 1,21 miliona dolarów</strong> — to nietypowe i mówi coś o tym, jak poważnie rynek traktuje tę tezę. Dla porównania ASP Isotopes ma trzech analityków, a Arqit zero. Konsensus wskazuje 79,88 dolara, czyli <strong>91,7% powyżej dzisiejszego kursu</strong>.</p>
+      <p style="margin-top:10px">Zderzenie tego z krótką sprzedażą obejmującą 20,30% wolnego obrotu, i to <strong>rosnącą</strong>, daje obraz rynku głęboko podzielonego. Analitycy widzą podwojenie; jedna piąta obrotu obstawia spadek.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 mies.)</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td style="color:var(--ocena-sprzedaz)">$1,21 mln</td><td>Marża brutto 40,41% — na znikomej bazie</td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$217,57 mln</strong></td><td>Marża operacyjna -17 981%</td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td>-$153,32 mln</td><td style="color:var(--ocena-kupno)">Lepszy niż operacyjny — odsetki od $3 mld gotówki</td></tr>
+          <tr><td>Strata netto</td><td>-$152,77 mln</td><td>-$0,93 na akcję</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-sprzedaz)">-$116,92 mln</td><td>Nakłady -$158,90 mln</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$275,82 mln</strong></td><td>-$1,48 na akcję</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Warto zauważyć rzecz nietypową w trzecim wierszu.</strong> Wynik przed opodatkowaniem (-153,32 mln) jest <em>lepszy</em> od operacyjnego (-217,57 mln) o 64 miliony dolarów. To odsetki od trzech miliardów gotówki leżącej na rachunku. <strong>Oklo zarabia dziś na lokowaniu pieniędzy z emisji akcji ponad pięćdziesiąt razy więcej niż na sprzedaży czegokolwiek.</strong> To dobrze obrazuje, na jakim etapie jest ta spółka.</div>
+      <p>Struktura wypalania gotówki jest przy tym zdrowsza, niż mogłoby się wydawać: <strong>ponad połowę stanowią nakłady inwestycyjne</strong> (158,9 mln z 275,8 mln), czyli pieniądze idące w budowę realnych obiektów, a nie w bieżące funkcjonowanie. Dla porównania u Arqit cała strata to koszty operacyjne, a nakłady wynoszą 34 tysiące dolarów.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="alert alert-info"><strong>Uwaga metodologiczna.</strong> Przy przychodach 1,21 miliona dolarów wskaźniki oparte na sprzedaży tracą sens informacyjny — cena do sprzedaży wynosi tu <strong>6 405</strong>. Podaję je dla porządku, ale wycenę opieram na wartości księgowej, gotówce i wartości opcyjnej projektu.</div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $41,66</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$7,75 mld</td><td style="color:var(--ocena-kupno)">EV $5,29 mld — o $2,46 mld niżej dzięki gotówce</td></tr>
+          <tr><td>P/E, Forward P/E</td><td>brak</td><td style="color:var(--ocena-sprzedaz)">Spółka głęboko nierentowna</td></tr>
+          <tr><td>P/S</td><td style="color:var(--ocena-sprzedaz)">6 405×</td><td>EV/Sales 4 370 — liczby bez znaczenia</td></tr>
+          <tr><td><strong>P/B</strong></td><td><strong>2,36×</strong></td><td style="color:var(--ocena-uwaga)">Wartość księgowa $17,69 na akcję</td></tr>
+          <tr><td><strong>Gotówka netto na akcję</strong></td><td style="color:var(--ocena-kupno)"><strong>$13,23</strong></td><td>32% dzisiejszego kursu</td></tr>
+          <tr><td>Wskaźnik bieżącej płynności</td><td style="color:var(--ocena-kupno)"><strong>48,46</strong></td><td>Zadłużenie praktycznie zerowe (D/E 0,00)</td></tr>
+          <tr><td>ROIC vs WACC</td><td style="color:var(--ocena-sprzedaz)">-6,84% vs 10,85%</td><td>Kapitał niszczony, jak u każdej spółki w budowie</td></tr>
+          <tr><td>Piotroski F-Score</td><td style="color:var(--ocena-sprzedaz)"><strong>1 na 9</strong></td><td>Najniżej z całej dzisiejszej serii</td></tr>
+          <tr><td>Konsensus (25 analityków)</td><td style="color:var(--ocena-kupno)">$79,88 · kupno</td><td>+91,7%</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Właściwa wycena: ile płacisz za sam projekt</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Składnik</th><th>Na akcję</th><th>Łącznie</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka netto</td><td>$13,23</td><td>$2,46 mld</td></tr>
+          <tr><td>Wartość księgowa (z gotówką)</td><td>$17,69</td><td>$3,27 mld</td></tr>
+          <tr><td><strong>Premia ponad wartość księgową</strong></td><td><strong>$23,97</strong></td><td><strong>$4,46 mld</strong></td></tr>
+          <tr><td><strong>Kurs</strong></td><td><strong>$41,66</strong></td><td>$7,75 mld</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> kupując dziś akcję Oklo, płacisz 13,23 dolara za gotówkę leżącą na rachunku, kolejne 4,46 dolara za pozostały majątek — i <strong>23,97 dolara za samą obietnicę, że reaktory powstaną i będą sprzedawać prąd</strong>. Łącznie rynek wycenia ten projekt na 4,46 miliarda dolarów, przy pierwszej elektrowni planowanej na 2028 rok. To nie jest wycena absurdalna dla spółki o tak dużym potencjalnym rynku — ale <strong>jest to w całości wartość opcyjna, a nie wartość działającego przedsiębiorstwa</strong>.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$32 – $50</div><div class="fair-value-note">Baza: wartość księgowa $17,69 na akcję powiększona o wartość opcyjną projektu w przedziale $2,5–6 mld, przy uwzględnieniu dalszego rozwodnienia z programu emisji bieżącej rzędu 15–25% rocznie | Konsensus 25 analityków: $79,88 („kupno”) — <strong>znacznie powyżej mojego szacunku</strong>; różnica bierze się stąd, że przypisuję większą wagę rozwodnieniu i dwuletniemu oczekiwaniu na pierwszy przychód | Scenariusz negatywny (opóźnienie licencji NRC, dalsze emisje, zejście ku wartości księgowej): $18–25 | Scenariusz pozytywny (przyspieszenie licencjonowania, kontrakt z dużym operatorem chmury, uruchomienie Aurora-INL zgodnie z planem): $80–95 | Przy $41,66 potencjał od -57% do +116%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>OKLO</th><th>ASPI</th><th>ARQQ</th><th>Caterpillar</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody roczne</td><td style="color:var(--ocena-sprzedaz)">$1,21 mln</td><td>$30,85 mln</td><td>$1,09 mln</td><td style="color:var(--ocena-kupno)">$74,73 mld</td></tr>
+          <tr><td>Marża operacyjna</td><td style="color:var(--ocena-sprzedaz)">-17 981%</td><td>-312%</td><td>-4 617%</td><td style="color:var(--ocena-kupno)">+18,65%</td></tr>
+          <tr><td><strong>Zapas gotówki</strong></td><td style="color:var(--ocena-kupno)"><strong>~11 lat</strong></td><td style="color:var(--ocena-sprzedaz)">0,6 roku</td><td style="color:var(--ocena-sprzedaz)">0,6 roku</td><td>—</td></tr>
+          <tr><td>Zadłużenie / kapitał</td><td style="color:var(--ocena-kupno)">0,00</td><td>0,98</td><td>0,08</td><td>2,33</td></tr>
+          <tr><td>Rozwodnienie r/r</td><td style="color:var(--ocena-sprzedaz)">+29,85%</td><td style="color:var(--ocena-sprzedaz)">+54,91%</td><td style="color:var(--ocena-sprzedaz)">+16,48%</td><td style="color:var(--ocena-kupno)">-2,67%</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>To zestawienie pokazuje, czym Oklo różni się od dwóch pozostałych spekulacyjnych pozycji w Twoim portfelu.</strong> Marża operacyjna jest tu najgorsza z całej trójki — bo przychody są w praktyce zerowe. Ale <strong>zapas gotówki wynosi jedenaście lat wobec sześciu miesięcy u ASP Isotopes i Arqit</strong>, a zadłużenie jest dokładnie zerowe.</p>
+      <div class="alert alert-success"><strong>To zasadnicza różnica jakościowa.</strong> ASPI i ARQQ muszą pozyskać kapitał w ciągu dwóch, trzech kwartałów, żeby przetrwać — będą emitować akcje pod przymusem, na warunkach dyktowanych przez rynek. <strong>Oklo emituje z wyboru</strong>, bo chce budować szybciej, a nie dlatego, że musi. Przy trzech miliardach dolarów płynności i zerowym długu ta spółka po prostu nie zbankrutuje w dającej się przewidzieć przyszłości.</div>
+      <p>Cena tej swobody jest jednak realna i widać ją w ostatnim wierszu: <strong>rozwodnienie 29,85% rocznie</strong>. Nawet jeśli projekt się powiedzie, Twój udział w nim maleje o niemal jedną trzecią rocznie.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka (bilans 12 mies.)</td><td>$2,47 mld</td><td style="color:var(--ocena-kupno)">Spółka podała $3,0 mld płynności na 30 czerwca</td></tr>
+          <tr><td>Zadłużenie</td><td style="color:var(--ocena-kupno)">$3,96 mln</td><td>Praktycznie zerowe, D/E 0,00</td></tr>
+          <tr><td><strong>Gotówka netto</strong></td><td style="color:var(--ocena-kupno)"><strong>+$2,46 mld</strong></td><td>$13,23 na akcję</td></tr>
+          <tr><td><strong>Wskaźnik bieżącej płynności</strong></td><td style="color:var(--ocena-kupno)"><strong>48,46</strong></td><td>Najwyższy, jaki widziałem w tej serii</td></tr>
+          <tr><td>Kapitał własny</td><td>$3,27 mld</td><td>$17,69 na akcję</td></tr>
+          <tr><td>Wypalanie gotówki</td><td style="color:var(--ocena-uwaga)">-$275,82 mln rocznie</td><td style="color:var(--ocena-kupno)">Zapas około 11 lat</td></tr>
+          <tr><td><strong>Emisja bieżąca w 2026</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$1,9 mld</strong></td><td>Główne źródło rozwodnienia i presji na kurs</td></tr>
+          <tr><td>Piotroski F-Score</td><td style="color:var(--ocena-sprzedaz)">1 na 9</td><td>Odzwierciedla brak przychodów i zysku</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Program emisji bieżącej zasługuje na osobne wyjaśnienie, bo to najważniejszy mechanizm w tej spółce.</strong> W przeciwieństwie do klasycznej emisji, ogłaszanej jednorazowo i po ustalonej cenie, emisja bieżąca oznacza, że <strong>spółka sprzedaje akcje na giełdzie codziennie, po cenie rynkowej</strong>. Zebrała tak 1,9 miliarda dolarów w 2026 roku. Konsekwencja jest taka, że <strong>Oklo jest dziś jednym z największych sprzedających własne akcje</strong> — a to nakłada sufit na każde odbicie kursu. Dobre wiadomości nie przekładają się na cenę tak, jak przy spółce, która akcji nie sprzedaje.</div>
+      <p>Trzeba jednak przyznać rzecz oczywistą: <strong>za te pieniądze Oklo kupiło sobie coś, czego nie ma żadna inna spekulacyjna pozycja w Twoim portfelu — czas</strong>. Jedenaście lat zapasu przy zerowym zadłużeniu oznacza, że spółka może spokojnie przechodzić przez proces licencyjny, nawet jeśli ten się wydłuży.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">⚛️</div><div class="catalyst-body"><h4>Pierwszy stan krytyczny osiągnięty</h4><p>W obiekcie Groves, jedenaście miesięcy po wbiciu łopaty i 229 dni po rozpoczęciu zasadniczej budowy. To dowód, że spółka potrafi zbudować i uruchomić reaktor — w branży notorycznych opóźnień to nie jest oczywiste.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏦</div><div class="catalyst-body"><h4>Trzy miliardy dolarów płynności i zero długu</h4><p>Zapas na około jedenaście lat przy obecnym tempie wypalania, wskaźnik bieżącej płynności 48,46. Ta spółka nie zbankrutuje — może spokojnie czekać na licencje.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Dwudziestu pięciu analityków, cel $79,88</h4><p>Bardzo szerokie pokrycie jak na spółkę o przychodach $1,21 mln, z rekomendacją „kupno” i celem 91,7% powyżej dzisiejszej ceny.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏛️</div><div class="catalyst-body"><h4>Wsparcie instytucjonalne i wojskowe</h4><p>Zgoda Departamentu Energii na wstępną analizę bezpieczeństwa dla Aurora-INL, kontrakt na bazie sił powietrznych Eielson, projekt Aurora-Ohio o mocy 1,2 GWe.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚡</div><div class="catalyst-body"><h4>Popyt na moc jest udokumentowany</h4><p>Caterpillar, którego masz w portfelu, ma z tego samego zjawiska portfel zamówień na 72,1 mld dolarów i czasy realizacji sięgające 2030 roku. Rynek istnieje.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">💸</div><div class="catalyst-body"><h4>Emisja bieżąca dławi kurs</h4><p>$1,9 mld pozyskane w 2026, liczba akcji +29,85% r/r. Spółka sprzedaje własne akcje codziennie, przez co dobre wiadomości nie przekładają się na cenę.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Trend jest wyraźnie spadkowy</h4><p>Kurs 39,3% poniżej średniej dwustusesyjnej i 12,6% poniżej pięćdziesięciosesyjnej, minus 36% w skali roku. Krótka sprzedaż wzrosła z 24,4 do 30,3 mln akcji i obejmuje 20,3% wolnego obrotu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🗓️</div><div class="catalyst-body"><h4>Pierwsze przychody najwcześniej w 2028</h4><p>Aurora-INL to horyzont dwuletni, a pozostałe projekty są dopiero w fazie przedwnioskowej. Pojawiły się komentarze o wydłużeniu harmonogramu licencyjnego NRC.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏗️</div><div class="catalyst-body"><h4>Model wymaga finansowania każdego obiektu z góry</h4><p>Sprzedaż prądu zamiast reaktorów oznacza, że Oklo samo płaci za budowę i czeka na zwrot przez dekady. Stąd nakłady $158,9 mln i ujemne przepływy $275,8 mln rocznie.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⏱️</div><div class="catalyst-body"><h4>Konkurencja dostarcza moc już dziś</h4><p>Caterpillar sprzedaje turbiny gazowe teraz, Oklo obiecuje reaktory w 2028. Klient potrzebujący prądu w przyszłym roku nie ma z Oklo o czym rozmawiać.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Podmiot</th><th>Rozwiązanie</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Oklo</strong></td><td>Reaktory małej mocy, sprzedaż prądu</td><td style="color:var(--ocena-uwaga)">Pierwsza elektrownia 2028</td></tr>
+          <tr><td><strong>Caterpillar</strong></td><td>Turbiny gazowe i silniki tłokowe</td><td style="color:var(--ocena-kupno)">Masz w portfelu — zamówienia $72,1 mld już dziś</td></tr>
+          <tr><td><strong>NuScale (SMR)</strong></td><td>Reaktory modułowe</td><td>Bezpośredni rywal, dłuższa historia licencyjna</td></tr>
+          <tr><td><strong>Bloom Energy</strong></td><td>Ogniwa paliwowe</td><td>Masz w obserwowanych — rozwiązanie dostępne od zaraz</td></tr>
+          <tr><td>ASP Isotopes</td><td>Paliwo HALEU dla reaktorów nowej generacji</td><td style="color:var(--ocena-uwaga)">Masz w portfelu — dostawca, nie konkurent</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>W Twoim portfelu ta teza występuje w czterech odsłonach naraz i warto zobaczyć je razem.</strong> <strong>Caterpillar (2,9%)</strong> zarabia na niej dziś turbinami gazowymi. <strong>Oklo (2,1%)</strong> obiecuje rozwiązać ją reaktorami w 2028. <strong>ASP Isotopes (1,8%)</strong> chce dostarczać paliwo do tych reaktorów, mając zakład planowany na 2027. <strong>Bloom Energy</strong> masz w obserwowanych. Razem to około <strong>6,8% portfela na jednej tezie o niedoborze energii dla centrów danych</strong> — przy czym tylko jedna z tych spółek ma z niej realne przychody.</div>
+      <p>Warto też zauważyć zależność między dwiema Twoimi pozycjami: <strong>ASP Isotopes potrzebuje odbiorców paliwa HALEU, a Oklo potrzebuje dostawców</strong>. Jeśli licencjonowanie reaktorów nowej generacji się opóźni, ucierpią obie naraz.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$41,66</strong></td><td style="color:var(--ocena-sprzedaz)">-36,31% w 52 tygodnie</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$47,64</td><td style="color:var(--ocena-sprzedaz)">Kurs 12,6% poniżej</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$68,60</td><td style="color:var(--ocena-sprzedaz)">Kurs <strong>39,3% poniżej</strong> — najgłębiej z całej serii</td></tr>
+          <tr><td>RSI (14)</td><td>44,40</td><td>Neutralnie — brak wyprzedania mimo spadków</td></tr>
+          <tr><td>Beta</td><td>1,20</td><td>Umiarkowana, niżej niż przy ASPI (3,62)</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>20,30% wolnego obrotu</strong></td><td>Wzrost z 24,37 do 30,33 mln akcji</td></tr>
+          <tr><td>Średni wolumen</td><td>9,2 mln akcji</td><td style="color:var(--ocena-kupno)">Bardzo płynny</td></tr>
+          <tr><td><strong>Wartość księgowa</strong></td><td>$17,69</td><td style="color:var(--ocena-uwaga)">Twarde wsparcie fundamentalne</td></tr>
+          <tr><td>Gotówka netto</td><td>$13,23</td><td>Dolna granica wyceny w scenariuszu skrajnym</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Kontrakt z dużym operatorem chmury</li><li>Przyspieszenie licencjonowania w NRC</li><li>Domykanie krótkich pozycji (20,3% obrotu)</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Kolejne transze emisji bieżącej</li><li>Opóźnienie Aurora-INL poza 2028</li><li>Zejście ku wartości księgowej $17,69</li></ul></div>
+      </div>
+      <p><strong>Trzydzieści dziewięć procent poniżej średniej dwustusesyjnej to najgłębsze odchylenie ze wszystkich ośmiu spółek, jakie w tej serii analizowałem.</strong> Niepokoi przy tym, że <strong>RSI wynosi 44,40, czyli nie ma tu wyprzedania</strong>, które zapowiadałoby odbicie techniczne. To nie jest panika — to spokojna, systematyczna przecena, w dużej mierze napędzana podażą akcji z samej spółki.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Kurs 39% poniżej średniej dwustusesyjnej bez oznak wyprzedania, emisja bieżąca trwa, krótka sprzedaż rośnie. Brak powodu, by trend miał się odwrócić sam z siebie.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Pierwsze przychody dopiero w 2028. Do tego czasu wartość spółki zależy od kamieni milowych regulacyjnych, a rozwodnienie zjada 20–30% udziału rocznie.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">SPEKULACYJNE KUPNO</div><div class="rating-note">Trzy miliardy płynności, zerowy dług, pierwszy stan krytyczny osiągnięty i realny rynek. Jeśli reaktory ruszą, dzisiejsza wycena okaże się niska — ale to horyzont pięcioletni.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: 1–2% portfela.</strong> Masz 1,9% po ostatnich spadkach — to poziom właściwy dla spółki bez przychodów, nie zmniejszałbym go dalej ani nie zwiększał</li>
+        <li><strong>Nie uśredniać w dół.</strong> Jesteś na minusie 27%, ale przy rozwodnieniu 29,85% rocznie dokupowanie oznacza kupowanie coraz mniejszego udziału w tej samej spółce</li>
+        <li><strong>Trzymać jako opcję, nie jako inwestycję.</strong> Ta pozycja ma sens wyłącznie jako niewielki zakład na scenariusz, który rozstrzygnie się po 2028 roku</li>
+        <li><strong>Dokupienie:</strong> tylko poniżej $25, czyli w okolicach wartości księgowej powiększonej o niewielką premię</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $75–85, gdyby licencjonowanie przyspieszyło</li>
+        <li><strong>Jedna liczba do śledzenia:</strong> <strong>liczba akcji</strong>. Dziś 186,02 mln po wzroście o 29,85% w rok. Zatrzymanie emisji bieżącej byłoby najsilniejszym sygnałem, że zarząd uważa kurs za zbyt niski — i zdjęłoby sufit z ceny</li>
+        <li><strong>Wyjście z tezy:</strong> przesunięcie Aurora-INL poza 2028, formalne opóźnienie w NRC albo przyspieszenie tempa emisji akcji</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$32 – $50</div><div class="fair-value-note">Scenariusz negatywny: $18–25 | Scenariusz pozytywny: $80–95 | Konsensus 25 analityków: $79,88 — znacznie powyżej mojego szacunku</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by trzymać</h4><ul>
+          <li><strong>Pierwszy stan krytyczny osiągnięty</strong> po 229 dniach budowy — dowód wykonalności, którego większość konkurentów nie ma</li>
+          <li><strong>$3,0 mld płynności przy zerowym długu</strong> i zapasie na jedenaście lat. Ta spółka nie zbankrutuje czekając na licencje</li>
+          <li><strong>25 analityków z celem $79,88</strong> i realny, udokumentowany rynek — Caterpillar ma z tej samej potrzeby zamówienia na $72 mld</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by nie dokupywać</h4><ul>
+          <li><strong>Emisja bieżąca $1,9 mld w 2026</strong>, rozwodnienie +29,85% r/r. Spółka jest największym sprzedającym własne akcje, co nakłada sufit na kurs</li>
+          <li><strong>Pierwsze przychody najwcześniej w 2028</strong>, a przy $1,21 mln sprzedaży rocznej Oklo zarabia dziś pięćdziesiąt razy więcej na odsetkach niż na działalności</li>
+          <li><strong>Kurs 39,3% pod średnią dwustusesyjną</strong> bez wyprzedania (RSI 44,4), przy krótkiej sprzedaży rosnącej do 20,3% obrotu</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> przesunięcie Aurora-INL poza 2028 albo przyspieszenie emisji akcji → zejście ku wartości księgowej, $18–25.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> kontrakt z dużym operatorem chmury lub wstrzymanie emisji bieżącej → droga ku $80–95.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Oklo jest przypadkiem, w którym <strong>spółka dowozi, a kurs spada</strong> — i warto zrozumieć, dlaczego, bo powód nie jest oczywisty. W sierpniu firma osiągnęła <strong>pierwszy stan krytyczny reaktora</strong> w obiekcie Groves, jedenaście miesięcy po wbiciu łopaty i 229 dni po rozpoczęciu zasadniczej budowy. Aurora-INL o mocy 75 MWe dostała zgodę Departamentu Energii na wstępną analizę bezpieczeństwa i celuje w uruchomienie w 2028 roku. Do tego dochodzą projekt Aurora-Ohio o mocy 1,2 GWe i kontrakt na bazie sił powietrznych. W energetyce jądrowej, gdzie harmonogramy notorycznie się ślizgają, to są realne osiągnięcia.</p>
+
+      <p class="sum-lead" style="border-color:var(--ocena-sprzedaz)">A kurs jest <strong>36% niżej niż rok temu i 39% poniżej średniej dwustusesyjnej</strong>. Wyjaśnienie leży w jednej pozycji sprawozdania: spółka pozyskała w 2026 roku <strong>1,9 miliarda dolarów przez program emisji bieżącej</strong>, czyli sprzedając własne akcje na giełdzie w sposób ciągły, po cenie rynkowej. Liczba akcji wzrosła przez to o <strong>29,85% w ciągu roku</strong>. Oklo jest dziś jednym z największych sprzedających własne papiery — i dopóki tak jest, dobre wiadomości nie przekładają się na cenę, bo każde odbicie spotyka się z nową podażą.</p>
+
+      <p class="sum-lead">Trzeba jednak oddać tej spółce coś, czego nie mają dwie pozostałe spekulacyjne pozycje w Twoim portfelu. <strong>Oklo ma trzy miliardy dolarów płynności, zerowe zadłużenie i zapas gotówki na jedenaście lat</strong> przy wskaźniku bieżącej płynności 48,46. ASP Isotopes i Arqit mają po sześć miesięcy i będą emitować akcje pod przymusem. <strong>Oklo emituje z wyboru</strong> — bo chce budować szybciej, a nie dlatego, że inaczej upadnie. To zasadnicza różnica jakościowa, nawet jeśli krótkoterminowy efekt dla kursu jest podobny.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Technologia działa.</strong> Pierwszy stan krytyczny osiągnięty po 229 dniach budowy — dowód wykonalności.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Nie ma ryzyka niewypłacalności.</strong> $3,0 mld płynności, zero długu, zapas na 11 lat, płynność bieżąca 48,46.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Rynek jest realny.</strong> Caterpillar ma z tej samej potrzeby portfel zamówień na $72,1 mld i czasy realizacji do 2030 roku.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Licencje z NRC w terminie.</strong> Aurora-INL celuje w 2028; pojawiły się komentarze o wydłużeniu harmonogramu.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Pierwszy duży kontrakt komercyjny.</strong> Aurora-Ohio i Eielson są dopiero w fazie przedwnioskowej.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Ochrona udziału akcjonariusza.</strong> +29,85% akcji rocznie z emisji bieżącej. Nawet przy powodzeniu projektu Twój udział szybko maleje.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>Sierpień 2026</td><td>Pierwszy stan krytyczny w Groves</td><td>Osiągnięty — dowód, że spółka potrafi budować i uruchamiać</td></tr>
+            <tr><td>Na bieżąco</td><td><strong>Tempo emisji bieżącej</strong></td><td>Najważniejsza zmienna dla kursu w najbliższych kwartałach</td></tr>
+            <tr><td>Na bieżąco</td><td>Postępy licencyjne w NRC</td><td>Aurora-Ohio i Eielson przed zgłoszeniem</td></tr>
+            <tr><td><strong>2028</strong></td><td>Planowane uruchomienie Aurora-INL</td><td>Pierwszy realny przychód ze sprzedaży prądu</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Liczba akcji</strong></td><td>186,02 mln (+29,85% r/r)</td><td>przyspieszenie emisji</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Kurs vs wartość księgowa</td><td>$41,66 wobec $17,69</td><td>zejście poniżej $25</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Krótka sprzedaż</td><td>20,30% obrotu, rośnie</td><td>powyżej 25%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Harmonogram Aurora-INL</td><td>2028</td><td>każde przesunięcie</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td><strong>Płynność</strong></td><td>$3,0 mld, zapas ~11 lat</td><td>poniżej 4 lat</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Zadłużenie</td><td>$3,96 mln, D/E 0,00</td><td>istotny wzrost</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji: 1–2% portfela.</strong> Masz 1,9% — właściwy poziom dla spółki bez przychodów</li>
+          <li><strong>Trzymać jako opcję, nie jako inwestycję.</strong> Rozstrzygnięcie przyjdzie po 2028 roku</li>
+          <li><strong>Nie uśredniać w dół</strong> mimo straty 27% — przy rozwodnieniu 29,85% rocznie dokupujesz coraz mniejszy udział</li>
+          <li><strong>Dokupienie:</strong> tylko poniżej $25, w okolicach wartości księgowej z niewielką premią</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> liczba akcji. Wstrzymanie emisji bieżącej zdjęłoby sufit z kursu</li>
+          <li><strong>Uwaga portfelowa:</strong> Caterpillar, Oklo i ASP Isotopes to razem około 6,8% portfela na jednej tezie o niedoborze energii — a tylko Caterpillar ma z niej realne przychody</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">⚖️ NEUTRALNA — spółka dowozi, ale sama dławi własny kurs</div>
+        <p>Oklo jest lepszą spekulacją niż ASP Isotopes czy Arqit, i to z jednego konkretnego powodu: <strong>ma trzy miliardy dolarów, zero długu i jedenaście lat czasu</strong>. Do tego dowiozła coś namacalnego — pierwszy stan krytyczny reaktora po 229 dniach budowy. Rynek, o który walczy, jest realny, co najlepiej widać po portfelu zamówień Caterpillara.</p>
+        <p>Problem polega na tym, że <strong>spółka sama jest największą przeszkodą dla własnego kursu</strong>. Pozyskała 1,9 miliarda dolarów przez emisję bieżącą, zwiększając liczbę akcji o 29,85% w rok. Dopóki ten program trwa, każde odbicie spotyka się z nową podażą papierów — i to tłumaczy, dlaczego spółka z realnymi osiągnięciami jest 39% poniżej średniej dwustusesyjnej.</p>
+        <p><strong>Trzymać w obecnej wielkości, nie uśredniać w dół, traktować jako opcję na 2028 rok, a nie jako inwestycję na najbliższe kwartały.</strong> Jeżeli zarząd wstrzyma emisję bieżącą, będzie to najsilniejszy możliwy sygnał, że uważa akcje za niedowartościowane — i wtedy warto wrócić do tej tezy.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$32–50</b></div>
+          <div><span>Scenariusz negatywny</span><b>$18–25</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$80–95</b></div>
+          <div><span>Sugerowana pozycja</span><b>1–2% portfela</b></div>
+          <div><span>Pierwszy przychód</span><b>2028 (Aurora-INL)</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 21 sierpnia 2026 | Cena: $41,66 (zamknięcie 20.08.2026) | Pierwsza samodzielna analiza OKLO — zastępuje porównanie z NuScale z 1 lipca | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 21.08.2026</strong>, Oklo IR (wyniki Q2 2026, 7 sierpnia) | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
