@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROKU — Roku, Inc. | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: ROKU</div>
+    <div class="company-name">Roku, Inc.</div>
+    <div class="company-sub">Platforma telewizji strumieniowej · reklama i subskrypcje · <strong>w trakcie przejęcia przez Fox Corporation</strong> · San Jose</div>
+    <div class="header-meta">
+      <span class="meta-tag">Przejęcie po $160,00</span>
+      <span class="meta-tag">Do domknięcia +1,5%</span>
+      <span class="meta-tag">Ryzyko zerwania -24% do -30%</span>
+      <span class="meta-tag">RSI 78,1</span>
+      <div class="price-display">
+        <div class="price-main">$157,68</div>
+        <div class="price-sub">zamknięcie 14.08.2026 | +79% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Konsument i platformy</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-sprzedaz" data-ocena="SPRZEDAŻ — cena już zawiera przejęcie, zostało +1,5% przy ryzyku -25%">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">SPRZEDAŻ</span><span class="rb-qual">nie z powodu spółki, tylko ceny</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$150 – $160</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-sprzedaz)">-5% do +1%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Domknięcie transakcji</span><b>I połowa 2027</b><em>wymaga zgód regulatora</em></div>
+    <div class="rb-right">Pozycja 0–1% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (14.08.2026)</div><div class="metric-value">$157,68</div><div class="metric-detail">Wartość nominalna transakcji: $160,00</div></div>
+    <div class="metric-card"><div class="metric-label">Pozostały potencjał</div><div class="metric-value red">+1,5%</div><div class="metric-detail">W horyzoncie do 12 miesięcy</div></div>
+    <div class="metric-card"><div class="metric-label">Ryzyko zerwania</div><div class="metric-value red">-24% do -30%</div><div class="metric-detail">Powrót do wyceny samodzielnej</div></div>
+    <div class="metric-card"><div class="metric-label">Struktura zapłaty</div><div class="metric-value">$96 + 0,9693</div><div class="metric-detail">Gotówka plus akcje FOX klasy A</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">$1,35 mld</div><div class="metric-detail">+22% r/r | reklama +25%, subskrypcje +26%</div></div>
+    <div class="metric-card"><div class="metric-label">ROIC vs koszt kapitału</div><div class="metric-value green">36,0% vs 15,2%</div><div class="metric-detail">Biznes jest naprawdę dobry</div></div>
+    <div class="metric-card"><div class="metric-label">RSI (14)</div><div class="metric-value red">78,10</div><div class="metric-detail">38% powyżej średniej 200-sesyjnej</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (26 analityków)</div><div class="metric-value">$162,55</div><div class="metric-detail">+3,1% — czyli mniej więcej cena transakcji</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+
+      <div class="alert alert-danger"><strong>Ta analiza wygląda inaczej niż wszystkie pozostałe, bo Roku nie jest już zwykłą spółką giełdową.</strong> 15 czerwca 2026 <strong>Fox Corporation ogłosił przejęcie Roku po 160 dolarów za akcję</strong> w transakcji gotówkowo-akcyjnej wycenianej na około 22 miliardy dolarów. Umowa jest wiążąca i została jednogłośnie zatwierdzona przez obie rady dyrektorów. To znaczy, że <strong>kurs akcji nie odzwierciedla już perspektyw biznesu, tylko prawdopodobieństwo domknięcia transakcji</strong> — i wszystkie wskaźniki wyceny trzeba czytać przez ten pryzmat.</div>
+
+      <h3>Warunki transakcji</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Element</th><th>Warunek</th></tr></thead>
+        <tbody>
+          <tr><td>Zapłata za akcję</td><td><strong>$96,00 gotówki + 0,9693 akcji FOX klasy A</strong></td></tr>
+          <tr><td>Wartość nominalna</td><td><strong>$160,00</strong> — część akcyjna wyceniona na $64,00 przy kursie odniesienia FOXA $66,03</td></tr>
+          <tr><td>Cena odniesienia</td><td>Średnia ważona wolumenem z 10 sesji do 10 czerwca 2026</td></tr>
+          <tr><td>Wartość transakcji</td><td>około $22 mld wartości przedsiębiorstwa</td></tr>
+          <tr><td>Struktura po połączeniu</td><td>Akcjonariusze FOX ok. 73%, akcjonariusze Roku ok. 27%</td></tr>
+          <tr><td>Zgody rad dyrektorów</td><td style="color:var(--ocena-kupno)">Jednogłośne po obu stronach</td></tr>
+          <tr><td><strong>Termin domknięcia</strong></td><td><strong>I połowa 2027</strong> — wymaga zgód akcjonariuszy i regulatorów</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Co to znaczy przy dzisiejszym kursie</h3>
+      <p>Kurs 157,68 dolara implikuje cenę akcji FOX na poziomie <strong>63,63 dolara</strong> — o 3,6% poniżej ceny odniesienia. Innymi słowy rynek wycenia transakcję jako niemal pewną, zostawiając niewielki dyskont na ryzyko i na czas oczekiwania.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Kurs FOXA w dniu domknięcia</th><th>Otrzymasz za akcję ROKU</th><th>Wobec dzisiejszego kursu</th></tr></thead>
+        <tbody>
+          <tr><td>$55,00</td><td>$149,31</td><td style="color:var(--ocena-sprzedaz)">-5,3%</td></tr>
+          <tr><td>$60,00</td><td>$154,16</td><td style="color:var(--ocena-sprzedaz)">-2,2%</td></tr>
+          <tr><td>$63,63 (implikowany dziś)</td><td>$157,68</td><td>0,0%</td></tr>
+          <tr><td><strong>$66,03 (cena odniesienia)</strong></td><td><strong>$160,00</strong></td><td style="color:var(--ocena-kupno)"><strong>+1,5%</strong></td></tr>
+          <tr><td>$70,00</td><td>$163,85</td><td style="color:var(--ocena-kupno)">+3,9%</td></tr>
+          <tr><td>$75,00</td><td>$168,70</td><td style="color:var(--ocena-kupno)">+7,0%</td></tr>
+        </tbody>
+      </table></div>
+      <p>Twoja pozycja jest na plusie <strong>163%</strong> (30 akcji po średniej 60 dolarów). To jeden z najlepszych wyników w portfelu — i właśnie dlatego warto policzyć, ile jeszcze zostało do wzięcia.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Opis</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Platforma</strong></td><td>Ekran główny, reklama, subskrypcje — źródło zysku</td><td style="color:var(--ocena-kupno)">$1,22 mld w Q2, +25% r/r, marża brutto 53,0%</td></tr>
+          <tr><td><strong>Reklama</strong></td><td>Sprzedaż powierzchni reklamowej w telewizji strumieniowej</td><td style="color:var(--ocena-kupno)">$673 mln, +25%, marża brutto 62,4% (+650 pb r/r)</td></tr>
+          <tr><td><strong>Subskrypcje</strong></td><td>Rozliczanie abonamentów innych serwisów</td><td style="color:var(--ocena-kupno)">$548 mln, +26% r/r</td></tr>
+          <tr><td>Urządzenia</td><td>Odtwarzacze i telewizory marki Roku</td><td style="color:var(--ocena-uwaga)">Sprzedawane niemal po koszcie — narzędzie akwizycji</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — ekran startowy w połowie amerykańskich domów</h3>
+      <p>Roku sprzedaje sprzęt niemal bez zarobku, żeby zdobyć <strong>kontrolę nad ekranem startowym telewizora</strong>. Kiedy już tam jest, zarabia na reklamie i na pośrednictwie w subskrypcjach. W Stanach Zjednoczonych <strong>ekran startowy Roku jest używany w ponad połowie gospodarstw domowych z szerokopasmowym internetem</strong>, a łączny czas oglądania sięgnął 37,9 miliarda godzin kwartalnie.</p>
+      <div class="alert alert-info"><strong>To właśnie ta pozycja jest przedmiotem transakcji.</strong> Fox nie kupuje producenta sprzętu ani serwisu z filmami — kupuje <strong>dystrybucję</strong>: miejsce, w którym widz zaczyna wybierać, co obejrzeć. Dla właściciela Tubi i kanałów sportowych to oznacza możliwość ustawienia własnych treści na najlepszym miejscu. Po połączeniu udział w oglądalności telewizyjnej przewyższyłby Netflixa.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Konsolidacja rynku telewizji strumieniowej</strong> — transakcja Fox–Roku jest jej kolejnym etapem; według doniesień Netflix również rozważał to przejęcie</li>
+        <li><strong>Przenoszenie budżetów reklamowych do telewizji strumieniowej</strong> — to napędza wzrost reklamy o 25% i rozszerzenie marży o 650 punktów bazowych rok do roku</li>
+        <li><strong>Ryzyko antymonopolowe</strong> — senator Elizabeth Warren i inni kongresmeni Partii Demokratycznej publicznie ostrzegli przed konsekwencjami tej fuzji dla konkurencji</li>
+        <li><strong>Możliwość kontroferty</strong> — analitycy Barron's sugerowali, że Netflix albo Disney mogliby przebić ofertę Foxa; to jedyne realne źródło zwyżki powyżej ceny transakcji</li>
+        <li><strong>Ryzyko kursu FOXA</strong> — 40% zapłaty stanowią akcje Foxa, więc ich cena bezpośrednio przekłada się na to, co dostaniesz</li>
+      </ul>
+      <div class="alert alert-warn"><strong>Ryzyko regulacyjne jest tu najważniejszym czynnikiem i trudno je precyzyjnie wycenić.</strong> Połączenie Foxa z Roku oznacza, że właściciel kanałów telewizyjnych i serwisu Tubi przejmuje kontrolę nad ekranem startowym w ponad połowie amerykańskich domów. Zastrzeżenia zgłaszane przez kongresmenów dotyczą dokładnie tego: <strong>możliwości faworyzowania własnych treści na cudzych telewizorach</strong>. Dyskont 1,5% wobec ceny transakcji pokazuje, że rynek uznaje to ryzyko za niewielkie — ale nie zerowe.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Stan</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td>Godziny oglądania</td><td>37,9 mld kwartalnie</td><td style="color:var(--ocena-kupno)">+7% r/r</td></tr>
+          <tr><td>Zasięg w USA</td><td>ponad połowa gospodarstw z internetem</td><td style="color:var(--ocena-kupno)">Rdzeń wartości dla Foxa</td></tr>
+          <tr><td>Przychód na pracownika</td><td><strong>$1,45 mln</strong></td><td style="color:var(--ocena-kupno)">Zaledwie 3 600 pracowników</td></tr>
+          <tr><td>Udział instytucji</td><td>81,52%</td><td>Osoby powiązane: 11,51%</td></tr>
+          <tr><td>Liczba akcji</td><td style="color:var(--ocena-uwaga)">+5,13% r/r</td><td>Wynagrodzenia w akcjach</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-uwaga)"><strong>8,12% wolnego obrotu</strong></td><td>Wzrost z 8,25 do 10,64 mln akcji</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Wzrost krótkiej sprzedaży wart jest odnotowania, choć jego interpretacja nie jest jednoznaczna.</strong> Liczba akcji sprzedanych na krótko wzrosła z 8,25 do 10,64 miliona <em>po</em> ogłoszeniu transakcji. Przy przejęciach gotówkowo-akcyjnych część tego ruchu to zwykle zabezpieczenia funduszy arbitrażowych, ale te zazwyczaj skracają akcje <em>przejmującego</em>, nie przejmowanego. <strong>Rosnąca krótka pozycja w samym Roku sugeruje raczej zakłady na to, że transakcja się nie domknie</strong> — albo że domknie się po niższej efektywnej wartości.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026 / 12 mies.</th><th>Dynamika</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody Q2</td><td><strong>$1,35 mld</strong></td><td style="color:var(--ocena-kupno)">+22% r/r</td></tr>
+          <tr><td>Przychody platformy</td><td>$1,22 mld</td><td style="color:var(--ocena-kupno)">+25% r/r, marża brutto 53,0%</td></tr>
+          <tr><td>Reklama</td><td>$673 mln</td><td style="color:var(--ocena-kupno)">+25%, marża brutto 62,4% (+650 pb r/r)</td></tr>
+          <tr><td>Subskrypcje</td><td>$548 mln</td><td style="color:var(--ocena-kupno)">+26% r/r</td></tr>
+          <tr><td>Zysk netto Q2</td><td>$164 mln</td><td style="color:var(--ocena-kupno)">EPS $1,08 wobec $0,07 rok wcześniej</td></tr>
+          <tr><td>Skorygowana EBITDA Q2</td><td>$254 mln</td><td style="color:var(--ocena-kupno)">Rekord</td></tr>
+          <tr><td>Przychody 12 mies.</td><td>$5,21 mld</td><td>+18,5%</td></tr>
+          <tr><td><strong>Wolne przepływy 12 mies.</strong></td><td style="color:var(--ocena-kupno)"><strong>$709,91 mln</strong></td><td>Rekord, marża 13,63%</td></tr>
+          <tr><td><strong>Prognoza spółki</strong></td><td style="color:var(--ocena-uwaga)"><strong>wstrzymana</strong></td><td>Ze względu na trwającą transakcję</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Trzeba uczciwie powiedzieć: to bardzo dobry kwartał.</strong> Przychody wzrosły o 22%, reklama o 25% przy marży brutto rozszerzonej o 650 punktów bazowych do 62,4%, subskrypcje o 26%, a zysk netto, skorygowana EBITDA i wolne przepływy osiągnęły rekordowe poziomy. Zysk na akcję wzrósł z 7 centów do 1,08 dolara. <strong>Gdyby nie transakcja, byłby to argument za trzymaniem tej spółki jeszcze długo.</strong></div>
+      <p>Zwróć jednak uwagę na ostatni wiersz: <strong>spółka wstrzymała publikowanie prognoz ze względu na trwające przejęcie</strong>. To formalne potwierdzenie tego, o czym mówi cała ta analiza — Roku przestało być spółką, którą wycenia się na podstawie własnych perspektyw.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="alert alert-info"><strong>Uwaga metodologiczna.</strong> Poniższe wskaźniki podaję dla porządku, ale <strong>w sytuacji trwającego przejęcia mają one drugorzędne znaczenie</strong>. Kurs nie jest wypadkową oczekiwań co do zysków Roku, tylko funkcją ceny transakcji, kursu akcji Foxa i prawdopodobieństwa domknięcia. Wskaźnik PEG na poziomie 171 jest tego dobrą ilustracją — to liczba matematycznie poprawna i całkowicie bezużyteczna.</div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $157,68</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$23,40 mld</td><td style="color:var(--ocena-kupno)">EV $21,32 mld — niżej, bo gotówka netto</td></tr>
+          <tr><td>P/E bieżące</td><td>67,83×</td><td style="color:var(--ocena-sprzedaz)">EPS $2,32</td></tr>
+          <tr><td>Forward P/E</td><td>51,40×</td><td style="color:var(--ocena-sprzedaz)">Wysoko, ale nieistotne przy przejęciu</td></tr>
+          <tr><td>PEG</td><td>171,33</td><td style="color:var(--ocena-uwaga)">Wskaźnik pozbawiony sensu informacyjnego</td></tr>
+          <tr><td>P/S</td><td>4,49× (forward 3,93×)</td><td>Umiarkowanie</td></tr>
+          <tr><td><strong>P/FCF</strong></td><td><strong>32,97×</strong></td><td style="color:var(--ocena-uwaga)">EV/FCF 30,03 — najsensowniejsza miara</td></tr>
+          <tr><td>EV/EBITDA</td><td>36,82×</td><td style="color:var(--ocena-sprzedaz)">Wysoko</td></tr>
+          <tr><td><strong>ROIC vs WACC</strong></td><td style="color:var(--ocena-kupno)"><strong>36,00% vs 15,19%</strong></td><td>Przewaga 20,8 pkt proc. — świetnie</td></tr>
+          <tr><td>Altman Z-Score</td><td style="color:var(--ocena-kupno)"><strong>6,77</strong></td><td>Najwyżej ze wszystkich dzisiejszych analiz</td></tr>
+          <tr><td>Piotroski F-Score</td><td style="color:var(--ocena-kupno)">7 na 9</td><td>Bardzo dobrze</td></tr>
+          <tr><td>Konsensus (26 analityków)</td><td>$162,55</td><td style="color:var(--ocena-uwaga)">+3,1% — zbieżny z ceną transakcji</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Właściwa wycena: rachunek transakcyjny, nie mnożnikowy</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Wartość dla akcjonariusza</th><th>Wobec $157,68</th><th>Prawdopodobieństwo wg rynku</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Domknięcie po cenie nominalnej</strong></td><td>$160,00</td><td style="color:var(--ocena-kupno)">+1,5%</td><td>wysokie — stąd dyskont tylko 1,5%</td></tr>
+          <tr><td>Domknięcie przy słabszym FOXA ($60)</td><td>$154,16</td><td style="color:var(--ocena-sprzedaz)">-2,2%</td><td>realne — 40% zapłaty to akcje</td></tr>
+          <tr><td><strong>Zerwanie transakcji</strong></td><td>$110–125</td><td style="color:var(--ocena-sprzedaz)"><strong>-24% do -30%</strong></td><td>niskie, ale niezerowe</td></tr>
+          <tr><td>Kontroferta (Netflix, Disney)</td><td>$175–190</td><td style="color:var(--ocena-kupno)">+11% do +21%</td><td>spekulacja prasowa</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> trzymając dziś akcje Roku, grasz o <strong>1,5% zysku w horyzoncie do dwunastu miesięcy</strong>, ryzykując <strong>od 24 do 30% straty</strong>, gdyby transakcja upadła. W ujęciu rocznym te 1,5% oznacza zwrot poniżej dwóch procent — mniej niż na obligacjach skarbowych, przy nieporównywalnie wyższym ryzyku. <strong>Taka asymetria ma sens wyłącznie dla funduszy arbitrażowych</strong>, które zabezpieczają pozycję krótką sprzedażą akcji Foxa i robią to na dziesiątkach transakcji naraz, licząc na średnią.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value</div><div class="fair-value-range">$150 – $160</div><div class="fair-value-note">Baza: wartość transakcji $96,00 gotówki plus 0,9693 akcji FOX klasy A, przy kursie FOXA w przedziale $56–66, skorygowana o czas oczekiwania do I połowy 2027 | Konsensus 26 analityków: $162,55 — zasadniczo cena transakcji | <strong>Wycena samodzielna, gdyby transakcja upadła: $110–125</strong> — na podstawie 20–25× wolnych przepływów $709,91 mln, czyli poziomu sprzed ogłoszenia | Scenariusz kontroferty: $175–190 | Przy $157,68 potencjał od -30% do +21%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Poziom (12 mies.)</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Brutto</td><td>45,50%</td><td style="color:var(--ocena-kupno)">W samej platformie 53,0%, w reklamie 62,4%</td></tr>
+          <tr><td>Operacyjna</td><td style="color:var(--ocena-uwaga)">5,78%</td><td>Obciążona wynagrodzeniami w akcjach</td></tr>
+          <tr><td>Netto</td><td>6,82%</td><td>Stopa podatkowa tylko 8,40%</td></tr>
+          <tr><td>EBITDA</td><td>11,12%</td><td>Amortyzacja $277,93 mln</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>13,63%</strong></td><td>Wyżej niż marża operacyjna</td></tr>
+          <tr><td><strong>ROIC</strong></td><td style="color:var(--ocena-kupno)"><strong>36,00%</strong></td><td>Przy koszcie kapitału 15,19%</td></tr>
+          <tr><td>Nakłady inwestycyjne</td><td style="color:var(--ocena-kupno)">$9,13 mln</td><td>0,18% przychodów — model bardzo lekki</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Nakłady inwestycyjne w wysokości 9,13 miliona dolarów przy przychodach 5,21 miliarda to liczba, którą warto zapamiętać.</strong> Dla porównania Amazon wydaje 173 miliardy, Sibanye 1,26 miliarda, a CoreWeave 20,57 miliarda. Roku prawie nie potrzebuje kapitału, żeby rosnąć — stąd wolne przepływy 709,91 miliona przy marży operacyjnej zaledwie 5,78%. <strong>Różnica między tymi dwiema miarami to głównie amortyzacja i wynagrodzenia w akcjach</strong>, czyli koszty księgowe, a nie gotówkowe.</p>
+      <div class="alert alert-success"><strong>Zwrot z zainwestowanego kapitału 36,00% przy jego koszcie 15,19% to druga najlepsza relacja, jaką dziś widziałem</strong> — po NVIDII, a przed Caterpillarem i Sibanye. Do tego wskaźnik Altmana 6,77 i Piotroski 7 na 9, oba najwyższe z całej dzisiejszej serii. <strong>Fox nie kupuje spółki w kłopotach — kupuje bardzo dobry biznes</strong>, i to jest właśnie powód, dla którego cała ta analiza kończy się rekomendacją sprzedaży: dobra spółka po dobrej cenie to nie to samo co dobra inwestycja.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$2,56 mld</td><td style="color:var(--ocena-kupno)">11% kapitalizacji</td></tr>
+          <tr><td>Zadłużenie</td><td>$474,12 mln</td><td style="color:var(--ocena-kupno)">Gotówka netto <strong>+$2,08 mld</strong> ($14,04 na akcję)</td></tr>
+          <tr><td>Dług / kapitał własny</td><td>0,17</td><td style="color:var(--ocena-kupno)">Bardzo nisko</td></tr>
+          <tr><td>Pokrycie odsetek</td><td>142,55</td><td style="color:var(--ocena-kupno)">Odsetki bez znaczenia</td></tr>
+          <tr><td>Wskaźnik bieżącej płynności</td><td>2,87</td><td style="color:var(--ocena-kupno)">Szybki 2,65</td></tr>
+          <tr><td>Kapitał obrotowy</td><td>+$2,35 mld</td><td style="color:var(--ocena-kupno)">Komfortowo</td></tr>
+          <tr><td>Liczba akcji</td><td style="color:var(--ocena-uwaga)">+5,13% r/r</td><td>Jedyna słabość — wynagrodzenia w akcjach</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-kupno)"><strong>6,77</strong></td><td>Piotroski 7 na 9</td></tr>
+        </tbody>
+      </table></div>
+      <p>Bilans jest bez zarzutu i to również argument za tym, że transakcja się domknie — <strong>Fox nie musi się martwić o kondycję finansową celu</strong>. Gotówka netto 2,08 miliarda dolarów stanowi 8,9% ceny transakcji, co obniża efektywny koszt przejęcia.</p>
+      <p>Jedyną realną słabością jest <strong>rozwodnienie o 5,13% rocznie</strong> wynikające z wynagradzania pracowników akcjami. W kontekście przejęcia po ustalonej cenie za akcję ma to jednak znaczenie drugorzędne.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🤝</div><div class="catalyst-body"><h4>Transakcja jest wiążąca i zatwierdzona jednogłośnie</h4><p>Rady dyrektorów obu spółek zatwierdziły umowę bez głosów przeciwnych. To nie jest list intencyjny ani rozmowy wstępne, tylko definitywna umowa z ustaloną ceną.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💵</div><div class="catalyst-body"><h4>60% zapłaty stanowi gotówka</h4><p>$96,00 z $160,00 jest niezależne od kursu akcji Foxa. Ryzyko rynkowe dotyczy tylko pozostałych $64,00.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏆</div><div class="catalyst-body"><h4>Biznes jest naprawdę dobry</h4><p>Reklama +25% przy marży brutto 62,4%, ROIC 36,00% wobec kosztu kapitału 15,19%, Altman 6,77, gotówka netto $2,08 mld, rekordowe wolne przepływy $709,91 mln.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Możliwość kontroferty</h4><p>Według doniesień prasowych Netflix rozważał to przejęcie, a analitycy sugerowali, że Netflix albo Disney mogliby przebić ofertę. To jedyne źródło zwyżki powyżej $160.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📺</div><div class="catalyst-body"><h4>Aktywo strategiczne dla przejmującego</h4><p>Ekran startowy w ponad połowie amerykańskich domów z internetem. Po połączeniu udział w oglądalności telewizyjnej przewyższyłby Netflixa — Fox ma silną motywację, żeby doprowadzić transakcję do końca.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">⚖️</div><div class="catalyst-body"><h4>Asymetria: +1,5% wobec -24% do -30%</h4><p>Do ceny transakcji zostało 1,5%, a zerwanie oznacza powrót do wyceny samodzielnej w rejonie $110–125. W ujęciu rocznym to zwrot poniżej dwóch procent przy ryzyku jednej czwartej kapitału.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏛️</div><div class="catalyst-body"><h4>Ryzyko antymonopolowe</h4><p>Senator Elizabeth Warren i inni kongresmeni Partii Demokratycznej publicznie ostrzegli przed konsekwencjami fuzji. Właściciel treści przejmuje kontrolę nad ekranem startowym w połowie amerykańskich domów.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>40% zapłaty zależy od kursu Foxa</h4><p>Dzisiejszy kurs implikuje FOXA na poziomie $63,63, o 3,6% poniżej ceny odniesienia. Spadek FOXA do $55 obniża wartość transakcji do $149,31, czyli 5,3% poniżej dzisiejszej ceny.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⏳</div><div class="catalyst-body"><h4>Domknięcie dopiero w I połowie 2027</h4><p>Do dziewięciu, dziesięciu miesięcy zamrożenia kapitału po to, żeby zarobić 1,5%. Przez ten czas kapitał nie pracuje nigdzie indziej.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📊</div><div class="catalyst-body"><h4>RSI 78,1 i rosnąca krótka sprzedaż</h4><p>Kurs 38% powyżej średniej 200-sesyjnej, a liczba akcji sprzedanych na krótko wzrosła po ogłoszeniu transakcji z 8,25 do 10,64 mln — część rynku obstawia, że fuzja się nie uda.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Podmiot</th><th>Rola</th><th>Znaczenie dla tej pozycji</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Fox Corporation</strong></td><td>Przejmujący</td><td style="color:var(--ocena-uwaga)">Kurs FOXA decyduje o 40% wartości, jaką otrzymasz</td></tr>
+          <tr><td><strong>Netflix</strong></td><td>Rywal, potencjalny kontroferent</td><td style="color:var(--ocena-kupno)">Według doniesień rozważał to przejęcie</td></tr>
+          <tr><td><strong>Disney</strong></td><td>Potencjalny kontroferent</td><td style="color:var(--ocena-kupno)">Wskazywany przez analityków jako możliwy przebijający</td></tr>
+          <tr><td>Amazon (Fire TV), Google (Chromecast)</td><td>Konkurenci platformowi</td><td style="color:var(--ocena-uwaga)">Amazona masz w portfelu — rywal Roku o ten sam ekran</td></tr>
+          <tr><td>Samsung, LG</td><td>Producenci telewizorów z własnymi platformami</td><td>Samsunga masz w portfelu</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Ciekawostka portfelowa: masz jednocześnie Roku, Amazona i Samsunga</strong> — trzy podmioty walczące o kontrolę nad tym samym ekranem telewizora. Fire TV Amazona i platformy Samsunga to bezpośredni rywale Roku. To akurat przypadek, a nie świadoma konstrukcja, ale warto wiedzieć, że w tej konkretnej rywalizacji jesteś po wszystkich stronach naraz.</div>
+      <p>Z punktu widzenia dzisiejszej decyzji liczy się jednak co innego: <strong>najważniejszą spółką dla wartości Twojej pozycji nie jest już Roku, tylko Fox</strong>. To jego kurs w dniu domknięcia wyznaczy 40% tego, co dostaniesz.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$157,68</strong></td><td>+79,00% w 52 tygodnie</td></tr>
+          <tr><td>Zakres 52-tygodniowy</td><td>$78,53 – $157,86</td><td style="color:var(--ocena-uwaga)">Kurs praktycznie na szczycie</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$140,54</td><td style="color:var(--ocena-uwaga)">Kurs 12,2% powyżej</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$113,91</td><td style="color:var(--ocena-sprzedaz)">Kurs 38,4% powyżej</td></tr>
+          <tr><td><strong>RSI (14)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>78,10</strong></td><td>Wyraźne wykupienie</td></tr>
+          <tr><td>Beta</td><td>2,04</td><td>Traci znaczenie przy trwającym przejęciu</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-uwaga)">8,12% wolnego obrotu</td><td>Wzrost z 8,25 do 10,64 mln akcji</td></tr>
+          <tr><td>Sufit</td><td>$160</td><td>Cena transakcji ogranicza wzrost</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Analiza techniczna traci tu większość swojej użyteczności i warto to powiedzieć wprost.</strong> Przy trwającym przejęciu kurs nie porusza się według popytu i podaży rynkowej, tylko <strong>przykleja się do ceny transakcji</strong>, z niewielkim dyskontem odzwierciedlającym ryzyko i czas. RSI 78,10 nie oznacza tu wykupienia w zwykłym sensie — oznacza po prostu, że kurs dotarł do ceny, po której Fox zapłaci. <strong>Powyżej 160 dolarów nie ma dokąd rosnąć, chyba że pojawi się kontroferta.</strong></p></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text sell">SPRZEDAŻ</div><div class="rating-note">Kurs praktycznie równy cenie transakcji, sufit na $160, RSI 78,1. Nie ma tu czego oczekiwać poza upływem czasu.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text sell">SPRZEDAŻ</div><div class="rating-note">Do domknięcia w I połowie 2027 zostało +1,5% przy ryzyku -24% do -30%. Zwrot poniżej dwóch procent rocznie przy realnym ryzyku regulacyjnym.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text neutral">NIE DOTYCZY</div><div class="rating-note">Spółka przestanie istnieć jako samodzielny podmiot. Po domknięciu zostaniesz akcjonariuszem Foxa — to zupełnie inna decyzja inwestycyjna.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: 0–1% portfela.</strong> Masz 3,1% — przy pozostałym potencjale 1,5% jest to kapitał zamrożony bez powodu</li>
+        <li><strong>Realizacja zysku: teraz.</strong> Jesteś na plusie 163%. Kurs jest o 0,1% od szczytu 52-tygodniowego i o 1,5% od ceny, powyżej której nie wzrośnie bez kontroferty</li>
+        <li><strong>Jeśli chcesz zostać:</strong> rób to świadomie, jako arbitraż. Oznacza to zamrożenie kapitału do I połowy 2027 dla zysku poniżej dwóch procent rocznie, z ryzykiem 24–30% przy niepowodzeniu</li>
+        <li><strong>Nie dokupywać w żadnym scenariuszu.</strong> Kupowanie akcji 1,5% poniżej ceny wykupu to nie inwestycja, tylko obligacja o bardzo słabej rentowności i akcyjnym profilu ryzyka</li>
+        <li><strong>Jedna rzecz do śledzenia:</strong> <strong>kurs akcji Fox klasy A</strong>. To on wyznacza 40% tego, co ostatecznie dostaniesz. Dziś rynek implikuje $63,63 wobec ceny odniesienia $66,03</li>
+        <li><strong>Co zmieniłoby ocenę:</strong> pojawienie się wiarygodnej kontroferty ze strony Netflixa albo Disneya — wtedy warto poczekać</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value</div><div class="fair-value-range">$150 – $160</div><div class="fair-value-note">Wycena samodzielna bez transakcji: $110–125 | Scenariusz kontroferty: $175–190 | Konsensus 26 analityków: $162,55</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by zostać</h4><ul>
+          <li><strong>Transakcja jest wiążąca</strong>, zatwierdzona jednogłośnie przez obie rady, a 60% zapłaty stanowi gotówka niezależna od kursu Foxa</li>
+          <li><strong>Biznes jest bardzo dobry.</strong> Reklama +25% przy marży 62,4%, ROIC 36,00% wobec kosztu 15,19%, Altman 6,77, rekordowe wolne przepływy</li>
+          <li><strong>Możliwa kontroferta.</strong> Netflix rozważał to przejęcie, analitycy wskazują też Disneya — jedyne źródło wyceny powyżej $160</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by sprzedać</h4><ul>
+          <li><strong>Asymetria +1,5% wobec -24% do -30%.</strong> Zwrot poniżej dwóch procent rocznie przy ryzyku jednej czwartej kapitału</li>
+          <li><strong>Ryzyko antymonopolowe jest realne</strong> — kongresmeni publicznie kwestionują fuzję, a przedmiotem sporu jest kontrola nad ekranem w połowie amerykańskich domów</li>
+          <li><strong>Kapitał zamrożony do I połowy 2027</strong> w pozycji z sufitem na $160, podczas gdy 52% portfela stoi przed sezonem wyników 26–27 sierpnia</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> sprzeciw regulatora albo wycofanie się jednej ze stron → powrót do wyceny samodzielnej, $110–125.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> wiarygodna kontroferta Netflixa lub Disneya → $175–190. To jedyny scenariusz uzasadniający dalsze trzymanie.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead" style="border-color:var(--ocena-sprzedaz)">To jedyna dziś rekomendacja sprzedaży i chcę od razu powiedzieć, że <strong>nie wynika ona z oceny spółki</strong>. Roku jest bardzo dobrym biznesem — zwrot z zainwestowanego kapitału 36,00% przy jego koszcie 15,19%, wskaźnik Altmana 6,77 i Piotroski 7 na 9, czyli najwyższe wyniki z całej dzisiejszej serii, gotówka netto 2,08 miliarda dolarów i nakłady inwestycyjne wynoszące zaledwie 9,13 miliona przy przychodach 5,21 miliarda. Drugi kwartał przyniósł przychody wyższe o 22%, reklamę o 25% przy marży brutto rozszerzonej o 650 punktów bazowych i rekordowe wolne przepływy.</p>
+
+      <p class="sum-lead">Rzecz w tym, że <strong>15 czerwca Fox Corporation ogłosił przejęcie Roku po 160 dolarów za akcję</strong> — 96 dolarów gotówką plus 0,9693 akcji Foxa, w transakcji wartej około 22 miliardów. Umowa jest wiążąca, zatwierdzona jednogłośnie przez obie rady, a domknięcie planowane jest na pierwszą połowę 2027 roku. Spółka wstrzymała publikowanie prognoz. <strong>Kurs 157,68 dolara nie odzwierciedla już perspektyw biznesu — odzwierciedla cenę wykupu pomniejszoną o niewielki dyskont.</strong></p>
+
+      <p class="sum-lead" style="border-color:var(--ocena-sprzedaz)">Z tego wynika arytmetyka, która przesądza o ocenie. <strong>Trzymając dziś te akcje, grasz o 1,5% w horyzoncie do dziesięciu miesięcy, ryzykując od 24 do 30%</strong>, gdyby transakcja upadła — a ryzyko regulacyjne jest realne, bo senator Elizabeth Warren i inni kongresmeni publicznie ostrzegli przed konsekwencjami tej fuzji. W ujęciu rocznym mówimy o zwrocie poniżej dwóch procent, czyli mniej niż na obligacjach skarbowych, przy akcyjnym profilu ryzyka. <strong>Taka asymetria ma sens dla funduszu arbitrażowego robiącego to na dziesiątkach transakcji naraz. Dla pojedynczej pozycji w portfelu prywatnym — nie ma.</strong></p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Umowa jest wiążąca.</strong> Jednogłośna zgoda obu rad, 60% zapłaty w gotówce, jasno określona cena $160,00 za akcję.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Biznes jest bardzo dobry.</strong> ROIC 36,00% wobec WACC 15,19%, Altman 6,77, gotówka netto $2,08 mld, rekordowe wolne przepływy $709,91 mln.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Aktywo jest strategiczne dla przejmującego.</strong> Ekran startowy w ponad połowie amerykańskich domów; po fuzji udział w oglądalności przewyższyłby Netflixa.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Zgoda regulatora.</strong> Kongresmeni publicznie kwestionują fuzję. Rynkowy dyskont 1,5% wskazuje na niskie, ale niezerowe ryzyko.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Kurs akcji Foxa.</strong> 40% zapłaty to akcje FOXA; dziś rynek implikuje $63,63 wobec ceny odniesienia $66,03.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Sensowna relacja zysku do ryzyka.</strong> +1,5% wobec -24% do -30%, przy zamrożeniu kapitału do I połowy 2027.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>15 czerwca 2026</td><td>Ogłoszenie przejęcia przez Fox</td><td>Od tego dnia kurs śledzi cenę transakcji, nie fundamenty</td></tr>
+            <tr><td>6 sierpnia 2026</td><td>Wyniki Q2 — już opublikowane</td><td>Rekordy, ale bez prognozy ze względu na transakcję</td></tr>
+            <tr><td>Bez terminu</td><td><strong>Decyzja regulatora</strong></td><td>Jedyne zdarzenie, które może zniweczyć transakcję</td></tr>
+            <tr><td>Bez terminu</td><td>Głosowania akcjonariuszy obu spółek</td><td>Formalny warunek domknięcia</td></tr>
+            <tr><td><strong>I połowa 2027</strong></td><td>Planowane domknięcie</td><td>Otrzymujesz $96,00 gotówki plus 0,9693 akcji FOX za każdą akcję</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Dyskont do ceny transakcji</strong></td><td>1,5%</td><td>rozszerzenie powyżej 5%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td><strong>Kurs FOXA</strong></td><td>implikowany $63,63</td><td>poniżej $58</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Krótka sprzedaż</td><td>8,12% obrotu, rośnie</td><td>powyżej 12%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Postępowanie antymonopolowe</td><td>zastrzeżenia kongresmenów</td><td>formalny sprzeciw DOJ</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Wyniki operacyjne</td><td>rekordowe, ale bez prognozy</td><td>—</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Relacja zysku do ryzyka</strong></td><td>+1,5% wobec -25%</td><td>—</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Realizacja zysku: teraz.</strong> Jesteś na plusie 163%, kurs jest 0,1% od szczytu 52-tygodniowego i 1,5% od sufitu wyznaczonego przez cenę transakcji</li>
+          <li><strong>Docelowa wielkość pozycji: 0–1% portfela</strong> zamiast obecnych 3,1%</li>
+          <li><strong>Nie dokupywać w żadnym scenariuszu</strong> — to nie jest inwestycja, tylko obligacja o rentowności poniżej 2% z akcyjnym ryzykiem</li>
+          <li><strong>Jeśli zostajesz, rób to świadomie jako arbitraż</strong>, z pełną wiedzą o horyzoncie do I połowy 2027 i ryzyku 24–30%</li>
+          <li><strong>Jedna rzecz do śledzenia:</strong> kurs akcji Fox klasy A. To on wyznacza 40% Twojej ostatecznej wypłaty</li>
+          <li><strong>Co zmieniłoby ocenę:</strong> wiarygodna kontroferta Netflixa albo Disneya. Wtedy warto poczekać</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-sprzedaz)">📉 SPRZEDAŻ — dobra spółka, ale cena już zawiera wszystko</div>
+        <p>Kupiłeś Roku po 60 dolarów, dziś kosztuje 157,68 — jesteś na plusie 163%. Ta inwestycja była trafna i nie mam tu nic do dodania poza uznaniem.</p>
+        <p>Ale <strong>Roku nie jest już spółką, którą się analizuje — jest transakcją, którą się rozlicza</strong>. Fox zapłaci 160 dolarów za akcję, z czego 96 gotówką, a domknięcie planowane jest na pierwszą połowę 2027. Od dzisiejszego kursu dzieli tę cenę <strong>1,5%</strong>. Powyżej niej akcje nie wzrosną, chyba że ktoś przebije ofertę. Poniżej — spadną o jedną czwartą do jednej trzeciej, jeśli regulator powie „nie", a takie głosy w Kongresie już padły.</p>
+        <p><strong>Zamknąłbym tę pozycję.</strong> Trzymanie 3,1% portfela przez dziesięć miesięcy dla zysku poniżej dwóch procent rocznie, przy realnym ryzyku utraty jednej czwartej kapitału, nie ma uzasadnienia — zwłaszcza gdy ten sam kapitał mógłby pracować w Amazonie czy Sibanye, gdzie widzę odpowiednio 12–28% i 7–39% przestrzeni. To jest dokładnie ta decyzja, której brakowało Ci ram: <strong>nie „czy spółka jest dobra", tylko „ile jeszcze zostało do wzięcia i czym za to ryzykuję".</strong></p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Sprzedaż</b></div>
+          <div><span>Fair value</span><b>$150–160</b></div>
+          <div><span>Bez transakcji</span><b>$110–125</b></div>
+          <div><span>Kontroferta</span><b>$175–190</b></div>
+          <div><span>Sugerowana pozycja</span><b>0–1% portfela</b></div>
+          <div><span>Domknięcie transakcji</span><b>I połowa 2027</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 sierpnia 2026 | Cena: $157,68 (zamknięcie 14.08.2026) | Pierwsza analiza ROKU | <strong>Spółka w trakcie przejęcia przez Fox Corporation po $160,00 za akcję</strong> | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 17.08.2026</strong>, Roku IR (wyniki Q2 2026, 6 sierpnia), komunikaty Fox Corporation z 15.06.2026 | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

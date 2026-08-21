@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAT — Caterpillar | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: CAT</div>
+    <div class="company-name">Caterpillar Inc.</div>
+    <div class="company-sub">Maszyny budowlane i górnicze · <strong>generatory i turbiny zasilające centra danych</strong> · Irving, Teksas</div>
+    <div class="header-meta">
+      <span class="meta-tag">+107% w 52 tygodnie</span>
+      <span class="meta-tag">Portfel zamówień $72,1 mld</span>
+      <span class="meta-tag">Zasilanie +72% r/r</span>
+      <span class="meta-tag">ROIC 18,3% vs WACC 11,8%</span>
+      <div class="price-display">
+        <div class="price-main">$856,57</div>
+        <div class="price-sub">zamknięcie 14.08.2026 | +107% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Przemysł i maszyny</span><span class="temat">Moc obliczeniowa dla AI</span><span class="temat">Zasilanie i chłodzenie</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — ale to nie jest już dywersyfikacja przemysłowa">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">po rajdzie o 107%</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$900 – $1 020</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">+5% do +19%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>4 sierpnia 2026</b><em>Q3 — koniec października</em></div>
+    <div class="rb-right">Pozycja 3–4% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (14.08.2026)</div><div class="metric-value">$856,57</div><div class="metric-detail">+107% w 52 tyg. | 6% pod średnią 50-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$393,7 mld</div><div class="metric-detail">EV $432,9 mld | 459,7 mln akcji</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">$20,5 mld</div><div class="metric-detail">+24% r/r — pierwszy taki kwartał w historii</div></div>
+    <div class="metric-card"><div class="metric-label">Portfel zamówień</div><div class="metric-value em">$72,1 mld</div><div class="metric-detail">+92% r/r | zamówienia sięgają 2029–2030</div></div>
+    <div class="metric-card"><div class="metric-label">Sprzedaż zasilania</div><div class="metric-value green">+72%</div><div class="metric-detail">Generatory i turbiny dla centrów danych</div></div>
+    <div class="metric-card"><div class="metric-label">ROIC vs koszt kapitału</div><div class="metric-value green">18,3% vs 11,8%</div><div class="metric-detail">Przewaga 6,5 pkt proc.</div></div>
+    <div class="metric-card"><div class="metric-label">Dywidenda</div><div class="metric-value green">33 lata</div><div class="metric-detail">Nieprzerwanego wzrostu | skup akcji -2,67% r/r</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (28 analityków)</div><div class="metric-value">$970,71</div><div class="metric-detail">+13,3% | kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+
+      <div class="alert alert-danger"><strong>Najważniejsze zdanie tego raportu: Caterpillar nie jest już w Twoim portfelu pozycją przemysłową.</strong> Jest kolejnym zakładem na budowę infrastruktury dla sztucznej inteligencji — i to jednym z czystszych, jakie masz. Kurs wzrósł o 107% w rok nie dlatego, że sprzedaje się więcej koparek, tylko dlatego, że <strong>sprzedaż generatorów i turbin do zasilania centrów danych wzrosła o 72%</strong>, a portfel zamówień skoczył o 92% do rekordowych 72,1 miliarda dolarów. Po prawidłowym zakwalifikowaniu tej pozycji <strong>Twoja ekspozycja na temat mocy obliczeniowej dla AI rośnie z 49,1% do 52,0% wartości akcji</strong>.</div>
+
+      <h3>Czym dziś jest Caterpillar</h3>
+      <p>Formalnie to wciąż największy na świecie producent maszyn budowlanych i górniczych — 118 tysięcy pracowników, 74,73 miliarda dolarów przychodu, 33 lata nieprzerwanego wzrostu dywidendy. Ale <strong>motorem wyniku stał się segment energetyczny</strong>: silniki gazowe i turbiny, które zasilają centra danych tam, gdzie sieć energetyczna nie nadąża za zapotrzebowaniem.</p>
+      <p>Twoja pozycja jest na plusie <strong>176%</strong> (5 akcji po średniej 310 dolarów).</p>
+
+      <h3>Co pokazał drugi kwartał 2026 — wyniki z 4 sierpnia</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026</th><th>Dynamika</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td><strong>$20,5 mld</strong></td><td style="color:var(--ocena-kupno)">+24% r/r — pierwszy raz powyżej $20 mld</td></tr>
+          <tr><td>Skorygowany zysk na akcję</td><td><strong>$8,17</strong></td><td style="color:var(--ocena-kupno)">+73% r/r</td></tr>
+          <tr><td>Skorygowana marża operacyjna</td><td>21,9%</td><td style="color:var(--ocena-kupno)">+430 punktów bazowych</td></tr>
+          <tr><td><strong>Sprzedaż zasilania do użytkowników</strong></td><td>—</td><td style="color:var(--ocena-kupno)"><strong>+72%</strong> — generatory i turbiny dla centrów danych</td></tr>
+          <tr><td>Przyrost wolumenu z zasilania</td><td>$3,1 mld</td><td style="color:var(--ocena-kupno)">Główne źródło wzrostu przychodów</td></tr>
+          <tr><td>Zamówienia w kwartale</td><td>$9,4 mld</td><td style="color:var(--ocena-kupno)">Portfel +$9 mld kw/kw</td></tr>
+          <tr><td><strong>Portfel zamówień</strong></td><td><strong>$72,1 mld</strong></td><td style="color:var(--ocena-kupno)">+92% r/r, rekord; 59% do wysyłki w 12 mies.</td></tr>
+          <tr><td>Prognoza roczna</td><td>wzrost „mid-to-high teens”</td><td style="color:var(--ocena-kupno)">Podniesiona</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Zdanie prezesa Joe Creeda warto zacytować:</strong> zainteresowanie klientów mocą dla ery sztucznej inteligencji pokazuje, że <em>„nikt nie zwalnia”</em> — a zamówienia sięgają już <strong>2029 i 2030 roku</strong>. Czasy realizacji dla silników gazowych i turbin rozciągają się na lata 2028–2030. Spółka przywraca produkcję dziesięciomegawatowej platformy silnikowej i odbudowuje około <strong>1,5 gigawata mocy wytwórczej</strong>, z pierwszymi dostawami w czwartym kwartale i osiemnastomiesięcznym rozruchem.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Opis</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zasilanie centrów danych</strong></td><td>Duże generatory i turbiny gazowe — moc podstawowa i awaryjna</td><td style="color:var(--ocena-kupno)">+72% r/r, czasy realizacji do 2028–2030</td></tr>
+          <tr><td><strong>Energia i transport</strong></td><td>Silniki tłokowe, turbiny, napędy kolejowe i morskie</td><td style="color:var(--ocena-kupno)">Sprzedaż do użytkowników +25% r/r</td></tr>
+          <tr><td>Maszyny budowlane</td><td>Koparki, ładowarki, sprzęt drogowy</td><td>Cykl budowlany słabszy niż zasilanie</td></tr>
+          <tr><td>Górnictwo</td><td>Wielkogabarytowy sprzęt wydobywczy</td><td>Powiązany z cyklem surowcowym</td></tr>
+          <tr><td>Cat Financial</td><td>Finansowanie zakupów sprzętu</td><td style="color:var(--ocena-uwaga)">Źródło większości długu bilansowego</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — wąskie gardło, którego nie da się ominąć</h3>
+      <p>Budowa centrum danych wymaga mocy elektrycznej, a sieć energetyczna w wielu miejscach jej nie ma. Rozwiązaniem stają się <strong>lokalne źródła zasilania: turbiny gazowe i duże silniki tłokowe</strong>. Producentów zdolnych dostarczyć je w skali gigawatów jest na świecie garstka, a <strong>czasy realizacji sięgające 2030 roku są najlepszym dowodem, że popyt przewyższa zdolności wytwórcze</strong>.</p>
+      <div class="alert alert-info"><strong>To jest zupełnie inna fosa niż u pozostałych spółek w Twoim portfelu.</strong> Marvell i NVIDIA konkurują projektem układu, który konkurent może przebić lepszym projektem. Caterpillar konkuruje <strong>zdolnością produkcyjną, której nie da się zbudować szybciej niż w osiemnaście miesięcy</strong> — bo tyle trwa rozruch odtwarzanej linii. Klient, który potrzebuje mocy w 2028 roku, musi zamówić ją dziś. Stąd portfel na 72,1 miliarda dolarów.</div>
+      <p>Do tego dochodzi sieć serwisowa i części zamiennych budowana przez dekady — element, który w maszynach ciężkich zapewnia powtarzalny, wysokomarżowy przychód niezależnie od cyklu sprzedaży nowego sprzętu.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Sieć energetyczna jest wąskim gardłem budowy centrów danych</strong> — to zjawisko przekształciło turbiny Caterpillara z produktu przemysłowego w aktywo o znaczeniu krytycznym</li>
+        <li><strong>Sprzedaż urządzeń wytwórczych ma potroić się do 2030</strong> wobec poziomu z 2024 — prognoza podniesiona z wcześniejszego podwojenia</li>
+        <li><strong>Wzrost przychodów około 12% rocznie</strong> wobec historycznego celu 5–7% — to właśnie ta różnica stoi za przeceną akcji w górę</li>
+        <li><strong>Cykl budowlany jest słabszy</strong> — tradycyjny biznes maszyn nie rośnie w tempie zbliżonym do zasilania</li>
+        <li><strong>Nakłady operatorów chmury</strong> — Amazon 220 mld, Alphabet około 200 mld dolarów; to ci sami klienci, którzy napędzają Twoje pozostałe pozycje</li>
+      </ul>
+      <div class="alert alert-warn"><strong>Warto zauważyć, skąd bierze się ta zmiana charakteru spółki.</strong> Caterpillar był przez dekady wzorcową spółką cykliczną — zarabiał, gdy budowano drogi i kopalnie, tracił, gdy inwestycje zamierały. Dziś <strong>rynek wycenia go jak spółkę wzrostową</strong>, bo popyt na moc dla centrów danych ma charakter strukturalny, a nie koniunkturalny. To założenie jest prawdopodobnie słuszne na najbliższe kilka lat, ale <strong>nie zmienia faktu, że pod spodem wciąż jest producent maszyn ciężkich</strong> z całą właściwą mu cyklicznością.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Stan</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Portfel zamówień</strong></td><td>$72,1 mld</td><td style="color:var(--ocena-kupno)">Blisko rocznych przychodów; +92% r/r</td></tr>
+          <tr><td>Struktura portfela</td><td>59% do wysyłki w 12 miesięcy</td><td style="color:var(--ocena-kupno)">Reszta sięga 2029–2030</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$633,3 tys.</td><td>Zysk na pracownika $91,9 tys.</td></tr>
+          <tr><td>Udział instytucji</td><td>72,96%</td><td>Osoby powiązane: 0,21%</td></tr>
+          <tr><td>Liczba akcji</td><td style="color:var(--ocena-kupno)">-2,67% r/r</td><td>Skup akcji, nie rozwodnienie</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>1,49% akcji</td><td style="color:var(--ocena-kupno)">Spadek z 9,05 do 6,85 mln</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Zestawienie portfeli zamówień w Twoim portfelu jest pouczające.</strong> Caterpillar ma 72,1 miliarda dolarów przy przychodach 74,73 miliarda — czyli mniej więcej rok pracy z góry. CoreWeave ma 104 miliardy przy przychodach 7,59 miliarda, czyli trzynaście lat. Marvell nie podaje portfela, ale deklaruje ponad 10 miliardów rocznie z układów dedykowanych do 2029. <strong>Wszystkie trzy mówią o tym samym: klienci rezerwują moc na lata do przodu, bo boją się, że jej zabraknie.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 mies.)</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$74,73 mld</td><td>Q2: $20,5 mld, +24% r/r</td></tr>
+          <tr><td>Zysk brutto</td><td>$22,20 mld</td><td>Marża 29,71%</td></tr>
+          <tr><td>Zysk operacyjny</td><td style="color:var(--ocena-kupno)">$13,94 mld</td><td>Marża 18,65% | w Q2 skorygowana 21,9%</td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td>$14,11 mld</td><td style="color:var(--ocena-kupno)">Blisko operacyjnego — czysta struktura</td></tr>
+          <tr><td>Zysk netto</td><td>$10,84 mld</td><td>EPS $23,21, marża 14,51%</td></tr>
+          <tr><td>EBITDA</td><td>$16,25 mld</td><td>Marża 21,75%</td></tr>
+          <tr><td>Przepływy operacyjne</td><td>$13,57 mld</td><td>Nakłady tylko $4,58 mld</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>$8,99 mld</strong></td><td>Marża 12,04%, $19,57 na akcję</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Czwarty wiersz jest tu wart osobnej uwagi, bo odróżnia Caterpillara od trzech spółek, które analizowałem dziś wcześniej.</strong> Zysk operacyjny wynosi 13,94 miliarda dolarów, a wynik przed opodatkowaniem 14,11 miliarda — <strong>różnica jest minimalna</strong>. U Amazona poniżej linii operacyjnej <em>przybywa</em> 81 miliardów z przeszacowań, u IREN cały zysk netto pochodzi spoza działalności, a u Sibanye <em>ubywa</em> 632 miliony. Tutaj zysk raportowany to po prostu zysk z prowadzenia biznesu. <strong>To rzadka i cenna cecha</strong> — wskaźniki wyceny Caterpillara można czytać wprost, bez korekt.</div>
+      <p>Model jest przy tym lekki kapitałowo jak na producenta maszyn ciężkich: nakłady 4,58 miliarda przy przepływach operacyjnych 13,57 miliarda dają <strong>8,99 miliarda wolnej gotówki, czyli marżę 12,04%</strong>. Dla porównania Amazon ma dziś wolne przepływy ujemne, a Sibanye marżę 1,08%.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $856,57</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$393,74 mld</td><td>EV $432,94 mld</td></tr>
+          <tr><td>P/E bieżące</td><td>36,91×</td><td style="color:var(--ocena-uwaga)">EPS $23,21</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>29,79×</strong></td><td style="color:var(--ocena-uwaga)">Niżej niż bieżące — zysk rośnie</td></tr>
+          <tr><td>PEG</td><td>1,64</td><td style="color:var(--ocena-uwaga)">Prognoza wzrostu zysku +26,09%</td></tr>
+          <tr><td>P/S</td><td>5,27× (forward 4,77×)</td><td style="color:var(--ocena-uwaga)">Wysoko jak na producenta maszyn</td></tr>
+          <tr><td>EV/EBITDA</td><td>26,64×</td><td style="color:var(--ocena-sprzedaz)">Bardzo wysoko dla przemysłu</td></tr>
+          <tr><td>P/FCF</td><td>43,78×</td><td style="color:var(--ocena-uwaga)">EV/FCF 48,14</td></tr>
+          <tr><td><strong>P/B</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>20,30×</strong></td><td>Efekt dekad skupu akcji — patrz sekcja 8</td></tr>
+          <tr><td><strong>ROIC vs WACC</strong></td><td style="color:var(--ocena-kupno)"><strong>18,30% vs 11,82%</strong></td><td>Przewaga 6,5 pkt proc.</td></tr>
+          <tr><td>ROE</td><td style="color:var(--ocena-kupno)">56,97%</td><td>Pokrycie odsetek 26,35</td></tr>
+          <tr><td>Altman Z-Score</td><td style="color:var(--ocena-kupno)">4,44</td><td>Piotroski 6 na 9</td></tr>
+          <tr><td>Dywidenda</td><td>$6,52 · 0,76%</td><td style="color:var(--ocena-kupno)">33 lata wzrostu, wypłata 28,10%</td></tr>
+          <tr><td>Konsensus (28 analityków)</td><td>$970,71 · kupno</td><td style="color:var(--ocena-uwaga)">Tylko +13,3%</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing</td><td>36,91×</td><td>EPS $23,21 za ostatnie 12 miesięcy</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>29,79×</strong></td><td>Implikuje EPS około $28,75</td></tr>
+          <tr><td>Skorygowany EPS w Q2</td><td>$8,17 (+73% r/r)</td><td style="color:var(--ocena-kupno)">Roczne tempo powyżej $32</td></tr>
+          <tr><td><strong>PEG</strong></td><td><strong>1,64</strong></td><td style="color:var(--ocena-uwaga)">Wzrost zysku +26,09% w 3 lata</td></tr>
+          <tr><td>Prognoza wzrostu przychodów (3 lata)</td><td>+12,24%</td><td>Wobec historycznego celu 5–7%</td></tr>
+          <tr><td>Marvell (odniesienie)</td><td>forward P/E 48,83, PEG 1,32</td><td style="color:var(--ocena-uwaga)">Drożej, ale przy szybszym wzroście</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> wskaźnik przyszłego zysku 29,79 przy wzroście zysku o 26% rocznie daje PEG 1,64 — <strong>drogo jak na producenta maszyn, rozsądnie jak na spółkę wzrostową</strong>. I na tym właśnie polega cała kwestia oceny Caterpillara: rynek przestał go wyceniać jako przemysł cykliczny, a zaczął jako beneficjenta strukturalnego trendu. Skorygowany zysk na akcję w drugim kwartale wyniósł 8,17 dolara, co daje tempo roczne powyżej 32 dolarów — czyli więcej, niż implikuje prognozowany wskaźnik. <strong>Jeśli portfel zamówień na 72,1 miliarda się zrealizuje, dzisiejsza wycena okaże się umiarkowana.</strong> Jeśli budowa centrów danych zwolni, wróci wycena cykliczna, czyli 15–20-krotność zysku.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$900 – $1 020</div><div class="fair-value-note">Baza: 28–32× zysku prognozowanego (ok. $30–32 na akcję przy annualizacji skorygowanego wyniku z Q2) przy utrzymaniu marży operacyjnej powyżej 20% i realizacji portfela zamówień | Konsensus 28 analityków: $970,71 („kupno”) — mieści się w środku przedziału | Scenariusz negatywny (zatrzymanie budowy centrów danych, powrót do wyceny cyklicznej 18–20× zysku): $600–680 | Scenariusz pozytywny (potrojenie sprzedaży zasilania do 2030 zgodnie z prognozą, marża powyżej 23%): $1 150–1 250 | Przy $856,57 potencjał od -30% do +46%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Poziom (12 mies.)</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Brutto</td><td>29,71%</td><td>Typowo dla maszyn ciężkich</td></tr>
+          <tr><td><strong>Operacyjna</strong></td><td style="color:var(--ocena-kupno)"><strong>18,65%</strong></td><td>W Q2 skorygowana 21,9%, wzrost o 430 pb</td></tr>
+          <tr><td>EBITDA</td><td>21,75%</td><td>Amortyzacja tylko $2,31 mld</td></tr>
+          <tr><td>Netto</td><td>14,51%</td><td>Stopa podatkowa 23,19%</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>12,04%</strong></td><td>$8,99 mld, $19,57 na akcję</td></tr>
+          <tr><td>ROIC</td><td style="color:var(--ocena-kupno)">18,30%</td><td>Przy koszcie kapitału 11,82%</td></tr>
+          <tr><td>ROE</td><td style="color:var(--ocena-kupno)">56,97%</td><td>Zawyżone przez niską bazę kapitału</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Rozszerzenie marży operacyjnej o 430 punktów bazowych w jednym kwartale jest tu liczbą najważniejszą.</strong> Pokazuje, że sprzedaż zasilania dla centrów danych jest <em>bardziej dochodowa</em> niż tradycyjny biznes maszynowy — a nie tylko większa. Przy czasach realizacji sięgających 2030 roku Caterpillar ma dziś realną siłę cenową, czego producent koparek zwykle nie ma.</p>
+      <div class="alert alert-info"><strong>Zwrot z kapitału 18,30% przy jego koszcie 11,82% zasługuje na docenienie w kontekście Twojego portfela.</strong> To druga po Sibanye i NVIDII najlepsza relacja, jaką tu widziałem — i wyraźnie lepsza niż u Amazona (0,6 punktu przewagi), Marvella (ujemna) czy CoreWeave (ujemna). Caterpillar tworzy realną wartość na każdym zainwestowanym dolarze, i to od dawna, bo trzydzieści trzy lata nieprzerwanego wzrostu dywidendy nie biorą się z niczego.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$5,95 mld</td><td>Kapitał obrotowy $14,66 mld</td></tr>
+          <tr><td>Zadłużenie</td><td>$45,15 mld</td><td style="color:var(--ocena-uwaga)">Dług netto -$39,20 mld</td></tr>
+          <tr><td><strong>Dług / kapitał własny</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>2,33</strong></td><td>Wysoko — ale patrz komentarz poniżej</td></tr>
+          <tr><td>Dług / EBITDA</td><td>2,73</td><td style="color:var(--ocena-uwaga)">Umiarkowanie</td></tr>
+          <tr><td>Pokrycie odsetek</td><td style="color:var(--ocena-kupno)">26,35</td><td>Bardzo wysoko</td></tr>
+          <tr><td>Wskaźnik bieżącej płynności</td><td>1,37</td><td style="color:var(--ocena-uwaga)">Wskaźnik szybki 0,78</td></tr>
+          <tr><td>Kapitał własny</td><td>$19,39 mld</td><td style="color:var(--ocena-uwaga)">$42,19 na akcję przy kursie $856,57</td></tr>
+          <tr><td>Altman Z-Score</td><td style="color:var(--ocena-kupno)">4,44</td><td>Piotroski 6 na 9</td></tr>
+          <tr><td>Zwrot dla akcjonariusza</td><td style="color:var(--ocena-kupno)">3,43%</td><td>Skup 2,67% + dywidenda 0,76%</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Dwie liczby z tej tabeli wyglądają alarmująco i warto wyjaśnić, dlaczego nie są.</strong> Wskaźnik ceny do wartości księgowej wynosi <strong>20,30</strong>, a zadłużenie do kapitału własnego <strong>2,33</strong>. Oba wynikają z tego samego: kapitał własny to zaledwie 19,39 miliarda dolarów, bo <strong>Caterpillar od dekad skupuje własne akcje</strong>, co księgowo pomniejsza kapitał. W ostatnim roku liczba akcji spadła o 2,67%. Do tego znaczna część długu należy do Cat Financial — ramienia finansującego zakupy klientów, gdzie dług jest surowcem, a nie obciążeniem. <strong>Miarodajne są tu pokrycie odsetek 26,35 i wskaźnik Altmana 4,44</strong>, a te mówią o spółce w bardzo dobrej kondycji.</div>
+      <p>Warto docenić politykę wobec akcjonariuszy: <strong>trzydzieści trzy lata nieprzerwanego wzrostu dywidendy</strong> przy wypłacie zaledwie 28,10% zysku, plus skup akcji dający łączny zwrot 3,43%. W Twoim portfelu tylko Nokia płaci wyższą dywidendę, ale robi to kosztem 80% zysku i przy rosnącej liczbie akcji.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📦</div><div class="catalyst-body"><h4>Rekordowy portfel zamówień $72,1 mld, +92% r/r</h4><p>Blisko rocznych przychodów zakontraktowanych z góry, z czego 41% wychodzi poza dwunastomiesięczny horyzont. Zamówienia sięgają 2029 i 2030 roku.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚡</div><div class="catalyst-body"><h4>Sprzedaż zasilania +72%, prognoza potrojenia do 2030</h4><p>Sprzedaż urządzeń wytwórczych ma się potroić wobec 2024 roku — prognoza podniesiona z wcześniejszego podwojenia. Sieć energetyczna jest wąskim gardłem budowy centrów danych.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Marża rośnie szybciej niż sprzedaż</h4><p>Skorygowana marża operacyjna 21,9%, wyższa o 430 punktów bazowych, przy zysku na akcję wyższym o 73%. Zasilanie jest bardziej dochodowe niż tradycyjne maszyny.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💎</div><div class="catalyst-body"><h4>Jakość kapitału i wyniku</h4><p>ROIC 18,30% wobec kosztu 11,82%, wolne przepływy $8,99 mld przy marży 12,04%, a wynik przed opodatkowaniem niemal równy operacyjnemu — wskaźniki można czytać wprost.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏆</div><div class="catalyst-body"><h4>33 lata wzrostu dywidendy i skup akcji</h4><p>Wypłata zaledwie 28,10% zysku, liczba akcji spada o 2,67% rocznie, łączny zwrot dla akcjonariusza 3,43%. Krótka sprzedaż spadła z 9,05 do 6,85 mln akcji.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🎭</div><div class="catalyst-body"><h4>Spółka cykliczna wyceniana jak wzrostowa</h4><p>EV/EBITDA 26,64 przy producencie maszyn ciężkich. Jeśli budowa centrów danych zwolni, wróci wycena cykliczna, czyli 15–20-krotność zysku — a to oznacza kurs w rejonie $600–680.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Kurs już się cofnął o 6% od średniej 50-sesyjnej</h4><p>Po wzroście o 107% w rok akcje są poniżej średniej pięćdziesięciosesyjnej ($912,53). Konsensus analityków daje tylko 13,3% przestrzeni — najmniej ze wszystkich pozycji, które dziś analizowałem.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔗</div><div class="catalyst-body"><h4>To nie jest dywersyfikacja, tylko ta sama teza</h4><p>Prawidłowe zakwalifikowanie Caterpillara podnosi Twoją ekspozycję na temat AI z 49,1% do 52,0% wartości akcji. Pozycja, która wyglądała na przemysłową przeciwwagę, jest kolejnym zakładem na ten sam trend.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏗️</div><div class="catalyst-body"><h4>Cykl budowlany jest słaby</h4><p>Tradycyjny biznes maszynowy nie rośnie w tempie zbliżonym do zasilania. Jeśli segment energetyczny wyhamuje, nie ma drugiej nogi, która by to zrównoważyła.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⏳</div><div class="catalyst-body"><h4>Ryzyko wykonawcze przy rozbudowie mocy</h4><p>Odbudowa 1,5 gigawata zdolności wytwórczej z osiemnastomiesięcznym rozruchem. Opóźnienia oznaczałyby przesunięcie realizacji portfela i rozczarowanie prognozą.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>Rola</th><th>Relacja do Caterpillara</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Caterpillar</strong></td><td>Generatory, turbiny, maszyny</td><td>Portfel $72,1 mld, ROIC 18,30%, marża FCF 12,04%</td></tr>
+          <tr><td><strong>Cummins</strong></td><td>Silniki i generatory</td><td style="color:var(--ocena-uwaga)">Bezpośredni rywal w zasilaniu awaryjnym</td></tr>
+          <tr><td><strong>GE Vernova</strong></td><td>Turbiny gazowe dużej mocy</td><td style="color:var(--ocena-uwaga)">Konkurent w segmencie największych mocy</td></tr>
+          <tr><td>Deere, Komatsu</td><td>Maszyny budowlane i rolnicze</td><td style="color:var(--ocena-kupno)">Bez ekspozycji na zasilanie centrów danych</td></tr>
+          <tr><td><strong>Bloom Energy, OKLO</strong></td><td>Alternatywne źródła zasilania</td><td style="color:var(--ocena-uwaga)">OKLO masz w portfelu — ta sama potrzeba, inna technologia</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Tu robi się ciekawie w kontekście Twojego portfela.</strong> Caterpillar i OKLO rozwiązują <strong>ten sam problem — brak mocy dla centrów danych — dwiema różnymi technologiami</strong>. Caterpillar robi to dziś, silnikami gazowymi i turbinami, z portfelem zamówień na 72 miliardy. OKLO obiecuje zrobić to reaktorami modułowymi, gdzieś w przyszłej dekadzie. <strong>Trzymasz obie strony tego wyścigu</strong>, przy czym jedna ma zamówienia sięgające 2030 roku, a druga jest projektem.</p>
+      <p style="margin-top:10px">Łącznie zasilanie centrów danych to w Twoim portfelu <strong>CAT (2,9%), OKLO (2,1%) i pośrednio ASPI (1,8%)</strong> — około 6,8% na jedną wąską tezę o niedoborze energii.</p></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$856,57</strong></td><td>+107,05% w 52 tygodnie</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$912,53</td><td style="color:var(--ocena-uwaga)">Kurs 6,1% poniżej — korekta po szczycie</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$754,39</td><td style="color:var(--ocena-kupno)">Kurs 13,5% powyżej — trend wzrostowy trwa</td></tr>
+          <tr><td>RSI (14)</td><td>46,49</td><td style="color:var(--ocena-kupno)">Neutralnie, bez wykupienia</td></tr>
+          <tr><td>Beta</td><td>1,60</td><td style="color:var(--ocena-uwaga)">Podwyższona jak na przemysł</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>1,49% akcji</td><td style="color:var(--ocena-kupno)">Spadek z 9,05 do 6,85 mln</td></tr>
+          <tr><td>Wsparcie S1</td><td>$754</td><td>Średnia 200-sesyjna</td></tr>
+          <tr><td>Opór R1</td><td>$912</td><td>Średnia 50-sesyjna</td></tr>
+          <tr><td>Opór R2</td><td>$971</td><td>Konsensus analityków</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Odzyskanie średniej 50-sesyjnej ($912)</li><li>Dalszy wzrost portfela zamówień w Q3</li><li>Droga ku $971 i wyżej</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Sygnały spowolnienia nakładów operatorów chmury</li><li>Przebicie $754 w dół</li><li>Powrót do wyceny cyklicznej: $600–680</li></ul></div>
+      </div>
+      <p><strong>Układ jest podobny do Marvella i Nokii:</strong> poniżej średniej pięćdziesięciosesyjnej, ale wyraźnie powyżej dwustusesyjnej. Trend długoterminowy nienaruszony, krótkoterminowo trwa korekta po bardzo silnym rajdzie. RSI 46,49 pokazuje, że nie ma tu ani wykupienia, ani wyprzedania.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text neutral">NEUTRALNA</div><div class="rating-note">Kurs pod średnią 50-sesyjną po rajdzie o 107%, konsensus daje tylko 13,3% przestrzeni, wyniki za sobą. Brak katalizatora do końca października.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Portfel $72,1 mld, marża rosnąca o 430 pb i prognoza potrojenia sprzedaży zasilania uzasadniają cel $900–1 020.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">ROIC 18,30%, 33 lata wzrostu dywidendy, skup akcji. Ryzykiem jest powrót do wyceny cyklicznej, gdy fala budowy centrów danych minie.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: 3–4% portfela.</strong> Masz 2,9% — jakość spółki uzasadniałaby więcej, ale <strong>skoro to kolejna pozycja w temacie AI, nie zwiększałbym jej bez zmniejszenia czegoś innego</strong></li>
+        <li><strong>Nie dokupywać przy obecnej cenie.</strong> Konsensus daje 13,3% przestrzeni — najmniej ze wszystkich dzisiejszych analiz</li>
+        <li><strong>Dokupienie:</strong> $760–790, przy zejściu do średniej 200-sesyjnej</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $1 000–1 020. Jesteś na plusie 176%, więc zabezpieczenie części tego wyniku jest decyzją o zarządzaniu ryzykiem, nie o tezie</li>
+        <li><strong>Jedna liczba do śledzenia:</strong> <strong>portfel zamówień</strong>. Dziś 72,1 miliarda po wzroście o 92%. Zatrzymanie jego wzrostu będzie pierwszym sygnałem, że fala mija — wcześniejszym niż jakiekolwiek dane o przychodach</li>
+        <li><strong>Wyjście z tezy:</strong> spadek portfela zamówień kwartał do kwartału, obniżenie prognozy sprzedaży zasilania albo sygnały hamowania nakładów u operatorów chmury</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$900 – $1 020</div><div class="fair-value-note">Scenariusz negatywny: $600–680 | Scenariusz pozytywny: $1 150–1 250 | Konsensus 28 analityków: $970,71</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by trzymać</h4><ul>
+          <li><strong>Portfel zamówień $72,1 mld, +92% r/r</strong>, z zamówieniami sięgającymi 2029–2030 i czasami realizacji turbin do 2028–2030 — realna siła cenowa</li>
+          <li><strong>Marża rośnie szybciej niż sprzedaż.</strong> Skorygowana operacyjna 21,9% (+430 pb), zysk na akcję +73%, sprzedaż zasilania +72%</li>
+          <li><strong>Jakość, jakiej w tym portfelu jest niewiele.</strong> ROIC 18,30% wobec kosztu 11,82%, wolne przepływy 12,04% przychodów, 33 lata wzrostu dywidendy, skup akcji</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by nie dokupywać</h4><ul>
+          <li><strong>Spółka cykliczna wyceniana jak wzrostowa.</strong> EV/EBITDA 26,64 przy producencie maszyn; powrót do wyceny cyklicznej oznacza $600–680</li>
+          <li><strong>To nie jest dywersyfikacja.</strong> Po prawidłowym zakwalifikowaniu ekspozycja portfela na temat AI rośnie z 49,1% do 52,0%</li>
+          <li><strong>Konsensus daje tylko 13,3% przestrzeni</strong>, a kurs jest już 6,1% poniżej średniej 50-sesyjnej po rajdzie o 107%</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> spadek portfela zamówień kwartał do kwartału albo sygnały hamowania nakładów u operatorów chmury → powrót do wyceny cyklicznej, $600–680.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> dalszy wzrost portfela przy marży operacyjnej powyżej 22% → droga ku $1 020 i wyżej.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead" style="border-color:var(--ocena-sprzedaz)">Najważniejszy wniosek z tej analizy nie dotyczy samego Caterpillara, tylko Twojego portfela. <strong>Ta pozycja wyglądała na przemysłową przeciwwagę dla koncentracji technologicznej, a jest kolejnym zakładem na tę samą falę.</strong> Kurs wzrósł o 107% w rok nie dzięki koparkom, tylko dlatego, że sprzedaż generatorów i turbin do zasilania centrów danych wzrosła o 72%, a portfel zamówień skoczył o 92% do rekordowych 72,1 miliarda dolarów. Po prawidłowym zakwalifikowaniu tej spółki <strong>Twoja ekspozycja na temat mocy obliczeniowej dla AI rośnie z 49,1% do 52,0% wartości akcji</strong> — przekracza połowę portfela.</p>
+
+      <p class="sum-lead">Sama spółka wypada przy tym bardzo dobrze i to trzeba powiedzieć jasno. Drugi kwartał przyniósł <strong>pierwsze w historii przychody powyżej 20 miliardów dolarów</strong>, skorygowany zysk na akcję wyższy o 73% i marżę operacyjną rozszerzoną o 430 punktów bazowych do 21,9%. Zwrot z zainwestowanego kapitału wynosi 18,30% przy jego koszcie 11,82% — to trzecia najlepsza relacja w Twoim portfelu. Wolne przepływy sięgają 8,99 miliarda przy marży 12,04%, a spółka podnosi dywidendę nieprzerwanie od trzydziestu trzech lat i skupuje własne akcje w tempie 2,67% rocznie.</p>
+
+      <p class="sum-lead" style="border-color:var(--text-muted)">Warto też docenić rzecz, która po dzisiejszych analizach wydaje się rzadka: <strong>zysk Caterpillara pochodzi z prowadzenia biznesu</strong>. Wynik operacyjny to 13,94 miliarda, przed opodatkowaniem 14,11 miliarda — różnica minimalna. U Amazona poniżej linii operacyjnej przybywa 81 miliardów z przeszacowań, u IREN cały zysk netto pochodzi spoza działalności, u Sibanye ubywa 632 miliony. Tutaj wskaźniki wyceny można czytać wprost.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Popyt jest zakontraktowany.</strong> Portfel $72,1 mld (+92% r/r), zamówienia sięgają 2029–2030, czasy realizacji turbin do 2028–2030.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Marża rośnie szybciej niż sprzedaż.</strong> Skorygowana operacyjna 21,9% (+430 pb), zysk na akcję +73% przy przychodach +24%.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Kapitał pracuje efektywnie.</strong> ROIC 18,30% wobec WACC 11,82%, wolne przepływy $8,99 mld, Altman 4,44, pokrycie odsetek 26,35.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Zysk jest czysty.</strong> Wynik przed opodatkowaniem niemal równy operacyjnemu — bez przeszacowań zniekształcających obraz.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Odbudowa 1,5 GW zdolności wytwórczej.</strong> Pierwsze dostawy w Q4, osiemnastomiesięczny rozruch. Opóźnienie przesuwa realizację portfela.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Rola dywersyfikatora.</strong> To nie jest przeciwwaga dla tezy AI — to jej część, i to podnosząca koncentrację powyżej połowy portfela.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>4 sierpnia 2026</td><td>Wyniki Q2 — już opublikowane</td><td>Rekordowe $20,5 mld, portfel $72,1 mld, prognoza podniesiona</td></tr>
+            <tr><td><strong>Koniec października 2026</strong></td><td>Wyniki Q3</td><td>Czy portfel zamówień dalej rośnie — to najwcześniejszy sygnał o kierunku fali</td></tr>
+            <tr><td>Q4 2026</td><td>Pierwsze dostawy z odbudowanej platformy 10 MW</td><td>Początek osiemnastomiesięcznego rozruchu 1,5 GW mocy wytwórczej</td></tr>
+            <tr><td>26–27 sierpnia</td><td>Wyniki NVIDII, Marvella i IREN</td><td>Nie dotyczą CAT bezpośrednio, ale wyznaczą nastawienie do całego tematu</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Portfel zamówień</strong></td><td>$72,1 mld (+92% r/r)</td><td>spadek kwartał do kwartału</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Sprzedaż zasilania</td><td>+72% r/r</td><td>&lt; 25%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Skorygowana marża operacyjna</td><td>21,9% (+430 pb)</td><td>&lt; 18%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>ROIC vs koszt kapitału</td><td>18,30% vs 11,82%</td><td>zawężenie poniżej 3 pkt proc.</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>EV/EBITDA</strong></td><td>26,64×</td><td>—</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Udział w temacie AI</td><td>portfel łącznie 52,0%</td><td>powyżej 55%</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji: 3–4% portfela.</strong> Masz 2,9%. Jakość spółki uzasadniałaby więcej, ale nie przy 52% już ulokowanych w tej samej tezie</li>
+          <li><strong>Nie dokupywać przy obecnej cenie</strong> — konsensus daje 13,3% przestrzeni, najmniej z dzisiejszych analiz</li>
+          <li><strong>Dokupienie:</strong> $760–790, przy zejściu do średniej 200-sesyjnej</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie $1 000–1 020. Jesteś na plusie 176%</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> portfel zamówień. Jego zatrzymanie będzie sygnałem wcześniejszym niż jakiekolwiek dane o przychodach</li>
+          <li><strong>Uwaga portfelowa:</strong> CAT, OKLO i ASPI to razem około 6,8% na wąskiej tezie o niedoborze energii dla centrów danych. Caterpillar realizuje ją dziś zamówieniami na 72 mld, OKLO obiecuje w przyszłej dekadzie</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">📈 KUPNO — dobra spółka, ale nie ta rola w portfelu, na którą wyglądała</div>
+        <p>Caterpillar zrobił coś, czego nikt po nim nie oczekiwał: stał się jednym z głównych beneficjentów budowy infrastruktury dla sztucznej inteligencji. Portfel zamówień na 72,1 miliarda dolarów, sprzedaż zasilania rosnąca o 72%, marża rozszerzona o 430 punktów bazowych i czasy realizacji sięgające 2030 roku to zestaw, który uzasadnia dzisiejszą wycenę. Do tego dochodzi jakość, jakiej w tym portfelu jest niewiele — zwrot z kapitału 18,30% przy koszcie 11,82%, trzydzieści trzy lata wzrostu dywidendy i zysk, którego nie trzeba korygować o pozycje jednorazowe.</p>
+        <p>Ale trzeba wiedzieć, co się posiada. <strong>To spółka cykliczna wyceniana jak wzrostowa</strong> — przy 26,64-krotności EBITDA powrót do normalnej wyceny producenta maszyn oznacza kurs w rejonie 600–680 dolarów. I co ważniejsze: <strong>trzymając Caterpillara, nie masz przemysłowej przeciwwagi dla technologii, tylko kolejny zakład na tę samą falę</strong>. Twoja ekspozycja na temat AI przekracza po tej korekcie połowę portfela.</p>
+        <p><strong>Trzymać, nie dokupywać, rozważyć realizację części zysku powyżej 1 000 dolarów.</strong> A przy okazji przyjąć do wiadomości, że dywersyfikacja tego portfela opiera się dziś praktycznie wyłącznie na Sibanye, Novo Nordisk i UnitedHealth.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$900–1 020</b></div>
+          <div><span>Scenariusz negatywny</span><b>$600–680</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$1 150–1 250</b></div>
+          <div><span>Sugerowana pozycja</span><b>3–4% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3 — koniec października</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 sierpnia 2026 | Cena: $856,57 (zamknięcie 14.08.2026) | Pierwsza analiza CAT | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 17.08.2026</strong>, Caterpillar IR (wyniki Q2 2026, 4 sierpnia) | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
