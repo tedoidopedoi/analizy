@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APH — Amphenol | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: APH</div>
+    <div class="company-name">Amphenol Corporation</div>
+    <div class="company-sub">Złącza i systemy połączeń · miedziane i optyczne łącza dla centrów danych · Wallingford, Connecticut</div>
+    <div class="header-meta">
+      <span class="meta-tag">Zamówienia +94% r/r</span>
+      <span class="meta-tag">IT datacom +89%</span>
+      <span class="meta-tag">Marża operacyjna 29,8%</span>
+      <span class="meta-tag">ROIC 20,2% vs WACC 10,3%</span>
+      <div class="price-display">
+        <div class="price-main">$153,11</div>
+        <div class="price-sub">zamknięcie 20.08.2026 | +39% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Moc obliczeniowa dla AI</span><span class="temat">Półprzewodniki</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — rekordowy kwartał, a kurs się cofnął">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">najlepszy moment z dzisiejszej serii</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$175 – $200</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">+14% do +31%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>29 lipca 2026</b><em>Q3 — koniec października</em></div>
+    <div class="rb-right">Pozycja 2–3% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (20.08.2026)</div><div class="metric-value">$153,11</div><div class="metric-detail">+39,2% w 52 tyg. | 5% pod średnią 50-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$188,8 mld</div><div class="metric-detail">EV $202,2 mld | 1,23 mld akcji</div></div>
+    <div class="metric-card"><div class="metric-label">Zamówienia Q2 2026</div><div class="metric-value em">$10,73 mld</div><div class="metric-detail">+94% r/r | wskaźnik zamówień do sprzedaży 1,23</div></div>
+    <div class="metric-card"><div class="metric-label">IT datacom</div><div class="metric-value green">+89% r/r</div><div class="metric-detail">43% przychodów kwartału, organicznie +63%</div></div>
+    <div class="metric-card"><div class="metric-label">Marża operacyjna</div><div class="metric-value green">29,8%</div><div class="metric-detail">Rekord, wzrost o 420 punktów bazowych</div></div>
+    <div class="metric-card"><div class="metric-label">ROIC vs koszt kapitału</div><div class="metric-value green">20,2% vs 10,3%</div><div class="metric-detail">Przewaga 9,9 pkt proc.</div></div>
+    <div class="metric-card"><div class="metric-label">RSI (14)</div><div class="metric-value yellow">41,14</div><div class="metric-detail">Najniżej z całej dzisiejszej serii</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (17 analityków)</div><div class="metric-value green">$191,88</div><div class="metric-detail">+25,3% | mocne kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Czym jest Amphenol</h3>
+      <p>Amphenol produkuje <strong>złącza i systemy połączeń</strong> — kable, wtyki, gniazda i moduły optyczne, którymi łączy się urządzenia elektroniczne. To biznes niepozorny i ogromny zarazem: 170 tysięcy pracowników, 29,01 miliarda dolarów przychodu i czternaście lat nieprzerwanego wzrostu dywidendy.</p>
+      <p>Twoja pozycja to 20 akcji po średniej 140,25 dolara — jesteś na plusie <strong>9,2%</strong>, co daje 2,3% portfela.</p>
+
+      <div class="alert alert-warn"><strong>Warto od razu odnotować, co się stało z kursem w ciągu ostatnich dwóch tygodni.</strong> Jeszcze 11 sierpnia akcje kosztowały 168,02 dolara, a dziś 153,11 — <strong>spadek o 8,9% w dziewięć dni</strong>, i to po kwartale, który był pod każdym względem rekordowy. Twój wynik obsunął się przez to z około 20% do 9,2%. Kurs znalazł się 4,8% poniżej średniej pięćdziesięciosesyjnej, a wskaźnik RSI wynosi <strong>41,14 — najniżej ze wszystkich spółek, które dziś analizowałem</strong>.</div>
+
+      <h3>Co pokazał drugi kwartał 2026 — wyniki z 29 lipca</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026</th><th>Dynamika</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td><strong>$8,76 mld</strong></td><td style="color:var(--ocena-kupno)">Rekord; o 5,3% powyżej oczekiwań</td></tr>
+          <tr><td>Sprzedaż organiczna</td><td>—</td><td style="color:var(--ocena-kupno)">+30% r/r</td></tr>
+          <tr><td>Skorygowany zysk na akcję</td><td><strong>$1,35</strong></td><td style="color:var(--ocena-kupno)">+67% wobec $0,81 rok wcześniej</td></tr>
+          <tr><td><strong>Skorygowana marża operacyjna</strong></td><td><strong>29,8%</strong></td><td style="color:var(--ocena-kupno)">Rekord; +420 punktów bazowych r/r</td></tr>
+          <tr><td><strong>IT datacom</strong></td><td>43% przychodów kwartału</td><td style="color:var(--ocena-kupno)"><strong>+89% r/r</strong>, organicznie +63%</td></tr>
+          <tr><td><strong>Zamówienia</strong></td><td><strong>$10,73 mld</strong></td><td style="color:var(--ocena-kupno)">+94% r/r, +14% kw/kw — rekord</td></tr>
+          <tr><td>Zamówienia do sprzedaży</td><td>1,23 : 1</td><td style="color:var(--ocena-kupno)">Portfel rośnie szybciej niż wysyłki</td></tr>
+          <tr><td>Przejęcie CommScope</td><td>prognoza podniesiona</td><td style="color:var(--ocena-kupno)">Do $4,6 mld sprzedaży i $0,30 na akcję z $4,1 mld i $0,15</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Ta tabela nie ma ani jednej słabej pozycji.</strong> Przychody rekordowe i powyżej oczekiwań, sprzedaż organiczna plus 30%, zysk na akcję plus 67%, marża operacyjna najwyższa w historii spółki. Najmocniejszy jest jednak przedostatni wiersz: <strong>zamówienia sięgnęły 10,73 miliarda dolarów przy sprzedaży 8,76 miliarda</strong>, co daje wskaźnik zamówień do sprzedaży 1,23. Klienci zamawiają o 23% szybciej, niż spółka jest w stanie wysyłać — i to niemal w całości za sprawą <strong>miedzianych i optycznych łączy dla sztucznej inteligencji</strong>.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Opis</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>IT datacom</strong></td><td>Łącza miedziane i optyczne wewnątrz centrów danych</td><td style="color:var(--ocena-kupno)">43% przychodów, +89% r/r</td></tr>
+          <tr><td><strong>CommScope Connectivity</strong></td><td>Przejęty biznes połączeń sieciowych</td><td style="color:var(--ocena-kupno)">Marża segmentu już powyżej 20%; prognoza podniesiona</td></tr>
+          <tr><td>Motoryzacja</td><td>Złącza dla pojazdów, w tym elektrycznych</td><td>Stabilna baza</td></tr>
+          <tr><td>Przemysł i lotnictwo</td><td>Rozwiązania dla warunków ekstremalnych</td><td>Wysokomarżowe nisze</td></tr>
+          <tr><td>Sieci mobilne</td><td>Komponenty dla infrastruktury telekomunikacyjnej</td><td>Rynek dojrzały</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — tysiąc małych rzeczy, których nikt nie chce robić</h3>
+      <p>Amphenol nie ma jednego przełomowego produktu. Ma <strong>dziesiątki tysięcy pozycji katalogowych</strong>, z których każda jest tania, a wszystkie razem są niezbędne. Złącze kosztujące kilka dolarów bywa jedynym elementem, którego brak zatrzymuje montaż serwera za sto tysięcy. To daje siłę cenową nieproporcjonalną do wartości samego komponentu.</p>
+      <div class="alert alert-info"><strong>W erze sztucznej inteligencji ta pozycja stała się nagle znacznie cenniejsza.</strong> Klaster obliczeniowy to dziesiątki tysięcy połączeń o bardzo wysokiej przepustowości — miedzianych na krótkich dystansach, optycznych na dłuższych. Im gęstsze upakowanie mocy w szafie, tym trudniejsze wymagania wobec złącza. <strong>Marża operacyjna wzrosła o 420 punktów bazowych do rekordowych 29,8%</strong>, co pokazuje, że Amphenol sprzedaje dziś nie tylko więcej, ale i drożej.</div>
+      <p>Drugim filarem strategii są przejęcia. Spółka od dekad kupuje mniejszych producentów i włącza ich w swoją strukturę — ostatnio biznes połączeń CommScope, którego <strong>prognozę podniesiono z 4,1 do 4,6 miliarda dolarów sprzedaży</strong>, a wkład w zysk na akcję z 15 do 30 centów. Marża tego segmentu przekroczyła już 20%.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Gęstość połączeń w centrach danych rośnie szybciej niż sama moc obliczeniowa</strong> — każdy kolejny akcelerator wymaga wielu łączy o wysokiej przepustowości</li>
+        <li><strong>Przejście z miedzi na optykę</strong> — na dłuższych dystansach wewnątrz centrum danych; Amphenol sprzedaje jedno i drugie, więc na tej zmianie nie traci</li>
+        <li><strong>Nakłady operatorów chmury</strong> — Amazon 220 mld, Alphabet około 200 mld dolarów; to ci sami klienci, którzy napędzają Marvella, Caterpillara i Samsunga w Twoim portfelu</li>
+        <li><strong>Konsolidacja branży złącz</strong> — Amphenol jest jednym z aktywniejszych kupujących, czego dowodem CommScope</li>
+        <li><strong>Cykliczność motoryzacji i przemysłu</strong> — pozostałe segmenty pozostają wrażliwe na koniunkturę, co łagodzi, ale i rozcieńcza efekt boomu w centrach danych</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Stan</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zamówienia do sprzedaży</strong></td><td><strong>1,23 : 1</strong></td><td style="color:var(--ocena-kupno)">Portfel rośnie o 23% szybciej niż wysyłki</td></tr>
+          <tr><td>Zamówienia w kwartale</td><td>$10,73 mld</td><td style="color:var(--ocena-kupno)">+94% r/r, +14% kw/kw</td></tr>
+          <tr><td>Udział IT datacom</td><td>43% przychodów</td><td style="color:var(--ocena-uwaga)">Rok temu było znacznie mniej</td></tr>
+          <tr><td>Udział instytucji</td><td><strong>96,51%</strong></td><td>Osoby powiązane: 0,53%</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$170,7 tys.</td><td style="color:var(--ocena-uwaga)">Zysk na pracownika: $30,3 tys.</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>1,25% akcji</td><td style="color:var(--ocena-kupno)">Niska i malejąca</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Wzrost udziału IT datacom do 43% przychodów to zjawisko o dwóch obliczach.</strong> Z jednej strony napędza dziś cały wynik — sprzedaż tego segmentu wzrosła o 89%, a marża spółki osiągnęła rekord. Z drugiej <strong>Amphenol przestaje być zdywersyfikowanym producentem komponentów, a staje się w coraz większym stopniu dostawcą dla centrów danych</strong>. Rok temu ten segment ważył znacznie mniej. Jeśli nakłady na sztuczną inteligencję wyhamują, pozostałe rynki — motoryzacja, przemysł, lotnictwo — nie zrównoważą ubytku.</div>
+      <p>Zwróć uwagę na udział instytucji: <strong>96,51%</strong>. To jedna z najwyższych wartości w Twoim portfelu i oznacza, że kurs jest niemal w całości kształtowany przez decyzje funduszy, a nie inwestorów indywidualnych.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 mies.)</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$29,01 mld</td><td>Q2: $8,76 mld, rekord</td></tr>
+          <tr><td>Zysk brutto</td><td>$11,30 mld</td><td>Marża 38,95%</td></tr>
+          <tr><td><strong>Zysk operacyjny</strong></td><td style="color:var(--ocena-kupno)"><strong>$8,16 mld</strong></td><td>Marża 28,13%; w Q2 skorygowana 29,8%</td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td>$7,32 mld</td><td style="color:var(--ocena-uwaga)">O $840 mln niżej — koszty odsetek</td></tr>
+          <tr><td>Zysk netto</td><td>$5,14 mld</td><td>EPS $4,00; stopa podatkowa 29,17%</td></tr>
+          <tr><td>Przepływy operacyjne</td><td>$5,87 mld</td><td>Nakłady $1,16 mld</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>$4,71 mld</strong></td><td>Marża 16,25%, $3,82 na akcję</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Struktura wyniku jest tu czysta, z jednym zastrzeżeniem.</strong> Między zyskiem operacyjnym 8,16 miliarda a wynikiem przed opodatkowaniem 7,32 miliarda ubywa 840 milionów dolarów — to koszty odsetek od długu zaciągniętego na przejęcia. Nie jest to poziom niepokojący przy pokryciu odsetek 12,91, ale warto wiedzieć, że <strong>strategia przejęć ma swoją cenę w rachunku wyników</strong>.</p>
+      <div class="alert alert-info"><strong>Marża operacyjna 28,13% zasługuje na docenienie w kontekście branży.</strong> Amphenol produkuje komponenty — biznes, w którym typowa marża wynosi kilkanaście procent. Caterpillar, też producent, ma 18,65%. Nokia, sprzedająca sprzęt sieciowy, ma 8,97%. <strong>Amphenol osiąga 28,13%, a w ostatnim kwartale rekordowe 29,8%</strong>, i to przy 170 tysiącach pracowników. To świadczy o sile cenowej, jakiej producent złącz normalnie nie ma.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $153,11</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$188,78 mld</td><td>EV $202,17 mld</td></tr>
+          <tr><td>P/E bieżące</td><td>38,30×</td><td style="color:var(--ocena-uwaga)">EPS $4,00</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>26,10×</strong></td><td style="color:var(--ocena-kupno)">Wyraźnie niżej — zysk szybko rośnie</td></tr>
+          <tr><td><strong>PEG</strong></td><td><strong>1,35</strong></td><td style="color:var(--ocena-uwaga)">Prognoza wzrostu zysku +30,50%</td></tr>
+          <tr><td>P/S</td><td>6,51× (forward 4,89×)</td><td style="color:var(--ocena-uwaga)">Wysoko jak na producenta komponentów</td></tr>
+          <tr><td>EV/EBITDA</td><td>21,36×</td><td style="color:var(--ocena-uwaga)">Niżej niż Caterpillar (26,64×)</td></tr>
+          <tr><td>P/FCF</td><td>40,05×</td><td style="color:var(--ocena-uwaga)">EV/FCF 42,89</td></tr>
+          <tr><td>P/B</td><td>12,18×</td><td style="color:var(--ocena-sprzedaz)">Efekt przejęć i skupu akcji</td></tr>
+          <tr><td><strong>ROIC vs WACC</strong></td><td style="color:var(--ocena-kupno)"><strong>20,19% vs 10,34%</strong></td><td>Przewaga 9,9 pkt proc.</td></tr>
+          <tr><td>ROE</td><td style="color:var(--ocena-kupno)">38,12%</td><td>Pokrycie odsetek 12,91</td></tr>
+          <tr><td>Altman Z-Score</td><td style="color:var(--ocena-kupno)">5,16</td><td>Piotroski 5 na 9</td></tr>
+          <tr><td>Dywidenda</td><td>$1,00 · 0,65%</td><td style="color:var(--ocena-kupno)">Wzrost o 51,52%, 14 lat z rzędu</td></tr>
+          <tr><td>Konsensus (17 analityków)</td><td>$191,88 · mocne kupno</td><td style="color:var(--ocena-kupno)">+25,3%</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing</td><td>38,30×</td><td>EPS $4,00 za ostatnie 12 miesięcy</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>26,10×</strong></td><td>Implikuje EPS około $5,87</td></tr>
+          <tr><td>Skorygowany EPS w Q2</td><td>$1,35 (+67% r/r)</td><td style="color:var(--ocena-kupno)">Tempo roczne powyżej $5,40 i rosnące</td></tr>
+          <tr><td><strong>PEG</strong></td><td><strong>1,35</strong></td><td>Wzrost zysku +30,50%, przychodów +26,51%</td></tr>
+          <tr><td>Caterpillar (odniesienie)</td><td>forward P/E 29,79, PEG 1,64</td><td style="color:var(--ocena-uwaga)">Drożej przy podobnej tezie</td></tr>
+          <tr><td>ASML (odniesienie)</td><td>forward P/E 30,82, PEG 0,78</td><td style="color:var(--ocena-kupno)">Drożej, ale przy trzykrotnie wyższym ROIC</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> wskaźnik przyszłego zysku 26,10 przy wzroście zysku o 30,50% rocznie daje PEG 1,35 — <strong>rozsądnie, choć nie tanio</strong>. Bardziej przekonuje mnie zestawienie z resztą Twojego koszyka związanego ze sztuczną inteligencją: Amphenol jest <strong>tańszy od Caterpillara (29,79) i Marvella (48,83), przy zwrocie z kapitału wyższym niż u obu</strong>. A skorygowany zysk na akcję w drugim kwartale wyniósł 1,35 dolara, co daje tempo roczne powyżej 5,40 — więcej, niż implikuje prognozowany wskaźnik.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$175 – $200</div><div class="fair-value-note">Baza: 27–31× zysku prognozowanego na 2027 (ok. $6,50 na akcję przy annualizacji skorygowanego wyniku z Q2 i dalszym wzroście) przy utrzymaniu marży operacyjnej powyżej 28% oraz realizacji portfela zamówień | Konsensus 17 analityków: $191,88 („mocne kupno”) — mieści się w przedziale | Scenariusz negatywny (spowolnienie nakładów na AI, problemy z integracją CommScope, cofnięcie marży do 24%): $105–125 | Scenariusz pozytywny (utrzymanie tempa zamówień i marży powyżej 30%): $235–255 | Przy $153,11 potencjał od -31% do +67%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Amphenol</th><th>Caterpillar</th><th>Marvell</th><th>Nokia</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto</td><td>38,95%</td><td>29,71%</td><td>51,50%</td><td>45,50%</td></tr>
+          <tr><td><strong>Marża operacyjna</strong></td><td style="color:var(--ocena-kupno)"><strong>28,13%</strong></td><td>18,65%</td><td>16,41%</td><td>8,97%</td></tr>
+          <tr><td>Marża wolnych przepływów</td><td>16,25%</td><td>12,04%</td><td>19,10%</td><td style="color:var(--ocena-sprzedaz)">2,62%</td></tr>
+          <tr><td><strong>ROIC</strong></td><td style="color:var(--ocena-kupno)"><strong>20,19%</strong></td><td>18,30%</td><td style="color:var(--ocena-sprzedaz)">6,87%</td><td style="color:var(--ocena-sprzedaz)">6,41%</td></tr>
+          <tr><td>Koszt kapitału</td><td>10,34%</td><td>11,82%</td><td>16,25%</td><td>8,19%</td></tr>
+          <tr><td><strong>Różnica ROIC–WACC</strong></td><td style="color:var(--ocena-kupno)"><strong>+9,9 pkt</strong></td><td style="color:var(--ocena-kupno)">+6,5 pkt</td><td style="color:var(--ocena-sprzedaz)">-9,4 pkt</td><td style="color:var(--ocena-sprzedaz)">-1,8 pkt</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Amphenol ma tu najwyższą marżę operacyjną z całej czwórki</strong>, mimo że sprzedaje produkt najbardziej przyziemny. Marvell projektuje układy scalone i osiąga 16,41%, Nokia sprzedaje sprzęt sieciowy i osiąga 8,97% — a producent złącz zarabia 28,13%. To wynik dekad konsolidacji rozdrobnionego rynku i pozycji, w której pojedyncze złącze bywa wąskim gardłem całego montażu.</p>
+      <div class="alert alert-success"><strong>Rozszerzenie marży o 420 punktów bazowych do rekordowych 29,8% w jednym kwartale to zjawisko warte uwagi.</strong> Spółka podała, że wynika ono głównie z dźwigni operacyjnej na wyższym wolumenie, przy niewielkim wsparciu 80 milionów dolarów z tytułu zwrotów celnych. Oznacza to, że <strong>przyrost sprzedaży spływa na zysk w bardzo wysokim stopniu</strong> — a przy wskaźniku zamówień do sprzedaży 1,23 ten wolumen ma się z czego brać jeszcze przez kilka kwartałów.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$5,42 mld</td><td>Kapitał obrotowy $8,38 mld</td></tr>
+          <tr><td>Zadłużenie</td><td>$18,81 mld</td><td style="color:var(--ocena-uwaga)">Dług netto -$13,39 mld</td></tr>
+          <tr><td><strong>Zaciągnięty dług netto</strong></td><td style="color:var(--ocena-uwaga)"><strong>+$10,88 mld</strong></td><td>W ciągu 12 miesięcy — sfinansowanie przejęć</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-uwaga)">1,20</td><td>Podwyższone po CommScope</td></tr>
+          <tr><td><strong>Dług / EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>1,95</strong></td><td>Bezpieczny poziom lewarowania</td></tr>
+          <tr><td>Pokrycie odsetek</td><td style="color:var(--ocena-kupno)">12,91</td><td>Solidnie</td></tr>
+          <tr><td>Wskaźnik bieżącej płynności</td><td>1,89</td><td style="color:var(--ocena-kupno)">Szybki 1,29</td></tr>
+          <tr><td>Altman Z-Score</td><td style="color:var(--ocena-kupno)">5,16</td><td>Powyżej progu 3</td></tr>
+          <tr><td>Dywidenda</td><td>14 lat wzrostu</td><td style="color:var(--ocena-kupno)">Podwyżka o 51,52%, wypłata 25,02%</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Wiersz trzeci jest tu najważniejszy.</strong> W ciągu ostatnich dwunastu miesięcy Amphenol zaciągnął netto <strong>10,88 miliarda dolarów długu</strong> — to finansowanie przejęcia biznesu połączeń CommScope. Zadłużenie do kapitału własnego wzrosło do 1,20, a dług netto wynosi minus 13,39 miliarda. <strong>Na razie wygląda to na dobrze wykorzystane pieniądze</strong>: prognoza przejętego biznesu została podniesiona z 4,1 do 4,6 miliarda sprzedaży, wkład w zysk na akcję z 15 do 30 centów, a marża segmentu przekroczyła 20%. Ale dopóki integracja nie dobiegnie końca, jest to element ryzyka, którego rok temu w tej spółce nie było.</div>
+      <p>Uspokajające są dwie liczby: <strong>dług do EBITDA na poziomie 1,95 i pokrycie odsetek 12,91</strong>. Dla porównania CoreWeave ma odpowiednio 9,22 i minus 0,11. Amphenol jest zadłużony, ale w sposób, który obsługuje bez wysiłku.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📦</div><div class="catalyst-body"><h4>Zamówienia $10,73 mld, wskaźnik do sprzedaży 1,23</h4><p>Wzrost o 94% rok do roku i 14% kwartał do kwartału. Klienci zamawiają o niemal jedną czwartą szybciej, niż spółka wysyła — portfel rośnie.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔌</div><div class="catalyst-body"><h4>IT datacom +89% r/r, organicznie +63%</h4><p>Segment stanowi już 43% przychodów, a jego wzrost jest niemal w całości związany z miedzianymi i optycznymi łączami dla sztucznej inteligencji.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Rekordowa marża operacyjna 29,8%</h4><p>Wzrost o 420 punktów bazowych rok do roku, głównie z dźwigni operacyjnej. Zysk na akcję wyższy o 67% przy sprzedaży organicznej +30%.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🤝</div><div class="catalyst-body"><h4>Przejęcie CommScope dowozi szybciej niż zakładano</h4><p>Prognoza podniesiona z $4,1 do $4,6 mld sprzedaży, wkład w zysk z $0,15 do $0,30 na akcję, marża segmentu już powyżej 20%.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Kurs cofnął się mimo rekordów</h4><p>Spadek o 8,9% od 11 sierpnia, RSI 41,14, kurs 4,8% poniżej średniej 50-sesyjnej. Konsensus 17 analityków wskazuje $191,88, czyli 25,3% wyżej.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🔗</div><div class="catalyst-body"><h4>43% przychodów z jednego tematu</h4><p>IT datacom przestał być dodatkiem, a stał się rdzeniem. Jeśli nakłady na sztuczną inteligencję wyhamują, motoryzacja i przemysł tego nie zrównoważą.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏦</div><div class="catalyst-body"><h4>Zaciągnięto netto $10,88 mld długu</h4><p>Dług do kapitału własnego wzrósł do 1,20, a odsetki zabierają $840 mln rocznie z zysku operacyjnego. Integracja CommScope wciąż trwa.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Marża 29,8% to poziom rekordowy, nie normalny</h4><p>W rozszerzeniu marży pomogło 80 mln dolarów zwrotów celnych. Powrót do historycznych poziomów oznaczałby wyraźnie niższy zysk przy tej samej sprzedaży.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💰</div><div class="catalyst-body"><h4>Wycena wciąż wymagająca</h4><p>P/S 6,51 i P/FCF 40,05 przy producencie komponentów, P/B 12,18. PEG 1,35 oznacza, że płacisz nieco więcej niż punkt wyceny za punkt wzrostu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔁</div><div class="catalyst-body"><h4>Kolejna pozycja w tej samej tezie</h4><p>Amphenol dokłada się do 52% portfela ulokowanych w temacie mocy obliczeniowej dla AI. To nie jest dywersyfikacja wobec Marvella, Caterpillara czy CoreWeave.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>Rola</th><th>Relacja do Amphenola</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Amphenol</strong></td><td>Złącza i systemy połączeń</td><td>Marża operacyjna 28,13%, ROIC 20,19%</td></tr>
+          <tr><td><strong>TE Connectivity</strong></td><td>Najbliższy odpowiednik</td><td style="color:var(--ocena-uwaga)">Podobna skala, ten sam rynek</td></tr>
+          <tr><td>Molex</td><td>Złącza, część Koch Industries</td><td>Prywatna, brak porównania rynkowego</td></tr>
+          <tr><td><strong>Coherent, Lumentum</strong></td><td>Komponenty optyczne</td><td style="color:var(--ocena-uwaga)">Obie masz w obserwowanych — sąsiedni segment</td></tr>
+          <tr><td>Marvell, Broadcom</td><td>Krzem dla centrów danych</td><td>Klienci i partnerzy, nie konkurenci</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Amphenol zajmuje w łańcuchu wartości miejsce niedoceniane i całkiem wygodne.</strong> Nie konkuruje z Marvellem ani NVIDIĄ — sprzedaje im i ich klientom to, bez czego ich układy nie zadziałają w szafie serwerowej. Nie musi wygrać żadnego wyścigu technologicznego; wystarczy, że centra danych powstają. <strong>To jest ekspozycja na budowę infrastruktury AI bez zakładania się, który producent układów wygra</strong> — podobnie jak Caterpillar, tylko na innym poziomie stosu.</p>
+      <p style="margin-top:10px">W Twoim portfelu Amphenol, Caterpillar i pośrednio Samsung reprezentują tę samą logikę: <strong>zarabiać na budowie, nie na rozstrzygnięciu</strong>. To najbezpieczniejsza forma ekspozycji na ten temat — i jednocześnie kolejny powód, dla którego łączna waga tematu sięga u Ciebie 52%.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$153,11</strong></td><td>+39,22% w 52 tygodnie</td></tr>
+          <tr><td>Kurs z 11 sierpnia</td><td>$168,02</td><td style="color:var(--ocena-sprzedaz)">Spadek o 8,9% w dziewięć dni</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$160,77</td><td style="color:var(--ocena-uwaga)">Kurs 4,8% poniżej</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$144,54</td><td style="color:var(--ocena-kupno)">Kurs 5,9% powyżej</td></tr>
+          <tr><td><strong>RSI (14)</strong></td><td style="color:var(--ocena-kupno)"><strong>41,14</strong></td><td>Najniżej z dzisiejszej serii — blisko wyprzedania</td></tr>
+          <tr><td>Beta</td><td>1,25</td><td>Umiarkowana</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>1,25% akcji</td><td style="color:var(--ocena-kupno)">Spadek z 15,99 do 15,42 mln</td></tr>
+          <tr><td>Wsparcie S1</td><td>$144,54</td><td>Średnia 200-sesyjna</td></tr>
+          <tr><td>Opór R1</td><td>$160,77</td><td>Średnia 50-sesyjna</td></tr>
+          <tr><td>Opór R2</td><td>$192</td><td>Konsensus analityków</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Odzyskanie średniej 50-sesyjnej ($160,77)</li><li>Utrzymanie tempa zamówień w Q3</li><li>Droga ku $175 i celowi analityków $192</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Sygnały hamowania nakładów na centra danych</li><li>Przebicie średniej 200-sesyjnej ($144,54)</li><li>Zejście ku $105–125</li></ul></div>
+      </div>
+      <p><strong>To najciekawszy technicznie moment z całej dzisiejszej serii.</strong> Spółka pokazała rekordowe wyniki 29 lipca, a kurs od tego czasu spadł — 8,9% w samych ostatnich dziewięciu dniach. RSI 41,14 jest najniższy ze wszystkich siedmiu analizowanych dziś spółek. <strong>Rozejście się wyników i kursu bywa albo okazją, albo sygnałem, że rynek wie coś, czego nie widać w raporcie.</strong> Przy wskaźniku zamówień do sprzedaży 1,23 i podniesionej prognozie CommScope skłaniam się ku pierwszej interpretacji.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">RSI 41,14, kurs 4,8% pod średnią 50-sesyjną po spadku o 8,9% mimo rekordowego kwartału. Najlepsza relacja ceny do świeżych wyników w całej dzisiejszej serii.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Zamówienia +94% przy wskaźniku 1,23 do sprzedaży, marża rekordowa, CommScope dowozi szybciej niż zakładano. Konsensus $191,88.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">ROIC 20,19% wobec kosztu 10,34%, 14 lat wzrostu dywidendy, sprawdzony model konsolidacji rynku. Ryzykiem jest 43% przychodów z jednego tematu.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: 2–3% portfela.</strong> Masz 2,3% — jakość i moment uzasadniałyby więcej, ale to kolejna pozycja w temacie ważącym już 52%</li>
+        <li><strong>To najlepszy moment na dokupienie z całej dzisiejszej serii</strong>, jeśli w ogóle miałbyś coś dokupować w tym temacie. RSI 41,14, kurs pod średnią 50-sesyjną, świeże rekordowe wyniki</li>
+        <li><strong>Dokupienie:</strong> obecne poziomy $150–155; druga transza $144–147 przy średniej 200-sesyjnej</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $190–200</li>
+        <li><strong>Jedna liczba do śledzenia:</strong> <strong>wskaźnik zamówień do sprzedaży</strong>. Dziś 1,23. Zejście poniżej 1,0 oznacza, że portfel przestaje rosnąć — to sygnał wcześniejszy niż jakiekolwiek dane o przychodach</li>
+        <li><strong>Wyjście z tezy:</strong> wskaźnik zamówień do sprzedaży poniżej 1,0, cofnięcie marży operacyjnej poniżej 24% albo problemy z integracją CommScope</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$175 – $200</div><div class="fair-value-note">Scenariusz negatywny: $105–125 | Scenariusz pozytywny: $235–255 | Konsensus 17 analityków: $191,88</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Zamówienia $10,73 mld, +94% r/r</strong>, przy wskaźniku do sprzedaży 1,23 — portfel rośnie szybciej, niż spółka wysyła</li>
+          <li><strong>Rekordowa marża operacyjna 29,8%</strong> (+420 pb) przy zysku na akcję wyższym o 67% i sprzedaży organicznej +30%</li>
+          <li><strong>Kurs spadł o 8,9% mimo rekordów.</strong> RSI 41,14, najniżej z dzisiejszej serii, przy celu analityków 25,3% powyżej ceny</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>43% przychodów z jednego tematu.</strong> IT datacom stał się rdzeniem spółki; pozostałe rynki nie zrównoważą ewentualnego hamowania</li>
+          <li><strong>Zaciągnięto netto $10,88 mld długu</strong> na przejęcia; dług do kapitału 1,20, odsetki zabierają $840 mln rocznie</li>
+          <li><strong>Marża 29,8% jest rekordowa, nie normalna</strong> — pomogło jej 80 mln zwrotów celnych. Powrót do średniej obniżyłby zysk przy tej samej sprzedaży</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> wskaźnik zamówień do sprzedaży poniżej 1,0 albo cofnięcie marży operacyjnej poniżej 24% → zejście w rejon $105–125.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> utrzymanie zamówień powyżej wysyłek przy marży ponad 28% w Q3 → droga ku $192 i wyżej.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Amphenol jest najciekawszym przypadkiem z całej dzisiejszej serii, bo <strong>wyniki i kurs rozeszły się w przeciwnych kierunkach</strong>. 29 lipca spółka pokazała rekordowe przychody 8,76 miliarda dolarów, sprzedaż organiczną wyższą o 30%, zysk na akcję o 67% i najwyższą w historii marżę operacyjną 29,8%. Zamówienia sięgnęły <strong>10,73 miliarda przy wskaźniku do sprzedaży 1,23</strong> — klienci zamawiają o niemal jedną czwartą szybciej, niż spółka jest w stanie wysyłać. A mimo to kurs spadł od 11 sierpnia o <strong>8,9%</strong>, a wskaźnik RSI wynosi 41,14 — najniżej ze wszystkich siedmiu spółek, które dziś przeanalizowałem.</p>
+
+      <p class="sum-lead">Motorem jest segment IT datacom, czyli miedziane i optyczne łącza dla centrów danych. Urósł o <strong>89% rok do roku</strong>, organicznie o 63%, i stanowi już 43% przychodów spółki. Do tego dochodzi przejęcie biznesu połączeń CommScope, którego prognozę podniesiono z 4,1 do 4,6 miliarda sprzedaży, a wkład w zysk na akcję podwojono z 15 do 30 centów. Zwrot z zainwestowanego kapitału wynosi 20,19% przy koszcie 10,34%, a spółka podnosi dywidendę czternasty rok z rzędu — ostatnio o 51,52%.</p>
+
+      <p class="sum-lead" style="border-color:var(--ocena-sprzedaz)">Trzy rzeczy trzeba przy tym nazwać. <strong>Czterdzieści trzy procent przychodów pochodzi dziś z jednego tematu</strong> — Amphenol przestał być zdywersyfikowanym producentem komponentów, a stał się w dużej mierze dostawcą dla centrów danych. Na przejęcia zaciągnięto netto <strong>10,88 miliarda dolarów długu</strong>, przez co zadłużenie do kapitału własnego wzrosło do 1,20, a odsetki zabierają 840 milionów rocznie z zysku operacyjnego. I wreszcie <strong>marża 29,8% jest rekordowa, a nie normalna</strong> — pomogło jej 80 milionów dolarów zwrotów celnych, a powrót do historycznych poziomów obniżyłby zysk przy niezmienionej sprzedaży.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Popyt wyprzedza możliwości wysyłki.</strong> Zamówienia $10,73 mld (+94% r/r) przy wskaźniku do sprzedaży 1,23.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Marża rośnie szybciej niż sprzedaż.</strong> Operacyjna 29,8% (+420 pb), zysk na akcję +67% przy sprzedaży organicznej +30%.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Kapitał pracuje efektywnie.</strong> ROIC 20,19% wobec WACC 10,34%, Altman 5,16, 14 lat wzrostu dywidendy.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Przejęcie dowozi szybciej niż zakładano.</strong> CommScope: prognoza podniesiona do $4,6 mld, marża segmentu powyżej 20%.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Utrzymanie marży bez wsparcia jednorazowego.</strong> W rekordowym kwartale pomogło $80 mln zwrotów celnych.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Dywersyfikacja przychodów.</strong> 43% z IT datacom oznacza, że spółka jest dziś zakładem na centra danych, a nie ich uzupełnieniem.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>29 lipca 2026</td><td>Wyniki Q2 — już opublikowane</td><td>Rekordy na każdym poziomie, zamówienia +94%</td></tr>
+            <tr><td><strong>Koniec października 2026</strong></td><td>Wyniki Q3</td><td>Czy wskaźnik zamówień do sprzedaży utrzyma się powyżej 1,0 i czy marża obroni 28%</td></tr>
+            <tr><td>Na bieżąco</td><td>Integracja CommScope</td><td>Prognoza podniesiona raz; kolejne podniesienie byłoby mocnym sygnałem</td></tr>
+            <tr><td>26–27 sierpnia</td><td>Wyniki NVIDII, Marvella i IREN</td><td>Nie dotyczą APH wprost, ale ustawią nastawienie do całego tematu</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Zamówienia do sprzedaży</strong></td><td>1,23 : 1</td><td>poniżej 1,0</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Wzrost IT datacom</td><td>+89% r/r</td><td>&lt; 25%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża operacyjna</td><td>29,8% skorygowana</td><td>&lt; 24%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>ROIC vs koszt kapitału</td><td>20,19% vs 10,34%</td><td>zawężenie poniżej 5 pkt</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Dług / EBITDA</strong></td><td>1,95</td><td>&gt; 3,0</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Udział IT datacom</td><td>43% przychodów</td><td>powyżej 55%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji: 2–3% portfela.</strong> Masz 2,3% — moment sprzyja zwiększeniu, ale temat waży już 52%</li>
+          <li><strong>Jeśli miałbyś dziś cokolwiek dokupić w tej tezie, to właśnie tę spółkę</strong> — rekordowe wyniki, kurs 4,8% pod średnią 50-sesyjną, RSI 41,14</li>
+          <li><strong>Dokupienie:</strong> obecne poziomy $150–155; druga transza $144–147</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie $190–200</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> wskaźnik zamówień do sprzedaży, dziś 1,23. Zejście poniżej 1,0 to sygnał wcześniejszy niż jakiekolwiek dane o przychodach</li>
+          <li><strong>Uwaga portfelowa:</strong> Amphenol, Caterpillar i Samsung zarabiają na budowie infrastruktury, nie na rozstrzygnięciu, kto wygra wyścig układów. To najbezpieczniejsza forma tej ekspozycji — ale wciąż ta sama ekspozycja</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">📈 KUPNO — rekordowy kwartał przy cofniętym kursie</div>
+        <p>Amphenol pokazał kwartał bez słabego punktu: rekordowe przychody, sprzedaż organiczna plus 30%, zysk na akcję plus 67%, najwyższa w historii marża operacyjna i zamówienia wyższe o 94% przy wskaźniku 1,23 do sprzedaży. Przejęcie CommScope dowozi szybciej, niż zakładano. Zwrot z kapitału wynosi 20,19% przy koszcie 10,34%, a dywidenda rośnie czternasty rok z rzędu.</p>
+        <p>A kurs od 11 sierpnia spadł o 8,9% i jest dziś 4,8% poniżej średniej pięćdziesięciosesyjnej przy RSI 41,14 — najniższym z dzisiejszej siódemki. <strong>Takie rozejście się wyników i ceny bywa albo okazją, albo ostrzeżeniem, że rynek widzi coś, czego nie ma w raporcie.</strong> Przy portfelu zamówień rosnącym szybciej niż wysyłki i podniesionej prognozie przejęcia skłaniam się ku pierwszej interpretacji.</p>
+        <p><strong>Trzymać, a jeśli miałbyś dziś cokolwiek dokupić w temacie sztucznej inteligencji, to właśnie tutaj</strong> — z zastrzeżeniem, że ten temat waży już 52% Twojego portfela i każde dołożenie pogłębia koncentrację, o której piszę w każdym kolejnym raporcie.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$175–200</b></div>
+          <div><span>Scenariusz negatywny</span><b>$105–125</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$235–255</b></div>
+          <div><span>Sugerowana pozycja</span><b>2–3% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3 — koniec października</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 21 sierpnia 2026 | Cena: $153,11 (zamknięcie 20.08.2026) | Pierwsza analiza APH | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 21.08.2026</strong>, Amphenol IR (wyniki Q2 2026, 29 lipca) | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

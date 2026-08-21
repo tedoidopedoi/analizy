@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARQQ — Arqit Quantum | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: ARQQ</div>
+    <div class="company-name">Arqit Quantum Inc.</div>
+    <div class="company-sub">Kryptografia postkwantowa · ochrona danych w transmisji · Londyn</div>
+    <div class="header-meta">
+      <span class="meta-tag">Przychody $1,09 mln</span>
+      <span class="meta-tag">P/S 319×</span>
+      <span class="meta-tag">Zapas gotówki ~7 mies.</span>
+      <span class="meta-tag">Krótka sprzedaż 48% obrotu</span>
+      <div class="price-display">
+        <div class="price-main">$20,94</div>
+        <div class="price-sub">zamknięcie 20.08.2026 | -30% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Kwanty i cyberbezpieczeństwo</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-sprzedaz" data-ocena="SPRZEDAŻ — wycena 319× przychodów przy siedmiomiesięcznym zapasie gotówki">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">SPRZEDAŻ</span><span class="rb-qual">emisja akcji niemal pewna</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$7 – $14</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-sprzedaz)">-67% do -33%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>21 maja 2026</b><em>półrocze FY2026</em></div>
+    <div class="rb-right">Pozycja 0–1% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (20.08.2026)</div><div class="metric-value">$20,94</div><div class="metric-detail">-30,2% w 52 tyg. | płasko wobec obu średnich</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$347,2 mln</div><div class="metric-detail">Tylko 16,58 mln akcji, obrót 6,03 mln</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody (12 mies.)</div><div class="metric-value red">$1,09 mln</div><div class="metric-detail">H1 FY2026: $623 tys., 9× więcej r/r</div></div>
+    <div class="metric-card"><div class="metric-label">Cena do sprzedaży</div><div class="metric-value red">319×</div><div class="metric-detail">NVIDIA 21,5× | ASML 16,8×</div></div>
+    <div class="metric-card"><div class="metric-label">Zapas gotówki</div><div class="metric-value red">~7 miesięcy</div><div class="metric-detail">$35,9 mln przy wypalaniu $42,8 mln rocznie</div></div>
+    <div class="metric-card"><div class="metric-label">Marża operacyjna</div><div class="metric-value red">-4 617%</div><div class="metric-detail">Strata $50,1 mln przy sprzedaży $1,09 mln</div></div>
+    <div class="metric-card"><div class="metric-label">Krótka sprzedaż</div><div class="metric-value red">48,09%</div><div class="metric-detail">wolnego obrotu — prawie połowa</div></div>
+    <div class="metric-card"><div class="metric-label">Pokrycie analityczne</div><div class="metric-value">brak</div><div class="metric-detail">Zero analityków, zero prognoz</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Czym jest Arqit</h3>
+      <p>Arqit sprzedaje oprogramowanie do <strong>kryptografii postkwantowej</strong> — szyfrowania odpornego na przyszłe komputery kwantowe. Główny produkt, NetworkSecure, chroni dane w transmisji. Spółka zatrudnia <strong>87 osób</strong> i wygenerowała w ciągu ostatnich dwunastu miesięcy <strong>1,09 miliona dolarów przychodu</strong>.</p>
+      <p>Twoja pozycja to 150 akcji po średniej 20,41 dolara, dziś wartych 3 141 dolarów — jesteś na plusie <strong>2,6%</strong>. To 2,2% portfela.</p>
+
+      <div class="alert alert-danger"><strong>Zacznę od dwóch liczb, które definiują tę spółkę.</strong> Kapitalizacja wynosi <strong>347,2 miliona dolarów przy rocznych przychodach 1,09 miliona</strong> — wskaźnik ceny do sprzedaży sięga <strong>319</strong>. Dla porównania NVIDIA notowana jest przy 21,5, a ASML przy 16,8. Jednocześnie spółka wypala <strong>42,78 miliona dolarów gotówki rocznie</strong>, mając jej — według własnego komunikatu z 20 maja — <strong>35,9 miliona</strong>. To około dziesięciu miesięcy zapasu licząc od maja, czyli <strong>mniej więcej siedem miesięcy od dzisiaj</strong>.</div>
+
+      <h3>Co pokazało półrocze FY2026 — wyniki z 21 maja</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>H1 FY2026</th><th>Odniesienie</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td><strong>$623 tys.</strong></td><td style="color:var(--ocena-kupno)">Wobec $67 tys. rok wcześniej — 9,3× więcej</td></tr>
+          <tr><td><strong>Liczba kontraktów</strong></td><td><strong>11</strong></td><td style="color:var(--ocena-kupno)">Wobec 7 w CAŁYM roku FY2025</td></tr>
+          <tr><td>Struktura klientów</td><td>3 operatorów telekomunikacyjnych, 8 podmiotów rządowych, obronnych i korporacyjnych</td><td>Dywersyfikacja się poprawia</td></tr>
+          <tr><td>Nowy produkt</td><td>Encryption Intelligence</td><td style="color:var(--ocena-kupno)">Pierwszy kontrakt podpisany</td></tr>
+          <tr><td>Gotówka na 20 maja</td><td style="color:var(--ocena-uwaga)">$35,9 mln</td><td>Przy wypalaniu $42,78 mln rocznie</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Trzeba uczciwie przyznać: kierunek jest właściwy.</strong> Przychody wzrosły ponad dziewięciokrotnie, a liczba kontraktów w samym półroczu przewyższyła całoroczny dorobek poprzedniego roku. Struktura klientów też się poprawia — obok telekomów pojawiły się podmioty rządowe i obronne, czyli odbiorcy o długim horyzoncie i stabilnych budżetach. <strong>Problem nie polega na tym, że nic się nie dzieje. Problem polega na skali:</strong> 623 tysiące dolarów w półrocze przy kapitalizacji 347 milionów i wypalaniu 42,78 miliona rocznie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Produkt</th><th>Opis</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>NetworkSecure</strong></td><td>Ochrona danych w transmisji kryptografią postkwantową</td><td>Produkt główny, źródło większości z 11 kontraktów</td></tr>
+          <tr><td><strong>Encryption Intelligence</strong></td><td>Nowa linia produktowa</td><td style="color:var(--ocena-kupno)">Pierwszy kontrakt podpisany w H1 FY2026</td></tr>
+          <tr><td>Marża brutto</td><td>49,72%</td><td style="color:var(--ocena-uwaga)">Przyzwoita, ale na przychodach $1,09 mln</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Czy tu w ogóle jest fosa?</h3>
+      <p>Problem, który Arqit próbuje rozwiązać, jest prawdziwy. Komputery kwantowe zdolne złamać dzisiejsze szyfrowanie jeszcze nie istnieją, ale <strong>dane przechwycone dzisiaj można odszyfrować za dziesięć lat</strong> — stąd presja na wcześniejszą wymianę kryptografii, zwłaszcza w wojsku i administracji. Rynek jest realny i nadchodzi.</p>
+      <div class="alert alert-warn"><strong>Ale kryptografia postkwantowa nie jest technologią zastrzeżoną.</strong> Amerykański instytut NIST wystandaryzował algorytmy odporne na komputery kwantowe i są one publicznie dostępne. Wdrażają je giganci — Google, Microsoft, Cloudflare, Apple — we własnych produktach, często bezpłatnie dla klienta. <strong>Arqit sprzedaje coś, co największe firmy technologiczne dodają jako standardową funkcję.</strong> Przy 87 pracownikach i przychodzie 12,5 tysiąca dolarów na osobę trudno mówić o przewadze skali czy dystrybucji.</p>
+      <p style="margin-top:10px">To nie znaczy, że produkt jest zły — 11 kontraktów, w tym z podmiotami obronnymi, świadczy, że ktoś za niego płaci. Znaczy tylko, że <strong>fosa jest tu znacznie płytsza niż u ASML czy NVIDII</strong>, a wycena tego nie odzwierciedla.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Wymiana kryptografii jest nieunikniona</strong> — administracje publiczne wyznaczają terminy przejścia na algorytmy odporne na komputery kwantowe; to rynek, który powstanie niezależnie od Arqit</li>
+        <li><strong>Zagrożenie „zbierz teraz, odszyfruj później”</strong> — realne uzasadnienie dla wcześniejszych wdrożeń w wojsku i dyplomacji</li>
+        <li><strong>Standardy są publiczne</strong> — algorytmy postkwantowe wystandaryzowane przez NIST może wdrożyć każdy, co ogranicza możliwość pobierania renty technologicznej</li>
+        <li><strong>Konkurencja ze strony gigantów</strong> — Google, Microsoft, Cloudflare i Apple wbudowują tę ochronę w swoje produkty, często bez dodatkowej opłaty</li>
+        <li><strong>Otoczenie finansowania mikrospółek</strong> — przy zapasie gotówki na siedem miesięcy dostęp do kapitału jest dla Arqit ważniejszy niż jakikolwiek trend rynkowy</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Stan</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td>Kontrakty w H1 FY2026</td><td><strong>11</strong></td><td style="color:var(--ocena-kupno)">Wobec 7 w całym FY2025</td></tr>
+          <tr><td>Średnia wartość kontraktu</td><td style="color:var(--ocena-sprzedaz)">około $57 tys.</td><td>$623 tys. podzielone na 11 umów</td></tr>
+          <tr><td>Przychód na pracownika</td><td style="color:var(--ocena-sprzedaz)">$12,5 tys.</td><td>Strata na pracownika: $562,7 tys.</td></tr>
+          <tr><td><strong>Osoby powiązane</strong></td><td><strong>62,13% akcji</strong></td><td style="color:var(--ocena-kupno)">Bardzo wysoko — interesy zbieżne</td></tr>
+          <tr><td><strong>Wolny obrót</strong></td><td style="color:var(--ocena-uwaga)"><strong>6,03 mln akcji</strong></td><td>Z 16,58 mln wyemitowanych</td></tr>
+          <tr><td>Liczba akcji</td><td style="color:var(--ocena-sprzedaz)">+16,48% r/r</td><td>Po odwrotnym podziale 1:25 z 2024 roku</td></tr>
+          <tr><td>Pokrycie analityczne</td><td style="color:var(--ocena-uwaga)"><strong>brak</strong></td><td>Zero analityków, zero prognoz, zero celów</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Średnia wartość kontraktu wynosi około 57 tysięcy dolarów</strong> — 623 tysiące podzielone na jedenaście umów. To są wdrożenia pilotażowe i niewielkie licencje, a nie kontrakty przemysłowe. Żeby uzasadnić dzisiejszą kapitalizację nawet przy hojnym mnożniku trzydziestokrotności sprzedaży, <strong>przychody musiałyby wzrosnąć jedenastokrotnie</strong>, czyli do około 11,6 miliona dolarów. Przy obecnej średniej wartości umowy oznaczałoby to ponad dwieście kontraktów rocznie.</div>
+      <p>Jedna rzecz działa tu na plus: <strong>osoby powiązane ze spółką posiadają 62,13% akcji</strong>. Kierownictwo traci razem z akcjonariuszami, a to przy mikrospółkach nie jest oczywiste.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 mies.)</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$1,09 mln</td><td>H1 FY2026: $623 tys.</td></tr>
+          <tr><td>Zysk brutto</td><td>$540 tys.</td><td>Marża 49,72%</td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$50,14 mln</strong></td><td>Marża -4 617%</td></tr>
+          <tr><td>Strata netto</td><td style="color:var(--ocena-sprzedaz)">-$48,96 mln</td><td>-$3,12 na akcję</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-sprzedaz)">-$42,75 mln</td><td>Nakłady inwestycyjne tylko $34 tys.</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$42,78 mln</strong></td><td>-$2,58 na akcję</td></tr>
+          <tr><td>ROIC</td><td style="color:var(--ocena-sprzedaz)">-131,99%</td><td>Przy koszcie kapitału 16,64%</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Marża operacyjna minus 4 617 procent to nie błąd zapisu.</strong> Spółka wydaje ponad czterdzieści sześć dolarów na każdego dolara, który sprzedaje. Strata operacyjna 50,14 miliona przy przychodach 1,09 miliona oznacza, że <strong>przychody pokrywają około 2% kosztów</strong>. Nakłady inwestycyjne wynoszą przy tym zaledwie 34 tysiące dolarów — pieniądze nie idą na budowę czegokolwiek trwałego, tylko na bieżące funkcjonowanie: wynagrodzenia, badania i sprzedaż.</div>
+      <p>Dla porównania w Twoim portfelu ASP Isotopes, którą oceniłem jako wysoce spekulacyjną, ma stratę czterokrotnie wyższą od przychodów. <strong>Arqit ma stratę czterdziestosześciokrotnie wyższą.</strong></p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $20,94</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$347,20 mln</td><td>EV $320,52 mln</td></tr>
+          <tr><td>P/E</td><td>brak</td><td style="color:var(--ocena-sprzedaz)">Głęboka strata</td></tr>
+          <tr><td><strong>P/S</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>319,71×</strong></td><td>Forward 246,24× — wciąż absurdalnie wysoko</td></tr>
+          <tr><td>EV/Sales</td><td style="color:var(--ocena-sprzedaz)">295,13×</td><td>Nawet po odjęciu gotówki</td></tr>
+          <tr><td>P/B</td><td style="color:var(--ocena-sprzedaz)">12,18×</td><td>Wartość księgowa $1,72 na akcję</td></tr>
+          <tr><td>Gotówka netto na akcję</td><td>$1,61</td><td style="color:var(--ocena-uwaga)">7,7% ceny akcji</td></tr>
+          <tr><td>ROIC vs WACC</td><td style="color:var(--ocena-sprzedaz)">-131,99% vs 16,64%</td><td>Najgorsza relacja w portfelu</td></tr>
+          <tr><td>Wskaźnik bieżącej płynności</td><td style="color:var(--ocena-kupno)">4,88</td><td>Dług praktycznie zerowy (D/E 0,08)</td></tr>
+          <tr><td>Altman Z-Score</td><td>11,52</td><td style="color:var(--ocena-uwaga)">Zawyżony — patrz komentarz w sekcji 8</td></tr>
+          <tr><td>Piotroski F-Score</td><td style="color:var(--ocena-sprzedaz)">4 na 9</td><td>Słabo</td></tr>
+          <tr><td>Pokrycie analityczne</td><td style="color:var(--ocena-uwaga)">brak</td><td>Żaden analityk nie śledzi tej spółki</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Dlaczego nie ma tu Forward P/E — i co go zastępuje</h3>
+      <p><strong>Wskaźnik Forward P/E jest dla tej spółki niedostępny, i to z dwóch powodów naraz.</strong> Po pierwsze, Arqit nie ma zysku ani perspektywy jego osiągnięcia w horyzoncie, dla którego liczy się takie prognozy — strata operacyjna przewyższa przychody czterdziestosześciokrotnie. Po drugie, <strong>żadna instytucja nie śledzi tej spółki</strong>, więc nie istnieje konsensus, z którego można by taki wskaźnik wyliczyć. Nie ma celu cenowego, prognozy przychodów ani prognozy zysku. W pozostałych raportach z tej serii Forward P/E był głównym punktem odniesienia — tutaj trzeba go zastąpić rachunkiem odwrotnym: ile spółka musiałaby sprzedawać, żeby dzisiejsza cena miała sens.</p>
+
+      <h3>Ile przychodu potrzeba, żeby obronić dzisiejszą cenę</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Przy mnożniku sprzedaży</th><th>Potrzebny przychód roczny</th><th>Ile razy więcej niż dziś</th></tr></thead>
+        <tbody>
+          <tr><td>10× (typowo dla dojrzałego oprogramowania)</td><td>$34,7 mln</td><td style="color:var(--ocena-sprzedaz)">32×</td></tr>
+          <tr><td>20× (szybko rosnące oprogramowanie)</td><td>$17,4 mln</td><td style="color:var(--ocena-sprzedaz)">16×</td></tr>
+          <tr><td>30× (wycena bardzo hojna)</td><td>$11,6 mln</td><td style="color:var(--ocena-sprzedaz)">11×</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> nawet przy trzydziestokrotności sprzedaży — poziomie zarezerwowanym dla najszybciej rosnącego oprogramowania — <strong>Arqit musiałby zwiększyć przychody jedenastokrotnie</strong>, żeby dzisiejsza cena była uzasadniona. Przy średniej wartości kontraktu 57 tysięcy dolarów oznacza to ponad dwieście umów rocznie wobec jedenastu w ostatnim półroczu. To nie jest niemożliwe w perspektywie kilku lat, ale <strong>spółka ma na to siedem miesięcy gotówki</strong>.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$7 – $14</div><div class="fair-value-note">Baza: 30–50× przychodu prognozowanego na FY2027 w przedziale $3–5 mln, przy założeniu utrzymania obecnego tempa pozyskiwania kontraktów i uwzględnieniu rozwodnienia z niemal pewnej emisji akcji | <strong>Brak konsensusu analityków</strong> — żadna instytucja nie śledzi tej spółki, więc nie ma punktu odniesienia | Scenariusz negatywny (emisja po głębokim dyskoncie, zatrzymanie kontraktów): $2,50–4,00, czyli okolice wartości księgowej $1,72 powiększonej o wartość opcji | Scenariusz pozytywny (utrzymanie tempa kontraktów i wymuszone domykanie 48% krótkich pozycji na obrocie 6 mln akcji): $30–40 | Przy $20,94 potencjał od -88% do +91%</div></div>
+      <p style="color:var(--text-muted);font-size:.88rem"><em>Rozpiętość od -88% do +91% jest tu wyjątkowo szeroka i tak być musi. Przy przychodach ponad trzystukrotnie niższych od kapitalizacji każdy szacunek wartości jest zakładem o przyszłość, a nie wyceną teraźniejszości.</em></p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>ARQQ</th><th>ASPI</th><th>ASML</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto</td><td>49,72%</td><td>18,32%</td><td style="color:var(--ocena-kupno)">52,73%</td></tr>
+          <tr><td><strong>Marża operacyjna</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-4 617%</strong></td><td>-312%</td><td style="color:var(--ocena-kupno)">+35,42%</td></tr>
+          <tr><td>Strata do przychodów</td><td style="color:var(--ocena-sprzedaz)">46×</td><td>4×</td><td>—</td></tr>
+          <tr><td>ROIC</td><td style="color:var(--ocena-sprzedaz)">-131,99%</td><td>-17,86%</td><td style="color:var(--ocena-kupno)">+65,98%</td></tr>
+          <tr><td>Przychód na pracownika</td><td style="color:var(--ocena-sprzedaz)">$12,5 tys.</td><td>$113,8 tys.</td><td style="color:var(--ocena-kupno)">$912,1 tys.</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Marża brutto 49,72% jest jedyną liczbą, która w tej tabeli wygląda dobrze</strong> — i pokazuje, że produkt sam w sobie ma sensowną ekonomikę. Gdyby Arqit sprzedawał go dziesięć razy więcej przy tej samej strukturze kosztów, spółka byłaby blisko rentowności. Cała trudność sprowadza się do tego, że nie sprzedaje.</p>
+      <div class="alert alert-warn"><strong>Przychód na pracownika 12,5 tysiąca dolarów wart jest chwili uwagi.</strong> To znaczy, że każda z 87 zatrudnionych osób generuje mniej sprzedaży, niż wynosi kwartalne wynagrodzenie jednej z nich. <strong>Struktura kosztowa Arqit jest strukturą spółki badawczej, a nie handlowej</strong> — i taka pozostanie, dopóki liczba kontraktów nie wzrośnie o rząd wielkości.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka (bilans TTM)</td><td>$28,86 mln</td><td style="color:var(--ocena-uwaga)">Spółka podała $35,9 mln na 20 maja 2026</td></tr>
+          <tr><td>Zadłużenie</td><td>$2,17 mln</td><td style="color:var(--ocena-kupno)">Gotówka netto +$26,69 mln</td></tr>
+          <tr><td>Dług / kapitał własny</td><td>0,08</td><td style="color:var(--ocena-kupno)">Praktycznie brak długu</td></tr>
+          <tr><td>Wskaźnik bieżącej płynności</td><td>4,88</td><td style="color:var(--ocena-kupno)">Szybki 4,61</td></tr>
+          <tr><td>Kapitał własny</td><td>$28,51 mln</td><td>$1,72 na akcję</td></tr>
+          <tr><td><strong>Wypalanie gotówki</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$42,78 mln rocznie</strong></td><td>-$2,58 na akcję</td></tr>
+          <tr><td><strong>Zapas gotówki</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>około 7 miesięcy</strong></td><td>Licząc od dzisiaj</td></tr>
+          <tr><td>Liczba akcji</td><td style="color:var(--ocena-sprzedaz)">+16,48% r/r</td><td>Po odwrotnym podziale 1:25 z 2024</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>To jest sekcja, która przesądza o ocenie.</strong> Na 20 maja spółka miała 35,9 miliona dolarów gotówki i wypala 42,78 miliona rocznie. To dziesięć miesięcy zapasu od tamtej daty — a od tamtej daty minęły trzy. <strong>Zostaje mniej więcej siedem miesięcy, czyli do końca marca 2027.</strong> Emisja akcji nie jest scenariuszem ryzyka, tylko praktycznie pewnym zdarzeniem w perspektywie najbliższych dwóch, trzech kwartałów. Liczba akcji wzrosła już o 16,48% w ciągu roku.</div>
+      <div class="alert alert-warn"><strong>Wskaźnik Altmana 11,52 wygląda znakomicie i jest tu całkowicie mylący.</strong> Formuła nagradza brak długu i wysoki kapitał obrotowy względem sumy bilansowej — a Arqit ma jedno i drugie, bo jest maleńką spółką bez zobowiązań. Model Altmana został jednak skonstruowany dla przedsiębiorstw produkcyjnych o normalnych przychodach i <strong>nie potrafi ocenić spółki, której główne ryzyko polega na tym, że skończą się jej pieniądze</strong>. Miarodajny jest tu Piotroski 4 na 9 — i przede wszystkim prosty rachunek zapasu gotówki.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>Przychody wzrosły dziewięciokrotnie, kontrakty ponad dwukrotnie</h4><p>$623 tys. w H1 FY2026 wobec $67 tys. rok wcześniej; 11 kontraktów w półroczu wobec 7 w całym poprzednim roku. Kierunek jest jednoznaczny.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🛡️</div><div class="catalyst-body"><h4>Klienci rządowi i obronni</h4><p>Osiem z jedenastu kontraktów zawarto z podmiotami rządowymi, obronnymi i korporacyjnymi. To odbiorcy o długim horyzoncie i stabilnych budżetach, u których wdrożenie pilotażowe bywa wstępem do dużego kontraktu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔥</div><div class="catalyst-body"><h4>Krótka sprzedaż na 48% wolnego obrotu przy 6 mln akcji</h4><p>Prawie połowa dostępnych akcji jest sprzedana na krótko, a wolny obrót to zaledwie 6,03 mln sztuk. Każda dobra wiadomość może wywołać ruch nieproporcjonalny do jej znaczenia.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🤝</div><div class="catalyst-body"><h4>Osoby powiązane mają 62,13% akcji</h4><p>Kierownictwo traci razem z akcjonariuszami. Przy mikrospółkach to nie jest oczywiste i wyraźnie ogranicza ryzyko decyzji szkodzących drobnym inwestorom.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔐</div><div class="catalyst-body"><h4>Rynek jest realny i nadchodzi</h4><p>Wymiana kryptografii na odporną wobec komputerów kwantowych to konieczność, nie moda. Zagrożenie „zbierz teraz, odszyfruj później” uzasadnia wcześniejsze wdrożenia w wojsku i dyplomacji.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">⏳</div><div class="catalyst-body"><h4>Siedem miesięcy gotówki</h4><p>$35,9 mln na 20 maja przy wypalaniu $42,78 mln rocznie. Emisja akcji nie jest ryzykiem, tylko niemal pewnym zdarzeniem — a liczba akcji urosła już o 16,48% w rok.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💸</div><div class="catalyst-body"><h4>Wycena 319× przychodów</h4><p>Nawet przy hojnej trzydziestokrotności sprzedaży przychody musiałyby wzrosnąć jedenastokrotnie. Przy średniej wartości kontraktu $57 tys. oznacza to ponad dwieście umów rocznie wobec jedenastu w półroczu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🏢</div><div class="catalyst-body"><h4>Konkurencja z gigantami i publiczne standardy</h4><p>Algorytmy postkwantowe wystandaryzował NIST i są publicznie dostępne. Google, Microsoft, Cloudflare i Apple wbudowują tę ochronę w swoje produkty, często bez dodatkowej opłaty.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📉</div><div class="catalyst-body"><h4>Strata 46× wyższa od przychodów</h4><p>Marża operacyjna -4 617%, ROIC -131,99% przy koszcie kapitału 16,64%, przychód na pracownika $12,5 tys. To struktura kosztowa spółki badawczej, nie handlowej.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔍</div><div class="catalyst-body"><h4>Zero pokrycia analitycznego i odwrotny podział w historii</h4><p>Żadna instytucja nie śledzi tej spółki — brak celów cenowych i prognoz. Odwrotny podział 1:25 z września 2024 świadczy o wcześniejszym załamaniu kursu.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Podmiot</th><th>Rola</th><th>Relacja do Arqit</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Arqit</strong></td><td>Kryptografia postkwantowa dla telekomów i administracji</td><td>Przychody $1,09 mln, 87 pracowników</td></tr>
+          <tr><td><strong>Google, Microsoft, Apple, Cloudflare</strong></td><td>Wbudowują ochronę postkwantową we własne produkty</td><td style="color:var(--ocena-sprzedaz)">Często bez dodatkowej opłaty dla klienta</td></tr>
+          <tr><td><strong>Thales, Palo Alto, Entrust</strong></td><td>Dostawcy rozwiązań bezpieczeństwa dla administracji</td><td style="color:var(--ocena-sprzedaz)">Istniejące relacje z tymi samymi klientami</td></tr>
+          <tr><td>SentinelOne</td><td>Cyberbezpieczeństwo</td><td>Masz w obserwowanych — inne pole, ten sam budżet klienta</td></tr>
+          <tr><td>BlackBerry</td><td>Bezpieczeństwo dla sektora regulowanego</td><td>Masz w kategorii „teraz nie wiem”</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>To jest najsłabszy punkt tej tezy.</strong> Arqit konkuruje o budżety bezpieczeństwa w administracji i telekomunikacji z firmami, które mają tam relacje od dekad i sprzedają całe pakiety, a nie pojedynczy produkt. <strong>Jednocześnie sama technologia nie jest zastrzeżona</strong> — standardy postkwantowe są publiczne. Arqit sprzedaje wdrożenie i integrację, czyli usługę, przy której 87-osobowy zespół konkuruje z globalnymi dostawcami.</p>
+      <p style="margin-top:10px">Nie oznacza to, że przegra. Jedenaście podpisanych kontraktów, w tym z podmiotami obronnymi, dowodzi, że jest miejsce dla wyspecjalizowanego dostawcy. <strong>Oznacza tylko, że przy wycenie 319-krotności przychodów rynek zakłada zwycięstwo, na które dowodów jeszcze nie ma.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$20,94</strong></td><td style="color:var(--ocena-sprzedaz)">-30,15% w 52 tygodnie</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$20,86</td><td>Kurs 0,4% powyżej — płasko</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$20,14</td><td>Kurs 4,0% powyżej — płasko</td></tr>
+          <tr><td>RSI (14)</td><td>49,37</td><td>Neutralnie</td></tr>
+          <tr><td>Beta</td><td>2,27</td><td style="color:var(--ocena-sprzedaz)">Ponad dwukrotnie silniejsze ruchy niż rynek</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>48,09% wolnego obrotu</strong></td><td>17,48% wszystkich akcji; 5,61 dnia do pokrycia</td></tr>
+          <tr><td>Średni wolumen</td><td style="color:var(--ocena-uwaga)">280 940 akcji</td><td>Bardzo niska płynność</td></tr>
+          <tr><td>Wartość księgowa</td><td>$1,72 na akcję</td><td style="color:var(--ocena-sprzedaz)">Kurs to 12,2× tej wartości</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Duży kontrakt rządowy albo obronny</li><li>Wymuszone domykanie 48% krótkich pozycji</li><li>Przy obrocie 6 mln akcji ruch może być gwałtowny</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Emisja akcji po dyskoncie w ciągu 2–3 kwartałów</li><li>Brak nowych kontraktów w kolejnym półroczu</li><li>Zejście ku $2,50–4,00</li></ul></div>
+        </div>
+      <p><strong>Kurs stoi praktycznie na obu średnich</strong> — 0,4% nad pięćdziesięciosesyjną i 4,0% nad dwustusesyjną, przy RSI 49,37. To obraz spółki w zawieszeniu, w którym rynek czeka na rozstrzygnięcie. Przy średnim wolumenie 281 tysięcy akcji dziennie i wolnym obrocie 6 milionów <strong>płynność jest tu bardzo ograniczona</strong> — wyjście z większej pozycji zajmuje czas i potrafi samo poruszyć kursem.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text sell">SPRZEDAŻ</div><div class="rating-note">Emisja akcji zbliża się w ciągu dwóch, trzech kwartałów. Przy becie 2,27 i wolnym obrocie 6 mln akcji ryzyko gwałtownego ruchu w dół po ogłoszeniu jest wysokie.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text sell">SPRZEDAŻ</div><div class="rating-note">Wycena 319× przychodów wymaga jedenastokrotnego wzrostu sprzedaży tylko po to, żeby uzasadnić dzisiejszą cenę przy hojnym mnożniku. Spółka ma na to siedem miesięcy gotówki.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text neutral">SPEKULACJA</div><div class="rating-note">Rynek kryptografii postkwantowej jest realny. Jeśli Arqit przetrwa rozwodnienie i utrzyma tempo kontraktów, może stać się przedsiębiorstwem. To jednak zakład, nie inwestycja.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: 0–1% portfela.</strong> Masz 2,2% — to dwukrotnie za dużo jak na spółkę z siedmiomiesięcznym zapasem gotówki i zerowym pokryciem analitycznym</li>
+        <li><strong>Zamknięcie lub zmniejszenie o połowę.</strong> Jesteś na plusie 2,6%, więc wyjście nie wiąże się z realizacją straty — to rzadka i wygodna sytuacja</li>
+        <li><strong>Wychodź stopniowo.</strong> Średni wolumen to 281 tys. akcji dziennie przy wolnym obrocie 6 mln. Zlecenie na 150 akcji nie poruszy rynkiem, ale nie licz na dobrą cenę przy zleceniu rynkowym w cienkim arkuszu</li>
+        <li><strong>Nie dokupywać przed emisją.</strong> Kupowanie akcji spółki, która za dwa, trzy kwartały będzie musiała sprzedać nowe, oznacza kupowanie tuż przed rozwodnieniem</li>
+        <li><strong>Jedna liczba do śledzenia:</strong> <strong>stan gotówki w kolejnym raporcie</strong>. Nie przychody, nie liczba kontraktów — gotówka. Ona wyznacza termin, przed którym musi dojść do emisji</li>
+        <li><strong>Co zmieniłoby ocenę:</strong> duży kontrakt rządowy o wartości liczonej w milionach, a nie dziesiątkach tysięcy, albo pozyskanie kapitału na warunkach nierozwadniających</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$7 – $14</div><div class="fair-value-note">Scenariusz negatywny: $2,50–4,00 | Scenariusz pozytywny: $30–40 | Brak konsensusu analityków — żadna instytucja nie śledzi tej spółki</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by zostać</h4><ul>
+          <li><strong>Przychody +9× r/r, kontrakty 11 w półroczu wobec 7 w całym poprzednim roku.</strong> Osiem z nich z podmiotami rządowymi i obronnymi</li>
+          <li><strong>Krótka sprzedaż na 48% wolnego obrotu</strong> przy zaledwie 6,03 mln akcji w obrocie — każda dobra wiadomość może wywołać ruch nieproporcjonalny</li>
+          <li><strong>Osoby powiązane mają 62,13% akcji</strong>, brak długu, płynność bieżąca 4,88, a marża brutto 49,72% pokazuje, że sam produkt ma sensowną ekonomikę</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by sprzedać</h4><ul>
+          <li><strong>Siedem miesięcy gotówki.</strong> $35,9 mln przy wypalaniu $42,78 mln rocznie — emisja jest niemal pewna, a liczba akcji urosła już o 16,48% w rok</li>
+          <li><strong>Wycena 319× przychodów.</strong> Nawet przy 30-krotności sprzedaż musiałaby wzrosnąć jedenastokrotnie, czyli do ponad dwustu kontraktów rocznie</li>
+          <li><strong>Standardy postkwantowe są publiczne</strong>, a Google, Microsoft i Apple wbudowują tę ochronę w swoje produkty, często bezpłatnie</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> emisja akcji po dyskoncie albo brak nowych kontraktów w kolejnym półroczu → zejście w rejon $2,50–4,00.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> kontrakt rządowy o wartości liczonej w milionach dolarów → wtedy teza staje się obronialna, a wycena zyskuje punkt zaczepienia.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead" style="border-color:var(--ocena-sprzedaz)">Arqit jest najbardziej spekulacyjną pozycją w Twoim portfelu i różnica między nią a resztą nie jest stopniowa, tylko jakościowa. <strong>Spółka wyceniana jest na 347 milionów dolarów przy rocznych przychodach 1,09 miliona</strong> — wskaźnik ceny do sprzedaży wynosi <strong>319</strong>, podczas gdy NVIDIA notowana jest przy 21,5, a ASML przy 16,8. Strata operacyjna jest <strong>czterdziestosześciokrotnie wyższa od przychodów</strong>, a każdy z 87 pracowników generuje 12,5 tysiąca dolarów sprzedaży rocznie.</p>
+
+      <p class="sum-lead" style="border-color:var(--ocena-sprzedaz)">Najważniejsza jest jednak arytmetyka przetrwania. Spółka podała, że <strong>na 20 maja miała 35,9 miliona dolarów gotówki</strong>, a wypala 42,78 miliona rocznie. To dziesięć miesięcy zapasu od tamtej daty, z czego trzy już minęły — <strong>zostaje mniej więcej siedem miesięcy, czyli do końca marca 2027</strong>. Emisja akcji nie jest w tym układzie ryzykiem, tylko niemal pewnym zdarzeniem w perspektywie dwóch, trzech kwartałów. Liczba akcji wzrosła już o 16,48% w ciągu roku.</p>
+
+      <p class="sum-lead">Chcę jednak uczciwie oddać drugą stronę, bo ona istnieje. <strong>Przychody wzrosły dziewięciokrotnie</strong> — z 67 tysięcy do 623 tysięcy dolarów w półroczu — a liczba kontraktów w samym półroczu przewyższyła całoroczny dorobek poprzedniego roku. Osiem z jedenastu umów zawarto z podmiotami rządowymi i obronnymi, czyli klientami, u których pilotaż bywa wstępem do dużego wdrożenia. Marża brutto 49,72% pokazuje, że sam produkt ma sensowną ekonomikę, osoby powiązane trzymają 62,13% akcji, a rynek kryptografii postkwantowej jest realny i nadchodzi niezależnie od Arqit.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Sprzedaż rośnie i to szybko.</strong> $623 tys. w H1 FY2026 wobec $67 tys. rok wcześniej; 11 kontraktów wobec 7 w całym FY2025.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Produkt ma sensowną ekonomikę.</strong> Marża brutto 49,72%; przy dziesięciokrotnie wyższej sprzedaży spółka byłaby blisko rentowności.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Interesy kierownictwa zbieżne z akcjonariuszami.</strong> Osoby powiązane posiadają 62,13% akcji, dług praktycznie zerowy.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Skok skali o rząd wielkości.</strong> Przy średniej wartości kontraktu $57 tys. potrzeba ponad dwustu umów rocznie, żeby obronić dzisiejszą wycenę.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Finansowanie bez rozwodnienia.</strong> Siedem miesięcy gotówki przy wypalaniu $42,78 mln rocznie. Emisja jest kwestią „kiedy”, nie „czy”.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Uzasadnienie wyceny.</strong> 319× przychodów przy technologii opartej na publicznych standardach, którą giganci wbudowują we własne produkty.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>21 maja 2026</td><td>Wyniki za I półrocze FY2026</td><td>Przychody $623 tys., 11 kontraktów, gotówka $35,9 mln</td></tr>
+            <tr><td><strong>Najbliższy raport</strong></td><td>Stan gotówki i tempo kontraktów</td><td>To on wyznaczy, jak blisko jest emisja</td></tr>
+            <tr><td><strong>Do końca I kw. 2027</strong></td><td>Prawdopodobna emisja akcji</td><td>Wynika wprost z zapasu gotówki i tempa wypalania</td></tr>
+            <tr><td>Bez terminu</td><td>Duży kontrakt rządowy lub obronny</td><td>Jedyne zdarzenie, które mogłoby uzasadnić dzisiejszą wycenę</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Zapas gotówki</strong></td><td>około 7 miesięcy</td><td>poniżej 6 miesięcy</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Cena do sprzedaży</strong></td><td>319×</td><td>—</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Liczba akcji</td><td>+16,48% r/r</td><td>emisja poniżej ceny rynkowej</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Liczba kontraktów</td><td>11 w półroczu</td><td>spadek wobec poprzedniego półrocza</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża brutto</td><td>49,72%</td><td>&lt; 40%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Krótka sprzedaż</td><td>48,09% wolnego obrotu</td><td>—</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji: 0–1% portfela.</strong> Masz 2,2% — to dwukrotnie za dużo przy siedmiomiesięcznym zapasie gotówki</li>
+          <li><strong>Zamknięcie albo zmniejszenie o połowę.</strong> Jesteś na plusie 2,6%, więc wyjście nie oznacza realizacji straty</li>
+          <li><strong>Wychodź stopniowo</strong> — wolumen 281 tys. akcji dziennie i wolny obrót 6 mln to cienki arkusz</li>
+          <li><strong>Nie dokupywać przed emisją</strong>, która jest kwestią dwóch, trzech kwartałów</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> stan gotówki w kolejnym raporcie. Nie przychody i nie kontrakty</li>
+          <li><strong>Uwaga portfelowa:</strong> ARQQ i ASPI to razem 4,0% portfela w spółkach, które finansują się emisjami akcji i wypalają gotówkę szybciej, niż ją zarabiają</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-sprzedaz)">📉 SPRZEDAŻ — nie dlatego, że technologia jest zła, tylko dlatego, że kończą się pieniądze</div>
+        <p>Problem, który Arqit rozwiązuje, jest prawdziwy, produkt ma marżę brutto blisko 50%, sprzedaż rośnie dziewięciokrotnie, a kierownictwo trzyma 62% akcji. Gdyby ta spółka była wyceniana na 30 milionów dolarów, byłaby ciekawym zakładem o asymetrycznym profilu.</p>
+        <p>Jest wyceniana na <strong>347 milionów przy przychodach 1,09 miliona i siedmiomiesięcznym zapasie gotówki</strong>. To dwie rzeczy naraz: cena, która zakłada zwycięstwo, na które nie ma jeszcze dowodów, oraz bilans, który wymusi emisję akcji, zanim te dowody zdążą się pojawić. Jedenaście kontraktów po średnio 57 tysięcy dolarów to za mało, żeby obronić którąkolwiek z tych liczb.</p>
+        <p><strong>Zamknąłbym tę pozycję albo zmniejszył ją o połowę.</strong> Sprzyja temu okoliczność, która przy takiej spółce zdarza się rzadko: jesteś na plusie 2,6%, więc wyjście nie wymaga realizowania straty. To jest dobry moment na decyzję podejmowaną na spokojnie, a nie pod presją komunikatu o emisji.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Sprzedaż</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$7–14</b></div>
+          <div><span>Scenariusz negatywny</span><b>$2,50–4,00</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$30–40</b></div>
+          <div><span>Sugerowana pozycja</span><b>0–1% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Stan gotówki w kolejnym raporcie</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 21 sierpnia 2026 | Cena: $20,94 (zamknięcie 20.08.2026) | Pierwsza analiza ARQQ | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 21.08.2026</strong>, Arqit Quantum IR (wyniki za I półrocze FY2026, 21 maja) | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

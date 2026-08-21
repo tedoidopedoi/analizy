@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASML — ASML Holding | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: ASML</div>
+    <div class="company-name">ASML Holding N.V.</div>
+    <div class="company-sub">Litografia dla przemysłu półprzewodnikowego · jedyny na świecie dostawca maszyn EUV · Veldhoven, Holandia</div>
+    <div class="header-meta">
+      <span class="meta-tag">ROIC 66,0% vs WACC 11,7%</span>
+      <span class="meta-tag">Marża operacyjna 35,4%</span>
+      <span class="meta-tag">PEG 0,78</span>
+      <span class="meta-tag">Monopol na EUV</span>
+      <div class="price-display">
+        <div class="price-main">$1 750,31</div>
+        <div class="price-sub">zamknięcie 20.08.2026 | +135% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Półprzewodniki</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — najlepsza jakość w portfelu po NVIDII">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">pozycja rdzeniowa</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$1 950 – $2 250</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">+11% do +29%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>15 lipca 2026</b><em>Q3 — połowa października</em></div>
+    <div class="rb-right">Pozycja 3–5% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (20.08.2026)</div><div class="metric-value">$1 750,31</div><div class="metric-detail">+135% w 52 tyg. | 21% nad średnią 200-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$675,3 mld</div><div class="metric-detail">EV $668,7 mld — niżej, bo gotówka netto</div></div>
+    <div class="metric-card"><div class="metric-label">ROIC vs koszt kapitału</div><div class="metric-value green">66,0% vs 11,7%</div><div class="metric-detail">Przewaga 54 pkt proc. — druga po NVIDII</div></div>
+    <div class="metric-card"><div class="metric-label">Marża operacyjna</div><div class="metric-value green">35,42%</div><div class="metric-detail">Marża wolnych przepływów 28,42%</div></div>
+    <div class="metric-card"><div class="metric-label">Forward P/E · PEG</div><div class="metric-value em">30,8× · 0,78</div><div class="metric-detail">Wzrost zysku prognozowany na +39,45%</div></div>
+    <div class="metric-card"><div class="metric-label">Sprzedaż Q2 2026</div><div class="metric-value green">€9,33 mld</div><div class="metric-detail">+21,2% r/r | marża brutto 54,0%</div></div>
+    <div class="metric-card"><div class="metric-label">Krótka sprzedaż</div><div class="metric-value green">0,28%</div><div class="metric-detail">Najniżej w całym portfelu</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (44 analityków)</div><div class="metric-value green">$2 195</div><div class="metric-detail">+25,4% | mocne kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Czym jest ASML</h3>
+      <p>ASML buduje maszyny do litografii — urządzenia, które rysują wzory obwodów na krzemowych płytkach. W najbardziej zaawansowanej odmianie, litografii w skrajnym nadfiolecie, <strong>jest jedynym dostawcą na świecie</strong>. Nie największym ani najlepszym — jedynym. Bez maszyn ASML nie powstaje żaden nowoczesny układ scalony: ani procesory NVIDII, ani pamięci Samsunga, ani krzem projektowany przez Marvella.</p>
+      <p>Spółka zatrudnia 44 175 osób i generuje 40,29 miliarda dolarów przychodu rocznie. Twoja pozycja jest na plusie <strong>143%</strong> (2 akcje po średniej 720,61 dolara).</p>
+
+      <div class="alert alert-success"><strong>Dwie liczby, które od razu ustawiają tę spółkę w Twoim portfelu.</strong> Zwrot z zainwestowanego kapitału wynosi <strong>65,98% przy koszcie kapitału 11,73%</strong> — przewaga 54 punktów procentowych. To druga najlepsza relacja w całym portfelu, po NVIDII, i nieporównywalna z Marvellem, CoreWeave czy IREN, gdzie jest ujemna. Do tego marża operacyjna 35,42% i marża wolnych przepływów 28,42%, przy gotówce netto 6,38 miliarda dolarów. <strong>To jest najwyższej jakości przedsiębiorstwo, jakie masz — obok NVIDII, której nie masz.</strong></div>
+
+      <h3>Co pokazał drugi kwartał 2026 — wyniki z 15 lipca</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026</th><th>Dynamika</th></tr></thead>
+        <tbody>
+          <tr><td>Sprzedaż netto</td><td><strong>€9 326 mln</strong></td><td style="color:var(--ocena-kupno)">+21,2% r/r, +6,4% kw/kw</td></tr>
+          <tr><td>Zysk netto</td><td>€2,9 mld</td><td style="color:var(--ocena-kupno)">Marża netto powyżej 31%</td></tr>
+          <tr><td><strong>Marża brutto</strong></td><td><strong>54,0%</strong></td><td style="color:var(--ocena-kupno)">Powyżej prognozy 51–52%; +100 pb kw/kw</td></tr>
+          <tr><td><strong>Prognoza na 2026</strong></td><td><strong>€43–45 mld sprzedaży</strong></td><td style="color:var(--ocena-kupno)">Podniesiona; marża brutto 54–56%</td></tr>
+          <tr><td>Zamówienia</td><td style="color:var(--ocena-uwaga)">nie ujawniane</td><td>„Bardzo mocne” w I półroczu — bez liczb</td></tr>
+          <tr><td><strong>High-NA EUV</strong></td><td>pierwszy produkt wielkoseryjny</td><td style="color:var(--ocena-kupno)">Intel wdraża na wybranych warstwach 18A</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warn"><strong>Jedna rzecz w tym raporcie mi się nie podoba i warto ją odnotować.</strong> Od pierwszego kwartału 2026 <strong>ASML przestał publikować kwartalne dane o zamówieniach</strong>, uzasadniając to tym, że duże kontrakty spływają nierównomiernie i zaburzają obraz. Uzasadnienie jest merytorycznie sensowne, ale skutek pozostaje ten sam: <strong>zniknął najlepszy wyprzedzający wskaźnik dla całej branży półprzewodnikowej</strong>. Zamówienia ASML były przez lata sygnałem o tym, ile mocy produkcyjnej planują odlewnie — teraz zostaje deklaracja, że były „bardzo mocne”.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT / USŁUGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Opis</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>EUV</strong></td><td>Litografia w skrajnym nadfiolecie — najbardziej zaawansowane układy</td><td style="color:var(--ocena-kupno)">Monopol światowy, brak alternatywy</td></tr>
+          <tr><td><strong>High-NA EUV</strong></td><td>Następna generacja, wyższa apertura numeryczna</td><td style="color:var(--ocena-kupno)">Intel wdraża na warstwach 18A</td></tr>
+          <tr><td>DUV</td><td>Litografia w głębokim nadfiolecie — układy dojrzalsze</td><td>Rynek dzielony z Nikonem i Canonem</td></tr>
+          <tr><td><strong>Serwis i części</strong></td><td>Utrzymanie maszyn pracujących przez dekady</td><td style="color:var(--ocena-kupno)">Powtarzalny przychód niezależny od cyklu</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Fosa — najgłębsza w całym portfelu</h3>
+      <p>Maszyna EUV to około 100 tysięcy części, dziesiątki tysięcy komponentów od setek dostawców, cena rzędu setek milionów dolarów za sztukę i lata realizacji zamówienia. <strong>Nikt na świecie nie potrafi zbudować drugiej takiej.</strong> Nie z powodu patentów, tylko dlatego, że przez trzy dekady ASML zbudował łańcuch dostaw i wiedzę inżynierską, których nie da się skopiować decyzją zarządu ani dotacją rządową.</p>
+      <div class="alert alert-info"><strong>Warto zestawić tę fosę z pozostałymi w Twoim portfelu.</strong> Marvell konkuruje projektem układu, który rywal może przebić lepszym projektem. CoreWeave konkuruje szybkością uruchamiania mocy, którą Microsoft może odtworzyć z własnych przepływów. Caterpillar konkuruje zdolnością produkcyjną, którą da się zbudować w osiemnaście miesięcy. <strong>ASML konkuruje trzydziestoma latami inżynierii i łańcuchem dostaw, którego odtworzenie zajęłoby dekadę przy nieograniczonym budżecie</strong> — a Chiny właśnie tego próbują i na razie im nie wychodzi.</div>
+      <p>Praktyczny dowód siły tej pozycji: marża brutto 54,0% <em>przekroczyła</em> własną prognozę spółki, a marża operacyjna wynosi 35,42%. Dostawca bez konkurencji nie musi walczyć ceną.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <ul>
+        <li><strong>Nakłady odlewni na moce produkcyjne</strong> — TSMC, Samsung i Intel rozbudowują fabryki pod popyt na układy dla sztucznej inteligencji; każda nowa linia oznacza zamówienia dla ASML</li>
+        <li><strong>Wdrożenie High-NA EUV</strong> — Intel integruje tę technologię na wybranych warstwach procesu 18A, co jest pierwszym zastosowaniem wielkoseryjnym</li>
+        <li><strong>Ograniczenia eksportowe wobec Chin</strong> — trwałe ryzyko regulacyjne; Holandia i Stany Zjednoczone systematycznie zawężają listę maszyn, które można tam sprzedawać</li>
+        <li><strong>Cykliczność branży</strong> — ASML sprzedaje dobra inwestycyjne, a te zamawia się falami; spadek nakładów odlewni przekłada się na wyniki z opóźnieniem, ale nieuchronnie</li>
+        <li><strong>Brak danych o zamówieniach</strong> — od 2026 roku spółka ich nie publikuje, co obniża przejrzystość dla całego sektora</li>
+      </ul>
+      <div class="alert alert-warn"><strong>Ryzyko chińskie jest tu strukturalne i nie da się go wycenić precyzyjnie.</strong> Chiny są jednym z największych odbiorców maszyn DUV, a kolejne rundy ograniczeń eksportowych systematycznie zawężają to, co ASML może tam sprzedawać. Jednocześnie Pekin finansuje własne programy litograficzne — na razie bez powodzenia w segmencie EUV, ale to jest wyścig na dekady, nie na kwartały. <strong>Utrata rynku chińskiego byłaby dla ASML ciosem w przychody, ale nie w pozycję konkurencyjną</strong>, bo alternatywy dla jego maszyn nadal by nie było.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I SPRZEDAŻ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metryka</th><th>Stan</th><th>Wymowa</th></tr></thead>
+        <tbody>
+          <tr><td>Przychód na pracownika</td><td>$912,1 tys.</td><td style="color:var(--ocena-kupno)">Zysk na pracownika: $274,7 tys.</td></tr>
+          <tr><td>Udział instytucji</td><td>51,27%</td><td>Osoby powiązane: 0,01%</td></tr>
+          <tr><td>Liczba akcji</td><td style="color:var(--ocena-kupno)">-1,44% r/r</td><td>Skup akcji, nie rozwodnienie</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-kupno)"><strong>0,28% akcji</strong></td><td>Najniżej w portfelu; spadek z 1,28 do 1,07 mln</td></tr>
+          <tr><td>Prognoza wzrostu przychodów</td><td>+25,83% w 3 lata</td><td style="color:var(--ocena-kupno)">Zysku: +39,45%</td></tr>
+          <tr><td>Pokrycie analityczne</td><td>44 analityków</td><td style="color:var(--ocena-kupno)">Cel $2 195,39, „mocne kupno”</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>Koncentracja odbiorców jest tu skrajna i to jedyna rzecz, która mnie w tej spółce naprawdę niepokoi.</strong> Klientów zdolnych kupić maszynę EUV jest na świecie <strong>trzech</strong>: TSMC, Samsung i Intel. Nie kilkunastu, nie kilku — trzech. Decyzja jednego z nich o wstrzymaniu rozbudowy natychmiast przekłada się na przychody ASML.</p>
+      <p style="margin-top:10px">Warto zauważyć, że <strong>dwóch z tych trzech masz w portfelu</strong>: Samsunga i Intela. Jeśli Intel ograniczy nakłady na proces 18A, ucierpią obie Twoje pozycje naraz — i ASML jako dostawca, i Intel jako spółka, która nie dowiozła.</p></div>
+      <p>Krótka sprzedaż na poziomie <strong>0,28% akcji</strong> jest najniższa w całym Twoim portfelu — dla porównania IREN ma 31,81% wolnego obrotu, ASPI 20,07%, a CoreWeave 18,88%. Rynek praktycznie nie obstawia spadku tej spółki.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 mies.)</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$40,29 mld</td><td>Prognoza roczna: €43–45 mld</td></tr>
+          <tr><td>Zysk brutto</td><td>$21,25 mld</td><td style="color:var(--ocena-kupno)">Marża 52,73%; w Q2 już 54,0%</td></tr>
+          <tr><td><strong>Zysk operacyjny</strong></td><td style="color:var(--ocena-kupno)"><strong>$14,27 mld</strong></td><td>Marża 35,42%</td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td>$14,66 mld</td><td style="color:var(--ocena-kupno)">Blisko operacyjnego — czysta struktura</td></tr>
+          <tr><td>Zysk netto</td><td>$12,13 mld</td><td>EPS $31,41, marża 30,11%</td></tr>
+          <tr><td>Przepływy operacyjne</td><td>$13,43 mld</td><td>Nakłady tylko $1,69 mld</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>$11,74 mld</strong></td><td>Marża 28,42%, $30,55 na akcję</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-success"><strong>Zwróć uwagę na czwarty wiersz — po dzisiejszej serii analiz to rzecz, której nauczyłem się szukać w pierwszej kolejności.</strong> Zysk operacyjny wynosi 14,27 miliarda, a wynik przed opodatkowaniem 14,66 miliarda. Różnica jest minimalna i dodatnia. Dla porównania: u Amazona poniżej linii operacyjnej <em>przybywa</em> 81 miliardów z przeszacowań, u IREN cały zysk netto pochodzi spoza działalności, u Sibanye <em>ubywa</em> 632 miliony. <strong>U ASML zysk to po prostu zysk ze sprzedaży maszyn</strong> — wskaźniki wyceny można czytać wprost.</div>
+      <p>Model jest przy tym wyjątkowo lekki kapitałowo jak na producenta maszyn: <strong>nakłady inwestycyjne to 1,69 miliarda przy przychodach 40,29 miliarda</strong>, czyli 4,2%. Stąd marża wolnych przepływów 28,42% — wyższa niż u Marvella (19,10%), Caterpillara (12,04%) czy Nokii (2,62%), a ustępująca tylko NVIDII (46,97%).</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Przy $1 750,31</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$675,25 mld</td><td style="color:var(--ocena-kupno)">EV $668,72 mld — niżej, bo gotówka netto</td></tr>
+          <tr><td>P/E bieżące</td><td>55,65×</td><td style="color:var(--ocena-uwaga)">EPS $31,41</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>30,82×</strong></td><td style="color:var(--ocena-kupno)">Duży spadek — zysk szybko rośnie</td></tr>
+          <tr><td><strong>PEG (wyliczenie własne)</strong></td><td style="color:var(--ocena-kupno)"><strong>0,78</strong></td><td>30,82 podzielone przez wzrost zysku 39,45%</td></tr>
+          <tr><td>P/S</td><td>16,76× (forward 12,93×)</td><td style="color:var(--ocena-uwaga)">Wysoko, ale przy marży netto 30%</td></tr>
+          <tr><td>EV/EBITDA</td><td>43,47×</td><td style="color:var(--ocena-sprzedaz)">Drogo</td></tr>
+          <tr><td>P/FCF</td><td>57,54×</td><td style="color:var(--ocena-sprzedaz)">EV/FCF 56,98</td></tr>
+          <tr><td>P/B</td><td>27,13×</td><td style="color:var(--ocena-sprzedaz)">Efekt skupu akcji i niskiej bazy kapitału</td></tr>
+          <tr><td><strong>ROIC vs WACC</strong></td><td style="color:var(--ocena-kupno)"><strong>65,98% vs 11,73%</strong></td><td>Przewaga 54,3 pkt proc.</td></tr>
+          <tr><td>ROE</td><td style="color:var(--ocena-kupno)">53,94%</td><td>Pokrycie odsetek 105,78</td></tr>
+          <tr><td>Dywidenda</td><td>$7,72 · 0,44%</td><td style="color:var(--ocena-kupno)">Wzrost o 26,96%, wypłata 24,57%</td></tr>
+          <tr><td>Konsensus (44 analityków)</td><td>$2 195,39 · mocne kupno</td><td style="color:var(--ocena-kupno)">+25,4%</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing</td><td>55,65×</td><td>EPS $31,41 za ostatnie 12 miesięcy</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>30,82×</strong></td><td>Implikuje EPS około $56,79</td></tr>
+          <tr><td>Prognoza wzrostu zysku (3 lata)</td><td>+39,45%</td><td style="color:var(--ocena-kupno)">Przychodów: +25,83%</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-kupno)"><strong>0,78</strong></td><td>Poniżej 1 — wzrost nie jest w pełni wyceniony</td></tr>
+          <tr><td>NVIDIA (odniesienie)</td><td>forward P/E 22,59, PEG 0,51</td><td style="color:var(--ocena-uwaga)">Taniej i szybciej, ale masz ją tylko w obserwowanych</td></tr>
+          <tr><td>Marvell (odniesienie)</td><td>forward P/E 48,83, PEG 1,32</td><td style="color:var(--ocena-sprzedaz)">Znacznie drożej przy ujemnym ROIC względem WACC</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> na pierwszy rzut oka ASML wygląda drogo — 55-krotność zysku bieżącego, 43-krotność EBITDA, 27-krotność wartości księgowej. Ale <strong>wskaźnik przyszłego zysku wynosi już 30,82, a prognozowany wzrost zysku 39,45% rocznie daje PEG na poziomie 0,78</strong>. Poniżej jedności, czyli poziomu, przy którym płaci się mniej niż punkt wyceny za punkt wzrostu. W Twoim portfelu niżej ma tylko NVIDIA z PEG 0,51 — a Marvell, notowany przy 48,83-krotności zysku przyszłorocznego, ma 1,32 przy zwrocie z kapitału <em>poniżej</em> jego kosztu.</p>
+
+      <div class="fair-value-box"><div class="fair-value-label">Szacunkowy fair value 12–18 miesięcy</div><div class="fair-value-range">$1 950 – $2 250</div><div class="fair-value-note">Baza: 34–40× zysku prognozowanego (ok. $56,79 na akcję) przy utrzymaniu marży brutto w przedziale 54–56% zapowiedzianym przez spółkę i realizacji prognozy sprzedaży €43–45 mld | Konsensus 44 analityków: $2 195,39 („mocne kupno”) — mieści się w górnej części przedziału | Scenariusz negatywny (odwrócenie cyklu nakładów odlewni, zaostrzenie ograniczeń wobec Chin, opóźnienie High-NA): $1 150–1 350 | Scenariusz pozytywny (pełne wdrożenie High-NA u wszystkich trzech klientów, marża powyżej 56%): $2 600–2 900 | Przy $1 750,31 potencjał od -34% do +66%</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża / wskaźnik</th><th>ASML</th><th>NVIDIA</th><th>Marvell</th><th>Caterpillar</th></tr></thead>
+        <tbody>
+          <tr><td>Brutto</td><td>52,73%</td><td>74,15%</td><td>51,50%</td><td>29,71%</td></tr>
+          <tr><td><strong>Operacyjna</strong></td><td style="color:var(--ocena-kupno)"><strong>35,42%</strong></td><td>64,02%</td><td>16,41%</td><td>18,65%</td></tr>
+          <tr><td>Wolne przepływy</td><td style="color:var(--ocena-kupno)">28,42%</td><td>46,97%</td><td>19,10%</td><td>12,04%</td></tr>
+          <tr><td><strong>ROIC</strong></td><td style="color:var(--ocena-kupno)"><strong>65,98%</strong></td><td>104,67%</td><td style="color:var(--ocena-sprzedaz)">6,87%</td><td>18,30%</td></tr>
+          <tr><td>Koszt kapitału</td><td>11,73%</td><td>16,40%</td><td>16,25%</td><td>11,82%</td></tr>
+          <tr><td><strong>Różnica ROIC–WACC</strong></td><td style="color:var(--ocena-kupno)"><strong>+54,3 pkt</strong></td><td style="color:var(--ocena-kupno)">+88,3 pkt</td><td style="color:var(--ocena-sprzedaz)">-9,4 pkt</td><td style="color:var(--ocena-kupno)">+6,5 pkt</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Ta tabela jest najkrótszym możliwym uzasadnieniem rekomendacji.</strong> ASML zarabia na zainwestowanym kapitale prawie sześciokrotnie więcej, niż ten kapitał kosztuje. Marvell, którego masz w portfelu z podobnym udziałem i który notowany jest przy wyższym mnożniku zysku przyszłorocznego, zarabia <em>mniej</em>, niż wynosi jego koszt kapitału.</p>
+      <div class="alert alert-info"><strong>Skąd bierze się ta rentowność?</strong> Z braku alternatywy. ASML nie negocjuje ceny — ustala ją. Marża brutto <strong>przekroczyła własną prognozę spółki</strong> (54,0% wobec zapowiadanych 51–52%), a prognoza roczna została podniesiona do przedziału 54–56%. Producent, który regularnie zaskakuje własne prognozy marży in plus, ma siłę cenową, jakiej w tym portfelu nie ma nikt poza NVIDIĄ.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Stan</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$8,65 mld</td><td style="color:var(--ocena-kupno)">Kapitał obrotowy $8,43 mld</td></tr>
+          <tr><td>Zadłużenie</td><td>$2,26 mld</td><td style="color:var(--ocena-kupno)">Gotówka netto <strong>+$6,38 mld</strong> ($16,62 na akcję)</td></tr>
+          <tr><td>Dług / kapitał własny</td><td>0,09</td><td style="color:var(--ocena-kupno)">Praktycznie zerowe</td></tr>
+          <tr><td>Dług / EBITDA</td><td>0,15</td><td style="color:var(--ocena-kupno)">Bez znaczenia</td></tr>
+          <tr><td>Pokrycie odsetek</td><td>105,78</td><td style="color:var(--ocena-kupno)">Odsetki są pozycją symboliczną</td></tr>
+          <tr><td>Wskaźnik bieżącej płynności</td><td>1,33</td><td style="color:var(--ocena-uwaga)">Szybki 0,72 — duże zapasy maszyn w budowie</td></tr>
+          <tr><td>Kapitał własny</td><td>$24,89 mld</td><td>$64,81 na akcję</td></tr>
+          <tr><td>Liczba akcji</td><td style="color:var(--ocena-kupno)">-1,44% r/r</td><td>Zwrot dla akcjonariusza 1,88%</td></tr>
+          <tr><td>Piotroski F-Score</td><td>6 na 9</td><td style="color:var(--ocena-uwaga)">Altman: brak danych dla tej spółki</td></tr>
+        </tbody>
+      </table></div>
+      <p>Bilans jest praktycznie bez zarzutu: <strong>gotówka netto 6,38 miliarda dolarów, zadłużenie do kapitału własnego 0,09, pokrycie odsetek 105,78</strong>. Jedyną pozycją wymagającą komentarza jest wskaźnik szybkiej płynności 0,72, wyraźnie niższy od bieżącego 1,33. Różnicę stanowią <strong>zapasy</strong> — maszyny w budowie, których wytworzenie trwa wiele miesięcy. W tej branży to normalne, a nie ostrzegawcze.</p>
+      <div class="alert alert-success"><strong>Wysoki wskaźnik ceny do wartości księgowej (27,13) nie jest tu sygnałem ostrzegawczym</strong>, tak samo jak przy Caterpillarze. Kapitał własny wynosi 24,89 miliarda dolarów, bo spółka od lat skupuje własne akcje i wypłaca dywidendę rosnącą o 26,96% rocznie, co księgowo pomniejsza bazę kapitałową. Przy zwrocie z kapitału 53,94% niska wartość księgowa jest <em>skutkiem</em> jakości biznesu, a nie jego słabością.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="catalyst-item"><div class="catalyst-icon">🔬</div><div class="catalyst-body"><h4>Monopol, którego nie da się szybko podważyć</h4><p>Jedyny na świecie dostawca maszyn EUV. Odtworzenie łańcucha dostaw i wiedzy inżynierskiej zajęłoby dekadę przy nieograniczonym budżecie — Chiny właśnie tego próbują.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💎</div><div class="catalyst-body"><h4>ROIC 65,98% przy koszcie kapitału 11,73%</h4><p>Przewaga 54 punktów procentowych, druga w portfelu po NVIDII. Marża operacyjna 35,42%, marża wolnych przepływów 28,42%, gotówka netto $6,38 mld.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">📈</div><div class="catalyst-body"><h4>PEG 0,78 przy prognozie wzrostu zysku +39,45%</h4><p>Wskaźnik przyszłego zysku spadł z 55,65 do 30,82. Konsensus 44 analityków wskazuje $2 195,39, czyli 25,4% powyżej ceny.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">⚙️</div><div class="catalyst-body"><h4>High-NA EUV wchodzi do produkcji wielkoseryjnej</h4><p>Intel integruje tę technologię na wybranych warstwach procesu 18A — pierwsze zastosowanie w produkcji masowej. To otwiera kolejny cykl wymiany parku maszynowego.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🎯</div><div class="catalyst-body"><h4>Marża przekracza własne prognozy spółki</h4><p>54,0% wobec zapowiadanych 51–52%, a prognoza roczna podniesiona do 54–56%. Sprzedaż na 2026 podniesiona do €43–45 mld. Krótka sprzedaż 0,28% — najniżej w portfelu.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="catalyst-item"><div class="catalyst-icon">👥</div><div class="catalyst-body"><h4>Trzech klientów na całym świecie</h4><p>TSMC, Samsung i Intel — tylko oni kupują maszyny EUV. Decyzja jednego o wstrzymaniu rozbudowy natychmiast uderza w przychody. Dwóch z tej trójki masz w portfelu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🇨🇳</div><div class="catalyst-body"><h4>Ograniczenia eksportowe wobec Chin</h4><p>Kolejne rundy restrykcji systematycznie zawężają to, co ASML może sprzedawać na jednym z największych rynków maszyn DUV. To ryzyko polityczne, na które spółka nie ma wpływu.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🔄</div><div class="catalyst-body"><h4>Cykliczność dóbr inwestycyjnych</h4><p>Odlewnie zamawiają falami. Po szczycie nakładów przychodzi zawsze zadyszka, a przy 43-krotności EBITDA i 27-krotności wartości księgowej korekta wyceny byłaby dotkliwa.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">🙈</div><div class="catalyst-body"><h4>Spółka przestała publikować zamówienia</h4><p>Od 2026 roku znikł najlepszy wyprzedzający wskaźnik dla całej branży. Zostaje deklaracja o „bardzo mocnych” zamówieniach — bez liczb, których dałoby się pilnować.</p></div></div>
+      <div class="catalyst-item"><div class="catalyst-icon">💰</div><div class="catalyst-body"><h4>Wycena nie zostawia miejsca na potknięcie</h4><p>EV/EBITDA 43,47, P/FCF 57,54, P/B 27,13. Kurs jest 21% powyżej średniej 200-sesyjnej po wzroście o 135% w rok — dobre wiadomości są w cenie.</p></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Podmiot</th><th>Rola</th><th>Relacja do ASML</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ASML</strong></td><td>Litografia EUV i DUV</td><td style="color:var(--ocena-kupno)">Monopol w EUV, ROIC 65,98%</td></tr>
+          <tr><td>Nikon, Canon</td><td>Litografia DUV</td><td style="color:var(--ocena-kupno)">Konkurencja tylko w starszych technologiach</td></tr>
+          <tr><td><strong>SMEE i programy chińskie</strong></td><td>Próba zbudowania alternatywy</td><td style="color:var(--ocena-uwaga)">Bez powodzenia w EUV; wyścig na dekady</td></tr>
+          <tr><td><strong>TSMC, Samsung, Intel</strong></td><td>Jedyni klienci EUV</td><td style="color:var(--ocena-sprzedaz)">Samsunga i Intela masz w portfelu</td></tr>
+          <tr><td>Lam Research, Applied Materials</td><td>Inne etapy produkcji układów</td><td>LRCX masz w obserwowanych — komplementarny, nie konkurencyjny</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>ASML zajmuje w łańcuchu wartości miejsce, którego nikt inny w Twoim portfelu nie ma.</strong> Marvell projektuje układy, Samsung produkuje pamięci, Intel walczy o powrót do gry, CoreWeave i Oracle wynajmują gotową moc, a Caterpillar zasila to wszystko prądem. <strong>ASML sprzedaje maszyny, bez których żaden z nich nie miałby czego robić.</strong> Jest najdalej od klienta końcowego i najbliżej fizycznego ograniczenia całej branży.</p>
+      <p style="margin-top:10px">Nie dopisałem tej spółce tematu „moc obliczeniowa dla AI”, choć popyt na jej maszyny bierze się dziś głównie stamtąd. Uznałem, że ASML sprzedaje narzędzia odlewniom, a nie moc odbiorcom, i rozciąganie tego tematu o kolejny szczebel łańcucha rozmyłoby jego znaczenie. <strong>Zostaje w półprzewodnikach, które i tak ważą w Twoim portfelu 36%.</strong></p></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Cena</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bieżąca</strong></td><td><strong>$1 750,31</strong></td><td>+135,38% w 52 tygodnie</td></tr>
+          <tr><td>Średnia 50-sesyjna</td><td>$1 780,95</td><td style="color:var(--ocena-uwaga)">Kurs 1,7% poniżej — płaska konsolidacja</td></tr>
+          <tr><td>Średnia 200-sesyjna</td><td>$1 443,05</td><td style="color:var(--ocena-kupno)">Kurs 21,3% powyżej</td></tr>
+          <tr><td>RSI (14)</td><td>49,19</td><td style="color:var(--ocena-kupno)">Idealnie neutralnie</td></tr>
+          <tr><td>Beta</td><td>1,37</td><td>Umiarkowana jak na tę grupę</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-kupno)"><strong>0,28% akcji</strong></td><td>Najniżej w portfelu; 0,51 dnia do pokrycia</td></tr>
+          <tr><td>Wsparcie S1</td><td>$1 620</td><td>Poziom pośredni</td></tr>
+          <tr><td>Wsparcie S2</td><td>$1 443</td><td>Średnia 200-sesyjna</td></tr>
+          <tr><td>Opór R1</td><td>$1 950</td><td>Dolny zakres fair value</td></tr>
+        </tbody>
+      </table></div>
+      <div class="scenario-grid">
+        <div class="bull-box"><h4>🐂 Scenariusz byczy</h4><ul><li>Wyniki Q3 w połowie października powyżej prognozy</li><li>Potwierdzenie rampy High-NA u kolejnych klientów</li><li>Droga ku $1 950 i celowi analityków $2 195</li></ul></div>
+        <div class="bear-box"><h4>🐻 Scenariusz niedźwiedzi</h4><ul><li>Sygnały o hamowaniu nakładów odlewni</li><li>Zaostrzenie ograniczeń eksportowych</li><li>Przebicie $1 443 i zejście ku $1 150–1 350</li></ul></div>
+      </div>
+      <p><strong>To najspokojniejszy układ techniczny z całej dzisiejszej serii.</strong> RSI 49,19 to praktycznie środek skali, kurs jest 1,7% poniżej średniej pięćdziesięciosesyjnej i 21,3% powyżej dwustusesyjnej, a krótka sprzedaż wynosi 0,28% i maleje. Po wzroście o 135% w rok spółka konsoliduje się bez oznak paniki ani euforii.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="rating-grid">
+        <div class="rating-box"><div class="period">Krótki termin (1–3 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">RSI 49,19, kurs w płaskiej konsolidacji tuż pod średnią 50-sesyjną, krótka sprzedaż 0,28%. Brak katalizatora do połowy października — spokojne okno na wejście.</div></div>
+        <div class="rating-box"><div class="period">Średni termin (6–18 mies.)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">PEG 0,78, prognoza sprzedaży €43–45 mld i marża brutto 54–56%. Konsensus 44 analityków: $2 195,39, czyli 25,4% powyżej ceny.</div></div>
+        <div class="rating-box"><div class="period">Długi termin (3–5 lat)</div><div class="rating-text buy">KUPNO</div><div class="rating-note">Monopol na EUV, ROIC 65,98% i wdrożenie High-NA otwierające kolejny cykl. Ryzykiem jest cykliczność i trzech klientów, nie kondycja spółki.</div></div>
+      </div>
+      <hr class="divider">
+      <h3>Strategia</h3>
+      <ul>
+        <li><strong>Wielkość pozycji: 3–5% portfela.</strong> Masz 2,5% — jakość uzasadniałaby więcej, ale półprzewodniki ważą już 36% portfela</li>
+        <li><strong>Uwaga na granulację.</strong> Masz tylko <strong>2 akcje</strong>, a jedna kosztuje 1 750 dolarów. Dokupienie choćby jednej to skok udziału o około 1,2 punktu procentowego — przy tej cenie nie da się dostrajać pozycji drobnymi krokami</li>
+        <li><strong>Można dokupywać przy obecnej cenie.</strong> RSI 49,19, brak katalizatora do połowy października</li>
+        <li><strong>Dokupienie:</strong> $1 600–1 650 przy głębszym cofnięciu; druga transza w okolicach średniej 200-sesyjnej, $1 443</li>
+        <li><strong>Realizacja zysku:</strong> częściowa w strefie $2 200–2 300</li>
+        <li><strong>Jedna liczba do śledzenia:</strong> <strong>marża brutto</strong>. Dziś 54,0% wobec zapowiadanych 51–52%, prognoza roczna podniesiona do 54–56%. Dopóki spółka przekracza własne prognozy marży, siła cenowa monopolisty jest nienaruszona. Skoro zamówień już nie publikuje, marża zostaje najlepszym dostępnym wskaźnikiem</li>
+        <li><strong>Wyjście z tezy:</strong> marża brutto poniżej 50%, obniżenie prognozy rocznej albo informacja o wstrzymaniu rozbudowy mocy przez któregoś z trzech klientów</li>
+      </ul>
+      <div class="fair-value-box"><div class="fair-value-label">Fair value 12–18 mies.</div><div class="fair-value-range">$1 950 – $2 250</div><div class="fair-value-note">Scenariusz negatywny: $1 150–1 350 | Scenariusz pozytywny: $2 600–2 900 | Konsensus 44 analityków: $2 195,39</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-buy"><h4>✅ 3 powody, by kupić</h4><ul>
+          <li><strong>Monopol na EUV.</strong> Jedyny dostawca na świecie; odtworzenie łańcucha dostaw zajęłoby dekadę. Marża brutto 54,0% przekracza własną prognozę spółki</li>
+          <li><strong>ROIC 65,98% przy koszcie kapitału 11,73%</strong> — przewaga 54 pkt proc., druga w portfelu po NVIDII. Marża operacyjna 35,42%, gotówka netto $6,38 mld, skup akcji</li>
+          <li><strong>PEG 0,78</strong> przy prognozie wzrostu zysku +39,45% i celu 44 analityków na poziomie $2 195,39</li>
+        </ul></div>
+        <div class="thesis-avoid"><h4>❌ 3 powody, by unikać</h4><ul>
+          <li><strong>Trzech klientów na świecie</strong> — TSMC, Samsung i Intel. Decyzja jednego przekłada się natychmiast na przychody, a dwóch z nich masz w portfelu</li>
+          <li><strong>Wycena bez marginesu błędu.</strong> EV/EBITDA 43,47, P/FCF 57,54, P/B 27,13 po wzroście kursu o 135% w rok</li>
+          <li><strong>Zniknęły dane o zamówieniach</strong> — od 2026 spółka ich nie publikuje, co odbiera najlepszy wyprzedzający wskaźnik dla całej branży</li>
+        </ul></div>
+      </div>
+      <hr class="divider">
+      <p><strong>🔴 Thesis-breaker:</strong> marża brutto poniżej 50%, obniżenie prognozy rocznej albo wstrzymanie rozbudowy mocy przez jednego z trzech klientów → zejście w rejon $1 150–1 350.</p>
+      <p><strong>🟢 Thesis-confirmer:</strong> utrzymanie marży w przedziale 54–56% przy rampie High-NA u kolejnych klientów → droga ku $2 195 i wyżej.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+
+      <p class="sum-lead">Po przeanalizowaniu dziś sześciu spółek mogę powiedzieć wprost: <strong>ASML jest najwyższej jakości przedsiębiorstwem w Twoim portfelu.</strong> Zwrot z zainwestowanego kapitału wynosi 65,98% przy jego koszcie 11,73% — przewaga 54 punktów procentowych, ustępująca wyłącznie NVIDII, której nie posiadasz. Marża operacyjna sięga 35,42%, marża wolnych przepływów 28,42%, spółka ma 6,38 miliarda dolarów gotówki netto i skupuje własne akcje w tempie 1,44% rocznie. Krótka sprzedaż wynosi 0,28% i jest najniższa w całym portfelu.</p>
+
+      <p class="sum-lead">Źródłem tej rentowności jest fosa, jakiej nie ma tu żadna inna spółka. <strong>ASML jest jedynym na świecie dostawcą maszyn do litografii EUV</strong> — bez nich nie powstaje żaden nowoczesny układ scalony. Nie chodzi o patenty, tylko o trzydzieści lat budowania łańcucha dostaw i wiedzy inżynierskiej, których nie da się odtworzyć decyzją zarządu ani programem państwowym. Praktyczny dowód: marża brutto w drugim kwartale wyniosła <strong>54,0% wobec zapowiadanych przez samą spółkę 51–52%</strong>, a prognoza roczna została podniesiona do przedziału 54–56% przy sprzedaży €43–45 miliardów.</p>
+
+      <p class="sum-lead" style="border-color:var(--ocena-sprzedaz)">Trzy rzeczy trzeba jednak nazwać. Po pierwsze, <strong>klientów zdolnych kupić maszynę EUV jest na świecie trzech</strong> — TSMC, Samsung i Intel — a dwóch z nich masz w portfelu, więc ryzyko się u Ciebie kumuluje. Po drugie, wycena nie zostawia marginesu: 43-krotność EBITDA i 57-krotność wolnych przepływów po wzroście kursu o 135% w rok. Po trzecie, <strong>od 2026 roku spółka przestała publikować dane o zamówieniach</strong>, przez co zniknął najlepszy wyprzedzający wskaźnik dla całej branży półprzewodnikowej — zostaje zapewnienie, że były „bardzo mocne”.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><div><strong>Monopol jest realny i trwały.</strong> Jedyny dostawca EUV; chińskie programy litograficzne nie zbliżyły się do tej technologii.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Rentowność bez odpowiednika.</strong> ROIC 65,98% wobec WACC 11,73%, marża operacyjna 35,42%, marża FCF 28,42%, gotówka netto $6,38 mld.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Siła cenowa potwierdzona.</strong> Marża brutto 54,0% przekroczyła własną prognozę spółki, roczna podniesiona do 54–56%.</div></li>
+          <li><span class="ck yes">✓</span><div><strong>Wycena względem wzrostu jest rozsądna.</strong> Forward P/E 30,82 przy wzroście zysku +39,45% daje PEG 0,78.</div></li>
+          <li><span class="ck wait">?</span><div><strong>Rampa High-NA EUV.</strong> Intel wdraża na warstwach 18A jako pierwszy; potwierdzenie u TSMC i Samsunga otworzyłoby pełny cykl wymiany.</div></li>
+          <li><span class="ck no">✗</span><div><strong>Przejrzystość zamówień.</strong> Zniknęła od 2026 roku. Trzeba się przestawić na obserwowanie marży zamiast portfela zleceń.</div></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>15 lipca 2026</td><td>Wyniki Q2 — już opublikowane</td><td>Sprzedaż €9,33 mld (+21,2%), marża 54,0%, prognoza roczna podniesiona</td></tr>
+            <tr><td><strong>Połowa października 2026</strong></td><td>Wyniki Q3</td><td>Sprawdzian marży w przedziale 54–56% i realizacji prognozy €43–45 mld</td></tr>
+            <tr><td>Na bieżąco</td><td>Wdrożenia High-NA EUV</td><td>Intel już na 18A; kolejni klienci otwierają nowy cykl wymiany maszyn</td></tr>
+            <tr><td>Na bieżąco</td><td>Decyzje eksportowe wobec Chin</td><td>Ryzyko polityczne poza kontrolą spółki</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Marża brutto</strong></td><td>54,0%, prognoza 54–56%</td><td>&lt; 50%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>ROIC vs koszt kapitału</td><td>65,98% vs 11,73%</td><td>zawężenie poniżej 30 pkt</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Prognoza sprzedaży 2026</td><td>€43–45 mld</td><td>każde obniżenie</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża wolnych przepływów</td><td>28,42%</td><td>&lt; 20%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Przejrzystość zamówień</strong></td><td>nie publikowane od 2026</td><td>—</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Nakłady trzech klientów EUV</td><td>rosnące</td><td>wstrzymanie u któregokolwiek</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <ul>
+          <li><strong>Wielkość pozycji: 3–5% portfela.</strong> Masz 2,5% — jakość uzasadnia więcej, ale półprzewodniki ważą już 36%</li>
+          <li><strong>Uwaga na granulację:</strong> masz 2 akcje po 1 750 dolarów. Dokupienie jednej to skok o około 1,2 punktu procentowego — tej pozycji nie da się dostrajać drobnymi krokami</li>
+          <li><strong>Dokupienie:</strong> $1 600–1 650; druga transza w okolicach średniej 200-sesyjnej, $1 443</li>
+          <li><strong>Realizacja zysku:</strong> częściowa w strefie $2 200–2 300</li>
+          <li><strong>Jedna liczba do śledzenia:</strong> marża brutto. Skoro zamówień już nie ma, to ona zostaje najlepszym miernikiem siły monopolisty</li>
+          <li><strong>Uwaga portfelowa:</strong> ASML sprzedaje maszyny Samsungowi i Intelowi, których obu masz. Problemy któregokolwiek z nich uderzyłyby w Ciebie dwukrotnie</li>
+        </ul>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">📈 KUPNO — najlepsza jakość w portfelu, warta zwiększenia</div>
+        <p>ASML jest spółką, jakich na giełdzie jest kilka: monopolista w technologii, bez której nie działa współczesna gospodarka cyfrowa, zarabiający na kapitale prawie sześciokrotność jego kosztu, z marżą operacyjną 35%, gotówką netto i skupem akcji. Kupiłeś ją po 720 dolarów, dziś kosztuje 1 750 — jesteś na plusie 143%, a mimo to wskaźnik PEG wynosi 0,78, czyli poniżej progu, przy którym płaci się punkt wyceny za punkt wzrostu.</p>
+        <p>Zastrzeżenia są realne, ale dotyczą otoczenia, nie spółki. <strong>Trzech klientów na całym świecie</strong> to koncentracja skrajna, a wycena po wzroście o 135% nie zostawia miejsca na potknięcie. Denerwuje mnie też, że spółka przestała publikować zamówienia — akurat w momencie, gdy cała branża najbardziej potrzebuje wyprzedzających sygnałów.</p>
+        <p><strong>Trzymać i rozważyć zwiększenie z 2,5% do 3–5%.</strong> Pamiętaj tylko o granulacji: przy cenie 1 750 dolarów za akcję każdy ruch jest tu skokowy. Jeśli szukasz w portfelu miejsca, z którego można to sfinansować, najbardziej oczywistym kandydatem jest <strong>Roku</strong> — pozycja z 1,5% pozostałego potencjału, o której pisałem w osobnym raporcie.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b>Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$1 950–2 250</b></div>
+          <div><span>Scenariusz negatywny</span><b>$1 150–1 350</b></div>
+          <div><span>Scenariusz pozytywny</span><b>$2 600–2 900</b></div>
+          <div><span>Sugerowana pozycja</span><b>3–5% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3 — połowa października</b></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 21 sierpnia 2026 | Cena: $1 750,31 (zamknięcie 20.08.2026) | Pierwsza analiza ASML | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 21.08.2026</strong>, ASML IR (wyniki Q2 2026, 15 lipca) | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
