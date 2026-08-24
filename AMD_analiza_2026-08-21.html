@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMD — Advanced Micro Devices | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: AMD</div>
+    <div class="company-name">Advanced Micro Devices, Inc.</div>
+    <div class="company-sub">Procesory serwerowe EPYC i akceleratory AI Instinct · Santa Clara, Kalifornia</div>
+    <div class="header-meta">
+      <span class="meta-tag">Największa pozycja — 16,4% portfela</span>
+      <span class="meta-tag">Twój wynik +306,7%</span>
+      <span class="meta-tag">Beta 2,49</span>
+      <span class="meta-tag">19% pod szczytem z 30 czerwca</span>
+      <div class="price-display">
+        <div class="price-main">$473,25</div>
+        <div class="price-sub">zamknięcie 21.08.2026 | +186% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Moc obliczeniowa dla AI</span><span class="temat">Półprzewodniki</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO na spółkę, ale pozycja za duża">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">dobra spółka w za dużej dawce</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$500 – $580</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">+6% do +23%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>4 sierpnia 2026</b><em>Q3 — początek listopada</em></div>
+    <div class="rb-right">Sugestia: zejść z 16,4% do 10–12%</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (21.08.2026)</div><div class="metric-value">$473,25</div><div class="metric-detail">7,3% pod średnią 50-sesyjną | 43% nad 200-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Kapitalizacja</div><div class="metric-value">$772,6 mld</div><div class="metric-detail">Po rozwodnieniu warrantami ok. $847 mld</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">$11,54 mld</div><div class="metric-detail">+50% r/r — rekord spółki</div></div>
+    <div class="metric-card"><div class="metric-label">Centra danych Q2</div><div class="metric-value green">+107%</div><div class="metric-detail">$6,7 mld — już 58% całej firmy</div></div>
+    <div class="metric-card"><div class="metric-label">Marża brutto</div><div class="metric-value yellow">56%</div><div class="metric-detail">Prognoza płaska — to jest powód spadku</div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot z kapitału vs koszt</div><div class="metric-value red">9,8% vs 17,9%</div><div class="metric-detail">Luka -8,1 pp — dziś niszczy wartość</div></div>
+    <div class="metric-card"><div class="metric-label">Warranty dla OpenAI</div><div class="metric-value red">160 mln akcji</div><div class="metric-detail">9,8% kapitału po $0,01 za sztukę</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (53 analityków)</div><div class="metric-value green">$613,09</div><div class="metric-detail">+29,6% | mocne kupno, zero rekomendacji sprzedaży</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Czym jest AMD i czym jest w Twoim portfelu</h3>
+      <p>AMD projektuje procesory i akceleratory obliczeniowe. Sama nie ma fabryk — produkcję zleca tajwańskiemu TSMC. Zatrudnia <strong>31 tysięcy osób</strong> i generuje <strong>41,31 miliarda dolarów przychodu</strong>, czyli 1,33 miliona dolarów na pracownika. Przez dwie dekady była słabszym rywalem Intela; dziś jest jedyną firmą poza NVIDIĄ, która sprzedaje akceleratory AI w skali gigawatów.</p>
+
+      <div class="alert alert-success"><strong>To jest Twoja najlepsza inwestycja i jednocześnie Twój największy problem.</strong> Masz 50 akcji po średniej cenie <strong>116,30 dolara</strong>. Przy kursie 473,25 dolara pozycja jest warta około <strong>23,7 tysiąca dolarów</strong> przy koszcie 5,8 tysiąca — zysk <strong>+306,7%</strong>, blisko 17,9 tysiąca dolarów. To <strong>16,4% całego portfela</strong>, czyli więcej niż jakakolwiek inna pozycja.</div>
+
+      <p>Sęk w tym, że AMD ma <strong>betę 2,49</strong> — historycznie porusza się dwa i pół raza mocniej niż rynek. Pozycja o wadze 16,4% i takiej zmienności odpowiada za mniej więcej <strong>41% zmienności rynkowej całego portfela</strong>. Jeśli kiedykolwiek zastanawiałeś się, dlaczego wartość rachunku skacze mocniej, niż wynikałoby to z indeksów — odpowiedź jest tutaj i nazywa się AMD.</p>
+
+      <h3>Co pokazał drugi kwartał 2026 — wyniki z 4 sierpnia</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody</strong></td><td><strong>$11,54 mld</strong></td><td style="color:var(--ocena-kupno)">+50% r/r — rekord w historii spółki</td></tr>
+          <tr><td><strong>Segment centrów danych</strong></td><td><strong>$6,7 mld</strong></td><td style="color:var(--ocena-kupno)">+107% r/r — 58% przychodów całej firmy</td></tr>
+          <tr><td>Zysk operacyjny (raportowany)</td><td>$2,0 mld</td><td>Marża 17,3%</td></tr>
+          <tr><td>Zysk na akcję (raportowany)</td><td>$1,38</td><td>Zysk netto $2,3 mld</td></tr>
+          <tr><td>Zysk na akcję (skorygowany)</td><td><strong>$1,66</strong></td><td style="color:var(--ocena-kupno)">Oczekiwano $1,61 — pobicie o 3,1%</td></tr>
+          <tr><td>Marża brutto raportowana</td><td>54%</td><td>Skorygowana 56%</td></tr>
+          <tr><td><strong>Prognoza marży brutto</strong></td><td style="color:var(--ocena-uwaga)"><strong>ok. 56% — bez zmian</strong></td><td style="color:var(--ocena-uwaga)">I to jest powód, dla którego kurs spadł</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Wyniki były znakomite, a akcje i tak są 19% poniżej szczytu.</strong> Rekord przychodów, segment centrów danych podwojony, pobity konsensus — a kurs od 30 czerwca (584,73 dolara) spadł do 473,25. Powód nie leży w sprzedaży, tylko w <strong>marży</strong>: zarząd utrzymał prognozę marży brutto na płaskim poziomie około 56% mimo tego, że rośnie najszybciej rosnący segment. Rozwijamy tę myśl w sekcji 7 — to najważniejsza rzecz do zrozumienia w całym tym raporcie.</div>
+
+      <h3>Kluczowe wydarzenia ostatnich dwunastu miesięcy</h3>
+      <ul>
+        <li><strong>Październik 2025 — umowa z OpenAI na 6 GW.</strong> Wieloletnie wdrożenie akceleratorów AMD, pierwsza faza 1 GW na układach MI450 w drugiej połowie 2026. Do tego <strong>warranty na 160 milionów akcji po jednym centrze</strong>, wykupywane transzami do października 2030.</li>
+        <li><strong>22 lipca 2026 — umowa z Anthropikiem na 2 GW.</strong> Wdrożenie układów serii MI450 w szafach Helios, start pierwszego gigawata w pierwszej połowie 2027. AMD deklaruje przy tym <strong>inwestycję kapitałową do 5 miliardów dolarów w Anthropic</strong>. Bez warrantów — to zmiana konstrukcji względem umów z OpenAI i Meta.</li>
+        <li><strong>Q2 2026 — premiera rodziny Instinct MI400.</strong> MI455X do trenowania i wnioskowania w dużej skali oraz MI430X pod obliczenia naukowe i tak zwaną suwerenną AI (instalacje rządowe).</li>
+        <li><strong>30 czerwca 2026 — historyczny szczyt 584,73 dolara.</strong> Od tego momentu trwa korekta.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT I PRZEWAGA KONKURENCYJNA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <h3>Trzy linie produktowe, jedna naprawdę się liczy</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Linia</th><th>Co to jest</th><th>Rola w tezie inwestycyjnej</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Instinct (MI300 / MI400 / MI450)</strong></td><td>Akceleratory GPU do trenowania i uruchamiania modeli AI</td><td style="color:var(--ocena-kupno)"><strong>Cała teza.</strong> To one dały +107% w centrach danych</td></tr>
+          <tr><td><strong>EPYC</strong></td><td>Procesory serwerowe</td><td>Solidny, wysokomarżowy fundament; AMD systematycznie odbiera udziały Intelowi</td></tr>
+          <tr><td>Ryzen i Radeon</td><td>Procesory i karty graficzne do komputerów</td><td>Stabilna gotówka, zerowy wpływ na wycenę</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Helios — sprzedaż szafy zamiast układu</h3>
+      <p>Najważniejsza zmiana produktowa ostatniego roku nie dotyczy krzemu, tylko <strong>opakowania</strong>. Helios to gotowa szafa serwerowa: akceleratory, procesory, sieć i chłodzenie w jednej, zintegrowanej jednostce. Klient nie składa systemu z części — kupuje moc obliczeniową w kawałkach po kilkadziesiąt megawatów.</p>
+      <p>To jest bezpośrednia odpowiedź na przewagę NVIDII, która tę samą rzecz robi od dawna pod nazwą NVL72. Ma dwie konsekwencje. <strong>Pozytywna:</strong> przychód na jedno wdrożenie rośnie wielokrotnie, bo AMD sprzedaje też to, co wcześniej sprzedawali integratorzy. <strong>Negatywna, i to ona tłumaczy zachowanie kursu:</strong> szafa zawiera dużo komponentów o niskiej marży — pamięć, zasilanie, chłodzenie, okablowanie. Im więcej Helios w miksie, tym niższa marża brutto całej firmy.</p>
+
+      <div class="alert alert-warning"><strong>To jest prawdziwe wyjaśnienie, dlaczego wyniki były rewelacyjne, a akcje spadły.</strong> AMD rośnie najszybciej tam, gdzie zarabia najmniej procentowo. Marża brutto 56% przy segmencie centrów danych rosnącym o 107% oznacza, że reszta biznesu musi tę marżę ciągnąć w górę, żeby wynik wyszedł na zero. Rynek zobaczył płaską prognozę marży i wycenił ryzyko, że ta struktura się nie poprawi.</div>
+
+      <h3>Gdzie AMD jest naprawdę słaba: oprogramowanie</h3>
+      <p>Fosą NVIDII nigdy nie był krzem, tylko <strong>CUDA</strong> — warstwa oprogramowania budowana od 2006 roku, na której działa praktycznie każdy istotny projekt badawczy w AI. Odpowiednik AMD nazywa się <strong>ROCm</strong> i przez lata był powodem, dla którego świetne układy AMD nie znajdowały nabywców: sprzęt liczył szybko, ale przeniesienie na niego istniejącego kodu kosztowało miesiące pracy zespołu.</p>
+      <p>Umowa z Anthropikiem zawiera osobny, wieloletni element dotyczący właśnie <strong>rozwoju ROCm z użyciem modeli Claude</strong>. To warto docenić jako sygnał: AMD najwyraźniej uznała, że nie nadgoni CUDA ludzkimi rękami, i płaci klientowi, żeby pomógł jej to zrobić maszynowo. Jeśli zadziała, jest to najważniejszy pojedynczy katalizator dla spółki na najbliższe trzy lata — ważniejszy niż jakikolwiek nowy układ.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <h3>Rynek, na którym drugie miejsce wystarcza</h3>
+      <p>Rynek akceleratorów AI to obecnie rząd wielkości <strong>350–400 miliardów dolarów rocznie</strong> i rośnie w tempie kilkudziesięciu procent. NVIDIA ma w nim około <strong>85–90% udziału</strong>. AMD — kilka procent.</p>
+      <p>I to jest w tej inwestycji rzecz kluczowa: <strong>AMD nie musi wygrać, żeby akcje się opłaciły</strong>. Przy rynku tej wielkości przesunięcie udziału z 5% do 12% oznacza podwojenie przychodów całej firmy. Konsensus zakłada przychód <strong>87,34 miliarda dolarów w 2027 roku</strong> wobec 50,80 miliarda w 2026 — czyli dołożenie 36,5 miliarda w jeden rok. Dla porządku: to więcej, niż AMD zarobiło <em>w całym 2025 roku</em> (34,64 miliarda).</p>
+
+      <h3>Dlaczego klienci w ogóle chcą drugiego dostawcy</h3>
+      <ul>
+        <li><strong>Cena.</strong> Marża brutto NVIDII przekracza 70%. Każdy duży nabywca wie, ile płaci ponad koszt, i ma interes w tym, żeby istniała alternatywa — nawet gdyby miał kupić u niej niewiele.</li>
+        <li><strong>Dostępność.</strong> Kolejki po układy NVIDII liczono w kwartałach. Moc, której nie da się kupić, jest warta zero.</li>
+        <li><strong>Pamięć na układzie.</strong> Akceleratory AMD tradycyjnie oferują więcej pamięci HBM na sztukę, co przy uruchamianiu bardzo dużych modeli bywa przewagą techniczną, a nie tylko cenową.</li>
+        <li><strong>Suwerenna AI.</strong> Rządy budujące własne centra obliczeniowe nie chcą uzależnienia od jednego dostawcy. MI430X celuje dokładnie w ten segment.</li>
+      </ul>
+
+      <div class="alert alert-info"><strong>Ryzyko cykliczne, o którym warto pamiętać przy pozycji tej wielkości.</strong> Cały ten rynek opiera się na wydatkach inwestycyjnych kilkunastu firm. To nie jest popyt konsumencki, który wygasa powoli — to budżety, które zarządy mogą ściąć w jednym kwartale. Historia półprzewodników to historia cykli, a nie równych trendów, i przez ostatnie dwa lata rynek zachowuje się tak, jakby cyklu już nie było.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I STRUKTURA UMÓW</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <h3>Zakontraktowana moc — i cena, jaką AMD za nią zapłaciła</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Klient</th><th>Skala</th><th>Start</th><th>Co AMD oddała w zamian</th></tr></thead>
+        <tbody>
+          <tr><td><strong>OpenAI</strong></td><td>6 GW</td><td>1 GW w 2. poł. 2026</td><td style="color:var(--ocena-sprzedaz)"><strong>Warranty na 160 mln akcji po $0,01</strong>, transze do X 2030</td></tr>
+          <tr><td><strong>Anthropic</strong></td><td>2 GW</td><td>1 GW w 1. poł. 2027</td><td style="color:var(--ocena-uwaga)"><strong>Inwestycja kapitałowa do $5 mld</strong> — bez warrantów</td></tr>
+          <tr><td>Meta</td><td>brak ujawnionej skali</td><td>trwa</td><td>Konstrukcja warrantowa</td></tr>
+          <tr><td>Oracle, dostawcy chmury, sektor publiczny</td><td>rozproszone</td><td>trwa</td><td>Umowy standardowe</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Warranty dla OpenAI to najbardziej niedoceniana liczba w całej tej analizie.</strong> 160 milionów akcji przy 1,63 miliarda w obrocie to <strong>9,8% kapitału spółki, oddawane praktycznie za darmo</strong> — po jednym centrze za sztukę. Przy dzisiejszym kursie to transfer wartości rzędu <strong>75,7 miliarda dolarów</strong>. Podawana kapitalizacja 772,6 miliarda nie uwzględnia tych akcji; po pełnym rozwodnieniu jest to raczej <strong>847 miliardów</strong>. Każdy wskaźnik na akcję, który zobaczysz w serwisach finansowych — zysk, przepływy, wartość księgowa — jest o te 9,8% zawyżony względem stanu docelowego.</div>
+
+      <p>Uczciwie trzeba dodać drugą stronę: warranty <strong>wykupywane są transzami powiązanymi z rzeczywistym wdrożeniem</strong>. Jeśli OpenAI nie postawi mocy, akcje nie powstają. To nie jest darowizna, tylko sposób zapłaty za coś, co ma większą wartość niż 9,8% kapitału — za wiarygodność. AMD kupiła sobie status realnej alternatywy dla NVIDII, a bez pierwszego klienta tej rangi nie kupiłaby go za żadne pieniądze.</p>
+
+      <h3>Zależność w obie strony</h3>
+      <p>Warto zobaczyć, co się zmieniło w konstrukcji: przy Anthropiku AMD nie dała warrantów, tylko <strong>sama zainwestowała do 5 miliardów dolarów w klienta</strong>. Staje się jednocześnie dostawcą i akcjonariuszem odbiorcy.</p>
+      <div class="alert alert-warning"><strong>To ta sama konstrukcja, którą oglądasz w portfelu już kilka razy</strong> — NVIDIA finansująca OpenAI, OpenAI kupujące moc od Oracle, Oracle budujące na sprzęcie NVIDII, CoreWeave (którą masz, 3,7%) finansująca się pod kontrakty od tych samych podmiotów. Ma to nazwę: <strong>finansowanie kołowe</strong>. Dopóki popyt końcowy rośnie, wygląda na sprytną alokację kapitału. Kiedy przestanie, wszystkie te podmioty okażą się skorelowane znacznie mocniej, niż wynika to z ich branż. Masz <strong>52% portfela w tej jednej tezie</strong> — to jest właściwy moment, żeby o tym pamiętać.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PROGNOZY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <h3>Ścieżka konsensusu — co dokładnie jest w cenie</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Rok</th><th>Przychody</th><th>Dynamika</th><th>Zysk na akcję*</th><th>Dynamika</th><th>Wolne przepływy</th></tr></thead>
+        <tbody>
+          <tr><td>2024</td><td>$25,79 mld</td><td>+13,7%</td><td>—</td><td>—</td><td>$3,50 mld</td></tr>
+          <tr><td>2025</td><td>$34,64 mld</td><td>+34,3%</td><td>$4,17</td><td>+26,0%</td><td>$4,59 mld</td></tr>
+          <tr><td><strong>2026 (prognoza)</strong></td><td><strong>$50,80 mld</strong></td><td style="color:var(--ocena-kupno)">+46,7%</td><td><strong>$7,56</strong></td><td style="color:var(--ocena-kupno)">+81,3%</td><td>$7,42 mld</td></tr>
+          <tr><td><strong>2027 (prognoza)</strong></td><td><strong>$87,34 mld</strong></td><td style="color:var(--ocena-kupno)">+71,9%</td><td><strong>$15,47</strong></td><td style="color:var(--ocena-kupno)">+104,6%</td><td>brak konsensusu</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">* zysk skorygowany (non-GAAP). Rozpiętość prognoz na 2026: przychody 48,3–52,7 mld, zysk 7,00–8,20 dolara. Prognozy sporządziło 44 analityków.</p>
+
+      <div class="alert alert-warning"><strong>Zatrzymaj się przy wierszu 2027, bo to jest cała inwestycja w jednej liczbie.</strong> Konsensus zakłada przychód 87,34 miliarda dolarów — o <strong>36,5 miliarda więcej niż w 2026</strong>. AMD ma dołożyć w ciągu jednego roku więcej przychodu, niż wypracowała przez cały 2025 rok. Jednocześnie zysk na akcję ma się <strong>ponownie podwoić</strong>, już po podwojeniu w 2026.</div>
+
+      <p>Czy to jest realne? Częściowo tak, i to jest ważne rozróżnienie względem typowych prognoz z sektora. Te liczby nie opierają się na szacunku rynku, tylko na <strong>podpisanych umowach</strong>: 6 GW dla OpenAI, 2 GW dla Anthropica, Meta. Gigawat mocy akceleratorów to w przybliżeniu rząd wielkości 25–35 miliardów dolarów przychodu. Sama pierwsza transza OpenAI wypełnia znaczącą część luki.</p>
+      <p>Ryzyko nie leży więc w tym, czy popyt istnieje, tylko w <strong>harmonogramie i realizacji</strong>: czy TSMC dostarczy krzem, czy będzie pamięć HBM, czy klienci zdążą z budową centrów danych i podłączeniem zasilania. Każdy z tych elementów potrafi przesunąć przychód o kwartał — a przy dzisiejszej wycenie kwartał opóźnienia kosztuje kilkadziesiąt procent kursu.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <h3>Pełny zestaw — stan na 21 sierpnia 2026</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Cena / zysk (bieżąca)</td><td style="color:var(--ocena-sprzedaz)"><strong>119,82</strong></td><td>Liczona z historycznego zysku $3,90 — bez znaczenia dla decyzji</td></tr>
+          <tr><td><strong>Cena / zysk prognozowany 2026</strong> <span style="color:var(--text-muted);font-size:12px">(Forward P/E)</span></td><td style="color:var(--ocena-uwaga)"><strong>62,6</strong></td><td>Przy zysku $7,56 — drogo</td></tr>
+          <tr><td><strong>Cena / zysk prognozowany 2027</strong></td><td style="color:var(--ocena-kupno)"><strong>30,6</strong></td><td><strong>Tu leży cała teza</strong> — przy zysku $15,47</td></tr>
+          <tr><td>To samo, po rozwodnieniu warrantami</td><td style="color:var(--ocena-uwaga)"><strong>33,6</strong></td><td>Uczciwsza liczba: zysk $14,08 na 1,79 mld akcji</td></tr>
+          <tr><td><strong>Wskaźnik PEG</strong></td><td style="color:var(--ocena-kupno)"><strong>0,64</strong></td><td>Poniżej 1 — wzrost przewyższa wycenę</td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td style="color:var(--ocena-sprzedaz)">79,23</td><td>Bardzo wysoko; sensowne dopiero po skoku 2027</td></tr>
+          <tr><td>Cena / przychody</td><td>18,56 → prognoz. <strong>11,38</strong></td><td>Skala spadku pokazuje tempo wzrostu</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td>11,40</td><td>Wartość księgowa $41,19 na akcję</td></tr>
+          <tr><td>Cena / wolne przepływy</td><td style="color:var(--ocena-sprzedaz)">91,21</td><td>Rentowność przepływów tylko <strong>1,10%</strong></td></tr>
+          <tr><td>Dywidenda</td><td>brak</td><td>Odkup akcji ujemny (-1,07%) — udziałów przybywa</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Jedna liczba, która najlepiej porządkuje ten obraz: PEG 0,64.</strong> Wskaźnik PEG dzieli wycenę przez tempo wzrostu zysku. Wartość poniżej 1 oznacza, że zysk rośnie szybciej, niż akcje są wyceniane — mimo optycznie horrendalnego wskaźnika cena/zysk 120. To jest najmocniejszy pojedynczy argument za tym, żeby tej pozycji nie sprzedawać w całości, tylko ją przyciąć.</div>
+
+      <h3>Trzy scenariusze na koniec 2027 roku</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Zysk 2027 (rozwodniony)</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Konsensus się realizuje</strong></td><td>$14,08</td><td>35×</td><td><strong>$493</strong></td><td style="color:var(--ocena-uwaga)">+4%</td></tr>
+          <tr><td><strong>Realizacja + utrzymana premia</strong></td><td>$14,08</td><td>42×</td><td><strong>$591</strong></td><td style="color:var(--ocena-kupno)">+25%</td></tr>
+          <tr><td>Poślizg o rok</td><td>$10,00</td><td>32×</td><td>$320</td><td style="color:var(--ocena-sprzedaz)">-32%</td></tr>
+          <tr><td>Cykl się odwraca</td><td>$7,50</td><td>25×</td><td>$188</td><td style="color:var(--ocena-sprzedaz)">-60%</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Fair value: 500–580 dolarów</strong>, środek przedziału 540 (+14%). Uwaga na asymetrię: droga w górę to plus 4 do 25 procent, droga w dół to minus 32 do 60 procent. Konsensus analityków (613,09 dolara) jest wyraźnie powyżej mojego przedziału, bo w większości modeli nie odejmuje się warrantów i zakłada utrzymanie dzisiejszej premii.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE — SEDNO SPRAWY</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <h3>Dlaczego rewelacyjne wyniki dały spadek o 19% od szczytu</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Rok</th><th>Marża brutto</th><th>Marża operacyjna</th><th>Zysk operacyjny</th></tr></thead>
+        <tbody>
+          <tr><td>2021</td><td>48,25%</td><td>22,2%</td><td>$3,65 mld</td></tr>
+          <tr><td>2022</td><td>51,06%</td><td>5,4%</td><td>$1,26 mld</td></tr>
+          <tr><td>2023</td><td>50,27%</td><td>1,8%</td><td>$0,40 mld</td></tr>
+          <tr><td>2024</td><td>53,02%</td><td>8,1%</td><td>$2,09 mld</td></tr>
+          <tr><td>2025</td><td>52,49%</td><td>10,8%</td><td>$3,74 mld</td></tr>
+          <tr><td><strong>2026 (prognoza)</strong></td><td style="color:var(--ocena-uwaga)"><strong>55,49%</strong></td><td style="color:var(--ocena-kupno)"><strong>28,2%</strong></td><td style="color:var(--ocena-kupno)"><strong>$14,34 mld</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Zwróć uwagę na rozjazd dwóch kolumn — to jest klucz do zrozumienia całej spółki.</strong> Marża brutto ledwo drgnęła: z 52,5% na 55,5%. Marża operacyjna w tym samym czasie skoczyła z 10,8% na 28,2%, a zysk operacyjny wzrósł niemal <strong>czterokrotnie</strong>. Cała poprawa zysku pochodzi więc nie z lepszych cen, tylko z <strong>dźwigni operacyjnej</strong>: przychody rosną o 47%, a koszty badań i administracji dużo wolniej.</div>
+
+      <p>Dlaczego marża brutto stoi w miejscu, skoro najszybciej rośnie segment centrów danych? Bo <strong>akceleratory mają niższą marżę niż procesory serwerowe EPYC</strong>, a szafy Helios mają niższą marżę niż same akceleratory. AMD rośnie najmocniej tam, gdzie procentowo zarabia najmniej. Miks systematycznie ciągnie marżę brutto w dół, a spółka musi ten spadek nadrabiać skalą.</p>
+
+      <div class="alert alert-danger"><strong>To jest właśnie mechanizm, który zabrał 19% od czerwcowego szczytu.</strong> Zarząd nie obniżył prognozy — utrzymał ją na płaskim poziomie około 56%. Ale przy takim tempie wzrostu <em>płaska marża brutto oznacza, że rozwodnienie z miksu dokładnie zjada całą poprawę operacyjną</em>. Rynek liczył na to, że skala pozwoli marżę podnieść, i tego nie dostał. To realny problem, nie panika: dopóki AMD sprzedaje moc taniej niż NVIDIA, bo tylko na cenie potrafi wygrać, dopóty ta marża się nie poprawi.</p>
+      </div>
+
+      <h3>Pozostałe wskaźniki rentowności</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto (12 mies.)</td><td>55,72%</td><td>NVIDIA operuje powyżej 70%</td></tr>
+          <tr><td>Marża operacyjna</td><td>15,82%</td><td>Rośnie kwartał po kwartale</td></tr>
+          <tr><td>Marża netto</td><td>15,58%</td><td>Efektywna stopa podatkowa tylko 14,51%</td></tr>
+          <tr><td>Marża wolnych przepływów</td><td style="color:var(--ocena-kupno)">20,34%</td><td>Przepływy wyższe od zysku księgowego — dobry znak</td></tr>
+          <tr><td>Nakłady inwestycyjne / przychody</td><td style="color:var(--ocena-kupno)">4,1%</td><td>$1,68 mld — zaleta modelu bez własnych fabryk</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$1,33 mln</td><td>Zysk na pracownika $207,5 tys.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I JAKOŚĆ KAPITAŁU</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <h3>Bilans jest bez zarzutu</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$13,11 mld</td><td style="color:var(--ocena-kupno)">Zadłużenie $4,28 mld</td></tr>
+          <tr><td><strong>Gotówka netto</strong></td><td style="color:var(--ocena-kupno)"><strong>$8,84 mld</strong></td><td style="color:var(--ocena-kupno)">$5,41 na akcję</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-kupno)">0,06</td><td style="color:var(--ocena-kupno)">Praktycznie zerowe zadłużenie</td></tr>
+          <tr><td>Wskaźnik bieżący</td><td style="color:var(--ocena-kupno)">2,61</td><td>Szybki 1,69</td></tr>
+          <tr><td>Pokrycie odsetek</td><td style="color:var(--ocena-kupno)">44,5×</td><td>Odsetki nieistotne</td></tr>
+          <tr><td>Wskaźnik Altmana Z</td><td style="color:var(--ocena-kupno)">15,21</td><td>Powyżej 3 to strefa bezpieczna — tu jest pięciokrotnie wyżej</td></tr>
+          <tr><td>Wskaźnik Piotroskiego F</td><td style="color:var(--ocena-kupno)">8 / 9</td><td>Wysoka jakość fundamentów</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Ale zwrot z kapitału jest dziś poniżej jego kosztu</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Zwrot z kapitału własnego</td><td>10,20%</td></tr>
+          <tr><td><strong>Zwrot z zainwestowanego kapitału</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>9,77%</strong></td></tr>
+          <tr><td><strong>Średni ważony koszt kapitału</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>17,85%</strong></td></tr>
+          <tr><td><strong>Luka</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-8,08 punktu procentowego</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Ta jedna para liczb mówi więcej niż wszystkie wskaźniki wyceny razem wzięte.</strong> AMD zarabia na zainwestowanym kapitale <strong>9,77%</strong>, a kapitał kosztuje ją <strong>17,85%</strong>. W ujęciu ekonomicznym spółka w tej chwili <em>niszczy wartość</em> — każdy zainwestowany dolar zwraca mniej, niż wynosi wymagana stopa. Wysoki koszt kapitału jest zresztą pochodną bety 2,49: rynek wymaga wysokiej premii, bo akcje są bardzo zmienne.</div>
+
+      <p>Luka zamyka się dopiero wtedy, gdy zrealizuje się prognoza na 2027 — zysk operacyjny 14,34 miliarda w 2026 i wyżej w 2027 przy tej bazie kapitałowej wypycha zwrot z kapitału znacznie powyżej 20%. <strong>To jest dokładnie ta sama teza, którą kupujesz przez wskaźnik cena/zysk 2027</strong>, tylko wyrażona inaczej. Warto to zobaczyć z obu stron: <em>nie kupujesz tu dzisiejszej rentowności AMD, tylko prognozę jej rentowności za osiemnaście miesięcy.</em></p>
+
+      <p>Rozwodnienie: liczba akcji rośnie o <strong>1,07% rocznie</strong>, co samo w sobie jest niegroźne. Prawdziwe rozwodnienie siedzi poza tą liczbą — w warrantach dla OpenAI opisanych w sekcji 4.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Przychód jest zakontraktowany, nie oszacowany.</strong> 6 GW dla OpenAI plus 2 GW dla Anthropica plus Meta to podpisane umowy z harmonogramami. Skok przychodów z 50,8 na 87,3 miliarda w 2027 nie wymaga zdobycia nowych klientów — wymaga wyłącznie <em>dostarczenia tego, co już sprzedano</em>. To zupełnie inna jakość prognozy niż w większości spółek z tego sektora.</div>
+
+      <div class="alert alert-success"><strong>2. Wskaźnik PEG 0,64.</strong> Przy prognozowanym wzroście zysku o 81% w 2026 i 105% w 2027 wycena jest — wbrew optyce — poniżej tempa wzrostu. Rynek nie wycenił jeszcze roku 2027 w pełni.</div>
+
+      <div class="alert alert-success"><strong>3. Przełom w oprogramowaniu ROCm.</strong> Największą barierą sprzedaży zawsze była warstwa programistyczna, nie sprzęt. Wieloletnia współpraca z Anthropikiem nad rozwojem ROCm przy użyciu modeli AI to próba nadgonienia dwudziestoletniej przewagi CUDA metodą, która wcześniej nie istniała. Sukces tutaj otwiera cały rynek klientów drugiego rzędu.</div>
+
+      <div class="alert alert-success"><strong>4. Klienci strukturalnie chcą, żeby AMD wygrała.</strong> Każdy duży nabywca akceleratorów ma interes w istnieniu drugiego dostawcy — dla ceny i dla dostępności. To rzadka sytuacja, w której odbiorcy aktywnie pomagają numerowi dwa. Marża brutto NVIDII powyżej 70% jest najlepszym argumentem sprzedażowym AMD.</div>
+
+      <div class="alert alert-success"><strong>5. Rynek jest tak duży, że drugie miejsce wystarcza.</strong> Przy rynku rzędu 350–400 miliardów dolarów rocznie przesunięcie udziału z 5% na 12% podwaja całą firmę. AMD nie musi pokonać NVIDII — musi tylko przestać być marginalna.</div>
+
+      <div class="alert alert-info"><strong>6. Rekomendacje idą w górę, nie w dół — i to po korekcie.</strong> Bernstein podniósł cenę docelową z 525 na 650 dolarów (13 sierpnia), Roth MKM utrzymał 650 (20 sierpnia), BMO rozpoczął pokrycie rekomendacją kupna z celem 550 (20 sierpnia). Na 53 analityków <strong>38 daje mocne kupno, 10 trzymaj, zero sprzedaży</strong>. Krótka sprzedaż spadła z 39,77 do 37,75 miliona akcji.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Marża brutto nie chce rosnąć — i to nie jest przejściowe.</strong> AMD wygrywa ceną, bo innej broni przeciw CUDA nie ma. Szafy Helios dokładają komponenty o niskiej marży. Płaska prognoza 56% przy 50-procentowym wzroście przychodów oznacza, że miks zjada całą poprawę. Dopóki to się nie zmieni, cała nadzieja opiera się wyłącznie na dźwigni operacyjnej, a ta ma swój sufit.</div>
+
+      <div class="alert alert-danger"><strong>2. Warranty na 160 mln akcji.</strong> 9,8% kapitału po jednym centrze za sztukę. To 75,7 miliarda dolarów wartości przy dzisiejszym kursie, którego nie widać w żadnym publikowanym wskaźniku na akcję. Każdy model wyceny, który tego nie odejmuje, zawyża wynik o mniej więcej jedną dziesiątą.</div>
+
+      <div class="alert alert-danger"><strong>3. Zwrot z kapitału 9,77% przy koszcie 17,85%.</strong> Dzisiejsza AMD jest, w kategoriach ekonomicznych, spółką niszczącą wartość. Luka domyka się wyłącznie w scenariuszu, w którym prognoza na 2027 rok wykonuje się co do joty.</div>
+
+      <div class="alert alert-danger"><strong>4. Beta 2,49 przy 16,4% portfela.</strong> To nie jest ryzyko spółki, tylko ryzyko Twojej konstrukcji. Sama ta pozycja odpowiada za około 41% zmienności rynkowej całego rachunku. Spadek AMD o 30% — całkowicie normalny w tej klasie aktywów, zdarzył się w tym roku od czerwcowego szczytu w połowie — zabiera <strong>blisko 5% wartości całego portfela</strong>.</div>
+
+      <div class="alert alert-warning"><strong>5. Wszystko przechodzi przez jedną fabrykę.</strong> AMD nie ma własnych zakładów. Akceleratory MI400 i MI450 powstają w TSMC, w tych samych najnowocześniejszych procesach, o które konkuruje z NVIDIĄ i Apple. Ograniczenie mocy produkcyjnych albo pamięci HBM przesuwa przychód natychmiast — a przy wycenie 30-krotności zysku 2027 kwartał poślizgu kosztuje kilkadziesiąt procent kursu. Do tego dochodzi geografia: Tajwan.</div>
+
+      <div class="alert alert-warning"><strong>6. Krzem projektowany przez klientów.</strong> Google buduje własne układy TPU, Amazon — Trainium, Meta i Microsoft też mają swoje projekty. To jest zagrożenie dla AMD groźniejsze niż dla NVIDII, bo uderza dokładnie w segment „tańsza alternatywa", w którym AMD chce wygrywać. Największy klient, który sam sobie zaprojektuje układ, znika z rynku na zawsze.</div>
+
+      <div class="alert alert-warning"><strong>7. Finansowanie kołowe.</strong> AMD inwestuje do 5 miliardów w Anthropic, żeby Anthropic kupił od niej akcelerator. NVIDIA robi to samo z OpenAI. Dopóki popyt końcowy rośnie, wygląda to na sprytną alokację kapitału. Kiedy przestanie rosnąć, okaże się, że część przychodu branży to pieniądze krążące w kółko między kilkoma bilansami.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA — AMD NA TLE NVIDII</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <h3>Zestawienie, które trzeba zobaczyć w całości</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>AMD</th><th>NVIDIA</th><th>Kto lepiej</th></tr></thead>
+        <tbody>
+          <tr><td>Kurs (21.08.2026)</td><td>$473,25</td><td>$214,72</td><td>—</td></tr>
+          <tr><td>Kapitalizacja</td><td>$772,6 mld</td><td>$5,20 bln</td><td>—</td></tr>
+          <tr><td>Cena / zysk bieżący</td><td style="color:var(--ocena-sprzedaz)">119,82</td><td style="color:var(--ocena-kupno)"><strong>33,21</strong></td><td style="color:var(--ocena-kupno)">NVIDIA</td></tr>
+          <tr><td><strong>Cena / zysk prognozowany</strong></td><td style="color:var(--ocena-sprzedaz)">42,26</td><td style="color:var(--ocena-kupno)"><strong>21,63</strong></td><td style="color:var(--ocena-kupno)"><strong>NVIDIA — o połowę taniej</strong></td></tr>
+          <tr><td><strong>Wskaźnik PEG</strong></td><td>0,64</td><td style="color:var(--ocena-kupno)"><strong>0,49</strong></td><td style="color:var(--ocena-kupno)">NVIDIA</td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td style="color:var(--ocena-sprzedaz)">79,23</td><td style="color:var(--ocena-kupno)"><strong>31,31</strong></td><td style="color:var(--ocena-kupno)">NVIDIA</td></tr>
+          <tr><td><strong>Marża brutto</strong></td><td>55,72%</td><td style="color:var(--ocena-kupno)"><strong>74,15%</strong></td><td style="color:var(--ocena-kupno)">NVIDIA</td></tr>
+          <tr><td>Marża operacyjna</td><td>15,82%</td><td style="color:var(--ocena-kupno)"><strong>64,02%</strong></td><td style="color:var(--ocena-kupno)">NVIDIA</td></tr>
+          <tr><td><strong>Zwrot z kapitału</strong></td><td style="color:var(--ocena-sprzedaz)">9,77%</td><td style="color:var(--ocena-kupno)"><strong>104,67%</strong></td><td style="color:var(--ocena-kupno)"><strong>NVIDIA — dziesięciokrotnie</strong></td></tr>
+          <tr><td>Koszt kapitału</td><td style="color:var(--ocena-sprzedaz)">17,85%</td><td>16,39%</td><td style="color:var(--ocena-kupno)">NVIDIA</td></tr>
+          <tr><td>Wolne przepływy</td><td>$8,40 mld</td><td style="color:var(--ocena-kupno)"><strong>$119,08 mld</strong></td><td style="color:var(--ocena-kupno)">NVIDIA</td></tr>
+          <tr><td>Rentowność przepływów</td><td style="color:var(--ocena-sprzedaz)">1,10%</td><td style="color:var(--ocena-kupno)"><strong>2,28%</strong></td><td style="color:var(--ocena-kupno)">NVIDIA</td></tr>
+          <tr><td>Liczba akcji rok do roku</td><td style="color:var(--ocena-sprzedaz)">+1,07%</td><td style="color:var(--ocena-kupno)"><strong>-1,11%</strong></td><td style="color:var(--ocena-kupno)">NVIDIA skupuje, AMD emituje</td></tr>
+          <tr><td>Beta</td><td style="color:var(--ocena-sprzedaz)">2,49</td><td>2,21</td><td style="color:var(--ocena-kupno)">NVIDIA</td></tr>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-kupno)"><strong>+186,4%</strong></td><td>+22,4%</td><td style="color:var(--ocena-uwaga)">AMD — i to jest właśnie problem</td></tr>
+          <tr><td>Wzrost przychodów (prognoza 3 lata)</td><td style="color:var(--ocena-kupno)"><strong>51,1%</strong></td><td>47,6%</td><td style="color:var(--ocena-kupno)">AMD</td></tr>
+          <tr><td>Wzrost zysku (prognoza 3 lata)</td><td style="color:var(--ocena-kupno)"><strong>73,3%</strong></td><td>50,4%</td><td style="color:var(--ocena-kupno)">AMD</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Przeczytaj tę tabelę jeszcze raz, bo jest w niej rzecz, która powinna zaboleć.</strong> NVIDIA jest <em>tańsza od AMD na każdym pojedynczym mnożniku wyceny</em> — cena do zysku prognozowanego 21,6 wobec 42,3, wskaźnik PEG 0,49 wobec 0,64, wartość firmy do EBITDA 31 wobec 79 — a przy tym ma <strong>dziesięciokrotnie wyższy zwrot z kapitału</strong>, marżę brutto wyższą o 18 punktów procentowych, czternastokrotnie wyższe wolne przepływy i skupuje własne akcje zamiast je emitować.</div>
+
+      <p>Powód tej rozbieżności jest prosty i wart zapamiętania: <strong>przez ostatni rok AMD urosła o 186%, a NVIDIA o 22%</strong>. Rynek wycenił nadzieję u pretendenta i znudził się liderem. To bardzo częsty wzorzec i bardzo często kończy się tak samo — nadzieja musi zostać dowieziona, a lider po prostu dalej zarabia.</p>
+
+      <div class="alert alert-warning"><strong>Bezpośrednie przełożenie na Twój portfel.</strong> Masz <strong>16,4% w pretendencie i 0% w liderze</strong> — NVIDIA nadal siedzi u Ciebie tylko na liście obserwowanych. Jeśli tniesz AMD, nie musisz wychodzić z tezy: możesz kupić dokładnie tę samą ekspozycję na sztuczną inteligencję po połowie ceny za jednostkę zysku, z dziesięciokrotnie lepszym zwrotem z kapitału i niższą betą. <strong>NVIDIA raportuje 26 sierpnia — za pięć dni.</strong> To argument, żeby poczekać na wyniki, ale nie argument, żeby o tym zapomnieć.</div>
+
+      <h3>Pozostali gracze</h3>
+      <ul>
+        <li><strong>Intel</strong> (masz go, 5,4% portfela) — w akceleratorach AI nie liczy się. Realna konkurencja tylko dla procesorów EPYC, gdzie AMD systematycznie odbiera mu udziały.</li>
+        <li><strong>Krzem projektowany przez klientów</strong> — TPU od Google'a, Trainium od Amazona (masz Amazon, 3,8%), projekty Mety i Microsoftu. Największe realne zagrożenie dla AMD, bo uderza dokładnie w segment „tańszej alternatywy".</li>
+        <li><strong>Broadcom</strong> — nie sprzedaje własnych akceleratorów, tylko projektuje je na zlecenie gigantów. Wygrywa dokładnie wtedy, gdy klient rezygnuje z gotowego układu AMD.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Kurs zamknięcia 21.08.2026</td><td><strong>$473,25</strong></td><td>+0,81% w ciągu dnia; po sesji $472,65</td></tr>
+          <tr><td>Szczyt wszech czasów</td><td>$584,73 (30.06.2026)</td><td style="color:var(--ocena-sprzedaz)"><strong>-19,1% od szczytu</strong></td></tr>
+          <tr><td>Minimum 52-tygodniowe</td><td>$149,22 (koniec 2025)</td><td style="color:var(--ocena-kupno)"><strong>+217% od dołka</strong></td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td>$510,23</td><td style="color:var(--ocena-sprzedaz)"><strong>Kurs 7,3% poniżej — trend krótkoterminowy złamany</strong></td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td>$329,86</td><td style="color:var(--ocena-kupno)"><strong>Kurs 43,5% powyżej — trend długoterminowy nienaruszony</strong></td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>45,78</td><td>Strefa neutralna, lekko poniżej środka</td></tr>
+          <tr><td>Beta (5 lat)</td><td style="color:var(--ocena-sprzedaz)"><strong>2,49</strong></td><td style="color:var(--ocena-sprzedaz)">Najwyższa zmienność w Twoim portfelu</td></tr>
+          <tr><td>Średni wolumen (20 sesji)</td><td>26,6 mln akcji</td><td>Bardzo wysoka płynność</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>37,75 mln (2,31%)</td><td style="color:var(--ocena-kupno)">Spadek z 39,77 mln — grający na spadki wycofują się</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Obraz techniczny jest podręcznikowy dla korekty w trendzie wzrostowym.</strong> Kurs przebił średnią 50-sesyjną w dół, ale został grubo powyżej 200-sesyjnej — to korekta, nie odwrócenie. Wskaźnik RSI 45,78 nie mówi nic ciekawego: nie ma wyprzedania, które dawałoby przewagę kupującemu (dla porównania UnitedHealth ma dziś 33,3), ani wykupienia, które zapowiadałoby dalszy spadek.</div>
+
+      <h3>Poziomy do obserwacji</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$510</strong></td><td>Średnia 50-sesyjna — pierwszy opór; powrót powyżej odbudowuje trend</td></tr>
+          <tr><td><strong>$585</strong></td><td>Szczyt z 30 czerwca — poziom docelowy scenariusza pozytywnego</td></tr>
+          <tr><td><strong>$450</strong></td><td>Wsparcie psychologiczne; przy dalszym spadku pierwszy punkt obrony</td></tr>
+          <tr><td><strong>$330</strong></td><td>Średnia 200-sesyjna — <strong>tutaj teza wymaga rewizji</strong>. To 30% niżej</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Uwaga na kalendarz: NVIDIA raportuje <strong>26 sierpnia</strong>. AMD historycznie reaguje na te wyniki mocniej niż na własne — wyniki NVIDII są dla całego sektora odczytem popytu. Marvell (masz go) raportuje 27 sierpnia.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs pod średnią 50-sesyjną, RSI bez sygnału, a 26 sierpnia wyniki NVIDII ustawią cały sektor. Brak przewagi w którąkolwiek stronę.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Pierwsze wdrożenia dla OpenAI (2. poł. 2026) i Anthropica (1. poł. 2027) zaczynają zasilać przychód. Fair value $500–580.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Rynek na tyle duży, że drugi dostawca jest strukturalnie potrzebny. Warunek: ROCm musi przestać być barierą.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Ocena spółki: KUPNO. Ocena Twojej pozycji: za duża.</strong> To nie jest sprzeczność, tylko dwa różne pytania. Gdybym dziś nie miał AMD, kupiłbym po 473 dolary — wskaźnik PEG 0,64, zakontraktowany przychód, bilans bez długu. Ale mając <strong>16,4% portfela w spółce z betą 2,49</strong>, przycinałbym — nie dlatego, że AMD jest zła, tylko dlatego, że pozycja tej wielkości i tej zmienności decyduje o wyniku całego rachunku niezależnie od tego, co zrobią pozostałe 24 spółki.</div>
+
+      <h3>Konkretnie</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Działanie</th><th>Szczegóły</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zejść z 16,4% do 10–12%</strong></td><td>Sprzedaż 12–15 z 50 akcji, około 5,7–7,1 tys. dolarów</td></tr>
+          <tr><td><strong>Kiedy</strong></td><td>Po wynikach NVIDII 26 sierpnia — one ustawią cały sektor na kilka tygodni</td></tr>
+          <tr><td><strong>Dokąd z gotówką</strong></td><td>UnitedHealth (dziś 1,7%, beta 0,63) albo NVIDIA — ta sama teza, o połowę taniej za jednostkę zysku</td></tr>
+          <tr><td><strong>Czego nie robić</strong></td><td>Nie sprzedawać całości. Wskaźnik PEG 0,64 i zakontraktowane 8 GW to za mocne argumenty</td></tr>
+          <tr><td><strong>Poziom rewizji tezy</strong></td><td>$330 (średnia 200-sesyjna) lub marża brutto poniżej 54% w Q3</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Uwaga podatkowa: przy zysku +306,7% sprzedaż 13 akcji realizuje około 4,6 tysiąca dolarów zysku podlegającego opodatkowaniu. Warto rozważyć rozłożenie na dwa lata podatkowe.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <h3>Gdzie AMD siedzi w Twojej konstrukcji</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td style="color:var(--ocena-uwaga)"><strong>16,4%</strong></td><td>Największa pozycja z 25</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-kupno)"><strong>+306,7%</strong></td><td>50 akcji po średniej $116,30</td></tr>
+          <tr><td>Beta pozycji</td><td style="color:var(--ocena-sprzedaz)">2,49</td><td>Najwyższa w portfelu</td></tr>
+          <tr><td><strong>Wkład w zmienność portfela</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>ok. 41%</strong></td><td>16,4% × 2,49 — to jest ta liczba, która się liczy</td></tr>
+          <tr><td>AMD + ServiceNow</td><td style="color:var(--ocena-uwaga)">29,6%</td><td>Dwie pozycje to prawie jedna trzecia rachunku</td></tr>
+          <tr><td>Cały temat „moc obliczeniowa dla AI"</td><td style="color:var(--ocena-uwaga)"><strong>52,0%</strong></td><td>12 pozycji na jednej tezie</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Najważniejsza liczba w tym raporcie nie dotyczy AMD, tylko Ciebie.</strong> Udział 16,4% pomnożony przez betę 2,49 daje około <strong>41% zmienności rynkowej całego portfela w jednej spółce</strong>. Praktycznie: spadek AMD o 30% — zupełnie zwyczajny w tej klasie aktywów i już w tym roku w połowie zrealizowany od czerwcowego szczytu — zabiera <strong>blisko 5% wartości całego rachunku</strong>, zanim jakakolwiek inna pozycja w ogóle drgnie.</div>
+
+      <h3>Powiązania, które warto widzieć razem</h3>
+      <ul>
+        <li><strong>AMD i NVIDIA (obserwowana, 0%).</strong> Ta sama teza, ale NVIDIA jest tańsza na każdym mnożniku i ma dziesięciokrotnie wyższy zwrot z kapitału. Jeśli tniesz AMD, przesunięcie części środków tutaj utrzymuje ekspozycję i podnosi jakość.</li>
+        <li><strong>AMD, CoreWeave (3,7%) i Oracle (5,0%).</strong> Trzy różne miejsca tego samego łańcucha: AMD sprzedaje układy, CoreWeave i Oracle je kupują i wynajmują, a finansowanie krąży między tymi samymi bilansami. W spokojnym rynku to dywersyfikacja. W stresie — jedna pozycja o wadze 25%.</li>
+        <li><strong>AMD i Samsung (3,0%).</strong> Szafy Helios potrzebują ogromnych ilości pamięci HBM. Wzrost AMD to bezpośredni popyt na produkt Samsunga — jedyne w tej grupie powiązanie, które działa na Twoją korzyść.</li>
+        <li><strong>AMD i ASML (2,5%).</strong> Cały ten wzrost przechodzi przez najnowsze procesy TSMC, a te przez maszyny ASML. Ekspozycja na to samo, tylko o dwa poziomy wcześniej i z fosą znacznie trwalszą.</li>
+        <li><strong>AMD i UnitedHealth (1,7%).</strong> Beta 2,49 kontra 0,63. Przesunięcie pięciu punktów procentowych z pierwszej do drugiej wyraźnie obniża zmienność całości, praktycznie nie ruszając oczekiwanego zwrotu.</li>
+      </ul>
+
+      <div class="alert alert-info"><strong>Kalendarz najbliższego tygodnia:</strong> NVIDIA raportuje <strong>26 sierpnia</strong>, Marvell i IREN <strong>27 sierpnia</strong>. Trzy odczyty tej samej tezy w dwa dni. AMD zareaguje na wyniki NVIDII prawdopodobnie mocniej niż na własne — dla całego sektora są one odczytem tempa wydatków inwestycyjnych. To naturalny moment na decyzję o wielkości pozycji.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <div class="thesis-grid">
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-kupno)">Trzy powody, żeby trzymać</h3>
+          <ol>
+            <li><strong>Przychód jest podpisany, nie oszacowany.</strong> 6 GW dla OpenAI i 2 GW dla Anthropica to umowy z harmonogramem. Skok z 50,8 na 87,3 miliarda w 2027 nie wymaga nowych klientów — tylko dostarczenia.</li>
+            <li><strong>Wskaźnik PEG 0,64.</strong> Przy wzroście zysku o 81% w tym roku i 105% w przyszłym wycena jest poniżej tempa wzrostu, mimo optycznego wskaźnika cena/zysk 120.</li>
+            <li><strong>Bilans bez zarzutu.</strong> Gotówka netto 8,84 miliarda, dług do kapitału 0,06, Altman Z 15,21, Piotroski 8/9. Ta spółka nie ma jak zbankrutować.</li>
+          </ol>
+        </div>
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-sprzedaz)">Trzy powody, żeby przyciąć</h3>
+          <ol>
+            <li><strong>16,4% × beta 2,49 = 41% zmienności portfela.</strong> Jedna pozycja decyduje o wyniku rachunku niezależnie od pozostałych 24.</li>
+            <li><strong>Warranty na 160 mln akcji.</strong> 9,8% kapitału po centrze za sztukę, poza wszystkimi publikowanymi wskaźnikami na akcję.</li>
+            <li><strong>NVIDIA jest tańsza na każdym mnożniku</strong> przy dziesięciokrotnie wyższym zwrocie z kapitału. Trzymasz droższego pretendenta i nie masz tańszego lidera.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="alert alert-warning"><strong>Sygnał, który unieważnia tezę:</strong> marża brutto poniżej 54% w wynikach za trzeci kwartał (początek listopada). Oznaczałaby, że rozwodnienie z miksu wyprzedza dźwignię operacyjną — a wtedy zysk 15,47 dolara na akcję w 2027 przestaje być osiągalny i cała wycena traci podstawę.</div>
+
+      <div class="alert alert-success"><strong>Sygnał, który tezę potwierdza:</strong> marża brutto powyżej 57% przy utrzymanym tempie wzrostu w centrach danych. Oznaczałaby, że AMD zaczyna sprzedawać moc obliczeniową na wartości, a nie na cenie — i wtedy górna granica przedziału 580 dolarów okazałaby się zbyt ostrożna.</div>
+
+      <h3>Jednym zdaniem</h3>
+      <p style="font-size:17px;line-height:1.8"><strong>AMD zasłużyła na miejsce w tym portfelu i wciąż jest warta trzymania — tylko nie w dawce, w której decyduje o wszystkim.</strong> Wynik +306,7% to nie jest powód do dumy, tylko sygnał, że pozycja urosła ponad zaplanowany rozmiar. Przycięcie do 10–12% po wynikach NVIDII z 26 sierpnia zostawia całą tezę nietkniętą, a zdejmuje z rachunku ryzyko, którego świadomie nie wybierałeś.</p>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 21 sierpnia 2026 | Cena: $473,25 (zamknięcie 21.08.2026) | Aktualizacja analizy z 6 sierpnia 2026 | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 21.08.2026</strong>, AMD Investor Relations (wyniki Q2 2026, 4 sierpnia) | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

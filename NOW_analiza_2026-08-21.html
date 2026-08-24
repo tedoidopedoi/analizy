@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOW — ServiceNow | Analiza Inwestycyjna 2026</title>
+<style>
+  :root { --bg:#0f1117; --surface:#1a1d2e; --surface2:#242740; --accent:#34d399; --accent2:#a7f3d0; --text:#e8eaf6; --text-muted:#8892b0; --border:#2e3250; --ocena-kupno:#34d399; --ocena-uwaga:#d99a52; --ocena-sprzedaz:#db5448; --radius:12px; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; font-size:15px; line-height:1.7; }
+  .header { background:linear-gradient(135deg,#34d399 0%,#0f1117 55%,#07281f 100%); border-bottom:1px solid var(--border); padding:32px; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-50px; right:-50px; width:500px; height:500px; background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%); border-radius:50%; }
+  .header-content { max-width:1100px; margin:0 auto; position:relative; }
+  .ticker-badge { display:inline-block; background:var(--accent); color:#0f1117; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:1px; margin-bottom:12px; }
+  .company-name { font-size:32px; font-weight:800; color:#fff; margin-bottom:6px; }
+  .company-sub { color:var(--text-muted); font-size:15px; margin-bottom:20px; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; align-items:center; }
+  .meta-tag { background:var(--surface); border:1px solid var(--border); color:var(--text-muted); font-size:12px; padding:6px 14px; border-radius:20px; }
+  .price-display { margin-left:auto; text-align:right; }
+  .price-main { font-size:30px; font-weight:800; color:#fff; }
+  .price-sub { color:var(--text-muted); font-size:13px; }
+  .nav-sticky { position:sticky; top:0; z-index:100; background:rgba(26,29,46,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); overflow-x:auto; }
+  .nav-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 16px; }
+  .nav-link { flex-shrink:0; padding:14px 16px; color:var(--text-muted); font-size:12px; font-weight:600; text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; cursor:pointer; }
+  .nav-link:hover { color:var(--text); }
+  .nav-link.active { color:var(--accent2); border-bottom-color:var(--accent); }
+  .summary-wrapper { max-width:1100px; margin:28px auto; padding:0 24px; }
+  .summary-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; }
+  .metric-card:hover { border-color:var(--accent); }
+  .metric-label { color:var(--text-muted); font-size:11px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; margin-bottom:8px; }
+  .metric-value { font-size:22px; font-weight:800; color:#fff; }
+  .metric-value.green { color:var(--ocena-kupno); } .metric-value.red { color:var(--ocena-sprzedaz); } .metric-value.yellow { color:var(--ocena-uwaga); } .metric-value.em { color:var(--accent2); }
+  .metric-detail { color:var(--text-muted); font-size:12px; margin-top:4px; }
+  .main { max-width:1100px; margin:0 auto; padding:0 24px 60px; }
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:16px; overflow:hidden; scroll-margin-top:64px; }
+  .section:hover { border-color:var(--accent); }
+  .section-header { display:flex; align-items:center; justify-content:space-between; padding:18px 24px; cursor:pointer; user-select:none; }
+  .section-title-wrap { display:flex; align-items:center; gap:14px; }
+  .section-num { background:var(--accent); color:#0f1117; font-size:11px; font-weight:800; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-title { font-size:15px; font-weight:700; color:var(--text); }
+  .section-toggle { color:var(--text-muted); font-size:18px; transition:transform 0.3s; }
+  .section-toggle.open { transform:rotate(180deg); }
+  .section-body { padding:0 24px 24px; display:none; }
+  .section-body.open { display:block; }
+  h3 { color:var(--accent2); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; margin:20px 0 10px; }
+  h3:first-child { margin-top:0; }
+  p { margin-bottom:12px; color:var(--text-muted); } p:last-child { margin-bottom:0; }
+  strong { color:var(--text); }
+  ul { list-style:none; padding:0; }
+  ul li { padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text-muted); }
+  ul li:last-child { border-bottom:none; }
+  ul li::before { content:'→'; color:var(--accent); margin-right:8px; font-size:12px; }
+  .table-wrap { overflow-x:auto; margin:12px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { background:var(--surface2); color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .rating-box { background:var(--surface2); border-radius:10px; padding:18px; text-align:center; }
+  .rating-box .period { color:var(--text-muted); font-size:11px; font-weight:700; text-transform:uppercase; margin-bottom:10px; }
+  .rating-box .rating-text { font-size:16px; font-weight:800; margin-bottom:8px; }
+  .rating-box .rating-text.buy { color:var(--ocena-kupno); } .rating-box .rating-text.neutral { color:var(--ocena-uwaga); }
+  .rating-box .rating-note { color:var(--text-muted); font-size:12px; }
+  .scenario-grid, .thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  .bull-box, .thesis-buy { background:rgba(52,211,153,0.06); border:1px solid rgba(52,211,153,0.25); border-radius:10px; padding:18px; }
+  .bear-box, .thesis-avoid { background:rgba(219,84,72,0.06); border:1px solid rgba(219,84,72,0.2); border-radius:10px; padding:18px; }
+  .bull-box h4, .thesis-buy h4 { color:var(--ocena-kupno); margin-bottom:12px; }
+  .bear-box h4, .thesis-avoid h4 { color:var(--ocena-sprzedaz); margin-bottom:12px; }
+  .bull-box ul li::before { color:var(--ocena-kupno); } .bear-box ul li::before { color:var(--ocena-sprzedaz); }
+  .fair-value-box { background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(167,243,208,0.05)); border:1px solid var(--accent); border-radius:12px; padding:24px; margin-top:16px; text-align:center; }
+  .fair-value-label { color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+  .fair-value-range { font-size:32px; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+  .fair-value-note { color:var(--text-muted); font-size:13px; }
+  .alert { border-radius:8px; padding:14px 18px; margin:14px 0; font-size:13px; }
+  .alert-warn { background:rgba(217,154,82,0.07); border-left:3px solid var(--ocena-uwaga); color:var(--text-muted); }
+  .alert-info { background:rgba(52,211,153,0.06); border-left:3px solid var(--accent); color:var(--text-muted); }
+  .alert-success { background:rgba(52,211,153,0.08); border-left:3px solid var(--ocena-kupno); color:var(--text-muted); }
+  .alert-danger { background:rgba(219,84,72,0.10); border-left:3px solid var(--ocena-sprzedaz); color:var(--text-muted); }
+  .catalyst-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .catalyst-item:last-child { border-bottom:none; }
+  .catalyst-icon { width:36px; height:36px; border-radius:50%; background:var(--surface2); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .catalyst-body h4 { color:var(--text); font-size:14px; margin-bottom:4px; }
+  .catalyst-body p { color:var(--text-muted); font-size:13px; margin:0; }
+  .divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+  .footer { text-align:center; padding:32px 24px; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border); }
+  @media (max-width:700px) { .rating-grid,.scenario-grid,.thesis-grid { grid-template-columns:1fr; } .company-name { font-size:24px; } .header-meta { flex-direction:column; align-items:flex-start; } .price-display { margin-left:0; } }
+</style>
+<style id="tp-brand">
+  .tp-wm { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+  .tp-wm svg { position:absolute; width:100%; height:100%; }
+  .tp-wm text { font-family:'Segoe UI',system-ui,sans-serif; font-weight:800; font-size:34px; letter-spacing:6px; }
+  .header, .nav-sticky, .summary-wrapper, .main, .footer { position:relative; z-index:1; }
+  .tp-logo { display:inline-flex; align-items:center; gap:9px; text-decoration:none; }
+  .tp-logo-mark { width:34px; height:34px; border-radius:9px; background:var(--accent,#34d399);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;
+    color:#0f1117; letter-spacing:0.5px; box-shadow:0 2px 10px rgba(0,0,0,.35); flex-shrink:0; }
+  .tp-logo-text { display:flex; flex-direction:column; line-height:1.05; }
+  .tp-logo-text b { font-size:14px; font-weight:800; color:var(--text,#e8eaf6); letter-spacing:1px; }
+  .tp-logo-text span { font-size:9px; color:var(--text-muted,#8892b0); letter-spacing:2.2px; text-transform:uppercase; }
+  .tp-header-brand { display:flex; align-items:center; justify-content:space-between; gap:16px;
+    max-width:1100px; margin:0 auto 22px; padding-bottom:14px; border-bottom:1px solid var(--border,#2e3250); }
+  .tp-tag { font-size:10px; color:var(--text-muted,#8892b0); letter-spacing:1.6px; text-transform:uppercase; }
+  .tp-foot { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px; }
+  @media (max-width:700px){ .tp-tag{ display:none; } }
+</style>
+<style id="tp-summary">
+  .sum-lead { font-size:15.5px; line-height:1.85; color:var(--text-muted); border-left:3px solid var(--accent); padding:4px 0 4px 18px; margin:4px 0 22px; }
+  .sum-lead strong { color:var(--text); }
+  .sum-block { margin:22px 0; }
+  .sum-block > h4 { font-size:12px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent2); margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--border); }
+  .check-list { list-style:none; padding:0; }
+  .check-list li { display:flex; gap:11px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); color:var(--text-muted); font-size:13.5px; align-items:flex-start; }
+  .check-list li:last-child { border-bottom:none; }
+  .check-list li::before { content:none; }
+  .ck { width:20px; height:20px; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; margin-top:2px; }
+  .ck.yes { background:rgba(52,211,153,.15); color:#34d399; border:1px solid rgba(52,211,153,.4); }
+  .ck.no  { background:rgba(219,84,72,.13);  color:#db5448; border:1px solid rgba(219,84,72,.35); }
+  .ck.wait{ background:rgba(217,154,82,.13); color:#d99a52; border:1px solid rgba(217,154,82,.35); }
+  .mon-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .mon-dot.g { background:#34d399; } .mon-dot.y { background:#d99a52; } .mon-dot.r { background:#db5448; }
+  .verdict-final { background:linear-gradient(135deg, rgba(255,255,255,.035), rgba(255,255,255,.01)); border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:12px; padding:26px 28px; margin-top:26px; }
+  .verdict-final h4 { font-size:12px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
+  .verdict-final .vf-rating { font-size:24px; font-weight:800; margin-bottom:14px; }
+  .verdict-final p { font-size:14px; line-height:1.85; }
+  .vf-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .vf-meta div span { display:block; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:5px; }
+  .vf-meta div b { font-size:15px; color:var(--text); font-weight:800; }
+</style>
+<style id="tp-rating-bar">
+  .rating-bar { position:relative; z-index:1; display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    padding:14px 32px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .rating-bar .rb-in { max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .rb-main { display:flex; align-items:center; gap:11px; }
+  .rb-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .rb-label { font-size:17px; font-weight:800; letter-spacing:.6px; }
+  .rb-qual { font-size:12px; color:var(--text-muted); }
+  .rb-sep { width:1px; height:26px; background:var(--border); }
+  .rb-item { display:flex; flex-direction:column; }
+  .rb-item span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-item b { font-size:14px; font-weight:800; color:var(--text); }
+  .rb-right { margin-left:auto; font-size:11px; color:var(--text-muted); letter-spacing:1.2px; text-transform:uppercase; }
+  .rb-kupno { background:rgba(52,211,153,.10); }
+  .rb-kupno .rb-dot { background:var(--ocena-kupno); } .rb-kupno .rb-label { color:var(--ocena-kupno); }
+  .rb-uwaga { background:rgba(217,154,82,.10); }
+  .rb-uwaga .rb-dot { background:var(--ocena-uwaga); } .rb-uwaga .rb-label { color:var(--ocena-uwaga); }
+  .rb-sprzedaz { background:rgba(219,84,72,.11); }
+  .rb-sprzedaz .rb-dot { background:var(--ocena-sprzedaz); } .rb-sprzedaz .rb-label { color:var(--ocena-sprzedaz); }
+  @media (max-width:700px){ .rating-bar{ padding:12px 20px; gap:14px; } .rb-sep{ display:none; } .rb-right{ margin-left:0; } }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: NOW</div>
+    <div class="company-name">ServiceNow, Inc.</div>
+    <div class="company-sub">Platforma automatyzacji procesów w przedsiębiorstwach · Santa Clara, Kalifornia</div>
+    <div class="header-meta">
+      <span class="meta-tag">Druga pozycja portfela — 13,2%</span>
+      <span class="meta-tag">Twój wynik +18,5%</span>
+      <span class="meta-tag">Beta 0,93</span>
+      <span class="meta-tag">Krótka sprzedaż -40,8% w miesiąc</span>
+      <div class="price-display">
+        <div class="price-main">$128,48</div>
+        <div class="price-sub">zamknięcie 21.08.2026 | -27,8% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Oprogramowanie i SaaS</span><span class="temat">Cyberbezpieczeństwo</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — przecena za tezę, która się nie potwierdza">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">rynek wycenił ofiarę, dane pokazują beneficjenta</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$140 – $160</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">+9% do +25%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>22 lipca 2026</b><em>Q3 — koniec października</em></div>
+    <div class="rb-right">Pozycja 13,2% — wielkość w porządku</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (21.08.2026)</div><div class="metric-value">$128,48</div><div class="metric-detail">18% nad średnią 50-sesyjną | 6,8% nad 200-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Zmiana w 52 tygodnie</div><div class="metric-value red">-27,8%</div><div class="metric-detail">Najgorsza duża pozycja w portfelu</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody abonamentowe Q2</div><div class="metric-value green">+24,5%</div><div class="metric-detail">$3,877 mld — powyżej górnej granicy prognozy</div></div>
+    <div class="metric-card"><div class="metric-label">Wartość kontraktów AI</div><div class="metric-value green">&gt; $1 mld</div><div class="metric-detail">Wdrożenia agentowe ×9 w dziewięć miesięcy</div></div>
+    <div class="metric-card"><div class="metric-label">Marża wolnych przepływów</div><div class="metric-value green">31,09%</div><div class="metric-detail">$4,58 mld — to jest prawdziwy wynik</div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot z kapitału vs koszt</div><div class="metric-value green">10,3% vs 8,9%</div><div class="metric-detail">Dodatnia różnica — inaczej niż w AMD</div></div>
+    <div class="metric-card"><div class="metric-label">Krótka sprzedaż</div><div class="metric-value green">-40,8%</div><div class="metric-detail">Z 62,13 do 36,79 mln akcji w miesiąc</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (49 analityków)</div><div class="metric-value green">$142,23</div><div class="metric-detail">+10,7% | mocne kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <h3>Czym jest ServiceNow</h3>
+      <p>ServiceNow sprzedaje platformę, na której duże organizacje układają swoje wewnętrzne procesy — zgłoszenia informatyczne, obsługę pracownika, obieg dokumentów, zarządzanie zasobami. Zaczynała jako narzędzie dla działów IT, dziś obsługuje kadry, finanse i obsługę klienta. Zatrudnia <strong>29 187 osób</strong> i generuje <strong>14,73 miliarda dolarów przychodu</strong>.</p>
+      <p>Twoja pozycja to <strong>150 akcji po średniej cenie 108,42 dolara</strong>, dziś warte około 19,3 tysiąca dolarów — <strong>+18,5%</strong>. To <strong>13,2% portfela</strong>, druga pozycja po AMD. Uwaga porządkowa: 18 grudnia 2025 spółka przeprowadziła <strong>split 5:1</strong>, więc wszystkie ceny sprzed tej daty w innych źródłach są pięciokrotnie wyższe.</p>
+
+      <div class="alert alert-info"><strong>Twoje wejście było wyjątkowo dobrze wymierzone.</strong> Średnia cena 108,42 dolara to praktycznie dokładnie dzisiejsza średnia 50-sesyjna (108,92). Kupiłeś w okolicach dołka przeceny, która zabrała spółce <strong>27,8% w ciągu roku</strong> — i to jest jedyna duża pozycja w Twoim portfelu, gdzie tak się stało.</div>
+
+      <h3>Dlaczego akcje spadły o 28%, skoro przychody rosną o 24,5%</h3>
+      <p>To jest w tej spółce pytanie najważniejsze i odpowiedź nie leży w wynikach. Przez ostatni rok rynek wycenił tezę, którą można streścić jednym zdaniem: <strong>sztuczna inteligencja zabije oprogramowanie sprzedawane na stanowiska</strong>. Skoro agent AI wykonuje pracę pracownika, to firma potrzebuje mniej licencji — a cały model ServiceNow opiera się na liczbie użytkowników. Ta obawa dotknęła cały sektor; ServiceNow oberwał mocniej niż większość, bo był droższy.</p>
+
+      <div class="alert alert-success"><strong>Wyniki z 22 lipca mówią jednak coś dokładnie odwrotnego.</strong> Biznes AI ServiceNow przekroczył <strong>miliard dolarów rocznej wartości kontraktów</strong>, wdrożenia agentowe wzrosły <strong>dziewięciokrotnie w dziewięć miesięcy</strong>, a liczba klientów kupujących AI po raz pierwszy zwiększyła się o <strong>ponad 45% rok do roku</strong>. To nie są liczby firmy, którą sztuczna inteligencja zjada — to liczby firmy, która na niej sprzedaje.</div>
+
+      <h3>Co pokazał drugi kwartał 2026 — wyniki z 22 lipca</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody abonamentowe</strong></td><td><strong>$3,877 mld</strong></td><td style="color:var(--ocena-kupno)">+24,5% r/r (+23% w stałej walucie)</td></tr>
+          <tr><td>Względem prognozy</td><td style="color:var(--ocena-kupno)"><strong>150 pb powyżej górnej granicy</strong></td><td style="color:var(--ocena-kupno)">Nie „w widełkach" — powyżej nich</td></tr>
+          <tr><td><strong>Wartość kontraktów AI</strong></td><td style="color:var(--ocena-kupno)"><strong>ponad $1 mld</strong></td><td style="color:var(--ocena-kupno)">Wdrożenia agentowe ×9 w 9 miesięcy</td></tr>
+          <tr><td>Nowi klienci AI</td><td style="color:var(--ocena-kupno)">+45% r/r</td><td>Rozszerzanie bazy, nie tylko dosprzedaż</td></tr>
+          <tr><td>Zakontraktowany przychód (cRPO)</td><td><strong>$13,2 mld</strong></td><td>Widoczność na najbliższe kwartały</td></tr>
+          <tr><td>Umowy powyżej miliona dolarów</td><td>123 sztuki</td><td style="color:var(--ocena-kupno)">Duże wdrożenia trzymają się mocno</td></tr>
+          <tr><td>Cyberbezpieczeństwo</td><td style="color:var(--ocena-kupno)">najszybciej rosnący z 10 największych</td><td style="color:var(--ocena-kupno)">Efekt przejęcia Armisu</td></tr>
+          <tr><td><strong>Prognoza roczna 2026</strong></td><td><strong>$15,76–15,78 mld</strong></td><td style="color:var(--ocena-kupno)">Podniesiona; +21% w stałej walucie</td></tr>
+          <tr><td><strong>Marże</strong></td><td style="color:var(--ocena-uwaga)">pod presją kosztów AI</td><td style="color:var(--ocena-uwaga)">Jedyna rysa na tym obrazie</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT I DWA PRZEJĘCIA, KTÓRE ZMIENIŁY SPÓŁKĘ</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <h3>Fosa: to nie jest oprogramowanie, które się wymienia</h3>
+      <p>Przewaga ServiceNow nie polega na tym, że produkt jest lepszy od konkurencji. Polega na tym, że po wdrożeniu <strong>staje się szkieletem procesów całej organizacji</strong>. Duże wdrożenie trwa kwartały, kosztuje miliony i wchodzi w setki integracji z innymi systemami. Wymiana dostawcy oznacza przeprojektowanie sposobu, w jaki firma działa.</p>
+      <p>Widać to w liczbach: 123 umowy powyżej miliona dolarów w jednym kwartale i zakontraktowany przychód 13,2 miliarda. To nie jest baza klientów, która odchodzi w reakcji na modę technologiczną.</p>
+
+      <h3>Kwiecień 2026: ServiceNow kupuje sobie drugą nogę</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Przejęcie</th><th>Kwota</th><th>Co wnosi</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Armis</strong> (kwiecień 2026)</td><td style="color:var(--ocena-uwaga)"><strong>ok. $7,6 mld</strong></td><td>Widoczność i ochrona wszystkich urządzeń podłączonych do sieci firmy</td></tr>
+          <tr><td><strong>Veza</strong></td><td>$1,2 mld</td><td>Zarządzanie uprawnieniami — kto ma dostęp do czego</td></tr>
+          <tr><td><strong>Razem</strong></td><td style="color:var(--ocena-uwaga)"><strong>ok. $8,8 mld</strong></td><td>$7,105 mld wydatkowane w pierwszym półroczu</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>To jest w tej spółce zmiana, której nazwa jeszcze nie dotarła do rynku: ServiceNow przestał być wyłącznie firmą od procesów, a stał się po części firmą od cyberbezpieczeństwa.</strong> Logika jest spójna i warto ją zobaczyć: skoro platforma i tak wie, jakie urządzenia i jacy ludzie działają w organizacji oraz jakie procesy uruchamiają, to jest naturalnym miejscem, żeby pilnować, <em>kto i do czego ma prawo</em>. Kiedy agenty AI zaczynają wykonywać działania w imieniu pracowników, pytanie o uprawnienia przestaje być techniczne i staje się egzystencjalne. Kupując Vezę, ServiceNow kupił odpowiedź na nie.</div>
+
+      <p>Efekt jest już w wynikach: cyberbezpieczeństwo to <strong>najszybciej rosnąca z dziesięciu największych linii produktowych</strong> spółki. Cena była jednak realna — o tym w sekcji 8, bo za te przejęcia zapłacono długiem i to widać w bilansie.</p>
+
+      <h3>Warstwa AI — dlaczego akurat tutaj działa</h3>
+      <p>Agent AI jest użyteczny wtedy, gdy ma dostęp do danych i uprawnienie do działania. ServiceNow ma jedno i drugie: siedzi w środku procesów firmy i już ma uprawnienia do ich wykonywania. Konkurent budujący agenta od zera musi najpierw zdobyć te integracje — a to jest właśnie ta praca, która zajmuje kwartały.</p>
+      <p>Stąd wynik: <strong>miliard dolarów wartości kontraktów AI i dziewięciokrotny wzrost wdrożeń agentowych w dziewięć miesięcy</strong>. ServiceNow nie musiał przekonywać klientów do nowego produktu — dosprzedał funkcję tam, gdzie już był.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <h3>Spór, który rozstrzygnie wycenę</h3>
+      <p>Cała różnica między kursem 128 a 200 dolarów sprowadza się do jednego pytania: <strong>czy sztuczna inteligencja jest dla oprogramowania korporacyjnego szansą, czy zagrożeniem?</strong></p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Teza rynku (wyceniona w kursie)</th><th>Teza wyników (widoczna w danych)</th></tr></thead>
+        <tbody>
+          <tr><td>Agenty AI zastępują pracowników, więc licencji na stanowiska potrzeba mniej</td><td>Agenty AI wymagają platformy, na której działają — i to jest ServiceNow</td></tr>
+          <tr><td>Model rozliczania za użytkownika się załamie</td><td>Spółka już przechodzi na rozliczanie za wykonaną pracę agenta</td></tr>
+          <tr><td>Startupy AI zbudują to taniej od zera</td><td>Nie mają integracji ani uprawnień; wdrożenie zajmuje kwartały</td></tr>
+          <tr><td>Wzrost zwolni z 25% do kilkunastu procent</td><td>Prognoza podniesiona; +21% w stałej walucie na cały rok</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Na dziś dane są po stronie drugiej kolumny, a kurs po stronie pierwszej.</strong> Przychody abonamentowe rosną o 24,5%, prognoza została podniesiona, wartość kontraktów AI przekroczyła miliard, a mimo to akcje są 27,8% niżej niż rok temu. Nie znaczy to, że rynek nie ma racji — obawa dotyczy lat 2028–2030, a nie tego kwartału. Znaczy to jednak, że <strong>płacisz dziś za scenariusz, który na razie w żadnej liczbie się nie pojawia</strong>.</div>
+
+      <p>Uczciwie po drugiej stronie: nikt nie wie, jak wygląda oprogramowanie korporacyjne w świecie, gdzie połowę pracy biurowej wykonują agenty. Możliwe, że ServiceNow wyjdzie z tego mocniejszy — sprzedając pracę zamiast stanowisk. Możliwe też, że warstwa procesów okaże się cienka i wchłonie ją ktoś, kto ma model językowy. Rynek wycenia tę drugą możliwość znacznie wyżej niż wyniki.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Umowy powyżej $1 mln w kwartale</td><td><strong>123</strong></td><td style="color:var(--ocena-kupno)">Duzi klienci nie wstrzymują wydatków</td></tr>
+          <tr><td>Zakontraktowany przychód (cRPO)</td><td><strong>$13,2 mld</strong></td><td>Rozpoznawany w najbliższych 12 miesiącach</td></tr>
+          <tr><td>Nowi klienci AI</td><td style="color:var(--ocena-kupno)">+45% r/r</td><td style="color:var(--ocena-kupno)">Wzrost bazy, nie tylko dosprzedaż</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$504,7 tys.</td><td>Zysk na pracownika $57,2 tys.</td></tr>
+          <tr><td>Udział instytucji</td><td>83,46%</td><td>Bardzo wysoki — kurs zależy od kilkudziesięciu funduszy</td></tr>
+        </tbody>
+      </table></div>
+      <p>Profil klienta to duże przedsiębiorstwa i administracja publiczna — sektory, w których cykl zakupowy jest długi, a decyzja o wymianie systemu praktycznie nie zapada. Przychód jest w przytłaczającej większości abonamentowy, czyli powtarzalny.</p>
+      <div class="alert alert-info"><strong>Zakontraktowany przychód 13,2 miliarda dolarów wobec prognozy rocznej 15,77 miliarda oznacza, że około 84% tegorocznej sprzedaży jest już podpisane.</strong> Dla porównania: w AMD, Twojej największej pozycji, ta widoczność opiera się na harmonogramach wdrożeń, które mogą się przesunąć o kwartał. Tutaj to są zaksięgowane zobowiązania klientów. Przy pozycji 13,2% portfela ta różnica w jakości przychodu jest warta odnotowania.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PROGNOZY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody (12 miesięcy)</td><td>$14,73 mld</td></tr>
+          <tr><td>Prognoza przychodów abonamentowych 2026</td><td><strong>$15,76–15,78 mld</strong> (+21% w stałej walucie)</td></tr>
+          <tr><td>Wzrost przychodów — prognoza 3-letnia</td><td>19,89% rocznie</td></tr>
+          <tr><td>Wzrost zysku — prognoza 3-letnia</td><td>19,96% rocznie</td></tr>
+          <tr><td>Zysk netto (12 miesięcy)</td><td>$1,67 mld, czyli $1,60 na akcję</td></tr>
+          <tr><td><strong>Wolne przepływy pieniężne</strong></td><td style="color:var(--ocena-kupno)"><strong>$4,58 mld, czyli $4,43 na akcję</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Zwróć uwagę na rozjazd między zyskiem a przepływami — w tej spółce to klucz do wyceny.</strong> Zysk księgowy wynosi 1,67 miliarda, a wolne przepływy pieniężne <strong>4,58 miliarda</strong>, czyli prawie trzykrotnie więcej. Różnica to głównie wynagrodzenia wypłacane w akcjach, które obciążają rachunek zysków, ale nie zabierają gotówki. Dlatego wskaźnik cena/zysk 81 jest tu liczbą myloną, a <strong>rentowność wolnych przepływów 3,45%</strong> — liczbą użyteczną.</div>
+
+      <h3>Skup akcji własnych</h3>
+      <p>W styczniu 2026 zarząd zwiększył program skupu o <strong>5 miliardów dolarów</strong>, przy około 1,4 miliarda pozostałych z wcześniejszych zgód. W pierwszym półroczu wykonano <strong>2 miliardy w trybie przyspieszonym i 225 milionów na rynku</strong>. Liczba akcji spadła o 0,40% rok do roku.</p>
+      <p>To jest zachowanie firmy, która uważa własne akcje za tanie: przecena o 28% została wykorzystana do skupu. Warto zestawić to z AMD, gdzie liczba akcji <em>rośnie</em> o 1,07% rocznie, a poza bilansem czekają warranty na 9,8% kapitału.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Cena / zysk (bieżąca)</td><td style="color:var(--ocena-sprzedaz)">81,07</td><td>Mylące — zysk księgowy obciążony wynagrodzeniami w akcjach</td></tr>
+          <tr><td><strong>Cena / zysk prognozowany</strong> <span style="color:var(--text-muted);font-size:12px">(Forward P/E)</span></td><td style="color:var(--ocena-uwaga)"><strong>28,64</strong></td><td>Rozsądnie przy wzroście 20% rocznie</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>29,00</strong></td><td><strong>To jest właściwa miara dla tej spółki</strong></td></tr>
+          <tr><td>Rentowność wolnych przepływów</td><td style="color:var(--ocena-kupno)">3,45%</td><td>Trzykrotnie wyżej niż w AMD (1,10%)</td></tr>
+          <tr><td>Wskaźnik PEG</td><td>1,17</td><td>Blisko jedności — wycena mniej więcej odpowiada wzrostowi</td></tr>
+          <tr><td>Cena / przychody</td><td>9,02 → prognoz. 7,52</td><td>Historycznie ServiceNow bywał wyceniany powyżej 15×</td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td style="color:var(--ocena-sprzedaz)">46,45</td><td>Wysoko; EBITDA zaniżona przez wynagrodzenia w akcjach</td></tr>
+          <tr><td>Wartość firmy / wolne przepływy</td><td style="color:var(--ocena-kupno)">29,38</td><td>Uczciwszy obraz</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td>10,72</td><td>Bez znaczenia w spółce bez aktywów trwałych</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Przy tej spółce trzeba świadomie wybrać, na którą liczbę się patrzy.</strong> Wskaźnik cena/zysk 81 sugeruje absurd, wskaźnik cena/wolne przepływy 29 sugeruje spółkę wycenioną rozsądnie. Prawdziwa jest ta druga, bo różnica między zyskiem księgowym (1,67 mld) a gotówką (4,58 mld) to głównie <strong>wynagrodzenia wypłacane w akcjach</strong> — koszt realny dla akcjonariusza, ale rozłożony i częściowo neutralizowany skupem akcji. Spółka skupiła w półroczu 2,2 miliarda, a liczba akcji spadła o 0,40%.</div>
+
+      <h3>Trzy scenariusze na koniec 2027 roku</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Przepływy na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Wzrost 20%, mnożnik bez zmian</strong></td><td>$5,32</td><td>29×</td><td><strong>$154</strong></td><td style="color:var(--ocena-kupno)">+20%</td></tr>
+          <tr><td><strong>Wzrost 20%, powrót zaufania</strong></td><td>$5,32</td><td>34×</td><td><strong>$181</strong></td><td style="color:var(--ocena-kupno)">+41%</td></tr>
+          <tr><td>Wzrost zwalnia do 12%</td><td>$4,96</td><td>24×</td><td>$119</td><td style="color:var(--ocena-sprzedaz)">-7%</td></tr>
+          <tr><td>Teza „AI zjada SaaS" się potwierdza</td><td>$4,40</td><td>18×</td><td>$79</td><td style="color:var(--ocena-sprzedaz)">-38%</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Fair value: 140–160 dolarów</strong>, środek 150 (+17%). Konsensus 49 analityków wynosi 142,23 dolara — praktycznie w dolnej części mojego przedziału, co jest rzadkie; zwykle konsensus jest wyżej. Asymetria jest tu <strong>korzystniejsza niż w AMD</strong>: w górę +20 do +41%, w dół -7 do -38%, przy czym scenariusz najgorszy wymaga potwierdzenia tezy, której dzisiejsze dane przeczą.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Brutto</strong></td><td style="color:var(--ocena-kupno)"><strong>74,77%</strong></td><td style="color:var(--ocena-kupno)">Klasyczna marża dobrego oprogramowania — o 19 pp wyżej niż AMD</td></tr>
+          <tr><td>Operacyjna (raportowana)</td><td style="color:var(--ocena-uwaga)">12,39%</td><td>Zaniżona przez wynagrodzenia w akcjach</td></tr>
+          <tr><td>Netto</td><td>11,34%</td><td>Efektywna stopa podatkowa 28,82% — wysoka</td></tr>
+          <tr><td><strong>Wolnych przepływów</strong></td><td style="color:var(--ocena-kupno)"><strong>31,09%</strong></td><td style="color:var(--ocena-kupno)">To jest prawdziwa rentowność tego biznesu</td></tr>
+          <tr><td>Nakłady inwestycyjne / przychody</td><td style="color:var(--ocena-kupno)">4,9%</td><td>$728 mln — model bardzo lekki kapitałowo</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Jedyna realna rysa w wynikach z 22 lipca: marże są pod presją kosztów sztucznej inteligencji.</strong> Mechanizm jest prosty i wart zrozumienia, bo będzie wracał. Kiedy klient korzysta z agenta AI, ServiceNow płaci za każde wywołanie modelu — to jest koszt zmienny, rosnący wraz z użyciem. Klasyczne oprogramowanie abonamentowe działa odwrotnie: raz zbudowane, kosztuje przy każdym kolejnym kliencie prawie nic. <strong>Sztuczna inteligencja wprowadza do modelu SaaS koszt krańcowy, którego tam wcześniej nie było.</strong></div>
+
+      <p>To jest dokładnie ta sama choroba, którą opisałem przy AMD, tylko w innej branży: <strong>obie spółki rosną najszybciej tam, gdzie procentowo zarabiają najmniej</strong>. W AMD to szafy serwerowe, tutaj wywołania modeli. Różnica jest jednak istotna na korzyść ServiceNow: koszt wnioskowania w modelach językowych spada systematycznie o rząd wielkości rocznie, a marża brutto AMD zależy od tego, ile NVIDIA pozwoli jej wziąć za akcelerator.</p>
+
+      <div class="alert alert-success"><strong>Kontrargument, który warto trzymać w głowie:</strong> marża brutto 74,77% zostawia ogromny bufor. Nawet gdyby koszty AI zabrały pięć punktów procentowych, spółka nadal miałaby marżę, o jakiej AMD nie może marzyć. Presja jest realna, ale zaczyna się z bardzo wysokiego pułapu.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — TU SIĘ NAJWIĘCEJ ZMIENIŁO</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$4,66 mld</td><td>Zadłużenie $8,45 mld</td></tr>
+          <tr><td><strong>Dług netto</strong></td><td style="color:var(--ocena-uwaga)"><strong>$1,75 mld</strong></td><td style="color:var(--ocena-uwaga)">Rok temu spółka miała gotówkę netto</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-uwaga)">0,68</td><td>AMD ma 0,06 — ale AMD niczego nie kupiła</td></tr>
+          <tr><td>Dług / EBITDA</td><td>2,77</td><td>Do przyjęcia; dług / przepływy tylko 1,85</td></tr>
+          <tr><td>Pokrycie odsetek</td><td style="color:var(--ocena-kupno)">22,0×</td><td style="color:var(--ocena-kupno)">Obsługa długu bez najmniejszego problemu</td></tr>
+          <tr><td>Wskaźnik bieżący</td><td style="color:var(--ocena-uwaga)">0,70</td><td>Wygląda źle — wyjaśnienie poniżej</td></tr>
+          <tr><td>Wskaźnik Altmana Z</td><td style="color:var(--ocena-kupno)">5,48</td><td style="color:var(--ocena-kupno)">Powyżej 3 — strefa bezpieczna</td></tr>
+          <tr><td><strong>Wskaźnik Piotroskiego F</strong></td><td style="color:var(--ocena-uwaga)"><strong>4 / 9</strong></td><td style="color:var(--ocena-uwaga)">Słabo — ale mechanicznie, wyjaśnienie poniżej</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Dwie liczby wyglądają alarmująco i obie mają spokojne wyjaśnienie — warto je znać, żeby nie sprzedać dobrej spółki ze złego powodu.</strong><br><br>
+      <strong>Wskaźnik bieżący 0,70 i ujemny kapitał obrotowy 3,64 mld.</strong> W normalnej firmie to sygnał kłopotów z płynnością. W modelu abonamentowym to norma: klienci płacą <em>z góry</em> za rok usługi, a niezrealizowana część tej opłaty księgowana jest jako zobowiązanie krótkoterminowe. Im lepiej spółka sprzedaje, tym gorszy ma wskaźnik bieżący. To zobowiązanie zostanie „spłacone" świadczeniem usługi, nie gotówką.<br><br>
+      <strong>Wskaźnik Piotroskiego 4 na 9.</strong> Ten wskaźnik przyznaje punkty między innymi za spadek zadłużenia i poprawę płynności. ServiceNow właśnie wydał 8,8 miliarda na dwa przejęcia, finansując je długiem — więc traci punkty za rzeczy, które zrobił <em>celowo</em>. To jest efekt mechaniczny, a nie pogorszenie jakości biznesu.</div>
+
+      <h3>Skąd wziął się dług: kwiecień–maj 2026</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th></tr></thead>
+        <tbody>
+          <tr><td>Styczeń 2026</td><td>Zarząd zwiększa program skupu akcji o <strong>$5,0 mld</strong> (plus ok. $1,4 mld z wcześniejszych zgód)</td></tr>
+          <tr><td>Kwiecień 2026</td><td><strong>Przejęcie Armisu za ok. $7,6 mld</strong>, sfinansowane kredytem terminowym; do tego Veza za $1,2 mld</td></tr>
+          <tr><td>15 maja 2026</td><td>Emisja obligacji na <strong>$4,0 mld</strong> — kupony <strong>4,250%–6,300%</strong>, zapadalność 2028–2056. Wpływ ok. $3,944 mld na spłatę kredytu</td></tr>
+          <tr><td>1. połowa 2026</td><td>Skup akcji: <strong>$2,0 mld</strong> w trybie przyspieszonym plus $225 mln na rynku</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Warto na to spojrzeć jako na jedną decyzję zarządu, a nie cztery osobne.</strong> W ciągu jednego półrocza spółka wydała około 11 miliardów dolarów — 8,8 na przejęcia i 2,2 na skup własnych akcji — zamieniając bezpieczny bilans z gotówką netto na bilans z długiem 1,75 miliarda. To jest zakład: że akcje po przecenie były tanie i że cyberbezpieczeństwo jest tym, czego platformie brakowało. Zakład jak dotąd wygląda dobrze (segment bezpieczeństwa rośnie najszybciej z dziesięciu największych), ale <strong>margines błędu jest dziś mniejszy niż rok temu</strong> — kupony do 6,3% trzeba obsługiwać niezależnie od koniunktury.</div>
+
+      <h3>Zwrot z kapitału</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>ServiceNow</th><th>AMD (dla porównania)</th></tr></thead>
+        <tbody>
+          <tr><td>Zwrot z zainwestowanego kapitału</td><td style="color:var(--ocena-kupno)"><strong>10,28%</strong></td><td>9,77%</td></tr>
+          <tr><td>Koszt kapitału</td><td style="color:var(--ocena-kupno)"><strong>8,85%</strong></td><td style="color:var(--ocena-sprzedaz)">17,85%</td></tr>
+          <tr><td><strong>Różnica</strong></td><td style="color:var(--ocena-kupno)"><strong>+1,43 pp</strong></td><td style="color:var(--ocena-sprzedaz)">-8,08 pp</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>ServiceNow tworzy dziś wartość ekonomiczną, AMD jej nie tworzy.</strong> Różnica bierze się głównie z kosztu kapitału: beta 0,93 wobec 2,49 oznacza, że rynek wymaga od ServiceNow o połowę niższej premii za ryzyko. To jest cicha zaleta spółki, która nie robi wrażenia na wykresie, ale decyduje o tym, czy wzrost przychodów w ogóle przekłada się na wartość dla akcjonariusza.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Dane przeczą tezie, która wyceniła spadek.</strong> Rynek zdjął 27,8% w rok, bo bał się, że AI zniszczy oprogramowanie na stanowiska. Tymczasem wartość kontraktów AI przekroczyła miliard dolarów, wdrożenia agentowe wzrosły dziewięciokrotnie w dziewięć miesięcy, a prognoza roczna została podniesiona. Płacisz dziś za scenariusz, którego w liczbach nie widać.</div>
+
+      <div class="alert alert-success"><strong>2. Krótka sprzedaż spadła o 40,8% w jeden miesiąc.</strong> Z 62,13 do 36,79 miliona akcji. To najsilniejszy sygnał odwrócenia nastawienia w całym Twoim portfelu — grający na spadki zamykają pozycje po wynikach z 22 lipca.</div>
+
+      <div class="alert alert-success"><strong>3. Cyberbezpieczeństwo jako druga noga.</strong> Armis (7,6 mld) i Veza (1,2 mld) dołożyły do platformy to, czego jej brakowało — kontrolę nad tym, kto i do czego ma dostęp. Przy agentach AI działających w imieniu pracowników to nie jest dodatek, tylko warunek wdrożenia. Segment jest już najszybciej rosnącym z dziesięciu największych.</div>
+
+      <div class="alert alert-success"><strong>4. Fosa oparta na kosztach zmiany.</strong> Zakontraktowany przychód 13,2 miliarda, 123 umowy powyżej miliona w kwartale, wdrożenia liczone w kwartałach i setkach integracji. Firmy nie wymieniają szkieletu swoich procesów, bo pojawiła się nowa technologia.</div>
+
+      <div class="alert alert-success"><strong>5. Przepływy pieniężne wysokiej jakości.</strong> Marża wolnych przepływów 31,09%, przepływy 4,58 miliarda przy zysku księgowym 1,67 miliarda. Zwrot z kapitału powyżej jego kosztu. Nakłady inwestycyjne tylko 4,9% przychodów.</div>
+
+      <div class="alert alert-info"><strong>6. Wycena jest dziś umiarkowana, nie wygórowana.</strong> Cena do prognozowanego zysku 28,6 i cena do wolnych przepływów 29,0 przy wzroście około 20% rocznie. Historycznie ServiceNow był wyceniany znacznie wyżej. Konsensus 49 analityków to mocne kupno z ceną docelową 142,23 dolara.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Teza „AI zjada SaaS" może być po prostu przedwczesna, a nie błędna.</strong> To najpoważniejsze ryzyko i nie da się go dziś rozstrzygnąć. Obawa rynku dotyczy lat 2028–2030, a nie tego kwartału. Jeśli za trzy lata agenty rzeczywiście przejmą pracę biurową, model rozliczany od użytkownika przestanie działać — a dzisiejsze rekordy sprzedaży okażą się szczytem, nie dowodem.</div>
+
+      <div class="alert alert-danger"><strong>2. Koszt krańcowy wszedł do modelu, w którym go nie było.</strong> Każde wywołanie agenta kosztuje. Zarząd sam przyznał, że marże są pod presją kosztów AI. Piękno klasycznego oprogramowania polegało na tym, że kolejny klient nie kosztował prawie nic — to się właśnie kończy.</div>
+
+      <div class="alert alert-danger"><strong>3. Bilans stracił bufor.</strong> Z gotówki netto do długu netto 1,75 miliarda w pół roku. Dług do kapitału 0,68, kupony obligacji do 6,3%, zapadalności aż do 2056. Wskaźnik Piotroskiego spadł do 4 na 9. Spółka może to udźwignąć (pokrycie odsetek 22×), ale nie ma już miejsca na drugi błąd tej wielkości.</div>
+
+      <div class="alert alert-warning"><strong>4. Ryzyko integracji dwóch przejęć naraz.</strong> Armis i Veza to razem 8,8 miliarda dolarów wydane w jednym kwartale. Przejęcia w oprogramowaniu psują się często i późno — odejścia kluczowych ludzi i integracja techniczna dają o sobie znać zwykle po roku. Wynik cyberbezpieczeństwa wygląda dziś dobrze, ale jest po prostu za wcześnie na ocenę.</div>
+
+      <div class="alert alert-warning"><strong>5. Konkurencja z dwóch stron naraz.</strong> Z góry Microsoft i Salesforce dokładają automatyzację do produktów, które klient już ma. Z dołu startupy budują agenty pod wąskie zastosowania, bez ciężaru starej platformy. ServiceNow musi wygrywać integracją — a to argument, który słabnie, jeśli agenty nauczą się integrować same.</div>
+
+      <div class="alert alert-warning"><strong>6. Zysk księgowy daleki od gotówki.</strong> Wskaźnik cena/zysk 81 przy cenie do przepływów 29 — całą różnicę robią wynagrodzenia w akcjach. To realny koszt dla akcjonariusza, tylko rozłożony w czasie. Spółka neutralizuje go skupem, ale skup pochłania gotówkę, której nie ma już na spłatę długu.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <h3>Kto atakuje i z której strony</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Kierunek ataku</th><th>Jak groźny</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Microsoft</strong></td><td>Dokłada automatyzację i agenty do pakietu, który klient już kupił</td><td style="color:var(--ocena-sprzedaz)"><strong>Najgroźniejszy</strong> — konkuruje ceną krańcową bliską zeru</td></tr>
+          <tr><td><strong>Salesforce</strong></td><td>Ta sama walka o warstwę agentową w przedsiębiorstwie</td><td style="color:var(--ocena-uwaga)">Bezpośrednia, ale symetryczna — obie firmy mają ten sam problem</td></tr>
+          <tr><td><strong>SAP</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 4,3%)</span></td><td>Procesy finansowe i produkcyjne; inna warstwa niż ServiceNow</td><td>Bardziej sąsiad niż rywal; częściej się integrują</td></tr>
+          <tr><td><strong>Oracle</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 5,0%)</span></td><td>Bazy danych i chmura; dziś głównie historia o mocy obliczeniowej</td><td>Ograniczone nakładanie się</td></tr>
+          <tr><td>Startupy agentowe</td><td>Wąskie zastosowania budowane od zera, bez ciężaru platformy</td><td style="color:var(--ocena-uwaga)">Pojedynczo nieistotne, zbiorowo — realne ryzyko erozji</td></tr>
+          <tr><td>Atlassian, Freshworks</td><td>Tańsze narzędzia dla średnich firm</td><td style="color:var(--ocena-kupno)">Nie konkurują o tego samego klienta</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Microsoft jest tu jedynym naprawdę niebezpiecznym przeciwnikiem</strong> — nie dlatego, że ma lepszy produkt, tylko dlatego, że może dołożyć „wystarczająco dobrą" automatyzację do licencji, za którą klient już płaci. Historia oprogramowania korporacyjnej pokazuje, że produkt lepszy o 30% przegrywa z produktem darmowym w pakiecie. Obroną ServiceNow jest głębokość wdrożenia: tam, gdzie platforma obsługuje setki procesów i integracji, „wystarczająco dobre" nie wystarcza.</div>
+
+      <h3>ServiceNow kontra AMD — dwie największe pozycje Twojego portfela</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>ServiceNow</th><th>AMD</th><th>Kto lepiej</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td>13,2%</td><td>16,4%</td><td>—</td></tr>
+          <tr><td><strong>Beta</strong></td><td style="color:var(--ocena-kupno)"><strong>0,93</strong></td><td style="color:var(--ocena-sprzedaz)">2,49</td><td style="color:var(--ocena-kupno)">ServiceNow</td></tr>
+          <tr><td><strong>Wkład w zmienność portfela</strong></td><td style="color:var(--ocena-kupno)"><strong>ok. 12%</strong></td><td style="color:var(--ocena-sprzedaz)">ok. 41%</td><td style="color:var(--ocena-kupno)">ServiceNow — ponad trzykrotnie mniej</td></tr>
+          <tr><td>Marża brutto</td><td style="color:var(--ocena-kupno)"><strong>74,77%</strong></td><td>55,72%</td><td style="color:var(--ocena-kupno)">ServiceNow</td></tr>
+          <tr><td>Marża wolnych przepływów</td><td style="color:var(--ocena-kupno)"><strong>31,09%</strong></td><td>20,34%</td><td style="color:var(--ocena-kupno)">ServiceNow</td></tr>
+          <tr><td>Rentowność przepływów</td><td style="color:var(--ocena-kupno)"><strong>3,45%</strong></td><td style="color:var(--ocena-sprzedaz)">1,10%</td><td style="color:var(--ocena-kupno)">ServiceNow</td></tr>
+          <tr><td>Zwrot kapitału minus koszt</td><td style="color:var(--ocena-kupno)"><strong>+1,43 pp</strong></td><td style="color:var(--ocena-sprzedaz)">-8,08 pp</td><td style="color:var(--ocena-kupno)">ServiceNow</td></tr>
+          <tr><td>Cena / zysk prognozowany</td><td style="color:var(--ocena-kupno)"><strong>28,64</strong></td><td>42,26</td><td style="color:var(--ocena-kupno)">ServiceNow</td></tr>
+          <tr><td>Liczba akcji rok do roku</td><td style="color:var(--ocena-kupno)"><strong>-0,40%</strong></td><td style="color:var(--ocena-sprzedaz)">+1,07% plus warranty 9,8%</td><td style="color:var(--ocena-kupno)">ServiceNow</td></tr>
+          <tr><td>Zadłużenie</td><td style="color:var(--ocena-uwaga)">dług netto $1,75 mld</td><td style="color:var(--ocena-kupno)"><strong>gotówka netto $8,84 mld</strong></td><td style="color:var(--ocena-kupno)">AMD</td></tr>
+          <tr><td>Tempo wzrostu przychodów</td><td>ok. 20%</td><td style="color:var(--ocena-kupno)"><strong>ok. 47–72%</strong></td><td style="color:var(--ocena-kupno)">AMD</td></tr>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-sprzedaz)">-27,8%</td><td style="color:var(--ocena-kupno)"><strong>+186,4%</strong></td><td>—</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>To zestawienie warto przeczytać uważnie, bo mówi coś o całym portfelu.</strong> ServiceNow wygrywa w dziewięciu z jedenastu kategorii — lepsze marże, lepsze przepływy, tańsza wycena prognozowana, dodatnia różnica między zwrotem a kosztem kapitału, skup akcji zamiast emisji, trzykrotnie niższy wkład w zmienność. AMD wygrywa w dwóch: bilansie i tempie wzrostu. <strong>A jednak przez ostatni rok AMD dała +186%, a ServiceNow -28%.</strong><br><br>Nie oznacza to, że rynek się myli. Oznacza, że przez ostatni rok rynek płacił wyłącznie za tempo wzrostu i całkowicie ignorował jakość. Takie okresy zdarzają się regularnie i regularnie się kończą — tylko nigdy nie wiadomo kiedy.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Kurs zamknięcia 21.08.2026</td><td><strong>$128,48</strong></td><td>-0,98% w ciągu dnia; po sesji $128,15</td></tr>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-sprzedaz)"><strong>-27,84%</strong></td><td style="color:var(--ocena-sprzedaz)">Najgorszy roczny wynik wśród dużych pozycji</td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td>$108,92</td><td style="color:var(--ocena-kupno)"><strong>Kurs 17,96% powyżej — silne odbicie</strong></td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td>$120,31</td><td style="color:var(--ocena-kupno)"><strong>Kurs 6,79% powyżej — trend odzyskany</strong></td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>62,42</td><td>Górna część strefy neutralnej — momentum po stronie kupujących</td></tr>
+          <tr><td>Beta (5 lat)</td><td style="color:var(--ocena-kupno)">0,93</td><td style="color:var(--ocena-kupno)">Zmienność zbliżona do rynku</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-kupno)"><strong>36,79 mln (3,56%)</strong></td><td style="color:var(--ocena-kupno)"><strong>Z 62,13 mln miesiąc wcześniej — spadek o 40,8%</strong></td></tr>
+          <tr><td>Średni wolumen (20 sesji)</td><td>20,9 mln akcji</td><td>Wysoka płynność</td></tr>
+          <tr><td>Split</td><td>5:1, 18 grudnia 2025</td><td>Starsze ceny w innych źródłach są 5× wyższe</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Obraz techniczny jest odwrotnością AMD i jest wyraźnie korzystniejszy.</strong> Kurs odbił się o 18% od średniej 50-sesyjnej i odzyskał 200-sesyjną — czyli wyszedł ponad poziom, który przez większość roku był oporem. Średnia 50-sesyjna (108,92) wciąż jest poniżej 200-sesyjnej (120,31), ale szybko się do niej zbliża; przecięcie w górę byłoby technicznym potwierdzeniem odwrócenia trendu. Do tego <strong>grający na spadki zamknęli w miesiąc 40,8% swoich pozycji</strong> — to najmocniejszy sygnał zmiany nastawienia w całym Twoim portfelu.</div>
+
+      <h3>Poziomy do obserwacji</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$120</strong></td><td>Średnia 200-sesyjna — pierwsze wsparcie; utrzymanie potwierdza odwrócenie</td></tr>
+          <tr><td><strong>$142</strong></td><td>Cena docelowa konsensusu — pierwszy poważny opór</td></tr>
+          <tr><td><strong>$150–160</strong></td><td>Górna część mojego przedziału wartości godziwej</td></tr>
+          <tr><td><strong>$109</strong></td><td>Średnia 50-sesyjna i Twoja cena zakupu — <strong>tu odbicie zostałoby unieważnione</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Ciekawostka: Twoja średnia cena zakupu (108,42) i średnia 50-sesyjna (108,92) różnią się o pół dolara. Trafiłeś w okolice dna przeceny.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Kurs nad obiema średnimi, RSI 62, krótka sprzedaż spadła o 40,8%, wyniki pobiły i podniosły prognozę. Wszystkie elementy krótkoterminowe działają w tę samą stronę.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Wartość godziwa 140–160. Integracja Armisu i skala biznesu AI to dwa katalizatory, które rozstrzygną się w tym okresie.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Tu leży prawdziwa niepewność: nie wiemy, jak wygląda oprogramowanie korporacyjne w świecie agentów. Wymaga rewizji co pół roku.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>To jest sytuacja odwrotna do AMD — i dlatego obie pozycje warto oceniać razem.</strong> W AMD spółka jest dobra, ale pozycja za duża. Tutaj <strong>pozycja ma właściwą wielkość</strong> (13,2% przy becie 0,93 to około 12% zmienności portfela — normalnie), a spółka jest tania względem tego, co pokazuje w wynikach. Nie ma powodu, żeby cokolwiek tu zmieniać.</div>
+
+      <h3>Konkretnie</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Działanie</th><th>Szczegóły</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Trzymać w obecnej wielkości</strong></td><td>13,2% przy becie 0,93 to rozsądna waga dla spółki tej jakości</td></tr>
+          <tr><td><strong>Dokupować?</strong></td><td>Tylko poniżej $120 (średnia 200-sesyjna). Powyżej $142 przewaga wyceny zanika</td></tr>
+          <tr><td><strong>Co obserwować w Q3</strong></td><td>Marża brutto (koszty AI) oraz tempo wzrostu segmentu bezpieczeństwa po Armisie</td></tr>
+          <tr><td><strong>Poziom rewizji tezy</strong></td><td>Spadek poniżej $109 lub wzrost przychodów abonamentowych poniżej 18%</td></tr>
+          <tr><td><strong>Czego nie robić</strong></td><td>Nie sprzedawać ze względu na wynik -27,8% za rok. Ten spadek to zmiana mnożnika, nie wyników</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td>13,2%</td><td>Druga pozycja po AMD</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-kupno)">+18,5%</td><td>150 akcji po średniej $108,42</td></tr>
+          <tr><td>Beta pozycji</td><td style="color:var(--ocena-kupno)">0,93</td><td>Jedna z najniższych w portfelu</td></tr>
+          <tr><td><strong>Wkład w zmienność portfela</strong></td><td style="color:var(--ocena-kupno)"><strong>ok. 12%</strong></td><td style="color:var(--ocena-kupno)">Trzy i pół raza mniej niż AMD przy podobnej wadze</td></tr>
+          <tr><td>Oprogramowanie korporacyjne razem</td><td style="color:var(--ocena-uwaga)">ok. 22,5%</td><td>ServiceNow 13,2% + SAP 4,3% + Oracle 5,0%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Najważniejszy wniosek z zestawienia dwóch największych pozycji: problemem portfela nie jest druga pozycja, tylko pierwsza.</strong> ServiceNow i AMD mają zbliżoną wagę (13,2% i 16,4%), ale wkład w zmienność rachunku wynosi odpowiednio około 12% i 41%. Te same pieniądze, ponad trzykrotnie różne ryzyko. Jeśli szukasz miejsca, z którego zdjąć ryzyko, to nie jest to.</div>
+
+      <h3>Powiązania w portfelu</h3>
+      <ul>
+        <li><strong>ServiceNow, SAP (4,3%) i Oracle (5,0%) — razem 22,5%.</strong> Trzy różne warstwy oprogramowania dla przedsiębiorstw. Nie są bezpośrednimi rywalami, ale <strong>reagują na ten sam czynnik</strong>: budżety informatyczne dużych firm. W recesji tną je wszystkie naraz.</li>
+        <li><strong>ServiceNow i Arqit (2,5%).</strong> Po przejęciach Armisu i Vezy masz cyberbezpieczeństwo w dwóch bardzo różnych postaciach: dojrzałej i dochodowej wewnątrz ServiceNow oraz spekulacyjnej w Arqit. Warto pamiętać, że tę ekspozycję już masz — i to w wersji, która zarabia.</li>
+        <li><strong>ServiceNow kontra reszta portfela.</strong> Przy 52% w temacie mocy obliczeniowej dla AI, ServiceNow jest jedną z niewielu dużych pozycji <em>po drugiej stronie</em> tego zjawiska: zarabia na zastosowaniu sztucznej inteligencji, a nie na sprzedawaniu sprzętu do jej trenowania. Razem z UnitedHealth i SBSW to jedna z trzech realnych przeciwwag.</li>
+        <li><strong>Wzorzec, który powtarza się w portfelu.</strong> ServiceNow, UnitedHealth i Sibanye mają wspólną cechę: dobre wyniki i słaby kurs. AMD, CoreWeave i Oklo — odwrotnie. W ostatnim roku opłacała się druga grupa. Warto zauważyć, że to jest opis rynku, a nie prawo natury.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <div class="thesis-grid">
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-kupno)">Trzy powody, żeby trzymać</h3>
+          <ol>
+            <li><strong>Dane przeczą tezie, która wyceniła spadek.</strong> Kurs -27,8% w rok za obawę, że AI zabije oprogramowanie na stanowiska. Tymczasem kontrakty AI przekroczyły miliard dolarów, wdrożenia agentowe ×9 w dziewięć miesięcy, prognoza podniesiona.</li>
+            <li><strong>Jakość biznesu wyraźnie wyższa niż w AMD.</strong> Marża brutto 74,8%, marża przepływów 31,1%, zwrot z kapitału powyżej jego kosztu, skup akcji zamiast emisji, beta 0,93.</li>
+            <li><strong>Krótka sprzedaż spadła o 40,8% w miesiąc</strong>, kurs odzyskał obie średnie. Rynek zaczyna zmieniać zdanie.</li>
+          </ol>
+        </div>
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-sprzedaz)">Trzy powody do ostrożności</h3>
+          <ol>
+            <li><strong>Teza „AI zjada SaaS" może być przedwczesna, nie błędna.</strong> Dotyczy lat 2028–2030 i dziś nie da się jej rozstrzygnąć.</li>
+            <li><strong>Bilans stracił bufor.</strong> Z gotówki netto do długu netto 1,75 mld w pół roku, kupony do 6,3%, Piotroski 4 na 9.</li>
+            <li><strong>Koszt krańcowy wszedł do modelu SaaS.</strong> Każde wywołanie agenta kosztuje — zarząd sam przyznaje presję na marże.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="alert alert-warning"><strong>Sygnał, który unieważnia tezę:</strong> wzrost przychodów abonamentowych poniżej 18% w stałej walucie w wynikach za trzeci kwartał (koniec października). Oznaczałby, że obawa rynku zaczyna się materializować w liczbach — a wtedy wycena 29-krotności przepływów przestaje mieć uzasadnienie.</div>
+
+      <div class="alert alert-success"><strong>Sygnał, który tezę potwierdza:</strong> utrzymanie wzrostu powyżej 22% przy stabilnej marży brutto oraz wartość kontraktów AI powyżej 1,5 miliarda dolarów. Oznaczałoby, że ServiceNow jest beneficjentem sztucznej inteligencji, a nie jej ofiarą — i wtedy właściwym mnożnikiem jest 34×, czyli kurs powyżej 180 dolarów.</div>
+
+      <h3>Jednym zdaniem</h3>
+      <p style="font-size:17px;line-height:1.8"><strong>Rynek wycenił ServiceNow jako ofiarę sztucznej inteligencji, a spółka raportuje wyniki beneficjenta — i to jest cała okazja.</strong> Kupiłeś ją niemal dokładnie w dołku, pozycja ma właściwą wielkość, a odbicie już się zaczęło: kurs nad obiema średnimi, krótka sprzedaż zdjęta w 40% w jeden miesiąc. Trzymać, obserwować marżę brutto w Q3, dokupować tylko poniżej 120 dolarów.</p>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 21 sierpnia 2026 | Cena: $128,48 (zamknięcie 21.08.2026) | Aktualizacja analizy z 12 sierpnia 2026 | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 21.08.2026</strong>, ServiceNow Investor Relations (wyniki Q2 2026, 22 lipca), zgłoszenia SEC (emisja obligacji 15.05.2026, przejęcia Armis i Veza) | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
