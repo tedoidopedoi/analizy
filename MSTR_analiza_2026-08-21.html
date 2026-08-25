@@ -5,6 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MSTR — Strategy Inc | Analiza Inwestycyjna 2026</title>
 <link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
 </head>
 <body>
 <div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
@@ -278,7 +300,7 @@
     <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
     <div class="section-body" id="s12-body">
       <div class="tp-chart">
-        <div class="tp-chart-head"><b>Kurs — ostatnie 12 miesięcy</b><span>zakres $82.31 – $351.63 | ostatnie zamknięcie $122.28</span></div>
+        <div class="tp-chart-head"><b>Kurs — ostatnie 12 miesięcy</b><span>zakres $82.31 – $351.63 | ostatnie zamknięcie $122.63</span></div>
         <svg viewBox="0 0 940 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block" role="img" aria-label="Wykres kursu z zaznaczonym przedziałem wartości godziwej">
 <line x1="58" y1="296.0" x2="848" y2="296.0" stroke="#2e3250" stroke-width="1"/>
 <text x="49" y="300.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$61</text>
@@ -295,15 +317,15 @@
 <line x1="58" y1="274.7" x2="848" y2="274.7" stroke="#34d399" stroke-width="1" stroke-dasharray="5 4" opacity="0.65"/>
 <text x="856" y="259.0" font-size="10.5" fill="#34d399" font-family="Segoe UI,system-ui,sans-serif" font-weight="700">FAIR VALUE</text>
 <text x="856" y="273.0" font-size="10" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$85–$130</text>
-<polygon points="58,296 58.0,56.0 73.2,54.7 88.4,58.6 103.6,46.9 118.8,78.2 134.0,40.9 149.2,82.0 164.3,95.1 179.5,95.8 194.8,112.9 210.0,137.1 225.2,174.1 240.4,199.8 255.6,193.9 270.8,192.3 286.0,194.5 301.2,204.7 316.4,210.0 331.6,211.5 346.7,211.3 361.9,196.9 377.1,206.2 392.3,218.0 407.5,231.0 422.7,231.9 437.9,234.4 453.1,235.7 468.3,232.2 483.5,226.8 498.7,230.3 513.9,238.8 529.0,244.2 544.2,236.5 559.3,203.2 574.5,199.3 589.7,193.9 604.9,184.8 620.1,193.7 635.3,209.1 650.5,209.8 665.7,243.7 680.9,240.6 696.1,250.6 711.3,277.1 726.5,260.9 741.7,266.3 756.8,266.1 772.0,268.9 787.2,267.5 802.4,261.6 817.6,267.7 832.8,244.7 848.0,242.0 848,296" fill="#34d399" opacity="0.07"/>
-<polyline points="58.0,56.0 73.2,54.7 88.4,58.6 103.6,46.9 118.8,78.2 134.0,40.9 149.2,82.0 164.3,95.1 179.5,95.8 194.8,112.9 210.0,137.1 225.2,174.1 240.4,199.8 255.6,193.9 270.8,192.3 286.0,194.5 301.2,204.7 316.4,210.0 331.6,211.5 346.7,211.3 361.9,196.9 377.1,206.2 392.3,218.0 407.5,231.0 422.7,231.9 437.9,234.4 453.1,235.7 468.3,232.2 483.5,226.8 498.7,230.3 513.9,238.8 529.0,244.2 544.2,236.5 559.3,203.2 574.5,199.3 589.7,193.9 604.9,184.8 620.1,193.7 635.3,209.1 650.5,209.8 665.7,243.7 680.9,240.6 696.1,250.6 711.3,277.1 726.5,260.9 741.7,266.3 756.8,266.1 772.0,268.9 787.2,267.5 802.4,261.6 817.6,267.7 832.8,244.7 848.0,242.0" fill="none" stroke="#34d399" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="58,296 58.0,56.0 73.2,54.7 88.4,58.6 103.6,46.9 118.8,78.2 134.0,40.9 149.2,82.0 164.3,95.1 179.5,95.8 194.8,112.9 210.0,137.1 225.2,174.1 240.4,199.8 255.6,193.9 270.8,192.3 286.0,194.5 301.2,204.7 316.4,210.0 331.6,211.5 346.7,211.3 361.9,196.9 377.1,206.2 392.3,218.0 407.5,231.0 422.7,231.9 437.9,234.4 453.1,235.7 468.3,232.2 483.5,226.8 498.7,230.3 513.9,238.8 529.0,244.2 544.2,236.5 559.3,203.2 574.5,199.3 589.7,193.9 604.9,184.8 620.1,193.7 635.3,209.1 650.5,209.8 665.7,243.7 680.9,240.6 696.1,250.6 711.3,277.1 726.5,260.9 741.7,266.3 756.8,266.1 772.0,268.9 787.2,267.5 802.4,261.6 817.6,267.7 832.8,244.7 848.0,241.7 848,296" fill="#34d399" opacity="0.07"/>
+<polyline points="58.0,56.0 73.2,54.7 88.4,58.6 103.6,46.9 118.8,78.2 134.0,40.9 149.2,82.0 164.3,95.1 179.5,95.8 194.8,112.9 210.0,137.1 225.2,174.1 240.4,199.8 255.6,193.9 270.8,192.3 286.0,194.5 301.2,204.7 316.4,210.0 331.6,211.5 346.7,211.3 361.9,196.9 377.1,206.2 392.3,218.0 407.5,231.0 422.7,231.9 437.9,234.4 453.1,235.7 468.3,232.2 483.5,226.8 498.7,230.3 513.9,238.8 529.0,244.2 544.2,236.5 559.3,203.2 574.5,199.3 589.7,193.9 604.9,184.8 620.1,193.7 635.3,209.1 650.5,209.8 665.7,243.7 680.9,240.6 696.1,250.6 711.3,277.1 726.5,260.9 741.7,266.3 756.8,266.1 772.0,268.9 787.2,267.5 802.4,261.6 817.6,267.7 832.8,244.7 848.0,241.7" fill="none" stroke="#34d399" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round"/>
 <line x1="848.0" y1="22" x2="848.0" y2="296" stroke="#34d399" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
-<circle cx="848.0" cy="242.0" r="5" fill="#34d399" stroke="#0f1117" stroke-width="2"/>
+<circle cx="848.0" cy="241.7" r="5" fill="#34d399" stroke="#0f1117" stroke-width="2"/>
 <text x="839.0" y="35" text-anchor="end" font-size="10.5" fill="#34d399" font-family="Segoe UI,system-ui,sans-serif" font-weight="700">Ta analiza · 21.08</text>
 <text x="58.0" y="318" text-anchor="start" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">25.08.2025</text>
 <text x="453.1" y="318" text-anchor="middle" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">23.02.2026</text>
 <text x="848.0" y="318" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">24.08.2026</text>
-<circle cx="848.0" cy="242.0" r="4" fill="#34d399"/>
+<circle cx="848.0" cy="241.7" r="4" fill="#34d399"/>
 </svg>
         <div class="tp-chart-legend"><span><i style="background:#34d399"></i>kurs zamknięcia (tygodniowo)</span><span><i style="background:#34d399;opacity:.25"></i>przedział fair value</span></div>
       </div>

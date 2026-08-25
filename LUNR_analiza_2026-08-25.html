@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUNR — Intuitive Machines | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: LUNR</div>
+    <div class="company-name">Intuitive Machines, Inc.</div>
+    <div class="company-sub">Lądowniki księżycowe i usługi dla NASA · Houston, Teksas</div>
+    <div class="header-meta">
+      <span class="meta-tag">Spoza portfela — pierwsza analiza</span>
+      <span class="meta-tag">Najtańsza z trójki: 3,5× sprzedaży</span>
+      <span class="meta-tag">Altman Z 1,48</span>
+      <span class="meta-tag">27% wolnych akcji na krótko</span>
+      <div class="price-display">
+        <div class="price-main">$16,62</div>
+        <div class="price-sub">25.08.2026, sesja trwa | +85% w 52 tygodnie</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Przestrzeń kosmiczna</span><span class="temat">Kontrakty rządowe</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO SPEKULACYJNE — najtańsza i najbardziej ryzykowna z trójki">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO SPEKULACYJNE</span><span class="rb-qual">przychody podwajają się, bilans na granicy</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$16 – $26</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">-4% do +56%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>13 sierpnia 2026</b><em>Q3 — listopad</em></div>
+    <div class="rb-right">Sugerowana pozycja 1–2%</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (25.08.2026)</div><div class="metric-value">$16,62</div><div class="metric-detail">15,0% pod średnią 200-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / sprzedaż prognozowana</div><div class="metric-value green">3,49</div><div class="metric-detail">Planet Labs 16,4 | Rocket Lab 35,1</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">$206,2 mln</div><div class="metric-detail">Z $50,3 mln rok wcześniej — czterokrotnie</div></div>
+    <div class="metric-card"><div class="metric-label">Prognoza roczna 2026</div><div class="metric-value green">$900 mln – $1 mld</div><div class="metric-detail">Wobec $490 mln za ostatnie 12 miesięcy</div></div>
+    <div class="metric-card"><div class="metric-label">Portfel zamówień</div><div class="metric-value green">$1,8 mld</div><div class="metric-detail">3,7× rocznych przychodów — najwięcej z trójki</div></div>
+    <div class="metric-card"><div class="metric-label">Wskaźnik Altmana Z</div><div class="metric-value red">1,48</div><div class="metric-detail">Piotroski 2/9 — najsłabszy bilans z trójki</div></div>
+    <div class="metric-card"><div class="metric-label">Rozwodnienie</div><div class="metric-value red">+44,6% r/r</div><div class="metric-detail">+9,67% w samym kwartale</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (9 analityków)</div><div class="metric-value green">$29,25</div><div class="metric-detail">+76% | mocne kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p><strong>Intuitive Machines nie masz w portfelu.</strong> To pierwsza analiza tej spółki.</p>
+
+      <p>Firma buduje <strong>lądowniki księżycowe</strong> i świadczy usługi dla NASA w ramach programu dostarczania ładunków na Księżyc. Jako pierwsza prywatna firma w historii posadziła statek na powierzchni Księżyca. Zatrudnia zaledwie <strong>525 osób</strong>, a przychody w ujęciu 12-miesięcznym wynoszą <strong>490,12 mln dolarów</strong> — co daje <strong>933 562 dolary na pracownika, najwięcej z całej trójki</strong>. Kapitalizacja to 3,80 miliarda.</p>
+
+      <div class="alert alert-success"><strong>Najważniejsza liczba w tej analizie: prognoza roczna na 2026 rok wynosi 900 milionów do miliarda dolarów, wobec 490 milionów za ostatnie dwanaście miesięcy.</strong> Spółka zapowiada mniej więcej <em>podwojenie przychodów</em> i po raz pierwszy <strong>dodatnią skorygowaną EBITDA</strong>. Przy kapitalizacji 3,8 miliarda oznacza to <strong>3,49-krotność prognozowanej sprzedaży</strong> — dla porównania Rocket Lab jest wyceniany na 35,07-krotność, czyli dziesięć razy drożej.</div>
+
+      <h3>Co pokazał drugi kwartał — wyniki z 13 sierpnia</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Q2 2026</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody</strong></td><td><strong>$206,2 mln</strong></td><td style="color:var(--ocena-kupno)">Z $50,3 mln w Q2 2025 — <strong>czterokrotny wzrost</strong></td></tr>
+          <tr><td>Marża brutto</td><td style="color:var(--ocena-uwaga)">17,4%</td><td style="color:var(--ocena-kupno)">Zysk brutto $35,9 mln wobec straty rok wcześniej</td></tr>
+          <tr><td><strong>Portfel zamówień</strong></td><td style="color:var(--ocena-kupno)"><strong>$1,8 mld</strong></td><td style="color:var(--ocena-kupno)">Rekord</td></tr>
+          <tr><td>Nowe kontrakty</td><td style="color:var(--ocena-kupno)">$920 mln w Q2</td><td style="color:var(--ocena-kupno)">Plus $300 mln w Q3 do tej pory</td></tr>
+          <tr><td>Nowy lądownik NASA</td><td>szósta misja w programie CLPS</td><td>W ramach programu Moonbase, lądownik produkcyjny standaryzowany</td></tr>
+          <tr><td>Kontrakty obserwacyjne</td><td>LROC i ShadowCam</td><td>Dwa zlecenia główne na rozpoznanie księżycowe</td></tr>
+          <tr><td>Misja IM-3</td><td>$91,3 mln przychodu</td><td>Realizacja do marca 2027</td></tr>
+          <tr><td><strong>Prognoza roczna 2026</strong></td><td style="color:var(--ocena-kupno)"><strong>$900 mln – $1 mld</strong></td><td style="color:var(--ocena-kupno)">Podtrzymana, z dodatnią skorygowaną EBITDA</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Zwróć uwagę na proporcję nowych zamówień do przychodów.</strong> W jednym kwartale spółka zakontraktowała <strong>920 milionów dolarów</strong> przy przychodach 206 milionów — czyli ponad cztery kwartały pracy w trzy miesiące. Do tego kolejne 300 milionów już w trzecim kwartale. Portfel 1,8 miliarda przy rocznych przychodach 490 milionów daje pokrycie <strong>3,67×</strong>, najwyższe z całej trójki.</div>
+
+      <p>Warto też zauważyć, że firma przestała być wyłącznie „spółką od lądowników". Kontrakty LROC i ShadowCam dotyczą <strong>obserwacji i rozpoznania</strong>, a szósty lądownik CLPS to już <em>produkt standaryzowany</em>, a nie jednorazowa misja badawcza. To przejście z projektów w produkcję seryjną — dokładnie ten moment, w którym marża zaczyna rosnąć.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Linia</th><th>Czym jest</th><th>Rola w tezie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Lądowniki Nova-C</strong></td><td>Dostarczanie ładunków NASA i klientów komercyjnych na powierzchnię Księżyca</td><td style="color:var(--ocena-kupno)">Rdzeń; szósty kontrakt CLPS to wersja produkcyjna</td></tr>
+          <tr><td><strong>Usługi inżynieryjne</strong></td><td>Prace dla NASA i wojska poza własnymi misjami</td><td>Stabilizuje przychód między lotami</td></tr>
+          <tr><td><strong>Łączność i nawigacja księżycowa</strong></td><td>Infrastruktura orbitalna wokół Księżyca</td><td style="color:var(--ocena-kupno)">Największa opcja długoterminowa</td></tr>
+          <tr><td><strong>LROC i ShadowCam</strong></td><td>Rozpoznanie i obrazowanie powierzchni</td><td>Nowy segment, wyższa marża niż lądowniki</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Przejście od misji do produktu jest tu kluczowe i warto rozumieć, dlaczego.</strong> Każda misja badawcza jest inna, więc kosztuje tyle, ile kosztuje — stąd marża brutto 16,35%, najniższa z trójki. <strong>Standaryzowany lądownik produkcyjny zmienia tę arytmetykę</strong>: ten sam projekt, ta sama linia, powtarzalne komponenty. Szósty kontrakt CLPS jest właśnie na taką wersję. Jeśli spółka rzeczywiście przejdzie na produkcję seryjną, marża brutto powinna zbliżyć się do poziomu Rocket Lab, czyli około 35%.</div>
+
+      <p>Fosa jest tu innego rodzaju niż u dwóch pozostałych: <strong>opiera się na doświadczeniu i zaufaniu zamawiającego, a nie na technologii czy danych</strong>. Intuitive Machines wylądowała na Księżycu, gdy nikomu prywatnemu się to wcześniej nie udało. NASA, przyznając szósty kontrakt, kupuje przewidywalność, nie innowację. To przewaga realna, ale <em>zależna od jednego klienta</em>.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <p>Rynek Intuitive Machines to w praktyce <strong>amerykański program powrotu na Księżyc</strong> i to, co wokół niego narasta: dostarczanie ładunków, łączność, nawigacja, rozpoznanie. Prognozowany wzrost przychodów na trzy lata wynosi <strong>80,36% rocznie</strong> — najwięcej z całej trójki i dwa razy więcej niż Rocket Lab.</p>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment</th><th>Charakter</th><th>Pozycja spółki</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Dostarczanie ładunków na Księżyc</strong></td><td>Kontrakty NASA o stałej cenie</td><td style="color:var(--ocena-kupno)">Jeden z nielicznych wykonawców z udanym lądowaniem</td></tr>
+          <tr><td><strong>Infrastruktura księżycowa</strong></td><td>Łączność i nawigacja wokół Księżyca</td><td style="color:var(--ocena-kupno)">Wczesna pozycja, duża opcjonalność</td></tr>
+          <tr><td>Usługi dla obronności</td><td>Zlecenia bezpieczeństwa narodowego</td><td>Rosnący udział w nowych zamówieniach</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Tu leży ryzyko, którego nie mają dwie pozostałe spółki: koncentracja na jednym zleceniodawcy o charakterze politycznym.</strong> Rocket Lab sprzedaje starty każdemu, kto chce polecieć. Planet Labs sprzedaje dane setkom odbiorców. Intuitive Machines w znacznej mierze <em>zależy od tego, czy amerykański program księżycowy będzie kontynuowany w obecnym kształcie</em>. Zmiana priorytetów NASA albo cięcie budżetu nie jest ryzykiem, które da się odczytać ze sprawozdania finansowego — a uderzyłoby natychmiast i mocno.</div>
+
+      <p>Po stronie pozytywnej: program księżycowy jest dziś przedmiotem rywalizacji geopolitycznej, a takie programy rzadko bywają porzucane w połowie. Kontrakty przyznane w drugim kwartale — łącznie 920 milionów — sugerują raczej rozbudowę niż wygaszanie.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I PORTFEL ZAMÓWIEŃ</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Portfel zamówień</strong></td><td style="color:var(--ocena-kupno)"><strong>$1,8 mld</strong></td><td style="color:var(--ocena-kupno)">Rekord</td></tr>
+          <tr><td><strong>Pokrycie przychodów</strong></td><td style="color:var(--ocena-kupno)"><strong>3,67×</strong></td><td style="color:var(--ocena-kupno)">Najwyższe z trójki (RKLB 3,07× · PL 2,70×)</td></tr>
+          <tr><td>Nowe kontrakty Q2</td><td>$920 mln</td><td>Plus $300 mln w Q3 do tej pory</td></tr>
+          <tr><td>Główny zleceniodawca</td><td style="color:var(--ocena-sprzedaz)">NASA i agencje rządowe</td><td style="color:var(--ocena-sprzedaz)">Wysoka koncentracja</td></tr>
+          <tr><td>Udziałowcy wewnętrzni</td><td>4,11%</td><td>Instytucje 77,49% — najwyżej z trójki</td></tr>
+          <tr><td>Akcje w wolnym obrocie</td><td style="color:var(--ocena-uwaga)">131,62 mln</td><td style="color:var(--ocena-uwaga)">Z 228,92 mln wszystkich — wąski rynek</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Portfel zamówień pokrywający 3,67 roku sprzedaży to najmocniejsza liczba tej spółki.</strong> Przy kontraktach rządowych o stałej cenie oznacza to bardzo dobrą widoczność przychodów — znacznie lepszą niż u Planet Labs, gdzie część portfela ma klauzulę wypowiedzenia. Kontrakty CLPS są przyznawane na konkretne misje z konkretnymi terminami.</div>
+
+      <p>Wąski wolny obrót zasługuje na uwagę: <strong>tylko 131,62 mln akcji z 228,92 mln znajduje się w swobodnym handlu</strong>. W połączeniu z krótką sprzedażą wynoszącą 27,04% tego wolnego obrotu daje to bardzo nietypową strukturę rynku — o czym w sekcji 12.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td><strong>$490,12 mln</strong></td></tr>
+          <tr><td>Zysk brutto</td><td>$80,13 mln — marża <strong>16,35%</strong></td></tr>
+          <tr><td>Wynik operacyjny</td><td style="color:var(--ocena-sprzedaz)">-$104,28 mln</td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-sprzedaz)">-$131,20 mln · -$0,96 na akcję</td></tr>
+          <tr><td>EBITDA</td><td style="color:var(--ocena-sprzedaz)">-$74,37 mln</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$187,75 mln</strong> — operacyjne -$126,35 mln, nakłady -$61,40 mln</td></tr>
+          <tr><td>Nowe zadłużenie w okresie</td><td style="color:var(--ocena-uwaga)">+$335,51 mln</td></tr>
+          <tr><td><strong>Przychód na pracownika</strong></td><td style="color:var(--ocena-kupno)"><strong>$933 562</strong> przy 525 osobach</td></tr>
+          <tr><td>Prognoza wzrostu przychodów (3 lata)</td><td style="color:var(--ocena-kupno)">80,36% rocznie</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Model rozliczeniowy jest tu istotny, bo tłumaczy niską marżę.</strong> Kontrakty CLPS mają <em>stałą cenę</em>: NASA płaci ustaloną kwotę za dostarczenie ładunku na Księżyc, niezależnie od tego, ile misja rzeczywiście kosztuje. Przy pierwszych misjach, gdy każdy lądownik jest prototypem, marża brutto 16,35% jest tego konsekwencją. Ryzyko przekroczenia budżetu spoczywa na spółce, nie na zamawiającym.</div>
+
+      <p>Właśnie dlatego szósty kontrakt CLPS — na <strong>lądownik standaryzowany, produkcyjny</strong> — jest ważniejszy, niż wynikałoby z jego wartości. Przy stałej cenie i powtarzalnej konstrukcji każda kolejna misja powinna kosztować mniej, a różnica zostaje u spółki. <strong>To jest cała teza na marżę.</strong></p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Cena / zysk</td><td>nie dotyczy</td><td>Spółka ze stratą: -$0,96 na akcję przy przychodach $490,12 mln</td></tr>
+          <tr><td><strong>Cena / sprzedaż</strong></td><td style="color:var(--ocena-kupno)"><strong>7,78</strong></td><td style="color:var(--ocena-kupno)">Prognozowana <strong>3,49</strong> — najniżej z trójki</td></tr>
+          <tr><td><strong>Wartość firmy / sprzedaż</strong></td><td style="color:var(--ocena-kupno)"><strong>8,01</strong></td><td style="color:var(--ocena-kupno)">Planet Labs 22,18 · Rocket Lab 49,61</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td>4,18</td><td>Też najniżej z trójki (PL 17,33 · RKLB 11,70)</td></tr>
+          <tr><td>Cena / wolne przepływy</td><td>nie dotyczy</td><td style="color:var(--ocena-sprzedaz)">Przepływy ujemne: -$187,75 mln</td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td>nie dotyczy</td><td>EBITDA ujemna: -$74,37 mln</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Źródło: StockAnalysis / S&amp;P Global Market Intelligence, stan 25.08.2026.</p>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>nie dotyczy</td><td>Strata na akcję -$0,96; przychody TTM $490,12 mln</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td>nie dotyczy</td><td>Spółka dopiero zapowiada dodatnią skorygowaną EBITDA, nie zysk netto</td></tr>
+          <tr><td><strong>PEG</strong></td><td>nie dotyczy</td><td>&lt; 1,0 = wzrost tańszy niż mnożnik sugeruje; tu brak bazy zysku</td></tr>
+          <tr><td>Miara zastępcza</td><td style="color:var(--ocena-kupno)"><strong>Cena / sprzedaż prognozowana 3,49</strong></td><td style="color:var(--ocena-kupno)">Dziesięciokrotnie taniej niż Rocket Lab</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> przy spółce przed progiem rentowności jedynym użytecznym mnożnikiem jest krotność sprzedaży — i tutaj wynosi ona <strong>3,49 wobec 16,44 u Planet Labs i 35,07 u Rocket Lab</strong>. Ta różnica nie jest przypadkowa: rynek płaci mniej za dolara przychodu, bo <em>ten dolar ma marżę brutto 16%, a nie 56%</em>, i bo bilans jest znacznie słabszy. Pytanie brzmi, czy dziesięciokrotna dysproporcja wobec Rocket Lab jest uzasadniona przez dwukrotną różnicę w marży.</p>
+
+      <h3>Cztery scenariusze na 12–18 miesięcy</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Założenie</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Prognoza dowieziona, marża rośnie</strong></td><td>Sprzedaż $1,0 mld, mnożnik 6,5×, akcji 250 mln</td><td><strong>$26</strong></td><td style="color:var(--ocena-kupno)">+56%</td></tr>
+          <tr><td><strong>Prognoza dowieziona, mnożnik bez zmian</strong></td><td>Sprzedaż $950 mln, mnożnik 5×</td><td><strong>$19</strong></td><td style="color:var(--ocena-kupno)">+14%</td></tr>
+          <tr><td>Dolna granica prognozy</td><td>Sprzedaż $900 mln, mnożnik 4×</td><td>$16</td><td style="color:var(--ocena-uwaga)">-4%</td></tr>
+          <tr><td>Poślizg misji plus emisja akcji</td><td>Sprzedaż $700 mln, mnożnik 3×, akcji 280 mln</td><td>$11</td><td style="color:var(--ocena-sprzedaz)">-34%</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Fair value: $16 – $26</strong>, środek $21 (+26%). Konsensus 9 analityków to $29,25 (+76%) przy rekomendacji mocnego kupna — stawiam niżej głównie dlatego, że konsensus nie dyskontuje w pełni tempa emisji akcji.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Intuitive Machines</th><th>Rocket Lab</th><th>Planet Labs</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Brutto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>16,35%</strong></td><td>37,26%</td><td style="color:var(--ocena-kupno)">55,58%</td></tr>
+          <tr><td>Brutto w Q2 2026</td><td style="color:var(--ocena-uwaga)">17,4%</td><td>—</td><td>—</td></tr>
+          <tr><td>Operacyjna</td><td style="color:var(--ocena-sprzedaz)">-21,28%</td><td style="color:var(--ocena-sprzedaz)">-27,60%</td><td style="color:var(--ocena-sprzedaz)">-26,71%</td></tr>
+          <tr><td>EBITDA</td><td style="color:var(--ocena-sprzedaz)">-15,17%</td><td style="color:var(--ocena-sprzedaz)">-19,57%</td><td style="color:var(--ocena-sprzedaz)">-15,41%</td></tr>
+          <tr><td>Nakłady / przychody</td><td style="color:var(--ocena-kupno)"><strong>12,5%</strong></td><td>19,3%</td><td style="color:var(--ocena-sprzedaz)">25,6%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Marża brutto 16,35% to najsłabszy element tej spółki i główny powód, dla którego rynek wycenia ją dziesięć razy taniej niż Rocket Lab.</strong> Z każdego dolara przychodu zostaje szesnaście centów na pokrycie badań, administracji i sprzedaży — a te kosztują znacznie więcej. Stąd strata operacyjna mimo czterokrotnego wzrostu sprzedaży.</div>
+
+      <div class="alert alert-success"><strong>Kierunek jest jednak właściwy i to jest cała nadzieja tej inwestycji.</strong> W drugim kwartale marża brutto wyniosła <strong>17,4%</strong> przy zysku brutto 35,9 miliona — wobec <em>straty</em> brutto rok wcześniej. Przejście z pojedynczych misji badawczych na standaryzowany lądownik produkcyjny powinno tę marżę dalej podnosić. Zapowiedziana dodatnia skorygowana EBITDA za 2026 rok byłaby pierwszym twardym potwierdzeniem.</div>
+
+      <p>Pocieszający jest za to ostatni wiersz: <strong>nakłady inwestycyjne to tylko 12,5% przychodów</strong>, najmniej z trójki. Planet Labs musi wymieniać zużywające się satelity za jedną czwartą przychodów rocznie, Intuitive Machines buduje lądowniki na zamówienie i płaci za to zamawiający.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — NAJSŁABSZY PUNKT</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$367,35 mln</td><td>Zadłużenie $481,45 mln</td></tr>
+          <tr><td><strong>Dług netto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$114,09 mln</strong></td><td style="color:var(--ocena-sprzedaz)">Jedyna z trójki bez gotówki netto</td></tr>
+          <tr><td>Nowe zadłużenie w okresie</td><td style="color:var(--ocena-uwaga)">+$335,51 mln</td><td>Finansowanie wzrostu długiem</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-uwaga)">0,53</td><td>Lepiej niż Planet Labs (1,10)</td></tr>
+          <tr><td>Wskaźnik bieżący</td><td style="color:var(--ocena-uwaga)">1,66</td><td style="color:var(--ocena-uwaga)">RKLB 5,48 · PL 2,81 — najniżej z trójki</td></tr>
+          <tr><td><strong>Wskaźnik Altmana Z</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>1,48</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Wyraźnie poniżej 3 — podwyższone ryzyko niewypłacalności</strong></td></tr>
+          <tr><td>Wskaźnik Piotroskiego F</td><td style="color:var(--ocena-sprzedaz)">2 / 9</td><td style="color:var(--ocena-sprzedaz)">Najniżej z trójki</td></tr>
+          <tr><td><strong>Liczba akcji</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+44,58% r/r</strong></td><td style="color:var(--ocena-sprzedaz)">+9,67% w samym kwartale</td></tr>
+          <tr><td>Wolne przepływy</td><td style="color:var(--ocena-sprzedaz)">-$187,75 mln</td><td>Wobec gotówki $367,35 mln</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Ta tabela wymaga jednoznacznego komentarza: bilans Intuitive Machines jest najsłabszy z całej trójki i jest głównym powodem oceny „spekulacyjne".</strong> Wskaźnik Altmana 1,48 przy Rocket Lab mającym 32,53 to nie jest różnica stopnia, tylko różnica kategorii. Spółka pali 187,75 miliona rocznie przy gotówce 367,35 miliona — czyli <strong>ma około dwóch lat bez dosypywania kapitału</strong>, a nie sześciu jak Rocket Lab.</div>
+
+      <div class="alert alert-danger"><strong>Rozwodnienie o 44,58% w ciągu roku to najostrzejsza liczba w tych trzech analizach.</strong> Akcjonariusz sprzed roku ma dziś w spółce o ponad jedną trzecią mniejszy udział. Przy 9,67% w samym ostatnim kwartale tempo się nie zmniejsza. Nawet jeśli przychody rzeczywiście się podwoją, <em>na akcję ten wzrost będzie znacznie skromniejszy</em> — i tę korektę trzeba robić przy każdej prognozie dotyczącej tej spółki.</div>
+
+      <div class="alert alert-warning"><strong>Osobna uwaga techniczna, żeby nie zaskoczyła Cię przy lekturze sprawozdań.</strong> Kapitał własny wynosi 911,52 miliona, ale <em>wartość księgowa na akcję jest ujemna</em> (-$1,71). To nie błąd — spółka powstała przez połączenie ze spółką celową i ma złożoną strukturę z akcjami różnych klas oraz udziałami niekontrolującymi. Wskaźniki opierające się na kapitale własnym, w tym zwrot z kapitału -30,77%, są przy tej konstrukcji mało miarodajne. Patrz na przychody, marżę brutto, przepływy i liczbę akcji.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Najtańsza z trójki i to o rząd wielkości.</strong> Cena do prognozowanej sprzedaży 3,49 wobec 16,44 u Planet Labs i 35,07 u Rocket Lab. Wartość firmy do sprzedaży 8,01 wobec 49,61. Za tego samego dolara przychodu płacisz dziesięć razy mniej niż za Rocket Lab.</div>
+
+      <div class="alert alert-success"><strong>2. Przychody mają się podwoić w tym roku.</strong> Prognoza $900 mln – $1 mld wobec $490 mln za ostatnie 12 miesięcy, przy czym drugi kwartał już pokazał czterokrotny wzrost r/r ($206,2 mln z $50,3 mln). Prognoza wzrostu na trzy lata: 80,36% rocznie.</div>
+
+      <div class="alert alert-success"><strong>3. Portfel zamówień $1,8 mld — pokrycie 3,67×.</strong> Najwyższe z trójki, oparte na kontraktach rządowych o stałej cenie. W samym Q2 zakontraktowano $920 mln, plus $300 mln w Q3.</div>
+
+      <div class="alert alert-success"><strong>4. Marża idzie w górę, a lądownik staje się produktem.</strong> Marża brutto 17,4% w Q2 wobec straty brutto rok wcześniej. Szósty kontrakt CLPS dotyczy <em>standaryzowanego lądownika produkcyjnego</em> — to moment, w którym powtarzalność zaczyna pracować na marżę.</div>
+
+      <div class="alert alert-info"><strong>5. Pierwsza dodatnia skorygowana EBITDA zapowiedziana na 2026.</strong> Byłoby to przejście z fazy „palimy gotówkę na dowód koncepcji" do fazy „biznes się broni".</div>
+
+      <div class="alert alert-info"><strong>6. Struktura rynku sprzyja gwałtownym ruchom w górę.</strong> 27,04% wolnego obrotu jest sprzedane na krótko przy wolnym obrocie zaledwie 131,62 mln akcji. Konsensus dziewięciu analityków to <strong>mocne kupno</strong> z ceną docelową $29,25 (+76%).</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Rozwodnienie 44,58% w rok.</strong> Najostrzejsza liczba z całej trójki. Przy +9,67% w samym kwartale tempo nie zwalnia. Podwojenie przychodów przy takim rozwodnieniu daje na akcję znacznie mniej, niż sugeruje nagłówek.</div>
+
+      <div class="alert alert-danger"><strong>2. Wskaźnik Altmana Z 1,48 i dwa lata gotówki.</strong> Palenie $187,75 mln rocznie przy $367,35 mln w kasie i długu netto $114,09 mln. Rocket Lab ma sześć lat zapasu i Altmana 32,53 — to inna liga bezpieczeństwa.</div>
+
+      <div class="alert alert-danger"><strong>3. Marża brutto 16,35% przy kontraktach o stałej cenie.</strong> Ryzyko przekroczenia budżetu misji spoczywa na spółce. Jedna nieudana lub przeciągnięta misja zjada marżę całego roku.</div>
+
+      <div class="alert alert-warning"><strong>4. Zależność od jednego programu rządowego.</strong> NASA i amerykański program księżycowy to podstawa portfela zamówień. Zmiana priorytetów politycznych albo cięcie budżetu uderza natychmiast, a nie da się tego przewidzieć ze sprawozdania.</div>
+
+      <div class="alert alert-warning"><strong>5. Ryzyko misji jest binarne.</strong> Lądowanie na Księżycu udaje się albo nie udaje. Nieudana misja to nie tylko utrata przychodu, ale i podważenie jedynej realnej fosy tej spółki — reputacji wykonawcy, któremu się udało.</div>
+
+      <div class="alert alert-warning"><strong>6. Wąski wolny obrót i 27% akcji na krótko.</strong> To działa w obie strony: potrafi wywołać gwałtowny wzrost, ale przy złych wiadomościach oznacza brak kupujących i spadki znacznie większe, niż wynikałoby z samej informacji.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Przewaga</th><th>Słabość wobec Intuitive Machines</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Firefly Aerospace</strong></td><td>Udane lądowanie księżycowe, własna rakieta</td><td>Mniejszy portfel kontraktów CLPS</td></tr>
+          <tr><td><strong>Astrobotic</strong></td><td>Wczesny uczestnik programu CLPS</td><td style="color:var(--ocena-kupno)">Historia niepowodzeń misji</td></tr>
+          <tr><td><strong>SpaceX</strong></td><td style="color:var(--ocena-sprzedaz)">Starship jako lądownik załogowy, nieporównywalna skala</td><td>Inna klasa misji; częściej partner transportowy</td></tr>
+          <tr><td><strong>Blue Origin</strong></td><td style="color:var(--ocena-sprzedaz)">Własny lądownik, nieograniczony kapitał</td><td>Wolniejsze tempo wdrożeń</td></tr>
+          <tr><td><strong>Redwire</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 1,9%)</span></td><td>Komponenty i infrastruktura orbitalna</td><td>Inna warstwa łańcucha — częściej dostawca niż rywal</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Przewaga Intuitive Machines nie jest technologiczna, tylko reputacyjna — i to trzeba rozumieć dosłownie.</strong> W programie, w którym kilku wykonawców rozbiło swoje lądowniki, firma, która wylądowała i przyznano jej szósty kontrakt, ma pozycję opartą na zaufaniu zamawiającego. Taka przewaga jest realna, ale <em>krucha</em>: jedna nieudana misja może ją odwrócić w jednym dniu.</div>
+
+      <h3>Trzy spółki kosmiczne obok siebie</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Intuitive Machines</th><th>Rocket Lab</th><th>Planet Labs</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$3,80 mld</td><td>$40,34 mld</td><td>$7,66 mld</td></tr>
+          <tr><td><strong>Cena / sprzedaż prognoz.</strong></td><td style="color:var(--ocena-kupno)"><strong>3,49</strong></td><td style="color:var(--ocena-sprzedaz)">35,07</td><td>16,44</td></tr>
+          <tr><td><strong>Wzrost przychodów (3 lata)</strong></td><td style="color:var(--ocena-kupno)"><strong>80,36%</strong></td><td>42,98%</td><td>34,50%</td></tr>
+          <tr><td>Pokrycie portfelem zamówień</td><td style="color:var(--ocena-kupno)"><strong>3,67×</strong></td><td>3,07×</td><td>2,70×</td></tr>
+          <tr><td>Marża brutto</td><td style="color:var(--ocena-sprzedaz)">16,35%</td><td>37,26%</td><td style="color:var(--ocena-kupno)"><strong>55,58%</strong></td></tr>
+          <tr><td><strong>Wskaźnik Altmana Z</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>1,48</strong></td><td style="color:var(--ocena-kupno)">32,53</td><td style="color:var(--ocena-uwaga)">2,55</td></tr>
+          <tr><td><strong>Rozwodnienie r/r</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+44,58%</strong></td><td>+15,68%</td><td style="color:var(--ocena-kupno)">+8,13%</td></tr>
+          <tr><td>Beta</td><td style="color:var(--ocena-kupno)"><strong>1,83</strong></td><td style="color:var(--ocena-sprzedaz)">2,63</td><td>2,12</td></tr>
+          <tr><td>Przychód na pracownika</td><td style="color:var(--ocena-kupno)"><strong>$933,6 tys.</strong></td><td>$295,8 tys.</td><td>$335,6 tys.</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Intuitive Machines wygrywa w pięciu kategoriach i przegrywa w dwóch — ale te dwie to marża i bilans</strong>, czyli dokładnie te, które decydują o przetrwaniu złego roku.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Kurs 25.08.2026</td><td><strong>$16,62</strong></td><td>-0,24%; sesja w toku</td></tr>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-kupno)">+84,61%</td><td>Między Rocket Lab (+51%) a Planet Labs (+217%)</td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td>$17,06</td><td style="color:var(--ocena-uwaga)">Kurs tylko 2,6% poniżej — najbliżej z trójki</td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td>$19,55</td><td style="color:var(--ocena-sprzedaz)">Kurs 15,0% poniżej</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>47,98</td><td style="color:var(--ocena-kupno)">Najbliżej równowagi z trójki</td></tr>
+          <tr><td>Beta (5 lat)</td><td style="color:var(--ocena-kupno)">1,83</td><td style="color:var(--ocena-kupno)">Najniższa z trójki</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>35,59 mln (15,55% akcji)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>27,04% wolnego obrotu</strong>; spadek z 37,77 mln</td></tr>
+          <tr><td>Średni wolumen</td><td>10,8 mln akcji</td><td>Pokrycie krótkich pozycji: 3,73 dnia</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ponad jedna czwarta akcji dostępnych w handlu jest sprzedana na krótko — i to jest najważniejsza informacja techniczna o tej spółce.</strong> Przy wolnym obrocie 131,62 miliona akcji i średnim wolumenie 10,8 miliona zamknięcie tych pozycji zajęłoby prawie cztery sesje. Skutek jest taki, że <strong>kurs reaguje na informacje w sposób przesadny w obie strony</strong>: dobry raport potrafi wywołać gwałtowny wzrost napędzany zamykaniem krótkich pozycji, a zły — spadek bez kupujących po drugiej stronie.</div>
+
+      <p>Obraz jest przy tym najmniej negatywny z całej trójki: kurs leży zaledwie 2,6% pod średnią pięćdziesięciosesyjną, wskaźnik RSI 47,98 jest praktycznie w środku skali, a beta 1,83 to najniższa zmienność z trzech spółek. <strong>Sektor jest w odwrocie — wszystkie trzy są 14–19% pod dwustusesyjną — ale ta spółka trzyma się najbliżej swojego ostatniego zakresu.</strong></p>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$17,10</strong></td><td>Średnia 50-sesyjna — tuż nad kursem</td></tr>
+          <tr><td><strong>$19,55</strong></td><td>Średnia 200-sesyjna — pierwszy poważny opór</td></tr>
+          <tr><td><strong>$26</strong></td><td>Górna granica wartości godziwej</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$11</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — 34% niżej</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO SPEKULACYJNE</strong></td><td>Kurs tuż pod średnią 50-sesyjną, RSI w równowadze, 27% wolnego obrotu na krótko. Najkorzystniejszy obraz techniczny z trójki.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO SPEKULACYJNE</strong></td><td>Wartość godziwa $16–26. Rozstrzygną: dowiezienie prognozy $900 mln – $1 mld i pierwsza dodatnia EBITDA.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>W tym horyzoncie decyduje trwałość programu księżycowego i to, czy bilans wytrzyma bez kolejnych emisji. Zbyt wiele niewiadomych.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>To jest najbardziej asymetryczna pozycja z całej trójki — w obie strony.</strong> Płacisz 3,49-krotność prognozowanej sprzedaży za spółkę, której przychody mają się w tym roku podwoić i która ma portfel zamówień pokrywający 3,67 roku pracy. Jednocześnie kupujesz wskaźnik Altmana 1,48, marżę brutto 16% i rozwodnienie 44,58% rocznie. <strong>Potencjał jest największy i ryzyko upadku też.</strong></div>
+
+      <h3>Konkretnie</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Działanie</th><th>Szczegóły</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Wielkość pozycji</strong></td><td><strong>1–2% portfela — mniej niż przy pozostałych dwóch</strong></td></tr>
+          <tr><td><strong>Kiedy wchodzić</strong></td><td>Można teraz; obraz techniczny jest najlepszy z trójki</td></tr>
+          <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa przy $19,50 (średnia 200-sesyjna), reszta przy $26</td></tr>
+          <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$11</strong> albo obniżenie prognozy rocznej poniżej $900 mln</td></tr>
+          <tr><td><strong>Czego pilnować</strong></td><td>Liczby akcji w każdym kwartale — to tu wycieka wartość</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-kupno)">Trzy powody, żeby kupić</h3>
+          <ol>
+            <li><strong>Dziesięciokrotnie taniej niż Rocket Lab</strong> — 3,49-krotność prognozowanej sprzedaży wobec 35,07, przy najwyższej prognozie wzrostu (80,36% rocznie).</li>
+            <li><strong>Przychody podwajają się w tym roku</strong>: prognoza $900 mln – $1 mld wobec $490 mln, z pierwszą dodatnią skorygowaną EBITDA.</li>
+            <li><strong>Portfel zamówień $1,8 mld</strong> — pokrycie 3,67× rocznych przychodów, najwyższe z trójki, oparte na kontraktach rządowych.</li>
+          </ol>
+        </div>
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-sprzedaz)">Trzy powody, żeby unikać</h3>
+          <ol>
+            <li><strong>Rozwodnienie 44,58% rocznie</strong> — najostrzejsze z trójki i bez oznak zwolnienia.</li>
+            <li><strong>Wskaźnik Altmana 1,48 i dwa lata gotówki</strong> przy wypalaniu $187,75 mln rocznie.</li>
+            <li><strong>Marża brutto 16,35% przy kontraktach o stałej cenie</strong> — ryzyko przekroczenia budżetu misji spoczywa na spółce.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="alert alert-danger"><strong>Thesis-breaker:</strong> obniżenie prognozy rocznej poniżej $900 mln, nieudana misja księżycowa albo kolejna duża emisja akcji. Kurs poniżej $11.</div>
+      <div class="alert alert-success"><strong>Thesis-confirmer:</strong> dowiezienie przychodów w górnej połowie prognozy z dodatnią skorygowaną EBITDA oraz marżą brutto powyżej 20% — dowód, że standaryzacja lądownika działa.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Intuitive Machines jest w tej trójce spółką o najlepszej cenie i najgorszym bilansie.</strong> Płacisz 3,49-krotność prognozowanej sprzedaży — dziesięć razy mniej niż za Rocket Lab — za firmę, której przychody mają się w tym roku podwoić do 900 milionów lub miliarda dolarów, która ma portfel zamówień pokrywający 3,67 roku pracy i która pięćset dwadzieścia pięć osób zamienia w blisko pół miliarda przychodu.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Cena tej okazji jest jednak dokładnie policzalna: wskaźnik Altmana 1,48, marża brutto szesnaście procent przy kontraktach o stałej cenie i <strong>rozwodnienie o czterdzieści cztery procent w ciągu roku</strong>. Kupując, akceptujesz, że część wzrostu przychodów nie dotrze do Ciebie, bo po drodze zostanie rozdzielona na nowe akcje.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck wait">?</span><span><strong>Prognoza $900 mln – $1 mld musi zostać dowieziona.</strong> Drugi kwartał dał $206,2 mln — tempo jest zgodne, ale druga połowa roku musi być mocniejsza.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Skorygowana EBITDA musi wyjść nad zero.</strong> Zapowiedziana na 2026 rok; byłby to pierwszy taki wynik w historii spółki.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Marża brutto musi rosnąć dalej.</strong> 17,4% w Q2 wobec straty rok wcześniej — kierunek dobry, poziom wciąż niski.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Emisja akcji musi radykalnie zwolnić.</strong> +44,58% r/r i +9,67% kw/kw to tempo nie do utrzymania z punktu widzenia akcjonariusza.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Portfel zamówień musi rosnąć.</strong> $1,8 mld, $920 mln nowych kontraktów w Q2 plus $300 mln w Q3 — warunek spełniony z nawiązką.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Listopad 2026</strong></td><td><strong>Wyniki za Q3</strong></td><td style="color:var(--ocena-uwaga)">Sprawdzian, czy prognoza roczna jest realna</td></tr>
+            <tr><td>Do marca 2027</td><td>Realizacja misji IM-3</td><td>$91,3 mln przychodu; ryzyko binarne przy lądowaniu</td></tr>
+            <tr><td>Na bieżąco</td><td>Kolejne kontrakty CLPS i obronne</td><td>$920 mln w Q2 pokazuje tempo, jakie spółka potrafi utrzymać</td></tr>
+            <tr><td>Każdy kwartał</td><td>Liczba akcji w obiegu</td><td style="color:var(--ocena-sprzedaz)">Najważniejsza pojedyncza liczba dla akcjonariusza</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Liczba akcji</strong></td><td>228,92 mln, +44,58% r/r</td><td>powyżej 8% kw/kw</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Wskaźnik Altmana Z</strong></td><td>1,48</td><td>poniżej 1,2</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Marża brutto</strong></td><td>16,35%, w Q2 17,4%</td><td>poniżej 15%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td><strong>Kurs akcji</strong></td><td>$16,62</td><td>zejście poniżej $11</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Portfel zamówień</td><td>$1,8 mld</td><td>spadek kw/kw</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Prognoza roczna</td><td>$900 mln – $1 mld</td><td>każde obniżenie</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Wielkość docelowa</strong></td><td>1–2% portfela — najmniej z trójki, ze względu na bilans</td></tr>
+            <tr><td><strong>Wejście</strong></td><td>Można teraz; obraz techniczny najkorzystniejszy z trzech spółek</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa przy $19,50, reszta przy $26</td></tr>
+            <tr><td><strong>Wyjście z tezy</strong></td><td>Kurs poniżej $11, obniżenie prognozy albo nieudana misja</td></tr>
+            <tr><td><strong>Co sprawdzać co kwartał</strong></td><td>Liczbę akcji, marżę brutto i stan gotówki — w tej kolejności</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">KUPNO SPEKULACYJNE</div>
+        <p>Ta spółka jest zakładem, nie inwestycją, i warto to nazwać wprost. Kupujesz najszybciej rosnące przychody z całej trójki po najniższej krotności sprzedaży, z portfelem zamówień pokrywającym prawie cztery lata pracy i z zapowiedzią pierwszego roku z dodatnią skorygowaną EBITDA. Pięćset dwadzieścia pięć osób generuje 933 tysiące dolarów przychodu na głowę — trzy razy więcej niż w Rocket Lab.</p>
+        <p>Kupujesz przy tym wskaźnik Altmana 1,48, dwa lata gotówki przy obecnym tempie wypalania i rozwodnienie o czterdzieści cztery procent rocznie. <strong>Jeśli prognoza zostanie dowieziona, to jest najtańsza spółka kosmiczna na rynku. Jeśli nie — bilans nie da drugiej szansy.</strong> Dlatego jeden do dwóch procent portfela i pilnowanie liczby akcji w każdym raporcie.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-kupno)">Kupno spekulacyjne</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$16 – $26</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$11 (-34%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$26 (+56%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>1–2% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3, listopad</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 25 sierpnia 2026 | Cena: $16,62 (sesja 25.08.2026) | Pierwsza analiza LUNR — spółka spoza portfela | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 25.08.2026</strong>, Intuitive Machines IR (wyniki Q2 2026, 13 sierpnia) | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
