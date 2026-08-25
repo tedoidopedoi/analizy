@@ -5,6 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>APP — AppLovin | Analiza Inwestycyjna 2026</title>
 <link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+<style id="tp-wykres">
+  .tp-chart { background:var(--surface2); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px 10px; margin:14px 0 6px; }
+  .tp-chart-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .tp-chart-head b { font-size:12px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; color:var(--accent2); }
+  .tp-chart-head span { font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:8px; font-size:11px; color:var(--text-muted); }
+  .tp-chart-legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+  .tp-chart-note { font-size:12px; color:var(--text-muted); margin-top:10px; padding-top:9px; border-top:1px solid var(--border); }
+</style>
 </head>
 <body>
 <div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
@@ -342,6 +364,36 @@
   <div class="section" id="s12">
     <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
     <div class="section-body" id="s12-body">
+      <div class="tp-chart">
+        <div class="tp-chart-head"><b>Kurs — ostatnie 12 miesięcy</b><span>zakres $298.59 – $721.37 | ostatnie zamknięcie $305.95</span></div>
+        <svg viewBox="0 0 940 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block" role="img" aria-label="Wykres kursu z zaznaczonym przedziałem wartości godziwej">
+<line x1="58" y1="296.0" x2="848" y2="296.0" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="300.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$265</text>
+<line x1="58" y1="227.5" x2="848" y2="227.5" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="231.5" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$387</text>
+<line x1="58" y1="159.0" x2="848" y2="159.0" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="163.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$510</text>
+<line x1="58" y1="90.5" x2="848" y2="90.5" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="94.5" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$633</text>
+<line x1="58" y1="22.0" x2="848" y2="22.0" stroke="#2e3250" stroke-width="1"/>
+<text x="49" y="26.0" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$755</text>
+<rect x="58" y="181.3" width="790" height="50.3" fill="#34d399" opacity="0.10"/>
+<line x1="58" y1="181.3" x2="848" y2="181.3" stroke="#34d399" stroke-width="1" stroke-dasharray="5 4" opacity="0.65"/>
+<line x1="58" y1="231.6" x2="848" y2="231.6" stroke="#34d399" stroke-width="1" stroke-dasharray="5 4" opacity="0.65"/>
+<text x="856" y="210.5" font-size="10.5" fill="#34d399" font-family="Segoe UI,system-ui,sans-serif" font-weight="700">FAIR VALUE</text>
+<text x="856" y="224.5" font-size="10" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">$380–$470</text>
+<polygon points="58,296 58.0,176.5 73.2,170.0 88.3,118.8 103.5,81.0 118.6,69.7 133.8,62.5 148.9,125.5 164.1,109.1 179.2,97.5 194.4,87.8 209.6,97.6 224.7,132.3 239.9,153.3 255.0,109.0 270.2,57.3 285.4,69.2 300.5,40.9 315.7,44.9 330.8,98.5 346.0,82.0 361.1,126.2 376.3,150.9 391.4,179.6 406.6,216.7 421.7,225.7 436.9,210.0 452.0,201.0 467.2,163.4 482.3,187.7 497.5,196.8 512.6,230.9 527.7,228.1 542.8,225.3 558.0,177.3 573.1,193.5 588.3,186.9 603.4,182.1 618.6,164.0 633.7,174.8 648.9,101.4 664.0,132.6 679.2,166.4 694.3,181.5 709.5,177.4 724.6,149.5 739.8,160.7 754.9,206.7 770.1,224.9 785.2,222.7 800.4,250.2 815.5,267.7 830.7,273.1 845.8,277.1 848.0,273.0 848,296" fill="#34d399" opacity="0.07"/>
+<polyline points="58.0,176.5 73.2,170.0 88.3,118.8 103.5,81.0 118.6,69.7 133.8,62.5 148.9,125.5 164.1,109.1 179.2,97.5 194.4,87.8 209.6,97.6 224.7,132.3 239.9,153.3 255.0,109.0 270.2,57.3 285.4,69.2 300.5,40.9 315.7,44.9 330.8,98.5 346.0,82.0 361.1,126.2 376.3,150.9 391.4,179.6 406.6,216.7 421.7,225.7 436.9,210.0 452.0,201.0 467.2,163.4 482.3,187.7 497.5,196.8 512.6,230.9 527.7,228.1 542.8,225.3 558.0,177.3 573.1,193.5 588.3,186.9 603.4,182.1 618.6,164.0 633.7,174.8 648.9,101.4 664.0,132.6 679.2,166.4 694.3,181.5 709.5,177.4 724.6,149.5 739.8,160.7 754.9,206.7 770.1,224.9 785.2,222.7 800.4,250.2 815.5,267.7 830.7,273.1 845.8,277.1 848.0,273.0" fill="none" stroke="#34d399" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="845.8" y1="22" x2="845.8" y2="296" stroke="#34d399" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
+<circle cx="845.8" cy="277.1" r="5" fill="#34d399" stroke="#0f1117" stroke-width="2"/>
+<text x="836.8" y="35" text-anchor="end" font-size="10.5" fill="#34d399" font-family="Segoe UI,system-ui,sans-serif" font-weight="700">Ta analiza · 24.08</text>
+<text x="58.0" y="318" text-anchor="start" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">25.08.2025</text>
+<text x="467.2" y="318" text-anchor="middle" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">02.03.2026</text>
+<text x="848.0" y="318" text-anchor="end" font-size="11" fill="#8892b0" font-family="Segoe UI,system-ui,sans-serif">25.08.2026</text>
+<circle cx="848.0" cy="273.0" r="4" fill="#34d399"/>
+</svg>
+        <div class="tp-chart-legend"><span><i style="background:#34d399"></i>kurs zamknięcia (tygodniowo)</span><span><i style="background:#34d399;opacity:.25"></i>przedział fair value</span></div>
+      </div>
       <div class="table-wrap"><table>
         <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
         <tbody>
