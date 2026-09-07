@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WDC — Western Digital | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: WDC</div>
+    <div class="company-name">Western Digital Corporation</div>
+    <div class="company-sub">Czysty producent dysków twardych po wydzieleniu SanDisk · duopol z Seagate</div>
+    <div class="header-meta">
+      <span class="meta-tag">Spoza portfela — pierwsza analiza</span>
+      <span class="meta-tag">+443% w 12 miesięcy</span>
+      <span class="meta-tag">Wyprzedane na cały 2026 rok</span>
+      <span class="meta-tag">Wynik netto mocno zaburzony</span>
+      <div class="price-display">
+        <div class="price-main">$467,46</div>
+        <div class="price-sub">zamknięcie 04.09.2026 | +5,86% | Twoja cena $467 — zgodna ze źródłem</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Pamięci i nośniki</span><span class="temat">Infrastruktura AI</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — wyprzedana zdolność produkcyjna i kontrakty do 2028 dają widoczność, ale wynik netto jest zaburzony o ponad 5 mld dolarów zdarzeń jednorazowych">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">za zakontraktowaną widoczność, nie za tanie wskaźniki</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$400 – $600</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">-14% do +28%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>5 sierpnia 2026</b><em>Q1 FY2027 — październik</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (04.09.2026)</div><div class="metric-value">$467,46</div><div class="metric-detail">7,8% pod średnią 50-sesyjną, 25,4% nad 200-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Zmiana za 52 tygodnie</div><div class="metric-value green">+443,56%</div><div class="metric-detail">Beta 2,18 — bardzo wysoka zmienność</div></div>
+    <div class="metric-card"><div class="metric-label">Marża brutto</div><div class="metric-value green">48,85%</div><div class="metric-detail"><strong>Prognoza na Q1: 55–56%</strong> — nadal rośnie</div></div>
+    <div class="metric-card"><div class="metric-label">Wynik operacyjny vs netto</div><div class="metric-value red">4,63 / 9,29</div><div class="metric-detail"><strong>Ponad $5 mld poniżej linii operacyjnej</strong></div></div>
+    <div class="metric-card"><div class="metric-label">ROIC vs WACC</div><div class="metric-value green">52,9% / 16,2%</div><div class="metric-detail">Różnica +36,7 pp — bardzo wysoko</div></div>
+    <div class="metric-card"><div class="metric-label">Nakłady inwestycyjne</div><div class="metric-value green">3,2% przychodów</div><div class="metric-detail">$418 mln · wolne przepływy $3,51 mld</div></div>
+    <div class="metric-card"><div class="metric-label">Altman Z-Score</div><div class="metric-value green">13,24</div><div class="metric-detail">Gotówka netto $388 mln · dług/EBITDA 0,24</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (26 analityków)</div><div class="metric-value green">$664,92</div><div class="metric-detail">+42,24% · kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p><strong>WDC jest spoza portfela</strong> — to pierwsza analiza tej spółki. W katalogu są natomiast trzy powiązane raporty z 25 sierpnia — <strong>Micron, SanDisk i SK hynix</strong>, wszystkie trzy spoza portfela — plus ich porównanie. Wracam do nich w dalszej części, bo dane Western Digital częściowo je potwierdzają, a w jednym miejscu podważają moją wcześniejszą argumentację.</p>
+
+      <p>Western Digital po wydzieleniu SanDisk w 2025 roku jest <strong>czystym producentem dysków twardych</strong> — bez pamięci flash, bez współdzielonych fabryk, bez SSD. Sprzedaje pojedynczy rodzaj produktu: talerzowe dyski o dużej pojemności do centrów danych. Przychody za dwanaście miesięcy <strong>12,92 miliarda dolarów</strong>, kapitalizacja <strong>168,54 miliarda</strong>, 40 000 pracowników, dzień bez dywidendy <strong>8 września</strong>.</p>
+
+      <div class="alert alert-danger"><strong>Zanim pójdę dalej, muszę wyjaśnić jedną liczbę, bo bez niej wszystkie wskaźniki wyceny tej spółki wprowadzają w błąd.</strong><br><br>
+      Wynik operacyjny za dwanaście miesięcy: <strong>4,63 mld dolarów</strong>. Wynik przed opodatkowaniem: <strong>9,91 mld</strong>. Wynik netto: <strong>9,29 mld</strong>.<br><br>
+      Oznacza to <strong>5,28 miliarda dolarów przychodów pozaoperacyjnych</strong> — więcej niż cały zysk z działalności. Potwierdza to marża: operacyjna 35,82%, ale marża przed opodatkowaniem <strong>76,67%</strong>. Do tego <strong>efektywna stawka podatkowa 4,86%</strong> — 481 milionów podatku od 9,91 miliarda zysku.<br><br>
+      Najbardziej prawdopodobnym źródłem jest <strong>przeszacowanie zatrzymanego udziału w Kioxii</strong>, której akcje mocno wzrosły, oraz rozliczenie wydzielenia SanDisk. <em>To wnioskowanie z układu liczb, nie potwierdzony fakt</em> — ale kierunek jest jednoznaczny: <strong>9,29 miliarda zysku netto nie pochodzi ze sprzedaży dysków.</strong></div>
+
+      <div class="alert alert-warning"><strong>Konsekwencja praktyczna jest taka, że dwa najbardziej zachęcające wskaźniki tej spółki są fałszywe.</strong><br><br>
+      P/E 19,26 i PEG 0,33 wyglądają na okazję. Oba są policzone z zysku netto zawyżonego o ponad 5 miliardów.<br><br>
+      <strong>Policzmy uczciwie:</strong> wynik operacyjny 4,63 mld przy normalnej stawce podatkowej około 21% daje <strong>3,66 mld zysku bazowego</strong>, czyli <strong>10,15 dolara na akcję</strong>. Przy kursie 467,46 to <strong>P/E około 46×</strong>, a nie 19×.<br><br>
+      Zgadza się to z pozostałymi miarami: <strong>cena / wolne przepływy 48,00</strong> i <strong>EV/EBITDA 33,62</strong>. Wszystkie wskaźniki oparte na gotówce i działalności operacyjnej mówią to samo — spółka jest droga. Tylko te oparte na zysku netto mówią, że tania.</div>
+
+      <h3>Wyniki za IV kwartał roku obrotowego 2026 — 5 sierpnia</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wynik</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody kwartalne</strong></td><td style="color:var(--ocena-kupno)"><strong>$3,75 mld · +44% r/r</strong></td><td style="color:var(--ocena-kupno)">Popyt hiperskalerów na dyski nearline</td></tr>
+          <tr><td><strong>Marża brutto (GAAP)</strong></td><td style="color:var(--ocena-kupno)"><strong>54,1%</strong></td><td style="color:var(--ocena-kupno)">Non-GAAP 54,4% — historycznie HDD miały 25–30%</td></tr>
+          <tr><td>Zysk na akcję (non-GAAP)</td><td style="color:var(--ocena-kupno)">$3,56 wobec oczekiwanych $3,31</td><td>Wynik powyżej konsensusu</td></tr>
+          <tr><td><strong>Prognoza na I kw. FY2027</strong></td><td style="color:var(--ocena-kupno)"><strong>$4,1 mld przychodu</strong></td><td style="color:var(--ocena-kupno)">Marża brutto <strong>55–56%</strong> — nadal rosnąca</td></tr>
+          <tr><td>Wzrost eksabajtów</td><td style="color:var(--ocena-kupno)">powyżej 25%</td><td>Plus rosnąca cena za terabajt</td></tr>
+          <tr><td>Nowa platforma</td><td>dyski 40 TB ePMR</td><td>Później technologia HAMR</td></tr>
+          <tr><td><strong>Reakcja kursu</strong></td><td style="color:var(--ocena-sprzedaz)">-5,4%, a po sesji do <strong>-10,8%</strong></td><td style="color:var(--ocena-sprzedaz)">Mimo wyniku powyżej oczekiwań</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ostatni wiersz jest ostrzeżeniem samym w sobie.</strong> Spółka pobiła konsensus, podniosła prognozowaną marżę brutto do 55–56% i pokazała przychody rosnące o 44% — a kurs spadł do 10,8% po sesji. To znaczy, że <strong>oczekiwania rynku były wyżej niż to, co spółka jest w stanie dostarczyć</strong>, mimo że dostarcza bardzo dużo.<br><br>To klasyczny objaw zatłoczonej pozycji. Nie unieważnia tezy — ale wyznacza charakter ryzyka: nie „czy biznes jest dobry", tylko „ile dobrego już jest w cenie".</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — DLACZEGO TALERZOWY DYSK WRÓCIŁ DO GRY</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <p>Przez dekadę narracja brzmiała, że dyski talerzowe umierają, wypierane przez pamięć flash. Okazało się, że umierają wszędzie poza tym jednym miejscem, gdzie liczy się najbardziej.</p>
+
+      <div class="alert alert-success"><strong>Jedna liczba wyjaśnia całą tę analizę: dyski SSD dla centrów danych kosztują dziś około 18,6 raza więcej za terabajt niż dyski talerzowe.</strong><br><br>Modele AI trzeba karmić danymi, a te dane trzeba gdzieś trzymać — petabajty tekstu, obrazów i wideo, do których dostęp nie musi być błyskawiczny, ale musi być tani. Przy takiej różnicy kosztów <strong>pamięć flash nie jest substytutem, tylko innym produktem</strong>. Hiperskaler nie wybiera między HDD a SSD; kupuje jedno i drugie do różnych zadań.<br><br>Dlatego popyt na dyski nearline nie jest resztką starego rynku, ale nową, rosnącą kategorią.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Element</th><th>Stan</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Dyski nearline dla centrów danych</strong></td><td style="color:var(--ocena-kupno)">Wzrost eksabajtów powyżej 25%</td><td>Główne źródło przychodów i marży</td></tr>
+          <tr><td><strong>Platforma 40 TB ePMR</strong></td><td style="color:var(--ocena-kupno)">Pierwsze dostawy</td><td>Wyższa cena za terabajt, lepszy mix</td></tr>
+          <tr><td><strong>Technologia HAMR</strong></td><td>W kolejce po ePMR</td><td>Kolejny skok pojemności — mapa drogowa na lata</td></tr>
+          <tr><td>Dyski konsumenckie i zewnętrzne</td><td style="color:var(--ocena-uwaga)">Kurczący się rynek</td><td>Marginalne znaczenie dla wyniku</td></tr>
+        </tbody>
+      </table></div>
+
+      <p><strong>Fosa jest tu nietypowo mocna i warto zrozumieć, dlaczego.</strong> Produkcja dysków talerzowych wymaga wiedzy o precyzyjnej mechanice i głowicach magnetycznych, której nikt nowy nie zdobędzie — rynek skonsolidował się do <strong>trzech producentów na świecie</strong> (Western Digital, Seagate i Toshiba), a nowy uczestnik nie wejdzie, bo rynek uważano za schyłkowy i nikt nie budował zdolności.</p>
+
+      <div class="alert alert-info"><strong>To właśnie rzadka i cenna sytuacja: rynek uznany za umierający, w którym popyt nagle wystrzelił, a zdolności produkcyjnej nie da się szybko dobudować.</strong> Efekt widać w cenniku — dysk 30 TB kosztował 495 dolarów w trzecim kwartale 2025, a dziś około <strong>1 216 dolarów</strong>. Dwa i pół raza więcej w rok, przy premii na rynku spotowym szacowanej na 30–40%.<br><br>Właśnie dlatego marża brutto wzrosła z historycznych 25–30% do <strong>ponad 54%</strong>, i właśnie dlatego zarząd prognozuje na kolejny kwartał 55–56%.</p></div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK I CYKLICZNOŚĆ</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="alert alert-danger"><strong>Tu leży najważniejsze pytanie o tę spółkę i nie da się na nie odpowiedzieć z pewnością — więc powiem, jak je czytam.</strong><br><br>Historycznie marża brutto na dyskach twardych wynosiła <strong>25–30%</strong>. Dziś jest <strong>ponad 54%</strong>, a prognozowana 55–56%. To nie jest lekka poprawa, to zupełnie inny poziom rentowności.<br><br>Pytanie brzmi: czy to <strong>szczyt cyklu</strong>, po którym marże wrócą do 30%, czy <strong>trwała zmiana struktury rynku</strong>?</p></div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Argument</th><th>Za trwałością</th><th>Za cyklicznością</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Struktura podaży</strong></td><td style="color:var(--ocena-kupno)">Trzech producentów, nikt nie buduje nowych zdolności, rynek uważano za schyłkowy</td><td style="color:var(--ocena-uwaga)">Przy takich marżach zdolności w końcu się rozbudują</td></tr>
+          <tr><td><strong>Substytucja</strong></td><td style="color:var(--ocena-kupno)">SSD droższe 18,6× za terabajt — nie zastąpi HDD w masowym składowaniu</td><td>Postęp w NAND może tę różnicę zmniejszyć</td></tr>
+          <tr><td><strong>Kontraktowanie</strong></td><td style="color:var(--ocena-kupno)"><strong>Umowy długoterminowe na 2027 i 2028, negocjacje do 2031</strong></td><td style="color:var(--ocena-uwaga)">Po wygaśnięciu umów ceny wracają na rynek</td></tr>
+          <tr><td><strong>Popyt</strong></td><td style="color:var(--ocena-kupno)">AI to nowa, strukturalna kategoria popytu</td><td style="color:var(--ocena-uwaga)">Nakłady hiperskalerów same są cykliczne</td></tr>
+          <tr><td><strong>Historia branży</strong></td><td>—</td><td style="color:var(--ocena-sprzedaz)"><strong>Każdy dotychczasowy szczyt marż w nośnikach się odwrócił</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Moja odpowiedź: prawda leży pośrodku, ale w horyzoncie, o którym mówimy, przechyla się na stronę trwałości.</strong><br><br>Kluczowe jest <em>kontraktowanie</em>. Gdyby WDC sprzedawało dyski po cenach spotowych, byłaby to klasyczna gra cykliczna i ocena byłaby ostrożna. Ale spółka jest <strong>wyprzedana na cały rok kalendarzowy 2026</strong>, ma <strong>podpisane umowy długoterminowe na 2027 i 2028</strong>, a według prezesa hiperskalerzy negocjują kontrakty obejmujące lata <strong>2029–2031</strong>. Zamówienia potwierdzone ma od siedmiu największych klientów.<br><br><strong>To zamienia najbliższe dwa–trzy lata z prognozy w umowę.</strong> Ryzyko cykliczne nie zniknęło — przesunęło się za horyzont 12–18 miesięcy, czyli za okres, na który wydaję tę ocenę. Za trzy–cztery lata, gdy kontrakty zaczną wygasać, to będzie zupełnie inna rozmowa.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I KONCENTRACJA</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zamówienia potwierdzone</strong></td><td style="color:var(--ocena-kupno)">od <strong>siedmiu największych klientów</strong></td><td style="color:var(--ocena-uwaga)">Wysoka koncentracja — hiperskalerzy</td></tr>
+          <tr><td><strong>Wyprzedanie</strong></td><td style="color:var(--ocena-kupno)">cały rok kalendarzowy 2026</td><td>Umowy długoterminowe na 2027 i 2028</td></tr>
+          <tr><td>Negocjacje w toku</td><td style="color:var(--ocena-kupno)">kontrakty na lata 2029–2031</td><td>Rzadka widoczność w tej branży</td></tr>
+          <tr><td>Instytucje</td><td>91,08%</td><td>Wolny obrót 358,02 mln z 360,54 mln akcji</td></tr>
+          <tr><td><strong>Udziałowcy wewnętrzni</strong></td><td style="color:var(--ocena-uwaga)"><strong>0,56%</strong></td><td style="color:var(--ocena-uwaga)">Praktycznie brak — zarząd nie ma majątku w akcjach</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$322 975</td><td>Zysk na pracownika $232 150 (zawyżony zdarzeniami jednorazowymi)</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Koncentracja klientów jest tu obosieczna i warto rozumieć obie strony.</strong><br><br><strong>Ryzyko:</strong> siedmiu klientów odpowiada za większość zamówień. Gdyby dwóch hiperskalerów ograniczyło nakłady, uderzyłoby to natychmiast.<br><br><strong>Ale przy niedoborze podaży koncentracja działa na korzyść producenta.</strong> Kiedy zdolność produkcyjna jest wyprzedana, a substytutu nie ma, siła przetargowa przesuwa się na stronę dostawcy. To dlatego klienci sami zabiegają o kontrakty na 2029–2031 — <em>chcą zabezpieczyć dostawy, a nie wynegocjować niższą cenę</em>. Cena dysku 30 TB wzrosła 2,5-krotnie w rok właśnie dlatego.</div>
+
+      <p>Osobno warto odnotować, że <strong>udziałowcy wewnętrzni trzymają zaledwie 0,56% akcji</strong>. Przy spółce o kapitalizacji 168 miliardów to nie jest niepokojące samo w sobie, ale różnica wobec sytuacji, które opisywałem ostatnio, jest wyraźna: w Fermi wewnętrzni mieli 27,65%, w Paramount Skydance 30,32%. Tutaj zarząd zarządza cudzym majątkiem.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th><th>Marża</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody</strong></td><td><strong>$12,92 mld</strong></td><td>—</td></tr>
+          <tr><td>Zysk brutto</td><td style="color:var(--ocena-kupno)">$6,31 mld</td><td style="color:var(--ocena-kupno)">48,85%</td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td style="color:var(--ocena-kupno)"><strong>$4,63 mld</strong></td><td style="color:var(--ocena-kupno)"><strong>35,82%</strong></td></tr>
+          <tr><td>EBITDA</td><td>$5,00 mld</td><td>38,72%</td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td style="color:var(--ocena-uwaga)">$9,91 mld</td><td style="color:var(--ocena-uwaga)"><strong>76,67% — zaburzone</strong></td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-uwaga)">$9,29 mld · $24,28/akcję</td><td style="color:var(--ocena-uwaga)"><strong>72,95% — zaburzone</strong></td></tr>
+          <tr><td>Podatek</td><td style="color:var(--ocena-uwaga)">$481 mln</td><td style="color:var(--ocena-uwaga)">Efektywna stawka <strong>4,86%</strong></td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-kupno)">$3,93 mld</td><td>Amortyzacja tylko $375 mln</td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-kupno)">-$418 mln</td><td style="color:var(--ocena-kupno)"><strong>3,2% przychodów</strong></td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>$3,51 mld</strong></td><td style="color:var(--ocena-kupno)">27,18% · $9,74/akcję</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Najmocniejszym elementem tego modelu jest wiersz z nakładami inwestycyjnymi — i to jest realna, strukturalna przewaga, nie efekt cyklu.</strong><br><br>Western Digital wydaje na inwestycje <strong>418 milionów dolarów, czyli 3,2% przychodów</strong>. Producenci pamięci półprzewodnikowych — Micron, SK hynix, Samsung — muszą wydawać na fabryki <strong>dziesiątki miliardów</strong>, bo każdy nowy węzeł technologiczny wymaga nowej linii litograficznej.<br><br>Dyski talerzowe to precyzyjna mechanika, nie litografia. Fabryki są już zbudowane i amortyzacja wynosi zaledwie 375 milionów rocznie. Dlatego z 5 miliardów EBITDA zostaje <strong>3,51 miliarda wolnych przepływów</strong> — konwersja 70%. W tym samym cyklu producent pamięci półprzewodnikowych zamienia większość zysku w kolejną fabrykę.<br><br><strong>To dlatego zwrot z zainwestowanego kapitału wynosi 52,90% przy koszcie kapitału 16,23%.</strong> Nie da się takiej różnicy osiągnąć w biznesie, który zjada kapitał.</div>
+
+      <p>Struktura przychodów jest przy tym prosta i jednorodna: sprzedaż sprzętu, rozliczana przy dostawie, bez elementu subskrypcyjnego. To model bez przychodów powtarzalnych w sensie księgowym — ale <strong>umowy długoterminowe na 2027 i 2028 dają efekt zbliżony do powtarzalności</strong>, bo wolumen i cena są zakontraktowane z góry. Prognoza wzrostu przychodów na trzy lata: <strong>+35,17% rocznie</strong>.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$168,54 mld</td><td>Wartość przedsiębiorstwa $168,15 mld — <strong>gotówka netto</strong></td></tr>
+          <tr><td><strong>Cena / zysk (TTM)</strong></td><td style="color:var(--ocena-uwaga)"><strong>19,26 — nie wierz tej liczbie</strong></td><td style="color:var(--ocena-uwaga)">Zysk netto zawyżony o ponad $5 mld zdarzeń jednorazowych</td></tr>
+          <tr><td><strong>P/E na zysku bazowym</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>około 46×</strong></td><td style="color:var(--ocena-sprzedaz)">Wynik operacyjny $4,63 mld po podatku 21% = $10,15/akcję</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td>23,27</td><td style="color:var(--ocena-uwaga)"><strong>Wyżej niż trailing</strong> — raportowany zysk ma spaść</td></tr>
+          <tr><td>Cena / sprzedaż</td><td style="color:var(--ocena-sprzedaz)">13,05</td><td>Prognozowana 8,80 — implikuje przychody ok. $19,1 mld</td></tr>
+          <tr><td><strong>Cena / wartość księgowa</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>19,04</strong></td><td style="color:var(--ocena-sprzedaz)">Do aktywów materialnych 37,10 — brak poduszki majątkowej</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>48,00</strong></td><td style="color:var(--ocena-sprzedaz)">Cena / przepływy operacyjne 42,90</td></tr>
+          <tr><td><strong>EV / EBITDA</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>33,62</strong></td><td style="color:var(--ocena-sprzedaz)">EV/EBIT 36,34 · EV/FCF 47,89</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-uwaga)"><strong>0,33 — również zniekształcony</strong></td><td style="color:var(--ocena-uwaga)">Liczony z zawyżonego P/E</td></tr>
+          <tr><td>Altman Z-Score</td><td style="color:var(--ocena-kupno)">13,24</td><td style="color:var(--ocena-kupno)">Piotroski 6 · bilans bez zastrzeżeń</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Źródło: StockAnalysis / S&amp;P Global Market Intelligence, stan 06.09.2026. Cena $467,46 to zamknięcie 04.09.2026 — zgodna z ceną $467 podaną przez użytkownika. P/E na zysku bazowym to obliczenie własne.</p>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td style="color:var(--ocena-uwaga)">19,26</td><td style="color:var(--ocena-uwaga)">Zysk na akcję $24,28 — <strong>zawyżony o zdarzenia jednorazowe</strong>; przychody TTM $12,92 mld</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>23,27</strong></td><td>Implikuje zysk przyszły <strong>$20,09/akcję</strong> — mniej niż trailing $24,28</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-uwaga)"><strong>0,33</strong></td><td>&lt; 1,0 = wzrost tańszy niż mnożnik sugeruje — <strong>ale liczony z zaburzonego P/E, więc bezużyteczny</strong></td></tr>
+          <tr><td>Prognoza wzrostu (3 lata)</td><td style="color:var(--ocena-kupno)">przychody +35,17% · zysk +63,70%</td><td>Oparta na zakontraktowanych umowach, nie na spekulacji</td></tr>
+          <tr><td>Miara najuczciwsza</td><td><strong>EV/EBITDA 33,62</strong></td><td style="color:var(--ocena-uwaga)">EBITDA $5,00 mld odpowiada wynikowi operacyjnemu + amortyzacji — bez zdarzeń jednorazowych</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać — i to jest najważniejszy akapit tej sekcji.</strong> Forward P/E <strong>wyższy</strong> od trailing (23,27 wobec 19,26) normalnie oznacza spadające zyski i jest ostrzeżeniem przy spółce cyklicznej. Tutaj przyczyna jest inna: <strong>trailing jest sztucznie zaniżony przez ponad 5 miliardów zysku pozaoperacyjnego</strong>, a forward opisuje realną działalność.</p>
+      <p>Licząc od zysku bazowego (10,15 dolara na akcję), <strong>spółka handluje po około 46× zysk obecny i 23× zysk przyszły</strong>. Ten drugi mnożnik jest obroniony, jeśli marża brutto utrzyma się w okolicach 55%. Przy powrocie do historycznych 30% zysk przyszły spada o ponad połowę i 23× zamienia się w około 50×.</p>
+      <div class="alert alert-danger"><strong>Ostrzeżenie o pułapce cyklicznej — obowiązkowe przy tej branży, ale z odwrotnym znakiem niż zwykle.</strong><br><br>Standardowa pułapka wygląda tak: na szczycie cyklu zysk jest maksymalny, więc forward P/E wydaje się niski, i inwestor kupuje drogo, myśląc że tanio.<br><br><strong>Tutaj rynek robi coś bardziej niebezpiecznego: przypisuje wysoki mnożnik do szczytowych zysków.</strong> Cena/wolne przepływy 48, EV/EBITDA 33,62 i cena/wartość księgowa 19,04 to mnożniki spółki wzrostowej, przyłożone do marż, które są najwyższe w historii tej branży. To podwójny optymizm — i gdyby nie zakontraktowane umowy na 2027 i 2028, byłby to argument za oceną negatywną.</div>
+
+      <h3>Cztery scenariusze na 12–18 miesięcy</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Założenie</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Kontrakty dowiezione, marża utrzymana</strong></td><td>Przychody ~$19 mld, marża brutto 55%, mnożnik bez zmian</td><td><strong>$600</strong></td><td style="color:var(--ocena-kupno)">+28%</td></tr>
+          <tr><td><strong>Stan bazowy</strong></td><td>Umowy realizowane, mnożnik lekko się kompresuje</td><td><strong>$500</strong></td><td style="color:var(--ocena-kupno)">+7%</td></tr>
+          <tr><td>Kompresja mnożnika</td><td>Wyniki dobre, ale rynek przestaje płacić 48× przepływy</td><td>$400</td><td style="color:var(--ocena-sprzedaz)">-14%</td></tr>
+          <tr><td><strong>Zwrot cyklu albo fuzja z Kioxią</strong></td><td>Marża brutto wraca ku 35%, albo transakcja rozwadnia i psuje profil czystego HDD</td><td><strong>$250</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-47%</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Fair value: $400 – $600</strong>, środek $500 (+7%). Konsensus 26 analityków to $664,92 (+42,24%) — powyżej mojego górnego przedziału, bo zakłada utrzymanie zarówno marż, jak i mnożnika.</p>
+      <p style="color:var(--text-muted);font-size:13px">Scenariusz czwarty ($250) jest poza dolną granicą przedziału wartości godziwej celowo: to nie wycena bazowa, ale ryzyko ogonowe. W horyzoncie 12–18 miesięcy chronią przed nim zakontraktowane umowy — realne staje się dopiero, gdy zaczną wygasać, albo natychmiast, jeśli dojdzie do transakcji z Kioxią.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Brutto</strong></td><td style="color:var(--ocena-kupno)"><strong>48,85%</strong></td><td style="color:var(--ocena-kupno)">Historycznie HDD: 25–30%. Prognoza na Q1: <strong>55–56%</strong></td></tr>
+          <tr><td><strong>Operacyjna</strong></td><td style="color:var(--ocena-kupno)"><strong>35,82%</strong></td><td style="color:var(--ocena-kupno)">EBITDA 38,72%</td></tr>
+          <tr><td>Przed opodatkowaniem</td><td style="color:var(--ocena-uwaga)">76,67%</td><td style="color:var(--ocena-uwaga)">Zaburzona zdarzeniami jednorazowymi</td></tr>
+          <tr><td>Netto</td><td style="color:var(--ocena-uwaga)">72,95%</td><td style="color:var(--ocena-uwaga)">Nie jest miarą działalności</td></tr>
+          <tr><td><strong>Wolnych przepływów</strong></td><td style="color:var(--ocena-kupno)"><strong>27,18%</strong></td><td style="color:var(--ocena-kupno)">$3,51 mld — najuczciwsza miara jakości</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Zwrot z kapitału wobec jego kosztu — w kontekście Twojego portfela</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>ROIC</th><th>WACC</th><th>Różnica</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ASML</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,45%)</span></td><td>—</td><td>—</td><td style="color:var(--ocena-kupno)"><strong>około +54 pp</strong></td></tr>
+          <tr><td><strong>Western Digital</strong> <span style="color:var(--text-muted);font-size:12px">(spoza portfela)</span></td><td style="color:var(--ocena-kupno)"><strong>52,90%</strong></td><td>16,23%</td><td style="color:var(--ocena-kupno)"><strong>+36,67 pp</strong></td></tr>
+          <tr><td><strong>ServiceNow</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 13,42%)</span></td><td>—</td><td>—</td><td style="color:var(--ocena-kupno)">około +1,43 pp</td></tr>
+          <tr><td>Paramount Skydance <span style="color:var(--text-muted);font-size:12px">(spoza portfela)</span></td><td>7,17%</td><td>8,04%</td><td style="color:var(--ocena-sprzedaz)">-0,87 pp</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ta tabela wymaga jednak ważnego zastrzeżenia, bo inaczej wprowadzałaby w błąd.</strong><br><br>Zwrot z zainwestowanego kapitału na poziomie 52,90% jest imponujący, ale <strong>jest to zwrot w szczycie cyklu</strong>. ASML osiąga swoją różnicę dzięki monopolowi technologicznemu, który nie zależy od cen produktu — i utrzymuje ją latami. Western Digital osiąga swoją dzięki cenom dysków, które wzrosły dwa i pół raza w rok.<br><br><strong>Wysoki zwrot z kapitału przy niskich nakładach jest cechą trwałą tego biznesu. Konkretna liczba 52,90% — nie jest.</strong> Przy marży brutto z powrotem na 35% zwrot spadłby do okolic 25–30%, co nadal byłoby dobre, ale znacznie mniej wyjątkowe.</div>
+
+      <p><strong>Dźwignia operacyjna działa tu bardzo mocno i to jest realny argument.</strong> Przychody kwartalne wzrosły o 44% rok do roku, a marża brutto z okolic 30% do 54,1% — bo w produkcji dysków znaczna część kosztów jest stała, a każdy dolar podwyżki ceny spływa niemal całkowicie do zysku. Amortyzacja to zaledwie 375 milionów przy 5 miliardach EBITDA, więc przy nakładach 3,2% przychodów zysk zamienia się w gotówkę, a nie w kolejną fabrykę.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$1,58 mld</td><td style="color:var(--ocena-kupno)"><strong>Gotówka netto +$388 mln</strong> ($1,08/akcję)</td></tr>
+          <tr><td>Zadłużenie</td><td style="color:var(--ocena-kupno)">$1,19 mld</td><td style="color:var(--ocena-kupno)">Dług / EBITDA <strong>0,24</strong> — praktycznie brak dźwigni</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-kupno)">0,13</td><td>Dług / wolne przepływy 0,34</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-kupno)"><strong>28,04</strong></td><td style="color:var(--ocena-kupno)">Odsetki nie są tu żadnym problemem</td></tr>
+          <tr><td>Wskaźnik bieżący</td><td>1,33</td><td>Szybki 0,85; kapitał obrotowy $1,39 mld</td></tr>
+          <tr><td>Kapitał własny</td><td style="color:var(--ocena-uwaga)">$8,86 mld</td><td style="color:var(--ocena-uwaga)">Wartość księgowa <strong>$24,55/akcję</strong> wobec kursu $467,46</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-kupno)"><strong>13,24</strong></td><td style="color:var(--ocena-kupno)">Powyżej 3,0 = bezpiecznie. Piotroski 6</td></tr>
+          <tr><td>Zmiana liczby akcji r/r</td><td style="color:var(--ocena-uwaga)">+6,69%</td><td style="color:var(--ocena-uwaga)">Rentowność skupu -6,69% — rozwodnienie, nie skup</td></tr>
+          <tr><td>Dywidenda</td><td>$0,60 · 0,13%</td><td>Wzrost +175% r/r, wypłata tylko 2,27% zysku</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>To jest bilans, o którym nie ma o czym dyskutować — i warto to docenić, bo w ostatnich analizach widziałem coś zupełnie innego.</strong><br><br>Gotówka netto dodatnia, dług 1,19 miliarda przy 5 miliardach EBITDA, pokrycie odsetek 28-krotne, Altman Z-Score <strong>13,24</strong>. Dla porównania: Fermi ma Z-Score, którego nie da się policzyć przy zerowych przychodach, a Paramount Skydance 1,03. <strong>Western Digital nie ma ryzyka finansowego — całe jej ryzyko jest w cenniku dysków.</strong><br><br>Nakłady inwestycyjne 3,2% przychodów oznaczają, że spółka nie potrzebuje kapitału z zewnątrz nawet przy takim wzroście. To rzadkie w branży nośników.</div>
+
+      <div class="alert alert-warning"><strong>Dwie rzeczy z tej tabeli wymagają jednak uwagi.</strong><br><br><strong>Pierwsza — brak poduszki majątkowej.</strong> Wartość księgowa to <strong>24,55 dolara na akcję</strong> przy kursie 467,46, czyli cena / wartość księgowa 19,04, a do aktywów materialnych 37,10. Przy spółce zarabiającej 130% na kapitale własnym to naturalne, ale znaczy jedno: <strong>jeśli zyski znikną, nie ma nic, co podtrzymałoby wycenę</strong>. Nie ma tu ziemi, licencji ani portfela nieruchomości — jest strumień zysków i tyle.<br><br><strong>Druga — liczba akcji rośnie o 6,69% rocznie.</strong> Spółka generująca 3,51 miliarda wolnych przepływów i wypłacająca zaledwie 2,27% zysku w dywidendzie jednocześnie <em>rozwadnia</em> akcjonariuszy. Przy takich przepływach naturalnym krokiem byłby skup akcji, nie emisja. To pytanie warto zadać przy kolejnych wynikach.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Zdolność produkcyjna wyprzedana, a kontrakty sięgają 2028 roku.</strong> Spółka jest wyprzedana na cały rok kalendarzowy 2026, ma podpisane umowy długoterminowe na <strong>2027 i 2028</strong>, potwierdzone zamówienia od siedmiu największych klientów, a hiperskalerzy negocjują kontrakty na lata <strong>2029–2031</strong>. To zamienia prognozę w umowę — w tej branży rzecz niemal niewidziana.</div>
+
+      <div class="alert alert-success"><strong>2. Pamięć flash nie jest substytutem — jest 18,6 raza droższa za terabajt.</strong> Dyski SSD dla centrów danych kosztują wielokrotność ceny HDD za tę samą pojemność. Modele AI wymagają petabajtów taniego składowania, więc dysk talerzowy nie konkuruje z flashem, tylko obsługuje inne zadanie. To fundament, na którym opiera się cała ta teza.</div>
+
+      <div class="alert alert-success"><strong>3. Marża brutto nadal rośnie, a nie tylko jest wysoka.</strong> 48,85% za dwanaście miesięcy, <strong>54,1% w ostatnim kwartale</strong>, a prognoza zarządu na kolejny to <strong>55–56%</strong>. Cena dysku 30 TB wzrosła z 495 do około 1 216 dolarów w rok. Trzech producentów na świecie, nikt nie buduje nowych zdolności.</div>
+
+      <div class="alert alert-success"><strong>4. Model niemal bez kapitału: nakłady 3,2% przychodów.</strong> Producenci pamięci półprzewodnikowych wydają dziesiątki miliardów na fabryki. Western Digital wydaje <strong>418 milionów</strong>, więc z 5 miliardów EBITDA zostaje <strong>3,51 miliarda wolnych przepływów</strong>. Stąd zwrot z zainwestowanego kapitału <strong>52,90% przy koszcie 16,23%</strong>.</div>
+
+      <div class="alert alert-info"><strong>5. Bilans bez ryzyka finansowego.</strong> Gotówka netto dodatnia, dług/EBITDA 0,24, pokrycie odsetek 28,04, Altman Z-Score <strong>13,24</strong>. Spółka nie potrzebuje rynku kapitałowego, żeby zrealizować kontrakty, które już podpisała.</div>
+
+      <div class="alert alert-info"><strong>6. Kurs jest 7,8% poniżej średniej 50-sesyjnej.</strong> Po wzroście o 443% w rok akcje skorygowały się z okolic 507–548 dolarów, wskaźnik RSI wynosi 48,28 (bez wykupienia), a krótka sprzedaż spadła z 24,60 do 20,28 mln akcji. Nie kupujesz szczytu — kupujesz po korekcie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Fuzja z Kioxią mogłaby zniszczyć dokładnie to, za co płacisz.</strong> Western Digital <strong>wznowiło rozmowy o połączeniu z Kioxią</strong>. Spółka właśnie wydzieliła SanDisk, żeby zostać czystym, lekkim kapitałowo producentem HDD — a fuzja z producentem pamięci NAND oznaczałaby powrót do biznesu kapitałochłonnego, który dopiero co porzuciła. Analitycy wskazują to jako główne ryzyko: <em>rozwadniająca albo źle zaplanowana transakcja z Kioxią unieważniłaby premię za czysty profil</em>. To ryzyko binarne i całkowicie w rękach zarządu.</div>
+
+      <div class="alert alert-danger"><strong>2. Marża brutto 55% nie ma precedensu w historii tej branży.</strong> Dyski twarde zarabiały historycznie <strong>25–30% brutto</strong>. Powrót do 35% — nadal powyżej średniej — obniżyłby zysk przyszły o ponad połowę i zamienił forward P/E z 23× w około 50×. Każdy poprzedni szczyt marż w nośnikach danych się odwrócił.</div>
+
+      <div class="alert alert-danger"><strong>3. Rynek płaci wysoki mnożnik za szczytowe zyski — to podwójny optymizm.</strong> Cena/wolne przepływy <strong>48,00</strong>, EV/EBITDA <strong>33,62</strong>, cena/wartość księgowa <strong>19,04</strong>. Zwykle spółki cykliczne na szczycie handlują po <em>niskich</em> mnożnikach wysokich zysków. Tutaj mnożnik i marża są maksymalne jednocześnie.</div>
+
+      <div class="alert alert-warning"><strong>4. Zysk netto zawyżony o ponad $5 mld, a stawka podatkowa 4,86% musi wzrosnąć.</strong> Wynik operacyjny 4,63 mld, netto 9,29 mld. P/E 19,26 i PEG 0,33 są policzone z tej zawyżonej liczby i nic nie znaczą. Po normalizacji podatku raportowany zysk na akcję spadnie — forward $20,09 wobec trailing $24,28 już to pokazuje.</div>
+
+      <div class="alert alert-warning"><strong>5. Siedmiu klientów i +443% w rok.</strong> Większość zamówień pochodzi od siedmiu hiperskalerów, których nakłady same są cykliczne. Kurs wzrósł o <strong>443,56%</strong> w dwanaście miesięcy przy becie 2,18 — a po wynikach lepszych od konsensusu spadł do 10,8% po sesji. Pozycja jest zatłoczona.</div>
+
+      <div class="alert alert-warning"><strong>6. Brak poduszki majątkowej i brak wewnętrznego zaangażowania.</strong> Wartość księgowa 24,55 dolara przy kursie 467,46 — jeśli zyski znikną, nic nie podtrzyma wyceny. Udziałowcy wewnętrzni trzymają <strong>0,56%</strong> akcji, a liczba akcji rośnie o 6,69% rocznie mimo 3,51 mld wolnych przepływów.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA I POWRÓT DO MOICH WCZEŚNIEJSZYCH ANALIZ</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Przewaga nad WDC</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Seagate</strong></td><td>Ta sama pozycja w duopolu, podobna dynamika marż</td><td>Praktycznie identyczna ekspozycja — nie ma tu dywersyfikacji</td></tr>
+          <tr><td><strong>Toshiba (HDD)</strong></td><td>Trzeci producent, obecność w Japonii</td><td style="color:var(--ocena-kupno)">Znacznie mniejsza skala i słabsza mapa technologiczna</td></tr>
+          <tr><td><strong>Kioxia</strong></td><td>Pamięć NAND — inny segment składowania</td><td style="color:var(--ocena-sprzedaz)"><strong>Potencjalny partner fuzji — ryzyko, nie konkurencja</strong></td></tr>
+          <tr><td><strong>Micron</strong> <span style="color:var(--text-muted);font-size:12px">(spoza portfela, analiza 25.08)</span></td><td>Ekspozycja na pamięć HBM dla akceleratorów AI</td><td style="color:var(--ocena-uwaga)">Nakłady inwestycyjne wielokrotnie wyższe</td></tr>
+          <tr><td><strong>SanDisk</strong> <span style="color:var(--text-muted);font-size:12px">(spoza portfela, analiza 25.08)</span></td><td>Wydzielona z WDC — pamięć flash</td><td style="color:var(--ocena-uwaga)">Fabryki we wspólnym przedsięwzięciu z Kioxią zaburzają przepływy</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Zgodnie z zasadą, że przy powiązanej spółce sprawdzam własne wcześniejsze tezy — oto co dane Western Digital robią z moimi analizami z 25 sierpnia.</strong><br><br>
+      <strong>Micron — ocena KUPNO przy $925,08, wartość godziwa $850–1 250. Teza się umacnia.</strong> Popyt na składowanie danych dla AI jest potwierdzony z drugiej, niezależnej strony rynku: wzrost eksabajtów powyżej 25%, wyprzedana zdolność, kontrakty do 2028. To wspiera cały kompleks pamięciowy.<br><br>
+      <strong>SanDisk — ocena NEUTRALNA przy $1 501,17. Tu muszę przyznać, że pominąłem istotny argument.</strong> Nie wyeksponowałem, że <em>dyski SSD dla centrów danych kosztują około 18,6 raza więcej za terabajt niż HDD</em>. To znaczy, że masowe składowanie danych dla AI trafia do dysków talerzowych, nie do pamięci flash — a więc największa część nowego popytu omija SanDisk. Konkluzja neutralna się broni, ale <strong>argumentacja była niepełna i powinna była zawierać ten punkt</strong>.<br><br>
+      <strong>Sygnał ostrzegawczy dla całej grupy.</strong> Western Digital notuje <strong>7,8% poniżej średniej 50-sesyjnej</strong>, a po wynikach lepszych od konsensusu spadło do 10,8% po sesji. Jeśli lider tematu koryguje po dobrych wynikach, to warto sprawdzić, czy Micron nie zachowuje się podobnie — moja ocena KUPNO ma dwanaście dni i cenę odniesienia z 25 sierpnia.</div>
+
+      <div class="alert alert-warning"><strong>Jedna uwaga o konkurencji, która ma znaczenie praktyczne.</strong> Seagate to niemal doskonały odpowiednik Western Digital — ten sam duopol, ten sam cennik, ta sama dynamika marż. <strong>Kupno obu nie daje dywersyfikacji, tylko podwaja tę samą pozycję.</strong> Jeśli miałbyś wybierać, decyzja sprowadza się do ceny i do tego, że WDC ma nierozstrzygnięte pytanie o Kioxię — czego Seagate nie ma.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Kurs zamknięcia 04.09.2026</td><td><strong>$467,46</strong></td><td style="color:var(--ocena-kupno)">+5,86% w ciągu dnia; po sesji $466,71</td></tr>
+          <tr><td><strong>Zmiana za 52 tygodnie</strong></td><td style="color:var(--ocena-kupno)"><strong>+443,56%</strong></td><td style="color:var(--ocena-uwaga)">Ogromny wzrost — sam w sobie czynnik ryzyka</td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td>$506,98</td><td style="color:var(--ocena-uwaga)"><strong>Kurs 7,8% poniżej — trwa korekta</strong></td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td>$372,82</td><td style="color:var(--ocena-kupno)"><strong>Kurs 25,4% powyżej — trend wzrostowy nienaruszony</strong></td></tr>
+          <tr><td><strong>RSI (14)</strong></td><td style="color:var(--ocena-kupno)"><strong>48,28</strong></td><td style="color:var(--ocena-kupno)">Neutralnie — ani wykupienia, ani wyprzedania</td></tr>
+          <tr><td>Beta (5 lat)</td><td style="color:var(--ocena-sprzedaz)">2,18</td><td style="color:var(--ocena-sprzedaz)">Ponad dwukrotna zmienność rynku</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td>20,28 mln (5,63% akcji)</td><td style="color:var(--ocena-kupno)"><strong>Spadek z 24,60 mln</strong> — 5,66% wolnego obrotu</td></tr>
+          <tr><td>Dni na zamknięcie krótkich pozycji</td><td>2,44</td><td>Nisko — brak ryzyka gwałtownego domykania</td></tr>
+          <tr><td>Średni wolumen</td><td>6,48 mln akcji</td><td>Płynność bez zastrzeżeń</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Obraz techniczny jest tu nietypowo korzystny i to jeden z powodów, dla których ocena wypada pozytywnie.</strong><br><br>Kurs jest <strong>25,4% powyżej średniej 200-sesyjnej</strong> — trend wzrostowy trwa. Jednocześnie jest <strong>7,8% poniżej średniej 50-sesyjnej</strong>, a wskaźnik RSI wynosi <strong>48,28</strong>, czyli dokładnie w środku skali. Krótka sprzedaż spadła z 24,60 do 20,28 miliona akcji.<br><br>Innymi słowy: <strong>akcje urosły o 443% w rok, ale ostatnie tygodnie to korekta, nie euforia.</strong> Po wynikach z 5 sierpnia kurs cofnął się z okolic 507–548 dolarów, a 4 września odbił o 5,86%. To rzadka konfiguracja — mocny trend długoterminowy plus neutralny wskaźnik krótkoterminowy.<br><br>Nie zmienia to jednak faktu, że przy becie 2,18 ta akcja potrafi spaść 30% bez żadnej złej wiadomości.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$506,98</strong></td><td>Średnia 50-sesyjna — najbliższy opór</td></tr>
+          <tr><td><strong>$548</strong></td><td>Okolice szczytu z lipca (rozmowy o Kioxii)</td></tr>
+          <tr><td><strong>$664,92</strong></td><td>Konsensus 26 analityków</td></tr>
+          <tr><td><strong>$400 – $600</strong></td><td>Przedział wartości godziwej — kurs w środku</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$372,82</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — średnia 200-sesyjna; poniżej niej trend wzrostowy jest złamany i tezę trzeba napisać od nowa</td></tr>
+          <tr><td><strong>$250</strong></td><td>Scenariusz zwrotu cyklu albo nieudanej fuzji z Kioxią</td></tr>
+          <tr><td><strong>$24,55</strong></td><td>Wartość księgowa na akcję — pokazuje, jak mało jest tu majątku pod wyceną</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs pod średnią 50-sesyjną, po wynikach lepszych od konsensusu spadł do 10,8%. Beta 2,18. Pozycja zatłoczona — wejście warto rozłożyć.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Zdolność wyprzedana, umowy na 2027 i 2028 podpisane, marża brutto prognozowana na 55–56%. Forward P/E 23,27 przy zakontraktowanym wzroście przychodów o 35% rocznie jest do obrony.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Gdy umowy zaczną wygasać, marże 55% zostaną zweryfikowane. Do tego nierozstrzygnięte pytanie o Kioxię, które może zmienić charakter spółki.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Ocena kupna opiera się na jednej rzeczy, którą w tej branży widzi się rzadko: zakontraktowanej widoczności.</strong><br><br>Gdyby Western Digital sprzedawało dyski po cenach rynkowych, byłaby to zwykła gra cykliczna przy marżach dwukrotnie wyższych od historycznych — i ocena byłaby negatywna. Ale spółka jest <strong>wyprzedana na cały 2026 rok, ma podpisane umowy długoterminowe na 2027 i 2028</strong>, potwierdzone zamówienia od siedmiu największych klientów, a hiperskalerzy sami zabiegają o kontrakty na lata 2029–2031.<br><br><strong>W horyzoncie 12–18 miesięcy przychody i marże są w dużej mierze zakontraktowane, a nie prognozowane.</strong> Do tego dochodzi model wymagający nakładów na poziomie 3,2% przychodów, bilans z gotówką netto i zwrot z kapitału 52,90% przy koszcie 16,23%.</div>
+
+      <div class="alert alert-danger"><strong>Ale są dwie rzeczy, których nie wolno pominąć, i to one wyznaczają wielkość pozycji.</strong><br><br><strong>Pierwsza: nie wierz wskaźnikom opartym na zysku netto.</strong> P/E 19,26 i PEG 0,33 są policzone z wyniku zawyżonego o ponad 5 miliardów dolarów zdarzeń jednorazowych. Uczciwe P/E na zysku bazowym to <strong>około 46×</strong>, cena/wolne przepływy <strong>48,00</strong>, EV/EBITDA <strong>33,62</strong>. Ta spółka jest droga i trzeba to wiedzieć, kupując ją.<br><br><strong>Druga: fuzja z Kioxią to ryzyko binarne w rękach zarządu.</strong> Western Digital wznowiło rozmowy. Cała premia w wycenie wynika z tego, że jest to czysty, lekki kapitałowo producent HDD — a połączenie z producentem pamięci NAND przywróciłoby biznes kapitałochłonny, który spółka właśnie się pozbyła wydzielając SanDisk. To nie ryzyko rynkowe; to decyzja, której nie da się przewidzieć.</div>
+
+      <h3>Konkretnie</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Działanie</th><th>Szczegóły</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Sugerowana wielkość</strong></td><td><strong>2–3% portfela</strong> — mniej, niż sugerowałaby jakość biznesu, ze względu na betę 2,18 i ryzyko Kioxii</td></tr>
+          <tr><td><strong>Pierwsza transza</strong></td><td>Przy obecnych <strong>$467</strong> — jedna trzecia docelowej pozycji</td></tr>
+          <tr><td><strong>Druga transza</strong></td><td>Poniżej <strong>$420</strong> — druga trzecia</td></tr>
+          <tr><td><strong>Trzecia transza</strong></td><td>W okolicach <strong>$380</strong>, blisko średniej 200-sesyjnej</td></tr>
+          <tr><td><strong>Realizacja zysku</strong></td><td>Powyżej <strong>$600</strong> — górna granica przedziału wartości godziwej</td></tr>
+          <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$372,82</strong> — średnia 200-sesyjna; poniżej niej teza wzrostowa jest złamana</td></tr>
+          <tr><td><strong>Natychmiastowe wyjście z tezy</strong></td><td>Ogłoszenie rozwadniającej transakcji z Kioxią albo obniżenie prognozy marży brutto</td></tr>
+          <tr><td><strong>Uwaga o Seagate</strong></td><td>To niemal identyczna ekspozycja — <strong>kupno obu nie dywersyfikuje, tylko podwaja pozycję</strong></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-kupno)">Trzy powody, żeby kupić</h3>
+          <ol>
+            <li><strong>Zakontraktowana widoczność.</strong> Wyprzedane na cały 2026, umowy długoterminowe na 2027 i 2028, negocjacje na 2029–2031, potwierdzone zamówienia od siedmiu największych klientów. To umowa, nie prognoza.</li>
+            <li><strong>Flash nie jest substytutem — jest 18,6× droższy za terabajt.</strong> Masowe składowanie danych dla AI musi trafić na dyski talerzowe. Trzech producentów na świecie, nikt nie buduje nowych zdolności, marża brutto idzie z 48,85% na prognozowane 55–56%.</li>
+            <li><strong>Nakłady 3,2% przychodów i gotówka netto.</strong> Z 5 mld EBITDA zostaje 3,51 mld wolnych przepływów. Zwrot z kapitału 52,90% przy koszcie 16,23%, Altman Z-Score 13,24.</li>
+          </ol>
+        </div>
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-sprzedaz)">Trzy powody, żeby unikać</h3>
+          <ol>
+            <li><strong>Fuzja z Kioxią zniszczyłaby premię za czysty profil.</strong> Rozmowy wznowione. Spółka właśnie wydzieliła SanDisk, żeby uciec od biznesu kapitałochłonnego — połączenie z producentem NAND cofnęłoby ten ruch. Ryzyko binarne.</li>
+            <li><strong>Marża 55% nie ma precedensu, a mnożnik jest wysoki.</strong> Historycznie HDD zarabiały 25–30% brutto. Cena/wolne przepływy 48,00, EV/EBITDA 33,62 — wysoki mnożnik przyłożony do szczytowych marż to podwójny optymizm.</li>
+            <li><strong>P/E 19,26 i PEG 0,33 są fałszywe.</strong> Zysk netto zawyżony o ponad $5 mld, stawka podatkowa 4,86%. Uczciwe P/E na zysku bazowym to około <strong>46×</strong>. Do tego +443% w rok przy becie 2,18.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="alert alert-danger"><strong>Thesis-breaker:</strong> ogłoszenie transakcji z Kioxią na warunkach rozwadniających, obniżenie prognozy marży brutto poniżej 50%, informacja o rozbudowie zdolności produkcyjnej u któregokolwiek z trzech producentów, albo spadek kursu poniżej <strong>$372,82</strong>.</div>
+      <div class="alert alert-success"><strong>Thesis-confirmer:</strong> kolejny kwartał z marżą brutto powyżej 55%, podpisanie kontraktów na lata 2029–2031, uruchomienie skupu akcji zamiast dalszego rozwodnienia, albo pierwsze dostawy dysków HAMR z wyższą ceną za terabajt.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Western Digital jest dziś jednym z najlepszych biznesów, jakie opisywałem w tej serii — i jednocześnie spółką, której dwa najbardziej zachęcające wskaźniki są fałszywe.</strong> Rynek uznany za schyłkowy okazał się nie do zastąpienia: dyski SSD kosztują około osiemnaście i pół raza więcej za terabajt, więc petabajty danych, którymi karmi się modele AI, muszą trafić na talerze magnetyczne. Trzech producentów na świecie, nikt nie budował nowych zdolności, a cena dysku 30 TB wzrosła w rok dwa i pół raza. Marża brutto poszła z historycznych 25–30% na 54,1% w ostatnim kwartale, przy prognozie 55–56% na kolejny. Spółka jest wyprzedana na cały 2026 rok, ma podpisane umowy na 2027 i 2028, a klienci sami negocjują kontrakty na lata 2029–2031.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Tyle że P/E 19,26 i PEG 0,33, które sugerują okazję, są policzone z zysku netto <strong>zawyżonego o ponad pięć miliardów dolarów</strong> — wynik operacyjny to 4,63 mld, a netto 9,29 mld, przy efektywnej stawce podatkowej 4,86%. Uczciwie policzone P/E na zysku bazowym wynosi <strong>około 46×</strong>, cena do wolnych przepływów 48,00, a EV/EBITDA 33,62. Do tego dochodzą dwa konkretne ryzyka: <strong>marża 55% nie ma precedensu w historii tej branży</strong>, a spółka <strong>wznowiła rozmowy o fuzji z Kioxią</strong> — co przywróciłoby jej biznes kapitałochłonny, którego właśnie się pozbyła, wydzielając SanDisk. <strong>Kupuję zakontraktowaną widoczność najbliższych dwóch lat, nie tanie wskaźniki — i dlatego pozycja ma być umiarkowana.</strong></p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Popyt musi być zakontraktowany, nie prognozowany.</strong> Wyprzedane na 2026, umowy na 2027 i 2028, zamówienia od siedmiu największych klientów, negocjacje na 2029–2031 — spełnione i to jest fundament oceny.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Marża musi rosnąć, a nie tylko być wysoka.</strong> 48,85% za rok, 54,1% w kwartale, prognoza 55–56% — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Model musi zamieniać zysk w gotówkę, nie w fabryki.</strong> Nakłady 3,2% przychodów, wolne przepływy 3,51 mld z 5 mld EBITDA, gotówka netto dodatnia — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Wycena musi dawać margines bezpieczeństwa.</strong> Cena/wolne przepływy 48,00, EV/EBITDA 33,62, P/E na zysku bazowym ok. 46× — niespełnione, spółka jest droga.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Pytanie o Kioxię musi zostać rozstrzygnięte.</strong> Rozmowy o fuzji wznowione; rozwadniająca transakcja unieważniłaby premię za czysty profil HDD.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Marże muszą utrzymać się po wygaśnięciu umów.</strong> Historia branży mówi 25–30%; dziś jest 55%. W horyzoncie 12–18 miesięcy chronią kontrakty, dalej — nic.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>8 września 2026</strong></td><td>Dzień bez dywidendy ($0,60 rocznie)</td><td>Stopa 0,13% — symboliczna, ale wzrost o 175% r/r</td></tr>
+            <tr><td><strong>Październik 2026</strong></td><td><strong>Wyniki za I kw. FY2027</strong></td><td style="color:var(--ocena-kupno)">Test prognozy: przychód $4,1 mld i marża brutto 55–56%</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">Termin nieokreślony</td><td style="color:var(--ocena-sprzedaz)"><strong>Rozstrzygnięcie rozmów z Kioxią</strong></td><td style="color:var(--ocena-sprzedaz)">Największe pojedyncze ryzyko dla tezy</td></tr>
+            <tr><td>Na bieżąco</td><td>Pierwsze dostawy i cennik dysków HAMR</td><td>Kolejny skok ceny za terabajt</td></tr>
+            <tr><td>Na bieżąco</td><td>Zapowiedzi rozbudowy zdolności u trzech producentów</td><td>Pierwszy realny sygnał końca niedoboru</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Marża brutto</strong></td><td>54,1% w kwartale, prognoza 55–56%</td><td>spadek poniżej 50%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Kurs akcji</strong></td><td>$467,46</td><td>spadek poniżej $372,82 (średnia 200-sesyjna)</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Przychód kwartalny</strong></td><td>$3,75 mld, prognoza $4,1 mld</td><td>wynik poniżej prognozy</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Liczba akcji</strong></td><td>360,54 mln, +6,69% r/r</td><td>dalszy wzrost bez skupu</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td><strong>Rozmowy z Kioxią</strong></td><td>wznowione, bez warunków</td><td>ogłoszenie transakcji z emisją akcji</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Efektywna stawka podatkowa</strong></td><td>4,86%</td><td>normalizacja do 20%+ obniży raportowany zysk</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Wielkość docelowa</strong></td><td><strong>2–3% portfela</strong> — ograniczona przez betę 2,18 i ryzyko Kioxii, nie przez jakość biznesu</td></tr>
+            <tr><td><strong>Transza pierwsza</strong></td><td>Przy <strong>$467</strong> — jedna trzecia pozycji</td></tr>
+            <tr><td><strong>Transza druga</strong></td><td>Poniżej <strong>$420</strong> — druga trzecia</td></tr>
+            <tr><td><strong>Transza trzecia</strong></td><td>W okolicach <strong>$380</strong> — dopełnienie</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Powyżej <strong>$600</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$372,82</strong> — poniżej średniej 200-sesyjnej teza wzrostowa jest złamana</td></tr>
+            <tr><td><strong>Warunek wyjścia</strong></td><td>Rozwadniająca transakcja z Kioxią albo marża brutto poniżej 50%</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">KUPNO</div>
+        <p>Kupuję tu jedną konkretną rzecz, której w branży nośników danych prawie nigdy nie ma: <strong>zakontraktowaną widoczność</strong>. Western Digital jest wyprzedane na cały rok kalendarzowy 2026, ma podpisane umowy długoterminowe na 2027 i 2028, potwierdzone zamówienia od siedmiu największych klientów, a hiperskalerzy sami zabiegają o kontrakty na lata 2029–2031. Do tego dochodzi model, który wymaga nakładów na poziomie 3,2% przychodów — dzięki czemu z 5 miliardów EBITDA zostaje 3,51 miliarda wolnych przepływów, a zwrot z zainwestowanego kapitału wynosi 52,90% przy koszcie 16,23%. Bilans ma gotówkę netto i Altman Z-Score 13,24. Producent pamięci półprzewodnikowych o podobnej dynamice musiałby większość tego zysku wpakować w kolejną fabrykę.</p>
+        <p>Ale trzeba wiedzieć, co się kupuje: <strong>nie tanią spółkę.</strong> P/E 19,26 i PEG 0,33 są policzone z zysku netto zawyżonego o ponad pięć miliardów dolarów — uczciwe P/E na zysku bazowym to około 46×, cena do wolnych przepływów 48,00, EV/EBITDA 33,62. Rynek przypisuje wysoki mnożnik marżom, które są najwyższe w historii tej branży, a to podwójny optymizm. Dwa ryzyka są konkretne: <strong>marża 55% nie ma precedensu</strong> i po wygaśnięciu kontraktów zostanie zweryfikowana, a <strong>wznowione rozmowy o fuzji z Kioxią</strong> mogą przywrócić spółce biznes kapitałochłonny, którego pozbyła się, wydzielając SanDisk — i tym samym unieważnić całą premię za czysty profil. Dlatego kupno, ale pozycja umiarkowana i rozłożona na trzy transze.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-kupno)">Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$400 – $600</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$250 (-47%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$600 (+28%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>2–3% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q1 FY2027, październik</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 6 września 2026 | Cena: <strong>$467,46</strong> — cena $467 podana przez użytkownika, zgodna z zamknięciem sesji 04.09.2026 | Pierwsza analiza WDC — spółka spoza portfela | Dane: StockAnalysis / S&amp;P Global Market Intelligence, komunikaty Western Digital IR i zgłoszenia SEC (formularz 8-K z wynikami IV kwartału roku obrotowego 2026), doniesienia prasowe o cenach dysków, wyprzedanej zdolności produkcyjnej i rozmowach z Kioxią — <strong>stan danych na 06.09.2026</strong>. P/E na zysku bazowym (ok. 46×) to obliczenie własne z wyniku operacyjnego przy założonej stawce podatkowej 21% | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
