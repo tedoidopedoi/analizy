@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLUG — Plug Power | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: PLUG</div>
+    <div class="company-name">Plug Power Inc.</div>
+    <div class="company-sub">Wodorowe ogniwa paliwowe, elektrolizery i paliwo · restrukturyzacja w toku</div>
+    <div class="header-meta">
+      <span class="meta-tag">Spoza portfela — pierwsza analiza</span>
+      <span class="meta-tag">Spekulacyjna</span>
+      <span class="meta-tag">Altman Z-Score -4,47</span>
+      <span class="meta-tag">Krótka sprzedaż 20,8% akcji</span>
+      <div class="price-display">
+        <div class="price-main">$2,17</div>
+        <div class="price-sub">zamknięcie 04.09.2026 | +2,84% | Twoja cena $2,17 — zgodna co do centa</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Wodór</span><span class="temat">Transformacja energetyczna</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — restrukturyzacja realnie działa, ale gotówki starczy na około trzy kwartały i kolejna emisja jest arytmetycznie nieunikniona">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">dobry trend operacyjny, zły bilans — cena w środku przedziału</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$1,50 – $2,80</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-31% do +29%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>10 sierpnia 2026</b><em>Q3 — listopad</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (04.09.2026)</div><div class="metric-value">$2,17</div><div class="metric-detail">3,1% pod średnią 50-sesyjną, 12,1% pod 200-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Marża brutto — ostatni kwartał</div><div class="metric-value green">-0,9%</div><div class="metric-detail"><strong>Rok temu -30,7%, kwartał temu -13%</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Marża brutto — 12 miesięcy</div><div class="metric-value red">-24,75%</div><div class="metric-detail">Średnia wsteczna — nie opisuje dzisiejszej spółki</div></div>
+    <div class="metric-card"><div class="metric-label">Wypalanie gotówki</div><div class="metric-value">$61 mln</div><div class="metric-detail">W kwartale — o 58% mniej niż w Q1</div></div>
+    <div class="metric-card"><div class="metric-label">Gotówka</div><div class="metric-value red">$172 mln</div><div class="metric-detail"><strong>Około trzech kwartałów przy obecnym tempie</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Altman Z-Score</div><div class="metric-value red">-4,47</div><div class="metric-detail">Ujemny · Piotroski 4 · dług $1,04 mld</div></div>
+    <div class="metric-card"><div class="metric-label">Liczba akcji</div><div class="metric-value red">+38,03%</div><div class="metric-detail">1,40 mld akcji · rozwodnienie rok do roku</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (20 analityków)</div><div class="metric-value">$3,55</div><div class="metric-detail">+63,6%, ale rekomendacja <strong>trzymaj</strong></div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p><strong>PLUG jest spoza portfela</strong> — to pierwsza analiza tej spółki. Z tematem transformacji energetycznej masz w portfelu trzy pozycje: <strong>Oklo (2,04%), ASP Isotopes (1,69%) i Caterpillar (2,87%)</strong>. Plug Power to zupełnie inna kategoria ryzyka niż każda z nich.</p>
+
+      <p>Plug Power buduje ogniwa paliwowe do wózków widłowych, elektrolizery do produkcji wodoru i sprzedaje samo paliwo wodorowe. Przychody za dwanaście miesięcy <strong>744,09 miliona dolarów</strong>, kapitalizacja <strong>3,03 miliarda</strong>, 2 344 pracowników. Kurs jest około <strong>90% poniżej szczytu z marca 2021</strong>.</p>
+
+      <div class="alert alert-warning"><strong>Zacznę od czegoś, co zmienia sposób czytania całej reszty: dane za dwanaście miesięcy opisują spółkę, która już nie istnieje.</strong><br><br>
+      Statystyki roczne pokazują marżę brutto <strong>-24,75%</strong>, stratę netto <strong>1,64 miliarda</strong> i ujemne przepływy <strong>560,50 miliona</strong>. To wygląda na spółkę w agonii.<br><br>
+      Ale wyniki za drugi kwartał, opublikowane 10 sierpnia, pokazują coś innego: <strong>marża brutto -0,9%, czyli praktycznie zero</strong> — wobec -30,7% rok wcześniej i -13% kwartał wcześniej. <strong>Koszty operacyjne spadły o połowę rok do roku</strong>, do 62 milionów. Wypalanie gotówki spadło o <strong>58% w jeden kwartał</strong>, do 61 milionów.<br><br>
+      Roczna średnia zawiera kwartały sprzed restrukturyzacji. <strong>Dzisiejsze tempo jest radykalnie inne i to trzeba uczciwie odnotować, zanim postawi się jakąkolwiek tezę.</strong></div>
+
+      <h3>Wyniki za II kwartał 2026 — 10 sierpnia</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wynik</th><th>Zmiana</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody kwartalne</td><td>$178,3 mln</td><td>+9% kw/kw, +2,5% r/r</td></tr>
+          <tr><td><strong>Marża brutto</strong></td><td style="color:var(--ocena-kupno)"><strong>-0,9%</strong></td><td style="color:var(--ocena-kupno)"><strong>z -30,7% rok temu i -13% kwartał temu</strong></td></tr>
+          <tr><td><strong>Koszty operacyjne</strong></td><td style="color:var(--ocena-kupno)">$62 mln</td><td style="color:var(--ocena-kupno)"><strong>-50% rok do roku</strong></td></tr>
+          <tr><td><strong>Zużycie gotówki netto</strong></td><td style="color:var(--ocena-kupno)">$61 mln</td><td style="color:var(--ocena-kupno)"><strong>-58% wobec I kwartału</strong></td></tr>
+          <tr><td>Przychody z serwisu</td><td style="color:var(--ocena-kupno)">$29,8 mln</td><td style="color:var(--ocena-kupno)">+82% r/r, <strong>marża +27%</strong></td></tr>
+          <tr><td>Przychody z paliwa</td><td style="color:var(--ocena-uwaga)">$39,5 mln</td><td style="color:var(--ocena-uwaga)">+15% r/r, marża <strong>-48%</strong> (było -91%)</td></tr>
+          <tr><td>Gotówka nieograniczona</td><td style="color:var(--ocena-sprzedaz)">$161,9 mln</td><td style="color:var(--ocena-sprzedaz)">Na koniec kwartału</td></tr>
+          <tr><td><strong>Prognoza na 2026</strong></td><td style="color:var(--ocena-kupno)"><strong>wzrost przychodów 15–16%</strong></td><td style="color:var(--ocena-kupno)">Podniesiona; <strong>dodatnia EBITDA celowana na IV kwartał</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>To jest realna restrukturyzacja i nie chcę jej umniejszać.</strong> Marża brutto idąca <strong>-30,7% → -13% → -0,9%</strong> w trzech kolejnych kwartałach nie jest przypadkiem — to efekt cięcia kosztów, sprzedaży aktywów i zmiany struktury przychodów. Serwis rośnie o 82% i ma <strong>dodatnią marżę 27%</strong>, a paliwo, które było najgorszym segmentem, poprawiło się z -91% do -48%.<br><br>Zarząd celuje w <strong>dodatnią EBITDA już w czwartym kwartale 2026</strong>. Gdyby to się udało, byłby to pierwszy taki kwartał w historii tej spółki.</div>
+
+      <div class="alert alert-danger"><strong>Ale poprawa tempa nie usuwa problemu bilansowego i to jest sedno sprawy.</strong><br><br>Gotówka: <strong>161,9 miliona nieograniczonej na koniec kwartału</strong> (bilans wykazuje 172,09 mln łącznie). Wypalanie: <strong>61 milionów w kwartale</strong>, już po poprawie o 58%.<br><br><strong>To daje mniej więcej trzy kwartały działania</strong> — do połowy 2027 roku. Nawet jeśli burn spadnie dalej, spółka dojdzie do granicy zanim EBITDA zdąży zamienić się w realną gotówkę. <strong>Kolejna emisja akcji nie jest ryzykiem — jest arytmetyką.</strong> Liczba akcji wzrosła już o 38,03% w ciągu roku.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — TRZY BIZNESY O RÓŻNEJ RENTOWNOŚCI</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment</th><th>Skala kwartalna</th><th>Marża</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Serwis</strong></td><td>$29,8 mln, +82% r/r</td><td style="color:var(--ocena-kupno)"><strong>+27%</strong></td><td style="color:var(--ocena-kupno)">Jedyny segment trwale zarabiający</td></tr>
+          <tr><td><strong>Sprzęt (ogniwa, elektrolizery)</strong></td><td>reszta z $178,3 mln</td><td style="color:var(--ocena-uwaga)">bliska zeru</td><td>Poprawiona, ale wciąż bez zysku</td></tr>
+          <tr><td><strong>Paliwo wodorowe</strong></td><td>$39,5 mln, +15% r/r</td><td style="color:var(--ocena-sprzedaz)"><strong>-48%</strong> (było -91%)</td><td style="color:var(--ocena-sprzedaz)">Sprzedaż poniżej kosztu wytworzenia</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Trzeci wiersz jest najważniejszy i wyjaśnia, dlaczego ta spółka traci pieniądze od dwóch dekad.</strong><br><br>Marża na paliwie <strong>-48%</strong> znaczy, że <em>za każdy dolar wodoru sprzedanego klientowi spółka wydaje około półtora dolara</em>. Poprawa z -91% jest ogromna, ale kierunek nie zmienia natury problemu: <strong>im więcej paliwa sprzedaje, tym więcej traci</strong>.<br><br>Model biznesowy Plug Power polega na tym, że sprzedaje klientowi ogniwo paliwowe, a potem dostarcza mu wodór przez lata. Dopóki wodór kosztuje więcej, niż klient płaci, każdy nowy klient pogłębia stratę. Dlatego wzrost przychodów sam w sobie nie jest tu dobrą wiadomością — dobrą wiadomością jest wyłącznie poprawa marży.</div>
+
+      <div class="alert alert-success"><strong>Za to serwis wygląda naprawdę dobrze i jest niedoceniany.</strong> 29,8 miliona przychodu, wzrost o <strong>82% rok do roku</strong> i <strong>dodatnia marża 27%</strong>. To zainstalowana baza urządzeń, które trzeba obsługiwać — przychód powtarzalny, przewidywalny i rentowny.<br><br>Jeśli w tej spółce jest coś, co ma trwałą wartość, to właśnie ten segment. Pytanie brzmi, czy urośnie wystarczająco szybko, żeby przykryć resztę.</div>
+
+      <p><strong>Fosa jest słaba.</strong> Ogniwa paliwowe nie są technologią zastrzeżoną, a koszt przełączenia dla klienta ogranicza się do wymiany floty wózków. Realna przewaga Plug Power to zainstalowana baza i infrastruktura dystrybucji wodoru — czyli rzeczy, które kosztowały miliardy i nadal nie zarabiają.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK — WODÓR I ZMIANA ZASAD GRY</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <p>Rynek zielonego wodoru miał być jednym z filarów transformacji energetycznej. Rzeczywistość okazała się trudniejsza: produkcja wodoru z elektrolizy jest droga, a bez dopłat publicznych rzadko konkuruje z alternatywami.</p>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na PLUG</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Wsparcie publiczne (pożyczka DOE)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$1,66 mld — działania zawieszone</strong></td><td style="color:var(--ocena-sprzedaz)">Największe źródło finansowania w zawieszeniu</td></tr>
+          <tr><td><strong>Zmiana strategii</strong></td><td style="color:var(--ocena-uwaga)">Odejście od własnych wytwórni wodoru</td><td style="color:var(--ocena-uwaga)">Zwrot ku dostawom od podmiotów trzecich</td></tr>
+          <tr><td>Umowa na wodór szary</td><td>Długoterminowy kontrakt z dużym dostawcą gazów przemysłowych</td><td style="color:var(--ocena-kupno)">Przewidywalna cena zamiast własnych nakładów</td></tr>
+          <tr><td>Popyt na wózki widłowe z ogniwami</td><td>Stabilny, niszowy</td><td>Rdzeń dzisiejszych przychodów</td></tr>
+          <tr><td>Wątek centrów danych</td><td style="color:var(--ocena-uwaga)">Próba wejścia w zasilanie awaryjne</td><td style="color:var(--ocena-uwaga)">Narracja, nie jeszcze przychód</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Zwrot strategiczny jest tu ważniejszy niż mogłoby się wydawać i wymaga wyjaśnienia.</strong><br><br>Plug Power przez lata budował własne wytwórnie wodoru, finansowane w dużej mierze <strong>gwarancją kredytową Departamentu Energii na 1,66 miliarda dolarów</strong>, zamkniętą w styczniu 2025. W 2026 spółka <strong>zawiesiła działania związane z tą pożyczką</strong>, przesuwając kapitał ku modelowi, w którym wodór kupuje od zewnętrznego dostawcy gazów przemysłowych po przewidywalnej cenie.<br><br><strong>Z punktu widzenia marży to decyzja rozsądna</strong> — kupowanie taniej niż własna produkcja poprawia rentowność paliwa i tłumaczy skok z -91% do -48%. <strong>Ale spółka sama ostrzegła, że zawieszenie działań stwarza ryzyko dla samej pożyczki.</strong> Rezygnacja z 1,66 miliarda finansowania w sytuacji, gdy w kasie jest 162 miliony, jest posunięciem odważnym.</div>
+
+      <div class="alert alert-danger"><strong>Do tego dochodzi ryzyko prawne, które wprost dotyczy tego wątku.</strong> W 2026 roku złożono pozew zbiorowy <em>(Ortolani przeciwko Plug Power)</em>, w którym zarzuca się spółce, że <strong>wprowadzała inwestorów w błąd co do swojej zdolności do pozyskania finansowania federalnego</strong>. Osobne doniesienia mówią o zarzucie zawyżania szans na uzyskanie pożyczki na wytwórnie wodoru.<br><br>To ryzyko binarne, którego z zewnątrz nie da się wycenić — a dotyczy dokładnie tej kwestii, która decyduje o przetrwaniu spółki.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I STRUKTURA WŁAŚCICIELSKA</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Profil klienta</td><td>B2B — magazyny i logistyka</td><td>Historycznie duzi operatorzy centrów dystrybucyjnych</td></tr>
+          <tr><td><strong>Baza serwisowa</strong></td><td style="color:var(--ocena-kupno)">+82% r/r przy marży 27%</td><td style="color:var(--ocena-kupno)">Najzdrowsza część relacji z klientem</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$317 443</td><td style="color:var(--ocena-sprzedaz)"><strong>Strata na pracownika -$700 235</strong></td></tr>
+          <tr><td><strong>Udziałowcy wewnętrzni</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>0,63%</strong></td><td style="color:var(--ocena-sprzedaz)">Praktycznie brak zaangażowania zarządu</td></tr>
+          <tr><td>Instytucje</td><td>58,68%</td><td>Wolny obrót 1,33 mld z 1,40 mld akcji</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>290,92 mln akcji</strong></td><td style="color:var(--ocena-sprzedaz)">20,82% wszystkich akcji, 21,82% wolnego obrotu</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Dwie liczby z tej tabeli mówią o tej spółce więcej niż niejeden rozdział sprawozdania.</strong><br><br><strong>Strata na pracownika wynosi 700 235 dolarów</strong> przy przychodzie na pracownika 317 443. Spółka traci na każdym zatrudnionym ponad dwa razy tyle, ile ten zatrudniony wypracowuje przychodu. To skala rozjazdu między kosztami a sprzedażą — choć trzeba uczciwie dodać, że liczba jest z okresu dwunastu miesięcy, więc zawiera kwartały sprzed cięcia kosztów o połowę.<br><br><strong>Krótka sprzedaż obejmuje 20,82% wszystkich akcji.</strong> Co piąta akcja jest pożyczona i sprzedana przez kogoś, kto liczy na spadek. To jeden z najwyższych poziomów, jakie widziałem — dla porównania Fermi miało 7,36%, Paramount Skydance 6,99%. Rynek ma tu bardzo wyraźną opinię.</div>
+
+      <p>Warto jednak zauważyć drugą stronę: przy 290,92 miliona pozycji krótkich i wskaźniku 4,97 dnia na ich zamknięcie, <strong>każda dobra wiadomość może wywołać gwałtowny wzrost</strong>. To działa w obie strony i tłumaczy, dlaczego kurs potrafi wzrosnąć o 45% w rok mimo fundamentów, które tego nie uzasadniają.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th><th>Marża</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody</strong></td><td><strong>$744,09 mln</strong></td><td>—</td></tr>
+          <tr><td><strong>Zysk brutto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$184,15 mln</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-24,75%</strong></td></tr>
+          <tr><td>Wynik operacyjny</td><td style="color:var(--ocena-sprzedaz)">-$542,44 mln</td><td style="color:var(--ocena-sprzedaz)">-72,90%</td></tr>
+          <tr><td>EBITDA</td><td style="color:var(--ocena-sprzedaz)">-$512,11 mln</td><td style="color:var(--ocena-sprzedaz)">-68,82%</td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td style="color:var(--ocena-sprzedaz)">-$1,70 mld</td><td style="color:var(--ocena-sprzedaz)">-228,96%</td></tr>
+          <tr><td><strong>Wynik netto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$1,64 mld</strong></td><td style="color:var(--ocena-sprzedaz)">-220,59% · -$1,24/akcję</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-sprzedaz)">-$482,56 mln</td><td>Amortyzacja tylko $30,34 mln</td></tr>
+          <tr><td>Nakłady inwestycyjne</td><td>-$77,94 mln</td><td>10,5% przychodów</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$560,50 mln</strong></td><td style="color:var(--ocena-sprzedaz)">-$0,40 na akcję</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Najbardziej niepokojący wiersz to zysk brutto: minus 184,15 miliona dolarów.</strong><br><br>Ujemna marża brutto oznacza, że spółka traci pieniądze <em>zanim jeszcze zapłaci komukolwiek pensję</em>. Sam koszt wytworzenia tego, co sprzedaje, przewyższa cenę sprzedaży. W takiej sytuacji <strong>zwiększanie sprzedaży pogłębia stratę</strong>, a wszystkie standardowe argumenty o skali i dźwigni operacyjnej przestają działać.<br><br>Strata netto <strong>1,64 miliarda przy przychodach 744 milionów</strong> to strata dwuipółkrotnie większa od sprzedaży.</div>
+
+      <div class="alert alert-success"><strong>Ale — i to jest kluczowe zastrzeżenie do całej powyższej tabeli — te liczby są średnią za dwanaście miesięcy.</strong><br><br>W ostatnim kwartale marża brutto wyniosła <strong>-0,9%</strong>, a nie -24,75%. Koszty operacyjne spadły do 62 milionów, o połowę rok do roku. Wypalanie gotówki wyniosło 61 milionów wobec średniej rocznej około 140 milionów na kwartał.<br><br><strong>Gdyby przeliczyć spółkę po dzisiejszym tempie, obraz byłby zupełnie inny — i właśnie dlatego ocena nie brzmi „sprzedaż".</strong> Roczne statystyki opisują przeszłość, którą zarząd właśnie zdemontował.</div>
+
+      <p>Docelowy model jest zrozumiały: sprzedać urządzenie, zarabiać na serwisie (marża 27%) i na paliwie. Problem w tym, że paliwo ma nadal marżę <strong>-48%</strong>. Prognoza wzrostu przychodów na trzy lata to <strong>+17,76% rocznie</strong>, ale przy ujemnej marży brutto na paliwie sam wzrost nie rozwiązuje niczego. <strong>Wszystko zależy od tego, czy nowa umowa na dostawy wodoru doprowadzi marżę paliwową do zera.</strong></p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$3,03 mld</td><td>Wartość przedsiębiorstwa $3,90 mld</td></tr>
+          <tr><td>Cena / zysk</td><td>nie dotyczy</td><td>Strata -$1,24 na akcję</td></tr>
+          <tr><td><strong>Cena / sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>4,07</strong></td><td style="color:var(--ocena-sprzedaz)">Prognozowana 3,47 — <strong>drogo jak na zerową marżę brutto</strong></td></tr>
+          <tr><td>EV / sprzedaż</td><td style="color:var(--ocena-sprzedaz)">5,24</td><td>Uwzględnia dług netto $865 mln</td></tr>
+          <tr><td><strong>Cena / wartość księgowa</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>5,21</strong></td><td style="color:var(--ocena-sprzedaz)">Wartość księgowa <strong>$0,42/akcję</strong>; do aktywów materialnych 5,47</td></tr>
+          <tr><td>Cena / wolne przepływy</td><td>nie dotyczy</td><td style="color:var(--ocena-sprzedaz)">Przepływy ujemne: -$560,50 mln</td></tr>
+          <tr><td>EV / EBITDA</td><td>nie dotyczy</td><td style="color:var(--ocena-sprzedaz)">EBITDA ujemna: -$512,11 mln</td></tr>
+          <tr><td>Rentowność wolnych przepływów</td><td style="color:var(--ocena-sprzedaz)">-18,49%</td><td style="color:var(--ocena-sprzedaz)">Rentowność zysku -54,14%</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-4,47</strong></td><td style="color:var(--ocena-sprzedaz)">Ujemny — najniższy w całej tej serii. Piotroski 4</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Źródło: StockAnalysis / S&amp;P Global Market Intelligence, stan 08.09.2026. Cena $2,17 to zamknięcie 04.09.2026 — zgodna z ceną podaną przez użytkownika.</p>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>nie dotyczy</td><td>Strata na akcję <strong>-$1,24</strong>; przychody TTM <strong>$744,09 mln</strong></td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td>nie dotyczy</td><td>Brak prognozowanego zysku — analitycy nie modelują dodatniego wyniku</td></tr>
+          <tr><td><strong>PEG</strong></td><td>nie dotyczy</td><td>&lt; 1,0 = wzrost tańszy niż mnożnik sugeruje; tu brak bazy zysku</td></tr>
+          <tr><td>Prognoza wzrostu (3 lata)</td><td>przychody <strong>+17,76%</strong> · zysk: brak prognozy</td><td style="color:var(--ocena-uwaga)">Analitycy prognozują sprzedaż, ale <strong>nie zysk</strong></td></tr>
+          <tr><td><strong>Miara zastępcza</strong></td><td><strong>Cena / sprzedaż 4,07</strong></td><td style="color:var(--ocena-sprzedaz)">Jedyny działający mnożnik — i wysoki jak na spółkę bez marży</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> Brak forward P/E przy dwudziestu analitykach pokrywających spółkę jest sam w sobie informacją: <strong>nikt nie modeluje dodatniego zysku w dającej się przewidzieć przyszłości</strong>. Jedyną działającą miarą jest krotność sprzedaży — i wynosi <strong>4,07</strong>, czyli tyle, ile płaci się za zdrową spółkę programistyczną z wysoką marżą.</p>
+      <p>Płacisz zatem <strong>ponad czterokrotność rocznych przychodów za biznes, który dopiero co doszedł do zerowej marży brutto</strong>. Kolejny sygnał tej samej rzeczy: cena do wartości księgowej 5,21 przy wartości księgowej 42 centów na akcję. Nie ma tu majątku, który podtrzymywałby wycenę.</p>
+      <div class="alert alert-warning"><strong>Zgodnie z zasadą dotyczącą spółek przed osiągnięciem zysku: to jest pozycja spekulacyjna i tak trzeba ją traktować.</strong> Nie ma zysku, nie ma dodatnich przepływów, nie ma prognozy zysku, Altman Z-Score jest ujemny, a wycena opiera się wyłącznie na tym, co może się wydarzyć. Każda taka pozycja powinna mieć rozmiar, przy którym całkowita strata nie ma znaczenia dla portfela.</div>
+
+      <h3>Cztery scenariusze na 12–18 miesięcy</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Założenie</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Dodatnia EBITDA i finansowanie bez szoku</strong></td><td>Q4 na plusie, marża paliwowa ku zeru, emisja umiarkowana</td><td><strong>$2,80</strong></td><td style="color:var(--ocena-kupno)">+29%</td></tr>
+          <tr><td><strong>Stan bazowy</strong></td><td>Poprawa trwa, ale konieczna emisja rozwadnia zysk z niej</td><td><strong>$2,15</strong></td><td style="color:var(--ocena-uwaga)">-1%</td></tr>
+          <tr><td>Emisja na gorszych warunkach</td><td>Rozwodnienie rzędu 20–30% przy słabym kursie</td><td>$1,50</td><td style="color:var(--ocena-sprzedaz)">-31%</td></tr>
+          <tr><td>Utrata pożyczki DOE albo niekorzystny wyrok</td><td>Finansowanie federalne przepada, pozew zbiorowy rozstrzygnięty na niekorzyść</td><td>$1,00</td><td style="color:var(--ocena-sprzedaz)">-54%</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Fair value: $1,50 – $2,80</strong>, środek $2,15 (-1%). Kurs $2,17 jest praktycznie w samym środku przedziału — <strong>spółka jest wyceniona uczciwie, ani tanio, ani drogo</strong>. Konsensus dwudziestu analityków to $3,55 (+63,6%), ale z rekomendacją <strong>trzymaj</strong>, co samo w sobie jest sprzecznym sygnałem.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <h3>Marża brutto kwartał po kwartale — najważniejszy wykres tej spółki</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>Marża brutto</th><th>Zmiana</th></tr></thead>
+        <tbody>
+          <tr><td>II kwartał 2025</td><td style="color:var(--ocena-sprzedaz)"><strong>-30,7%</strong></td><td>Punkt wyjścia</td></tr>
+          <tr><td>I kwartał 2026</td><td style="color:var(--ocena-uwaga)"><strong>-13,0%</strong></td><td style="color:var(--ocena-kupno)">+17,7 pp</td></tr>
+          <tr><td><strong>II kwartał 2026</strong></td><td style="color:var(--ocena-kupno)"><strong>-0,9%</strong></td><td style="color:var(--ocena-kupno)">+12,1 pp</td></tr>
+          <tr><td>Średnia 12 miesięcy</td><td style="color:var(--ocena-sprzedaz)">-24,75%</td><td style="color:var(--text-muted)">Zawiera stare kwartały</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>To jest najmocniejszy argument za tą spółką i chcę go postawić uczciwie.</strong> Poprawa marży brutto o <strong>prawie 30 punktów procentowych w cztery kwartały</strong> nie zdarza się przypadkiem. Złożyły się na nią cięcie kosztów operacyjnych o połowę, sprzedaż aktywów, wzrost udziału serwisu (marża +27%) i przede wszystkim <strong>poprawa marży paliwowej z -91% do -48%</strong> po zmianie modelu zaopatrzenia w wodór.<br><br>Jeśli ten trend przedłuży się choćby o dwa kwartały, spółka będzie miała dodatnią marżę brutto po raz pierwszy od lat. Zarząd celuje w <strong>dodatnią EBITDA w IV kwartale 2026</strong>.</div>
+
+      <div class="alert alert-danger"><strong>Ale trzeba policzyć, ile jeszcze brakuje — i to studzi entuzjazm.</strong><br><br>Przy przychodach kwartalnych <strong>178,3 miliona</strong> i kosztach operacyjnych <strong>62 milionów</strong>, żeby wyjść na zero na poziomie operacyjnym spółka potrzebuje marży brutto około <strong>35%</strong>. Dziś ma <strong>-0,9%</strong>.<br><br>Innymi słowy: przebyta droga od -30,7% do -0,9% jest imponująca, ale <strong>do rentowności operacyjnej pozostało jeszcze więcej niż już pokonano</strong>. Dodatnia EBITDA w czwartym kwartale będzie możliwa głównie dzięki temu, że EBITDA pomija amortyzację i część kosztów — nie jest tożsama z zarabianiem pieniędzy.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Wniosek</th></tr></thead>
+        <tbody>
+          <tr><td>Zwrot z zainwestowanego kapitału (ROIC)</td><td style="color:var(--ocena-sprzedaz)">-15,48%</td><td rowspan="2" style="color:var(--ocena-sprzedaz)"><strong>Różnica -29,15 pp — głębokie niszczenie wartości</strong></td></tr>
+          <tr><td>Średni ważony koszt kapitału (WACC)</td><td>13,67%</td></tr>
+          <tr><td>Zwrot z kapitału własnego (ROE)</td><td style="color:var(--ocena-sprzedaz)">-144,96%</td><td>ROA -12,23%, ROCE -31,93%</td></tr>
+        </tbody>
+      </table></div>
+      <p>Dla porównania w Twoim portfelu: <strong>ASML ma tę różnicę na poziomie około +54 pp, ServiceNow około +1,43 pp</strong>. Plug Power jest po przeciwnej stronie skali od wszystkiego, co posiadasz.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — TU LEŻY PRAWDZIWY PROBLEM</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gotówka</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$172,09 mln</strong></td><td style="color:var(--ocena-sprzedaz)">Nieograniczona na koniec kwartału: $161,9 mln</td></tr>
+          <tr><td><strong>Zadłużenie</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$1,04 mld</strong></td><td style="color:var(--ocena-sprzedaz)">Dług netto <strong>$864,86 mln</strong> = <strong>$0,62/akcję</strong></td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-sprzedaz)">1,77</td><td>Dług/EBITDA: nie dotyczy (EBITDA ujemna)</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-7,54</strong></td><td style="color:var(--ocena-sprzedaz)">Ujemne — odsetki płacone z kapitału, nie z zysku</td></tr>
+          <tr><td>Wskaźnik bieżący</td><td style="color:var(--ocena-uwaga)">2,32</td><td style="color:var(--ocena-sprzedaz)"><strong>Ale szybki tylko 0,82</strong> — różnica to zapasy</td></tr>
+          <tr><td>Kapitał obrotowy</td><td>$652,45 mln</td><td>W dużej mierze zapasy, nie gotówka</td></tr>
+          <tr><td>Kapitał własny</td><td style="color:var(--ocena-uwaga)">$587,29 mln</td><td style="color:var(--ocena-uwaga)">Wartość księgowa <strong>$0,42/akcję</strong> wobec kursu $2,17</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-4,47</strong></td><td style="color:var(--ocena-sprzedaz)">Ujemny. Piotroski 4</td></tr>
+          <tr><td><strong>Zmiana liczby akcji r/r</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+38,03%</strong></td><td style="color:var(--ocena-sprzedaz)">1,40 mld akcji; rentowność dla akcjonariusza -38,03%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Policzmy runway, bo to jest liczba, wokół której kręci się cała decyzja.</strong><br><br>Gotówka nieograniczona na koniec II kwartału: <strong>161,9 miliona dolarów</strong>.<br>Zużycie gotówki w II kwartale: <strong>61 milionów</strong> — już po poprawie o 58%.<br><br><strong>To daje około dwóch i pół do trzech kwartałów</strong>, czyli mniej więcej do połowy 2027 roku. Nawet zakładając dalszą poprawę burnu do 40–50 milionów na kwartał, mówimy o trzech–czterech kwartałach.<br><br>Do tego dochodzi dług <strong>1,04 miliarda</strong> i ujemne pokrycie odsetek <strong>-7,54</strong> — odsetki są dziś płacone z kapitału, a nie z zysku. <strong>Emisja akcji albo nowe zadłużenie nie są scenariuszem ryzyka; są niemal pewnością w horyzoncie najbliższego roku.</strong></div>
+
+      <div class="alert alert-warning"><strong>Historia rozwodnienia zasługuje na osobne zdanie, bo to nie jest jednorazowy epizod.</strong><br><br>Liczba akcji wzrosła o <strong>38,03% w ciągu jednego roku</strong> — do 1,40 miliarda. Rentowność dla akcjonariusza wynosi <strong>-38,03%</strong>. Kurs jest około 90% poniżej szczytu z marca 2021, a ostatni podział akcji to <strong>scalenie w stosunku 1:10 z maja 2011</strong> — czyli spółka już raz musiała naprawiać liczbę akcji.<br><br><strong>Wniosek praktyczny: nawet jeśli restrukturyzacja się powiedzie, część korzyści przechwycą nowi akcjonariusze, a nie dzisiejsi.</strong> Przy 1,40 miliarda akcji i kursie 2,17 dolara pozyskanie 300 milionów oznacza wyemitowanie około 138 milionów akcji — kolejne 10% rozwodnienia.</div>
+
+      <p>Jeden element bilansu wygląda lepiej, niż sugeruje reszta: <strong>wskaźnik bieżący 2,32</strong>. Ale wskaźnik szybki wynosi już tylko <strong>0,82</strong>, a różnica między nimi to zapasy. Zapasy da się upłynnić, ale zwykle poniżej wartości księgowej — zwłaszcza gdy rynek wie, że sprzedający potrzebuje gotówki.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Marża brutto poprawiła się o prawie 30 punktów w cztery kwartały.</strong> Z <strong>-30,7%</strong> przez -13% do <strong>-0,9%</strong>. To nie jest szum statystyczny, tylko efekt konkretnych działań: cięcia kosztów, sprzedaży aktywów i zmiany modelu zaopatrzenia w wodór. Najmocniejszy argument w całej tej analizie.</div>
+
+      <div class="alert alert-success"><strong>2. Koszty operacyjne spadły o połowę, a wypalanie gotówki o 58%.</strong> Koszty operacyjne 62 miliony wobec ponad 120 rok wcześniej; zużycie gotówki 61 milionów wobec około 145 w I kwartale. Zarząd celuje w <strong>dodatnią EBITDA w IV kwartale 2026</strong> — pierwszą w historii spółki.</div>
+
+      <div class="alert alert-success"><strong>3. Segment serwisowy jest realnie rentowny i szybko rośnie.</strong> Przychód 29,8 miliona, <strong>+82% rok do roku</strong>, przy <strong>dodatniej marży 27%</strong>. To powtarzalny przychód z zainstalowanej bazy urządzeń — jedyna część tej spółki, która ma cechy normalnego biznesu.</div>
+
+      <div class="alert alert-info"><strong>4. Zwrot ku zewnętrznym dostawom wodoru jest decyzją rozsądną.</strong> Zamiast budować własne wytwórnie za miliardy, spółka podpisała długoterminową umowę z dużym dostawcą gazów przemysłowych na przewidywalną cenę. To właśnie stoi za poprawą marży paliwowej z <strong>-91% do -48%</strong> i radykalnie obniża przyszłe potrzeby kapitałowe.</div>
+
+      <div class="alert alert-info"><strong>5. Podniesiona prognoza przychodów na 2026.</strong> Wzrost <strong>15–16%</strong>, podwyższony przy okazji wyników za II kwartał. Prognoza trzyletnia zakłada <strong>+17,76% rocznie</strong>. Popyt istnieje — problemem zawsze była marża, nie sprzedaż.</div>
+
+      <div class="alert alert-info"><strong>6. Krótka sprzedaż obejmuje 20,82% akcji.</strong> 290,92 miliona akcji sprzedanych krótko, wskaźnik 4,97 dnia na zamknięcie. Każda pozytywna niespodzianka — zwłaszcza dodatnia EBITDA w IV kwartale — może wywołać gwałtowne domykanie tych pozycji.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Gotówki starczy na około trzy kwartały — emisja jest arytmetyką, nie ryzykiem.</strong> 161,9 miliona nieograniczonej gotówki przy zużyciu 61 milionów na kwartał. Liczba akcji wzrosła już o <strong>38,03% w rok</strong>, do 1,40 miliarda. Nawet przy udanej restrukturyzacji część korzyści przechwycą nowi akcjonariusze.</div>
+
+      <div class="alert alert-danger"><strong>2. Altman Z-Score -4,47 — wartość ujemna.</strong> Poniżej 1,8 oznacza strefę zagrożenia; tutaj wskaźnik jest ujemny, najniższy w całej tej serii analiz. Dług <strong>1,04 miliarda</strong>, pokrycie odsetek <strong>-7,54</strong>, wskaźnik szybki 0,82. Odsetki są płacone z kapitału, nie z zysku.</div>
+
+      <div class="alert alert-danger"><strong>3. Pożyczka DOE na $1,66 mld w zawieszeniu, do tego pozew zbiorowy.</strong> Spółka zawiesiła działania związane z gwarancją kredytową Departamentu Energii i sama ostrzegła, że stwarza to ryzyko dla samej pożyczki. Równolegle toczy się pozew <em>Ortolani przeciwko Plug Power</em>, zarzucający wprowadzanie inwestorów w błąd co do zdolności pozyskania finansowania federalnego. <strong>Ryzyko binarne dotyczące dokładnie tego, co decyduje o przetrwaniu.</strong></div>
+
+      <div class="alert alert-warning"><strong>4. Do rentowności operacyjnej brakuje więcej, niż już pokonano.</strong> Przy przychodach 178,3 mln i kosztach operacyjnych 62 mln potrzebna jest marża brutto około <strong>35%</strong>. Dziś jest <strong>-0,9%</strong>. Marża paliwowa nadal wynosi <strong>-48%</strong> — każdy dolar sprzedanego wodoru kosztuje około półtora dolara.</div>
+
+      <div class="alert alert-warning"><strong>5. Wycena nie jest niska: 4,07× sprzedaż i 5,21× wartość księgowa.</strong> Płacisz ponad czterokrotność przychodów za spółkę, która dopiero doszła do zerowej marży brutto. Wartość księgowa to <strong>42 centy na akcję</strong> przy kursie 2,17 — nie ma majątku, który podtrzymywałby wycenę.</div>
+
+      <div class="alert alert-warning"><strong>6. Dwudziestu analityków, żaden nie prognozuje zysku.</strong> Brak forward P/E i brak prognozy zysku na akcję przy pełnym pokryciu analitycznym to wymowny sygnał. Konsensus $3,55 przy rekomendacji <strong>trzymaj</strong> jest wewnętrznie sprzeczny. Udziałowcy wewnętrzni trzymają <strong>0,63%</strong> akcji.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Przewaga nad PLUG</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Bloom Energy</strong> <span style="color:var(--text-muted);font-size:12px">(spoza portfela)</span></td><td style="color:var(--ocena-sprzedaz)">Ogniwa stacjonarne z dodatnią marżą brutto, ekspozycja na zasilanie centrów danych</td><td>Też kapitałochłonna, ale znacznie dalej w drodze do zysku</td></tr>
+          <tr><td><strong>Ballard Power</strong></td><td>Podobna skala, mocniejszy bilans gotówkowy</td><td style="color:var(--ocena-uwaga)">Również bez rentowności</td></tr>
+          <tr><td><strong>Dostawcy gazów przemysłowych</strong><br><span style="color:var(--text-muted);font-size:12px">(Air Liquide, Linde)</span></td><td style="color:var(--ocena-sprzedaz)">Produkują wodór taniej i zarabiają na tym od dekad</td><td>Nie sprzedają ogniw końcowym użytkownikom</td></tr>
+          <tr><td><strong>Baterie litowo-jonowe</strong></td><td style="color:var(--ocena-sprzedaz)">Tańsze i dojrzalsze w większości zastosowań magazynowych</td><td>Dłuższe ładowanie w pracy wielozmianowej</td></tr>
+          <tr><td><strong>Oklo</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,04%)</span></td><td>Inny wariant tej samej tezy o czystej energii</td><td style="color:var(--ocena-uwaga)">Też przed przychodami — inne ryzyko, ta sama kategoria</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Najgroźniejszy konkurent Plug Power nie jest firmą — jest nim koszt wodoru.</strong><br><br>Dostawcy gazów przemysłowych produkują wodór taniej i robią to rentownie od dziesięcioleci. Właśnie dlatego Plug Power <em>zrezygnował z budowy własnych wytwórni</em> i podpisał umowę na zakup od zewnętrznego dostawcy — przyznając w praktyce, że sam nie potrafi produkować taniej.<br><br>To rozsądna decyzja, ale ma konsekwencję: <strong>spółka staje się pośrednikiem między producentem wodoru a użytkownikiem końcowym</strong>. Marża takiego pośrednika jest z natury cienka, a dziś wynosi -48%.</div>
+
+      <div class="alert alert-warning"><strong>Bloom Energy jest tu najbardziej pouczającym punktem odniesienia</strong> — ta sama kategoria „ogniwa paliwowe", zupełnie inne wykonanie. Bloom osiągnął dodatnią marżę brutto i wszedł w zasilanie centrów danych, czyli dokładnie tam, gdzie płynie dziś kapitał. <strong>Obu spółek nie masz w portfelu</strong>, ale gdybyś rozważał ekspozycję na ogniwa paliwowe, warto porównać je bezpośrednio, zanim wybierzesz tę o ujemnej marży i ujemnym Altman Z-Score.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Kurs zamknięcia 04.09.2026</td><td><strong>$2,17</strong></td><td>+2,84% w ciągu dnia; po sesji $2,159</td></tr>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-kupno)">+45,64%</td><td style="color:var(--ocena-uwaga)">Mimo fundamentów — efekt niskiej bazy i krótkich pozycji</td></tr>
+          <tr><td>Od szczytu z marca 2021</td><td style="color:var(--ocena-sprzedaz)">około <strong>-90%</strong></td><td style="color:var(--ocena-sprzedaz)">Skala zniszczenia kapitału akcjonariuszy</td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td>$2,24</td><td style="color:var(--ocena-uwaga)">Kurs 3,1% poniżej</td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td>$2,47</td><td style="color:var(--ocena-sprzedaz)"><strong>Kurs 12,1% poniżej — trend nadal spadkowy</strong></td></tr>
+          <tr><td><strong>RSI (14)</strong></td><td>47,98</td><td>Neutralnie — bez wyprzedania i bez wykupienia</td></tr>
+          <tr><td>Beta (5 lat)</td><td style="color:var(--ocena-sprzedaz)">2,22</td><td style="color:var(--ocena-sprzedaz)">Ponad dwukrotna zmienność rynku</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>290,92 mln (20,82% akcji)</strong></td><td>21,82% wolnego obrotu; spadek z 294,02 mln</td></tr>
+          <tr><td>Średni wolumen</td><td>64,03 mln akcji</td><td>Bardzo wysoki — akcja spekulacyjna z natury</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Obraz techniczny jest neutralny, ale w sposób, który nie pomaga w podjęciu decyzji.</strong><br><br>Kurs jest <strong>poniżej obu średnich</strong> — 3,1% pod 50-sesyjną i 12,1% pod 200-sesyjną — więc trend pozostaje spadkowy. Jednocześnie RSI 47,98 nie pokazuje ani wyprzedania (brak argumentu za odbiciem), ani wykupienia (brak argumentu za spadkiem).<br><br>Jedyny wyraźny sygnał to <strong>krótka sprzedaż na poziomie 20,82% wszystkich akcji</strong>. Przy becie 2,22 i wolumenie 64 milionów akcji dziennie oznacza to, że każda wiadomość — dobra albo zła — wywoła ruch o kilkanaście procent. <strong>Ta akcja nie porusza się w oparciu o wycenę, tylko o pozycjonowanie.</strong></div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$2,24</strong></td><td>Średnia 50-sesyjna — pierwszy opór</td></tr>
+          <tr><td><strong>$2,47</strong></td><td>Średnia 200-sesyjna — powrót powyżej odwróciłby trend</td></tr>
+          <tr><td><strong>$3,55</strong></td><td>Konsensus 20 analityków (przy rekomendacji „trzymaj")</td></tr>
+          <tr><td><strong>$1,50 – $2,80</strong></td><td>Przedział wartości godziwej — <strong>kurs praktycznie w środku</strong></td></tr>
+          <tr><td style="color:var(--ocena-kupno)"><strong>poniżej $1,70</strong></td><td style="color:var(--ocena-kupno)"><strong>Poziom rewizji tezy w górę</strong> — tam ryzyko emisji jest już w cenie i ocena zmienia się na kupno spekulacyjne</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>powyżej $2,80</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy w dół</strong> — bez dodatniej EBITDA cena powyżej tego poziomu przekracza to, co potrafię obronić</td></tr>
+          <tr><td><strong>$0,42</strong></td><td>Wartość księgowa na akcję — pokazuje, jak mało majątku jest pod tą wyceną</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs pod obiema średnimi, RSI 47,98 bez sygnału. Katalizator — dodatnia EBITDA w IV kwartale — dopiero przed nami, ale przed nim może pojawić się emisja.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Wartość godziwa $1,50–2,80, kurs praktycznie w środku. Wszystko zależy od tego, czy spółka dojdzie do dodatnich przepływów, zanim skończy się gotówka.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>SPRZEDAŻ</strong></td><td>Nawet przy udanej restrukturyzacji rozwodnienie rzędu kilkudziesięciu procent rocznie zjada zwrot dzisiejszego akcjonariusza. Przy Altman Z-Score -4,47 struktura kapitału jest niestabilna.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ocena neutralna wynika z konfliktu dwóch rzetelnych obserwacji — i chcę je postawić obok siebie, bo obie są prawdziwe.</strong><br><br><strong>Po stronie pozytywnej:</strong> marża brutto poprawiła się z -30,7% do -0,9% w cztery kwartały, koszty operacyjne spadły o połowę, wypalanie gotówki o 58%, serwis rośnie o 82% przy marży +27%, a prognoza przychodów została podniesiona. To realna, mierzalna restrukturyzacja, nie obietnica.<br><br><strong>Po stronie negatywnej:</strong> gotówki starczy na około trzy kwartały, dług wynosi 1,04 miliarda, Altman Z-Score jest ujemny, liczba akcji wzrosła o 38% w rok, pożyczka DOE na 1,66 miliarda jest zawieszona, a pozew zbiorowy dotyczy dokładnie kwestii finansowania.<br><br><strong>Przy kursie 2,17 dolara — praktycznie w środku przedziału wartości godziwej — te dwie siły się równoważą.</strong></div>
+
+      <div class="alert alert-danger"><strong>Jedna rzecz przechyla jednak szalę w stronę cierpliwości, a nie działania.</strong> Kiedy wiadomo, że spółka <em>musi</em> pozyskać kapitał w ciągu dwóch–trzech kwartałów, a jej akcje są wycenione uczciwie, oczekiwana ścieżka prowadzi najpierw przez rozwodnienie, a dopiero potem przez ewentualną poprawę. <strong>Nie ma powodu kupować przed emisją, skoro emisja jest niemal pewna.</strong></div>
+
+      <h3>Konkretnie</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Działanie</th><th>Szczegóły</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przy obecnej cenie $2,17</strong></td><td style="color:var(--ocena-uwaga)"><strong>Nie kupować.</strong> Kurs w środku przedziału wartości godziwej, przed prawdopodobną emisją</td></tr>
+          <tr><td><strong>Cena, przy której staje się ciekawa</strong></td><td><strong>poniżej $1,70</strong> — tam ryzyko rozwodnienia jest już opłacone</td></tr>
+          <tr><td><strong>Sugerowana wielkość</strong></td><td>Maksymalnie <strong>0,5–1% portfela</strong> i wyłącznie jako pozycja spekulacyjna, którą można stracić w całości</td></tr>
+          <tr><td><strong>Kontekst portfelowy</strong></td><td>Twój koszyk spekulacyjny to już <strong>15,69%</strong> — PLUG powiększyłby go o kolejną pozycję najwyższego ryzyka</td></tr>
+          <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>poniżej $1,70 → kupno spekulacyjne; powyżej $2,80 → sprzedaż</strong></td></tr>
+          <tr><td><strong>Naturalny moment wejścia</strong></td><td>Po ogłoszeniu emisji i po wynikach za IV kwartał — wtedy dwie największe niewiadome znikną naraz</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-kupno)">Trzy powody, żeby się zainteresować</h3>
+          <ol>
+            <li><strong>Marża brutto: -30,7% → -13% → -0,9%</strong> w cztery kwartały. Trzy kolejne kwartały poprawy, napędzane cięciem kosztów i zmianą modelu zaopatrzenia w wodór.</li>
+            <li><strong>Koszty operacyjne w dół o 50%, wypalanie gotówki o 58%.</strong> Zarząd celuje w pierwszą w historii spółki dodatnią EBITDA już w IV kwartale 2026.</li>
+            <li><strong>Serwis: +82% r/r przy marży +27%.</strong> Powtarzalny, rentowny przychód z zainstalowanej bazy — jedyna część firmy, która zachowuje się jak normalny biznes.</li>
+          </ol>
+        </div>
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-sprzedaz)">Trzy powody, żeby trzymać się z daleka</h3>
+          <ol>
+            <li><strong>Gotówki na ~3 kwartały, akcji o 38% więcej niż rok temu.</strong> $161,9 mln przy zużyciu $61 mln na kwartał — emisja to arytmetyka, nie ryzyko.</li>
+            <li><strong>Altman Z-Score -4,47</strong>, dług $1,04 mld, pokrycie odsetek -7,54. Odsetki płacone z kapitału, nie z zysku.</li>
+            <li><strong>Pożyczka DOE na $1,66 mld zawieszona plus pozew zbiorowy</strong> o wprowadzanie w błąd co do dostępu do finansowania federalnego. Ryzyko binarne dotyczące przetrwania.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="alert alert-success"><strong>Thesis-breaker (co zmieniłoby ocenę na kupno):</strong> dodatnia EBITDA w IV kwartale 2026 potwierdzona wynikiem, marża brutto trwale powyżej zera, emisja przeprowadzona bez głębokiego rozwodnienia albo spadek kursu poniżej $1,70.</div>
+      <div class="alert alert-danger"><strong>Thesis-confirmer (co potwierdziłoby ostrożność):</strong> emisja akcji z dyskontem, utrata gwarancji kredytowej DOE, niekorzystne rozstrzygnięcie pozwu zbiorowego albo cofnięcie się marży brutto poniżej -5%.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Plug Power jest spółką, o której większość statystyk mówi nieprawdę — i to w obie strony.</strong> Dane za dwanaście miesięcy pokazują marżę brutto minus 24,75%, stratę netto 1,64 miliarda przy przychodach 744 milionów i ujemne przepływy 560 milionów. To obraz firmy w agonii. Ale ostatni kwartał wygląda zupełnie inaczej: <strong>marża brutto minus 0,9% wobec minus 30,7% rok wcześniej</strong>, koszty operacyjne w dół o połowę, wypalanie gotówki w dół o 58%, serwis rosnący o 82% przy dodatniej marży 27%. Zarząd podniósł prognozę przychodów i celuje w pierwszą w historii spółki dodatnią EBITDA już w czwartym kwartale. <strong>To jest prawdziwa restrukturyzacja, a nie kosmetyka — i uczciwość wymaga, żeby to powiedzieć wprost.</strong></p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Tyle że poprawa tempa nie naprawiła bilansu. W kasie jest <strong>161,9 miliona dolarów nieograniczonej gotówki, a kwartalne zużycie wynosi 61 milionów</strong> — czyli około trzech kwartałów. Dług sięga 1,04 miliarda, pokrycie odsetek jest ujemne, Altman Z-Score wynosi <strong>-4,47</strong>, a liczba akcji wzrosła w rok o <strong>38%</strong>. Do tego gwarancja kredytowa Departamentu Energii na 1,66 miliarda została zawieszona, a pozew zbiorowy zarzuca spółce wprowadzanie inwestorów w błąd właśnie co do dostępu do tych pieniędzy. <strong>Kolejna emisja nie jest ryzykiem — jest arytmetyką. A skoro kurs 2,17 dolara leży praktycznie w środku mojego przedziału wartości godziwej, nie ma powodu kupować przed nią.</strong></p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby warto było tu wejść</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Marża brutto musi realnie rosnąć.</strong> Z -30,7% przez -13% do -0,9% w cztery kwartały — spełnione i to najmocniejszy element tezy.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Koszty muszą spaść.</strong> Koszty operacyjne -50% r/r do $62 mln, wypalanie gotówki -58% kw/kw do $61 mln — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Bilans musi wytrzymać do rentowności.</strong> $161,9 mln gotówki przy zużyciu $61 mln na kwartał to około trzech kwartałów — niespełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Finansowanie musi być pewne.</strong> Pożyczka DOE na $1,66 mld zawieszona, pozew zbiorowy w toku, liczba akcji +38% r/r.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Marża paliwowa musi dojść do zera.</strong> Poprawa z -91% do -48% jest ogromna, ale każdy dolar sprzedanego wodoru wciąż kosztuje około półtora dolara.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Cena musi dawać margines na ryzyko.</strong> Przy $2,17 kurs jest w środku przedziału $1,50–2,80; 4,07× sprzedaż to niemało jak na zerową marżę.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Listopad 2026</strong></td><td><strong>Wyniki za III kwartał</strong></td><td>Sprawdzian, czy marża brutto przekroczyła zero i jak wygląda gotówka</td></tr>
+            <tr><td style="color:var(--ocena-kupno)"><strong>Luty 2027</strong></td><td style="color:var(--ocena-kupno)"><strong>Wyniki za IV kwartał — cel dodatniej EBITDA</strong></td><td style="color:var(--ocena-kupno)">Najważniejsze wydarzenie; pierwsza taka EBITDA w historii spółki</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">Termin nieokreślony</td><td style="color:var(--ocena-sprzedaz)"><strong>Emisja akcji lub nowe zadłużenie</strong></td><td style="color:var(--ocena-sprzedaz)">Arytmetycznie konieczna w ciągu 2–3 kwartałów</td></tr>
+            <tr><td>Termin nieokreślony</td><td>Rozstrzygnięcie statusu pożyczki DOE ($1,66 mld)</td><td>Ryzyko binarne w obie strony</td></tr>
+            <tr><td>Termin nieokreślony</td><td>Postępy pozwu zbiorowego <em>Ortolani</em></td><td>Dotyczy dostępu do finansowania federalnego</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Marża brutto kwartalna</strong></td><td>-0,9% (było -30,7%)</td><td>cofnięcie poniżej -5%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td><strong>Gotówka nieograniczona</strong></td><td>$161,9 mln</td><td>spadek poniżej $100 mln</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Zużycie gotówki na kwartał</strong></td><td>$61 mln (było ~$145 mln)</td><td>wzrost powyżej $80 mln</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td><strong>Liczba akcji</strong></td><td>1,40 mld, +38,03% r/r</td><td>każda nowa emisja</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Marża segmentu paliwowego</strong></td><td>-48% (było -91%)</td><td>brak dalszej poprawy</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td><strong>Kurs akcji</strong></td><td>$2,17</td><td>spadek poniżej $1,70 lub wzrost powyżej $2,80</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Przy cenie $2,17</strong></td><td>Nie kupować — kurs w środku przedziału wartości godziwej, przed prawdopodobną emisją</td></tr>
+            <tr><td><strong>Pierwsza transza</strong></td><td>Poniżej <strong>$1,70</strong> — połowa docelowej pozycji</td></tr>
+            <tr><td><strong>Druga transza</strong></td><td>Po ogłoszeniu emisji albo po potwierdzonej dodatniej EBITDA</td></tr>
+            <tr><td><strong>Wielkość docelowa</strong></td><td>Maksymalnie <strong>0,5–1% portfela</strong> — pozycja, którą można stracić w całości</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Powyżej <strong>$2,80</strong> bez potwierdzonej rentowności</td></tr>
+            <tr><td><strong>Warunek wyjścia z tezy</strong></td><td>Cofnięcie marży brutto poniżej -5%, utrata pożyczki DOE albo emisja z głębokim dyskontem</td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td>poniżej <strong>$1,70</strong> → kupno spekulacyjne; powyżej <strong>$2,80</strong> → sprzedaż</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p>Byłoby łatwo napisać o Plug Power raport miażdżący — ujemna marża brutto za dwanaście miesięcy, strata dwuipółkrotnie większa od przychodów, Altman Z-Score minus 4,47, kurs 90% poniżej szczytu i liczba akcji rosnąca o 38% rocznie. Ale byłoby to nieuczciwe wobec tego, co pokazał ostatni kwartał: <strong>marża brutto poprawiona z minus 30,7% do minus 0,9% w cztery kwartały</strong>, koszty operacyjne ścięte o połowę, wypalanie gotówki mniejsze o 58%, segment serwisowy rosnący o 82% przy dodatniej marży 27%. To jest prawdziwa restrukturyzacja i zarząd zasługuje za nią na uznanie.</p>
+        <p>Problem polega na tym, że <strong>poprawa tempa spotkała się z bilansem, który nie daje na nią czasu</strong>. Sto sześćdziesiąt dwa miliony gotówki przy zużyciu sześćdziesięciu jeden milionów na kwartał to około trzech kwartałów — a do rentowności operacyjnej brakuje jeszcze więcej marży, niż spółka zdołała odzyskać. Do tego dochodzi miliard długu przy ujemnym pokryciu odsetek, zawieszona gwarancja kredytowa na 1,66 miliarda i pozew zbiorowy dotyczący dokładnie tej kwestii. <strong>Kolejna emisja jest niemal pewna, a kurs 2,17 dolara leży w samym środku mojego przedziału wartości godziwej — więc nie ma powodu kupować przed nią.</strong> Ciekawie robi się poniżej 1,70 dolara albo po potwierdzonej dodatniej EBITDA. Wtedy, i tylko wtedy, w rozmiarze, którego strata nie zaboli.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$1,50 – $2,80</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$1,00 (-54%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$2,80 (+29%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Brak przy $2,17</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3, listopad</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 8 września 2026 | Cena: <strong>$2,17</strong> — cena podana przez użytkownika, zgodna co do centa z zamknięciem sesji 04.09.2026 | Pierwsza analiza PLUG — spółka spoza portfela | Dane: StockAnalysis / S&amp;P Global Market Intelligence, komunikaty Plug Power IR (wyniki II kwartału 2026 z 10 sierpnia), doniesienia prasowe o zawieszeniu działań przy gwarancji kredytowej DOE, zmianie modelu zaopatrzenia w wodór i pozwie zbiorowym — <strong>stan danych na 08.09.2026</strong>. Wyliczenie runway (ok. 3 kwartałów) to obliczenie własne z gotówki nieograniczonej i kwartalnego zużycia gotówki | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

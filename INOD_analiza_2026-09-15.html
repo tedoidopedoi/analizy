@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INOD — Innodata | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: INOD</div>
+    <div class="company-name">Innodata Inc.</div>
+    <div class="company-sub">Przygotowanie i anotacja danych treningowych dla modeli AI · 10 107 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">Spoza portfela — pierwsza analiza</span>
+      <span class="meta-tag">Dwóch klientów = 71% przychodów</span>
+      <span class="meta-tag">-47% w trzy miesiące</span>
+      <span class="meta-tag">Beta 2,88</span>
+      <div class="price-display">
+        <div class="price-main">$55,24</div>
+        <div class="price-sub">zamknięcie 14.09.2026 (+3,82%) | Twoje $55 — zgodne ze źródłem</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Infrastruktura AI</span><span class="temat">Usługi danych</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — biznes realnie zarabia i rośnie o 58%, ale wskaźnik 10x przepływów jest iluzją z przedpłat klientów, a dwóch klientów daje 71% przychodów">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">dobry biznes, zwodnicze wskaźniki, ekstremalna koncentracja</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$44 – $72</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-20% do +30%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>6 sierpnia 2026</b><em>Q3 — listopad</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Przepływy</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (zamknięcie 14.09)</div><div class="metric-value">$55,24</div><div class="metric-detail">9,8% pod średnią 50-sesyjną, 9,1% pod 200-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Spadek w 3 miesiące</div><div class="metric-value red">-47%</div><div class="metric-detail">Ponad -50% od szczytu z 4 czerwca</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">$92,1 mln</div><div class="metric-detail"><strong>+58% r/r</strong> · skoryg. EBITDA +92%</div></div>
+    <div class="metric-card"><div class="metric-label">Koncentracja klientów</div><div class="metric-value red">71%</div><div class="metric-detail"><strong>Dwóch klientów: 37% + 34%</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Przepływy vs zysk netto</div><div class="metric-value red">196 / 46</div><div class="metric-detail"><strong>Gotówka 4× wyższa od zysku — patrz sekcja 16</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Forward P/E vs trailing</div><div class="metric-value red">49,55 / 41,02</div><div class="metric-detail"><strong>Forward wyżej — zysk ma spaść</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Gotówka netto</div><div class="metric-value green">$246,5 mln</div><div class="metric-detail">$7,17/akcję · Altman Z 8,02</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (4 analityków)</div><div class="metric-value green">$122,75</div><div class="metric-detail">+122%, ale pokrycie bardzo cienkie</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p><strong>Innodata jest spoza portfela</strong> — to pierwsza analiza tej spółki. Twoja cena $55 zgadza się z zamknięciem sesji 14 września ($55,24, +3,82%), więc nie ma tu żadnej rozbieżności do wyjaśniania.</p>
+
+      <p>Innodata przygotowuje i anotuje <strong>dane treningowe dla modeli sztucznej inteligencji</strong> — czyli wykonuje pracę, bez której duże modele językowe nie powstają: opisywanie, klasyfikowanie, korygowanie i ocenianie zbiorów danych. Robi to siłami <strong>10 107 pracowników</strong>, głównie na rynkach o niskich kosztach pracy. Przychody za dwanaście miesięcy <strong>317,16 mln dolarów</strong>, kapitalizacja <strong>1,90 mld</strong>.</p>
+
+      <h3>Wyniki za II kwartał 2026 — 6 sierpnia — były rekordowe</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wynik</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody kwartalne</strong></td><td style="color:var(--ocena-kupno)"><strong>$92,1 mln, +58% r/r</strong></td><td style="color:var(--ocena-kupno)">Powyżej konsensusu</td></tr>
+          <tr><td><strong>Skorygowana EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>$25,4 mln, +92% r/r</strong></td><td style="color:var(--ocena-kupno)">27,5% przychodów</td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-kupno)">$14,4 mln · $0,43/akcję</td><td style="color:var(--ocena-kupno)">Podwojony rok do roku</td></tr>
+          <tr><td><strong>Prognoza roczna — potwierdzona</strong></td><td style="color:var(--ocena-kupno)"><strong>wzrost przychodów 40% i więcej</strong></td><td>Nowe kontrakty badawcze i związane z AI</td></tr>
+          <tr><td><strong>Największy klient</strong></td><td style="color:var(--ocena-uwaga)"><strong>37% przychodów</strong></td><td style="color:var(--ocena-kupno)">Spadek z 56% w I kwartale — dywersyfikacja działa</td></tr>
+          <tr><td><strong>Klient z wielkiej technologii</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>wzrost z 17% na 34%</strong></td><td style="color:var(--ocena-sprzedaz)">Razem dwóch klientów: <strong>ponad 70%</strong></td></tr>
+          <tr><td>Zmiana kierownictwa</td><td style="color:var(--ocena-uwaga)">Rahul Singhal prezesem</td><td>Jack Abuhoff przechodzi na stanowisko przewodniczącego wykonawczego</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>A mimo tych wyników kurs spadł o 47% w trzy miesiące i o ponad 50% od szczytu z 4 czerwca.</strong><br><br>Przyczyny, jakie podaje rynek: wysoka wycena (prognozowane P/E około 45× wobec średniej branżowej usług technologicznych rzędu 23×), realizacja zysków, wyjście kapitału z drogich spółek związanych z AI, <strong>koncentracja klientów</strong>, zmiana prezesa i zmienność przychodów wynikająca z projektowego charakteru pracy.<br><br>Zwróć uwagę, że zmiana za 52 tygodnie to tylko <strong>-11,70%</strong>. To oznacza, że kurs najpierw poszedł ostro w górę, a potem oddał cały ten ruch — dzisiejsza cena jest mniej więcej tam, gdzie rok temu.</div>
+
+      <div class="alert alert-warning"><strong>Ale najważniejszej rzeczy o tej spółce nie znajdziesz w żadnym z tych komentarzy — i to jest oś całej tej analizy.</strong><br><br>Za dwanaście miesięcy Innodata wykazała <strong>zysk netto 46,49 mln dolarów</strong> i jednocześnie <strong>przepływy operacyjne 196,20 mln</strong>. Gotówka z działalności jest <strong>ponad czterokrotnie wyższa od zysku</strong>, a amortyzacja wynosi zaledwie 3,80 mln, więc nie ona tę różnicę tłumaczy.<br><br>To sprawia, że cena do wolnych przepływów wynosi <strong>10,33</strong>, a wartość przedsiębiorstwa do wolnych przepływów <strong>8,99</strong> — spółka wygląda na okazyjnie tanią. <strong>Pokazuję w sekcji 16, dlaczego uważam, że to iluzja.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — PRACA, KTÓREJ MODELE NIE WYKONAJĄ ZA SIEBIE</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Element</th><th>Czym jest</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Anotacja danych treningowych</strong></td><td>Opisywanie, klasyfikowanie i korygowanie zbiorów dla modeli językowych</td><td style="color:var(--ocena-kupno)">Rdzeń przychodów, popyt rośnie z każdą generacją modeli</td></tr>
+          <tr><td><strong>Ocena i strojenie modeli</strong></td><td>Ludzka ocena odpowiedzi, uczenie ze wzmocnieniem</td><td style="color:var(--ocena-kupno)">Wyższa wartość dodana niż sama anotacja</td></tr>
+          <tr><td>Dane specjalistyczne</td><td>Medycyna, prawo, finanse — wymagają wiedzy dziedzinowej</td><td style="color:var(--ocena-kupno)">Najwyższa marża, najtrudniej zastąpić</td></tr>
+          <tr><td>Usługi wydawnicze (dziedzictwo)</td><td>Historyczny biznes przetwarzania treści</td><td>Stabilna, malejąca część</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Model tej spółki jest zupełnie inny, niż sugeruje etykieta „spółka AI" — i lepiej to zrozumieć od razu.</strong><br><br><strong>Przychód na pracownika wynosi 31 381 dolarów.</strong> Dla porównania Vertiv ma 337 635, a Western Digital 322 975. Innodata zatrudnia <strong>ponad dziesięć tysięcy osób</strong> i to ich praca jest produktem. <strong>To nie jest firma programistyczna — to firma usługowa o dużej skali zatrudnienia, sprzedająca uporządkowaną pracę ludzką.</strong><br><br>Konsekwencja jest podwójna. Z jednej strony marża brutto 43,20% i operacyjna 17,48% są jak na taki model przyzwoite, a spółka nie potrzebuje kapitału — nakłady inwestycyjne to 12,36 mln przy 317 mln przychodów. Z drugiej: <strong>wzrost wymaga zatrudniania, więc dźwignia operacyjna jest ograniczona</strong>. Nie da się podwoić przychodów bez zwiększenia liczby ludzi o podobny rząd wielkości.</div>
+
+      <div class="alert alert-warning"><strong>Fosa jest tu realna, ale węższa, niż się wydaje.</strong> Przewagą Innodaty jest zorganizowanie i przeszkolenie dziesięciu tysięcy osób oraz procesy kontroli jakości — tego konkurent nie zbuduje w kwartał. Przy danych specjalistycznych (medycyna, prawo) bariera jest wyższa, bo potrzeba ludzi z wiedzą dziedzinową.<br><br>Ale to <strong>nie jest fosa technologiczna</strong>. Klient, który zdecyduje się zbudować własny zespół albo przenieść pracę do konkurenta, ma do pokonania koszt organizacyjny, a nie techniczny. <strong>Przy dwóch klientach dających 71% przychodów to rozróżnienie ma zasadnicze znaczenie.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na Innodatę</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Popyt na dane treningowe</strong></td><td style="color:var(--ocena-kupno)">Rośnie z każdą generacją modeli</td><td style="color:var(--ocena-kupno)">Wzrost przychodów 58% r/r</td></tr>
+          <tr><td><strong>Przesunięcie ku ocenie i strojeniu</strong></td><td style="color:var(--ocena-kupno)">Modele wymagają coraz więcej ludzkiej oceny</td><td style="color:var(--ocena-kupno)">Wyższa wartość zlecenia</td></tr>
+          <tr><td><strong>Dane syntetyczne</strong></td><td style="color:var(--ocena-sprzedaz)">Modele generują dane treningowe same</td><td style="color:var(--ocena-sprzedaz)"><strong>Główne ryzyko strukturalne</strong></td></tr>
+          <tr><td>Prognoza wzrostu przychodów (3 lata)</td><td style="color:var(--ocena-uwaga)"><strong>tylko +11,31% rocznie</strong></td><td style="color:var(--ocena-sprzedaz)">Wobec 40%+ w 2026 — ostre wyhamowanie</td></tr>
+          <tr><td>Nakłady operatorów modeli</td><td style="color:var(--ocena-uwaga)">Cykliczne, koncentrowane u kilku podmiotów</td><td style="color:var(--ocena-sprzedaz)">Ten sam czynnik ryzyka co koncentracja klientów</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Zestawienie dwóch liczb z tej tabeli jest najbardziej niepokojącym elementem otoczenia rynkowego.</strong><br><br>Spółka <strong>potwierdza na 2026 rok wzrost przychodów „40% i więcej"</strong>. Tymczasem prognoza konsensusu na kolejne trzy lata to <strong>+11,31% rocznie</strong>.<br><br>To nie jest drobne wyhamowanie — to <strong>spadek tempa o trzy czwarte</strong>. I to jest najprawdopodobniej powód, dla którego <strong>prognozowane P/E (49,55) jest wyższe od historycznego (41,02)</strong>: rynek zakłada, że dzisiejszy zysk na akcję 1,35 dolara spadnie, a nie urośnie.<br><br>Pytanie, na które nie potrafię odpowiedzieć z zewnątrz, brzmi: czy prognoza 11,31% to ostrożność analityków (jest ich tylko czterech), czy realne oczekiwanie, że boom na przygotowywanie danych treningowych jest zjawiskiem jednorazowym.</div>
+
+      <div class="alert alert-warning"><strong>Ryzyko danych syntetycznych zasługuje na osobne zdanie, bo dotyka samej istoty tego biznesu.</strong> Coraz więcej treningu modeli odbywa się na danych wygenerowanych przez inne modele, a nie opisanych przez ludzi. Jeśli ten kierunek okaże się dominujący, <strong>popyt na pracę dziesięciu tysięcy anotatorów strukturalnie maleje</strong>.<br><br>Przeciwargument jest taki, że im lepsze modele, tym trudniejsza staje się ocena ich odpowiedzi — a to wymaga ludzi o coraz wyższych kwalifikacjach, nie niższych. Dlatego Innodata przesuwa się ku danym specjalistycznym. <strong>Który z tych dwóch procesów wygra, rozstrzygnie się w tej dekadzie i nie da się tego dziś przesądzić.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI — NAJWIĘKSZE RYZYKO TEJ SPÓŁKI</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Klient</th><th>I kw. 2026</th><th>II kw. 2026</th><th>Kierunek</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Największy klient</strong></td><td style="color:var(--ocena-sprzedaz)">56%</td><td style="color:var(--ocena-uwaga)"><strong>37%</strong></td><td style="color:var(--ocena-kupno)">Spadek udziału — dobrze</td></tr>
+          <tr><td><strong>Klient z wielkiej technologii</strong></td><td>17%</td><td style="color:var(--ocena-sprzedaz)"><strong>34%</strong></td><td style="color:var(--ocena-sprzedaz)">Podwojenie udziału</td></tr>
+          <tr><td><strong>Razem dwóch klientów</strong></td><td>73%</td><td style="color:var(--ocena-sprzedaz)"><strong>71%</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Bez istotnej poprawy</strong></td></tr>
+          <tr><td>Cała reszta</td><td>27%</td><td>29%</td><td>Rozproszona</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Tę tabelę trzeba przeczytać uważnie, bo pierwsza reakcja bywa myląca.</strong><br><br>Komunikaty spółki i komentarze rynkowe podkreślają, że <strong>udział największego klienta spadł z 56% do 37%</strong> — i słusznie, bo to realna poprawa. Ale w tym samym czasie <strong>drugi klient urósł z 17% do 34%</strong>.<br><br><strong>Łącznie dwóch klientów odpowiada za 71% przychodów wobec 73% kwartał wcześniej.</strong> Koncentracja praktycznie się nie zmieniła — zmienił się tylko jej rozkład między dwa podmioty. To nie jest dywersyfikacja, to przetasowanie.<br><br>Praktyczny skutek: <strong>utrata jednego z tych dwóch klientów oznacza natychmiastową utratę ponad jednej trzeciej przychodów.</strong> Przy biznesie projektowym, gdzie zlecenia nie są wieloletnimi abonamentami, to ryzyko realne, a nie teoretyczne.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Przychód na pracownika</td><td style="color:var(--ocena-uwaga)">$31 381</td><td>Zysk na pracownika $4 599 · 10 107 osób</td></tr>
+          <tr><td><strong>Udziałowcy wewnętrzni</strong></td><td>3,77%</td><td>Niewiele, ale więcej niż w Vertivie (0,19%)</td></tr>
+          <tr><td>Instytucje</td><td>58,24%</td><td>Wolny obrót 33,09 mln z 34,38 mln akcji</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>4,80 mln (13,95% akcji)</strong></td><td style="color:var(--ocena-sprzedaz)">14,50% wolnego obrotu; <strong>wzrost z 4,61 mln</strong></td></tr>
+          <tr><td>Zmiana liczby akcji</td><td style="color:var(--ocena-kupno)">+3,62% r/r, ale <strong>-2,25% kw/kw</strong></td><td style="color:var(--ocena-kupno)">W ostatnim kwartale skup</td></tr>
+        </tbody>
+      </table></div>
+
+      <p><strong>Krótka sprzedaż na poziomie 13,95% akcji i rosnąca</strong> pokazuje, że spory kapitał gra przeciw tej spółce — najprawdopodobniej właśnie na koncentracji klientów i na wyhamowaniu wzrostu. Przy wskaźniku 3,08 dnia na zamknięcie pozycji działa to jednak w obie strony.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th><th>Marża</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody</strong></td><td><strong>$317,16 mln</strong></td><td>—</td></tr>
+          <tr><td>Zysk brutto</td><td style="color:var(--ocena-kupno)">$137,01 mln</td><td style="color:var(--ocena-kupno)">43,20%</td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td style="color:var(--ocena-kupno)"><strong>$55,45 mln</strong></td><td style="color:var(--ocena-kupno)">17,48%</td></tr>
+          <tr><td>EBITDA</td><td style="color:var(--ocena-kupno)">$59,25 mln</td><td>18,68%</td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td style="color:var(--ocena-kupno)">$58,44 mln</td><td>18,42%</td></tr>
+          <tr><td><strong>Wynik netto</strong></td><td style="color:var(--ocena-kupno)"><strong>$46,49 mln</strong></td><td style="color:var(--ocena-kupno)">14,66% · <strong>$1,35/akcję</strong></td></tr>
+          <tr><td>Podatek</td><td>$11,95 mln</td><td style="color:var(--ocena-kupno)">Stawka <strong>20,45% — normalna</strong></td></tr>
+          <tr><td><strong>Przepływy operacyjne</strong></td><td style="color:var(--ocena-uwaga)"><strong>$196,20 mln</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>4,2× zysk netto — anomalia</strong></td></tr>
+          <tr><td>Nakłady inwestycyjne</td><td style="color:var(--ocena-kupno)">-$12,36 mln</td><td>3,9% przychodów</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-uwaga)"><strong>$183,85 mln</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Marża 57,97% — niemożliwa dla usług</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Zacznę od tego, co w tej tabeli jest w porządku — a jest tego sporo.</strong><br><br>Rachunek wyników jest <strong>czysty</strong>. Wynik operacyjny 55,45 mln przechodzi w wynik przed opodatkowaniem 58,44 mln (odsetki od gotówki dodają, nie odejmują), a stawka podatkowa wynosi <strong>20,45%, czyli normalnie</strong>. Nie ma tu pozycji pozaoperacyjnych zawyżających zysk, nie ma korzyści podatkowej zamiast obciążenia. Marża operacyjna 17,48% przy modelu opartym na pracy ludzkiej jest solidna.<br><br>To ważne, bo w większości spółek, które analizowałem w ostatnich tygodniach, właśnie ten fragment był zepsuty.</div>
+
+      <div class="alert alert-danger"><strong>A teraz to, co jest nie w porządku — i co uważam za najważniejszą rzecz w całej tej analizie.</strong><br><br><strong>Marża wolnych przepływów wynosi 57,97%.</strong> To znaczy, że z każdego dolara przychodu spółka zatrzymuje 58 centów gotówki.<br><br>Dla firmy, która zatrudnia <strong>ponad dziesięć tysięcy osób</strong> i ma marżę brutto 43,20%, jest to <strong>arytmetycznie niemożliwe jako stan trwały</strong>. Sam koszt wytworzenia pochłania 56,8% przychodów, w większości w postaci wynagrodzeń wypłacanych co miesiąc. Nie da się jednocześnie wypłacać tych pensji i zatrzymywać 58% przychodów.<br><br>Różnica między zyskiem netto (46,49 mln) a przepływami operacyjnymi (196,20 mln) wynosi <strong>blisko 150 milionów dolarów</strong>, a amortyzacja to zaledwie 3,80 mln. <strong>Ta gotówka musi pochodzić z kapitału obrotowego — i rozkładam to w sekcji 16.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$1,90 mld</td><td style="color:var(--ocena-kupno)">Wartość przedsiębiorstwa <strong>$1,65 mld</strong> — gotówka netto</td></tr>
+          <tr><td><strong>Cena / zysk</strong></td><td style="color:var(--ocena-uwaga)"><strong>41,02</strong></td><td>Zysk czysty — bez pozycji pozaoperacyjnych</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>49,55</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>WYŻSZY od historycznego — zysk ma spaść</strong></td></tr>
+          <tr><td>Cena / sprzedaż</td><td style="color:var(--ocena-uwaga)">5,99</td><td>Prognozowana 4,91; EV/sprzedaż 5,21</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>10,33 — nie wierz tej liczbie</strong></td><td style="color:var(--ocena-sprzedaz)">EV/FCF 8,99; przepływy zawyżone kapitałem obrotowym</td></tr>
+          <tr><td><strong>EV / EBITDA</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>27,89</strong></td><td>EV/EBIT 29,81 — drogo</td></tr>
+          <tr><td>EV / skoryg. EBITDA (roczne tempo Q2)</td><td style="color:var(--ocena-uwaga)"><strong>około 16,2×</strong></td><td style="color:var(--ocena-uwaga)">$25,4 mln × 4 = $101,6 mln — <strong>obliczenie własne</strong></td></tr>
+          <tr><td>Cena / wartość księgowa</td><td style="color:var(--ocena-sprzedaz)">11,90</td><td>Do aktywów materialnych 13,25; księga $4,64/akcję</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-kupno)"><strong>8,02</strong></td><td style="color:var(--ocena-kupno)">Bardzo bezpiecznie. Piotroski 5</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Źródło: StockAnalysis / S&amp;P Global Market Intelligence, stan 15.09.2026. Cena $55,24 to zamknięcie sesji 14.09.2026 — zgodna z ceną $55 podaną przez użytkownika. Przeliczenie EV do skorygowanej EBITDA w tempie rocznym to obliczenie własne.</p>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>41,02</td><td>Zysk na akcję <strong>$1,35</strong>, przychody TTM $317,16 mln. <strong>Zysk nie jest zaburzony</strong> — stawka podatkowa 20,45%</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>49,55</strong></td><td style="color:var(--ocena-sprzedaz)">Implikuje zysk ok. <strong>$1,11/akcję</strong> — czyli <em>spadek</em> z dzisiejszych $1,35</td></tr>
+          <tr><td><strong>PEG</strong></td><td>nie dotyczy</td><td>&lt; 1,0 = wzrost tańszy niż mnożnik sugeruje; brak prognozy zysku na akcję</td></tr>
+          <tr><td>Prognoza wzrostu (3 lata)</td><td style="color:var(--ocena-sprzedaz)">przychody <strong>+11,31%</strong> · zysk: brak prognozy</td><td style="color:var(--ocena-sprzedaz)"><strong>Wobec 40%+ potwierdzonych na 2026</strong></td></tr>
+          <tr><td>Odniesienie branżowe</td><td>usługi technologiczne: ok. 23× forward</td><td style="color:var(--ocena-sprzedaz)">Innodata ponad dwukrotnie drożej</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> <strong>Forward P/E wyższy od historycznego to sygnał, że rynek oczekuje spadku zysku</strong>, a nie wzrostu. Przy spółce rosnącej o 58% rok do roku brzmi to sprzecznie — dopóki nie zestawi się tego z prognozą wzrostu przychodów na kolejne trzy lata, która wynosi zaledwie <strong>11,31% rocznie</strong>. Rynek zakłada, że 2026 jest rokiem wyjątkowym, a nie nowym poziomem bazowym.</p>
+      <p>Mnożnik 49,55× wobec około 23× dla branży usług technologicznych oznacza <strong>ponad dwukrotną premię</strong>. Uzasadniałby ją utrzymany wzrost 40% — ale nie wzrost 11%.</p>
+      <div class="alert alert-danger"><strong>Ostrzeżenie o zaburzonej mierze — obowiązkowe i tutaj kluczowe.</strong><br><br>Cena do wolnych przepływów <strong>10,33</strong> i wartość przedsiębiorstwa do wolnych przepływów <strong>8,99</strong> sugerują spółkę wycenioną jak dojrzały, tani biznes. <strong>Te dwa wskaźniki są w mojej ocenie bezużyteczne</strong>, bo w liczniku przepływów siedzi około 150 milionów dolarów pochodzących z kapitału obrotowego, a nie z zarobku (sekcja 16).<br><br>Miary, którym ufam przy tej spółce: <strong>EV do skorygowanej EBITDA w tempie rocznym — około 16,2×</strong>, oraz <strong>forward P/E 49,55</strong>. Pierwsza mówi „rozsądnie", druga „drogo". Prawda jest pomiędzy i dlatego ocena wypada neutralnie.</div>
+
+      <h3>Cztery scenariusze na 12–18 miesięcy</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Założenie</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Wzrost utrzymany, koncentracja spada</strong></td><td>Przychody nadal +30%+, trzeci duży klient, zysk na akcję ok. $1,80, mnożnik 40×</td><td><strong>$72</strong></td><td style="color:var(--ocena-kupno)">+30%</td></tr>
+          <tr><td><strong>Stan bazowy</strong></td><td>Wzrost hamuje do ok. 20%, zysk na akcję ok. $1,55, mnożnik 37×</td><td><strong>$58</strong></td><td style="color:var(--ocena-kupno)">+5%</td></tr>
+          <tr><td>Wyhamowanie do prognozy konsensusu</td><td>Wzrost 11%, zysk na akcję $1,10–1,20, mnożnik 38×</td><td>$44</td><td style="color:var(--ocena-sprzedaz)">-20%</td></tr>
+          <tr><td><strong>Utrata jednego z dwóch głównych klientów</strong></td><td>Przychody -30%+, kompresja mnożnika</td><td><strong>$28</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-49%</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Fair value: $44 – $72</strong>, środek $58 (+5%). Kurs $55,24 leży praktycznie w środku przedziału. Konsensus to <strong>$122,75 (+122%)</strong> przy rekomendacji „mocne kupno", ale opiera się na <strong>zaledwie czterech analitykach</strong> — to statystycznie bardzo cienkie pokrycie i nie budowałbym na nim decyzji.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Brutto</td><td style="color:var(--ocena-kupno)">43,20%</td><td>Dobra jak na model oparty na pracy</td></tr>
+          <tr><td><strong>Operacyjna</strong></td><td style="color:var(--ocena-kupno)"><strong>17,48%</strong></td><td style="color:var(--ocena-kupno)">Skoryg. EBITDA w Q2: 27,5% przychodów</td></tr>
+          <tr><td>Netto</td><td style="color:var(--ocena-kupno)">14,66%</td><td>Po normalnym podatku 20,45%</td></tr>
+          <tr><td><strong>Wolnych przepływów</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>57,97%</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Nierealna jako stan trwały — sekcja 16</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Zwrot z kapitału — na tle spółek z tej serii</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>ROIC</th><th>WACC</th><th>Różnica</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Innodata</strong> <span style="color:var(--text-muted);font-size:12px">(spoza portfela)</span></td><td style="color:var(--ocena-kupno)"><strong>122,90%</strong></td><td>20,06%</td><td style="color:var(--ocena-kupno)"><strong>+102,84 pp</strong></td></tr>
+          <tr><td><strong>ASML</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,45%)</span></td><td>—</td><td>—</td><td style="color:var(--ocena-kupno)">ok. +54 pp</td></tr>
+          <tr><td>Western Digital <span style="color:var(--text-muted);font-size:12px">(spoza portfela)</span></td><td>52,90%</td><td>16,23%</td><td style="color:var(--ocena-kupno)">+36,67 pp</td></tr>
+          <tr><td>Vertiv <span style="color:var(--text-muted);font-size:12px">(spoza portfela)</span></td><td>37,58%</td><td>15,19%</td><td style="color:var(--ocena-kupno)">+22,39 pp</td></tr>
+          <tr><td><strong>Grab</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,53%)</span></td><td>5,86%</td><td>8,39%</td><td style="color:var(--ocena-sprzedaz)">-2,53 pp</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Zwrot z zainwestowanego kapitału 122,90% wygląda jak najlepszy wynik w całej tej serii — i wymaga wyjaśnienia, zanim się tym zachwycimy.</strong><br><br>Wskaźnik jest tak wysoki, bo <strong>mianownik jest bardzo mały</strong>: kapitał własny wynosi 159,53 mln dolarów, dług praktycznie nie istnieje (3,83 mln), a znaczna część bilansu to gotówka. Firma usługowa nie potrzebuje majątku — potrzebuje ludzi, a ludzie nie są aktywem bilansowym.<br><br><strong>To realna cecha modelu (biznes nie zjada kapitału), ale nie jest to przewaga konkurencyjna w takim sensie jak u ASML.</strong> ASML ma monopol technologiczny; Innodata ma sprawnie zorganizowaną pracę. Pierwsze jest trudne do odtworzenia, drugie kosztowne, ale możliwe.<br><br>Miarą uczciwszą jest tu <strong>zwrot z zaangażowanego kapitału: 32,41%</strong> i <strong>zwrot z aktywów 14,17%</strong>. Nadal bardzo dobre, ale w skali ziemskiej.</div>
+
+      <p><strong>Dźwignia operacyjna działa, ale ma sufit.</strong> W II kwartale przychody wzrosły o 58%, a skorygowana EBITDA o <strong>92%</strong> — więc skala pomaga. Jednak przy przychodzie na pracownika wynoszącym 31 381 dolarów każde podwojenie sprzedaży wymaga zbliżonego wzrostu zatrudnienia. <strong>To ogranicza, jak wysoko marża operacyjna może dojść</strong> — inaczej niż w oprogramowaniu, gdzie kolejny klient nie kosztuje prawie nic.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gotówka</strong></td><td style="color:var(--ocena-kupno)"><strong>$250,37 mln</strong></td><td style="color:var(--ocena-kupno)">13% kapitalizacji</td></tr>
+          <tr><td>Zadłużenie</td><td style="color:var(--ocena-kupno)">$3,83 mln</td><td style="color:var(--ocena-kupno)"><strong>Gotówka netto +$246,54 mln = $7,17/akcję</strong></td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-kupno)">0,02</td><td style="color:var(--ocena-kupno)">Dług / EBITDA 0,06 — praktycznie zero</td></tr>
+          <tr><td>Wskaźnik bieżący</td><td style="color:var(--ocena-kupno)">1,73</td><td>Szybki 1,61 — zdrowo</td></tr>
+          <tr><td>Kapitał obrotowy</td><td>$135,16 mln</td><td style="color:var(--ocena-uwaga)">Mniej niż gotówka — patrz sekcja 16</td></tr>
+          <tr><td>Kapitał własny</td><td style="color:var(--ocena-uwaga)">$159,53 mln</td><td style="color:var(--ocena-uwaga)">Wartość księgowa <strong>$4,64/akcję</strong> wobec kursu $55,24</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-kupno)"><strong>8,02</strong></td><td style="color:var(--ocena-kupno)">Bardzo bezpiecznie. Piotroski 5</td></tr>
+          <tr><td>Zmiana liczby akcji</td><td style="color:var(--ocena-kupno)">+3,62% r/r, <strong>-2,25% kw/kw</strong></td><td style="color:var(--ocena-kupno)">Skup w ostatnim kwartale</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Bilans jest bardzo mocny i nie budzi zastrzeżeń.</strong> Gotówka netto <strong>246,54 mln dolarów, czyli 7,17 na akcję</strong> — to 13% ceny akcji. Zadłużenie wynosi 3,83 mln, czyli w praktyce zero. Altman Z-Score <strong>8,02</strong>, wskaźnik szybki 1,61, a spółka skupowała własne akcje w ostatnim kwartale (liczba akcji -2,25%).<br><br>W całej tej serii analiz tylko Western Digital i Vertiv miały porównywalnie zdrowe bilanse — a Innodata ma lepszy od obu pod względem zadłużenia.</div>
+
+      <div class="alert alert-warning"><strong>Dwie rzeczy warte uwagi.</strong><br><br><strong>Pierwsza — kapitał obrotowy niższy od gotówki.</strong> Gotówka wynosi 250,37 mln, a kapitał obrotowy 135,16 mln. Oznacza to, że <strong>zobowiązania krótkoterminowe są znaczne</strong> — a to spójne z tezą z sekcji 16, że w bilansie siedzą duże przedpłaty od klientów, księgowane jako zobowiązanie do wykonania usługi.<br><br><strong>Druga — brak poduszki majątkowej.</strong> Wartość księgowa to <strong>4,64 dolara na akcję</strong> przy kursie 55,24, czyli cena do wartości księgowej 11,90. Firma usługowa nie ma majątku — jej wartość to zdolność do wykonywania zleceń. <strong>Jeśli zlecenia znikną, nie ma nic, co podtrzymałoby wycenę.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Wzrost jest realny i potwierdzony.</strong> Przychody w II kwartale <strong>+58% r/r do $92,1 mln</strong>, skorygowana EBITDA <strong>+92%</strong> do 27,5% przychodów, zysk netto podwojony. Zarząd <strong>potwierdził prognozę roczną wzrostu „40% i więcej"</strong>.</div>
+
+      <div class="alert alert-success"><strong>2. Rachunek wyników jest czysty.</strong> Stawka podatkowa 20,45%, brak pozycji pozaoperacyjnych, marża operacyjna 17,48%. To spółka, która <strong>naprawdę zarabia</strong> — inaczej niż większość spółek z tematu AI, które analizowałem ostatnio.</div>
+
+      <div class="alert alert-success"><strong>3. Bilans bez zadłużenia, z dużą gotówką.</strong> Gotówka netto <strong>$246,54 mln, czyli $7,17 na akcję</strong> — 13% ceny. Dług 3,83 mln, Altman Z-Score 8,02. Spółka skupuje własne akcje (-2,25% kw/kw).</div>
+
+      <div class="alert alert-success"><strong>4. Kurs spadł o 47% w trzy miesiące.</strong> Ponad 50% od szczytu z 4 czerwca, przy czym wyniki w tym czasie były rekordowe. Kurs jest <strong>9–10% poniżej obu średnich</strong>, RSI 42,20 — wchodzisz po korekcie, nie na szczycie.</div>
+
+      <div class="alert alert-info"><strong>5. Udział największego klienta realnie spadł</strong> — z 56% w I kwartale do <strong>37% w II</strong>. Kierunek jest właściwy, nawet jeśli łączna koncentracja dwóch największych pozostała wysoka.</div>
+
+      <div class="alert alert-info"><strong>6. Model nie zjada kapitału.</strong> Nakłady inwestycyjne <strong>3,9% przychodów</strong>, zwrot z zaangażowanego kapitału 32,41%, zwrot z aktywów 14,17%. Wzrost nie wymaga dokładania pieniędzy do bilansu — wymaga zatrudniania.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Dwóch klientów daje 71% przychodów.</strong> Największy 37%, drugi 34%. Wobec 73% kwartał wcześniej — <strong>koncentracja praktycznie się nie zmniejszyła</strong>, zmienił się tylko jej rozkład. Utrata jednego z nich to natychmiastowa utrata ponad jednej trzeciej przychodów, przy biznesie projektowym bez wieloletnich abonamentów.</div>
+
+      <div class="alert alert-danger"><strong>2. Wskaźnik 10× przepływów jest iluzją.</strong> Marża wolnych przepływów <strong>57,97%</strong> jest niemożliwa dla firmy zatrudniającej 10 107 osób przy marży brutto 43,20%. Około <strong>150 mln dolarów</strong> różnicy między zyskiem a przepływami pochodzi z kapitału obrotowego, nie z zarobku (sekcja 16). <strong>Realna cena do przepływów jest bliżej 50× niż 10×.</strong></div>
+
+      <div class="alert alert-danger"><strong>3. Forward P/E (49,55) jest wyższy od historycznego (41,02).</strong> Rynek oczekuje <strong>spadku</strong> zysku na akcję z $1,35 do ok. $1,11. Prognoza wzrostu przychodów na trzy lata to <strong>+11,31% rocznie</strong> wobec 40%+ w 2026 — wyhamowanie o trzy czwarte. Premia ponad dwukrotna wobec branży (ok. 23× forward).</div>
+
+      <div class="alert alert-warning"><strong>4. Dane syntetyczne podważają fundament modelu.</strong> Im więcej treningu odbywa się na danych generowanych przez modele, tym mniejszy popyt na pracę dziesięciu tysięcy anotatorów. To ryzyko strukturalne, którego nie da się dziś rozstrzygnąć.</div>
+
+      <div class="alert alert-warning"><strong>5. Zmiana prezesa w środku historii wzrostu.</strong> Rahul Singhal obejmuje stanowisko prezesa, Jack Abuhoff przechodzi na przewodniczącego wykonawczego. Zmiana zaplanowana, ale wypada w momencie, gdy spółka musi udowodnić trwałość wzrostu i zdywersyfikować klientów.</div>
+
+      <div class="alert alert-warning"><strong>6. Beta 2,88 i rosnąca krótka sprzedaż.</strong> Najwyższa beta w całej tej serii analiz. Krótka sprzedaż <strong>13,95% akcji</strong> (14,50% wolnego obrotu), wzrost z 4,61 do 4,80 mln. Do tego cena do wartości księgowej 11,90 — brak jakiejkolwiek poduszki majątkowej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Przewaga nad Innodatą</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Scale AI</strong> <span style="color:var(--text-muted);font-size:12px">(prywatna)</span></td><td style="color:var(--ocena-sprzedaz)">Największa rozpoznawalność, powiązania kapitałowe z wielką technologią</td><td>Nienotowana — brak porównania wyceny</td></tr>
+          <tr><td><strong>Appen</strong></td><td>Dłuższa historia, globalna sieć wykonawców</td><td style="color:var(--ocena-kupno)">Traci kontrakty i kurczy się od lat</td></tr>
+          <tr><td><strong>TaskUs, Telus International</strong></td><td style="color:var(--ocena-sprzedaz)">Większa skala usług outsourcingowych, szersza baza klientów</td><td>Mniejszy udział prac stricte AI-owych</td></tr>
+          <tr><td><strong>Zespoły wewnętrzne klientów</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Największe zagrożenie</strong> — klient może budować własny zespół</td><td>Kosztowne i wolne w uruchomieniu</td></tr>
+          <tr><td><strong>Dane syntetyczne</strong></td><td style="color:var(--ocena-sprzedaz)">Skalują się bez ludzi, koszt bliski zeru</td><td>Wciąż ograniczona jakość w zadaniach specjalistycznych</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Najgroźniejszy konkurent tej spółki nie jest firmą — jest nim własny klient.</strong><br><br>Kiedy jeden odbiorca daje 37% przychodów, a drugi 34%, obaj dokładnie wiedzą, ile płacą i za co. <strong>Przy tej skali zbudowanie własnego zespołu anotacyjnego staje się dla nich policzalną alternatywą</strong> — kosztowną i wolną, ale wykonalną. Innodata nie ma tu patentu ani technologii, której nie dałoby się odtworzyć; ma zorganizowaną pracę.<br><br>To jest realna różnica wobec Vertiva czy ASML, gdzie klient nie może po prostu zacząć sam produkować litografii ani systemów chłodzenia cieczą.</div>
+
+      <div class="alert alert-info"><strong>Gdzie Innodata wygrywa:</strong> w porównaniu z Appenem, który kurczy się od lat, Innodata rośnie o 58% i jest rentowna. To pokazuje, że <strong>wykonanie w tej branży ma znaczenie</strong> — nie wszyscy korzystają z boomu jednakowo. Przesunięcie ku danym specjalistycznym (medycyna, prawo, finanse) jest właściwą odpowiedzią na zagrożenie ze strony danych syntetycznych, bo tam jakość wciąż wymaga człowieka z wiedzą dziedzinową.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zamknięcie 14.09.2026</td><td><strong>$55,24</strong></td><td style="color:var(--ocena-kupno)">+3,82%; po sesji $55,35</td></tr>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-uwaga)">-11,70%</td><td style="color:var(--ocena-sprzedaz)"><strong>Ale -47% w trzy miesiące i ponad -50% od szczytu z 4 czerwca</strong></td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td>$61,25</td><td style="color:var(--ocena-sprzedaz)">Kurs 9,8% poniżej</td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td>$60,76</td><td style="color:var(--ocena-sprzedaz)">Kurs 9,1% poniżej</td></tr>
+          <tr><td><strong>RSI (14)</strong></td><td>42,20</td><td>Neutralnie — jeszcze bez wyprzedania</td></tr>
+          <tr><td><strong>Beta (5 lat)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>2,88</strong></td><td style="color:var(--ocena-sprzedaz)">Najwyższa w całej tej serii analiz</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>4,80 mln (13,95% akcji)</strong></td><td style="color:var(--ocena-sprzedaz)">14,50% wolnego obrotu; wzrost z 4,61 mln</td></tr>
+          <tr><td>Średni wolumen</td><td>953 167 akcji</td><td>Płynność umiarkowana przy 34,38 mln akcji</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Obraz techniczny mówi: korekta zaawansowana, ale niezakończona.</strong><br><br>Zwróć uwagę na rozjazd między dwiema miarami. Zmiana za 52 tygodnie to tylko <strong>-11,70%</strong>, ale w trzy miesiące kurs stracił <strong>47%</strong>, a od szczytu z 4 czerwca ponad połowę. To znaczy, że akcje wystrzeliły w pierwszej połowie roku i oddały cały ten ruch. <strong>Dzisiejsza cena jest mniej więcej tam, gdzie rok temu — mimo że przychody urosły w tym czasie o 58%.</strong><br><br>Obie średnie są blisko siebie ($61,25 i $60,76), a kurs jest 9–10% pod nimi. RSI 42,20 <em>nie</em> pokazuje wyprzedania, więc technicznie jest jeszcze miejsce niżej. Przy becie 2,88 ruchy będą gwałtowne w obie strony.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$60,76 – $61,25</strong></td><td>Obie średnie blisko siebie — silna strefa oporu</td></tr>
+          <tr><td><strong>$122,75</strong></td><td>Konsensus czterech analityków — moim zdaniem nierealistyczny</td></tr>
+          <tr><td><strong>$44 – $72</strong></td><td>Przedział wartości godziwej — <strong>kurs praktycznie w środku</strong></td></tr>
+          <tr><td style="color:var(--ocena-kupno)"><strong>poniżej $48</strong></td><td style="color:var(--ocena-kupno)">Poziom, przy którym relacja zysku do ryzyka wyraźnie się poprawia</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$44</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — dolna granica wartości godziwej</td></tr>
+          <tr><td><strong>$28</strong></td><td>Scenariusz utraty jednego z dwóch głównych klientów</td></tr>
+          <tr><td><strong>$7,17</strong></td><td>Gotówka netto na akcję — twarde dno wyceny (13% kursu)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs pod obiema średnimi, RSI 42,20 bez wyprzedania, krótka sprzedaż rośnie, zmiana prezesa w toku. Wyniki dopiero w listopadzie.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Wartość godziwa $44–72, kurs $55,24 praktycznie w środku. Rozstrzygnie, czy wzrost bliżej 40%, czy bliżej prognozowanych 11%.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Rentowny biznes, gotówka netto 13% kursu, zwrot z zaangażowanego kapitału 32,41%, nakłady 3,9% przychodów. Pod warunkiem rozbicia zależności od dwóch klientów.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ocena neutralna wynika z tego, że trzy różne miary dają trzy różne odpowiedzi — i żadna nie jest oczywiście najważniejsza.</strong><br><br><strong>Cena do wolnych przepływów 10,33</strong> mówi „bardzo tanio". <strong>Uważam ją za bezużyteczną</strong> z powodów z sekcji 16.<br><br><strong>Wartość przedsiębiorstwa do skorygowanej EBITDA w tempie rocznym, około 16,2×</strong>, mówi „rozsądnie" dla spółki rosnącej o 58%.<br><br><strong>Forward P/E 49,55</strong>, ponad dwukrotnie powyżej branży, mówi „drogo" — zwłaszcza że jest <em>wyższy</em> od historycznego, czyli rynek liczy na spadek zysku.<br><br>Przy cenie $55,24 leżącej w samym środku mojego przedziału $44–72, uczciwa odpowiedź brzmi: <strong>spółka jest wyceniona sprawiedliwie, a nie okazyjnie.</strong></div>
+
+      <div class="alert alert-danger"><strong>Co przesądza o ostrożności mimo dobrego biznesu.</strong><br><br><strong>Dwóch klientów daje 71% przychodów.</strong> Poprawa z 73% jest kosmetyczna — zmienił się rozkład, nie skala zależności. Przy biznesie projektowym, bez wieloletnich umów abonamentowych, utrata jednego z nich to <strong>natychmiastowy ubytek ponad jednej trzeciej sprzedaży</strong>. Żadna wycena nie wytrzymuje takiego zdarzenia bez głębokiej korekty — stąd scenariusz negatywny na poziomie $28.<br><br>Do tego dochodzi rozjazd, którego nie umiem rozstrzygnąć: spółka potwierdza wzrost <strong>40%+ w 2026</strong>, a konsensus zakłada <strong>11,31% rocznie</strong> przez kolejne trzy lata. To różnica między spółką wartą 70 dolarów a wartą 44.</div>
+
+      <h3>Konkretnie</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Działanie</th><th>Szczegóły</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przy obecnej cenie $55,24</strong></td><td style="color:var(--ocena-uwaga)"><strong>Nie spieszyć się.</strong> Kurs w środku przedziału wartości godziwej, korekta niezakończona</td></tr>
+          <tr><td><strong>Cena, przy której staje się ciekawa</strong></td><td><strong>poniżej $48</strong> — tam relacja zysku do ryzyka wyraźnie się poprawia</td></tr>
+          <tr><td><strong>Sugerowana wielkość</strong></td><td>Maksymalnie <strong>1,5–2% portfela</strong> — ograniczona przez koncentrację klientów i betę 2,88</td></tr>
+          <tr><td><strong>Kontekst portfelowy</strong></td><td>Temat AI to już około <strong>53,5%</strong> Twojego portfela — INOD by go pogłębił</td></tr>
+          <tr><td><strong>Realizacja zysku</strong></td><td>Powyżej <strong>$72</strong> — górna granica przedziału</td></tr>
+          <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$44</strong></td></tr>
+          <tr><td><strong>Warunek wyjścia z tezy</strong></td><td>Spadek przychodów któregoś z dwóch głównych klientów, obniżenie prognozy rocznej albo utrzymanie koncentracji powyżej 70% przez kolejne dwa kwartały</td></tr>
+          <tr><td><strong>Do sprawdzenia w listopadzie</strong></td><td>Rachunek przepływów i pozycja przedpłat — czy luka z sekcji 16 się domyka, czy powiększa</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-kupno)">Trzy powody, żeby rozważyć</h3>
+          <ol>
+            <li><strong>Wzrost +58% przy realnym zysku.</strong> Skorygowana EBITDA +92% do 27,5% przychodów, zysk netto podwojony, prognoza roczna 40%+ potwierdzona. Rachunek wyników czysty, podatek normalny.</li>
+            <li><strong>Bilans bez długu, gotówka netto $7,17 na akcję</strong> — 13% kursu. Altman Z 8,02, nakłady inwestycyjne 3,9% przychodów, spółka skupuje własne akcje.</li>
+            <li><strong>Kurs -47% w trzy miesiące</strong> mimo rekordowych wyników. Wchodzisz po korekcie, 9–10% pod obiema średnimi, a nie na szczycie z czerwca.</li>
+          </ol>
+        </div>
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-sprzedaz)">Trzy powody, żeby uważać</h3>
+          <ol>
+            <li><strong>Dwóch klientów = 71% przychodów</strong> (37% + 34%), wobec 73% kwartał wcześniej. Koncentracja się nie zmniejszyła — tylko przesunęła.</li>
+            <li><strong>Cena do przepływów 10,33 to iluzja.</strong> Marża FCF 57,97% jest niemożliwa przy 10 107 pracownikach; realny mnożnik jest bliżej 50× (sekcja 16).</li>
+            <li><strong>Forward P/E 49,55 wyższy od historycznego 41,02</strong> — rynek oczekuje spadku zysku. Prognoza wzrostu na 3 lata: 11,31% wobec 40%+ w 2026.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="alert alert-success"><strong>Thesis-confirmer (co zmieniłoby ocenę na kupno):</strong> trzeci duży klient obniżający koncentrację poniżej 60%, utrzymanie wzrostu powyżej 30% w III kwartale, domknięcie luki między zyskiem a przepływami, kurs poniżej $48.</div>
+      <div class="alert alert-danger"><strong>Thesis-breaker:</strong> utrata lub redukcja zamówień od któregoś z dwóch głównych klientów, obniżenie prognozy rocznej, dalsze powiększanie się luki przepływowej, kurs poniżej $44.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Innodata jest jedną z niewielu spółek z tematu sztucznej inteligencji, która naprawdę zarabia pieniądze — i właśnie dlatego warto ją czytać uważniej niż zwykle.</strong> W drugim kwartale przychody wzrosły o <strong>58% do 92,1 miliona dolarów</strong>, skorygowana EBITDA o <strong>92%</strong> do 27,5% przychodów, a zysk netto się podwoił. Rachunek wyników jest czysty: marża operacyjna 17,48%, stawka podatkowa 20,45%, żadnych pozycji pozaoperacyjnych naciągających wynik. Bilans jest jeszcze lepszy — <strong>gotówka netto 246,54 miliona dolarów, czyli 7,17 na akcję, przy zadłużeniu 3,83 miliona</strong> i wskaźniku Altmana 8,02. Do tego kurs spadł o <strong>47% w trzy miesiące</strong> mimo rekordowych wyników, więc nie kupuje się tu szczytu.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Ale dwie rzeczy każą zachować dystans. <strong>Pierwsza: dwóch klientów odpowiada za 71% przychodów</strong> — największy 37%, drugi 34%. Komunikaty podkreślają spadek udziału największego z 56% do 37%, ale łączna koncentracja spadła tylko z 73% do 71%. <strong>To nie dywersyfikacja, tylko przetasowanie</strong>, a utrata jednego z tych klientów oznacza natychmiastową utratę ponad jednej trzeciej sprzedaży. <strong>Druga: wskaźnik ceny do wolnych przepływów wynoszący 10,33 jest w mojej ocenie iluzją.</strong> Marża wolnych przepływów 57,97% jest arytmetycznie nieosiągalna dla firmy zatrudniającej ponad dziesięć tysięcy osób przy marży brutto 43,20%. Około 150 milionów dolarów gotówki pochodzi z kapitału obrotowego, nie z zarobku — <strong>a to zmienia wycenę z „bardzo tanio" na „sprawiedliwie".</strong></p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Spółka musi realnie zarabiać.</strong> Marża operacyjna 17,48%, zysk netto $46,49 mln, podatek 20,45%, rachunek wyników bez zaburzeń — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Bilans musi być bezpieczny.</strong> Gotówka netto $246,54 mln ($7,17/akcję), dług $3,83 mln, Altman Z 8,02, skup akcji — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Wzrost musi być potwierdzony.</strong> Przychody +58%, skoryg. EBITDA +92%, prognoza roczna 40%+ podtrzymana — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Koncentracja klientów musi spaść.</strong> Dwóch klientów = 71% wobec 73% kwartał wcześniej — niespełnione i to główny powód oceny neutralnej.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Przepływy muszą odzwierciedlać zarobek.</strong> Marża FCF 57,97% przy zysku netto 14,66% — luka ok. $150 mln z kapitału obrotowego.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Wzrost musi się utrzymać po 2026.</strong> Spółka mówi 40%+, konsensus 11,31% rocznie — rozstrzygnie się dopiero w kolejnych kwartałach.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-kupno)"><strong>Listopad 2026</strong></td><td style="color:var(--ocena-kupno)"><strong>Wyniki za III kwartał</strong></td><td style="color:var(--ocena-kupno)">Trzy testy naraz: koncentracja klientów, tempo wzrostu i rachunek przepływów</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">Na bieżąco</td><td style="color:var(--ocena-sprzedaz)"><strong>Zmiany w zamówieniach dwóch głównych klientów</strong></td><td style="color:var(--ocena-sprzedaz)">Jedyny punkt awarii całej tezy</td></tr>
+            <tr><td style="color:var(--ocena-uwaga)">W toku</td><td style="color:var(--ocena-uwaga)">Przejęcie sterów przez Rahula Singhala</td><td>Zmiana prezesa w trakcie sprawdzianu trwałości wzrostu</td></tr>
+            <tr><td>Na bieżąco</td><td>Pozyskanie trzeciego dużego klienta</td><td style="color:var(--ocena-kupno)">Najskuteczniejszy sposób na usunięcie dyskonta</td></tr>
+            <tr><td>Luty 2027</td><td>Wyniki roczne i prognoza na 2027</td><td>Rozstrzyga spór 40% kontra 11%</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Udział dwóch największych klientów</strong></td><td>71% (37% + 34%)</td><td>brak spadku poniżej 65%</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Luka zysk netto – przepływy operacyjne</strong></td><td>$46,5 mln vs $196,2 mln</td><td>dalsze powiększanie się luki</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Wzrost przychodów r/r</strong></td><td>+58% (Q2)</td><td>spadek poniżej 25%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Marża skoryg. EBITDA</strong></td><td>27,5% przychodów</td><td>spadek poniżej 22%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Kurs akcji</strong></td><td>$55,24</td><td>spadek poniżej $44</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td><strong>Krótka sprzedaż</strong></td><td>13,95% akcji (z 13,4%)</td><td>wzrost powyżej 18%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Przy cenie $55,24</strong></td><td>Nie spieszyć się — kurs w środku przedziału wartości godziwej, korekta niezakończona</td></tr>
+            <tr><td><strong>Transza pierwsza</strong></td><td>Poniżej <strong>$48</strong> — połowa docelowej pozycji</td></tr>
+            <tr><td><strong>Transza druga</strong></td><td>Po wynikach za III kwartał, jeśli koncentracja spadnie poniżej 65%</td></tr>
+            <tr><td><strong>Wielkość docelowa</strong></td><td>Maksymalnie <strong>1,5–2% portfela</strong></td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Powyżej <strong>$72</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$44</strong></td></tr>
+            <tr><td><strong>Warunek wyjścia</strong></td><td>Redukcja zamówień u któregoś z dwóch głównych klientów albo obniżenie prognozy rocznej</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p>To jest dobry biznes wyceniony sprawiedliwie, a nie okazja. Innodata rośnie o 58%, ma marżę operacyjną 17,48%, czysty rachunek wyników z normalną stawką podatkową, <strong>gotówkę netto 7,17 dolara na akcję przy zadłużeniu bliskim zeru</strong> i wskaźnik Altmana 8,02. Skupuje własne akcje i potwierdziła prognozę wzrostu przychodów o 40% i więcej. Kurs spadł o 47% w trzy miesiące mimo rekordowych wyników, więc wejście po dzisiejszej cenie nie jest kupowaniem szczytu.</p>
+        <p>Dwie rzeczy jednak nie pozwalają mi napisać „kupno". <strong>Dwóch klientów daje 71% przychodów</strong> — i choć udział największego spadł z 56% do 37%, łączna zależność praktycznie się nie zmieniła. Utrata jednego z nich to natychmiastowa utrata ponad jednej trzeciej sprzedaży, przy pracy projektowej bez wieloletnich umów. <strong>A wskaźnik ceny do wolnych przepływów wynoszący 10,33, który sprawia, że spółka wygląda na tanią, uważam za mylący</strong>: marża wolnych przepływów 57,97% jest niemożliwa dla firmy zatrudniającej ponad dziesięć tysięcy osób, a różnica około 150 milionów dolarów pochodzi z kapitału obrotowego, nie z zarobku. Licząc uczciwie, spółka handluje po około 16-krotności skorygowanej EBITDA i po 49-krotności prognozowanego zysku. <strong>Ciekawie robi się poniżej 48 dolarów.</strong></p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$44 – $72</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$28 (-49%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$72 (+30%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Brak przy $55</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3, listopad</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">PRZEPŁYWY — DLACZEGO 10× TO ILUZJA</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="alert alert-danger"><strong>Ta sekcja istnieje, bo bez niej ta analiza dawałaby zupełnie inny wniosek. Cena do wolnych przepływów 10,33 sugeruje spółkę tanią. Uważam, że to nieprawda — i pokazuję dlaczego krok po kroku.</strong></div>
+
+      <h3>Krok 1 — same liczby</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$317,16 mln</td></tr>
+          <tr><td>Zysk netto</td><td>$46,49 mln</td></tr>
+          <tr><td>Amortyzacja</td><td style="color:var(--ocena-uwaga)">tylko $3,80 mln</td></tr>
+          <tr><td><strong>Przepływy operacyjne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$196,20 mln</strong></td></tr>
+          <tr><td><strong>Niewyjaśniona różnica</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>ok. $146 mln</strong> (196,20 − 46,49 − 3,80)</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Krok 2 — dlaczego to nie może być normalna działalność</h3>
+      <div class="alert alert-warning"><strong>Arytmetyka jest tu bezlitosna.</strong><br><br>Marża brutto wynosi <strong>43,20%</strong>, co znaczy, że <strong>56,8% przychodów</strong> — około 180 milionów dolarów rocznie — pochłania koszt wytworzenia. W firmie zatrudniającej <strong>10 107 osób</strong> jest to w przeważającej części <strong>wynagrodzenie wypłacane co miesiąc</strong>.<br><br>Do tego dochodzą koszty sprzedaży i administracji, które sprowadzają marżę operacyjną do 17,48%.<br><br><strong>Spółka nie może jednocześnie wypłacać tych pensji i zatrzymywać 57,97% przychodów jako wolne przepływy.</strong> Te dwie liczby wzajemnie się wykluczają jako stan trwały. Amortyzacja, która w wielu firmach tłumaczy różnicę między zyskiem a gotówką, wynosi tu zaledwie 3,80 miliona — czyli 1,2% przychodów.</div>
+
+      <h3>Krok 3 — skąd więc ta gotówka</h3>
+      <div class="alert alert-info"><strong>Najbardziej prawdopodobne wyjaśnienie to przedpłaty klientów, księgowane jako przychody przyszłych okresów.</strong><br><br>Spółka sama opisuje tę pozycję: <em>„przychody przyszłych okresów to płatności otrzymane od klientów z góry, przed wykonaniem usługi"</em>, i zaznacza, że <em>„spodziewa się rozpoznać zasadniczo wszystkie te zobowiązania w ciągu najbliższych dwunastu miesięcy"</em>.<br><br>Układ się zgadza: przychody rosną o 58%, dwóch klientów daje 71% sprzedaży, a duzi odbiorcy z branży technologicznej rezerwują moce przerobowe z wyprzedzeniem i płacą z góry. Potwierdza to też bilans — <strong>kapitał obrotowy (135,16 mln) jest niższy od samej gotówki (250,37 mln)</strong>, co oznacza duże zobowiązania krótkoterminowe.<br><br><em>To wnioskowanie z układu liczb i z opisu spółki, nie potwierdzony rozkład pozycji.</em> Dokładną kwotę przedpłat znajdziesz w raporcie kwartalnym w nocie o przychodach przyszłych okresów.</div>
+
+      <h3>Krok 4 — co to znaczy dla wyceny</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość raportowana</th><th>Wartość znormalizowana</th></tr></thead>
+        <tbody>
+          <tr><td>Wolne przepływy</td><td style="color:var(--ocena-kupno)">$183,85 mln</td><td style="color:var(--ocena-sprzedaz)"><strong>ok. $38 mln</strong></td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>10,33</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>około 50×</strong></td></tr>
+          <tr><td>EV / wolne przepływy</td><td style="color:var(--ocena-kupno)">8,99</td><td style="color:var(--ocena-sprzedaz)">około 43×</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Znormalizowane wolne przepływy policzone jako zysk netto ($46,49 mln) plus amortyzacja ($3,80 mln) minus nakłady inwestycyjne ($12,36 mln) = $37,93 mln. Obliczenie własne.</p>
+
+      <div class="alert alert-danger"><strong>Wniosek: różnica między 10× a 50× to nie jest niuans — to jest różnica między okazją a spółką drogą.</strong><br><br>Przedpłata nie jest zarobkiem. Jest <strong>gotówką pożyczoną od klienta</strong>, którą trzeba odpracować. Gdy usługa zostanie wykonana, pojawi się przychód i zysk — <strong>ale nie pojawi się już żadna nowa gotówka</strong>, bo ta wpłynęła wcześniej.<br><br>Praktyczna konsekwencja jest taka, że <strong>dzisiejsze przepływy nie są powtarzalne</strong>. Utrzymają się tylko wtedy, gdy przedpłaty będą rosły w każdym kolejnym kwartale — czyli gdy spółka będzie rosła coraz szybciej. <strong>Przy prognozie wyhamowania do 11,31% rocznie to się nie wydarzy.</strong></div>
+
+      <div class="alert alert-info"><strong>Jak to sprawdzić samemu przy wynikach za III kwartał — dwie rzeczy w raporcie:</strong><br><br><strong>1.</strong> Nota o <em>przychodach przyszłych okresów</em> (deferred revenue) w bilansie — czy pozycja rośnie, czy maleje. <strong>Jeśli maleje, przepływy operacyjne spadną gwałtownie</strong>, nawet przy rosnącym zysku.<br><br><strong>2.</strong> Sekcja <em>zmiany w kapitale obrotowym</em> w rachunku przepływów pieniężnych — pokazuje wprost, ile z 196 milionów pochodzi stamtąd, a ile z działalności.<br><br>To są dwie liczby, które rozstrzygną, czy Innodata handluje po 10-krotności przepływów, czy po 50-krotności. <strong>Do czasu ich sprawdzenia traktowałbym niski wskaźnik ceny do przepływów jako pułapkę, a nie argument.</strong></div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 15 września 2026 | Cena: <strong>$55,24</strong> — zamknięcie sesji 14.09.2026 (+3,82%), zgodne z ceną $55 podaną przez użytkownika | Pierwsza analiza INOD — spółka spoza portfela | Dane: StockAnalysis / S&amp;P Global Market Intelligence, komunikaty Innodata IR i zgłoszenia SEC (wyniki II kwartału 2026 z 06.08.2026, formularz 10-Q), doniesienia prasowe o koncentracji klientów i zmianie prezesa — <strong>stan danych na 15.09.2026</strong>. Znormalizowane wolne przepływy (ok. $38 mln), przeliczenie EV do skorygowanej EBITDA w tempie rocznym (ok. 16,2×) oraz wyliczenie luki przepływowej (ok. $146 mln) to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

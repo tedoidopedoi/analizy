@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BW — Babcock &amp; Wilcox | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: BW</div>
+    <div class="company-name">Babcock &amp; Wilcox Enterprises, Inc.</div>
+    <div class="company-sub">Kotły, systemy energetyczne i środowiskowe · technologia BrightLoop · zasilanie centrów danych</div>
+    <div class="header-meta">
+      <span class="meta-tag">Spoza portfela — pierwsza analiza</span>
+      <span class="meta-tag">Wysoce spekulacyjna</span>
+      <span class="meta-tag">Portfel zamówień +533%</span>
+      <span class="meta-tag">Pozew zbiorowy w toku</span>
+      <div class="price-display">
+        <div class="price-main">$7,17</div>
+        <div class="price-sub">zamknięcie 10.09.2026 (-3,50%) | przed sesją 11.09: <strong>$7,43 (+3,66%)</strong></div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Energetyka</span><span class="temat">Infrastruktura AI</span><span class="temat">Sytuacje specjalne</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO SPEKULACYJNE — portfel zamówień 2,6 mld przy 11,7-krotności prognozowanej EBITDA, ale ten sam kontrakt jest przedmiotem pozwu zbiorowego, a pokrycie odsetek wynosi 0,80">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO SPEKULACYJNE</span><span class="rb-qual">tania na prognozie, krucha w bilansie, obciążona procesem</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$6,00 – $11,00</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">-16% do +53%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>10 sierpnia 2026</b><em>Q3 — listopad</em></div>
+    <div class="rb-right">Maks. 1% portfela</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Portfel a pozew</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (zamknięcie 10.09)</div><div class="metric-value">$7,17</div><div class="metric-detail">38,1% pod średnią 200-sesyjną · przed sesją $7,43</div></div>
+    <div class="metric-card"><div class="metric-label">Zmiana za 52 tygodnie</div><div class="metric-value green">+256,72%</div><div class="metric-detail"><strong>Ale -58% od szczytu z czerwca</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Portfel zamówień</div><div class="metric-value green">$2,6 mld</div><div class="metric-detail"><strong>+533% r/r</strong> · 3,1× roczne przychody</div></div>
+    <div class="metric-card"><div class="metric-label">Wynik netto — Q2</div><div class="metric-value green">+$14,3 mln</div><div class="metric-detail">Rok temu -$58,5 mln · zysk $0,07/akcję</div></div>
+    <div class="metric-card"><div class="metric-label">Dług netto</div><div class="metric-value green">$8,25 mln</div><div class="metric-detail"><strong>Rok temu $349 mln</strong> — spłacono $215 mln</div></div>
+    <div class="metric-card"><div class="metric-label">Pokrycie odsetek</div><div class="metric-value red">0,80</div><div class="metric-detail">Poniżej 1,0 · Altman Z -0,61</div></div>
+    <div class="metric-card"><div class="metric-label">Liczba akcji</div><div class="metric-value red">+30,85%</div><div class="metric-detail"><strong>+15,52% w samym kwartale</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Krótka sprzedaż</div><div class="metric-value red">12,40%</div><div class="metric-detail">16,44% wolnego obrotu · rośnie</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <div class="alert alert-warning"><strong>Uwaga o cenie:</strong> używam <strong>$7,17 — zamknięcia z 10 września</strong> (spadek o 3,50%). W notowaniach przed sesją 11 września kurs wynosi <strong>$7,43, czyli +3,66%</strong>. Sesja 11 września jeszcze się nie zaczęła, więc zamknięcie z poprzedniego dnia jest jedyną kompletną ceną.</div>
+
+      <p><strong>Babcock &amp; Wilcox jest spoza portfela</strong> — to pierwsza analiza tej spółki. Z tematem energetycznym masz w portfelu <strong>Caterpillar (2,87%), Oklo (2,04%) i ASP Isotopes (1,69%)</strong>, ale żadna z nich nie przypomina tej sytuacji.</p>
+
+      <p>Spółka projektuje i buduje <strong>kotły przemysłowe, systemy energetyczne i instalacje ochrony środowiska</strong>, a od niedawna kieruje się ku zasilaniu centrów danych. Rozwija też własną technologię <strong>BrightLoop</strong> — proces wytwarzania wodoru z wychwytem dwutlenku węgla. Przychody za dwanaście miesięcy <strong>834,35 mln dolarów</strong>, kapitalizacja <strong>1,07 mld</strong>, zaledwie <strong>1 650 pracowników</strong>.</p>
+
+      <div class="alert alert-success"><strong>Zacznę od tego, co w tej spółce zadziałało — bo skala zmiany jest naprawdę duża.</strong></div>
+
+      <h3>Wyniki za II kwartał 2026 — 10 sierpnia</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wynik</th><th>Zmiana</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody kwartalne</strong></td><td style="color:var(--ocena-kupno)"><strong>$319,7 mln</strong></td><td style="color:var(--ocena-kupno)"><strong>+130% r/r</strong>, powyżej konsensusu</td></tr>
+          <tr><td><strong>Wynik netto</strong></td><td style="color:var(--ocena-kupno)"><strong>+$14,3 mln</strong></td><td style="color:var(--ocena-kupno)">Rok temu <strong>-$58,5 mln</strong></td></tr>
+          <tr><td>Zysk na akcję</td><td style="color:var(--ocena-kupno)">+$0,07</td><td style="color:var(--ocena-kupno)">Rok temu -$0,63</td></tr>
+          <tr><td>Skorygowana EBITDA</td><td style="color:var(--ocena-kupno)">$21,8 mln</td><td style="color:var(--ocena-kupno)">+57% r/r</td></tr>
+          <tr><td>Zamówienia w kwartale</td><td style="color:var(--ocena-kupno)">$151,0 mln</td><td>+38% r/r</td></tr>
+          <tr><td><strong>Portfel zamówień</strong></td><td style="color:var(--ocena-kupno)"><strong>$2,6 mld</strong></td><td style="color:var(--ocena-kupno)"><strong>+533% r/r</strong></td></tr>
+          <tr><td><strong>Prognoza EBITDA na 2026 — podniesiona</strong></td><td style="color:var(--ocena-kupno)"><strong>$80–105 mln</strong></td><td style="color:var(--ocena-kupno)">Wobec $30,18 mln za ostatnie 12 miesięcy</td></tr>
+          <tr><td>BrightLoop w Massillon</td><td>Budowa rusza w tym roku</td><td>Komercjalizacja celowana na koniec 2027</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>A teraz to, co poszło źle — i dlaczego kurs jest 58% poniżej czerwcowego szczytu mimo tych wyników.</strong><br><br>
+      <strong>15 maja 2026</strong> spółka ogłosiła emisję <strong>10,8 mln akcji po $18,50, czyli około $200 mln</strong>, z przeznaczeniem na wcześniejszą spłatę kredytu i projekty rozwojowe, w tym dla centrów danych. Kurs spadł tego dnia o blisko 9%.<br><br>
+      <strong>Dziś te akcje kosztują $7,17.</strong> Inwestorzy, którzy objęli emisję po $18,50 cztery miesiące temu, stracili <strong>61%</strong>.<br><br>
+      Do tego doszły: <strong>strata $0,60 na akcję w I kwartale wobec oczekiwanych $0,03</strong>, kontrola nad ładem korporacyjnym w marcu oraz — najważniejsze — <strong>pozwy zbiorowe akcjonariuszy związane z kontraktem na wytwarzanie energii Base Electron o wartości 2,4 miliarda dolarów</strong>.</div>
+
+      <h3>Kalendarium roku, który zdecydował o wycenie</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Termin</th><th>Wydarzenie</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--ocena-sprzedaz)">Marzec 2026</td><td style="color:var(--ocena-sprzedaz)">Kurs spada przy doniesieniach o kontroli ładu korporacyjnego</td></tr>
+          <tr><td>I kw. 2026</td><td>Dług netto spada do <strong>$42,4 mln</strong> z $349,3 mln rok wcześniej</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)">I kw. 2026</td><td style="color:var(--ocena-sprzedaz)"><strong>Strata $0,60 na akcję</strong> wobec konsensusu -$0,03 — głębokie rozminięcie</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)">15 maja 2026</td><td style="color:var(--ocena-sprzedaz)"><strong>Emisja 10,8 mln akcji po $18,50 — ok. $200 mln.</strong> Kurs -9%</td></tr>
+          <tr><td>Początek czerwca 2026</td><td>Kurs powyżej <strong>$17</strong></td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)">26 czerwca – 24 lipca</td><td style="color:var(--ocena-sprzedaz)">Spadek z $14,45 do $9,62 — <strong>o 33% w miesiąc</strong></td></tr>
+          <tr><td style="color:var(--ocena-kupno)">10 sierpnia 2026</td><td style="color:var(--ocena-kupno)"><strong>Wyniki Q2 powyżej oczekiwań, portfel zamówień +533%, prognoza podniesiona</strong></td></tr>
+          <tr><td>10 września 2026</td><td>Kurs <strong>$7,17</strong> — o 58% poniżej czerwcowego szczytu</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>To jest spółka, w której dwie narracje biegną równolegle i obie są prawdziwe.</strong> Operacyjnie: przychody +130%, pierwszy zysk netto od dawna, portfel zamówień pięciokrotnie większy, dług netto praktycznie wyzerowany. Kapitałowo: emisja po $18,50 przy dzisiejszych $7,17, liczba akcji większa o 30,85% w rok, kapitał własny stopiony do 57 milionów i pozew zbiorowy dotyczący największego kontraktu w historii spółki.<br><br><strong>Sekcja 16 pokazuje, dlaczego te dwie narracje nie są od siebie niezależne.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT I SEGMENTY</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Czym jest</th><th>Rola w tezie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Kotły i systemy energetyczne</strong></td><td>Projektowanie, budowa i serwis instalacji wytwórczych</td><td style="color:var(--ocena-kupno)">Rdzeń przychodów, technologia sprawdzona od ponad wieku</td></tr>
+          <tr><td><strong>Instalacje ochrony środowiska</strong></td><td>Odsiarczanie, odazotowanie, filtracja spalin</td><td>Stabilny, regulowany popyt</td></tr>
+          <tr><td><strong>Zasilanie centrów danych</strong></td><td style="color:var(--ocena-kupno)"><strong>Nowy kierunek</strong> — cel emisji z maja</td><td style="color:var(--ocena-kupno)">Źródło skoku portfela zamówień</td></tr>
+          <tr><td><strong>BrightLoop</strong></td><td style="color:var(--ocena-uwaga)">Wytwarzanie wodoru z wychwytem CO₂; demonstracja w Massillon</td><td style="color:var(--ocena-uwaga)">Komercjalizacja dopiero pod koniec 2027</td></tr>
+          <tr><td>Serwis zainstalowanej bazy</td><td>Utrzymanie kotłów pracujących u klientów</td><td style="color:var(--ocena-kupno)">Przychód powtarzalny, wyższa marża</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Warto zrozumieć, na czym polega przewaga tej spółki — bo nie jest ona technologiczna w nowoczesnym sensie.</strong><br><br>Babcock &amp; Wilcox istnieje od ponad stu pięćdziesięciu lat i jej realnym aktywem jest <strong>zainstalowana baza kotłów oraz uprawnienia i referencje do budowy dużych instalacji energetycznych</strong>. Tego nie da się odtworzyć — budowa kotła energetycznego wymaga certyfikacji, doświadczenia wykonawczego i ubezpieczenia, których nowy uczestnik nie zdobędzie w kilka lat.<br><br><strong>Przy 1 650 pracownikach i przychodzie 505 668 dolarów na osobę</strong> spółka działa przy tym jako integrator: projektuje i nadzoruje, a nie prowadzi masowej produkcji. Stąd wysoka rotacja aktywów 0,98 i niskie nakłady inwestycyjne w relacji do skali kontraktów.</div>
+
+      <div class="alert alert-warning"><strong>Ale fosa nie chroni marży, i to widać w liczbach.</strong> Marża brutto wynosi <strong>19,74%</strong>, a operacyjna zaledwie <strong>2,38%</strong>. To typowe dla budownictwa energetycznego: kontrakty są rozliczane ryczałtowo, więc <strong>całe ryzyko przekroczenia kosztów spoczywa na wykonawcy</strong>. Jeden źle wyceniony projekt potrafi skasować zysk z kilku dobrych.<br><br>Dokładnie z tego powodu portfel zamówień o wartości 2,6 miliarda dolarów jest jednocześnie największą szansą i największym ryzykiem tej spółki — o czym w sekcji 16.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na BW</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zapotrzebowanie centrów danych na moc</strong></td><td style="color:var(--ocena-kupno)">Rekordowe; kolejki do sieci trwają latami</td><td style="color:var(--ocena-kupno)">Główne źródło nowych zamówień</td></tr>
+          <tr><td><strong>Modernizacja starych bloków energetycznych</strong></td><td style="color:var(--ocena-kupno)">Przedłużanie życia zamiast wygaszania</td><td style="color:var(--ocena-kupno)">Naturalny rynek dla kotłów i serwisu</td></tr>
+          <tr><td>Regulacje środowiskowe</td><td>Wymuszają modernizacje instalacji</td><td>Stabilny popyt na systemy oczyszczania</td></tr>
+          <tr><td><strong>Wodór z wychwytem CO₂</strong></td><td style="color:var(--ocena-uwaga)">Rynek wciąż przed komercjalizacją</td><td style="color:var(--ocena-uwaga)">BrightLoop dopiero od końca 2027</td></tr>
+          <tr><td><strong>Koszt kapitału dla spółek zadłużonych</strong></td><td style="color:var(--ocena-sprzedaz)">Wysoki</td><td style="color:var(--ocena-sprzedaz)">Pokrycie odsetek 0,80 — dotyka wprost</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Ten temat znasz już z kilku stron portfela — i Babcock &amp; Wilcox zajmuje w nim miejsce, którego dotąd nie miałeś.</strong><br><br>Centrum danych potrzebuje prądu. W Twoim portfelu obstawiasz to przez <strong>Caterpillar (2,87%) — generatory</strong> i <strong>Oklo (2,04%) — reaktory przyszłości</strong>. Babcock &amp; Wilcox jest gdzie indziej: <strong>buduje i modernizuje duże instalacje wytwórcze</strong>, czyli obsługuje tę część rynku, która musi dostarczyć megawaty <em>teraz</em>, z istniejących technologii.<br><br>To rynek mniej efektowny niż małe reaktory modułowe, ale realny i rozliczany dzisiaj. Prognoza wzrostu przychodów na trzy lata wynosi <strong>+40,04% rocznie</strong> — i po raz pierwszy od lat ma pod sobą zakontraktowany portfel.</div>
+
+      <div class="alert alert-warning"><strong>Otoczenie ma jednak jedną cechę, która akurat tej spółce szkodzi najbardziej: kapitałochłonność kontraktów.</strong> Budowa instalacji energetycznej wymaga finansowania kapitału obrotowego przez wiele kwartałów, zanim wpłyną płatności. Przy <strong>pokryciu odsetek 0,80</strong> i ujemnych wolnych przepływach <strong>-58,17 mln dolarów</strong> oznacza to, że im szybciej rośnie portfel zamówień, tym większe zapotrzebowanie na gotówkę. <strong>Wzrost kosztuje tu pieniądze, których spółka nie generuje z działalności.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I STRUKTURA WŁAŚCICIELSKA</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Portfel zamówień</strong></td><td style="color:var(--ocena-kupno)"><strong>$2,6 mld, +533% r/r</strong></td><td style="color:var(--ocena-uwaga)"><strong>3,1× roczne przychody — ale skrajnie skoncentrowany</strong></td></tr>
+          <tr><td>Zamówienia kwartalne</td><td>$151,0 mln, +38% r/r</td><td>Bieżący napływ bez wielkich kontraktów</td></tr>
+          <tr><td>Przychód na pracownika</td><td style="color:var(--ocena-kupno)">$505 668</td><td style="color:var(--ocena-sprzedaz)">Strata na pracownika -$20 127</td></tr>
+          <tr><td><strong>Udziałowcy wewnętrzni</strong></td><td style="color:var(--ocena-kupno)"><strong>6,20%</strong></td><td style="color:var(--ocena-kupno)">Najwyżej spośród spółek z tej serii poza Fermi i Paramount</td></tr>
+          <tr><td>Instytucje</td><td>72,17%</td><td>Wolny obrót 112,29 mln z 148,97 mln akcji</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>18,46 mln (12,40% akcji)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>16,44% wolnego obrotu, wzrost z 15,25 mln</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Najważniejsza obserwacja o klientach dotyczy koncentracji portfela zamówień — i wymaga rachunku.</strong><br><br>Portfel wzrósł o <strong>533%</strong>, co oznacza, że jest dziś <strong>6,33 raza większy</strong> niż rok temu. Skoro wynosi 2,6 miliarda dolarów, rok temu wynosił około <strong>410 milionów</strong>. Przyrost to zatem mniej więcej <strong>2,19 miliarda dolarów</strong>.<br><br>W tym samym czasie spółka jest przedmiotem pozwów zbiorowych związanych z <strong>kontraktem Base Electron o wartości 2,4 miliarda dolarów</strong>.<br><br><strong>Te dwie liczby są zbyt blisko siebie, żeby były przypadkiem.</strong> Wszystko wskazuje na to, że skok portfela zamówień o 533% i kontrakt będący przedmiotem sporu sądowego to w znacznej mierze <em>to samo zdarzenie</em>. <em>To wnioskowanie z arytmetyki, nie potwierdzony fakt</em> — ale konsekwencje są na tyle poważne, że poświęcam im osobną sekcję 16.</div>
+
+      <p>Po stronie pozytywnej warto odnotować, że <strong>udziałowcy wewnętrzni trzymają 6,20% akcji</strong>. To niewiele w liczbach bezwzględnych, ale wyraźnie więcej niż w większości spółek, które analizowałem w ostatnich dniach: Vertiv 0,19%, Grab 3,61%, Canopy Growth 0,10%, Plug Power 0,63%. <strong>Zarząd ma tu realny, choć niewielki, udział w wyniku.</strong></p>
+
+      <div class="alert alert-warning"><strong>Krótka sprzedaż na poziomie 12,40% akcji i 16,44% wolnego obrotu, w dodatku rosnąca</strong> (z 15,25 do 18,46 mln), pokazuje, że rynek ma tu wyraźną i negatywną opinię. Przy wskaźniku 4,00 dnia na zamknięcie pozycji oznacza to jednak również, że <strong>dobra wiadomość mogłaby wywołać gwałtowny ruch w górę</strong>. To działa w obie strony.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th><th>Marża</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody</strong></td><td><strong>$834,35 mln</strong></td><td>—</td></tr>
+          <tr><td>Zysk brutto</td><td style="color:var(--ocena-uwaga)">$164,72 mln</td><td style="color:var(--ocena-uwaga)">19,74%</td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td style="color:var(--ocena-uwaga)"><strong>+$19,84 mln</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>2,38% — bardzo cienko</strong></td></tr>
+          <tr><td>EBITDA</td><td style="color:var(--ocena-uwaga)">$30,18 mln</td><td>3,62%</td></tr>
+          <tr><td><strong>Wynik przed opodatkowaniem</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$69,73 mln</strong></td><td style="color:var(--ocena-sprzedaz)">-8,36%</td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-sprzedaz)">-$33,21 mln</td><td>-2,20% · -$0,27/akcję</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-sprzedaz)">-$34,73 mln</td><td>Amortyzacja tylko $10,34 mln</td></tr>
+          <tr><td>Nakłady inwestycyjne</td><td>-$23,44 mln</td><td>2,8% przychodów</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$58,17 mln</strong></td><td>-$0,39 na akcję</td></tr>
+          <tr><td><strong>Spłata zadłużenia netto</strong></td><td style="color:var(--ocena-kupno)"><strong>-$215,39 mln</strong></td><td style="color:var(--ocena-kupno)">Sfinansowana emisją akcji</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Trzy liczby z tej tabeli opowiadają całą historię tej spółki i warto je zestawić obok siebie.</strong><br><br>
+      <strong>Wynik operacyjny: +19,84 mln dolarów.</strong> Działalność podstawowa zarabia — cienko, ale na plusie.<br>
+      <strong>Wynik przed opodatkowaniem: -69,73 mln.</strong> Różnica to około <strong>90 milionów kosztów poniżej linii operacyjnej</strong>, głównie odsetek od dawnego zadłużenia.<br>
+      <strong>Spłata zadłużenia: 215,39 mln.</strong> Spółka wykorzystała emisję akcji, żeby te odsetki wyeliminować.<br><br>
+      <strong>To jest sedno całej operacji: zarząd zamienił dług na kapitał.</strong> Odsetki, które zjadały zysk operacyjny, w dużej mierze znikną — ale zapłacili za to akcjonariusze, których udział rozwodniono o 30,85% w ciągu roku.</div>
+
+      <div class="alert alert-info"><strong>Warto zauważyć jedną rzecz, która wygląda dziwnie, a ma sens.</strong> Wynik netto <strong>-33,21 mln</strong> jest <em>lepszy</em> od wyniku przed opodatkowaniem <strong>-69,73 mln</strong>, mimo zapłaconego podatku 5,41 mln. Różnica około 42 milionów pochodzi najpewniej z <strong>działalności zaniechanej</strong> — czyli ze sprzedaży aktywów, którą spółka prowadziła równolegle ze spłatą długu.<br><br><em>To wnioskowanie z układu liczb.</em> Konsekwencja praktyczna jest jednak jednoznaczna: <strong>część poprawy wyniku netto nie pochodzi z działalności operacyjnej i nie powtórzy się</strong>. Miarą powtarzalną jest tu skorygowana EBITDA i prognoza $80–105 mln na 2026.</div>
+
+      <p>Model jest projektowy: kontrakty ryczałtowe rozliczane etapami przez wiele kwartałów. Oznacza to duże zapotrzebowanie na kapitał obrotowy i wrażliwość na przekroczenia kosztów. Prognoza wzrostu przychodów na trzy lata to <strong>+40,04% rocznie</strong>, a portfel zamówień 2,6 miliarda daje jej pokrycie — pod warunkiem, że kontrakty zostaną zrealizowane z zakładaną marżą.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$1,07 mld</td><td>Wartość przedsiębiorstwa $1,08 mld — bilans niemal neutralny</td></tr>
+          <tr><td>Cena / zysk</td><td>nie dotyczy</td><td>Strata -$0,27 na akcję za 12 miesięcy</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-uwaga)"><strong>26,31</strong></td><td>Rynek zakłada powrót do zysku</td></tr>
+          <tr><td>Cena / sprzedaż</td><td style="color:var(--ocena-kupno)">1,28</td><td style="color:var(--ocena-kupno)">Prognozowana <strong>0,99</strong> — poniżej rocznych przychodów</td></tr>
+          <tr><td>EV / sprzedaż</td><td style="color:var(--ocena-kupno)">1,29</td><td>Nisko dla spółki z portfelem 3,1× przychody</td></tr>
+          <tr><td><strong>EV / EBITDA (12 mies.)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>35,66</strong></td><td style="color:var(--ocena-sprzedaz)">Drogo — na EBITDA $30,18 mln</td></tr>
+          <tr><td><strong>EV / EBITDA na prognozie</strong></td><td style="color:var(--ocena-kupno)"><strong>około 11,7×</strong></td><td style="color:var(--ocena-kupno)">Na środku prognozy $80–105 mln — <strong>obliczenie własne</strong></td></tr>
+          <tr><td><strong>Cena / wartość księgowa</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>18,64</strong></td><td style="color:var(--ocena-sprzedaz)">Wartość księgowa <strong>$0,38/akcję</strong>; aktywa materialne ujemne</td></tr>
+          <tr><td>Cena / wolne przepływy</td><td>nie dotyczy</td><td style="color:var(--ocena-sprzedaz)">Przepływy ujemne: -$58,17 mln</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-0,61</strong></td><td style="color:var(--ocena-sprzedaz)">Ujemny. Piotroski 4</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Źródło: StockAnalysis / S&amp;P Global Market Intelligence, stan 11.09.2026. Cena $7,17 to zamknięcie sesji 10.09.2026; przed sesją 11.09 kurs wynosił $7,43. Przeliczenie EV/EBITDA na prognozę spółki to obliczenie własne.</p>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>nie dotyczy</td><td>Strata na akcję <strong>-$0,27</strong>; przychody TTM <strong>$834,35 mln</strong></td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-uwaga)"><strong>26,31</strong></td><td>Implikuje zysk ok. <strong>$0,27/akcję</strong> — dokładne odwrócenie dzisiejszej straty</td></tr>
+          <tr><td><strong>PEG</strong></td><td>nie dotyczy</td><td>&lt; 1,0 = wzrost tańszy niż mnożnik sugeruje; tu brak prognozy zysku na akcję</td></tr>
+          <tr><td>Prognoza wzrostu (3 lata)</td><td style="color:var(--ocena-kupno)">przychody <strong>+40,04%</strong> · zysk: brak prognozy</td><td style="color:var(--ocena-uwaga)">Tylko czterech analityków pokrywa spółkę</td></tr>
+          <tr><td><strong>Miara najuczciwsza</strong></td><td><strong>EV/EBITDA na prognozie ok. 11,7×</strong></td><td style="color:var(--ocena-kupno)">Przy prognozie EBITDA $80–105 mln na 2026</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać — i tu leży cała teza inwestycyjna.</strong> Na danych historycznych spółka wygląda drogo: EV/EBITDA <strong>35,66</strong> przy EBITDA 30,18 mln dolarów. Ale zarząd podniósł prognozę na 2026 do <strong>80–105 mln</strong>, a skorygowana EBITDA za sam II kwartał wyniosła <strong>21,8 mln</strong>, czyli w tempie rocznym około <strong>87 mln</strong> — dokładnie w przedziale prognozy.</p>
+      <p>Licząc wartość przedsiębiorstwa 1,08 miliarda wobec środka prognozy (92,5 mln), otrzymujemy <strong>około 11,7-krotności EBITDA</strong>. <strong>Dla spółki przemysłowej z portfelem zamówień równym 3,1 rocznych przychodów i prognozą wzrostu 40% rocznie to nie jest wysoka cena.</strong></p>
+      <div class="alert alert-danger"><strong>Ostrzeżenie o pułapce — obowiązkowe przy budownictwie kontraktowym.</strong><br><br>Cała powyższa arytmetyka opiera się na założeniu, że <strong>portfel zamówień zostanie zrealizowany z zakładaną marżą</strong>. W budownictwie energetycznym kontrakty są ryczałtowe, więc każde przekroczenie kosztów obciąża wykonawcę. Przy marży operacyjnej <strong>2,38%</strong> margines błędu jest minimalny: wzrost kosztów o trzy punkty procentowe zamienia zysk w stratę.<br><br>Dodatkowo <strong>ten sam portfel zamówień jest powiązany z kontraktem będącym przedmiotem pozwu zbiorowego</strong> (sekcja 16). <strong>Niska wycena na prognozie nie jest więc okazją — jest ceną za ryzyko wykonawcze i prawne.</strong></div>
+
+      <h3>Cztery scenariusze na 12–18 miesięcy</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Założenie</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Prognoza dowieziona, pozew rozwiany</strong></td><td>EBITDA w górnym końcu, portfel realizowany z marżą, brak nowej emisji</td><td><strong>$11,00</strong></td><td style="color:var(--ocena-kupno)">+53%</td></tr>
+          <tr><td><strong>Stan bazowy</strong></td><td>EBITDA ok. $90 mln, mnożnik 12–13×, rozwodnienie zatrzymane</td><td><strong>$8,50</strong></td><td style="color:var(--ocena-kupno)">+19%</td></tr>
+          <tr><td>Realizacja z niższą marżą</td><td>Portfel realizowany, ale marża pod presją; rynek wycenia 9× EBITDA</td><td>$6,00</td><td style="color:var(--ocena-sprzedaz)">-16%</td></tr>
+          <tr><td><strong>Niekorzystny wyrok albo odpis portfela</strong></td><td>Kontrakt zakwestionowany, kolejna emisja ratunkowa</td><td><strong>$3,50</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-51%</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Fair value: $6,00 – $11,00</strong>, środek $8,50 (+19%). Konsensus to <strong>$22,00 (+206,8%)</strong> z rekomendacją „mocne kupno", ale <strong>opiera się na zaledwie czterech analitykach</strong> i moim zdaniem zakłada bezproblemową realizację całego portfela. Nie opierałbym na nim decyzji.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I DYNAMIKA</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Brutto</td><td style="color:var(--ocena-uwaga)">19,74%</td><td>Typowo dla budownictwa kontraktowego</td></tr>
+          <tr><td><strong>Operacyjna</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>2,38%</strong></td><td style="color:var(--ocena-sprzedaz)">Minimalny margines błędu wykonawczego</td></tr>
+          <tr><td>EBITDA</td><td style="color:var(--ocena-uwaga)">3,62%</td><td>$30,18 mln; prognoza 2026: <strong>$80–105 mln</strong></td></tr>
+          <tr><td>Przed opodatkowaniem</td><td style="color:var(--ocena-sprzedaz)">-8,36%</td><td style="color:var(--ocena-sprzedaz)">Odsetki zjadają wynik operacyjny</td></tr>
+          <tr><td>Netto</td><td style="color:var(--ocena-sprzedaz)">-2,20%</td><td style="color:var(--ocena-uwaga)">Podniesiona przez działalność zaniechaną</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Trajektoria kwartalna — tu widać skalę zmiany</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Q2 2025</th><th>Q2 2026</th><th>Zmiana</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>ok. $139 mln</td><td style="color:var(--ocena-kupno)"><strong>$319,7 mln</strong></td><td style="color:var(--ocena-kupno)"><strong>+130%</strong></td></tr>
+          <tr><td><strong>Wynik netto</strong></td><td style="color:var(--ocena-sprzedaz)">-$58,5 mln</td><td style="color:var(--ocena-kupno)"><strong>+$14,3 mln</strong></td><td style="color:var(--ocena-kupno)"><strong>Zmiana znaku</strong></td></tr>
+          <tr><td>Zysk na akcję</td><td style="color:var(--ocena-sprzedaz)">-$0,63</td><td style="color:var(--ocena-kupno)">+$0,07</td><td style="color:var(--ocena-kupno)">Zmiana znaku</td></tr>
+          <tr><td>Skorygowana EBITDA</td><td>ok. $13,9 mln</td><td style="color:var(--ocena-kupno)"><strong>$21,8 mln</strong></td><td style="color:var(--ocena-kupno)">+57%</td></tr>
+          <tr><td><strong>Portfel zamówień</strong></td><td>ok. $410 mln</td><td style="color:var(--ocena-kupno)"><strong>$2,6 mld</strong></td><td style="color:var(--ocena-kupno)"><strong>+533%</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Wartości za Q2 2025 wyliczone wstecznie z podanych dynamik — obliczenia własne.</p>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Wniosek</th></tr></thead>
+        <tbody>
+          <tr><td>Zwrot z zainwestowanego kapitału (ROIC)</td><td style="color:var(--ocena-kupno)">12,06%</td><td rowspan="2" style="color:var(--ocena-kupno)"><strong>Różnica +2,34 pp — dodatnia, ale z zastrzeżeniem poniżej</strong></td></tr>
+          <tr><td>Średni ważony koszt kapitału (WACC)</td><td>9,72%</td></tr>
+          <tr><td>Zwrot z zaangażowanego kapitału (ROCE)</td><td style="color:var(--ocena-sprzedaz)">3,97%</td><td>ROA 1,46%; ROE nie do policzenia</td></tr>
+          <tr><td>Rotacja aktywów</td><td style="color:var(--ocena-kupno)">0,98</td><td>Rotacja zapasów 10,57 — sprawnie</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Zastrzeżenie do wskaźnika ROIC, bo bez niego liczba 12,06% byłaby myląca.</strong><br><br>Zwrot z zainwestowanego kapitału wygląda przyzwoicie i przewyższa koszt kapitału o 2,34 punktu. Ale <strong>kapitał własny spółki wynosi zaledwie 57,37 mln dolarów</strong> — mianownik jest więc bardzo mały, co sztucznie zawyża wskaźnik. Znacznie bardziej miarodajny jest tu <strong>zwrot z zaangażowanego kapitału: 3,97%</strong>, a także zwrot z aktywów: <strong>1,46%</strong>.<br><br><strong>To nie jest spółka o wysokiej rentowności kapitału — to spółka o bardzo małym kapitale własnym.</strong> Różnica jest zasadnicza.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — NAPRAWIONY, ALE KOSZTEM AKCJONARIUSZY</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td style="color:var(--ocena-kupno)">$314,03 mln</td><td style="color:var(--ocena-kupno)">29% kapitalizacji</td></tr>
+          <tr><td>Zadłużenie</td><td>$322,29 mln</td><td style="color:var(--ocena-kupno)"><strong>Dług netto tylko $8,25 mln</strong> — rok temu $349 mln</td></tr>
+          <tr><td><strong>Dług / kapitał własny</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>5,62</strong></td><td style="color:var(--ocena-sprzedaz)">Wysoko — bo kapitał własny jest znikomy</td></tr>
+          <tr><td>Dług / EBITDA</td><td style="color:var(--ocena-sprzedaz)">8,89</td><td style="color:var(--ocena-uwaga)">Na prognozie 2026 spadłoby do ok. 3,5×</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>0,80</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poniżej 1,0 — zysk operacyjny nie pokrywa odsetek</strong></td></tr>
+          <tr><td>Wskaźnik bieżący</td><td style="color:var(--ocena-kupno)">1,45</td><td>Szybki 1,17; kapitał obrotowy $225,14 mln</td></tr>
+          <tr><td><strong>Kapitał własny</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$57,37 mln</strong></td><td style="color:var(--ocena-sprzedaz)">Wartość księgowa <strong>$0,38/akcję</strong>; aktywa materialne ujemne</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-0,61</strong></td><td style="color:var(--ocena-sprzedaz)">Ujemny. Piotroski 4</td></tr>
+          <tr><td><strong>Zmiana liczby akcji</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+30,85% r/r, +15,52% kw/kw</strong></td><td style="color:var(--ocena-sprzedaz)">Emisja 10,8 mln akcji po $18,50</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>To, co zarząd zrobił z bilansem, było słuszne — i trzeba to uczciwie docenić.</strong><br><br>Dług netto spadł z <strong>349 milionów dolarów</strong> rok temu do <strong>8,25 miliona</strong> dziś. Spółka spłaciła <strong>215,39 miliona</strong> zobowiązań, finansując to emisją akcji i sprzedażą aktywów. Gotówka 314 milionów niemal dokładnie równoważy dług 322 miliony.<br><br>Dla spółki, której odsetki pochłaniały około 90 milionów rocznie i przy pokryciu odsetek poniżej jedności, <strong>była to operacja ratunkowa, a nie wybór</strong>. Alternatywą było refinansowanie na coraz gorszych warunkach albo restrukturyzacja.</div>
+
+      <div class="alert alert-danger"><strong>Ale cena, jaką zapłacili akcjonariusze, jest wysoka i warto ją nazwać wprost.</strong><br><br><strong>Liczba akcji wzrosła o 30,85% w rok i o 15,52% w samym ostatnim kwartale.</strong> Kluczowa emisja — 10,8 miliona akcji — została przeprowadzona <strong>15 maja po cenie $18,50</strong>. Dziś kurs wynosi <strong>$7,17</strong>, czyli o <strong>61% mniej</strong>.<br><br>Po tej operacji <strong>kapitał własny wynosi 57,37 miliona dolarów, czyli 38 centów na akcję</strong> przy kursie 7,17 — cena do wartości księgowej 18,64. <strong>Aktywa materialne są ujemne.</strong> Nie ma tu żadnego majątku, który podtrzymałby wycenę, gdyby wyniki zawiodły.<br><br>I rzecz najważniejsza: <strong>pokrycie odsetek nadal wynosi 0,80</strong>. Mimo spłaty 215 milionów zysk operacyjny wciąż nie pokrywa kosztów odsetkowych z ostatnich dwunastu miesięcy. Poprawa nastąpi dopiero, gdy w rachunku wyników pojawi się pełny efekt niższego zadłużenia.</div>
+
+      <div class="alert alert-warning"><strong>Kontekst historyczny, który warto znać:</strong> ostatnie scalenie akcji spółka przeprowadziła <strong>w stosunku 1:10 w lipcu 2019 roku</strong>. To znaczy, że problem rozwodnienia nie jest tu nowy — to druga runda tej samej choroby. Przy kursie 7,17 dolara i rosnącej liczbie akcji <strong>warto śledzić, czy temat scalenia nie wróci</strong>.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Portfel zamówień $2,6 mld, wzrost o 533%.</strong> To <strong>3,1 raza roczne przychody</strong> — poziom, przy którym prognoza przestaje być prognozą, a staje się kwestią wykonania. Zamówienia bieżące rosły dodatkowo o 38%.</div>
+
+      <div class="alert alert-success"><strong>2. Wycena na prognozie jest niska: około 11,7× EBITDA.</strong> Wartość przedsiębiorstwa 1,08 mld wobec prognozy EBITDA $80–105 mln, przy czym skorygowana EBITDA za II kwartał (21,8 mln) daje tempo roczne ok. 87 mln — <strong>wewnątrz przedziału prognozy</strong>. Cena do sprzedaży prognozowanej wynosi <strong>0,99</strong>.</div>
+
+      <div class="alert alert-success"><strong>3. Wynik netto zmienił znak.</strong> W II kwartale <strong>+$14,3 mln</strong> wobec <strong>-$58,5 mln</strong> rok wcześniej, zysk $0,07 na akcję wobec straty $0,63. Przychody +130%, skorygowana EBITDA +57%, prognoza roczna podniesiona.</div>
+
+      <div class="alert alert-success"><strong>4. Dług netto praktycznie wyzerowany.</strong> Z <strong>$349 mln</strong> rok temu do <strong>$8,25 mln</strong> dziś; spłacono 215,39 mln. Gotówka 314 mln niemal równa zadłużeniu 322 mln. Kiedy pełny efekt niższych odsetek wejdzie do rachunku wyników, pokrycie odsetek wyraźnie się poprawi.</div>
+
+      <div class="alert alert-info"><strong>5. Kurs jest 38,1% poniżej średniej 200-sesyjnej.</strong> RSI 38,51, spadek o 58% od czerwcowego szczytu, mimo że wyniki za II kwartał były lepsze od oczekiwań. <strong>Rynek wycenia dziś wydarzenia z maja i czerwca, a nie sierpniowy raport.</strong></div>
+
+      <div class="alert alert-info"><strong>6. Udziałowcy wewnętrzni mają 6,20% akcji</strong> — najwięcej spośród większości spółek z tej serii (Vertiv 0,19%, Canopy Growth 0,10%, Plug Power 0,63%). Do tego krótka sprzedaż obejmuje <strong>16,44% wolnego obrotu</strong>, więc dobra wiadomość mogłaby wywołać gwałtowne domykanie pozycji.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Pozew zbiorowy dotyczy kontraktu, który jest całym portfelem zamówień.</strong> Sprawa wiąże się z kontraktem <strong>Base Electron o wartości $2,4 mld</strong>, a przyrost portfela zamówień wyniósł około <strong>$2,19 mld</strong>. To niemal ta sama liczba. <strong>Największa szansa i największe ryzyko tej spółki są tym samym zdarzeniem</strong> — rozwijam to w sekcji 16.</div>
+
+      <div class="alert alert-danger"><strong>2. Rozwodnienie: +30,85% akcji w rok, +15,52% w kwartale.</strong> Emisja 10,8 mln akcji po <strong>$18,50</strong> z 15 maja — dziś kurs $7,17, czyli <strong>61% niżej</strong>. Kapitał własny stopiony do <strong>$57,37 mln ($0,38 na akcję)</strong>, aktywa materialne ujemne, cena do wartości księgowej 18,64.</div>
+
+      <div class="alert alert-danger"><strong>3. Pokrycie odsetek 0,80 i Altman Z-Score -0,61.</strong> Zysk operacyjny <strong>nie pokrywa</strong> kosztów odsetkowych. Wolne przepływy <strong>-$58,17 mln</strong>, przepływy operacyjne -$34,73 mln. Przy rosnącym portfelu zamówień zapotrzebowanie na kapitał obrotowy będzie rosło, a spółka nie generuje gotówki z działalności.</div>
+
+      <div class="alert alert-warning"><strong>4. Marża operacyjna 2,38% przy kontraktach ryczałtowych.</strong> W budownictwie energetycznym ryzyko przekroczenia kosztów spoczywa na wykonawcy. <strong>Wzrost kosztów o trzy punkty procentowe zamienia zysk w stratę</strong> — a właśnie takie przekroczenia bywają źródłem sporów sądowych w tej branży.</div>
+
+      <div class="warning-box"><strong>5. Krótka sprzedaż 12,40% akcji i 16,44% wolnego obrotu — i rośnie</strong> (z 15,25 do 18,46 mln). Rynek ma tu wyraźnie negatywną opinię, a przy zaledwie <strong>czterech analitykach</strong> pokrywających spółkę konsensus $22,00 jest statystycznie bardzo słaby.</div>
+
+      <div class="alert alert-warning"><strong>6. Historia rozwodnienia się powtarza.</strong> Scalenie akcji w stosunku <strong>1:10 w lipcu 2019</strong>, a dziś ponownie rosnąca liczba akcji przy kursie 7,17 dolara. Do tego część poprawy wyniku netto pochodzi z <strong>działalności zaniechanej</strong>, czyli ze sprzedaży aktywów — a tego nie da się powtarzać w nieskończoność.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Przewaga nad BW</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Mitsubishi Power, Doosan</strong></td><td style="color:var(--ocena-sprzedaz)">Ogromne bilanse, zdolność finansowania dużych kontraktów</td><td>Mniejsza elastyczność przy mniejszych projektach</td></tr>
+          <tr><td><strong>Fluor, KBR i firmy inżynieryjne</strong></td><td style="color:var(--ocena-sprzedaz)">Silniejsze bilanse, szersza oferta wykonawcza</td><td>Brak własnej technologii kotłowej</td></tr>
+          <tr><td><strong>Vertiv</strong> <span style="color:var(--text-muted);font-size:12px">(spoza portfela, analiza 10.09)</span></td><td style="color:var(--ocena-sprzedaz)">Marża operacyjna 19,96% wobec 2,38%; Altman Z 5,91 wobec -0,61</td><td>Znacznie droższa: EV/EBITDA 36 wobec ok. 12 na prognozie</td></tr>
+          <tr><td><strong>Caterpillar</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,87%)</span></td><td style="color:var(--ocena-sprzedaz)">Generatory sprzedawane z magazynu, natychmiastowa marża</td><td>Nie buduje dużych instalacji wytwórczych</td></tr>
+          <tr><td><strong>Oklo</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,04%)</span></td><td>Technologia przyszłości — małe reaktory</td><td style="color:var(--ocena-uwaga)">Przed przychodami; BW dostarcza moc dzisiaj</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Najbardziej pouczające jest zestawienie z Vertivem, którą analizowałem wczoraj — bo pokazuje dwa skrajnie różne sposoby grania tego samego tematu.</strong><br><br><strong>Vertiv:</strong> marża operacyjna 19,96%, ROIC 37,58%, Altman Z 5,91, wolne przepływy +2,93 mld, portfel zamówień 15 mld. Cena: EV/EBITDA <strong>36,03</strong>.<br><br><strong>Babcock &amp; Wilcox:</strong> marża operacyjna 2,38%, ROCE 3,97%, Altman Z <strong>-0,61</strong>, wolne przepływy <strong>-58 mln</strong>, portfel zamówień 2,6 mld. Cena: EV/EBITDA na prognozie <strong>około 11,7×</strong>.<br><br><strong>Płacisz trzykrotnie mniej za spółkę, która jest wielokrotnie słabsza — i to jest uczciwa wycena, a nie okazja.</strong> Vertiv to jakość za wysoką cenę; Babcock &amp; Wilcox to zakład na wykonanie kontraktów przez spółkę bez marginesu bezpieczeństwa.</div>
+
+      <div class="alert alert-warning"><strong>Gdzie BW faktycznie przegrywa: na bilansie przy przetargach.</strong> Duże kontrakty energetyczne wymagają gwarancji bankowych i zdolności do sfinansowania kapitału obrotowego przez lata. Przy kapitale własnym <strong>57 milionów dolarów</strong> i ujemnych aktywach materialnych spółka jest w tych rozmowach stroną słabszą — <strong>i to jest strukturalna, nie przejściowa przeszkoda</strong>.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zamknięcie 10.09.2026</td><td><strong>$7,17</strong></td><td>-3,50%; przed sesją 11.09: <strong>$7,43 (+3,66%)</strong></td></tr>
+          <tr><td><strong>Zmiana za 52 tygodnie</strong></td><td style="color:var(--ocena-kupno)"><strong>+256,72%</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Ale -58% od szczytu powyżej $17 z czerwca</strong></td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td>$9,34</td><td style="color:var(--ocena-sprzedaz)">Kurs <strong>23,2% poniżej</strong></td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td>$11,58</td><td style="color:var(--ocena-sprzedaz)"><strong>Kurs 38,1% poniżej — trend głęboko spadkowy</strong></td></tr>
+          <tr><td><strong>RSI (14)</strong></td><td>38,51</td><td style="color:var(--ocena-uwaga)">Blisko wyprzedania, ale jeszcze powyżej progu 30</td></tr>
+          <tr><td>Beta (5 lat)</td><td>1,19</td><td style="color:var(--ocena-uwaga)">Umiarkowana — spadek nie był rynkowy</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>18,46 mln (12,40% akcji)</strong></td><td style="color:var(--ocena-sprzedaz)">16,44% wolnego obrotu; <strong>wzrost z 15,25 mln</strong></td></tr>
+          <tr><td>Średni wolumen</td><td>4,76 mln akcji</td><td>Wysoki wobec kapitalizacji — spółka spekulacyjna</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Obraz techniczny jest jednoznacznie zły i trzeba to powiedzieć bez łagodzenia.</strong><br><br>Kurs jest <strong>23,2% poniżej średniej 50-sesyjnej i 38,1% poniżej 200-sesyjnej</strong>. Wzrost o 256,72% w skali roku nie powinien mylić — to efekt bardzo niskiej bazy sprzed roku, a <strong>od czerwcowego szczytu powyżej 17 dolarów kurs stracił 58%</strong>.<br><br>RSI 38,51 jest blisko wyprzedania, ale <em>jeszcze go nie osiągnął</em>, więc technicznie jest miejsce niżej. Krótka sprzedaż <strong>rośnie</strong>, co oznacza, że grający na spadki dokładają pozycje po tej przecenie.<br><br><strong>Jedyny pozytywny sygnał: kurs spadł mimo dobrych wyników z 10 sierpnia.</strong> Rynek wycenia więc emisję z maja i pozew zbiorowy, a nie bieżące wyniki — co przy rozwiązaniu tych dwóch spraw dawałoby przestrzeń do odbicia.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$9,34</strong></td><td>Średnia 50-sesyjna — pierwszy realny opór</td></tr>
+          <tr><td><strong>$11,58</strong></td><td>Średnia 200-sesyjna — powrót powyżej odwróciłby trend</td></tr>
+          <tr><td><strong>$18,50</strong></td><td>Cena emisji z 15 maja — poziom, do którego wracali kupujący z tamtej oferty</td></tr>
+          <tr><td><strong>$22,00</strong></td><td>Konsensus czterech analityków — moim zdaniem nierealistyczny</td></tr>
+          <tr><td><strong>$6,00 – $11,00</strong></td><td>Przedział wartości godziwej — kurs w dolnej części</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$6,00</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — poniżej dolnej granicy wartości godziwej ocena wymaga nowego uzasadnienia</td></tr>
+          <tr><td><strong>$3,50</strong></td><td>Scenariusz niekorzystnego wyroku albo odpisu portfela zamówień</td></tr>
+          <tr><td><strong>$0,38</strong></td><td>Wartość księgowa na akcję — pokazuje, że pod tą wyceną nie ma majątku</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs 38% pod średnią 200-sesyjną, RSI 38,51 bez pełnego wyprzedania, krótka sprzedaż rośnie, pozew nierozstrzygnięty. Technicznie jest miejsce niżej.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO SPEKULACYJNE</strong></td><td>Około 11,7× prognozowanej EBITDA przy portfelu zamówień równym 3,1 rocznych przychodów i wyzerowanym długu netto. Ale wyłącznie w rozmiarze, którego strata nie zaboli.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Zależy od rozstrzygnięcia pozwu, zatrzymania rozwodnienia i tego, czy marża operacyjna wyjdzie trwale powyżej 2,38%. BrightLoop dopiero od końca 2027.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ocena spekulacyjna wynika z tego, że obie strony tej tezy są wyjątkowo mocne — i wzajemnie się znoszą.</strong><br><br><strong>Za:</strong> portfel zamówień 2,6 miliarda (+533%), czyli 3,1 raza roczne przychody. Wynik netto zmienił znak z -58,5 na +14,3 miliona. Przychody +130%. Dług netto spadł z 349 milionów do 8,25 miliona. Prognoza EBITDA podniesiona do 80–105 milionów, a II kwartał już daje tempo 87 milionów. To wszystko przy wycenie <strong>około 11,7-krotności prognozowanej EBITDA</strong>.<br><br><strong>Przeciw:</strong> pokrycie odsetek 0,80, Altman Z-Score -0,61, kapitał własny 57 milionów, aktywa materialne ujemne, wolne przepływy -58 milionów, rozwodnienie 30,85% w rok, emisja po 18,50 przy dzisiejszych 7,17 i <strong>pozew zbiorowy dotyczący kontraktu, który stanowi większość portfela zamówień</strong>.</div>
+
+      <div class="alert alert-danger"><strong>Rozstrzyga jedna rzecz — i dlatego to kupno jest spekulacyjne, a nie zwyczajne.</strong><br><br>Cała atrakcyjność wyceny opiera się na prognozie EBITDA 80–105 milionów, a ta opiera się na realizacji portfela zamówień. <strong>A ten sam portfel jest w znacznej części tym samym kontraktem, wokół którego toczy się pozew zbiorowy.</strong> Nie da się kupić jednego bez drugiego.<br><br>Do tego dochodzi marża operacyjna <strong>2,38%</strong> przy kontraktach ryczałtowych — margines, w którym trzypunktowe przekroczenie kosztów zamienia zysk w stratę. <strong>Przy kapitale własnym 57 milionów spółka nie ma z czego takiego błędu pokryć.</strong></div>
+
+      <h3>Konkretnie</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Działanie</th><th>Szczegóły</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Sugerowana wielkość</strong></td><td style="color:var(--ocena-uwaga)"><strong>Maksymalnie 1% portfela</strong> — pozycja, którą można stracić w całości</td></tr>
+          <tr><td><strong>Kontekst portfelowy</strong></td><td>Twój koszyk spekulacyjny to już <strong>15,69%</strong>; BW byłby kolejną pozycją najwyższego ryzyka</td></tr>
+          <tr><td><strong>Pierwsza transza</strong></td><td>Przy obecnych <strong>$7,17</strong> — połowa docelowej pozycji</td></tr>
+          <tr><td><strong>Druga transza</strong></td><td>Poniżej <strong>$6,00</strong> albo po wynikach za III kwartał w listopadzie</td></tr>
+          <tr><td><strong>Realizacja zysku</strong></td><td>Powyżej <strong>$11,00</strong> — górna granica przedziału wartości godziwej</td></tr>
+          <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$6,00</strong></td></tr>
+          <tr><td><strong>Natychmiastowe wyjście z tezy</strong></td><td>Odpis portfela zamówień, nowa emisja akcji, obniżenie prognozy EBITDA albo niekorzystne rozstrzygnięcie w sprawie kontraktu Base Electron</td></tr>
+          <tr><td><strong>Do sprawdzenia w listopadzie</strong></td><td>Czy pokrycie odsetek przekroczyło 1,0 i czy przepływy operacyjne wyszły na plus</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-kupno)">Trzy powody, żeby rozważyć</h3>
+          <ol>
+            <li><strong>Portfel zamówień $2,6 mld (+533%)</strong> — 3,1 raza roczne przychody. Zamówienia bieżące +38%, przychody kwartalne +130%.</li>
+            <li><strong>Około 11,7× prognozowanej EBITDA.</strong> Prognoza $80–105 mln, a II kwartał już daje tempo ok. $87 mln. Cena do sprzedaży prognozowanej 0,99.</li>
+            <li><strong>Bilans naprawiony:</strong> dług netto z $349 mln do $8,25 mln, spłacone $215 mln. Wynik netto zmienił znak z -$58,5 mln na +$14,3 mln.</li>
+          </ol>
+        </div>
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-sprzedaz)">Trzy powody, żeby uważać</h3>
+          <ol>
+            <li><strong>Pozew zbiorowy dotyczy kontraktu, który jest portfelem zamówień.</strong> Base Electron $2,4 mld wobec przyrostu portfela ok. $2,19 mld — szansa i ryzyko to jedno zdarzenie.</li>
+            <li><strong>Pokrycie odsetek 0,80, Altman Z -0,61, kapitał własny $57 mln</strong>, aktywa materialne ujemne, wolne przepływy -$58 mln.</li>
+            <li><strong>Rozwodnienie +30,85% w rok.</strong> Emisja po $18,50 z maja przy dzisiejszych $7,17 — kupujący z tamtej oferty stracili 61%. Krótka sprzedaż 16,44% wolnego obrotu i rośnie.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="alert alert-success"><strong>Thesis-confirmer (co uzasadniłoby zwiększenie pozycji):</strong> pokrycie odsetek powyżej 1,0 w III kwartale, dodatnie przepływy operacyjne, korzystne rozstrzygnięcie albo umorzenie pozwu, zatrzymanie emisji akcji, potwierdzenie prognozy EBITDA.</div>
+      <div class="alert alert-danger"><strong>Thesis-breaker:</strong> odpis portfela zamówień, kolejna emisja, obniżenie prognozy EBITDA, niekorzystny wyrok w sprawie Base Electron albo kurs poniżej $6,00.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Babcock &amp; Wilcox przeszła w ciągu roku przemianę, która na papierze wygląda jak podręcznikowy przykład udanej restrukturyzacji.</strong> Przychody kwartalne wzrosły o <strong>130% do 319,7 miliona dolarów</strong>, wynik netto zmienił znak z minus 58,5 na <strong>plus 14,3 miliona</strong>, skorygowana EBITDA urosła o 57%, a zarząd podniósł prognozę roczną do <strong>80–105 milionów</strong>. Dług netto spadł z <strong>349 milionów do 8,25 miliona</strong> — spłacono 215 milionów zobowiązań. A portfel zamówień, najważniejsza metryka w budownictwie kontraktowym, wzrósł o <strong>533% do 2,6 miliarda dolarów</strong>, czyli do 3,1 raza rocznych przychodów. Przy wartości przedsiębiorstwa 1,08 miliarda daje to <strong>około 11,7-krotności prognozowanej EBITDA</strong> — cenę, która dla spółki przemysłowej z takim portfelem nie jest wygórowana.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Za tę naprawę zapłacili jednak akcjonariusze, i to drogo. <strong>Liczba akcji wzrosła o 30,85% w rok, a kluczową emisję 10,8 miliona akcji przeprowadzono 15 maja po cenie 18,50 dolara — dziś kurs wynosi 7,17, czyli o 61% mniej.</strong> Po tej operacji kapitał własny wynosi <strong>57,37 miliona dolarów, czyli 38 centów na akcję</strong>, aktywa materialne są ujemne, <strong>pokrycie odsetek nadal wynosi 0,80</strong>, a wolne przepływy to minus 58 milionów. Altman Z-Score jest ujemny. I rzecz najważniejsza: <strong>spółka jest przedmiotem pozwów zbiorowych związanych z kontraktem Base Electron o wartości 2,4 miliarda dolarów — a przyrost portfela zamówień wyniósł około 2,19 miliarda.</strong> Te dwie liczby są zbyt blisko siebie, by je rozdzielać.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Portfel zamówień musi być duży i rosnąć.</strong> $2,6 mld (+533%), zamówienia bieżące +38%, przychody +130% — spełnione i to fundament oceny.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Wynik musi zmienić znak.</strong> Q2: +$14,3 mln wobec -$58,5 mln rok wcześniej, zysk $0,07 na akcję — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Dług musi zniknąć.</strong> Dług netto z $349 mln do $8,25 mln, spłacone $215 mln — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Zysk operacyjny musi pokrywać odsetki.</strong> Pokrycie 0,80 — niespełnione i to główny powód oceny wyłącznie spekulacyjnej.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Przepływy muszą być dodatnie.</strong> Operacyjne -$34,73 mln, wolne -$58,17 mln, przy rosnącym zapotrzebowaniu na kapitał obrotowy.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Pozew zbiorowy musi zostać rozstrzygnięty.</strong> Dotyczy kontraktu stanowiącego większość portfela zamówień — nierozstrzygnięty.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-kupno)"><strong>Listopad 2026</strong></td><td style="color:var(--ocena-kupno)"><strong>Wyniki za III kwartał</strong></td><td style="color:var(--ocena-kupno)">Test prognozy EBITDA, pokrycia odsetek i przepływów operacyjnych</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">Termin nieokreślony</td><td style="color:var(--ocena-sprzedaz)"><strong>Postępy pozwu zbiorowego (Base Electron)</strong></td><td style="color:var(--ocena-sprzedaz)">Ryzyko binarne dotyczące większości portfela zamówień</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">Na bieżąco</td><td style="color:var(--ocena-sprzedaz)">Każda nowa emisja akcji</td><td style="color:var(--ocena-sprzedaz)">Główny mechanizm utraty wartości przez akcjonariusza</td></tr>
+            <tr><td>Do końca 2026</td><td>Start budowy instalacji BrightLoop w Massillon</td><td>Komercjalizacja celowana na koniec 2027</td></tr>
+            <tr><td>Na bieżąco</td><td>Nowe kontrakty na zasilanie centrów danych</td><td>Potwierdzenie, że skok portfela nie był jednorazowy</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Pokrycie odsetek</strong></td><td>0,80</td><td>brak przekroczenia 1,0 do końca roku</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Przepływy operacyjne</strong></td><td>-$34,73 mln</td><td>nadal ujemne w III kwartale</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Liczba akcji</strong></td><td>148,97 mln, +30,85% r/r</td><td>każda nowa emisja</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Portfel zamówień</strong></td><td>$2,6 mld (+533%)</td><td>spadek lub odpis</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Prognoza EBITDA 2026</strong></td><td>$80–105 mln</td><td>obniżenie prognozy</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Kurs akcji</strong></td><td>$7,17</td><td>spadek poniżej $6,00</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Wielkość docelowa</strong></td><td><strong>Maksymalnie 1% portfela</strong> — pozycja, którą można stracić w całości</td></tr>
+            <tr><td><strong>Transza pierwsza</strong></td><td>Przy <strong>$7,17</strong> — połowa pozycji</td></tr>
+            <tr><td><strong>Transza druga</strong></td><td>Poniżej <strong>$6,00</strong> albo po wynikach za III kwartał</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Powyżej <strong>$11,00</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$6,00</strong></td></tr>
+            <tr><td><strong>Warunek wyjścia</strong></td><td>Odpis portfela, nowa emisja, obniżenie prognozy albo niekorzystny wyrok</td></tr>
+            <tr><td><strong>Kontekst portfelowy</strong></td><td>Koszyk spekulacyjny to już <strong>15,69%</strong> — warto to uwzględnić przed dołożeniem kolejnej pozycji</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">KUPNO SPEKULACYJNE</div>
+        <p>Na poziomie operacyjnym ta spółka zrobiła w rok więcej, niż zrobiła przez poprzednią dekadę: przychody kwartalne wzrosły o 130%, wynik netto zmienił znak z minus 58,5 na plus 14,3 miliona dolarów, dług netto spadł z 349 milionów do ośmiu, a <strong>portfel zamówień urósł o 533% do 2,6 miliarda — trzy razy tyle, ile wynoszą roczne przychody</strong>. Zarząd podniósł prognozę EBITDA do 80–105 milionów, a drugi kwartał już daje tempo około 87 milionów. Przy wartości przedsiębiorstwa 1,08 miliarda oznacza to <strong>około 11,7-krotności prognozowanej EBITDA</strong> i cenę poniżej rocznych przychodów. Rynek tego nie wycenia: kurs jest 38% pod średnią 200-sesyjną i o 58% poniżej czerwcowego szczytu, mimo że sierpniowy raport był lepszy od oczekiwań.</p>
+        <p>Ale ocena jest spekulacyjna z dwóch konkretnych powodów. <strong>Po pierwsze, bilans nadal nie stoi: pokrycie odsetek 0,80, kapitał własny 57 milionów dolarów, aktywa materialne ujemne, wolne przepływy minus 58 milionów, Altman Z-Score minus 0,61.</strong> Naprawę sfinansowano emisją akcji po 18,50 dolara, które dziś kosztują 7,17 — rozwodnienie wyniosło 30,85% w rok. <strong>Po drugie, i ważniejsze: pozew zbiorowy dotyczy kontraktu Base Electron o wartości 2,4 miliarda dolarów, a przyrost portfela zamówień wyniósł około 2,19 miliarda.</strong> Największa szansa tej spółki i jej największe ryzyko są z dużym prawdopodobieństwem tym samym zdarzeniem — i nie da się kupić jednego bez drugiego. <strong>Maksymalnie 1% portfela, w rozmiarze, którego całkowita strata nie zmieni niczego.</strong></p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-kupno)">Kupno spekulacyjne</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$6,00 – $11,00</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$3,50 (-51%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$11,00 (+53%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Maks. 1% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki Q3, listopad</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">PORTFEL ZAMÓWIEŃ A POZEW — DLACZEGO TO JEDNO ZDARZENIE</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="alert alert-danger"><strong>Ta sekcja istnieje, bo jest to najważniejsza obserwacja całej analizy, a nie wynika z żadnego pojedynczego źródła — wynika z zestawienia dwóch liczb, które nikt nie kładzie obok siebie.</strong></div>
+
+      <h3>Rachunek</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Krok</th><th>Wyliczenie</th><th>Wynik</th></tr></thead>
+        <tbody>
+          <tr><td>Portfel zamówień dziś</td><td>podany w raporcie za II kwartał</td><td><strong>$2,6 mld</strong></td></tr>
+          <tr><td>Wzrost rok do roku</td><td>podany w raporcie</td><td><strong>+533%</strong></td></tr>
+          <tr><td>Mnożnik</td><td>533% wzrostu = wartość 6,33 raza wyższa</td><td>6,33×</td></tr>
+          <tr><td>Portfel rok temu</td><td>$2,6 mld ÷ 6,33</td><td><strong>ok. $410 mln</strong></td></tr>
+          <tr><td><strong>Przyrost portfela</strong></td><td>$2,6 mld − $0,41 mld</td><td style="color:var(--ocena-uwaga)"><strong>ok. $2,19 mld</strong></td></tr>
+          <tr><td><strong>Kontrakt objęty pozwem</strong></td><td>Base Electron, podana wartość</td><td style="color:var(--ocena-sprzedaz)"><strong>$2,4 mld</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Wniosek: przyrost portfela zamówień (ok. 2,19 mld) i kontrakt będący przedmiotem pozwu zbiorowego (2,4 mld) to niemal ta sama kwota.</strong><br><br>Przy spółce o rocznych przychodach 834 milionów dolarów nie ma realistycznego scenariusza, w którym pojawiają się <em>dwa niezależne</em> kontrakty tej skali w tym samym okresie. <strong>Najbardziej prawdopodobne wyjaśnienie jest takie, że skok portfela o 533% to w znacznej mierze zaksięgowanie właśnie tego kontraktu</strong> — przy czym część wartości mogła zostać ujęta etapami, co tłumaczyłoby drobną różnicę między 2,19 a 2,4 miliarda.<br><br><strong>To jest wnioskowanie z arytmetyki i skali, a nie potwierdzony fakt.</strong> Zapisuję to jawnie, bo od tego zależy cała ocena — a nie znalazłem publicznego źródła, które rozstrzygałoby sprawę wprost.</div>
+
+      <h3>Co z tego wynika praktycznie</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konsekwencja</th><th>Znaczenie dla inwestora</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Nie da się rozdzielić szansy od ryzyka</strong></td><td style="color:var(--ocena-sprzedaz)">Kupując ekspozycję na portfel zamówień, kupujesz jednocześnie ekspozycję na spór sądowy</td></tr>
+          <tr><td><strong>Prognoza EBITDA zależy od tego kontraktu</strong></td><td style="color:var(--ocena-sprzedaz)">Cała atrakcyjność wyceny 11,7× opiera się na jego realizacji</td></tr>
+          <tr><td><strong>Odpis portfela byłby podwójnym ciosem</strong></td><td style="color:var(--ocena-sprzedaz)">Zniknęłaby zarówno prognoza, jak i argument za wyceną</td></tr>
+          <tr><td>Korzystne rozstrzygnięcie działa odwrotnie</td><td style="color:var(--ocena-kupno)">Usunęłoby główny powód dyskonta — przy 16,44% krótkich pozycji ruch mógłby być gwałtowny</td></tr>
+          <tr><td><strong>Koncentracja jest skrajna</strong></td><td style="color:var(--ocena-sprzedaz)">Jeden kontrakt odpowiada za ok. 84% portfela zamówień</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Jak to zweryfikować samemu — bo warto, zanim cokolwiek kupisz.</strong><br><br>Raport kwartalny (formularz 10-Q) i roczny (10-K) zawierają notę o koncentracji przychodów i portfela zamówień oraz opis toczących się postępowań. <strong>Wystarczy sprawdzić dwie rzeczy: czy spółka wymienia pojedynczego klienta odpowiadającego za ponad 10% portfela, oraz jak opisuje przedmiot pozwu zbiorowego.</strong> Jeśli obie noty wskazują na ten sam kontrakt, teza z tej sekcji się potwierdza — a wtedy maksymalna pozycja 1% portfela jest wciąż górną granicą rozsądku, nie punktem wyjścia do negocjacji.</div>
+
+      <div class="alert alert-warning"><strong>Zastrzeżenie metodologiczne:</strong> wartość portfela sprzed roku (ok. $410 mln) i przyrost (ok. $2,19 mld) to <strong>obliczenia własne wyprowadzone z podanej dynamiki +533%</strong>, a nie liczby raportowane wprost. Wartość kontraktu Base Electron ($2,4 mld) pochodzi z doniesień prasowych o pozwie. Zbieżność tych kwot jest silną przesłanką, ale nie dowodem.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 11 września 2026 | Cena: <strong>$7,17</strong> — zamknięcie sesji 10.09.2026 (-3,50%); w notowaniach przed sesją 11.09 kurs wynosił $7,43 (+3,66%) | Pierwsza analiza BW — spółka spoza portfela | Dane: StockAnalysis / S&amp;P Global Market Intelligence, komunikaty Babcock &amp; Wilcox IR i zgłoszenia SEC (wyniki II kwartału 2026 z 10.08.2026, formularz 8-K), doniesienia prasowe o emisji akcji z 15.05.2026, o spłacie zadłużenia oraz o pozwach zbiorowych związanych z kontraktem Base Electron — <strong>stan danych na 11.09.2026</strong>. Przeliczenie EV/EBITDA na prognozę (ok. 11,7×), wartość portfela sprzed roku (ok. $410 mln) i przyrost portfela (ok. $2,19 mld) to obliczenia własne wyprowadzone z podanych dynamik | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
