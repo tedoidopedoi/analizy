@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORCL — Oracle | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:12.5px; color:var(--text-muted); font-style:italic; margin-top:-4px; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: ORCL</div>
+    <div class="company-name">Oracle Corporation</div>
+    <div class="company-sub">Bazy danych, aplikacje i chmura obliczeniowa · Austin, Teksas</div>
+    <div class="header-meta">
+      <span class="meta-tag">W portfelu — 5,83%</span>
+      <span class="meta-tag">Obniżenie oceny z kupna spekulacyjnego</span>
+      <span class="meta-tag">Kurs o połowę niższy niż rok temu</span>
+      <div class="price-display">
+        <div class="price-main">$150,91</div>
+        <div class="price-sub">notowanie 17.09.2026, 10:57 EDT (+5,41%)</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Chmura i centra danych</span><span class="temat">Moc obliczeniowa dla AI</span><span class="temat">Oprogramowanie i SaaS</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — 664 mld dolarów zakontraktowanych przychodów przy ujemnych przepływach i 169 mld długu; teza jest słuszna, ale finansowanie nierozstrzygnięte">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">obniżenie z kupna spekulacyjnego — mój przedział był za wysoki</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$110 – $200</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-27% do +33%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>10 września 2026</b><em>Q1 roku obrotowego 2027</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Portfel zamówień</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$150,91</div><div class="metric-detail"><strong>-51,33% w 52 tygodnie</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 14.08</div><div class="metric-value">+0,3%</div><div class="metric-detail">Praktycznie w miejscu; mój przedział $180–220 poza zasięgiem</div></div>
+    <div class="metric-card"><div class="metric-label">Zakontraktowane przychody</div><div class="metric-value green">$664 mld</div><div class="metric-detail"><strong>9,25 roku</strong> dzisiejszej sprzedaży</div></div>
+    <div class="metric-card"><div class="metric-label">Chmura infrastrukturalna</div><div class="metric-value green">$7,4 mld</div><div class="metric-detail">Ponad dwukrotnie r/r; wykorzystanie GPU 97,9%</div></div>
+    <div class="metric-card"><div class="metric-label">Wolne przepływy</div><div class="metric-value red">-$28,72 mld</div><div class="metric-detail"><strong>Nakłady to 105% przychodów</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Zadłużenie</div><div class="metric-value red">$169,14 mld</div><div class="metric-detail">Dług netto $132,07 mld · Altman 1,93</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / zysk prognozowany</div><div class="metric-value green">16,80</div><div class="metric-detail">Wskaźnik PEG <strong>0,56</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (43 analityków)</div><div class="metric-value green">$239,00</div><div class="metric-detail">+58,37% — najwyższa rozbieżność w portfelu</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I WYNIKI Z 10 WRZEŚNIA</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Oracle sprzedaje bazy danych, aplikacje dla przedsiębiorstw i — od kilku lat z rosnącym rozmachem — moc obliczeniową w chmurze. Przychody za dwanaście miesięcy to <strong>$71,78 mld</strong> przy 141 000 pracowników. To <strong>Twoja pozycja o wadze 5,83%</strong>, przy cenie wejścia $164,27, czyli wynik <strong>-8,1%</strong>.</p>
+
+      <div class="alert alert-warning"><strong>Kurs jest o połowę niższy niż rok temu — i to przy portfelu zamówień, który urósł do $664 miliardów.</strong><br><br>
+      Spadek o <strong>51,33%</strong> w dwanaście miesięcy nie wydarzył się przez słabe wyniki. Przychody rosną o 30%, chmura o 62%, a zakontraktowane przychody przekroczyły sześćset miliardów dolarów. <strong>Rynek przecenił nie wyniki, tylko sposób ich finansowania</strong> — i temu poświęcam sekcje 5 i 8.<br><br>Od mojej poprzedniej analizy z 14 sierpnia kurs zmienił się o <strong>0,3%</strong>. Wyceniłem wtedy Oracle na $180–220; dolna granica nigdy nie znalazła się w zasięgu.</div>
+
+      <h3>Wyniki za I kwartał roku obrotowego 2027 — 10 września 2026</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wynik</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody</strong></td><td style="color:var(--ocena-kupno)"><strong>$19,3 mld, +30% r/r</strong></td><td>Zysk na akcję $1,92 — powyżej oczekiwań</td></tr>
+          <tr><td><strong>Chmura razem</strong></td><td style="color:var(--ocena-kupno)"><strong>$11,61 mld, +62%</strong></td><td>Powyżej konsensusu</td></tr>
+          <tr><td><strong>Chmura infrastrukturalna</strong></td><td style="color:var(--ocena-kupno)"><strong>$7,4 mld — ponad dwukrotnie r/r</strong></td><td style="color:var(--ocena-kupno)">Wykorzystanie GPU <strong>97,9%</strong>, ponad 300 000 układów wdrożonych w kwartale</td></tr>
+          <tr><td><strong>Zakontraktowane przychody (RPO)</strong></td><td style="color:var(--ocena-kupno)"><strong>$664 mld</strong></td><td style="color:var(--ocena-kupno)">Konsensus zakładał $630,6 mld</td></tr>
+          <tr><td><strong>Nowe kontrakty AI w kwartale</strong></td><td style="color:var(--ocena-kupno)"><strong>ponad $30 mld</strong></td><td style="color:var(--ocena-kupno)"><strong>bez konieczności angażowania dodatkowego kapitału Oracle</strong></td></tr>
+          <tr><td><strong>Nakłady inwestycyjne w kwartale</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$28,50 mld</strong></td><td style="color:var(--ocena-sprzedaz)">Rok wcześniej $8,50 mld — wzrost ponad trzykrotny</td></tr>
+          <tr><td><strong>Prognoza na rok obrotowy 2027</strong></td><td><strong>$8,10 zysku na akcję, co najmniej $90 mld przychodów</strong></td><td style="color:var(--ocena-sprzedaz)">Nakłady: <strong>$90–95 mld</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Ostatni wiersz tej tabeli jest całą historią Oracle w jednym zdaniu: spółka zamierza w tym roku wydać na inwestycje mniej więcej tyle, ile zarobi na sprzedaży.</strong><br><br>Prognoza przychodów to „co najmniej $90 mld". Prognoza nakładów inwestycyjnych to <strong>$90–95 mld</strong>. Nie ma w dużych spółkach technologicznych drugiego takiego przypadku — i to jest powód, dla którego kurs jest o połowę niższy mimo rekordowego portfela zamówień.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — TRZY BIZNESY O RÓŻNEJ NATURZE</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Filar</th><th>Czym jest</th><th>Charakter</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Bazy danych</strong></td><td>Rdzeń systemów korporacyjnych od dekad</td><td style="color:var(--ocena-kupno)">Bardzo wysoki koszt zmiany, stabilne przychody</td></tr>
+          <tr><td><strong>Aplikacje</strong></td><td>Systemy kadrowe, finansowe, branżowe</td><td style="color:var(--ocena-kupno)">Abonamentowe, powolny wzrost</td></tr>
+          <tr><td><strong>Chmura infrastrukturalna (OCI)</strong></td><td>Wynajem mocy obliczeniowej, głównie pod AI</td><td style="color:var(--ocena-uwaga)"><strong>Kapitałochłonna, niskomarżowa, rosnąca najszybciej</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Fosa Oracle jest jedną z najtrwalszych w całym oprogramowaniu i warto rozumieć, na czym polega.</strong> Baza danych to nie aplikacja, którą się wymienia — to fundament, na którym zbudowano wszystko inne. Migracja oznacza przepisanie dziesięcioleci logiki biznesowej, a ryzyko utraty danych jest nie do zaakceptowania. Dlatego Oracle podnosi ceny licencji od trzydziestu lat i klienci płacą.<br><br><strong>Problem polega na tym, że nowy biznes nie ma z tą fosą nic wspólnego.</strong> Wynajem mocy obliczeniowej pod sztuczną inteligencję to sprzedaż towaru: klient porównuje cenę za godzinę pracy układu i przenosi się tam, gdzie taniej. Oracle buduje więc drugą firmę — kapitałochłonną i konkurencyjną cenowo — na fundamencie pierwszej, która jest dokładnym przeciwieństwem.</div>
+
+      <p>Jedna liczba pokazuje, że w tym nowym biznesie Oracle radzi sobie sprawnie: <strong>wykorzystanie zainstalowanych układów wynosi 97,9%</strong>. Sprzęt nie stoi bezczynnie, co przy takiej wartości aktywów ma bezpośrednie przełożenie na zwrot z kapitału.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK — WYŚCIG, W KTÓRYM NIE MOŻNA NIE BIEC</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Teza rynku</th><th>Teza spółki</th></tr></thead>
+        <tbody>
+          <tr><td>Nakłady tej skali nigdy się nie zwrócą</td><td>Portfel zamówień jest podpisany, nie prognozowany</td></tr>
+          <tr><td>Wynajem mocy to sprzedaż towaru bez marży</td><td>Wykorzystanie sprzętu bliskie stu procent</td></tr>
+          <tr><td>Bilans nie udźwignie kolejnego roku</td><td>Część kontraktów nie wymaga własnego kapitału</td></tr>
+          <tr><td>Konkurenci mają większe bilanse</td><td>Oracle rośnie szybciej od nich</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Oracle znalazł się w położeniu, w którym wycofanie się jest równie kosztowne jak kontynuacja.</strong><br><br>Skoro klienci podpisali kontrakty na dostarczenie mocy obliczeniowej, spółka musi tę moc zbudować — inaczej traci zarówno przychód, jak i wiarygodność. Nakłady nie są więc decyzją, którą można odłożyć na lepszy kwartał; są zobowiązaniem wynikającym z tego, co już sprzedano.<br><br>To jest dokładnie ten mechanizm, który rynek wycenia jako ryzyko. <strong>Spółka z portfelem zamówień na dziewięć lat i ujemnymi przepływami nie ma miejsca na pomyłkę w harmonogramie</strong>, bo każdy poślizg oznacza koszt finansowania bez odpowiadającego mu przychodu.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">PORTFEL ZAMÓWIEŃ — NAJWAŻNIEJSZA LICZBA</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zakontraktowane przychody (RPO)</strong></td><td style="color:var(--ocena-kupno)"><strong>$664 mld</strong></td><td style="color:var(--ocena-kupno)"><strong>9,25 roku</strong> dzisiejszych przychodów, już podpisane</td></tr>
+          <tr><td>Nowe kontrakty AI w kwartale</td><td style="color:var(--ocena-kupno)">ponad $30 mld</td><td style="color:var(--ocena-kupno)">Bez angażowania dodatkowego kapitału spółki</td></tr>
+          <tr><td>Wykorzystanie zainstalowanych układów</td><td style="color:var(--ocena-kupno)">97,9%</td><td>Ponad 300 000 układów wdrożonych w kwartale</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$509,1 tys.</td><td>Zysk na pracownika $132,9 tys.</td></tr>
+          <tr><td><strong>Zarząd i założyciel</strong></td><td style="color:var(--ocena-kupno)"><strong>38,53%</strong></td><td style="color:var(--ocena-kupno)">Wyjątkowo wysoko; wolny obrót tylko 1,86 mld akcji</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Portfel zamówień odpowiadający ponad dziewięciu latom dzisiejszej sprzedaży jest liczbą, której nie ma żadna inna spółka w Twoim portfelu — i prawdopodobnie żadna duża spółka technologiczna na świecie.</strong><br><br>To nie są prognozy analityków ani deklaracje zarządu, tylko <strong>umowy podpisane przez klientów</strong>. Dla porównania ServiceNow ma zakontraktowane około dziesięciu miesięcy sprzedaży abonamentowej i uznałem to za bardzo dobrą widoczność.<br><br><strong>Zastrzeżenie, bez którego ta liczba wprowadza w błąd:</strong> RPO to zobowiązanie do <em>dostarczenia</em>, nie gotówka w kasie. Oracle rozpozna te przychody dopiero wtedy, gdy wybuduje i uruchomi moc obliczeniową — a to wymaga nakładów opisanych w sekcji 5. Portfel zamówień mówi, że popyt istnieje; nie mówi nic o tym, ile zostanie z tego marży po opłaceniu sprzętu i odsetek.</div>
+
+      <p>Osobno warto odnotować <strong>38,53% akcji w rękach zarządu i założyciela</strong> — to zupełnie inna sytuacja niż w większości dużych spółek technologicznych, gdzie zaangażowanie kierownictwa liczy się w ułamkach procenta. Decyzja o wydaniu dziewięćdziesięciu miliardów dolarów jest podejmowana przez ludzi, którzy ponoszą jej skutki majątkowo.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZEPŁYWY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$71,78 mld</td></tr>
+          <tr><td>Zysk brutto</td><td style="color:var(--ocena-kupno)">$45,91 mld</td></tr>
+          <tr><td>Zysk operacyjny</td><td style="color:var(--ocena-kupno)">$24,60 mld</td></tr>
+          <tr><td>Zysk netto</td><td style="color:var(--ocena-kupno)">$18,74 mld · $6,38 na akcję</td></tr>
+          <tr><td>EBITDA</td><td>$34,43 mld</td></tr>
+          <tr><td><strong>Przepływy operacyjne</strong></td><td style="color:var(--ocena-kupno)"><strong>$46,94 mld</strong></td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$75,66 mld</strong></td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$28,72 mld · -$9,50 na akcję</strong></td></tr>
+          <tr><td>Prognoza wzrostu przychodów (3 lata)</td><td style="color:var(--ocena-kupno)">39,49% rocznie</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>To jest najważniejsze zestawienie w całym raporcie i warto je przeczytać powoli.</strong><br><br>
+      Oracle generuje <strong>$46,94 mld</strong> gotówki operacyjnej rocznie — to znakomity wynik, lepszy od większości spółek na świecie. I wydaje <strong>$75,66 mld</strong> na inwestycje, czyli <strong>105% swoich przychodów</strong>.<br><br>
+      Różnica to <strong>minus $28,72 mld wolnych przepływów</strong>, czyli $9,50 na każdą akcję. Lukę zamyka dług: w ciągu roku zaciągnięto netto <strong>$34,51 mld</strong>.<br><br>
+      <strong>Nie jest to spółka w kłopotach — to spółka w trakcie budowy drugiej firmy za pożyczone pieniądze.</strong> Różnica między tymi opisami polega wyłącznie na tym, czy budowa się zwróci.</div>
+
+      <p>Warto zauważyć jeden szczegół z ostatniego kwartału, który tę arytmetykę łagodzi: ponad <strong>$30 mld nowych kontraktów AI zamknięto bez konieczności angażowania dodatkowego kapitału Oracle</strong>. Sugeruje to, że część nowych umów ma strukturę, w której moc obliczeniową finansuje partner lub klient. Gdyby ten model się upowszechnił, zmieniłby profil całej tezy — ale na razie jest to jedno zdanie z jednego kwartału, nie trend.</p>
+      <p>Dywidenda wynosi $2,00 na akcję przy stopie 1,33% i rośnie od dwunastu lat, pochłaniając 31,36% zysku. Przy ujemnych wolnych przepływach <strong>jest ona dziś wypłacana z długu, nie z gotówki wypracowanej</strong>. Liczba akcji rośnie o 1,95% rocznie.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$456,31 mld</td><td style="color:var(--ocena-sprzedaz)">Wartość przedsiębiorstwa <strong>$588,38 mld</strong> — różnicę robi dług</td></tr>
+          <tr><td>Cena / zysk</td><td style="color:var(--ocena-kupno)">22,45</td><td>Nisko jak na spółkę rosnącą o 30%</td></tr>
+          <tr><td>Cena / sprzedaż</td><td>6,03</td><td>Prognozowana 4,39</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>nie dotyczy</strong></td><td style="color:var(--ocena-sprzedaz)">Przepływy ujemne; cena do przepływów operacyjnych 9,22</td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td>16,41</td><td>EV/EBIT 22,97</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td>7,00</td><td>Księga $20,44 na akcję</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>22,45</td><td>Zysk <strong>$6,38 na akcję</strong> przy przychodach $71,78 mld</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-kupno)"><strong>16,80</strong></td><td style="color:var(--ocena-kupno)">Na własnej prognozie spółki ($8,10 na akcję) wychodzi <strong>18,6×</strong></td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-kupno)"><strong>0,56</strong></td><td style="color:var(--ocena-kupno)">Wyraźnie poniżej 1,0 — wzrost tańszy, niż sugeruje mnożnik. Prognoza zysku +27,34% rocznie</td></tr>
+          <tr><td>Odniesienie sektorowe</td><td>duże oprogramowanie: ok. 22–30× forward</td><td style="color:var(--ocena-kupno)">Oracle wyraźnie poniżej</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> Wskaźnik PEG na poziomie <strong>0,56</strong> jest najniższy wśród spółek, które analizowałem w tej serii — dla porównania ServiceNow ma 1,26, Amphenol 1,35, Take-Two 0,94. Oznacza to, że rynek nie płaci za wzrost Oracle nawet połowy tego, ile płaci za wzrost porównywalnych spółek.</p>
+      <p><strong>Dlaczego tak jest, widać w tabeli wyżej:</strong> wartość przedsiębiorstwa przewyższa kapitalizację o <strong>$132 mld</strong>, bo tyle wynosi dług netto. Kupując akcję Oracle, kupuje się jednocześnie udział w tym zadłużeniu — i to ono, a nie wynik operacyjny, tłumaczy dyskonto w mnożnikach.</p>
+
+      <h3>Cztery scenariusze na koniec 2027 roku</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Zysk na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Prognoza dowieziona, rynek zaczyna płacić za portfel zamówień</strong></td><td>$8,10</td><td>24×</td><td><strong>$194</strong></td><td style="color:var(--ocena-kupno)">+29%</td></tr>
+          <tr><td><strong>Prognoza dowieziona, mnożnik pozostaje zdołowany</strong></td><td>$8,10</td><td>20×</td><td><strong>$162</strong></td><td style="color:var(--ocena-kupno)">+7%</td></tr>
+          <tr><td>Nakłady przekraczają plan, marże rozczarowują</td><td>$7,00</td><td>16×</td><td>$112</td><td style="color:var(--ocena-sprzedaz)">-26%</td></tr>
+          <tr><td><strong>Portfel okazuje się nierentowny albo pojawia się napięcie finansowe</strong></td><td style="color:var(--ocena-sprzedaz)">$6,00</td><td>12×</td><td><strong>$72</strong></td><td style="color:var(--ocena-sprzedaz)">-52%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne. Scenariusz pierwszy opiera się na prognozie samej spółki na rok obrotowy 2027. Dane wejściowe: StockAnalysis / S&amp;P Global Market Intelligence, stan 17.09.2026; wyniki kwartalne i prognozy z komunikatu Oracle z 10.09.2026.</p>
+
+      <p><strong>Fair value: $110 – $200</strong>, środek <strong>$155,00 (+2,7%)</strong>. Konsensus 43 analityków to <strong>$239,00 (+58,37%)</strong> — wyraźnie powyżej górnej granicy mojego przedziału i najwyższa rozbieżność między moją wyceną a rynkową w całym portfelu.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Marża brutto</strong></td><td style="color:var(--ocena-kupno)"><strong>63,96%</strong></td><td style="color:var(--ocena-uwaga)">Spada wraz z rosnącym udziałem chmury infrastrukturalnej</td></tr>
+          <tr><td><strong>Marża operacyjna</strong></td><td style="color:var(--ocena-kupno)"><strong>34,27%</strong></td><td style="color:var(--ocena-kupno)">Bardzo wysoka — to dziedzictwo baz danych</td></tr>
+          <tr><td>Marża netto / EBITDA</td><td>26,36% / 47,97%</td><td>Efektywna stopa podatkowa tylko 12,95%</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-uwaga)"><strong>11,34% vs 10,64%</strong></td><td style="color:var(--ocena-uwaga)"><strong>Różnica tylko +0,70 pp</strong></td></tr>
+          <tr><td>Zwrot z kapitału własnego</td><td style="color:var(--ocena-kupno)">41,19%</td><td style="color:var(--ocena-sprzedaz)">Zawyżony dźwignią — ROA tylko 6,36%</td></tr>
+          <tr><td>Rotacja aktywów</td><td style="color:var(--ocena-sprzedaz)">0,30</td><td style="color:var(--ocena-sprzedaz)">Bardzo ciężki bilans wobec przychodów</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Różnica między zwrotem z kapitału a jego kosztem wynosi zaledwie 0,70 punktu procentowego — i to jest liczba, która najlepiej podsumowuje dzisiejsze Oracle.</strong><br><br>Spółka wciąż tworzy wartość ekonomiczną, ale margines jest cienki jak żyletka. Dla porównania w tej serii: Amphenol <strong>+9,89 pp</strong>, ServiceNow +1,18 pp, AMD -8,02 pp, MARA -84,58 pp.<br><br><strong>Kluczowe zastrzeżenie:</strong> ten wskaźnik liczy zwrot z kapitału <em>już zainwestowanego</em>. Dziesiątki miliardów wydane w ostatnich kwartałach jeszcze nie zaczęły zarabiać — sprzęt jest w budowie albo dopiero uruchamiany. Jeśli te aktywa osiągną rentowność zbliżoną do obecnej, wskaźnik wzrośnie; jeśli nie, spadnie poniżej kosztu kapitału i Oracle zacznie niszczyć wartość mimo rosnących przychodów.<br><br>Warto też zauważyć, że <strong>zwrot z kapitału własnego 41,19% przy zwrocie z aktywów 6,36%</strong> to niemal w całości efekt dźwigni finansowej, a nie efektywności.</div>
+
+      <p>Marża brutto <strong>63,96%</strong> jest wciąż wysoka, ale trzeba obserwować jej kierunek: każdy punkt wzrostu udziału chmury infrastrukturalnej w sprzedaży ją obniża, bo wynajem mocy ma strukturalnie gorszą ekonomikę niż licencja na bazę danych.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — SEDNO PROBLEMU</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka / zadłużenie</td><td style="color:var(--ocena-sprzedaz)">$37,08 mld / <strong>$169,14 mld</strong></td><td style="color:var(--ocena-sprzedaz)">Zaciągnięte netto w 12 miesięcy: <strong>$34,51 mld</strong></td></tr>
+          <tr><td><strong>Dług netto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$132,07 mld</strong></td><td style="color:var(--ocena-sprzedaz)">$43,68 na akcję — prawie jedna trzecia kursu</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-sprzedaz)">2,52</td><td style="color:var(--ocena-sprzedaz)">Dług netto do EBITDA <strong>3,84×</strong></td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-uwaga)"><strong>4,82</strong></td><td style="color:var(--ocena-uwaga)">Komfortowo, ale bez zapasu na kolejne podwojenie długu</td></tr>
+          <tr><td>Wskaźnik bieżący / szybki</td><td style="color:var(--ocena-uwaga)">1,17 / 1,02</td><td>Kapitał obrotowy $8,12 mld</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>1,93</strong></td><td style="color:var(--ocena-sprzedaz)">Poniżej progu 3,0; Piotroski 5/9</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Altman Z-Score 1,93 w spółce zarabiającej osiemnaście miliardów dolarów rocznie wygląda absurdalnie — i wymaga uczciwego rozłożenia na części.</strong><br><br>
+      <strong>Dlaczego wskaźnik jest tak niski:</strong> karze za wysoką dźwignię, niską rotację aktywów i cienki kapitał obrotowy. Oracle ma wszystkie trzy cechy, bo właśnie zamienił bilans w wielką inwestycję w infrastrukturę.<br><br>
+      <strong>Dlaczego nie oznacza zagrożenia upadłością:</strong> pokrycie odsetek wynosi 4,82, marża operacyjna 34%, a przepływy operacyjne blisko $47 mld rocznie. To nie jest spółka, która nie ma z czego płacić.<br><br>
+      <strong>Co jednak oznacza naprawdę:</strong> <strong>Oracle wyczerpał swobodę finansową.</strong> Przy długu netto na poziomie 3,84-krotności EBITDA kolejny rok nakładów rzędu dziewięćdziesięciu miliardów musi zostać sfinansowany albo z rosnących przepływów, albo z jeszcze większego długu, albo z emisji akcji. Żadna z tych dróg nie jest darmowa, a rynek już wycenia tę wiedzę.</div>
+
+      <p>Element łagodzący, o którym nie wolno zapomnieć: <strong>ponad $30 mld nowych kontraktów zamknięto bez angażowania dodatkowego kapitału spółki</strong>. Jeśli ta struktura stanie się regułą, presja na bilans wyraźnie zmaleje. To jest najważniejsza rzecz do obserwowania przy kolejnych wynikach — ważniejsza od samych przychodów.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Portfel zamówień odpowiada dziewięciu latom dzisiejszej sprzedaży.</strong> To umowy podpisane przez klientów, nie prognozy. Żadna inna duża spółka technologiczna nie ma takiej widoczności — a rynek wycenia dziś Oracle tak, jakby ta widoczność nie istniała.</div>
+
+      <div class="alert alert-success"><strong>2. Wycena jest najniższa w całym portfelu względem wzrostu.</strong> Wskaźnik PEG poniżej 0,6 przy dynamice przychodów 30% i prognozie wzrostu zysku o ponad ćwierć rocznie. Konsensus czterdziestu trzech analityków leży o blisko sześćdziesiąt procent powyżej kursu.</div>
+
+      <div class="alert alert-success"><strong>3. Sprzęt pracuje niemal bez przerwy.</strong> Wykorzystanie zainstalowanych układów na poziomie 97,9% oznacza, że popyt wyprzedza moc — a to jest warunek, żeby nakłady w ogóle miały szansę się zwrócić. Problemem nie jest brak klientów.</div>
+
+      <div class="alert alert-info"><strong>4. Struktura kontraktów zaczyna się zmieniać na korzyść bilansu.</strong> Ponad trzydzieści miliardów nowych umów bez angażowania własnego kapitału to sygnał, że Oracle uczy się przerzucać ciężar finansowania. Do tego zarząd i założyciel trzymają blisko czterdzieści procent akcji, więc skutki tych decyzji ponoszą osobiście.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Nakłady dorównują przychodom, a w nadchodzącym roku mają im dorównać ponownie.</strong> Wolne przepływy są ujemne o blisko trzydzieści miliardów dolarów, a prognoza inwestycji na rok obrotowy 2027 jest mniej więcej równa prognozie sprzedaży. To nie jest stan, który da się utrzymywać w nieskończoność.</div>
+
+      <div class="alert alert-danger"><strong>2. Bilans wyczerpał swobodę.</strong> Dług netto przekracza trzykrotność rocznej EBITDA, wskaźnik Altmana zszedł poniżej progu bezpieczeństwa, a dywidenda jest dziś finansowana z pożyczonych pieniędzy. Kolejna runda nakładów wymaga nowego źródła finansowania.</div>
+
+      <div class="alert alert-danger"><strong>3. Zwrot z kapitału ledwie przekracza jego koszt.</strong> Różnica poniżej jednego punktu procentowego oznacza, że przy niewielkim rozczarowaniu marżą nowe inwestycje zaczną niszczyć wartość, mimo że przychody będą rosły.</div>
+
+      <div class="alert alert-warning"><strong>4. Nowy biznes nie ma fosy starego.</strong> Wynajem mocy obliczeniowej to sprzedaż towaru, w której klient porównuje cenę za godzinę. Konkurenci — Amazon, Microsoft, Google — mają większe bilanse i mogą tę cenę obniżać dłużej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Przewaga nad Oracle</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Amazon</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 3,91%)</span></td><td style="color:var(--ocena-sprzedaz)">Największa skala chmury, bilans finansujący nakłady z bieżącej gotówki</td><td>Wolniejsza dynamika w segmencie AI</td></tr>
+          <tr><td><strong>Microsoft</strong></td><td style="color:var(--ocena-sprzedaz)">Bilans i relacja z OpenAI</td><td>Ograniczenia mocy, podobne napięcie inwestycyjne</td></tr>
+          <tr><td><strong>Google</strong></td><td style="color:var(--ocena-sprzedaz)">Własne układy obliczeniowe obniżają koszt</td><td>Słabsza pozycja w sprzedaży do przedsiębiorstw</td></tr>
+          <tr><td><strong>CoreWeave</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 3,78%)</span></td><td>Wyspecjalizowana, szybsza we wdrożeniach</td><td style="color:var(--ocena-uwaga)">Ten sam problem finansowania, mniejsza skala</td></tr>
+          <tr><td><strong>SAP</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 5,04%)</span></td><td>Rywal w aplikacjach dla przedsiębiorstw</td><td style="color:var(--ocena-kupno)">Nie konkuruje o moc obliczeniową</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Oracle prowadzi wyścig inwestycyjny z przeciwnikami, którzy mają od niego nieporównywalnie mocniejsze bilanse — i to jest istota ryzyka konkurencyjnego.</strong><br><br>Amazon, Microsoft i Google finansują rozbudowę centrów danych z gotówki wypracowanej w innych, bardzo dochodowych biznesach. Oracle finansuje ją długiem. Jeśli ceny wynajmu mocy obliczeniowej spadną — a przy sprzedaży towaru spadają zawsze — <strong>oni to wytrzymają dłużej.</strong><br><br>Przewagą Oracle jest tempo i relacja z klientem korporacyjnym zbudowana przez dekady na bazach danych. To realna przewaga, ale w segmencie, w którym o wyborze decyduje cena za godzinę pracy układu, jej trwałość jest ograniczona.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zmiana za 52 tygodnie</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-51,33%</strong></td><td style="color:var(--ocena-sprzedaz)">Najgorszy roczny wynik w Twoim portfelu</td></tr>
+          <tr><td>Średnie kroczące 50 i 200 sesji</td><td>$140,91 / $166,51</td><td style="color:var(--ocena-uwaga)">Kurs 7,1% powyżej krótszej, <strong>9,4% poniżej dłuższej</strong></td></tr>
+          <tr><td><strong>Układ średnich</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>50 poniżej 200</strong></td><td style="color:var(--ocena-sprzedaz)">Trend spadkowy nienaruszony — odbicie dopiero się zaczyna</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>51,15</td><td>Neutralnie; wolumen 26,67 mln akcji</td></tr>
+          <tr><td>Beta (5 lat)</td><td style="color:var(--ocena-uwaga)">1,73</td><td>Wyraźnie powyżej rynku</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-kupno)">44,60 mln (1,47%)</td><td style="color:var(--ocena-kupno)">Miesiąc wcześniej 50,14 mln — spadek o 11,0%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Układ techniczny mówi o spółce po ciężkiej przecenie, która właśnie zaczyna się odbijać — ale trendu jeszcze nie odwróciła.</strong><br><br>Kurs wyszedł ponad średnią z pięćdziesięciu sesji, co jest pierwszym pozytywnym sygnałem od wielu miesięcy, ale <strong>średnia ta nadal leży wyraźnie poniżej dwustusesyjnej</strong>, a do samej dwustusesyjnej brakuje kursowi ponad dziewięć procent. Technicznie to wciąż trend spadkowy z odbiciem w środku.<br><br>Pozytywnie wyróżnia się zachowanie grających na spadki, którzy zmniejszyli pozycje o jedenaście procent w miesiąc — oraz dzisiejszy ruch w górę o ponad pięć procent.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$166,51</strong></td><td>Średnia 200-sesyjna — kluczowy opór; jej odzyskanie zmieniłoby obraz techniczny</td></tr>
+          <tr><td><strong>$194</strong></td><td>Scenariusz dowiezionej prognozy z przeszacowaniem mnożnika</td></tr>
+          <tr><td><strong>$239,00</strong></td><td>Cena docelowa konsensusu</td></tr>
+          <tr><td><strong>$140,91</strong></td><td>Średnia 50-sesyjna — pierwsze wsparcie</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$110</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — dolna granica wartości godziwej</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs poniżej średniej dwustusesyjnej, trend spadkowy nienaruszony, wyniki dopiero co ogłoszone — brak najbliższego katalizatora.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Środek wartości godziwej praktycznie na kursie. Rozstrzygnie się, czy nakłady zamienią się w marżę, a to potrwa dłużej niż ten okres.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>To jest horyzont, na którym portfel zamówień zamienia się w przychód, a dzisiejsze nakłady przestają obciążać przepływy. Jeśli konwersja się powiedzie, obecna cena okaże się bardzo niska.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ocena łączna: NEUTRALNA — obniżenie z kupna spekulacyjnego.</strong> Powodem nie jest pogorszenie spółki, tylko to, że <strong>mój poprzedni przedział $180–220 był za wysoki</strong>: wyceniałem portfel zamówień, nie dyskontując dostatecznie kosztu jego zbudowania. Pełne rozliczenie w sekcji 16.<br><br>Zwracam uwagę na nietypowy układ ocen: <strong>neutralnie na dwa najbliższe horyzonty, kupno na najdłuższy.</strong> Jest to uzasadnione konstrukcją tej inwestycji — nakłady ponosi się dziś, a przychód z nich pojawia się za kilka lat.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td><strong>5,83%</strong></td><td>Piąta pozycja z osiemnastu</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-sprzedaz)">-8,1%</td><td>Przy cenie wejścia $164,27</td></tr>
+          <tr><td><strong>Razem z AMD</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>26,75%</strong></td><td style="color:var(--ocena-sprzedaz)">Powiązanie wyjaśnione poniżej</td></tr>
+          <tr><td>Oprogramowanie korporacyjne razem</td><td style="color:var(--ocena-uwaga)">23,08%</td><td>Z ServiceNow i SAP</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Najważniejsze powiązanie w Twoim portfelu, którego wcześniej nie opisałem: Oracle jest jednym z kotwicowych klientów AMD.</strong><br><br>AMD wymienia Oracle wśród nabywców, którzy zobowiązali się do odbioru układów obliczeniowych nowej generacji — obok OpenAI, Meta i Anthropic. Oznacza to, że <strong>te dwie pozycje, stanowiące razem ponad ćwierć portfela, są ze sobą połączone łańcuchem dostaw, a nie tylko wspólnym tematem.</strong><br><br>Konsekwencja jest konkretna: gdyby Oracle musiał ograniczyć nakłady z powodu bilansu, ucierpiałby jednocześnie jako spółka i jako klient AMD. Ten sam czynnik uderzyłby w obie pozycje naraz — i to mocniej w tę większą.</div>
+
+      <div class="alert alert-info"><strong>Drugie powiązanie dotyczy strony podażowej.</strong> W portfelu masz Amazon (3,91%) i CoreWeave (3,78%), czyli dwóch konkurentów Oracle w wynajmie mocy obliczeniowej. Amazon finansuje rozbudowę z gotówki, CoreWeave — podobnie jak Oracle — długiem. <strong>Masz więc obstawione obie strony sporu o to, kto wygra wyścig o moc obliczeniową</strong>, co samo w sobie jest formą zabezpieczenia, ale nie chroni przed spadkiem cen w całej kategorii.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Oracle ma zakontraktowane przychody odpowiadające ponad dziewięciu latom dzisiejszej sprzedaży i ujemne wolne przepływy pieniężne — te dwie liczby opisują całą inwestycję.</strong> Portfel zamówień na $664 miliardy to umowy podpisane przez klientów, a nie prognozy; wykorzystanie zainstalowanych układów sięga 97,9%, więc popyt wyprzedza moc. Rynek zareagował na to przeceną o ponad połowę w ciągu roku, bo wycenia nie popyt, tylko sposób jego obsłużenia.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Sposób ten polega na wydaniu w nadchodzącym roku obrotowym <strong>$90–95 miliardów na inwestycje przy prognozowanych „co najmniej $90 miliardach" przychodu</strong>. Dług netto sięgnął już $132 miliardów, czyli 3,84-krotności rocznej EBITDA, wskaźnik Altmana zszedł do 1,93, a dywidenda jest w praktyce finansowana z pożyczonych pieniędzy. Zwrot z zainwestowanego kapitału przewyższa jego koszt o <strong>0,70 punktu procentowego</strong> — margines, przy którym niewielkie rozczarowanie marżą wystarczy, żeby nowe inwestycje zaczęły niszczyć wartość.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Popyt musi wyprzedzać moc.</strong> Wykorzystanie układów bliskie stu procent, portfel zamówień rosnący — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Wzrost przychodów musi być realny.</strong> +30% w kwartale, chmura +62% — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Inwestycje powinny mieścić się w generowanej gotówce.</strong> Nakłady przewyższają przepływy operacyjne o blisko trzydzieści miliardów — niespełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Bilans powinien mieć zapas.</strong> Dług netto blisko czterokrotności EBITDA, Altman poniżej progu — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Nowe kontrakty muszą przestać wymagać własnego kapitału.</strong> Pierwszy taki kwartał właśnie był; czy to reguła, pokażą kolejne.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>Grudzień 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki za II kwartał</strong></td><td style="color:var(--ocena-uwaga)">Czy udział kontraktów niewymagających własnego kapitału rośnie; tempo realizacji nakładów</td></tr>
+            <tr><td>Cały rok obrotowy 2027</td><td>Realizacja prognozy $8,10 na akcję</td><td>Pierwszy test, czy rosnące przychody przekładają się na zysk mimo kosztu odsetek</td></tr>
+            <tr><td>2027–2028</td><td>Uruchamianie wybudowanej mocy</td><td>Moment, w którym nakłady zaczynają zarabiać i zwrot z kapitału powinien wzrosnąć</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">W dowolnym momencie</td><td style="color:var(--ocena-sprzedaz)">Decyzja o finansowaniu kolejnej rundy</td><td style="color:var(--ocena-sprzedaz)">Emisja akcji byłaby sygnałem, że dług osiągnął granicę</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Wolne przepływy</td><td>-$28,72 mld</td><td>dalsze pogłębianie w kolejnym roku</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Dług netto do EBITDA</td><td>3,84×</td><td>przekroczenie 4,5×</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Zwrot z kapitału ponad koszt</td><td>+0,70 pp</td><td>zejście poniżej zera</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Marża brutto</td><td>63,96%</td><td>zejście poniżej 58%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Wielkość pozycji</strong></td><td>Bez zmian — obecna waga jest adekwatna do ryzyka bilansowego przy becie 1,73</td></tr>
+            <tr><td><strong>Dokupowanie</strong></td><td>Dopiero poniżej <strong>$120</strong> i tylko jako świadomy zakład na konwersję portfela zamówień</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$200</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$110</strong></td></tr>
+            <tr><td><strong>Warunek zmiany na sprzedaż</strong></td><td>Emisja akcji na sfinansowanie nakładów albo dług netto powyżej 4,5-krotności EBITDA</td></tr>
+            <tr><td><strong>Warunek powrotu do kupna</strong></td><td>Dodatnie wolne przepływy przy utrzymanym tempie wzrostu przychodów</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p><strong>Obniżam ocenę, bo w sierpniu popełniłem przy Oracle ten sam błąd co przy MARA: wyceniłem to, co spółka obiecuje, nie dyskontując tego, ile kosztuje dostarczenie obietnicy.</strong> Portfel zamówień na $664 miliardy jest prawdziwy i imponujący, ale jego realizacja wymaga wydania w jednym roku obrotowym kwoty równej całorocznym przychodom — a spółka wchodzi w ten rok z długiem netto na poziomie blisko czterokrotności EBITDA i wskaźnikiem Altmana poniżej progu bezpieczeństwa.</p>
+        <p>Nie jest to ocena negatywna wobec spółki. Oracle rośnie o 30%, ma marżę operacyjną 34%, wykorzystanie sprzętu bliskie stu procent i najniższy wskaźnik PEG w całym Twoim portfelu. <strong>Jest to ocena wobec niepewności, której nie da się dziś rozstrzygnąć</strong> — a przy przedziale wartości godziwej rozciągniętym od $110 do $200 uczciwą odpowiedzią jest trzymać i obserwować, czy nakłady zamieniają się w marżę.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$110 – $200</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$72 (-52%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$194 (+29%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Bez zmian</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki w grudniu</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA ANALIZY Z 14 SIERPNIA</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Wartość godziwa $180–220</strong> przy kursie $150,52</td>
+            <td>Dolna granica nigdy nie znalazła się w zasięgu — dzieli od niej blisko dwadzieścia procent. Nowy przedział <strong>$110–200</strong> uwzględnia scenariusz, w którym nakłady nie zamieniają się w marżę</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — przedział zawyżony i zbyt wąski</td>
+          </tr>
+          <tr>
+            <td><strong>„Największy portfel zamówień, najgorszy bilans"</strong> jako ocena kupna spekulacyjnego</td>
+            <td>Diagnoza była trafna, ale <strong>wniosek z niej nie</strong>. Skoro bilans jest najgorszy, a różnica między zwrotem z kapitału a jego kosztem wynosi 0,70 pp, to kupno — nawet spekulacyjne — było oceną zbyt optymistyczną</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — trafna diagnoza, błędny wniosek</td>
+          </tr>
+          <tr>
+            <td>Brak zestawienia <strong>nakładów z przychodami</strong></td>
+            <td>Nakłady sięgają 105% przychodów, a prognoza na nadchodzący rok zakłada mniej więcej to samo. To jest najważniejsza liczba w tej spółce i powinna była stać na początku analizy</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana — pominięte kluczowe zestawienie</td>
+          </tr>
+          <tr>
+            <td>Brak opisania <strong>powiązania z AMD</strong></td>
+            <td>Oracle jest jednym z kotwicowych klientów AMD. Dwie pozycje stanowiące razem ponad ćwierć portfela są połączone łańcuchem dostaw, a nie tylko tematem</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana — pominięte powiązanie portfelowe</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Sama diagnoza — „największy portfel zamówień, najgorszy bilans" — okazała się celna i pozostaje aktualna po miesiącu; obie jej części się pogłębiły. Trafne było też wskazanie bilansu jako głównego źródła ryzyka, a nie popytu.</div>
+
+      <div class="alert alert-warning"><strong>Wzorzec, który powtarza się w moich pomyłkach i który warto nazwać.</strong> Przy MARA, przy Oracle i częściowo przy ServiceNow zawyżałem wartość godziwą, <strong>wyceniając zapowiedziany przychód bez pełnego zdyskontowania kosztu jego dostarczenia</strong>. Portfel zamówień, transformacja i podniesiona prognoza to rzeczy realne — ale każda z nich ma cenę wyrażoną w nakładach, długu albo rozwodnieniu, i to ona decyduje, ile z obietnicy trafia do akcjonariusza.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 września 2026 | Cena: <strong>$150,91</strong> (notowanie 17.09.2026, 10:57 EDT) | <strong>Aktualizacja analizy z 14 sierpnia 2026 — ocena obniżona z kupna spekulacyjnego do neutralnej</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> wartość godziwa $180–220 → $110–200, bo poprzedni przedział wyceniał portfel zamówień bez dostatecznego zdyskontowania kosztu jego zbudowania; dodano zestawienie nakładów z przychodami (105%) jako kluczową miarę; dodano powiązanie z AMD, którego Oracle jest kotwicowym klientem | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 17.09.2026</strong>, Oracle Investor Relations (wyniki Q1 roku obrotowego 2027 z 10.09.2026: przychody, RPO, nakłady, prognoza roczna); scenariusze i wyliczenia pochodne to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

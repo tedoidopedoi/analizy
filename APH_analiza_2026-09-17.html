@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APH — Amphenol | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-kupno); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:12.5px; color:var(--text-muted); font-style:italic; margin-top:-4px; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: APH</div>
+    <div class="company-name">Amphenol Corporation</div>
+    <div class="company-sub">Złącza i okablowanie · Wallingford, Connecticut · 170 000 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">W portfelu — 2,46%</span>
+      <span class="meta-tag">Split 2:1 z 3 września</span>
+      <span class="meta-tag">Zmiana charakteru spółki</span>
+      <div class="price-display">
+        <div class="price-main">$78,00</div>
+        <div class="price-sub">notowanie 17.09.2026, 10:41 EDT (+0,96%) · ceny po splicie 2:1</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Moc obliczeniowa dla AI</span><span class="temat">Półprzewodniki</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — jakość biznesu najwyższa w portfelu, a kurs cofnął się mimo rekordowych zamówień; ryzykiem jest 43% sprzedaży w jednym temacie">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">teza z sierpnia utrzymana — okazja się nie zamknęła</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$72 – $102</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">-8% do +31%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>28 października</b><em>Q3 2026</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Zamówienia</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$78,00</div><div class="metric-detail">+29,76% w 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 21.08</div><div class="metric-value">+1,9%</div><div class="metric-detail">Po przeliczeniu na ceny posplitowe</div></div>
+    <div class="metric-card"><div class="metric-label">Sprzedaż Q2</div><div class="metric-value green">$8,76 mld</div><div class="metric-detail"><strong>+55% r/r</strong>, +30% organicznie</div></div>
+    <div class="metric-card"><div class="metric-label">IT datacom</div><div class="metric-value green">+63%</div><div class="metric-detail"><strong>43% sprzedaży</strong> — organicznie r/r</div></div>
+    <div class="metric-card"><div class="metric-label">Zamówienia</div><div class="metric-value green">$10,7 mld</div><div class="metric-detail"><strong>Book-to-bill 1,23:1</strong> — rekord</div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot kapitału vs koszt</div><div class="metric-value green">+9,89 pp</div><div class="metric-detail"><strong>Najlepszy wynik w Twoim portfelu</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Cena / zysk prognozowany</div><div class="metric-value">26,18</div><div class="metric-detail">Prognoza wzrostu zysku 31,20% rocznie</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (17 analityków)</div><div class="metric-value green">$99,26</div><div class="metric-detail">+27,26% · mocne kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I CO SIĘ ZMIENIŁO OD SIERPNIA</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Amphenol produkuje złącza, kable i czujniki — elementy, które łączą ze sobą wszystko, co elektroniczne. Przychody za dwanaście miesięcy to <strong>$29,01 mld</strong> przy 170 000 pracowników. To <strong>Twoja pozycja o wadze 2,46%</strong>, przy cenie wejścia <strong>$70,13</strong> po splicie, czyli wynik <strong>+11,2%</strong>.</p>
+
+      <div class="alert alert-warning"><strong>Uwaga porządkowa, bez której wszystkie liczby się rozjadą: 3 września 2026 spółka przeprowadziła split akcji 2:1.</strong><br><br>Liczba akcji na Twoim rachunku się podwoiła, a cena średnia spadła o połowę — to <em>nie</em> było dokupienie. Wszystkie ceny w mojej poprzedniej analizie z 21 sierpnia są w starej skali: tamtejsze <strong>$153,11 odpowiada dzisiejszym $76,56</strong>, a przedział wartości godziwej $175–200 to dzisiejsze <strong>$87,50–100</strong>.<br><br>Po tym przeliczeniu kurs urósł od tamtej analizy o <strong>1,9%</strong>. Teza praktycznie stoi w miejscu — i o tym jest ten raport.</div>
+
+      <h3>Wyniki za II kwartał — koniec lipca 2026</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wynik</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Sprzedaż</strong></td><td style="color:var(--ocena-kupno)"><strong>$8,76 mld, +55% r/r</strong></td><td>+30% organicznie — reszta z przejęć</td></tr>
+          <tr><td><strong>IT datacom</strong></td><td style="color:var(--ocena-kupno)"><strong>+63% organicznie, +89% w dolarach</strong></td><td style="color:var(--ocena-kupno)">Wzrost o 22% kwartał do kwartału, <strong>„praktycznie w całości" z produktów dla AI</strong></td></tr>
+          <tr><td><strong>Udział IT datacom w sprzedaży</strong></td><td style="color:var(--ocena-uwaga)"><strong>43%</strong></td><td style="color:var(--ocena-uwaga)">To zmienia charakter spółki — sekcja 2</td></tr>
+          <tr><td><strong>Zamówienia</strong></td><td style="color:var(--ocena-kupno)"><strong>$10,7 mld — rekord</strong></td><td style="color:var(--ocena-kupno)">Book-to-bill <strong>1,23:1</strong></td></tr>
+          <tr><td><strong>Przejęcie CommScope — prognoza podniesiona</strong></td><td style="color:var(--ocena-kupno)"><strong>przychód $4,1 → 4,6 mld</strong></td><td style="color:var(--ocena-kupno)">Wkład w zysk na akcję <strong>$0,15 → $0,30</strong></td></tr>
+          <tr><td>Prognoza na III kwartał</td><td style="color:var(--ocena-kupno)">IT datacom dalej w górę o kilkanaście procent</td><td>Kwartał do kwartału</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Jedna z tych liczb zasługuje na osobne zdanie, bo jest rzadka: wkład przejęcia CommScope w zysk na akcję został podniesiony z $0,15 do $0,30, a prognoza przychodu z $4,1 do $4,6 mld.</strong><br><br>Przejęcia w przemyśle zwykle rozczarowują — synergie okazują się mniejsze, integracja dłuższa, a zarząd po roku po cichu obniża oczekiwania. <strong>Podwojenie deklarowanej akrecji w ciągu kilku kwartałów jest sytuacją odwrotną</strong> i mówi więcej o jakości zarządzania niż niejeden wskaźnik.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — I CICHA ZMIANA CHARAKTERU SPÓŁKI</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <p>Fosa Amphenolu opiera się na czymś niepozornym: <strong>złącze jest tanie, ale jego awaria jest bardzo droga</strong>. W serwerze, samolocie czy pojeździe kosztuje ułamek wartości urządzenia, a odpowiada za jego działanie. Klient projektuje układ wokół konkretnego złącza i przy kolejnej generacji produktu wraca do tego samego dostawcy, bo zmiana wymaga przeprojektowania i ponownej certyfikacji.</p>
+      <p>Druga warstwa przewagi to <strong>rozproszenie</strong>. Spółka działa w kilkudziesięciu rynkach końcowych — lotnictwo, motoryzacja, przemysł, wojsko, telekomunikacja, centra danych — i przez dekady rosła przez przejęcia mniejszych wyspecjalizowanych producentów. Żaden pojedynczy klient nie ma tu siły przetargowej.</p>
+
+      <div class="alert alert-warning"><strong>Ale właśnie to rozproszenie przestało być prawdą — i to jest najważniejsza obserwacja w całym raporcie.</strong><br><br><strong>IT datacom odpowiada dziś za 43% sprzedaży</strong> i rośnie o 63% organicznie, przy czym cały wzrost kwartał do kwartału pochodzi z produktów dla sztucznej inteligencji. Jeszcze niedawno Amphenol był szeroko zdywersyfikowanym producentem komponentów z ekspozycją na centra danych. <strong>Dziś jest producentem komponentów dla centrów danych z resztą działalności w tle.</strong><br><br>To nie jest zarzut — ta zmiana zarobiła akcjonariuszom prawie 30% w rok. To jest ostrzeżenie o <strong>innym profilu ryzyka niż ten, za który się tę spółkę kiedyś kupowało</strong>. Konsekwencje dla Twojego portfela opisuję w sekcji 14.</p>
+      </div>
+
+      <h3>Co dokładnie sprzedają do centrów danych AI</h3>
+      <p>Szafa z akceleratorami wymaga przesyłania danych między układami przy prędkościach, przy których <strong>zwykły kabel miedziany przestaje działać</strong>. Potrzebne są złącza wysokiej częstotliwości, kable aktywne i systemy zasilania o gęstości mocy nieporównywalnej z klasycznym serwerem. Im więcej akceleratorów w szafie, tym więcej połączeń — i tym droższe każde z nich.</p>
+      <p>Przejęcie <strong>CommScope</strong> dołożyło do tego infrastrukturę okablowania, a jego biznes IT datacom mniej więcej podwoił się rok do roku. Dodatkowo domknięto przejęcia El.Com i Wilder Technologies, wzmacniające przemysł, obronność i lotnictwo.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Rynek końcowy</th><th>Stan</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Centra danych i AI</strong></td><td style="color:var(--ocena-kupno)"><strong>Napędza wszystko</strong></td><td style="color:var(--ocena-kupno)">Nakłady hiperskalerów rosną; treść złączowa na szafę rośnie szybciej niż liczba szaf</td></tr>
+          <tr><td>Obronność i lotnictwo</td><td style="color:var(--ocena-kupno)">Budżety rosną</td><td>Wysokie marże, długie cykle, stabilne</td></tr>
+          <tr><td>Przemysł</td><td style="color:var(--ocena-uwaga)">Umiarkowanie</td><td>Automatyzacja i elektryfikacja podtrzymują popyt</td></tr>
+          <tr><td>Motoryzacja</td><td style="color:var(--ocena-uwaga)">Słabo</td><td style="color:var(--ocena-uwaga)">Spowolnienie w pojazdach elektrycznych</td></tr>
+          <tr><td>Telekomunikacja</td><td style="color:var(--ocena-uwaga)">Płasko</td><td>Po szczycie nakładów na 5G</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Warto zrozumieć, dlaczego Amphenol rośnie szybciej niż same nakłady na centra danych.</strong> Przejście z jednej generacji akceleratorów na kolejną nie zwiększa tylko liczby szaf — zwiększa <strong>liczbę i cenę połączeń wewnątrz każdej z nich</strong>. Wyższe prędkości wymagają droższych złącz, a gęstsze upakowanie mocy wymaga innych systemów zasilania.<br><br>Dlatego wartość komponentów Amphenolu przypadająca na jedną szafę rośnie z każdą generacją. To jest dźwignia, której nie widać w prognozach liczby wdrożonych serwerów — i to ona tłumaczy prognozę wzrostu przychodów o <strong>26,98% rocznie</strong> dla spółki, która sprzedaje za 29 miliardów dolarów.</div>
+
+      <p>Cykliczność trzeba jednak nazwać wprost: <strong>nakłady inwestycyjne na centra danych są cykliczne, a nie sekularne.</strong> Rynki obronny i przemysłowy amortyzują wahania, ale przy dzisiejszym udziale IT datacom amortyzacja ta jest znacznie słabsza niż jeszcze rok temu.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">ZAMÓWIENIA I KLIENCI</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zamówienia w kwartale</strong></td><td style="color:var(--ocena-kupno)"><strong>$10,7 mld</strong></td><td style="color:var(--ocena-kupno)">Rekord spółki</td></tr>
+          <tr><td><strong>Book-to-bill</strong></td><td style="color:var(--ocena-kupno)"><strong>1,23:1</strong></td><td style="color:var(--ocena-kupno)"><strong>Na każdego zafakturowanego dolara przypada 1,23 dolara nowych zamówień</strong></td></tr>
+          <tr><td>Rozproszenie klientów</td><td style="color:var(--ocena-kupno)">Kilkadziesiąt rynków końcowych</td><td>Brak pojedynczego klienta o sile przetargowej</td></tr>
+          
+          <tr><td>Instytucje / zarząd</td><td>96,95% / 0,53%</td><td style="color:var(--ocena-uwaga)">Praktycznie w całości instytucjonalna</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Book-to-bill 1,23 przy rekordowych zamówieniach to najmocniejsza pojedyncza liczba w tym raporcie i warto wiedzieć dlaczego.</strong><br><br>Wskaźnik ten porównuje zamówienia przyjęte z produktami zafakturowanymi. Wartość powyżej jedności oznacza, że <strong>portfel zamówień rośnie szybciej, niż spółka zdąża go realizować</strong> — czyli że przychody najbliższych kwartałów są już w dużej mierze zakontraktowane.<br><br>To jest miara, która wyprzedza rachunek wyników. Prognozy analityków są prognozami; book-to-bill to zamówienia, które klienci już złożyli.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZEPŁYWY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th><th>Prognoza 3-letnia</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$29,01 mld</td><td style="color:var(--ocena-kupno)">wzrost <strong>26,98% rocznie</strong></td></tr>
+          <tr><td>Zysk operacyjny</td><td style="color:var(--ocena-kupno)">$8,16 mld</td><td rowspan="2" style="color:var(--ocena-kupno)">wzrost zysku <strong>31,20% rocznie</strong></td></tr>
+          <tr><td>Zysk netto</td><td style="color:var(--ocena-kupno)">$5,14 mld · $2,00 na akcję</td></tr>
+          <tr><td>EBITDA</td><td>$9,46 mld</td><td>—</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-kupno)">$5,87 mld</td><td>nakłady inwestycyjne -$1,16 mld</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>$4,71 mld · $1,91 na akcję</strong></td><td style="color:var(--ocena-kupno)"><strong>96% zysku księgowego</strong> pokryte gotówką</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Wolne przepływy pokrywają 96% zysku księgowego — i to jest cecha, której brakuje większości spółek z Twojego portfela.</strong> W ServiceNow gotówka jest niemal trzykrotnie wyższa od zysku przez wynagrodzenia w akcjach, w Take-Two odwrotnie przez amortyzację, w MARA obie liczby są ujemne. Tutaj zysk księgowy i gotówka mówią to samo, co znacznie ułatwia wycenę — wskaźniki oparte na zysku i na przepływach dają zbieżny obraz.</div>
+
+      <h3>Model wzrostu: przejęcia plus wzrost organiczny</h3>
+      <p>Ze sprzedaży rosnącej o 55% rok do roku <strong>30 punktów pochodzi ze wzrostu organicznego, reszta z przejęć</strong> — głównie CommScope, a także El.Com i Wilder. To jest wzorzec powtarzany przez Amphenol od dekad: kupować wyspecjalizowanych producentów, wpinać ich w sieć sprzedaży i podnosić im marżę.</p>
+
+      <div class="alert alert-warning"><strong>Cena tego modelu jest widoczna w dwóch miejscach i trzeba ją nazwać.</strong> Liczba akcji wzrosła o <strong>1,55% rok do roku</strong>, a stopa skupu jest ujemna — akcjonariusz płacił za przejęcia częściowo rozwodnieniem. Do tego doszło <strong>$10,88 mld zaciągniętego długu netto</strong>, czego skutki bilansowe rozliczam w sekcji 8.<br><br>Dywidenda wynosi $0,50 na akcję przy stopie 0,64%, ale została podniesiona o <strong>51,52%</strong> i rośnie nieprzerwanie od czternastu lat. Pochłania 26% wolnych przepływów, więc jest bezpieczna z dużym zapasem.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$192,35 mld</td><td>Wartość przedsiębiorstwa $205,74 mld</td></tr>
+          <tr><td>Cena / zysk</td><td style="color:var(--ocena-uwaga)">38,66</td><td>Wysoko, ale mianownik szybko rośnie</td></tr>
+          <tr><td>Cena / sprzedaż</td><td>6,57</td><td style="color:var(--ocena-kupno)">Prognozowana <strong>4,92</strong> — spada, bo przychody rosną</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>40,42</strong></td><td style="color:var(--ocena-sprzedaz)">EV/FCF 43,26 — <strong>najdroższa miara w tym zestawieniu</strong></td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td>21,55</td><td>EV/EBIT 24,99</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td style="color:var(--ocena-sprzedaz)">12,29</td><td>Księga $6,28 na akcję; aktywa materialne ujemne po przejęciach</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>38,66</td><td>Zysk <strong>$2,00 na akcję</strong> przy przychodach $29,01 mld</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-kupno)"><strong>26,18</strong></td><td>Implikuje zysk <strong>$2,98 na akcję</strong> w najbliższych dwunastu miesiącach, czyli <strong>+49%</strong></td></tr>
+          <tr><td><strong>PEG</strong></td><td><strong>1,35</strong></td><td style="color:var(--ocena-uwaga)">Powyżej 1,0, ale liczone ostrożniej niż z prognozy zysku <strong>+31,20% rocznie</strong> — przy tej dynamice mnożnik dzielony przez wzrost daje 0,84</td></tr>
+          <tr><td>Odniesienie sektorowe</td><td>komponenty elektroniczne: ok. 18–24× forward</td><td style="color:var(--ocena-uwaga)">Amphenol wyżej — rynek płaci premię za ekspozycję na AI</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> Różnica między wskaźnikiem historycznym 38,66 a prognozowanym 26,18 to skala oczekiwanego skoku zysku: z <strong>$2,00 do około $2,98 na akcję</strong>. Skok pochodzi z dwóch źródeł — organicznego wzrostu IT datacom i pełnorocznego wkładu CommScope, którego akrecję właśnie podwojono.</p>
+      <p><strong>Cena do wolnych przepływów 40,42 jest tu najtrudniejszą liczbą</strong> i wymaga uczciwego komentarza. Jest wyraźnie wyższa od wskaźnika opartego na zysku prognozowanym, bo przepływy obciążają nakłady na rozbudowę mocy produkcyjnych pod zamówienia, które dopiero wpłyną. Jeśli book-to-bill utrzyma się powyżej jedności, ta liczba spadnie sama; jeśli zamówienia zwolnią, zostanie wysoka przy niższych przychodach.</p>
+
+      <h3>Cztery scenariusze na koniec 2027 roku</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Zysk na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Wzrost utrzymany, mnożnik bez zmian</strong></td><td>$3,19</td><td>26×</td><td><strong>$83</strong></td><td style="color:var(--ocena-kupno)">+6%</td></tr>
+          <tr><td><strong>Wzrost utrzymany, premia za AI</strong></td><td>$3,19</td><td>30×</td><td><strong>$96</strong></td><td style="color:var(--ocena-kupno)">+23%</td></tr>
+          <tr><td>Portfel zamówień realizuje się w całości</td><td>$3,19</td><td>34×</td><td>$108</td><td style="color:var(--ocena-kupno)">+39%</td></tr>
+          <tr><td><strong>Pauza w nakładach na AI</strong></td><td style="color:var(--ocena-sprzedaz)">$2,60</td><td>19×</td><td><strong>$49</strong></td><td style="color:var(--ocena-sprzedaz)">-37%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne: zysk prognozowany $2,98 narastany tempem 31,2% przez dodatkowy kwartał ponad okno dwunastomiesięczne. Scenariusz negatywny zakłada, że pauza w nakładach uderza jednocześnie w zysk i w mnożnik — przy tak dużym udziale jednego tematu oba efekty działają razem. Dane wejściowe: StockAnalysis / S&amp;P Global Market Intelligence, stan 17.09.2026.</p>
+
+      <p><strong>Fair value: $72 – $102</strong>, środek <strong>$87,00 (+11,5%)</strong>. Konsensus 17 analityków to $99,26 (+27,26%) przy rekomendacji „mocne kupno" — blisko górnej granicy mojego przedziału.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto</td><td>38,95%</td><td>Typowa dla producenta komponentów</td></tr>
+          <tr><td><strong>Marża operacyjna</strong></td><td style="color:var(--ocena-kupno)"><strong>28,13%</strong></td><td style="color:var(--ocena-kupno)">Bardzo wysoko jak na producenta sprzętu</td></tr>
+          <tr><td>Marża netto / EBITDA</td><td>17,73% / 32,62%</td><td>Stopa podatkowa bez odchyleń</td></tr>
+          <tr><td>Marża wolnych przepływów</td><td style="color:var(--ocena-kupno)">16,25%</td><td>Nakłady inwestycyjne to tylko 4,0% przychodów</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-kupno)"><strong>20,19% vs 10,30%</strong></td><td style="color:var(--ocena-kupno)"><strong>Różnica +9,89 pp</strong></td></tr>
+          <tr><td>Zwrot z kapitału własnego</td><td style="color:var(--ocena-kupno)">38,12%</td><td>ROA 14,47%, ROCE 23,07%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Marża operacyjna 28% u producenta fizycznych komponentów jest liczbą, której nie powinno tam być — i to jest cały sens tej spółki.</strong><br><br>Producenci sprzętu zwykle mają marże operacyjne rzędu kilkunastu procent, bo konkurują ceną. Amphenol utrzymuje dwadzieścia osiem, bo <strong>sprzedaje element o niskiej cenie jednostkowej i wysokim koszcie awarii</strong>, wbudowany w konstrukcję urządzenia klienta. Nikt nie negocjuje ceny złącza tak, jak negocjuje cenę procesora.<br><br><strong>Różnica między zwrotem z kapitału a jego kosztem wynosi +9,89 punktu procentowego — to najwyższa wartość w Twoim portfelu.</strong> Dla porównania ServiceNow ma +1,18 pp, Take-Two -11,2 pp, a MARA -84,58 pp. Amphenol jest tu wyjątkiem, a nie regułą: każdy dolar zainwestowanego kapitału tworzy realną wartość, a nie tylko obrót.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I KOSZT PRZEJĘĆ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka / zadłużenie</td><td>$5,42 mld / <strong>$18,81 mld</strong></td><td style="color:var(--ocena-uwaga)">Zaciągnięte netto w 12 miesięcy: <strong>$10,88 mld</strong></td></tr>
+          <tr><td><strong>Dług netto</strong></td><td style="color:var(--ocena-uwaga)"><strong>$13,39 mld</strong></td><td>Dług do kapitału własnego 1,20</td></tr>
+          <tr><td>Dług / EBITDA</td><td style="color:var(--ocena-kupno)">1,95</td><td style="color:var(--ocena-kupno)">Dług do wolnych przepływów 3,99 — spłacalne w cztery lata</td></tr>
+          <tr><td>Wskaźnik bieżący / szybki</td><td style="color:var(--ocena-kupno)">1,89 / 1,29</td><td style="color:var(--ocena-kupno)">Kapitał obrotowy $8,38 mld</td></tr>
+          <tr><td>Altman Z / Piotroski F</td><td style="color:var(--ocena-kupno)">5,16</td><td>Piotroski 5/9 — obniżony przez wzrost zadłużenia</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Pokrycie odsetek: raportowane 12,91 wymaga sprawdzenia</h3>
+      <p>Raportowany wskaźnik pokrycia odsetek wynosi <strong>12,91</strong> i przy zysku operacyjnym $8,16 mld implikuje koszt odsetek około <strong>$632 mln</strong>. Liczy się go jednak z dwunastu miesięcy wstecz, a <strong>58% dzisiejszego zadłużenia zaciągnięto w tym właśnie okresie</strong> — na przejęcie CommScope. Wskaźnik mierzy więc rok, w którym większość długu pracowała przez część czasu.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Ujęcie</th><th>Koszt odsetek</th><th>Pokrycie</th></tr></thead>
+        <tbody>
+          <tr><td>Raportowane (12 mies. wstecz)</td><td>ok. $632 mln</td><td>12,91×</td></tr>
+          <tr><td><strong>Tempo bieżące: $18,81 mld przy ok. 5%</strong></td><td><strong>ok. $940 mln</strong></td><td><strong>ok. 8,7×</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Szacunek własny przy założonej średniej stopie 5%. Dokładna wartość pojawi się w wynikach za trzeci kwartał.</p>
+
+      <div class="alert alert-success"><strong>Tu akurat kontrola wypada uspokajająco i warto to powiedzieć równie wyraźnie, jak mówi się o zagrożeniach.</strong><br><br>Pokrycie spada z 12,9 do około <strong>8,7-krotności</strong> — czyli zysk operacyjny nadal pokrywa odsetki blisko dziewięciokrotnie. Dług do EBITDA wynosi <strong>1,95</strong>, a dług do wolnych przepływów <strong>3,99</strong>, co oznacza, że spółka mogłaby spłacić całe zadłużenie w cztery lata z samej generowanej gotówki.<br><br>To jest przeciwieństwo sytuacji, którą opisałem w ServiceNow, gdzie ten sam test obniżył pokrycie do około pięciokrotności przy znacznie cieńszym bilansie. <strong>Amphenol zaciągnął dług dużo większy, ale ma z czego go obsługiwać.</strong></div>
+
+      <p>Wskaźnik Piotroskiego <strong>5 na 9</strong> jest obniżony mechanicznie: punkty odejmuje się między innymi za wzrost zadłużenia i rozwodnienie, czyli za rzeczy, które spółka zrobiła <em>celowo</em>, kupując CommScope. Przy Altmanie <strong>5,16</strong> i zwrocie z kapitału przekraczającym jego koszt o blisko dziesięć punktów nie jest to sygnał pogorszenia jakości.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Portfel zamówień rośnie szybciej, niż spółka zdąża go realizować.</strong> Rekordowe zamówienia przy wskaźniku pokrycia znacznie powyżej jedności oznaczają, że przychody najbliższych kwartałów są już w dużej mierze zakontraktowane. To nie prognoza, tylko złożone zamówienia.</div>
+
+      <div class="alert alert-success"><strong>2. Zarząd podniósł oczekiwania wobec własnego przejęcia, zamiast je obniżyć.</strong> Wkład CommScope w zysk na akcję podwojono w ciągu kilku kwartałów. W przemyśle zdarza się to rzadko i mówi o jakości integracji więcej niż deklaracje.</div>
+
+      <div class="alert alert-success"><strong>3. Jakość kapitałowa najwyższa w portfelu.</strong> Zwrot z kapitału przewyższa jego koszt o blisko dziesięć punktów procentowych, marża operacyjna przekracza 28%, a gotówka pokrywa niemal cały zysk księgowy. To profil spółki, która rośnie bez niszczenia wartości.</div>
+
+      <div class="alert alert-info"><strong>4. Kurs cofnął się mimo rekordowych wyników.</strong> Notowanie jest poniżej średniej 50-sesyjnej, wskaźnik RSI w dolnej strefie neutralnej, a grający na spadki zmniejszyli pozycje. Konsensus siedemnastu analityków to mocne kupno z ceną docelową ponad ćwierć wyżej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Czterdzieści trzy procent sprzedaży zależy od jednego cyklu nakładów.</strong> Dywersyfikacja, która była głównym argumentem za tą spółką, przestała działać w dotychczasowej skali. Pauza w wydatkach hiperskalerów uderzyłaby jednocześnie w zysk i w mnożnik — mój scenariusz negatywny daje kurs $49.</div>
+
+      <div class="alert alert-danger"><strong>2. Cena do wolnych przepływów 40,42.</strong> To najdroższa miara w całym zestawieniu i wyraźnie wyższa od wskaźnika opartego na zysku prognozowanym. Uzasadnia ją tylko założenie, że dzisiejsze nakłady zamienią się w przyszłe przychody.</div>
+
+      <div class="alert alert-warning"><strong>3. Wzrost kupiony długiem i rozwodnieniem.</strong> W rok przybyło blisko jedenaście miliardów dolarów zadłużenia netto, a liczba akcji wzrosła o 1,55%. Bilans to udźwignie, ale kolejne przejęcie tej skali wymagałoby już innego finansowania.</div>
+
+      <div class="alert alert-warning"><strong>4. Premia w wycenie wobec sektora.</strong> Spółka handluje wyraźnie powyżej typowego przedziału dla producentów komponentów, bo rynek płaci za ekspozycję na sztuczną inteligencję. Ta premia znika w tym samym momencie, w którym rynek przestanie za nią płacić — niezależnie od wyników Amphenolu.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Pozycja</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>TE Connectivity</strong></td><td>Najbliższy odpowiednik skalą i asortymentem</td><td style="color:var(--ocena-uwaga)">Wolniejszy wzrost, mniejsza ekspozycja na centra danych</td></tr>
+          <tr><td><strong>Molex</strong> (Koch)</td><td>Prywatna, silna w centrach danych</td><td style="color:var(--ocena-uwaga)">Bez presji kwartalnej — może konkurować ceną</td></tr>
+          <tr><td><strong>Luxshare</strong></td><td>Chiński producent, agresywny cenowo</td><td style="color:var(--ocena-sprzedaz)"><strong>Główne ryzyko marżowe</strong> w tańszych segmentach</td></tr>
+          <tr><td><strong>Coherent i Lumentum</strong></td><td>Warstwa optyczna tego samego łącza</td><td style="color:var(--ocena-kupno)">Uzupełniają, nie konkurują — miedź i światło współistnieją</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Najciekawsza granica konkurencyjna nie przebiega między Amphenolem a TE Connectivity, tylko między miedzią a światłem.</strong><br><br>Przy rosnących prędkościach transmisji miedź ma fizyczną granicę zasięgu i coraz częściej ustępuje optyce — czyli obszarowi, w którym działają Coherent i Lumentum, opisane przy okazji Marvella. Dopóki chodzi o połączenia wewnątrz szafy, miedź wygrywa ceną i prostotą. Im dłuższy dystans i wyższa prędkość, tym mocniejsza pozycja optyki.<br><br>Amphenol zabezpiecza się, sprzedając także kable aktywne i komponenty optyczne, ale <strong>długoterminowo przesuwanie się granicy w stronę światła jest dla niego ryzykiem strukturalnym</strong>, a nie konkurencyjnym.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-kupno)">+29,76%</td><td>Mimo cofnięcia w ostatnich tygodniach</td></tr>
+          <tr><td>Średnie kroczące 50 i 200 sesji</td><td>$80,00 / $73,34</td><td style="color:var(--ocena-uwaga)">Kurs 2,5% poniżej pierwszej, 6,4% powyżej drugiej</td></tr>
+          <tr><td><strong>Układ średnich</strong></td><td style="color:var(--ocena-kupno)"><strong>50 powyżej 200</strong></td><td style="color:var(--ocena-kupno)">Trend wzrostowy nienaruszony — to korekta w jego wnętrzu</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td style="color:var(--ocena-kupno)">43,00</td><td style="color:var(--ocena-kupno)">Dolna część strefy neutralnej</td></tr>
+          <tr><td>Beta (5 lat)</td><td>1,24</td><td>Umiarkowana; płynność wysoka</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-kupno)">27,12 mln (1,10%)</td><td style="color:var(--ocena-kupno)">Miesiąc wcześniej 30,84 mln — spadek o 12,1%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Układ jest ten sam, co przy poprzedniej analizie, i to jest w nim najciekawsze.</strong> W sierpniu pisałem „rekordowy kwartał, a kurs się cofnął" — po miesiącu opis pasuje bez zmian: wyniki były rekordowe, zamówienia najwyższe w historii spółki, a notowanie jest pod średnią 50-sesyjną przy wskaźniku RSI w okolicach czterdziestu trzech.<br><br>Trend długoterminowy pozostaje nienaruszony, bo krótsza średnia wciąż jest wyraźnie powyżej dłuższej. <strong>To cofnięcie wewnątrz trendu, a nie jego odwrócenie</strong> — a pozycje krótkie w tym czasie malały.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$80,00</strong></td><td>Najbliższy opór</td></tr>
+          <tr><td><strong>$87,00</strong></td><td>Środek przedziału wartości godziwej</td></tr>
+          <tr><td><strong>$99,26</strong></td><td>Cena docelowa konsensusu</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$73,34</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — średnia 200-sesyjna</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Kurs pod średnią 50-sesyjną, a wyniki 28 października mają za sobą rekordowy portfel zamówień.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Pełnoroczny wkład CommScope plus wzrost organiczny IT datacom. Środek wartości godziwej powyżej kursu, konsensus wyraźnie wyżej.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Cykl nakładów na centra danych kiedyś się odwróci, a amortyzacja z pozostałych rynków jest dziś słabsza niż kiedyś. Przesuwanie się granicy z miedzi na optykę to dodatkowe ryzyko strukturalne.</td></tr>
+        </tbody>
+      </table></div>
+
+      <p><strong>Ocena łączna: KUPNO — utrzymana z 21 sierpnia.</strong> W przeciwieństwie do ServiceNow, gdzie teza zadziałała i dyskonto się zamknęło, tutaj kurs po przeliczeniu splitu praktycznie stoi w miejscu, a wyniki i portfel zamówień poprawiły się. <strong>Okazja się nie zamknęła — po prostu jeszcze nie zadziałała.</strong> Plan działania w sekcji 15.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td><strong>2,46%</strong></td><td>Szesnasta pozycja z osiemnastu</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-kupno)">+11,2%</td><td>Przy cenie wejścia $70,13 po splicie</td></tr>
+          <tr><td><strong>Temat AI w portfelu</strong></td><td style="color:var(--ocena-uwaga)"><strong>59,4%</strong></td><td style="color:var(--ocena-uwaga)">Amphenol należy do tej grupy</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Najważniejszy wniosek portfelowy dotyczy tego, jak zmienił się charakter tej pozycji, a nie jej wielkość.</strong><br><br>Amphenol był przez lata <strong>zdywersyfikowanym producentem komponentów</strong> — lotnictwo, motoryzacja, przemysł, wojsko — z ekspozycją na centra danych jako jednym z wielu rynków. Przy 43% sprzedaży w IT datacom to już nie jest prawda. <strong>W praktyce trzymasz dziś kolejną spółkę infrastruktury AI</strong>, tylko sprzedającą miedź zamiast krzemu.<br><br>Przy koncentracji tematycznej sięgającej 59,4% portfela ma to znaczenie: <strong>Amphenol nie równoważy AMD, Marvella czy CoreWeave — dokłada się do nich.</strong> Argument za trzymaniem tej pozycji to dziś jakość biznesu, nie dywersyfikacja.<br><br>Jest jednak ważna różnica w charakterze ryzyka. Amphenol <strong>zarabia na każdej szafie niezależnie od tego, czyj akcelerator w niej siedzi</strong> — nie musi wygrać walki między producentami układów. W tym sensie jest bezpieczniejszą formą tej samej ekspozycji, podobnie jak Marvell w warstwie połączeń optycznych.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Amphenol jest najwyższej jakości biznesem w Twoim portfelu i jednocześnie spółką, która cicho zmieniła to, czym jest.</strong> Zwrot z zainwestowanego kapitału przewyższa jego koszt o blisko dziesięć punktów procentowych, marża operacyjna przekracza 28%, a wolne przepływy pokrywają niemal cały zysk księgowy. Portfel zamówień jest rekordowy, a zarząd podwoił deklarowany wkład przejęcia CommScope zamiast go obniżyć — co w przemyśle zdarza się rzadko.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Zmiana polega na tym, że <strong>IT datacom odpowiada już za większą część sprzedaży niż którykolwiek inny rynek końcowy</strong>. Spółka, którą kupowało się za rozproszenie rynków końcowych, jest dziś producentem komponentów dla centrów danych z resztą działalności w tle. Dla wyniku to było znakomite; dla profilu ryzyka oznacza, że pauza w nakładach hiperskalerów uderzyłaby jednocześnie w zysk i w mnożnik. Cena do wolnych przepływów <strong>40,42</strong> zostawia na to niewiele miejsca.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się utrzymać, żeby teza działała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Zamówienia muszą wyprzedzać fakturowanie.</strong> Portfel rekordowy, wskaźnik wyraźnie powyżej jedności — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Przejęcie musi dowozić obiecane synergie.</strong> Akrecja CommScope podwojona — spełnione ponad plan.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Zwrot z kapitału musi przewyższać jego koszt.</strong> Różnica +9,89 pp — spełnione z dużym zapasem.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Wycena przepływów powinna zostawiać margines.</strong> Cena do wolnych przepływów powyżej czterdziestu — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Nakłady na centra danych muszą się utrzymać.</strong> Rozstrzygnie się poza spółką; pierwszy sprawdzian 28 października.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-kupno)"><strong>28 października 2026</strong></td><td style="color:var(--ocena-kupno)"><strong>Wyniki za III kwartał</strong></td><td style="color:var(--ocena-kupno)">Zapowiedziany dalszy wzrost IT datacom o kilkanaście procent kwartał do kwartału oraz pierwszy pełny kwartał z nowym kosztem odsetek</td></tr>
+            <tr><td>22 września 2026</td><td>Dzień ustalenia prawa do dywidendy</td><td>Drobne, ale to czternasty rok nieprzerwanych podwyżek</td></tr>
+            <tr><td>2027</td><td>Pełnoroczny wkład CommScope</td><td>Test, czy podniesiona akrecja się utrzyma</td></tr>
+            <tr><td>2027–2028</td><td>Przesuwanie się granicy miedź–optyka</td><td>Ryzyko strukturalne, nie kwartalne</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Book-to-bill</td><td>1,23:1</td><td>zejście poniżej 1,0</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Udział IT datacom w sprzedaży</td><td>43%</td><td>wzrost powyżej 50%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Marża operacyjna</td><td>28,13%</td><td>zejście poniżej 25%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Pokrycie odsetek</td><td>ok. 8,7× (szacunek)</td><td>poniżej 6×</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Wielkość pozycji</strong></td><td>Obecna waga jest niska jak na tę jakość — jest miejsce na powiększenie do ok. 3,5%</td></tr>
+            <tr><td><strong>Dokupowanie</strong></td><td>W okolicach <strong>$73–76</strong>; powyżej <strong>$90</strong> przewaga wyceny maleje</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$102</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$73,34</strong></td></tr>
+            <tr><td><strong>Warunek zmiany oceny</strong></td><td>Book-to-bill poniżej jedności albo obniżenie prognozy dla CommScope</td></tr>
+            <tr><td><strong>Czego nie robić</strong></td><td>Nie traktować tej pozycji jako przeciwwagi dla ekspozycji na AI — nią nie jest</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">KUPNO</div>
+        <p><strong>Utrzymuję ocenę z sierpnia, bo w przeciwieństwie do ServiceNow tutaj okazja się nie zamknęła — ona jeszcze nie zadziałała.</strong> Po przeliczeniu wrześniowego splitu 2:1 kurs jest o 1,9% wyżej niż przy poprzedniej analizie, podczas gdy spółka w tym czasie pokazała rekordową sprzedaż, rekordowe zamówienia i podwojony wkład przejęcia CommScope. Notowanie jest poniżej średniej 50-sesyjnej, a grający na spadki zmniejszyli pozycje.</p>
+        <p>Zmieniło się natomiast coś, co warto zapamiętać niezależnie od oceny: <strong>przy dzisiejszym udziale IT datacom Amphenol przestał być dywersyfikatorem, a stał się kolejną pozycją infrastruktury AI.</strong> Trzymam go dziś za jakość biznesu — najwyższą w tym portfelu — a nie za to, że równoważy resztę. Bo nie równoważy.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-kupno)">Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$72 – $102</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$49 (-37%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$108 (+39%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Miejsce do ok. 3,5%</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 28 października</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA ANALIZY Z 21 SIERPNIA</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Wszystkie ceny w starej skali</strong> — kurs $153,11, wartość godziwa $175–200</td>
+            <td>Po splicie 2:1 z 3 września odpowiada to kursowi <strong>$76,56</strong> i przedziałowi <strong>$87,50–100</strong>. Poprzedni raport nie jest błędny, ale <strong>nieporównywalny bez przeliczenia</strong> — dlatego powstał nowy plik zamiast poprawki starego</td>
+            <td style="color:var(--ocena-uwaga)">Porządkowa, ale bez niej wszystko się rozjeżdża</td>
+          </tr>
+          <tr>
+            <td><strong>Amphenol opisany jako dywersyfikator</strong> wobec reszty portfela</td>
+            <td>Przy udziale IT datacom sięgającym <strong>43% sprzedaży</strong> spółka należy do tej samej grupy ryzyka co AMD, Marvell czy CoreWeave. Argumentem za trzymaniem jest jakość biznesu, nie rozproszenie ekspozycji</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — błędna rola przypisana pozycji w portfelu</td>
+          </tr>
+          <tr>
+            <td>Brak sprawdzenia <strong>pokrycia odsetek po zaciągnięciu długu</strong></td>
+            <td>58% zadłużenia powstało w ciągu ostatnich dwunastu miesięcy, więc wskaźnik raportowany zawyża komfort. W tempie bieżącym pokrycie wynosi <strong>około 8,7× zamiast 12,91×</strong> — nadal bardzo bezpiecznie, ale liczba jest inna</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana — wniosek bez zmian</td>
+          </tr>
+          <tr>
+            <td>Waga tematu AI podana jako <strong>52%</strong></td>
+            <td>Po zamknięciu sześciu pozycji we wrześniu koncentracja wzrosła do <strong>59,4%</strong>, bo sprzedane spółki były w większości tymi, które ten temat równoważyły</td>
+            <td>Drobna — dryf danych, nie błąd</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Ocena kupna i diagnoza „rekordowy kwartał, a kurs się cofnął" pozostają aktualne po miesiącu — co samo w sobie jest informacją, bo opis pasuje bez zmian mimo kolejnych rekordowych wyników. Trafny był też nacisk na jakość kapitałową jako główny argument.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 września 2026 | Cena: <strong>$78,00</strong> (notowanie 17.09.2026, 10:41 EDT, ceny po splicie 2:1 z 03.09.2026) | <strong>Aktualizacja analizy z 21 sierpnia 2026 — ocena kupna utrzymana</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> wszystkie ceny przeliczone po splicie 2:1 (poprzedni kurs $153,11 → $76,56, wartość godziwa $175–200 → $87,50–100, nowy przedział $72–102); wycofano opis Amphenolu jako dywersyfikatora portfela — przy dzisiejszym udziale IT datacom spółka należy do tej samej grupy ryzyka co reszta ekspozycji na AI; dodano kontrolę pokrycia odsetek po zaciągnięciu długu na przejęcie CommScope (12,91× → ok. 8,7× w tempie bieżącym); waga tematu AI zaktualizowana z 52% na 59,4% | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 17.09.2026</strong>, Amphenol Investor Relations (wyniki Q2 2026, podniesiona prognoza dla CommScope), komunikaty o przejęciach CommScope, El.Com i Wilder Technologies; szacunek kosztu odsetek i scenariusze to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
