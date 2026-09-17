@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MARA — MARA Holdings | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:12.5px; color:var(--text-muted); font-style:italic; margin-top:-4px; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: MARA</div>
+    <div class="company-name">MARA Holdings, Inc.</div>
+    <div class="company-sub">Kopalnia bitcoina w trakcie zwrotu ku infrastrukturze cyfrowej · Fort Lauderdale</div>
+    <div class="header-meta">
+      <span class="meta-tag">W portfelu — 4,33%</span>
+      <span class="meta-tag">Najstarsza analiza w portfelu (42 dni)</span>
+      <span class="meta-tag">Obniżam wartość godziwą o połowę</span>
+      <div class="price-display">
+        <div class="price-main">$11,01</div>
+        <div class="price-sub">notowanie 17.09.2026, 9:55 EDT (-0,27%)</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Bitcoin i kopalnie</span><span class="temat">Moc obliczeniowa dla AI</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — lewarowany sposób na posiadanie bitcoina z ujemnym kosztem utrzymania; wycena odpowiada kursowi BTC, nie jakości spółki">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">to zakład na bitcoina, nie na spółkę</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$8 – $17</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-27% do +54%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>3 listopada 2026</b><em>Q3 2026</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Skarbiec</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$11,01</div><div class="metric-detail">-36,79% w 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 06.08</div><div class="metric-value red">-6,3%</div><div class="metric-detail">Mój przedział $15–22 nigdy nie był w zasięgu</div></div>
+    <div class="metric-card"><div class="metric-label">Strata roczna</div><div class="metric-value red">-$3,46 mld</div><div class="metric-detail"><strong>4,3× przychody</strong> — przecena bitcoina w rachunku</div></div>
+    <div class="metric-card"><div class="metric-label">Bitcoin w skarbcu</div><div class="metric-value">ok. 36 900</div><div class="metric-detail">Spadek o 29% r/r; <strong>18 750 pod zastaw</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Wolne przepływy</div><div class="metric-value red">-$1,29 mld</div><div class="metric-detail">Finansowane sprzedażą bitcoina</div></div>
+    <div class="metric-card"><div class="metric-label">Liczba akcji</div><div class="metric-value green">-5,03%</div><div class="metric-detail"><strong>Skup, nie emisja</strong> — rzadkość wśród kopalni</div></div>
+    <div class="metric-card"><div class="metric-label">Krótka sprzedaż</div><div class="metric-value red">28,50%</div><div class="metric-detail">110,11 mln akcji</div></div>
+    <div class="metric-card"><div class="metric-label">Beta</div><div class="metric-value red">5,33</div><div class="metric-detail"><strong>Najwyższa w Twoim portfelu</strong></div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I CO SIĘ ZMIENIŁO OD SIERPNIA</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>MARA Holdings wydobywa bitcoina i trzyma go w bilansie zamiast sprzedawać na bieżąco. Przy 266 pracownikach i przychodach <strong>$804,22 mln</strong> daje to ponad trzy miliony dolarów na osobę — biznes jest kapitałowy, nie ludzki. To <strong>Twoja pozycja o wadze 4,33%</strong>, przy średniej cenie wejścia $9,95, czyli wynik <strong>+10,6%</strong>.</p>
+
+      <div class="alert alert-warning"><strong>Teza z 6 sierpnia nie zadziałała i muszę to powiedzieć wprost.</strong><br><br>
+      Wyceniłem wtedy MARA na <strong>$15–22</strong> przy kursie $11,75, opisując spółkę jako „transformację w toku o wyniku binarnym". Od tamtej pory kurs spadł do $11,01, czyli o <strong>6,3%</strong>, a dolna granica mojego przedziału nigdy nie znalazła się w zasięgu — dziś dzieli od niej <strong>36%</strong>.<br><br>
+      Błąd nie polegał na ocenie neutralnej, tylko na <strong>zbyt wysokim przedziale wartości</strong>. Przypisałem „transformacji ku infrastrukturze cyfrowej" wartość, której nie widać w żadnej liczbie. Pełne rozliczenie w sekcji 16, a nowy sposób liczenia — w sekcji 6.</div>
+
+      <h3>Wyniki za II kwartał — 6 sierpnia 2026</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wynik</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$174,9 mln, -27% r/r</strong></td><td>Wydobycie wzrosło o 3% do 2 422 BTC</td></tr>
+          <tr><td><strong>Wynik netto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$611,3 mln</strong></td><td style="color:var(--ocena-sprzedaz)">Rok wcześniej <strong>+$808,2 mln zysku</strong></td></tr>
+          <tr><td>Przecena aktywów cyfrowych</td><td style="color:var(--ocena-sprzedaz)">ok. -$343 mln</td><td>Odwrócenie zysków z wyceny, które napędzały wynik rok temu</td></tr>
+          <tr><td><strong>Średnia cena bitcoina w kwartale</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-28% r/r</strong></td><td style="color:var(--ocena-sprzedaz)">To zjadło cały wzrost wydobycia</td></tr>
+          <tr><td>Stan skarbca</td><td style="color:var(--ocena-sprzedaz)">35 577 BTC, -29% r/r</td><td>Głównie przez sprzedaż w I kwartale — sekcja 4</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Jedna liczba tłumaczy cały rachunek wyników: strata roczna $3,46 mld jest ponad czterokrotnie większa od przychodów.</strong><br><br>Żaden biznes operacyjny nie generuje takiej straty. Odpowiada za nią <strong>wycena bitcoina w bilansie</strong> — od 2024 roku kopalnie wyceniają posiadane monety według wartości rynkowej i przeprowadzają zmianę wprost przez rachunek zysków. Kiedy bitcoin rośnie, pojawia się zysk księgowy; kiedy spada, strata tej samej natury.<br><br><strong>Wniosek praktyczny: rachunek wyników MARA jest wykresem ceny bitcoina, a nie miarą jakości zarządzania.</strong> Żeby ocenić spółkę, trzeba patrzeć na przepływy i skarbiec — czym zajmują się sekcje 5 i 6.</div>
+
+      <p>Od czasu tamtych wyników bitcoin odbił, a MARA wróciła do selektywnego dokupowania monet — szczegóły w sekcjach 3 i 4.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — WYDOBYCIE I ZWROT KU AI</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <p>MARA robi dwie rzeczy. <strong>Wydobywa bitcoina</strong> — utrzymuje farmy maszyn liczących, które konkurują o nagrodę za blok. I <strong>trzyma wykopane monety</strong> zamiast je sprzedawać, zamieniając spółkę wydobywczą w spółkę wydobywczo-inwestycyjną.</p>
+
+      <div class="alert alert-warning"><strong>Fosa w wydobyciu bitcoina praktycznie nie istnieje i to jest cecha konstrukcyjna, nie słabość zarządu.</strong><br><br>Sieć automatycznie dostosowuje trudność tak, żeby blok powstawał co dziesięć minut niezależnie od tego, ilu jest kopiących — więc każda nowa maszyna podłączona gdziekolwiek na świecie <strong>obniża przychód wszystkich pozostałych</strong>. Nie ma kosztu zmiany dostawcy, lojalności klienta ani patentu; jedyną przewagą jest tani prąd i tania maszyna. Produkt jest doskonale jednorodny, więc żadna kopalnia nie zbudowała trwałej marży.</div>
+
+      <h3>Zwrot ku infrastrukturze cyfrowej</h3>
+      <p>Zarząd coraz mocniej opiera opowieść dla inwestorów na <strong>przejściu w stronę infrastruktury cyfrowej i usług okołosztucznointeligencyjnych</strong> — przychodów mniej zależnych od wahań bitcoina. Logika jest wspólna dla całej branży: kopalnie mają to, czego brakuje centrom danych AI — <strong>podłączoną moc, grunty i chłodzenie</strong>.</p>
+
+      <div class="alert alert-info"><strong>Ten sam zwrot masz już w portfelu w wersji, która się udała.</strong> IREN wyszedł z wydobycia bitcoina w stronę chmury obliczeniowej i wynik pozycji mówi sam za siebie. <strong>Różnica jest w zaawansowaniu:</strong> IREN ma podpisane umowy na moc obliczeniową, MARA na razie ma prezentację dla inwestorów.<br><br>Prognoza analityków to potwierdza: konsensus zakłada <strong>spadek przychodów o 14,14% rocznie</strong> przez trzy lata. Nikt nie wycenia jeszcze przychodów z AI — a to znaczy, że gdyby się pojawiły, byłyby czystą niespodzianką w górę.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK — ARYTMETYKA POŁÓWKOWANIA</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Nagroda za blok</th><th>Skutek dla przychodu z jednostki mocy</th></tr></thead>
+        <tbody>
+          <tr><td>Do kwietnia 2024</td><td>6,25 BTC</td><td>—</td></tr>
+          <tr><td><strong>Kwiecień 2024</strong></td><td><strong>3,125 BTC</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Przychód natychmiast o połowę niższy</strong></td></tr>
+          <tr><td><strong>Około kwietnia 2028</strong></td><td><strong>1,5625 BTC</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Kolejne przepołowienie</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>To jest najważniejszy fakt o tej branży i jedyny, który da się przewidzieć z góry co do dnia.</strong><br><br>Co cztery lata nagroda za wydobycie bloku spada o połowę. Żeby przychód kopalni pozostał na tym samym poziomie, <strong>cena bitcoina musi się w tym czasie podwoić</strong> — albo kopalnia musi podwoić swój udział w globalnej mocy obliczeniowej, co przy rosnącej konkurencji oznacza ogromne nakłady.<br><br>Połówkowanie z 2024 roku zostawiło <strong>wszystkie duże kopalnie palące gotówkę</strong>. Kolejne wypada około kwietnia 2028. Jeśli do tego czasu bitcoin się nie podwoi, czyste wydobycie przestanie mieć ekonomiczny sens — i to jest powód, dla którego cała branża naraz mówi dziś o sztucznej inteligencji.</div>
+
+      <p>Bitcoin kosztuje obecnie około <strong>$78 000</strong> po wzroście o 21% w ciągu tygodnia. Akcje kopalni odbijają słabiej od samego bitcoina, bo rynek wycenia nie tylko cenę surowca, ale i to, że marża na jego wydobyciu jest ściśnięta.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">SKARBIEC — CO SIĘ Z NIM DZIEJE</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Ruch</th><th>Wielkość</th><th>Cel</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Sprzedaż w I kwartale</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>20 880 monet za ok. $1,5 mld</strong></td><td>Finansowanie działalności, wykup długu, inwestycje</td></tr>
+          <tr><td>Sprzedaż w II kwartale</td><td style="color:var(--ocena-sprzedaz)">2 213 monet po średnio $73 078</td><td>Bieżące potrzeby</td></tr>
+          <tr><td><strong>Zastaw po zakończeniu kwartału</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>18 750 monet</strong></td><td style="color:var(--ocena-sprzedaz)">Zabezpieczenie $600 mln zdolności kredytowej</td></tr>
+          <tr><td>Zakup we wrześniu</td><td style="color:var(--ocena-kupno)">1 292 BTC za $98,64 mln</td><td style="color:var(--ocena-kupno)">Powrót do dokupowania</td></tr>
+          <tr><td><strong>Stan obecny (szacunek)</strong></td><td><strong>ok. 36 900 monet</strong></td><td>35 577 na koniec II kwartału plus wrześniowy zakup</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Szacunek własny: raportowany stan na 30 czerwca powiększony o ujawniony zakup wrześniowy. Nie uwzględnia wydobycia w III kwartale ani ewentualnych sprzedaży, które nie zostały jeszcze ujawnione.</p>
+
+      <div class="alert alert-danger"><strong>Ta tabela opowiada historię, której nie widać w rachunku wyników: spółka finansuje się własnym skarbcem.</strong><br><br>W jednym kwartale sprzedano <strong>ponad dwadzieścia tysięcy monet</strong>, a wkrótce po kolejnym oddano pod zastaw <strong>18 750</strong> — czyli mniej więcej połowę tego, co zostało — żeby otworzyć sobie linię kredytową. To nie jest strategia „kupuj i trzymaj", tylko <strong>stopniowe zamienianie aktywa na płynność</strong>.<br><br>Wrześniowy zakup 1 292 monet jest sygnałem odwrotnym i warto go odnotować uczciwie — ale jest o rząd wielkości mniejszy od tego, co wcześniej sprzedano.</div>
+
+      <div class="alert alert-info"><strong>W tej spółce nie ma klientów w normalnym sensie.</strong> Odbiorcą jest protokół bitcoina, wypłacający nagrodę według reguły matematycznej — brak koncentracji odbiorców i ryzyka utraty kontraktu, ale też <strong>całkowita zależność od jednej zmiennej, na którą spółka nie ma wpływu</strong>. Instytucje trzymają 72,47% akcji, zarząd 2,04%.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZEPŁYWY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$804,22 mln</td></tr>
+          <tr><td><strong>Zysk brutto</strong></td><td><strong>$322,67 mln</strong> (marża 40,12%)</td></tr>
+          <tr><td>Wynik operacyjny</td><td style="color:var(--ocena-sprzedaz)">-$2,54 mld</td></tr>
+          <tr><td>EBITDA</td><td style="color:var(--ocena-sprzedaz)">-$1,88 mld</td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-sprzedaz)">-$3,46 mld · -$9,32 na akcję</td></tr>
+          <tr><td><strong>Przepływy operacyjne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$895,05 mln</strong></td></tr>
+          <tr><td>Nakłady inwestycyjne</td><td style="color:var(--ocena-sprzedaz)">-$395,96 mln</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$1,29 mld · -$3,34 na akcję</strong></td></tr>
+          <tr><td>Prognoza przychodów (3 lata)</td><td style="color:var(--ocena-sprzedaz)"><strong>-14,14% rocznie</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Najostrzejsza liczba w całym raporcie nie jest żadną ze strat, tylko zestawieniem dwóch pozycji z tej tabeli.</strong><br><br>
+      Zysk brutto: <strong>$322,67 mln</strong>. Nakłady inwestycyjne: <strong>$395,96 mln</strong>.<br><br>
+      <strong>Wydobycie nie zarabia nawet na odtworzenie własnego sprzętu</strong> — brakuje około $73 mln, i to <em>zanim</em> odejmiemy jakiekolwiek koszty ogólne, odsetki czy wynagrodzenia. Maszyny liczące zużywają się i tracą konkurencyjność w ciągu kilku lat; jeśli marża brutto nie pokrywa ich wymiany, biznes kurczy się sam z siebie.<br><br>Dlatego wolne przepływy wynoszą <strong>minus 1,29 miliarda dolarów</strong>, a lukę zamyka sprzedaż bitcoina ze skarbca.</div>
+
+      <div class="alert alert-success"><strong>Jest w tym obrazie jeden element wyraźnie pozytywny i nietypowy dla branży: liczba akcji spadła o 5,03% rok do roku.</strong><br><br>Kopalnie bitcoina finansują się prawie zawsze emisją akcji — akcjonariusz płaci za wzrost rozwodnieniem. MARA zrobiła odwrotnie: <strong>skupiła własne akcje i wykupiła dług</strong>, używając na to pieniędzy ze sprzedaży monet. Stopa skupu wynosi 5,03%.<br><br>To jest realna decyzja na korzyść akcjonariusza — ale trzeba widzieć jej drugą stronę: <strong>zapłacono za nią aktywem, które miało być powodem posiadania tych akcji.</strong> Zamieniono bitcoina na mniejszą liczbę akcji.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA — SUMA CZĘŚCI</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$4,25 mld</td><td>Wartość przedsiębiorstwa $6,30 mld</td></tr>
+          <tr><td>Cena / przychody</td><td style="color:var(--ocena-uwaga)">5,30</td><td style="color:var(--ocena-sprzedaz)">Prognozowana <strong>6,00</strong> — rośnie, bo przychody mają spadać</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td style="color:var(--ocena-uwaga)">2,54</td><td>Księga $4,35 na akcję; aktywa materialne 2,79</td></tr>
+          <tr><td>Wartość firmy / sprzedaż</td><td style="color:var(--ocena-sprzedaz)">7,85</td><td>Wysoko jak na biznes bez fosy</td></tr>
+          <tr><td>Cena / zysk, EV/EBITDA, P/FCF</td><td>nie dotyczy</td><td style="color:var(--ocena-sprzedaz)">Wszystkie mianowniki ujemne</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>nie dotyczy</td><td>Strata <strong>$9,32 na akcję</strong> przy przychodach $804,22 mln</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>nie dotyczy</strong></td><td style="color:var(--ocena-sprzedaz)">Konsensus nie zakłada powrotu do zysku w horyzoncie prognozy</td></tr>
+          <tr><td><strong>PEG</strong></td><td>nie dotyczy</td><td>Brak dodatniego zysku bazowego</td></tr>
+          <tr><td>Odniesienie sektorowe</td><td>kopalnie bitcoina: większość bez dodatniego P/E</td><td style="color:var(--ocena-uwaga)">To norma w branży po połówkowaniu, nie wyjątek</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> Brak forward P/E nie jest tu drobnym brakiem danych, tylko <strong>informacją samą w sobie</strong>: analitycy nie prognozują zysku, bo przy dzisiejszej cenie bitcoina i po połówkowaniu wydobycie nie jest rentowne. Jedyny wskaźnik z tabeli, który rośnie, to cena do przychodów — <strong>z 5,30 do prognozowanych 6,00</strong> — i rośnie dlatego, że mianownik ma się kurczyć. Skoro klasyczne mnożniki nie działają, wycenę trzeba zbudować od aktywów.</p>
+
+      <h3>Ile kosztuje sam biznes wydobywczy</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Składnik</th><th>Wartość</th><th>Na akcję</th></tr></thead>
+        <tbody>
+          <tr><td>Bitcoin w skarbcu (ok. 36 900 monet po $78 000)</td><td>$2,88 mld</td><td>$7,44</td></tr>
+          <tr><td>Dług netto</td><td style="color:var(--ocena-sprzedaz)">-$2,04 mld</td><td style="color:var(--ocena-sprzedaz)">-$5,28</td></tr>
+          <tr><td><strong>Skarbiec po odjęciu długu</strong></td><td><strong>$0,84 mld</strong></td><td><strong>$2,16</strong></td></tr>
+          <tr><td><strong>Reszta ceny — biznes wydobywczy i zwrot ku AI</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$3,41 mld</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$8,85</strong></td></tr>
+          <tr><td colspan="2"><strong>Czyli mnożnik zysku brutto płacony za wydobycie</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>10,6×</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenie własne. Dane wejściowe: StockAnalysis / S&amp;P Global Market Intelligence, stan 17.09.2026; stan skarbca z raportu za II kwartał plus ujawniony zakup wrześniowy; cena bitcoina z bieżących notowań rynkowych.</p>
+
+      <div class="alert alert-danger"><strong>Tu jest sedno wyceny: po odjęciu bitcoina i długu zostaje $8,85 na akcję zapłacone za biznes, który nie zarabia na wymianę własnych maszyn.</strong><br><br>To <strong>10,6-krotność rocznego zysku brutto</strong> — dla działalności, której przychody mają według konsensusu spadać o 14,14% rocznie i która po kolejnym połówkowaniu w 2028 roku dostanie jeszcze jedno cięcie przychodu o połowę.<br><br>Innymi słowy: <strong>ponad 80% dzisiejszej ceny akcji to nie bitcoin, tylko opowieść o wydobyciu i o zwrocie ku AI.</strong> Bitcoin, po spłacie długu, odpowiada za około jedną piątą kursu.</div>
+
+      <h3>Cztery scenariusze według ceny bitcoina</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Cena bitcoina</th><th>Wartość skarbca</th><th>Mnożnik biznesu</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$55 000</strong></td><td>$2,03 mld</td><td>0,9×</td><td><strong>$7,92</strong></td><td style="color:var(--ocena-sprzedaz)">-28%</td></tr>
+          <tr><td><strong>$78 000 — stan dzisiejszy</strong></td><td>$2,88 mld</td><td>1,0×</td><td><strong>$11,00</strong></td><td>0%</td></tr>
+          <tr><td><strong>$105 000</strong></td><td>$3,87 mld</td><td>1,6×</td><td><strong>$18,88</strong></td><td style="color:var(--ocena-kupno)">+72%</td></tr>
+          <tr><td>$140 000</td><td>$5,16 mld</td><td>2,3×</td><td>$28,41</td><td style="color:var(--ocena-kupno)">+158%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Mnożnik biznesu odzwierciedla to, że rentowność wydobycia poprawia się szybciej niż sama cena surowca — przy wyższym bitcoinie ta sama moc obliczeniowa daje wyraźnie wyższą marżę. Wartości mnożnika są założeniem własnym, nie danymi.</p>
+
+      <div class="alert alert-info"><strong>Kontrola modelu, która daje mu wiarygodność:</strong> przy dzisiejszej cenie bitcoina i mnożniku 1,0 model zwraca kurs <strong>$11,00</strong> wobec rzeczywistych $11,01. Model odtwarza dzisiejszą wycenę bez dopasowywania — co znaczy, że <strong>rynek wycenia MARA mniej więcej dokładnie tak, jak wynika z ceny bitcoina.</strong> Akcje nie są ani tanie, ani drogie względem surowca; są po prostu jego lewarowanym odbiciem.</div>
+
+      <p><strong>Fair value: $8 – $17</strong>, środek <strong>$12,50 (+13,5%)</strong>. Konsensus 13 analityków to $17,99, czyli +63,4% — mieści się przy górnej granicy mojego przedziału i zakłada bitcoina powyżej $100 000.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Marża brutto</strong></td><td style="color:var(--ocena-uwaga)"><strong>40,12%</strong></td><td>Jedyna dodatnia marża w tej tabeli</td></tr>
+          <tr><td>Marża operacyjna</td><td style="color:var(--ocena-sprzedaz)">-315,76%</td><td rowspan="2" style="color:var(--ocena-sprzedaz)">Obie zniekształcone przeceną bitcoina w rachunku</td></tr>
+          <tr><td>Marża EBITDA</td><td style="color:var(--ocena-sprzedaz)">-233,61%</td></tr>
+          <tr><td>Zwrot z kapitału (ROIC)</td><td style="color:var(--ocena-sprzedaz)">-62,80%</td><td rowspan="2" style="color:var(--ocena-sprzedaz)"><strong>Różnica -84,58 pp — najgorsza w Twoim portfelu</strong></td></tr>
+          <tr><td>Koszt kapitału (WACC)</td><td style="color:var(--ocena-sprzedaz)">21,78%</td></tr>
+          <tr><td>Zwrot z kapitału własnego</td><td style="color:var(--ocena-sprzedaz)">-105,57%</td><td>ROA -26,30%</td></tr>
+          <tr><td>Rotacja aktywów</td><td style="color:var(--ocena-sprzedaz)">0,13</td><td>Bardzo ciężki bilans wobec przychodów</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Marżę operacyjną i EBITDA trzeba tu odrzucić jako miary, bo mierzą cenę bitcoina, a nie działalność.</strong> Sensowna jest tylko <strong>marża brutto 40,12%</strong> — i ona mówi, że samo wydobycie jest jeszcze rentowne na poziomie bezpośrednich kosztów energii i sprzętu. Dopiero niżej, przy nakładach na odtworzenie floty, ekonomika się załamuje (sekcja 5).<br><br><strong>Koszt kapitału 21,78% zasługuje na osobne zdanie.</strong> Tak wysoka wartość bierze się z bety 5,33 — rynek wymaga od tej spółki premii za ryzyko czterokrotnie wyższej niż od typowej spółki. Przy zwrocie z kapitału -62,80% różnica wynosi <strong>-84,58 punktu procentowego</strong>.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka / zadłużenie</td><td style="color:var(--ocena-sprzedaz)">$421,27 mln / $2,47 mld</td><td style="color:var(--ocena-sprzedaz)">Gotówka pokrywa ok. 17% długu</td></tr>
+          <tr><td><strong>Dług netto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$2,04 mld</strong></td><td>Dług do kapitału własnego 1,40</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-59,63</strong></td><td style="color:var(--ocena-sprzedaz)">Ujemne — odsetki opłacane z aktywów, nie z zysku</td></tr>
+          <tr><td>Wskaźnik bieżący / szybki</td><td style="color:var(--ocena-sprzedaz)">0,89 / 0,76</td><td>Kapitał obrotowy -$64,63 mln</td></tr>
+          <tr><td>Kapitał własny</td><td>$1,76 mld</td><td>Księga $4,35 na akcję</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-1,64</strong></td><td style="color:var(--ocena-sprzedaz)">Piotroski 3/9</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Altman Z-Score -1,64 formalnie oznacza strefę podwyższonego ryzyka upadłości — ale przy tej spółce trzeba go czytać z zastrzeżeniem, i to działa w obie strony.</strong><br><br>
+      <strong>Na korzyść:</strong> wskaźnik karze za ujemny wynik operacyjny i niski kapitał obrotowy, a oba są zniekształcone księgowaniem bitcoina. Skarbiec to przy tym <strong>aktywo płynne w kilka godzin</strong>, co robi realną różnicę wobec fabryki.<br><br>
+      <strong>Na niekorzyść:</strong> ten argument już został użyty — ponad dwadzieścia tysięcy monet sprzedano, a połowę reszty oddano pod zastaw. <strong>Bufor, który uzasadnia ignorowanie wskaźnika, jest systematycznie zużywany.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Lewar na bitcoina działa w obie strony, a odbicie już się zaczęło.</strong> Bitcoin urósł w tydzień o 21%, a akcje kopalni zostały w tyle. Przy cenie surowca w okolicach $105 000 mój model daje kurs blisko $19 — spółka reaguje na wzrost mocniej niż sam bitcoin, bo poprawia się jednocześnie wartość skarbca i rentowność wydobycia.</div>
+
+      <div class="alert alert-success"><strong>2. Skup akcji zamiast emisji.</strong> Liczba akcji spadła o 5,03% w rok, podczas gdy branża finansuje się rozwodnieniem akcjonariuszy. To decyzja zarządu na korzyść posiadacza akcji i wyróżnia MARA wśród konkurentów.</div>
+
+      <div class="alert alert-success"><strong>3. Zwrot ku AI jest w cenie wyceniony na zero.</strong> Konsensus zakłada spadek przychodów, więc żadne przychody z infrastruktury cyfrowej nie są uwzględnione. Każda podpisana umowa na moc obliczeniową byłaby czystą niespodzianką w górę — a kopalnie mają dokładnie to, czego brakuje centrom danych: podłączoną moc i grunty.</div>
+
+      <div class="alert alert-info"><strong>4. Bardzo wysoka krótka sprzedaż przy niskim wskaźniku pokrycia.</strong> 28,50% akcji sprzedanych na krótko przy zaledwie 2,34 dnia potrzebnych na zamknięcie pozycji. Przy dobrej wiadomości taka konstrukcja potrafi wzmocnić ruch w górę ponad to, co uzasadniają fundamenty.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Wydobycie nie zarabia na odtworzenie własnego sprzętu.</strong> Zysk brutto jest niższy od nakładów inwestycyjnych — zanim policzymy cokolwiek innego. To nie jest problem jednego słabego kwartału, tylko stan ekonomiki branży po połówkowaniu z 2024 roku.</div>
+
+      <div class="alert alert-danger"><strong>2. Skarbiec jest zużywany na finansowanie tej luki.</strong> W rok stan monet spadł o 29%, a połowa tego, co zostało, poszła pod zastaw. Aktywo, które jest głównym powodem trzymania tych akcji, jest systematycznie zamieniane na płynność.</div>
+
+      <div class="alert alert-danger"><strong>3. Kolejne połówkowanie wypada około kwietnia 2028.</strong> Nagroda za blok spadnie do 1,5625 BTC. Jeśli bitcoin się do tego czasu nie podwoi, czyste wydobycie przestanie mieć sens ekonomiczny — a zwrot ku AI musi wtedy być już gotowy, nie zapowiedziany.</div>
+
+      <div class="alert alert-warning"><strong>4. Beta 5,33 przy ujemnych przepływach.</strong> Spółka z najwyższą zmiennością w Twoim portfelu jest jednocześnie tą, która pali gotówkę i ma najgorszą różnicę między zwrotem a kosztem kapitału. Przecena bitcoina o jedną trzecią sprowadza w moim modelu kurs poniżej ośmiu dolarów.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Różnica wobec MARA</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>IREN</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,54%)</span></td><td>Ten sam start, ale zwrot ku chmurze obliczeniowej już wykonany</td><td style="color:var(--ocena-kupno)"><strong>Wzorzec udanej transformacji</strong></td></tr>
+          <tr><td><strong>Riot Platforms</strong></td><td>Podobna skala i podobna presja marżowa</td><td style="color:var(--ocena-uwaga)">Ta sama choroba branżowa</td></tr>
+          <tr><td><strong>CleanSpark</strong></td><td>Niższy koszt energii, mniejszy skarbiec</td><td style="color:var(--ocena-uwaga)">Lepsza ekonomika, mniejszy lewar na bitcoina</td></tr>
+          <tr><td><strong>Cipher Mining</strong></td><td>Mniejsza, mocniej postawiona na centra danych</td><td style="color:var(--ocena-uwaga)">Podobna opowieść o AI, wcześniejszy etap</td></tr>
+          <tr><td><strong>Strategy (MSTR)</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,02%)</span></td><td>Sam skarbiec bez wydobycia — bitcoin bez kosztu utrzymania floty</td><td style="color:var(--ocena-uwaga)">Czystszy lewar, inny rodzaj ryzyka</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Najostrzejsze porównanie nie jest z inną kopalnią, tylko z samym bitcoinem.</strong><br><br>Posiadacz akcji MARA płaci za lewar i za opcję na zwrot ku AI <strong>ujemnym kosztem utrzymania</strong>: spółka traci gotówkę i sprzedaje monety, więc liczba bitcoinów przypadających na akcję z czasem maleje. Kto chce ekspozycji na bitcoina bez tego kosztu, może go trzymać bezpośrednio. IREN pokazuje, że transformacja bywa tego warta — ale też, że wymaga podpisanych umów, nie prezentacji.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-sprzedaz)">-36,79%</td><td>Mimo odbicia bitcoina w ostatnim tygodniu</td></tr>
+          <tr><td>Średnia 50-sesyjna / 200-sesyjna</td><td>$11,18 / $10,94</td><td style="color:var(--ocena-uwaga)">Kurs 1,5% poniżej pierwszej, 0,6% powyżej drugiej</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>49,10</td><td>Dokładnie neutralny — brak sygnału w obie strony</td></tr>
+          <tr><td><strong>Beta (5 lat)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>5,33</strong></td><td style="color:var(--ocena-sprzedaz)">Ponad pięciokrotność zmienności rynku</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>110,11 mln akcji (28,50%)</strong></td><td>Bez zmian wobec poprzedniego miesiąca; 2,34 dnia na zamknięcie</td></tr>
+          <tr><td>Średni wolumen (20 sesji)</td><td>47,99 mln akcji</td><td style="color:var(--ocena-kupno)">Bardzo wysoka płynność</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Obraz techniczny jest wyjątkowo nijaki i to samo w sobie jest informacją.</strong> Kurs jest wciśnięty między obie średnie, dzielone od siebie o dwadzieścia kilka centów, a wskaźnik RSI stoi praktycznie na pięćdziesiątce — <strong>rynek nie ma zdania</strong>. Przy tej becie spokój nie potrwa długo, a kierunek wyznaczy cena bitcoina, nie układ średnich.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$11,18</strong></td><td>Średnia 50-sesyjna — najbliższy opór</td></tr>
+          <tr><td><strong>$12,50</strong></td><td>Środek przedziału wartości godziwej</td></tr>
+          <tr><td><strong>$17,99</strong></td><td>Cena docelowa konsensusu — zakłada bitcoina powyżej $100 000</td></tr>
+          <tr><td><strong>$10,94</strong></td><td>Średnia 200-sesyjna — pierwsze wsparcie</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$8,00</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — dolna granica wartości godziwej</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs między średnimi, wskaźnik RSI na pięćdziesiątce, bitcoin po mocnym tygodniu. Brak przewagi w którąkolwiek stronę; wyniki 3 listopada są pierwszym punktem odniesienia.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Wynik zależy niemal wyłącznie od ceny bitcoina. Przy dzisiejszej cenie surowca akcje są wycenione uczciwie — środek wartości godziwej leży tylko nieznacznie powyżej kursu.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>SPRZEDAŻ</strong></td><td>Połówkowanie około kwietnia 2028 zetnie przychód z jednostki mocy o kolejną połowę. Bez gotowego biznesu infrastruktury cyfrowej samo wydobycie traci wtedy sens ekonomiczny.</td></tr>
+        </tbody>
+      </table></div>
+
+      <p><strong>Ocena łączna: NEUTRALNA.</strong> Utrzymuję ocenę z sierpnia, ale <strong>obniżam wartość godziwą z $15–22 do $8–17</strong> — poprzedni przedział przypisywał transformacji wartość, której nie potwierdza żadna liczba. Plan działania w sekcji 15.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td><strong>4,33%</strong></td><td>Siódma pozycja z osiemnastu</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-kupno)">+10,6%</td><td>Przy cenie wejścia $9,95</td></tr>
+          <tr><td><strong>Bitcoin razem z MSTR</strong></td><td style="color:var(--ocena-uwaga)"><strong>6,35%</strong></td><td>MARA 4,33% + Strategy 2,02%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Trzy rzeczy warte odnotowania przy tej pozycji.</strong><br><br>
+      <strong>Ekspozycję na bitcoina masz w dwóch postaciach naraz</strong> — razem 6,35% portfela. MARA to bitcoin z wydobyciem i z ujemnym kosztem utrzymania; Strategy to skarbiec bez floty maszyn. Obie reagują na tę samą zmienną, więc w przecenie bitcoina spadną razem. To jedna ekspozycja rozpisana na dwie linijki, a nie dwie różne inwestycje.<br><br>
+      <strong>Wspólny rodowód z IREN.</strong> IREN wyszedł z tego samego biznesu i zrobił zwrot, który MARA dopiero zapowiada. Masz więc w portfelu obie strony tej samej tezy: wykonaną i zapowiedzianą.<br><br>
+      <strong>Beta 5,33 to najwyższa wartość w portfelu.</strong> Przy pozycji stanowiącej 4,33% oznacza to, że MARA porusza wartością rachunku nieproporcjonalnie do swojej wagi — i robi to w obie strony. To jest ta cecha, którą trzeba mieć na uwadze przy dzisiejszym poziomie wykorzystania depozytu zabezpieczającego.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>MARA nie jest spółką wydobywczą, którą wycenia się jak spółkę — jest lewarowanym sposobem na posiadanie bitcoina, za który płaci się ujemnym kosztem utrzymania.</strong> Model oparty na sumie części odtwarza dzisiejszy kurs przy dzisiejszej cenie surowca praktycznie co do centa, co znaczy, że rynek nie wycenia tu ani okazji, ani przewartościowania — wycenia bitcoina. Cała reszta analizy sprowadza się do pytania, ile kosztuje ten lewar.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Kosztuje sporo. <strong>Zysk brutto jest niższy od nakładów na odtworzenie floty maszyn</strong>, więc wydobycie nie utrzymuje samo siebie, a lukę zamyka sprzedaż monet: stan skarbca spadł w rok o 29%, a połowa tego, co zostało, poszła pod zastaw pod linię kredytową. Po odjęciu bitcoina i długu zostaje <strong>$8,85 na akcję zapłacone za sam biznes wydobywczy</strong> — 10,6-krotność jego rocznego zysku brutto, przy konsensusie zakładającym spadek przychodów i przy kolejnym połówkowaniu nagrody w 2028 roku. Po drugiej stronie stoją dwie rzeczy realne: <strong>skup akcji zamiast rozwodnienia</strong> i zwrot ku infrastrukturze cyfrowej, którego nikt jeszcze nie wycenia.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Skarbiec musi mieć realną wartość rynkową.</strong> Około 36 900 monet, płynnych w każdej chwili — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Zarząd nie może rozwadniać akcjonariuszy.</strong> Liczba akcji spadła o 5,03% w rok — spełnione i rzadkie w tej branży.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Wydobycie musi zarabiać na odtworzenie sprzętu.</strong> Zysk brutto niższy od nakładów inwestycyjnych — niespełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Skarbiec nie może się kurczyć.</strong> Spadek o 29% w rok plus zastaw na połowie reszty — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Zwrot ku AI musi zamienić się w podpisane umowy.</strong> Na razie jest zapowiedzią; konsensus wycenia go na zero.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>3 listopada 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki za III kwartał</strong></td><td style="color:var(--ocena-uwaga)">Stan skarbca po wrześniowych zakupach, wykorzystanie linii kredytowej pod zastaw, pierwsze konkrety o infrastrukturze cyfrowej</td></tr>
+            <tr><td>Na bieżąco</td><td>Cena bitcoina</td><td>Jedyna zmienna, która realnie rusza tą wyceną</td></tr>
+            <tr><td>2027</td><td>Ewentualne umowy na moc obliczeniową</td><td>Jedyne źródło niespodzianki w górę spoza ceny surowca</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)"><strong>Około kwietnia 2028</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Połówkowanie nagrody za blok</strong></td><td style="color:var(--ocena-sprzedaz)">Twarda data, znana z góry — przychód z jednostki mocy spada o połowę</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Stan skarbca</td><td>ok. 36 900 BTC</td><td>dalszy spadek poniżej 30 000</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Zysk brutto wobec nakładów</td><td>niedobór ok. $73 mln</td><td>pogłębienie niedoboru</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Liczba akcji</td><td>-5,03% r/r</td><td>powrót do emisji akcji</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Przychody z infrastruktury cyfrowej</td><td>brak w prognozach</td><td>brak konkretów po III kwartale</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Wielkość pozycji</strong></td><td>Obecna waga jest górną granicą sensu przy becie 5,33 — <strong>nie powiększać</strong></td></tr>
+            <tr><td><strong>Dokupowanie</strong></td><td>Tylko poniżej <strong>$9</strong> i tylko jako świadomy zakład na bitcoina</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$17</strong> — górnej granicy wartości godziwej</td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$8,00</strong></td></tr>
+            <tr><td><strong>Warunek zmiany na sprzedaż</strong></td><td>Dalsza wyprzedaż skarbca bez umów na moc obliczeniową po wynikach z 3 listopada</td></tr>
+            <tr><td><strong>Pytanie do rozstrzygnięcia</strong></td><td>Czy lewar i opcja na transformację są warte kurczącego się skarbca — jeśli nie, bitcoin bezpośrednio daje tę samą ekspozycję bez kosztu</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p><strong>Utrzymuję ocenę, ale obniżam wartość godziwą o połowę — i to jest ważniejsze od samej oceny.</strong> W sierpniu wyceniłem MARA na $15–22, przypisując „transformacji ku infrastrukturze cyfrowej" wartość, której nie potwierdza żadna liczba: konsensus wciąż zakłada spadek przychodów, a jedynym konkretem po sześciu tygodniach jest zakup 1 292 monet. Nowy przedział <strong>$8–17</strong> bierze się z policzenia, ile faktycznie kosztuje biznes wydobywczy po odjęciu skarbca i długu.</p>
+        <p>Spółka jest dokładnie tym, czym wygląda: <strong>lewarowanym bitcoinem z ujemnym kosztem utrzymania i opcją na coś więcej.</strong> Przy becie 5,33 i kurczącym się skarbcu obecna waga jest górną granicą sensu, a decyzja sprowadza się do pytania: czy chcesz bitcoina z lewarem i z kosztem, czy bitcoina bez nich.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$8 – $17</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$7,92 (-28%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$18,88 (+72%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Bez zmian, nie powiększać</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 3 listopada</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA ANALIZY Z 6 SIERPNIA</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Wartość godziwa $15–22</strong> przy kursie $11,75</td>
+            <td>Dolna granica nigdy nie znalazła się w zasięgu — dziś dzieli od niej 36%. Nowy przedział <strong>$8–17</strong> pochodzi z sumy części, a nie z oczekiwań wobec transformacji</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — przedział zawyżony o około połowę</td>
+          </tr>
+          <tr>
+            <td><strong>„Transformacja w toku o wyniku binarnym"</strong> jako oś tezy</td>
+            <td>Po sześciu tygodniach transformacja nadal nie ma ani jednej liczby: konsensus zakłada <strong>spadek przychodów o 14,14% rocznie</strong>. Określenie „binarny" sugerowało rozstrzygnięcie w widocznym terminie, którego nie było i nie ma</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — teza bez sprawdzalnego terminu</td>
+          </tr>
+          <tr>
+            <td>Brak policzenia, <strong>ile kosztuje sam biznes wydobywczy</strong></td>
+            <td>Po odjęciu skarbca i długu zostaje $8,85 na akcję, czyli ponad 80% ceny akcji. Bez tego rachunku nie da się powiedzieć, za co się właściwie płaci</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana — brak kluczowego wyliczenia</td>
+          </tr>
+          <tr>
+            <td>Brak <strong>arytmetyki połówkowania</strong> jako osobnego ryzyka</td>
+            <td>Data około kwietnia 2028 jest znana z góry i zetnie przychód z jednostki mocy o połowę. To jedyne ryzyko w tej spółce, które da się przewidzieć co do terminu — powinno było mieć własne miejsce</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana — pominięte ryzyko terminowe</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Ocena neutralna była trafna — kurs zmienił się o 6,3% w dół w ciągu sześciu tygodni, czyli w granicach szumu dla spółki o tej zmienności. Trafne było też uznanie wyniku za zależny od czynnika zewnętrznego, a nie od jakości zarządzania.</div>
+
+      <div class="alert alert-warning"><strong>Wniosek na przyszłość, szerszy niż ta spółka.</strong> Obie poważne pomyłki mają wspólne źródło: <strong>przypisałem wartość zapowiedzi zarządu, zamiast policzyć, co widać w liczbach.</strong> Przy spółkach, które ogłaszają zwrot strategiczny, wartość godziwa powinna wynikać z dzisiejszych aktywów i przepływów, a zapowiedziana transformacja być opcją ponad tym — nie składnikiem przedziału.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 września 2026 | Cena: <strong>$11,01</strong> (notowanie 17.09.2026, 9:55 EDT) | <strong>Aktualizacja analizy z 6 sierpnia 2026 — ocena neutralna utrzymana, wartość godziwa obniżona</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> wartość godziwa $15–22 → $8–17, bo poprzedni przedział wyceniał zapowiedzianą transformację zamiast dzisiejszych aktywów; dodano rachunek sumy części pokazujący, że po odjęciu skarbca i długu na biznes wydobywczy przypada $8,85 na akcję; dodano połówkowanie z 2028 roku jako osobne ryzyko terminowe | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 17.09.2026</strong>, MARA Holdings Investor Relations i zgłoszenia SEC (wyniki Q2 2026 z 06.08.2026, sprzedaż i zastaw bitcoina, zakup wrześniowy), bieżące notowania bitcoina; wyliczenia sumy części i scenariuszy to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
