@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MPWR — Monolithic Power Systems | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: MPWR</div>
+    <div class="company-name">Monolithic Power Systems, Inc.</div>
+    <div class="company-sub">Układy zarządzania energią · zasilanie akceleratorów AI i centrów danych</div>
+    <div class="header-meta">
+      <span class="meta-tag">Spoza portfela — pierwsza analiza</span>
+      <span class="meta-tag">33% pod szczytem</span>
+      <span class="meta-tag">Enterprise Data +164% r/r</span>
+      <span class="meta-tag">Altman Z 42,76</span>
+      <div class="price-display">
+        <div class="price-main">$1 147,61</div>
+        <div class="price-sub">zamknięcie 16.09.2026 (+0,45%) | Twoje $1 145 — zgodne ze źródłem</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Półprzewodniki</span><span class="temat">Moc obliczeniowa dla AI</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — wskaźniki historyczne liczone są na przychodach o 41% niższych od dzisiejszego tempa, a kurs jest 33% pod szczytem przy RSI 34,7">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">wysoka jakość po korekcie, ale uzależniona od jednego tematu</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$1 050 – $1 500</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">-9% do +31%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>29 października 2026</b><em>Bez dywidendy — 30 września</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Portfel</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (zamknięcie 16.09)</div><div class="metric-value">$1 147,61</div><div class="metric-detail">12,3% pod średnią 50-sesyjną, 9,0% pod 200-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Od szczytu 52-tygodniowego</div><div class="metric-value red">-33,3%</div><div class="metric-detail">Szczyt $1 714,09 · ale +35,06% za 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody Q2 2026</div><div class="metric-value green">$980,6 mln</div><div class="metric-detail"><strong>+47,6% r/r, +21,9% kw/kw</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Segment Enterprise Data</div><div class="metric-value green">+164,3%</div><div class="metric-detail">$380,6 mln · 38,8% przychodów</div></div>
+    <div class="metric-card"><div class="metric-label">Prognoza na Q3</div><div class="metric-value green">$1,14–1,16 mld</div><div class="metric-detail"><strong>16,5% powyżej konsensusu</strong></div></div>
+    <div class="metric-card"><div class="metric-label">P/E historyczne vs prognozowane</div><div class="metric-value">70,01 / 35,82</div><div class="metric-detail">PEG 1,04 · <strong>rozbieżność wyjaśniona w sekcji 6</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Altman Z-Score</div><div class="metric-value green">42,76</div><div class="metric-detail"><strong>Najwyższy w całej serii</strong> · dług $18,9 mln</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (17 analityków)</div><div class="metric-value green">$1 839,80</div><div class="metric-detail">+60,3% · mocne kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p><strong>MPWR jest spoza portfela</strong> — to pierwsza analiza tej spółki. Twoje $1 145 zgadza się z zamknięciem sesji 16 września ($1 147,61, +0,45%), więc nie ma tu rozbieżności.</p>
+
+      <p>Monolithic Power Systems projektuje <strong>układy scalone do zarządzania energią</strong> — czyli elementy, które przetwarzają napięcie i dostarczają prąd do procesorów, akceleratorów i pamięci. Spółka ma zaledwie <strong>4 501 pracowników</strong> przy przychodach <strong>3,27 miliarda dolarów</strong>, co daje 727 207 dolarów przychodu na osobę. Kapitalizacja <strong>56,40 miliarda</strong>, instytucje trzymają <strong>98,87%</strong> akcji.</p>
+
+      <h3>Wyniki za II kwartał 2026 — 30 lipca — i prognoza, która wszystko tłumaczy</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wynik</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody kwartalne</strong></td><td style="color:var(--ocena-kupno)"><strong>$980,6 mln</strong></td><td style="color:var(--ocena-kupno)"><strong>+47,6% r/r, +21,9% kw/kw</strong> — rekord</td></tr>
+          <tr><td>Zysk na akcję</td><td style="color:var(--ocena-kupno)">$6,50</td><td style="color:var(--ocena-kupno)">Wobec oczekiwanych $5,88</td></tr>
+          <tr><td><strong>Segment Enterprise Data</strong></td><td style="color:var(--ocena-kupno)"><strong>$380,6 mln</strong></td><td style="color:var(--ocena-kupno)"><strong>+164,3% r/r, +44,8% kw/kw</strong>; 38,8% przychodów</td></tr>
+          <tr><td><strong>Prognoza na III kwartał</strong></td><td style="color:var(--ocena-kupno)"><strong>$1,14–1,16 mld</strong></td><td style="color:var(--ocena-kupno)"><strong>16,5% powyżej konsensusu</strong></td></tr>
+          <tr><td>Marża brutto w prognozie</td><td style="color:var(--ocena-kupno)">55,2–55,8% (GAAP)</td><td>Non-GAAP 55,4–56,0%</td></tr>
+          <tr><td>Stosunek zamówień do sprzedaży</td><td style="color:var(--ocena-kupno)">powyżej 1</td><td>Ponad kwartał widoczności</td></tr>
+          <tr><td>Nowe produkty</td><td>Kontrolery DDR5, układy 800 V AC-DC (GaN/SiC)</td><td>Pierwsze zamówienia i próbki</td></tr>
+          <tr><td><strong>Skup akcji</strong></td><td style="color:var(--ocena-kupno)">rozszerzony do <strong>$1 mld</strong></td><td>Nowa autoryzacja zarządu</td></tr>
+          <tr><td>Reakcja kursu na wyniki</td><td style="color:var(--ocena-kupno)">+10,5%</td><td>Wzrost w dniu publikacji</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Prognoza na trzeci kwartał zasługuje na osobne zdanie, bo jest kluczem do zrozumienia wyceny tej spółki.</strong><br><br>Przychody drugiego kwartału wyniosły <strong>980,6 miliona</strong>. Prognoza na trzeci to <strong>1,14–1,16 miliarda</strong> — czyli <strong>wzrost o około 17% w jeden kwartał</strong>, i to <strong>16,5% powyżej tego, czego oczekiwali analitycy</strong>.<br><br>Środek tej prognozy w tempie rocznym daje <strong>około 4,6 miliarda dolarów przychodu</strong>. Tymczasem wszystkie wskaźniki historyczne w tym raporcie liczone są na przychodach za ostatnie dwanaście miesięcy, czyli <strong>3,27 miliarda</strong>.<br><br><strong>Spółka działa dziś w tempie o 41% wyższym niż to, które widać w danych historycznych.</strong> To wyjaśnia, dlaczego P/E historyczne wynosi 70,01, a prognozowane 35,82 — czyli dokładnie połowę.</div>
+
+      <h3>Dlaczego więc kurs jest 33% poniżej szczytu</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Przyczyna</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Wysoka wycena i „wszystko w cenie"</strong> — kurs handlował powyżej celów analityków, a mnożnik historyczny sięgał w szczycie stukrotności zysku</td><td style="color:var(--ocena-uwaga)">Uzasadniona — patrz sekcja 6</td></tr>
+          <tr><td><strong>Wątpliwości co do trwałości niektórych umów AI powiązanych z NVIDIĄ</strong>, ciążące całemu ekosystemowi dostawców</td><td style="color:var(--ocena-sprzedaz)"><strong>Najpoważniejsze ryzyko — sekcja 4</strong></td></tr>
+          <tr><td>Realizacja zysków w drogich spółkach sprzętowych związanych z AI</td><td style="color:var(--ocena-uwaga)">Faza trawienia, nie pogorszenie fundamentów</td></tr>
+          <tr><td>Makro — rentowności obligacji i ceny ropy</td><td>Tło rynkowe</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Warto zwrócić uwagę na sekwencję zdarzeń, bo mówi więcej niż same przyczyny.</strong> Spółka opublikowała 30 lipca rekordowy kwartał i prognozę o 16,5% powyżej oczekiwań — kurs wzrósł wtedy o 10,5%. <strong>Sześć tygodni później, 14 września, spadł o 7,39% w jednej sesji</strong>, a od szczytu 1 714,09 dolara stracił <strong>jedną trzecią wartości</strong>.<br><br>W tym czasie nie pojawiły się żadne nowe dane o spółce. <strong>Przeceniono więc nie wyniki, lecz mnożnik</strong> — i to jest różnica, która decyduje o tym, czy ocena wypada pozytywnie, czy negatywnie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — DLACZEGO TEN UKŁAD JEST TRUDNY DO ZASTĄPIENIA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment</th><th>Czym jest</th><th>Rola w tezie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Enterprise Data</strong></td><td style="color:var(--ocena-kupno)"><strong>$380,6 mln, +164,3% r/r</strong> — zasilanie akceleratorów AI i serwerów</td><td style="color:var(--ocena-kupno)"><strong>Cały wzrost pochodzi stąd</strong></td></tr>
+          <tr><td>Motoryzacja</td><td>Układy zasilania w pojazdach</td><td>Stabilny, wolniej rosnący</td></tr>
+          <tr><td>Przemysł i komunikacja</td><td>Infrastruktura sieciowa, automatyka</td><td>Baza dywersyfikacyjna</td></tr>
+          <tr><td>Elektronika konsumencka</td><td>Historyczny rdzeń spółki</td><td>Malejące znaczenie</td></tr>
+          <tr><td><strong>Nowe linie</strong></td><td style="color:var(--ocena-kupno)">Kontrolery DDR5, układy <strong>800 V AC-DC</strong> (GaN/SiC)</td><td>Pierwsze zamówienia — kolejna fala wzrostu</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Fosa tej spółki jest mocniejsza, niż sugerowałby opis „producent układów zasilania" — i warto zrozumieć, na czym polega.</strong><br><br>Układ zarządzania energią nie jest komponentem, który da się wymienić po fakcie. Jest <strong>projektowany razem z płytą, pod konkretny akcelerator, konkretny profil poboru prądu i konkretny budżet cieplny</strong>. Zmiana dostawcy oznacza przeprojektowanie zasilania całej płyty i ponowną certyfikację.<br><br>W praktyce oznacza to, że <strong>decyzja zapada raz, na etapie projektowania, i obowiązuje przez cały cykl życia produktu</strong> — zwykle kilka lat. To najbardziej klasyczna postać kosztu przełączenia, jaka istnieje w półprzewodnikach.<br><br>Widać to w marży brutto: <strong>55,20%</strong>, przy prognozie na trzeci kwartał podniesionej do 55,2–55,8%. Producent komponentu zamiennego takiej marży nie utrzymuje.</div>
+
+      <div class="alert alert-warning"><strong>Ale ta sama cecha działa w drugą stronę i to jest sedno ryzyka.</strong> Skoro decyzja zapada na etapie projektowania, to <strong>przegrana w jednym projekcie oznacza utratę przychodów na całe lata</strong> — bez możliwości nadrobienia w trakcie. Nie da się odzyskać gniazda, które zajął konkurent, dopóki nie powstanie następna generacja sprzętu.<br><br>Dokładnie to zdarzało się już tej spółce w przeszłości przy akceleratorach AI i dlatego rynek reaguje tak gwałtownie na każdą wzmiankę o zmianie dostawcy u kluczowego klienta. <strong>Segment Enterprise Data urósł w rok o 164% — i tą samą drogą może się skurczyć.</strong></div>
+
+      <p>Nowe linie produktowe — <strong>kontrolery pamięci DDR5 i układy 800 V AC-DC oparte na azotku galu i węgliku krzemu</strong> — są odpowiedzią na to ryzyko. Architektura zasilania 800 V to kierunek, w którym idą nowe centra danych, bo ogranicza straty przesyłowe przy rosnącej gęstości mocy. <strong>Jeśli MPWR zdobędzie tam pozycję, uniezależni się częściowo od pojedynczych gniazd w akceleratorach.</strong> Na razie są to pierwsze zamówienia i próbki.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK I CYKLICZNOŚĆ</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na MPWR</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gęstość mocy w centrach danych</strong></td><td style="color:var(--ocena-kupno)">Rośnie z każdą generacją akceleratorów</td><td style="color:var(--ocena-kupno)">Więcej układów zasilania na szafę, wyższa wartość</td></tr>
+          <tr><td><strong>Przejście na architekturę 800 V</strong></td><td style="color:var(--ocena-kupno)">Wczesna faza wdrożeń</td><td style="color:var(--ocena-kupno)">Nowy rynek dla GaN i SiC</td></tr>
+          <tr><td>Motoryzacja</td><td style="color:var(--ocena-uwaga)">Elektryfikacja spowolniła</td><td>Segment stabilizujący, nie napędowy</td></tr>
+          <tr><td><strong>Cykliczność półprzewodników</strong></td><td style="color:var(--ocena-sprzedaz)">Historycznie ostra</td><td style="color:var(--ocena-sprzedaz)"><strong>Marża 55% i wzrost 47% to poziomy szczytowe</strong></td></tr>
+          <tr><td>Prognoza wzrostu (3 lata)</td><td style="color:var(--ocena-kupno)">przychody +31,52%, zysk +31,95% rocznie</td><td>Konsensus 17 analityków</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Ostrzeżenie o cykliczności — obowiązkowe przy półprzewodnikach i tutaj szczególnie zasadne.</strong><br><br>MPWR notuje dziś <strong>marżę brutto 55,20%, marżę operacyjną 28,72% i wzrost przychodów o 47,6% rok do roku</strong>. Wszystkie trzy liczby są na poziomach, których branża półprzewodnikowa nie utrzymuje przez pełny cykl.<br><br>Standardowa pułapka wygląda tak: na szczycie cyklu zysk jest maksymalny, więc prognozowane P/E wydaje się niskie, i inwestor kupuje drogo, sądząc że tanio. <strong>Tutaj prognozowane P/E wynosi 35,82 — czyli nie jest niskie nawet przy szczytowych zyskach.</strong> To paradoksalnie uczciwszy punkt wyjścia: rynek nie udaje, że te zyski są wieczne.<br><br>Ryzyko pozostaje jednak realne. <strong>Gdyby marża brutto wróciła do 48–50%, a wzrost wyhamował do kilkunastu procent, dzisiejsza wycena straciłaby uzasadnienie</strong> — i to jest scenariusz negatywny z sekcji 6.</div>
+
+      <div class="alert alert-info"><strong>Argument po drugiej stronie, który uważam za istotny.</strong> Poprzednie cykle w półprzewodnikach napędzała elektronika konsumencka i telefony — rynki, gdzie popyt potrafi zniknąć w kwartał. <strong>Obecny cykl napędzają nakłady inwestycyjne operatorów centrów danych</strong>, planowane w horyzoncie wieloletnim i zakontraktowane z wyprzedzeniem.<br><br>To nie znosi cykliczności, ale wydłuża jej okres. Potwierdza to <strong>stosunek zamówień do sprzedaży powyżej 1 i ponad kwartał widoczności</strong>, o których mówił zarząd.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI — GDZIE LEŻY PRAWDZIWE RYZYKO</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Enterprise Data w przychodach</strong></td><td style="color:var(--ocena-uwaga)"><strong>38,8%</strong> ($380,6 mln)</td><td style="color:var(--ocena-sprzedaz)">Rok temu ok. 22% — koncentracja szybko rośnie</td></tr>
+          <tr><td>Dynamika tego segmentu</td><td style="color:var(--ocena-kupno)">+164,3% r/r, +44,8% kw/kw</td><td style="color:var(--ocena-sprzedaz)">Cały wzrost spółki pochodzi z jednego obszaru</td></tr>
+          <tr><td>Przychód na pracownika</td><td style="color:var(--ocena-kupno)">$727 207</td><td style="color:var(--ocena-kupno)">Zysk na pracownika $178 171 · 4 501 osób</td></tr>
+          <tr><td><strong>Instytucje</strong></td><td style="color:var(--ocena-kupno)"><strong>98,87%</strong></td><td>Praktycznie cała spółka w rękach instytucji</td></tr>
+          <tr><td>Udziałowcy wewnętrzni</td><td>3,53%</td><td>Wolny obrót 47,36 mln z 49,14 mln akcji</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-uwaga)">2,00 mln (4,07% akcji)</td><td style="color:var(--ocena-uwaga)">Wzrost z 1,84 mln — nisko, ale rośnie</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>To jest najważniejsza sekcja tej analizy, bo tu leży jedyne ryzyko, które mogłoby wywrócić tezę.</strong><br><br>Segment Enterprise Data urósł w rok o <strong>164,3%</strong> i odpowiada dziś za <strong>38,8% przychodów</strong> wobec około 22% rok wcześniej. Oznacza to, że <strong>praktycznie cały wzrost spółki pochodzi z zasilania akceleratorów AI</strong>, a ten rynek jest skoncentrowany u kilku producentów platform.<br><br>Komentarze rynkowe do wrześniowej przeceny mówią wprost o <em>wątpliwościach co do trwałości niektórych umów AI powiązanych z NVIDIĄ</em>, ciążących sentymentowi wobec dostawców i partnerów. <strong>MPWR jest dokładnie takim dostawcą.</strong><br><br>W połączeniu z mechaniką z sekcji 2 — gdzie decyzja o dostawcy zapada raz, na etapie projektowania, i obowiązuje przez lata — daje to profil ryzyka, który nie jest stopniowy, lecz skokowy. <strong>Przegrana w jednej generacji sprzętu nie obniża przychodów o kilka procent; wycina cały strumień na kilka lat.</strong></div>
+
+      <div class="alert alert-warning"><strong>Uczciwie po drugiej stronie.</strong> Sam fakt, że segment urósł o 164% i że stosunek zamówień do sprzedaży przekracza 1, oznacza, że <strong>MPWR obecne gniazda wygrywa, a nie przegrywa</strong>. Prognoza na trzeci kwartał o 16,5% powyżej konsensusu nie powstałaby, gdyby spółka traciła pozycję.<br><br>Ryzyko dotyczy więc <em>następnej</em> generacji, nie obecnej — a to daje co najmniej kilka kwartałów widoczności. <strong>Nowe linie produktowe (DDR5, 800 V) są właśnie próbą rozłożenia tego ryzyka na więcej niż jeden koszyk.</strong></div>
+
+      <p>Osobno warto odnotować, że <strong>instytucje trzymają 98,87% akcji</strong> — najwyższy poziom, jaki widziałem w tej serii analiz. Praktycznie nie ma tu kapitału detalicznego. Z jednej strony oznacza to profesjonalną bazę akcjonariuszy, z drugiej — <strong>gdy instytucje zmieniają zdanie, robią to jednocześnie</strong>, co tłumaczy spadek o 7,39% w jednej sesji.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th><th>Marża</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody</strong></td><td><strong>$3,27 mld</strong></td><td style="color:var(--ocena-uwaga)">Tempo bieżące: ok. <strong>$4,6 mld</strong></td></tr>
+          <tr><td>Zysk brutto</td><td style="color:var(--ocena-kupno)">$1,81 mld</td><td style="color:var(--ocena-kupno)"><strong>55,20%</strong></td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td style="color:var(--ocena-kupno)"><strong>$940,17 mln</strong></td><td style="color:var(--ocena-kupno)"><strong>28,72%</strong></td></tr>
+          <tr><td>EBITDA</td><td style="color:var(--ocena-kupno)">$1,00 mld</td><td>30,56%</td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td style="color:var(--ocena-kupno)">$984,26 mln</td><td style="color:var(--ocena-kupno)">30,07% — odsetki od gotówki <em>dodają</em></td></tr>
+          <tr><td><strong>Wynik netto</strong></td><td style="color:var(--ocena-kupno)"><strong>$801,95 mln</strong></td><td style="color:var(--ocena-kupno)">24,50% · <strong>$16,39/akcję</strong></td></tr>
+          <tr><td>Podatek</td><td>$182,31 mln</td><td style="color:var(--ocena-kupno)">Stawka <strong>18,52% — normalna</strong></td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-uwaga)">$822,34 mln</td><td style="color:var(--ocena-uwaga)">Ledwo powyżej zysku netto</td></tr>
+          <tr><td>Nakłady inwestycyjne</td><td style="color:var(--ocena-uwaga)">-$236,80 mln</td><td style="color:var(--ocena-uwaga)">7,2% przychodów</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-uwaga)"><strong>$585,54 mln</strong></td><td style="color:var(--ocena-uwaga)">17,89% — <strong>poniżej marży netto</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Rachunek wyników jest tu wzorowy i warto to docenić po serii spółek, w których trzeba było prostować każdą linię.</strong><br><br>Wynik operacyjny <strong>940,17 mln</strong> przechodzi w wynik przed opodatkowaniem <strong>984,26 mln</strong> — czyli <em>rośnie</em>, bo odsetki od 1,41 miliarda gotówki dodają, a nie odejmują. Stawka podatkowa wynosi <strong>18,52%</strong>, normalnie. Nie ma pozycji pozaoperacyjnych naciągających wynik, nie ma korzyści podatkowej zamiast obciążenia.<br><br>Marża brutto <strong>55,20%</strong> i operacyjna <strong>28,72%</strong> przy przychodzie 727 tysięcy dolarów na pracownika to ekonomika, jakiej nie ma żadna inna spółka analizowana w tym cyklu.</div>
+
+      <div class="alert alert-warning"><strong>Jedna rzecz wymaga jednak uwagi: wolne przepływy są niższe od zysku netto.</strong><br><br>Zysk netto <strong>801,95 mln</strong>, przepływy operacyjne <strong>822,34 mln</strong>, wolne przepływy <strong>585,54 mln</strong>. Przy amortyzacji zaledwie 60,12 mln przepływy operacyjne powinny wyraźnie przewyższać zysk — a przewyższają go tylko o 2,5%.<br><br>Przyczyna jest w kapitale obrotowym: <strong>rotacja zapasów wynosi 2,51</strong>, a przychody rosną o 47,6% rocznie. Spółka musi budować zapasy i finansować należności szybciej, niż inkasuje gotówkę. Do tego dochodzą nakłady inwestycyjne <strong>7,2% przychodów</strong>.<br><br><strong>To jest naturalny koszt szybkiego wzrostu, a nie sygnał ostrzegawczy</strong> — ale sprawia, że wycena liczona przepływami (cena/wolne przepływy 96,32) wygląda znacznie gorzej niż liczona zyskiem. Wracam do tego w sekcji 6.</div>
+
+      <p>Prognozy: wzrost przychodów <strong>+31,52% rocznie</strong> i wzrost zysku na akcję <strong>+31,95% rocznie</strong> przez trzy lata, według konsensusu siedemnastu analityków.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$56,40 mld</td><td style="color:var(--ocena-kupno)">Wartość przedsiębiorstwa $55,00 mld — gotówka netto</td></tr>
+          <tr><td><strong>Cena / zysk (TTM)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>70,01</strong></td><td style="color:var(--ocena-uwaga)">Liczone na przychodach o 41% niższych od bieżącego tempa</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-kupno)"><strong>35,82</strong></td><td style="color:var(--ocena-kupno)"><strong>Połowa historycznego</strong> — zysk ma się podwoić</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-kupno)"><strong>1,04</strong></td><td>Około 1,0 — wzrost wyceniony uczciwie</td></tr>
+          <tr><td>Cena / sprzedaż</td><td style="color:var(--ocena-sprzedaz)">17,23</td><td style="color:var(--ocena-uwaga)">Prognozowana <strong>11,78</strong>; EV/sprzedaż 16,80</td></tr>
+          <tr><td><strong>EV / EBITDA</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>54,99</strong></td><td style="color:var(--ocena-sprzedaz)">EV/EBIT 58,50 — drogo w ujęciu historycznym</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>96,32</strong></td><td style="color:var(--ocena-sprzedaz)">EV/FCF 93,93 — <strong>blisko progu stukrotności</strong></td></tr>
+          <tr><td>Cena / wartość księgowa</td><td style="color:var(--ocena-uwaga)">14,48</td><td>Do aktywów materialnych 14,61 — księga $79,27/akcję</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-kupno)"><strong>42,76</strong></td><td style="color:var(--ocena-kupno)">Ekstremalnie bezpiecznie. Piotroski 4</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Źródło: StockAnalysis / S&amp;P Global Market Intelligence, stan 17.09.2026. Cena $1 147,61 to zamknięcie sesji 16.09.2026 — zgodna z ceną $1 145 podaną przez użytkownika. Przeliczenie tempa bieżącego (ok. $4,6 mld) to obliczenie własne ze środka prognozy na III kwartał.</p>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td style="color:var(--ocena-sprzedaz)">70,01</td><td>Zysk na akcję <strong>$16,39</strong>, przychody TTM <strong>$3,27 mld</strong>. <strong>Zysk czysty</strong> — stawka podatkowa 18,52%, brak pozycji pozaoperacyjnych</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-kupno)"><strong>35,82</strong></td><td style="color:var(--ocena-kupno)">Implikuje zysk ok. <strong>$32/akcję</strong> — niemal dwukrotność dzisiejszych $16,39</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-kupno)"><strong>1,04</strong></td><td>&lt; 1,0 = wzrost tańszy niż mnożnik sugeruje. Tu <strong>równowaga</strong> — płacisz dokładnie za dynamikę</td></tr>
+          <tr><td>Prognoza wzrostu (3 lata)</td><td style="color:var(--ocena-kupno)">przychody <strong>+31,52%</strong> · zysk <strong>+31,95%</strong></td><td>Konsensus 17 analityków</td></tr>
+          <tr><td>Odniesienie sektorowe</td><td>półprzewodniki analogowe: ok. 25–35× forward</td><td style="color:var(--ocena-uwaga)">MPWR w górnej części — premia za wzrost 47%</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać — i to jest klucz do całej wyceny.</strong> Rozbieżność między P/E 70,01 a prognozowanym 35,82 nie jest błędem ani efektem zaburzonego zysku. Wynika z tego, że <strong>mianownik historyczny jest po prostu nieaktualny</strong>: przychody za dwanaście miesięcy to 3,27 miliarda, a prognoza na sam trzeci kwartał ($1,14–1,16 mld) daje tempo roczne około <strong>4,6 miliarda</strong>.</p>
+      <p>Przy wzroście o 47,6% rok do roku i 17% kwartał do kwartału <strong>każdy wskaźnik liczony wstecz zawyża wycenę</strong>. Uczciwszą miarą jest forward P/E 35,82 przy PEG 1,04 — czyli płacisz mniej więcej tyle, ile wynosi dynamika. <strong>To nie jest okazja, ale nie jest też przepłacenie.</strong></p>
+      <div class="alert alert-danger"><strong>Ostrzeżenia, których nie wolno pominąć — dwa.</strong><br><br><strong>Pierwsze: cena do wolnych przepływów wynosi 96,32</strong>, a wartość przedsiębiorstwa do wolnych przepływów 93,93. To praktycznie stukrotność — poziom, przy którym wycena opiera się na przyszłości, a nie na dzisiejszych przepływach. Powód jest zrozumiały (budowa zapasów i nakłady 7,2% przychodów przy wzroście 47%), ale liczba pozostaje liczbą.<br><br><strong>Drugie: pułapka cykliczna.</strong> Marża brutto 55,20% i wzrost 47,6% to poziomy szczytowe dla półprzewodników. Prognozowane P/E 35,82 <em>nie jest</em> niskie, więc rynek nie udaje, że te zyski są wieczne — ale przy powrocie marży do 48–50% i wzroście kilkunastoprocentowym dzisiejsza cena traci uzasadnienie.</div>
+
+      <h3>Cztery scenariusze na 12–18 miesięcy</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Założenie</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Prognoza dowieziona, gniazda utrzymane</strong></td><td>Zysk 2027 ok. $42/akcję, mnożnik 36×</td><td><strong>$1 500</strong></td><td style="color:var(--ocena-kupno)">+31%</td></tr>
+          <tr><td><strong>Stan bazowy</strong></td><td>Wzrost zgodny z konsensusem, mnożnik lekko się kompresuje</td><td><strong>$1 275</strong></td><td style="color:var(--ocena-kupno)">+11%</td></tr>
+          <tr><td>Kompresja mnożnika</td><td>Wyniki dobre, ale rynek przestaje płacić 36× zysk przyszły</td><td>$1 050</td><td style="color:var(--ocena-sprzedaz)">-9%</td></tr>
+          <tr><td><strong>Utrata gniazda u kluczowego klienta albo zwrot cyklu</strong></td><td>Enterprise Data hamuje, marża wraca ku 50%</td><td><strong>$800</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-30%</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Fair value: $1 050 – $1 500</strong>, środek $1 275 (+11%). Konsensus 17 analityków to <strong>$1 839,80 (+60,3%)</strong> przy rekomendacji „mocne kupno" — wyraźnie powyżej mojej górnej granicy, bo zakłada utrzymanie zarówno tempa wzrostu, jak i mnożnika.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Brutto</strong></td><td style="color:var(--ocena-kupno)"><strong>55,20%</strong></td><td style="color:var(--ocena-kupno)">Prognoza na Q3: <strong>55,2–55,8%</strong> — nadal rośnie</td></tr>
+          <tr><td><strong>Operacyjna</strong></td><td style="color:var(--ocena-kupno)"><strong>28,72%</strong></td><td style="color:var(--ocena-kupno)">EBITDA 30,56%</td></tr>
+          <tr><td>Przed opodatkowaniem</td><td style="color:var(--ocena-kupno)">30,07%</td><td style="color:var(--ocena-kupno)">Wyższa od operacyjnej — odsetki od gotówki</td></tr>
+          <tr><td>Netto</td><td style="color:var(--ocena-kupno)">24,50%</td><td>Po normalnym podatku 18,52%</td></tr>
+          <tr><td><strong>Wolnych przepływów</strong></td><td style="color:var(--ocena-uwaga)"><strong>17,89%</strong></td><td style="color:var(--ocena-uwaga)">Poniżej marży netto — kapitał obrotowy i nakłady</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Zwrot z kapitału — na tle spółek z tej serii</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Spółka</th><th>ROIC</th><th>WACC</th><th>Różnica</th></tr></thead>
+        <tbody>
+          <tr><td>Innodata <span style="color:var(--text-muted);font-size:12px">(spoza portfela)</span></td><td>122,90%</td><td>20,06%</td><td style="color:var(--ocena-kupno)">+102,84 pp <span style="font-size:11px">(mały kapitał)</span></td></tr>
+          <tr><td><strong>ASML</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,45%)</span></td><td>—</td><td>—</td><td style="color:var(--ocena-kupno)">ok. +54 pp</td></tr>
+          <tr><td>Western Digital <span style="color:var(--text-muted);font-size:12px">(spoza portfela)</span></td><td>52,90%</td><td>16,23%</td><td style="color:var(--ocena-kupno)">+36,67 pp</td></tr>
+          <tr><td>Vertiv <span style="color:var(--text-muted);font-size:12px">(spoza portfela)</span></td><td>37,58%</td><td>15,19%</td><td style="color:var(--ocena-kupno)">+22,39 pp</td></tr>
+          <tr><td><strong>Monolithic Power</strong> <span style="color:var(--text-muted);font-size:12px">(spoza portfela)</span></td><td style="color:var(--ocena-kupno)"><strong>31,71%</strong></td><td>13,40%</td><td style="color:var(--ocena-kupno)"><strong>+18,31 pp</strong></td></tr>
+          <tr><td><strong>Grab</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,53%)</span></td><td>5,86%</td><td>8,39%</td><td style="color:var(--ocena-sprzedaz)">-2,53 pp</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Różnica między zwrotem z kapitału a jego kosztem wynosi +18,31 punktu procentowego — solidnie, choć nie rekordowo.</strong> Ale warto zwrócić uwagę na coś innego: <strong>MPWR ma najniższy koszt kapitału w całym zestawieniu — 13,40%</strong>. To bezpośredni skutek zerowego zadłużenia i 1,41 miliarda gotówki w bilansie. Rynek wycenia ryzyko tej spółki niżej niż wszystkich pozostałych z tej listy.<br><br>Zwrot z kapitału własnego wynosi 21,98%, a z zaangażowanego 22,45% — czyli wskaźniki są spójne, bez efektu sztucznie małego mianownika, który zawyża wynik Innodaty.</div>
+
+      <div class="alert alert-warning"><strong>Anomalia warta wyjaśnienia: wskaźnik Piotroskiego wynosi tylko 4 na 9</strong>, mimo Altman Z-Score 42,76, marży brutto 55% i wzrostu 47%. To wygląda na sprzeczność, ale nią nie jest.<br><br>Piotroski karze między innymi za: <strong>wolne przepływy niższe od zysku netto</strong> (tu: 585 mln wobec 802 mln), <strong>spadającą rotację aktywów</strong> (0,76) i <strong>wzrost liczby akcji</strong> (+1,15%). Wszystkie trzy wynikają z tego samego — <strong>spółka rośnie tak szybko, że kapitał obrotowy i nakłady wyprzedzają wpływy</strong>.<br><br><strong>Niski wynik Piotroskiego opisuje tu koszt wzrostu, a nie słabość biznesu.</strong> Warto jednak pilnować, czy w kolejnych kwartałach przepływy dogonią zysk — jeśli nie, to znaczy, że wzrost jest droższy, niż wygląda.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — NAJMOCNIEJSZY W CAŁEJ SERII</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td style="color:var(--ocena-kupno)">$1,41 mld</td><td style="color:var(--ocena-kupno)">2,5% kapitalizacji</td></tr>
+          <tr><td><strong>Zadłużenie</strong></td><td style="color:var(--ocena-kupno)"><strong>$18,93 mln</strong></td><td style="color:var(--ocena-kupno)"><strong>Gotówka netto +$1,39 mld = $28,38/akcję</strong></td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-kupno)">0,00</td><td style="color:var(--ocena-kupno)">Dług/EBITDA 0,02 — praktycznie brak długu</td></tr>
+          <tr><td><strong>Wskaźnik bieżący</strong></td><td style="color:var(--ocena-kupno)"><strong>4,98</strong></td><td style="color:var(--ocena-kupno)">Szybki 3,53 — bardzo wysoka płynność</td></tr>
+          <tr><td>Kapitał obrotowy</td><td style="color:var(--ocena-kupno)">$1,98 mld</td><td>Duży bufor</td></tr>
+          <tr><td>Kapitał własny</td><td>$3,90 mld</td><td style="color:var(--ocena-uwaga)">Wartość księgowa <strong>$79,27/akcję</strong> wobec kursu $1 147,61</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-kupno)"><strong>42,76</strong></td><td style="color:var(--ocena-kupno)"><strong>Najwyższy, jaki widziałem</strong>. Piotroski 4</td></tr>
+          <tr><td>Zmiana liczby akcji</td><td style="color:var(--ocena-kupno)">+1,15% r/r, +0,04% kw/kw</td><td style="color:var(--ocena-kupno)">Minimalne rozwodnienie; skup do <strong>$1 mld</strong></td></tr>
+          <tr><td><strong>Dywidenda</strong></td><td style="color:var(--ocena-kupno)">$8,00 · 0,70%</td><td style="color:var(--ocena-kupno)">Wzrost <strong>+27,49%</strong>, <strong>8 lat z rzędu</strong>; wypłata 46,12%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Altman Z-Score 42,76 to najwyższa wartość, jaką pokazałem w całej tej serii — i to z ogromnym zapasem.</strong><br><br>Dla porównania: Vertiv 5,91, Innodata 8,02, Western Digital 13,24, a po drugiej stronie Plug Power -4,47 i Canopy Growth -12,79. Próg bezpieczeństwa to 3,0.<br><br>Powód jest prosty: <strong>zadłużenie wynosi 18,93 miliona dolarów</strong> przy gotówce 1,41 miliarda i kapitale obrotowym 1,98 miliarda. Wskaźnik zadłużenia do kapitału własnego to <strong>0,00</strong>. Ta spółka nie ma ryzyka finansowego w żadnej rozpoznawalnej postaci.</div>
+
+      <div class="alert alert-info"><strong>Polityka wobec akcjonariuszy jest rzadka w półprzewodnikach i warto ją odnotować osobno.</strong><br><br><strong>Ósmy rok z rzędu wzrostu dywidendy, ostatni o 27,49%</strong>, przy wskaźniku wypłaty zaledwie 46,12% — czyli jest przestrzeń na dalsze podwyżki. Do tego <strong>autoryzacja skupu rozszerzona do 1 miliarda dolarów</strong> przy rozwodnieniu 1,15% rocznie.<br><br>Spółka rosnąca o 47% rok do roku, która jednocześnie ósmy rok podnosi dywidendę i skupuje akcje, to połączenie, którego w tej serii nie spotkałem nigdzie indziej. <strong>Zwykle trzeba wybierać między wzrostem a zwrotem kapitału; tutaj nie trzeba.</strong></div>
+
+      <p><strong>Jedyne zastrzeżenie bilansowe:</strong> wartość księgowa to <strong>79,27 dolara na akcję</strong> przy kursie 1 147,61, czyli cena do wartości księgowej 14,48. Jak w każdej spółce projektującej układy, majątek jest znikomy w stosunku do wartości — cała wycena to strumień przyszłych zysków. <strong>Nie ma tu poduszki majątkowej</strong>, choć 28,38 dolara gotówki netto na akcję stanowi pewne dno.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Prognoza na III kwartał o 16,5% powyżej konsensusu.</strong> Przychody <strong>$1,14–1,16 mld</strong> wobec $980,6 mln w II kwartale — wzrost o 17% w jeden kwartał. Tempo roczne wynosi więc około <strong>$4,6 mld</strong> wobec 3,27 mld w danych historycznych. <strong>Wszystkie wskaźniki liczone wstecz zawyżają wycenę o ten dystans.</strong></div>
+
+      <div class="alert alert-success"><strong>2. Enterprise Data +164,3% rok do roku.</strong> $380,6 mln, 38,8% przychodów, wzrost o 44,8% w samym kwartale. Stosunek zamówień do sprzedaży powyżej 1 i ponad kwartał widoczności — spółka <strong>wygrywa obecne gniazda, a nie je traci</strong>.</div>
+
+      <div class="alert alert-success"><strong>3. Ekonomika najlepsza w całej tej serii.</strong> Marża brutto <strong>55,20%</strong> (prognoza 55,2–55,8%), operacyjna 28,72%, przychód na pracownika <strong>$727 207</strong> przy 4 501 osobach. Rachunek wyników czysty, stawka podatkowa 18,52%.</div>
+
+      <div class="alert alert-success"><strong>4. Bilans bez ryzyka finansowego.</strong> Altman Z-Score <strong>42,76</strong> — najwyższy, jaki pokazałem. Zadłużenie $18,93 mln, gotówka netto <strong>$28,38 na akcję</strong>, wskaźnik bieżący 4,98. Koszt kapitału 13,40%, najniższy w zestawieniu.</div>
+
+      <div class="alert alert-info"><strong>5. Kurs 33,3% poniżej szczytu, RSI 34,72.</strong> Szczyt 52-tygodniowy to $1 714,09; dziś $1 147,61. Kurs 12,3% pod średnią 50-sesyjną. <strong>W tym czasie nie pojawiły się żadne złe dane o spółce</strong> — przeceniono mnożnik, nie wyniki.</div>
+
+      <div class="alert alert-info"><strong>6. Wzrost i zwrot kapitału jednocześnie.</strong> Ósmy rok wzrostu dywidendy (ostatni +27,49%, wypłata tylko 46,12%), skup rozszerzony do <strong>$1 mld</strong>, rozwodnienie 1,15% rocznie. Do tego nowe linie — kontrolery DDR5 i układy 800 V — jako druga noga wzrostu.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Ryzyko gniazda u kluczowego klienta — skokowe, nie stopniowe.</strong> Enterprise Data to 38,8% przychodów wobec ok. 22% rok temu, a wątpliwości rynku dotyczą wprost <em>trwałości umów AI powiązanych z NVIDIĄ</em>. Ponieważ dostawca układu zasilania jest wybierany <strong>raz, na etapie projektowania</strong>, przegrana w jednej generacji wycina strumień przychodów na lata — bez możliwości nadrobienia w trakcie.</div>
+
+      <div class="alert alert-danger"><strong>2. Marża 55% i wzrost 47% to poziomy szczytowe dla półprzewodników.</strong> Branża historycznie ich nie utrzymuje przez pełny cykl. Powrót marży brutto do 48–50% przy wzroście kilkunastoprocentowym odbierałby dzisiejszej wycenie uzasadnienie — to scenariusz $800, czyli -30%.</div>
+
+      <div class="alert alert-danger"><strong>3. Cena do wolnych przepływów 96,32.</strong> Praktycznie stukrotność; EV/FCF 93,93. Wolne przepływy ($585,54 mln) są <strong>niższe od zysku netto</strong> ($801,95 mln), bo kapitał obrotowy i nakłady 7,2% przychodów zjadają gotówkę. Przy takim mnożniku wycena opiera się wyłącznie na przyszłości.</div>
+
+      <div class="alert alert-warning"><strong>4. Wskaźniki historyczne są wysokie nawet po korekcie.</strong> P/E 70,01, EV/EBITDA <strong>54,99</strong>, cena/sprzedaż 17,23, cena/wartość księgowa 14,48 przy księdze $79,27 na akcję. Nie ma tu żadnej poduszki majątkowej.</div>
+
+      <div class="warning-box"><strong>5. Instytucje mają 98,87% akcji — a to działa w obie strony.</strong> Praktycznie brak kapitału detalicznego oznacza, że <strong>gdy nastawienie się zmienia, zmienia się jednocześnie</strong>. Stąd spadek o 7,39% w jednej sesji 14 września. Beta 1,66, krótka sprzedaż rośnie z 1,84 do 2,00 mln akcji.</div>
+
+      <div class="alert alert-warning"><strong>6. Konsensus może być zbyt optymistyczny.</strong> Cel $1 839,80 (+60,3%) zakłada utrzymanie zarówno tempa wzrostu 31,5% rocznie, jak i wysokiego mnożnika. Wskaźnik Piotroskiego 4 przypomina, że wzrost kosztuje — przepływy nie nadążają za zyskiem.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Przewaga nad MPWR</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Texas Instruments</strong></td><td style="color:var(--ocena-sprzedaz)">Ogromna skala, własne fabryki, szerszy katalog analogowy</td><td>Wolniejszy w najnowszych architekturach zasilania AI</td></tr>
+          <tr><td><strong>Infineon</strong></td><td style="color:var(--ocena-sprzedaz)">Silna pozycja w mocy i motoryzacji, kompetencje w SiC</td><td>Niższa marża, wolniejszy cykl projektowy</td></tr>
+          <tr><td><strong>Renesas, ADI</strong></td><td>Szerokie portfolio, relacje z producentami płyt</td><td style="color:var(--ocena-kupno)">Słabsza pozycja w gęstym zasilaniu akceleratorów</td></tr>
+          <tr><td><strong>Zespoły wewnętrzne producentów platform</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Realne zagrożenie</strong> — projektowanie zasilania u siebie</td><td>Kosztowne, wymaga lat i zespołu analogowego</td></tr>
+          <tr><td><strong>Amphenol</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,25%)</span></td><td>Inne ogniwo łańcucha — złącza i okablowanie</td><td style="color:var(--ocena-kupno)">Nie konkurent; <strong>ta sama ekspozycja tematyczna</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Porównanie z Vertivem, którą analizowałem tydzień temu, jest tu najbardziej pouczające — bo obie grają ten sam temat z dwóch różnych miejsc.</strong><br><br>
+      <table style="width:100%;font-size:13px;margin-top:10px">
+      <tr><td style="padding:4px 8px"><strong>Miara</strong></td><td style="padding:4px 8px"><strong>Vertiv</strong></td><td style="padding:4px 8px"><strong>Monolithic Power</strong></td></tr>
+      <tr><td style="padding:4px 8px">ROIC − WACC</td><td style="padding:4px 8px">+22,39 pp</td><td style="padding:4px 8px">+18,31 pp</td></tr>
+      <tr><td style="padding:4px 8px">Marża brutto</td><td style="padding:4px 8px">38,04%</td><td style="padding:4px 8px;color:var(--ocena-kupno)"><strong>55,20%</strong></td></tr>
+      <tr><td style="padding:4px 8px">EV/EBITDA</td><td style="padding:4px 8px;color:var(--ocena-kupno)"><strong>36,03</strong></td><td style="padding:4px 8px">54,99</td></tr>
+      <tr><td style="padding:4px 8px">Marża wolnych przepływów</td><td style="padding:4px 8px;color:var(--ocena-kupno)"><strong>25,52%</strong></td><td style="padding:4px 8px">17,89%</td></tr>
+      <tr><td style="padding:4px 8px">Altman Z-Score</td><td style="padding:4px 8px">5,91</td><td style="padding:4px 8px;color:var(--ocena-kupno)"><strong>42,76</strong></td></tr>
+      </table>
+      <br><strong>Vertiv jest tańszy i lepiej zamienia zysk w gotówkę. Monolithic Power ma wyższą marżę i bilans bez porównania mocniejszy.</strong> Vertiv sprzedaje systemy do budynku, MPWR układy do płyty — pierwszy ma portfel zamówień na 15 miliardów, drugi decyzje projektowe zapadające raz na kilka lat. <strong>Obie są zakładem na te same nakłady operatorów centrów danych</strong>, więc dodanie obu nie dywersyfikuje tematu.</div>
+
+      <div class="alert alert-warning"><strong>Najpoważniejszy konkurent długoterminowy nie jest w tej tabeli firmą — jest nim klient.</strong> Producenci platform AI mają skalę, żeby zbudować własne zespoły projektujące zasilanie. Jest to kosztowne i wymaga lat pracy inżynierów analogowych, ale przy obecnej skali zakupów staje się policzalne. <strong>To ryzyko odległe, ale realne — i dokładnie dlatego nowe linie produktowe MPWR mają znaczenie większe, niż sugeruje ich dzisiejszy udział w przychodach.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zamknięcie 16.09.2026</td><td><strong>$1 147,61</strong></td><td style="color:var(--ocena-kupno)">+0,45%; po sesji $1 158,00 (+0,91%)</td></tr>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-kupno)">+35,06%</td><td style="color:var(--ocena-sprzedaz)"><strong>Ale -33,3% od szczytu $1 714,09</strong></td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td>$1 309,11</td><td style="color:var(--ocena-sprzedaz)">Kurs 12,3% poniżej</td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td>$1 260,94</td><td style="color:var(--ocena-uwaga)">Kurs 9,0% poniżej — <strong>ale 50-sesyjna nadal powyżej 200-sesyjnej</strong></td></tr>
+          <tr><td><strong>RSI (14)</strong></td><td style="color:var(--ocena-kupno)"><strong>34,72</strong></td><td style="color:var(--ocena-kupno)">Blisko wyprzedania (próg 30)</td></tr>
+          <tr><td>Beta (5 lat)</td><td style="color:var(--ocena-uwaga)">1,66</td><td>Zmienność wyraźnie wyższa od rynku</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>2,00 mln (4,07% akcji)</td><td style="color:var(--ocena-uwaga)">Wzrost z 1,84 mln; 2,90 dnia na zamknięcie</td></tr>
+          <tr><td>Średni wolumen</td><td>593 557 akcji</td><td>Przy 49,14 mln akcji — płynność umiarkowana</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Obraz techniczny jest tu korzystniejszy, niż wygląda na pierwszy rzut oka — i warto zobaczyć dlaczego.</strong><br><br>Kurs jest poniżej obu średnich, co zwykle oznacza trend spadkowy. Ale <strong>średnia 50-sesyjna ($1 309,11) nadal znajduje się powyżej 200-sesyjnej ($1 260,94)</strong> — czyli układ długoterminowy pozostaje wzrostowy, a to, co widzimy, jest korektą wewnątrz trendu, a nie jego odwróceniem.<br><br><strong>RSI 34,72 zbliża się do progu wyprzedania</strong>, a kurs stracił jedną trzecią od szczytu 1 714,09 dolara. Jednocześnie zmiana za pełne 52 tygodnie to wciąż <strong>+35,06%</strong>.<br><br>Warto pamiętać, co się w tym czasie nie zdarzyło: <strong>nie pojawiła się żadna negatywna informacja o spółce</strong>. Ostatnie dane — z 30 lipca — to rekordowy kwartał i prognoza o 16,5% powyżej konsensusu.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$1 260,94</strong></td><td>Średnia 200-sesyjna — pierwszy istotny opór</td></tr>
+          <tr><td><strong>$1 309,11</strong></td><td>Średnia 50-sesyjna — powrót powyżej zamknąłby korektę</td></tr>
+          <tr><td><strong>$1 714,09</strong></td><td>Szczyt 52-tygodniowy</td></tr>
+          <tr><td><strong>$1 839,80</strong></td><td>Konsensus 17 analityków</td></tr>
+          <tr><td><strong>$1 050 – $1 500</strong></td><td>Przedział wartości godziwej — kurs w dolnej części</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$1 050</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — dolna granica wartości godziwej</td></tr>
+          <tr><td><strong>$800</strong></td><td>Scenariusz utraty gniazda albo zwrotu cyklu</td></tr>
+          <tr><td><strong>$28,38</strong></td><td>Gotówka netto na akcję — 2,5% kursu</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Korekta trwa, kurs pod obiema średnimi, RSI 34,72 jeszcze nie w wyprzedaniu, sentyment wobec dostawców AI kruchy. Wyniki dopiero 29 października.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Prognoza na Q3 o 16,5% powyżej konsensusu, tempo roczne $4,6 mld wobec $3,27 mld w danych historycznych. Forward P/E 35,82 przy PEG 1,04 i bilansie bez długu.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Marża brutto 55%, koszt przełączenia wpisany w cykl projektowy, nowe linie DDR5 i 800 V, ósmy rok wzrostu dywidendy. Pod warunkiem utrzymania gniazd u producentów platform.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Ocena kupna opiera się na jednej obserwacji, którą łatwo przeoczyć patrząc na tabelę wskaźników.</strong><br><br>P/E 70,01, EV/EBITDA 54,99 i cena/sprzedaż 17,23 wyglądają na wycenę oderwaną od rzeczywistości. <strong>Ale wszystkie są liczone na przychodach za dwanaście miesięcy wynoszących 3,27 miliarda, podczas gdy prognoza na sam trzeci kwartał ($1,14–1,16 mld) daje tempo roczne około 4,6 miliarda.</strong><br><br>Spółka działa dziś o <strong>41% powyżej</strong> poziomu widocznego w danych historycznych — i właśnie dlatego prognozowane P/E (35,82) jest dokładnie połową historycznego. Przy PEG 1,04 płacisz mniej więcej tyle, ile wynosi dynamika.<br><br>Do tego dochodzi jakość, której nie ma żadna inna spółka w tej serii jednocześnie: <strong>marża brutto 55,20%, zerowe zadłużenie, Altman Z-Score 42,76, ósmy rok wzrostu dywidendy i skup do miliarda dolarów</strong>. A kurs jest <strong>33% poniżej szczytu, choć od lipca nie pojawiła się o spółce ani jedna zła wiadomość</strong>.</div>
+
+      <div class="alert alert-danger"><strong>Dwie rzeczy trzymają tę ocenę przy krótkiej smyczy i wyznaczają wielkość pozycji.</strong><br><br><strong>Pierwsza: ryzyko gniazda jest skokowe.</strong> Enterprise Data to 38,8% przychodów i rośnie o 164% rocznie, ale dostawca układu zasilania wybierany jest raz, na etapie projektowania płyty. Przegrana w jednej generacji nie obniża przychodów stopniowo — wycina je na kilka lat. Rynek wycenia dziś właśnie tę obawę.<br><br><strong>Druga: cena do wolnych przepływów wynosi 96,32.</strong> Wolne przepływy są niższe od zysku netto, bo wzrost o 47% pochłania kapitał obrotowy, a nakłady sięgają 7,2% przychodów. To zrozumiałe, ale przy takim mnożniku nie ma marginesu na rozczarowanie.</div>
+
+      <h3>Konkretnie</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Działanie</th><th>Szczegóły</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Sugerowana wielkość</strong></td><td><strong>2–2,5% portfela</strong> — ograniczona przez koncentrację tematyczną, nie przez jakość spółki</td></tr>
+          <tr><td><strong>Transza pierwsza</strong></td><td>Przy obecnych <strong>$1 147</strong> — jedna trzecia docelowej pozycji</td></tr>
+          <tr><td><strong>Transza druga</strong></td><td>Poniżej <strong>$1 050</strong> albo po wynikach z 29 października, jeśli prognoza na IV kwartał potwierdzi tempo</td></tr>
+          <tr><td><strong>Transza trzecia</strong></td><td>W okolicach <strong>$950</strong>, gdyby korekta się pogłębiła</td></tr>
+          <tr><td><strong>Realizacja zysku</strong></td><td>Powyżej <strong>$1 500</strong> — górna granica przedziału wartości godziwej</td></tr>
+          <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$1 050</strong></td></tr>
+          <tr><td><strong>Natychmiastowe wyjście z tezy</strong></td><td>Informacja o utracie gniazda u producenta platform AI, spadek marży brutto poniżej 52% albo obniżenie prognozy kwartalnej</td></tr>
+          <tr><td><strong>Kontekst portfelowy</strong></td><td>Temat AI to już ok. <strong>53,5%</strong> portfela — <strong>patrz sekcja 16</strong></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-kupno)">Trzy powody, żeby kupić</h3>
+          <ol>
+            <li><strong>Wskaźniki historyczne są nieaktualne.</strong> Prognoza na Q3 ($1,14–1,16 mld, 16,5% powyżej konsensusu) daje tempo roczne ~$4,6 mld wobec $3,27 mld w danych TTM. Stąd forward P/E 35,82 przy trailing 70,01 i PEG 1,04.</li>
+            <li><strong>Ekonomika i bilans najlepsze w serii.</strong> Marża brutto 55,20%, operacyjna 28,72%, zadłużenie $18,93 mln, <strong>Altman Z-Score 42,76</strong>, gotówka netto $28,38/akcję, ósmy rok wzrostu dywidendy, skup do $1 mld.</li>
+            <li><strong>Kurs 33% pod szczytem bez złych wiadomości.</strong> RSI 34,72, korekta wewnątrz trendu wzrostowego (50-sesyjna nadal nad 200-sesyjną). Ostatnie dane to rekordowy kwartał z 30 lipca.</li>
+          </ol>
+        </div>
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-sprzedaz)">Trzy powody do ostrożności</h3>
+          <ol>
+            <li><strong>Ryzyko gniazda jest skokowe, nie stopniowe.</strong> Enterprise Data to 38,8% przychodów (+164% r/r), a dostawca wybierany jest raz na cykl projektowy. Przegrana w jednej generacji wycina przychody na lata.</li>
+            <li><strong>Cena do wolnych przepływów 96,32.</strong> FCF ($585,54 mln) poniżej zysku netto ($801,95 mln) — wzrost zjada kapitał obrotowy, nakłady 7,2% przychodów.</li>
+            <li><strong>Marża 55% i wzrost 47% to szczyt cyklu.</strong> Powrót marży ku 48–50% odbiera wycenie uzasadnienie. EV/EBITDA 54,99, cena/księga 14,48, beta 1,66, instytucje 98,87% (sprzedają jednocześnie).</li>
+          </ol>
+        </div>
+      </div>
+      <div class="alert alert-success"><strong>Thesis-confirmer (co potwierdziłoby kupno):</strong> prognoza na IV kwartał utrzymująca tempo powyżej $1,15 mld, marża brutto powyżej 55%, przepływy operacyjne doganiające zysk netto, pierwsze istotne przychody z linii 800 V, powrót kursu powyżej średniej 200-sesyjnej ($1 260,94).</div>
+      <div class="alert alert-danger"><strong>Thesis-breaker:</strong> informacja o utracie gniazda u producenta platform AI, spadek marży brutto poniżej 52%, obniżenie prognozy kwartalnej, dalszy spadek udziału Enterprise Data albo kurs poniżej $1 050.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Monolithic Power to najlepsza jakościowo spółka, jaką opisywałem w tym cyklu — i właśnie przeceniona o jedną trzecią bez jednej złej wiadomości.</strong> Ostatnie dane pochodzą z 30 lipca: przychody kwartalne <strong>980,6 miliona dolarów, o 47,6% wyższe rok do roku</strong>, zysk na akcję 6,50 wobec oczekiwanych 5,88, segment Enterprise Data w górę o <strong>164,3%</strong>, a prognoza na trzeci kwartał — <strong>1,14–1,16 miliarda, czyli 16,5% powyżej konsensusu</strong>. Kurs wzrósł wtedy o 10,5%. Sześć tygodni później spadł o 7,39% w jednej sesji i znalazł się <strong>33% poniżej szczytu</strong>. W międzyczasie nie zmieniło się nic poza nastawieniem rynku do drogich spółek związanych ze sztuczną inteligencją.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Kluczem do wyceny jest to, że <strong>wskaźniki historyczne są po prostu nieaktualne</strong>. P/E 70,01 i EV/EBITDA 54,99 liczone są na przychodach 3,27 miliarda, a środek prognozy na trzeci kwartał daje tempo roczne <strong>około 4,6 miliarda — o 41% wyżej</strong>. Dlatego prognozowane P/E wynosi 35,82, czyli dokładnie połowę historycznego, a wskaźnik PEG 1,04 mówi, że płacisz mniej więcej tyle, ile wynosi dynamika. Do tego dochodzi ekonomika, której nie ma nikt inny w tej serii jednocześnie: <strong>marża brutto 55,20%, zadłużenie 18,93 miliona przy 1,41 miliarda gotówki, Altman Z-Score 42,76, ósmy rok wzrostu dywidendy i skup do miliarda dolarów.</strong> Ale trzeba wiedzieć, za co się nie płaci: <strong>cena do wolnych przepływów wynosi 96,32</strong>, a 38,8% przychodów zależy od gniazd u producentów platform AI — gdzie przegrana w jednej generacji wycina strumień na lata.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Wzrost musi być potwierdzony prognozą, nie tylko historią.</strong> Q3 guidance $1,14–1,16 mld, o 16,5% powyżej konsensusu, book-to-bill powyżej 1 — spełnione i to fundament oceny.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Ekonomika musi być pierwszorzędna.</strong> Marża brutto 55,20% (prognoza 55,2–55,8%), operacyjna 28,72%, rachunek wyników czysty, podatek 18,52% — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Bilans musi eliminować ryzyko finansowe.</strong> Altman Z 42,76, dług $18,93 mln, gotówka netto $28,38/akcję, wskaźnik bieżący 4,98 — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Przepływy muszą nadążać za zyskiem.</strong> FCF $585,54 mln wobec zysku netto $801,95 mln; cena/FCF 96,32 — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Gniazda u producentów platform muszą zostać utrzymane.</strong> Enterprise Data 38,8% przychodów i rośnie — dziś spółka wygrywa, ale ryzyko dotyczy następnej generacji.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Marże muszą przetrwać zwrot cyklu.</strong> 55% brutto i 47% wzrostu to poziomy szczytowe dla półprzewodników.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>30 września 2026</strong></td><td>Dzień bez dywidendy ($8,00 rocznie)</td><td>Stopa 0,70%; ósmy rok wzrostu, ostatni +27,49%</td></tr>
+            <tr><td style="color:var(--ocena-kupno)"><strong>29 października 2026</strong></td><td style="color:var(--ocena-kupno)"><strong>Wyniki za III kwartał</strong></td><td style="color:var(--ocena-kupno)">Test prognozy $1,14–1,16 mld i marży 55,2–55,8%</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">Na bieżąco</td><td style="color:var(--ocena-sprzedaz)"><strong>Doniesienia o gniazdach u producentów platform AI</strong></td><td style="color:var(--ocena-sprzedaz)">Jedyne ryzyko mogące wywrócić tezę</td></tr>
+            <tr><td>Na bieżąco</td><td>Realizacja skupu za $1 mld</td><td>Przy rozwodnieniu 1,15% rocznie realnie zmniejsza liczbę akcji</td></tr>
+            <tr><td>2027</td><td>Pierwsze istotne przychody z linii 800 V i DDR5</td><td style="color:var(--ocena-kupno)">Druga noga wzrostu, rozkłada ryzyko gniazda</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Marża brutto</strong></td><td>55,20%, prognoza 55,2–55,8%</td><td>spadek poniżej 52%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Przychody kwartalne</strong></td><td>$980,6 mln, prognoza $1,14–1,16 mld</td><td>wynik poniżej prognozy</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Udział Enterprise Data</strong></td><td>38,8% (+164,3% r/r)</td><td>spadek kw/kw</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Przepływy operacyjne vs zysk netto</strong></td><td>$822,34 mln vs $801,95 mln</td><td>dalsze rozjeżdżanie się</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Kurs akcji</strong></td><td>$1 147,61</td><td>spadek poniżej $1 050</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td><strong>Krótka sprzedaż</strong></td><td>2,00 mln (z 1,84 mln)</td><td>wzrost powyżej 6% akcji</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Wielkość docelowa</strong></td><td><strong>2–2,5% portfela</strong> — ograniczona koncentracją tematyczną, nie jakością spółki</td></tr>
+            <tr><td><strong>Transza pierwsza</strong></td><td>Przy <strong>$1 147</strong> — jedna trzecia pozycji</td></tr>
+            <tr><td><strong>Transza druga</strong></td><td>Poniżej <strong>$1 050</strong> albo po wynikach z 29 października</td></tr>
+            <tr><td><strong>Transza trzecia</strong></td><td>W okolicach <strong>$950</strong> przy pogłębieniu korekty</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Powyżej <strong>$1 500</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$1 050</strong></td></tr>
+            <tr><td><strong>Warunek wyjścia</strong></td><td>Utrata gniazda u producenta platform AI, marża brutto poniżej 52% albo obniżenie prognozy</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">KUPNO</div>
+        <p>Kupuję tu rozbieżność między tym, co pokazują wskaźniki historyczne, a tym, w jakim tempie spółka faktycznie działa. P/E 70,01 i EV/EBITDA 54,99 liczone są na przychodach 3,27 miliarda dolarów, podczas gdy prognoza na sam trzeci kwartał — <strong>1,14–1,16 miliarda, o 16,5% powyżej konsensusu</strong> — daje tempo roczne około <strong>4,6 miliarda</strong>. Stąd prognozowane P/E 35,82, czyli połowa historycznego, przy wskaźniku PEG 1,04. Pod spodem stoi ekonomika, której nie ma jednocześnie żadna inna spółka z tej serii: <strong>marża brutto 55,20%, operacyjna 28,72%, zadłużenie 18,93 miliona przy 1,41 miliarda gotówki, Altman Z-Score 42,76 — najwyższy, jaki pokazałem — ósmy rok wzrostu dywidendy i skup rozszerzony do miliarda dolarów.</strong> A kurs jest 33% poniżej szczytu, choć od lipcowego rekordowego kwartału nie pojawiła się o spółce ani jedna zła wiadomość.</p>
+        <p>Ale to nie jest ocena bezwarunkowa i wielkość pozycji ma to odzwierciedlać. <strong>Segment Enterprise Data odpowiada za 38,8% przychodów i rośnie o 164% rocznie — a układ zasilania wybierany jest raz, na etapie projektowania płyty.</strong> Oznacza to, że ryzyko nie jest stopniowe, lecz skokowe: przegrana w jednej generacji sprzętu wycina strumień przychodów na kilka lat, bez możliwości nadrobienia. Dokładnie tę obawę rynek dziś wycenia. Do tego <strong>cena do wolnych przepływów wynosi 96,32</strong>, bo wzrost o 47% pochłania kapitał obrotowy, a marża brutto 55% i takie tempo to poziomy szczytowe dla półprzewodników. <strong>Wchodzić w trzech transzach, docelowo 2–2,5% portfela — i przeczytać uważnie raport z 29 października.</strong></p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-kupno)">Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$1 050 – $1 500</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$800 (-30%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$1 500 (+31%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>2–2,5% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 29 października</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KONTEKST PORTFELOWY</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="alert alert-danger"><strong>MPWR jest spoza portfela, ale trafia dokładnie tam, gdzie masz już najwięcej.</strong> Temat sztucznej inteligencji odpowiada za około <strong>53,5%</strong> Twojego portfela, a półprzewodniki za <strong>37%</strong>. Dodanie kolejnej spółki półprzewodnikowej zależnej od nakładów operatorów centrów danych <strong>nie dywersyfikuje ryzyka — zagęszcza je</strong>.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Waga</th><th>Rola w łańcuchu AI</th></tr></thead>
+        <tbody>
+          <tr><td><strong>AMD</strong></td><td>16,93%</td><td style="color:var(--ocena-sprzedaz)">Akceleratory — <strong>klient MPWR w tej samej warstwie</strong></td></tr>
+          <tr><td><strong>ServiceNow</strong></td><td>13,42%</td><td>Oprogramowanie korzystające z AI</td></tr>
+          <tr><td><strong>Oracle</strong></td><td>5,08%</td><td>Chmura i centra danych</td></tr>
+          <tr><td><strong>Intel</strong></td><td>4,94%</td><td style="color:var(--ocena-uwaga)">Półprzewodniki</td></tr>
+          <tr><td><strong>CoreWeave</strong></td><td>3,72%</td><td>Operator infrastruktury AI</td></tr>
+          <tr><td><strong>Marvell</strong></td><td>3,37%</td><td style="color:var(--ocena-sprzedaz)">Układy sieciowe — <strong>najbliższy odpowiednik</strong></td></tr>
+          <tr><td><strong>Caterpillar</strong></td><td>2,87%</td><td>Generatory dla centrów danych</td></tr>
+          <tr><td><strong>ASML</strong></td><td>2,45%</td><td>Litografia — warstwa wyżej</td></tr>
+          <tr><td><strong>Amphenol</strong></td><td>2,25%</td><td style="color:var(--ocena-sprzedaz)">Złącza i okablowanie — sąsiednie ogniwo</td></tr>
+          <tr><td><strong>IREN</strong></td><td>2,23%</td><td>Centra danych</td></tr>
+          <tr><td style="color:var(--text-muted)">Monolithic Power <span style="font-size:11px">(spoza portfela)</span></td><td style="color:var(--text-muted)">—</td><td style="color:var(--ocena-sprzedaz)"><strong>Zasilanie akceleratorów</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Zwróć uwagę na pierwszy wiersz, bo to nie jest zwykłe nałożenie ekspozycji.</strong><br><br><strong>AMD to 16,93% Twojego portfela — i jednocześnie producent platform akceleratorowych, czyli dokładnie ta warstwa, od której zależy segment Enterprise Data MPWR.</strong> Kupując MPWR, obstawiasz to samo zdarzenie z dwóch stron: raz jako właściciel producenta układów obliczeniowych, drugi raz jako właściciel dostawcy ich zasilania.<br><br>Jeśli nakłady na akceleratory AI wyhamują, obie pozycje spadną razem — i pociągną za sobą Marvella, Amphenola, CoreWeave i Oracle'a. <strong>To jest ryzyko skorelowane, nie rozproszone.</strong></div>
+
+      <div class="alert alert-info"><strong>Trzy warianty, gdybyś chciał tę ekspozycję dodać.</strong><br><br>
+      <strong>1. Zamiana zamiast dodania.</strong> W tej samej warstwie łańcucha masz już <strong>Amphenol (2,25%)</strong> i wcześniej analizowany <strong>Vertiv</strong>. MPWR ma wyższą marżę brutto (55,20% wobec 38,04% u Vertiva) i znacznie mocniejszy bilans (Altman Z 42,76 wobec 5,91), ale jest droższy w ujęciu EV/EBITDA (54,99 wobec 36,03) i gorzej zamienia zysk w gotówkę.<br><br>
+      <strong>2. Mniejsza pozycja.</strong> 1,5% zamiast sugerowanych 2–2,5%, ze świadomością, że temat jest przeważony.<br><br>
+      <strong>3. Odłożenie do 29 października.</strong> Wyniki za trzeci kwartał rozstrzygną dwie rzeczy naraz: czy prognoza $1,14–1,16 mld została dowieziona i czy przepływy zaczęły doganiać zysk. <strong>Przy trwającej korekcie i RSI 34,72 czekanie niewiele kosztuje.</strong></div>
+
+      <div class="alert alert-warning"><strong>Zastrzeżenie metodologiczne:</strong> wagi pochodzą z eksportu rachunku z <strong>25 sierpnia 2026</strong> i od tego czasu zmieniły się wraz z kursami — a od tamtej pory rynek AI wyraźnie się cofnął. Udziały tematów (53,5% dla AI, 37% dla półprzewodników) to wartości z widoku portfela, oparte na przypisaniu tematycznym, a nie pojedyncze pozycje. <strong>Przed decyzją warto odświeżyć eksport.</strong></div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 września 2026 | Cena: <strong>$1 147,61</strong> — zamknięcie sesji 16.09.2026 (+0,45%), zgodne z ceną $1 145 podaną przez użytkownika | Pierwsza analiza MPWR — spółka spoza portfela | Dane: StockAnalysis / S&amp;P Global Market Intelligence, komunikaty Monolithic Power Systems IR i zgłoszenia SEC (wyniki II kwartału 2026 z 30.07.2026, formularz 8-K, rozszerzenie skupu akcji), doniesienia prasowe o wrześniowej przecenie w sektorze dostawców AI — <strong>stan danych na 17.09.2026</strong>. Przeliczenie tempa bieżącego (ok. $4,6 mld) ze środka prognozy na III kwartał oraz wagi portfelowe z eksportu z 25.08.2026 to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

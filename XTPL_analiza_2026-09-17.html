@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XTPL — XTPL S.A. | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">GPW: XTP</div>
+    <div class="company-name">XTPL S.A.</div>
+    <div class="company-sub">Ultraprecyzyjny druk nanomateriałów · Wrocław · 51 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">Spoza portfela — pierwsza analiza</span>
+      <span class="meta-tag">Wysoce spekulacyjna</span>
+      <span class="meta-tag">Emisja po 65 zł</span>
+      <span class="meta-tag">Skrajnie niska płynność</span>
+      <div class="price-display">
+        <div class="price-main">79,00 zł</div>
+        <div class="price-sub">cena podana przez Ciebie | <strong>dane ze źródła są nieaktualne — patrz sekcja 1</strong></div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Półprzewodniki</span><span class="temat">Nanotechnologia</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-sprzedaz" data-ocena="SPRZEDAŻ — inwestor strategiczny z Tajwanu kupuje nowe akcje po 65 zł, czyli 17,7% poniżej ceny rynkowej, a przychody II kwartału spadły o 85%">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">SPRZEDAŻ</span><span class="rb-qual">najlepiej poinformowany kupujący płaci 17,7% mniej niż Ty</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>45 – 75 zł</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-sprzedaz)">-43% do -5%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Wyniki</span><b>28 września 2026</b><em>Walne w sprawie emisji — 29 września</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Cena emisji</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena (podana przez Ciebie)</div><div class="metric-value">79,00 zł</div><div class="metric-detail">Zakres 52 tyg. 54,00–87,60 zł</div></div>
+    <div class="metric-card"><div class="metric-label">Cena nowej emisji</div><div class="metric-value red">65,00 zł</div><div class="metric-detail"><strong>17,7% poniżej rynku</strong> — inwestor z Tajwanu</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody II kw. 2026</div><div class="metric-value red">0,3 mln zł</div><div class="metric-detail"><strong>Rok wcześniej 2,0 mln — spadek o 85%</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Marża brutto</div><div class="metric-value red">-8,82%</div><div class="metric-detail">Ujemna — strata już na poziomie sprzedaży</div></div>
+    <div class="metric-card"><div class="metric-label">Gotówka</div><div class="metric-value red">2,10 mln zł</div><div class="metric-detail"><strong>Przy wypalaniu 34,95 mln rocznie</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Strata na akcję</div><div class="metric-value red">-8,07 zł</div><div class="metric-detail">Przepływy -13,60 zł/akcję = 17% kursu</div></div>
+    <div class="metric-card"><div class="metric-label">Średni wolumen</div><div class="metric-value red">3 476 akcji</div><div class="metric-detail">Ok. 275 tys. zł dziennie · free float 1,57 mln</div></div>
+    <div class="metric-card"><div class="metric-label">Pokrycie analityczne</div><div class="metric-value red">brak</div><div class="metric-detail">Zero analityków, brak ceny docelowej</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <div class="alert alert-danger"><strong>Zastrzeżenie o jakości danych — ważniejsze tu niż w którejkolwiek poprzedniej analizie.</strong><br><br>
+      Strona ze wskaźnikami dla XTPL została ostatnio zaktualizowana <strong>22 lipca 2026</strong>, a widok podstawowy <strong>4 września</strong>. Dziś jest 17 września. <strong>Wszystkie mnożniki (P/S, P/B, EV/Sales, kapitalizacja) policzono przy kursie 72,70 zł</strong>, czyli o 8% niższym od podanego przez Ciebie.<br><br>
+      Dlatego: <strong>kurs biorę z Twojej wiadomości (79 zł)</strong>, dane finansowe z ostatnich dwunastu miesięcy traktuję jako aktualne (bo pochodzą ze sprawozdań), a <strong>mnożniki przeliczam samodzielnie</strong> i zaznaczam to przy każdej liczbie. Braki nadrobiłem komunikatami spółki z sierpnia i września.</div>
+
+      <p><strong>XTPL jest spoza portfela</strong> — to pierwsza analiza tej spółki i pierwsza spółka z GPW w całym katalogu.</p>
+
+      <p>XTPL S.A. z Wrocławia, założona w 2015 roku, rozwija <strong>technologię ultraprecyzyjnego druku nanomateriałów</strong> — drukarki laboratoryjne Delta, nanotusze i usługi badawcze. Zatrudnia <strong>51 osób</strong>. Przychody za dwanaście miesięcy <strong>14,83 mln zł</strong>, kapitalizacja przy 79 zł wynosi około <strong>203 mln zł</strong> (przeliczenie własne).</p>
+
+      <h3>Co się wydarzyło w ostatnich tygodniach</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--ocena-kupno)">Lipiec 2026</td><td style="color:var(--ocena-kupno)"><strong>Zamówienie ramowe na 10 modułów UPD</strong> w technologii wyświetlaczy (FPD) — kontynuacja pierwszego wdrożenia przemysłowego XTPL w Chinach</td><td style="color:var(--ocena-kupno)">Realne, pierwszy przemysłowy klient</td></tr>
+          <tr><td style="color:var(--ocena-kupno)">2026</td><td style="color:var(--ocena-kupno)">Umowa z NCBiR — projekt o wartości <strong>18,29 mln zł</strong>, rekomendowane dofinansowanie <strong>10,1 mln zł</strong></td><td style="color:var(--ocena-kupno)">Pieniądze bez rozwodnienia</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)">II kw. 2026</td><td style="color:var(--ocena-sprzedaz)"><strong>Szacunkowe przychody 0,3 mln zł</strong> wobec 2,0 mln rok wcześniej</td><td style="color:var(--ocena-sprzedaz)"><strong>Spadek o 85%</strong></td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)">Wrzesień 2026</td><td style="color:var(--ocena-sprzedaz)"><strong>Emisja 198 462 akcji serii Z po 65,00 zł</strong> dla jednego inwestora z Tajwanu — pozyskanie <strong>12,9 mln zł</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>17,7% poniżej rynku</strong></td></tr>
+          <tr><td><strong>28 września 2026</strong></td><td><strong>Publikacja wyników</strong></td><td>Za 11 dni</td></tr>
+          <tr><td><strong>29 września 2026</strong></td><td><strong>Nadzwyczajne Walne Zgromadzenie</strong> w sprawie podwyższenia kapitału</td><td>Za 12 dni</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Dwa wiersze z tej tabeli rozstrzygają całą ocenę i chcę je postawić obok siebie od razu.</strong><br><br>
+      <strong>Pierwszy: przychody drugiego kwartału wyniosły 0,3 miliona złotych wobec 2,0 miliona rok wcześniej.</strong> To spadek o <strong>85%</strong>. Dla spółki wycenianej na ponad 200 milionów złotych kwartał ze sprzedażą trzystu tysięcy złotych to nie jest wahnięcie — to zatrzymanie sprzedaży.<br><br>
+      <strong>Drugi: inwestor strategiczny z Tajwanu, mający doświadczenie w półprzewodnikach, obejmuje nowe akcje po 65 złotych — gdy rynek płaci 79.</strong> To jest cena wynegocjowana przez podmiot, który miał dostęp do ksiąg i do zarządu. <strong>Najlepiej poinformowany kupujący na tym rynku płaci o 17,7% mniej, niż zapłaciłbyś Ty.</strong><br><br>
+      Rozwijam to w sekcji 16, bo uważam za najmocniejszy pojedynczy argument w tej analizie.</div>
+
+      <div class="alert alert-warning"><strong>Uczciwie po drugiej stronie — i to nie jest drobiazg.</strong> Ten sam inwestor to <strong>podmiot z Tajwanu z doświadczeniem w inwestycjach półprzewodnikowych</strong>, a nie fundusz szukający okazji. Jego wejście oznacza, że ktoś z branży uznał technologię za wartą pieniędzy i własnego czasu. W połączeniu z zamówieniem na 10 modułów UPD z Chin daje to <strong>pierwszą realną walidację przemysłową po dziesięciu latach istnienia spółki</strong>.<br><br>Pytanie nie brzmi więc „czy technologia działa", tylko „ile jest warta dzisiaj i kto zapłaci za drogę do jej komercjalizacji".</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — TECHNOLOGIA, KTÓRA DZIAŁA, ALE NIE SPRZEDAJE SIĘ SAMA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Element</th><th>Czym jest</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Moduły UPD</strong></td><td>Głowice do ultraprecyzyjnego druku nanomateriałów, wbudowywane w linie produkcyjne klienta</td><td style="color:var(--ocena-kupno)"><strong>Zamówienie ramowe na 10 sztuk — Chiny, FPD</strong></td></tr>
+          <tr><td>Drukarki laboratoryjne Delta</td><td>Systemy badawcze dla uczelni i działów R&amp;D</td><td>Sprzedaż jednostkowa, nieregularna</td></tr>
+          <tr><td>Nanotusze i materiały eksploatacyjne</td><td>Powtarzalny przychód po wdrożeniu</td><td style="color:var(--ocena-uwaga)">Docelowo najważniejszy — dziś marginalny</td></tr>
+          <tr><td>Usługi badawcze</td><td>Druk na podłożach dostarczonych przez klienta</td><td>Uzupełniające</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Model docelowy jest sensowny i warto go zrozumieć, bo to on uzasadnia jakąkolwiek wycenę tej spółki.</strong><br><br>XTPL nie chce zarabiać na sprzedaży drukarek. Chce, żeby producenci wyświetlaczy i półprzewodników <strong>wbudowali moduły UPD w swoje linie produkcyjne</strong>, a potem przez lata kupowali nanotusze. To model „maszynka do golenia i żyletki": urządzenie sprzedajesz raz, materiał eksploatacyjny co miesiąc.<br><br>Zamówienie ramowe na <strong>10 modułów UPD</strong> w ramach pierwszego wdrożenia przemysłowego w Chinach jest pierwszym realnym krokiem w tę stronę. Jeśli te moduły wejdą do produkcji seryjnej, pojawi się powtarzalny strumień przychodu z materiałów.</div>
+
+      <div class="alert alert-danger"><strong>Ale dziesięć lat po założeniu spółka nadal nie ma z tego przychodów — i to jest sedno problemu.</strong><br><br>Przychody za dwanaście miesięcy to <strong>14,83 mln zł</strong>, a <strong>marża brutto wynosi minus 8,82%</strong>. To znaczy, że <em>koszt wytworzenia tego, co XTPL sprzedaje, przewyższa cenę sprzedaży</em>. Spółka nie zarabia na sprzedaży — dopłaca do niej, zanim jeszcze zapłaci komukolwiek pensję.<br><br>Przy takiej marży <strong>wzrost sprzedaży pogłębia stratę</strong>. Model żyletkowy zacznie działać dopiero wtedy, gdy materiały eksploatacyjne będą sprzedawane w skali dającej dodatnią marżę — a do tego potrzeba wdrożeń przemysłowych, których jest dziś jedno.</div>
+
+      <p><strong>Fosa technologiczna prawdopodobnie istnieje</strong> — druk struktur o szerokości pojedynczych mikrometrów jest trudny i XTPL ma w tym patenty. Ale fosa technologiczna bez sprzedaży to koszt, nie aktywo. <strong>Wejście inwestora z Tajwanu jest najmocniejszym dowodem, że technologia ma wartość dla kogoś z branży</strong> — i jednocześnie, poprzez cenę 65 zł, wskazówką, ile ta wartość wynosi.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na XTPL</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Wyświetlacze (FPD)</strong></td><td style="color:var(--ocena-kupno)">Pierwsze wdrożenie przemysłowe w Chinach</td><td style="color:var(--ocena-kupno)">Najbliższy realnej komercjalizacji</td></tr>
+          <tr><td><strong>Zaawansowane pakowanie półprzewodników</strong></td><td style="color:var(--ocena-uwaga)">Rynek rośnie wraz z AI</td><td style="color:var(--ocena-uwaga)">Potencjał duży, obecność minimalna</td></tr>
+          <tr><td>Naprawa obwodów i mikroelektronika</td><td>Nisze specjalistyczne</td><td>Sprzedaż jednostkowa</td></tr>
+          <tr><td><strong>Finansowanie publiczne</strong></td><td style="color:var(--ocena-kupno)">NCBiR: projekt 18,29 mln zł, dofinansowanie <strong>10,1 mln zł</strong></td><td style="color:var(--ocena-kupno)">Pieniądze bez rozwodnienia akcjonariuszy</td></tr>
+          <tr><td><strong>Dostęp do kapitału na GPW</strong></td><td style="color:var(--ocena-sprzedaz)">Emisje prywatne z dyskontem</td><td style="color:var(--ocena-sprzedaz)">Seria X: 27,6 mln zł; seria Z: 12,9 mln po 65 zł</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Rynek docelowy jest duży i realny — to nie jest spółka bez sensownego adresata.</strong><br><br>Zaawansowane pakowanie półprzewodników i produkcja wyświetlaczy to obszary, gdzie precyzja druku poniżej dziesięciu mikrometrów ma wymierną wartość. Rosną razem ze sztuczną inteligencją, bo gęstsze upakowanie układów wymaga cieńszych połączeń.<br><br>Problem nie leży więc w rynku, lecz w <strong>czasie potrzebnym na kwalifikację</strong>. Producent wyświetlaczy albo pakowni półprzewodników testuje nową technologię latami, zanim wpuści ją na linię produkcyjną. <strong>XTPL jest dziś po pierwszej takiej kwalifikacji — i to zajęło dziesięć lat.</strong></div>
+
+      <div class="alert alert-warning"><strong>Dofinansowanie z NCBiR zasługuje na uwagę, bo jest jedynym źródłem pieniędzy, które nie rozwadnia akcjonariuszy.</strong> Rekomendowane <strong>10,1 mln zł</strong> przy projekcie wartym 18,29 mln to realne wsparcie — zbliżone wielkością do całej emisji dla inwestora z Tajwanu (12,9 mln).<br><br>Ale trzeba pamiętać o dwóch rzeczach: <strong>dotacje wypłacane są w transzach po rozliczeniu etapów</strong>, więc nie rozwiązują problemu gotówki tu i teraz, oraz <strong>finansują projekt badawczy, a nie bieżącą działalność</strong>. Nie zastąpią przychodów.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I STRUKTURA WŁAŚCICIELSKA</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody II kw. 2026</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>0,3 mln zł</strong></td><td style="color:var(--ocena-sprzedaz)">Rok wcześniej 2,0 mln — <strong>spadek o 85%</strong></td></tr>
+          <tr><td>Przychody za 12 miesięcy</td><td>14,83 mln zł</td><td>Rok 2025: 15,61 mln (+13,89%)</td></tr>
+          <tr><td>Przychód na pracownika</td><td>290 843 zł</td><td style="color:var(--ocena-sprzedaz)">Strata na pracownika <strong>-431 098 zł</strong></td></tr>
+          <tr><td><strong>Udziałowcy wewnętrzni</strong></td><td style="color:var(--ocena-kupno)"><strong>13,27%</strong></td><td style="color:var(--ocena-kupno)">Wysoko — najwyżej od Fermi i Paramount w tej serii</td></tr>
+          <tr><td>Instytucje</td><td style="color:var(--ocena-uwaga)">24,15%</td><td>Niewiele jak na spółkę publiczną</td></tr>
+          <tr><td><strong>Free float</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>1,57 mln akcji</strong> z 2,57 mln</td><td style="color:var(--ocena-sprzedaz)">Przy 79 zł to ok. 124 mln zł w wolnym obrocie</td></tr>
+          <tr><td><strong>Pokrycie analityczne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>brak</strong></td><td style="color:var(--ocena-sprzedaz)">Zero analityków, brak ceny docelowej</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Spadek przychodów o 85% w jednym kwartale wymaga postawienia sprawy wprost.</strong><br><br>Trzysta tysięcy złotych przychodu w kwartale, przy kapitalizacji ponad 200 milionów, oznacza <strong>mnożnik liczony w setkach</strong>, jeśli policzyć go od bieżącego tempa. Roczne przychody 14,83 mln pochodzą z wcześniejszych, lepszych kwartałów.<br><br>Model XTPL jest z natury nieregularny — sprzedaż pojedynczego modułu albo drukarki potrafi zrobić cały kwartał. <strong>Ale to działa w obie strony: nieregularność nie tłumaczy, dlaczego akurat teraz sprzedaż praktycznie zniknęła</strong>, i nie zmienia faktu, że spółka pali gotówkę niezależnie od tego, czy sprzedaje.<br><br>Wyniki z <strong>28 września</strong> pokażą, czy to było jednorazowe przesunięcie, czy początek trendu. <strong>To jest data, przed którą nie podejmowałbym żadnej decyzji.</strong></div>
+
+      <div class="alert alert-success"><strong>Element pozytywny: udziałowcy wewnętrzni trzymają 13,27% akcji.</strong> To znacznie więcej niż w większości spółek z tej serii — Vertiv 0,19%, Canopy Growth 0,10%, Monolithic Power 3,53%. Zarząd i założyciele mają tu realny majątek związany z kursem.<br><br>Warto jednak zestawić to z faktem, że <strong>kolejne emisje przeprowadzane są z dyskontem</strong> — najpierw seria X za 27,6 mln zł, teraz seria Z po 65 zł. Przy każdej z nich udział dotychczasowych akcjonariuszy, także wewnętrznych, maleje.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZYCHODY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th><th>Marża</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody</strong></td><td><strong>14,83 mln zł</strong></td><td>2025: 15,61 mln (+13,89%)</td></tr>
+          <tr><td><strong>Zysk brutto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-1,31 mln zł</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-8,82% — ujemna</strong></td></tr>
+          <tr><td>Wynik operacyjny</td><td style="color:var(--ocena-sprzedaz)">-20,68 mln zł</td><td style="color:var(--ocena-sprzedaz)">-139,45%</td></tr>
+          <tr><td>EBITDA</td><td style="color:var(--ocena-sprzedaz)">-16,00 mln zł</td><td style="color:var(--ocena-sprzedaz)">-107,84%</td></tr>
+          <tr><td><strong>Wynik netto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-21,99 mln zł</strong></td><td style="color:var(--ocena-sprzedaz)">-148,22% · <strong>-8,07 zł/akcję</strong></td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-sprzedaz)">-33,85 mln zł</td><td>Amortyzacja 4,69 mln</td></tr>
+          <tr><td>Nakłady inwestycyjne</td><td>-1,10 mln zł</td><td>7,4% przychodów</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-34,95 mln zł</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-13,60 zł/akcję</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Trzy liczby z tej tabeli warto zestawić z ceną akcji, bo dopiero wtedy widać skalę.</strong><br><br>
+      <strong>Strata na akcję: -8,07 zł.</strong> Przy kursie 79 zł spółka traci rocznie równowartość <strong>10,2% ceny akcji</strong>.<br>
+      <strong>Wolne przepływy na akcję: -13,60 zł.</strong> W gotówce jest jeszcze gorzej — spalane jest <strong>17,2% ceny akcji rocznie</strong>.<br>
+      <strong>Marża brutto: -8,82%.</strong> Strata powstaje już na poziomie sprzedaży, przed jakimkolwiek kosztem operacyjnym.<br><br>
+      Innymi słowy: kupując akcję za 79 zł, kupujesz udział w przedsięwzięciu, które <strong>w ciągu roku spala około jednej szóstej tej kwoty</strong> i nie ma z czego tego pokryć poza nowymi emisjami.</div>
+
+      <div class="alert alert-warning"><strong>Zwróć uwagę na rozjazd między wynikiem netto a przepływami.</strong> Strata netto to 21,99 mln zł, ale przepływy operacyjne minus <strong>33,85 mln</strong> — czyli o 12 milionów gorzej, mimo że amortyzacja (4,69 mln) powinna działać w przeciwną stronę.<br><br>Oznacza to, że <strong>kapitał obrotowy pochłonął dodatkowe kilkanaście milionów</strong> — najpewniej zapasy i należności budowane pod wdrożenia, które jeszcze nie przyniosły płatności. Przy rotacji zapasów 3,59 i rotacji aktywów 0,26 to spójny obraz.<br><br><strong>Praktyczny wniosek: realne tempo wypalania gotówki jest wyższe niż sugerowałaby strata księgowa.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Kapitalizacja przy 79 zł</strong></td><td><strong>ok. 203 mln zł</strong></td><td style="color:var(--text-muted)">Przeliczenie własne; źródło podaje 187–193 mln przy niższym kursie</td></tr>
+          <tr><td>Cena / zysk</td><td>nie dotyczy</td><td style="color:var(--ocena-sprzedaz)">Strata -8,07 zł na akcję</td></tr>
+          <tr><td>Forward P/E</td><td>nie dotyczy</td><td style="color:var(--ocena-sprzedaz)">Brak prognoz — <strong>zero pokrycia analitycznego</strong></td></tr>
+          <tr><td><strong>Cena / sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>ok. 13,7</strong></td><td style="color:var(--ocena-sprzedaz)">Przeliczenie własne (203 ÷ 14,83); źródło podaje 12,61 przy 72,70 zł</td></tr>
+          <tr><td>EV / sprzedaż</td><td style="color:var(--ocena-sprzedaz)">ok. 14,6</td><td>Z długiem netto 14,01 mln</td></tr>
+          <tr><td><strong>Cena / wartość księgowa</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>ok. 7,2</strong></td><td style="color:var(--ocena-sprzedaz)">Wartość księgowa <strong>10,97 zł/akcję</strong>; do aktywów materialnych ok. 9,3</td></tr>
+          <tr><td>Cena / wolne przepływy</td><td>nie dotyczy</td><td style="color:var(--ocena-sprzedaz)">Przepływy ujemne: -34,95 mln zł</td></tr>
+          <tr><td>EV / EBITDA</td><td>nie dotyczy</td><td style="color:var(--ocena-sprzedaz)">EBITDA ujemna: -16,00 mln zł</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-uwaga)"><strong>3,08</strong></td><td style="color:var(--ocena-sprzedaz)">Tuż nad progiem 3,0, ale <strong>Piotroski 1</strong> — najniższy możliwy</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Źródło: StockAnalysis / S&amp;P Global Market Intelligence, <strong>dane ze wskaźnikami z 22.07.2026, widok podstawowy z 04.09.2026</strong>. Kurs 79 zł podany przez użytkownika. <strong>Mnożniki przeliczone własnoręcznie na kurs 79 zł</strong> — wartości w źródle policzono przy 72,70 zł i są o ok. 8% niższe. Dane o emisji serii Z i wynikach II kwartału z komunikatów spółki.</p>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>nie dotyczy</td><td>Strata na akcję <strong>-8,07 zł</strong>; przychody TTM <strong>14,83 mln zł</strong></td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td>nie dotyczy</td><td style="color:var(--ocena-sprzedaz)">Brak prognozowanego zysku — <strong>żaden analityk nie pokrywa spółki</strong></td></tr>
+          <tr><td><strong>PEG</strong></td><td>nie dotyczy</td><td>&lt; 1,0 = wzrost tańszy niż mnożnik sugeruje; tu brak bazy zysku i prognozy</td></tr>
+          <tr><td>Prognoza wzrostu</td><td style="color:var(--ocena-sprzedaz)">brak</td><td style="color:var(--ocena-sprzedaz)">Zero pokrycia analitycznego, zero ceny docelowej</td></tr>
+          <tr><td><strong>Miara zastępcza</strong></td><td><strong>cena emisyjna 65 zł</strong></td><td style="color:var(--ocena-sprzedaz)">Wycena inwestora strategicznego — <strong>sekcja 16</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> Przy spółce ze stratą i bez pokrycia analitycznego nie istnieje ani P/E, ani forward P/E, ani PEG. Jedynymi działającymi miarami są krotność sprzedaży (<strong>około 13,7</strong>) i krotność wartości księgowej (<strong>około 7,2</strong>) — obie wysokie dla spółki, której <strong>sprzedaż w ostatnim kwartale spadła o 85%, a marża brutto jest ujemna</strong>.</p>
+      <p><strong>Brak choćby jednego analityka pokrywającego spółkę o kapitalizacji ponad 200 milionów złotych jest sam w sobie informacją.</strong> Oznacza, że nie ma niezależnego punktu odniesienia dla wyceny — poza jednym, o którym w sekcji 16: <strong>ceną, jaką zapłacił inwestor strategiczny</strong>.</p>
+      <div class="alert alert-danger"><strong>Ostrzeżenie o spółce przed osiągnięciem rentowności — obowiązkowe i tu szczególnie ostre.</strong><br><br>XTPL nie ma zysku, nie ma dodatnich przepływów, ma <strong>ujemną marżę brutto</strong> i wskaźnik Piotroskiego <strong>1 na 9</strong>. Wycena opiera się wyłącznie na tym, co może się wydarzyć. <strong>Każda taka pozycja powinna mieć rozmiar, przy którym całkowita strata nie ma znaczenia dla portfela</strong> — a w tym przypadku dochodzi drugie ograniczenie: <strong>skrajnie niska płynność</strong>, o której w sekcji 12.</div>
+
+      <h3>Cztery scenariusze na 12–18 miesięcy</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Założenie</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Wdrożenie w Chinach skaluje się</strong></td><td>10 modułów UPD wchodzi do produkcji, ruszają przychody z nanotuszy, brak kolejnej emisji</td><td><strong>75 zł</strong></td><td style="color:var(--ocena-sprzedaz)">-5%</td></tr>
+          <tr><td><strong>Stan bazowy</strong></td><td>Emisja po 65 zł przechodzi, sprzedaż odbija do poziomu z 2025, kurs zbiega do ceny emisyjnej</td><td><strong>60 zł</strong></td><td style="color:var(--ocena-sprzedaz)">-24%</td></tr>
+          <tr><td>Wypalanie trwa</td><td>Kolejna emisja w 2027, przychody bez przełomu</td><td>45 zł</td><td style="color:var(--ocena-sprzedaz)">-43%</td></tr>
+          <tr><td><strong>Emisja z głębszym dyskontem albo brak zgody walnego</strong></td><td>Konieczność ratunkowego finansowania przy 2,1 mln zł gotówki</td><td><strong>35 zł</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-56%</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Fair value: 45 – 75 zł</strong>, środek 60 zł (-24%). <strong>Cały przedział leży poniżej dzisiejszego kursu</strong> — i to jest bezpośrednia konsekwencja tego, że górną granicę wyznaczam ceną, jaką zapłacił inwestor strategiczny (65 zł), powiększoną o niewielką premię za możliwy sukces wdrożenia.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Brutto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-8,82%</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Ujemna — sprzedaż poniżej kosztu wytworzenia</strong></td></tr>
+          <tr><td>Operacyjna</td><td style="color:var(--ocena-sprzedaz)">-139,45%</td><td style="color:var(--ocena-sprzedaz)">Koszty przewyższają przychody o 40%</td></tr>
+          <tr><td>EBITDA</td><td style="color:var(--ocena-sprzedaz)">-107,84%</td><td>-16,00 mln zł</td></tr>
+          <tr><td>Netto</td><td style="color:var(--ocena-sprzedaz)">-148,22%</td><td>-21,99 mln zł · -8,07 zł/akcję</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Ujemna marża brutto to rzadkość nawet wśród spółek spekulacyjnych i warto zrozumieć, co znaczy.</strong><br><br>Marża brutto <strong>minus 8,82%</strong> oznacza, że za każde 100 złotych przychodu XTPL wydaje 108,82 złotych na samo wytworzenie sprzedanego produktu. <strong>Zanim zapłaci pensje, wynajem, badania czy cokolwiek innego, jest już 8,82 złotych pod wodą.</strong><br><br>Konsekwencja jest kontrintuicyjna: <strong>zwiększanie sprzedaży pogłębia stratę</strong>. Wszystkie standardowe argumenty o skali i dźwigni operacyjnej przestają obowiązywać, dopóki marża brutto nie przekroczy zera.<br><br>W tej serii analiz jedyną drugą spółką z ujemną marżą brutto był Plug Power (-24,75%) — i tam poprawa do -0,9% w ciągu roku była głównym argumentem za oceną neutralną. <strong>Tutaj nie mam danych pokazujących taką trajektorię.</strong></div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Wniosek</th></tr></thead>
+        <tbody>
+          <tr><td>Zwrot z zainwestowanego kapitału (ROIC)</td><td style="color:var(--ocena-sprzedaz)">-29,24%</td><td rowspan="2" style="color:var(--ocena-sprzedaz)"><strong>Różnica -34,77 pp — najgłębsze niszczenie wartości w tej serii</strong></td></tr>
+          <tr><td>Średni ważony koszt kapitału (WACC)</td><td>5,53%</td></tr>
+          <tr><td>Zwrot z kapitału własnego (ROE)</td><td style="color:var(--ocena-sprzedaz)">-67,04%</td><td>ROA -22,65%, ROCE -42,54%</td></tr>
+          <tr><td>Rotacja aktywów</td><td style="color:var(--ocena-sprzedaz)">0,26</td><td>Rotacja zapasów 3,59</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Różnica między zwrotem z kapitału a jego kosztem wynosi minus 34,77 punktu procentowego</strong> — głębiej niż Plug Power (-29,15 pp) i Canopy Growth (-25,45 pp). Dla porównania po drugiej stronie: ASML około +54 pp, Monolithic Power +18,31 pp, ServiceNow około +1,43 pp.<br><br>Zwróć uwagę na niski koszt kapitału (5,53%) — to efekt bety 0,22, która jednak <strong>nie oznacza niskiego ryzyka, tylko niską płynność</strong>. Akcja mało się rusza, bo mało się nią handluje. Model wyceny czyta to jako bezpieczeństwo; w rzeczywistości jest odwrotnie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — TRZY TYGODNIE GOTÓWKI</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gotówka</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>2,10 mln zł</strong></td><td style="color:var(--ocena-sprzedaz)">Przy wypalaniu <strong>34,95 mln zł rocznie</strong></td></tr>
+          <tr><td>Zadłużenie</td><td style="color:var(--ocena-sprzedaz)">16,11 mln zł</td><td style="color:var(--ocena-sprzedaz)">Dług netto <strong>-14,01 mln zł</strong> (-5,45 zł/akcję)</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-uwaga)">0,50</td><td>Sam w sobie do przyjęcia</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-16,07</strong></td><td style="color:var(--ocena-sprzedaz)">Głęboko ujemne</td></tr>
+          <tr><td>Wskaźnik bieżący</td><td style="color:var(--ocena-kupno)">2,49</td><td style="color:var(--ocena-uwaga)">Szybki 2,13 — ale w aktywach obrotowych mało gotówki</td></tr>
+          <tr><td>Kapitał obrotowy</td><td>18,78 mln zł</td><td style="color:var(--ocena-uwaga)">Głównie zapasy i należności, nie gotówka</td></tr>
+          <tr><td>Kapitał własny</td><td>32,36 mln zł</td><td>Wartość księgowa <strong>10,97 zł/akcję</strong> wobec kursu 79 zł</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-uwaga)"><strong>3,08</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Piotroski 1</strong> — najniższy możliwy</td></tr>
+          <tr><td><strong>Zmiana liczby akcji</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+11,32% kw/kw</strong></td><td style="color:var(--ocena-sprzedaz)">Plus planowane +7,7% z serii Z</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Policzmy runway, bo to jest liczba, wokół której kręci się wszystko inne.</strong><br><br>
+      Gotówka w bilansie: <strong>2,10 mln zł</strong>.<br>
+      Roczne wolne przepływy: <strong>-34,95 mln zł</strong>, czyli około <strong>2,9 mln miesięcznie</strong>.<br><br>
+      <strong>To daje mniej więcej trzy tygodnie działania.</strong> Emisja serii Z za 12,9 mln zł przedłuża to o około <strong>cztery i pół miesiąca</strong>. Dofinansowanie z NCBiR (10,1 mln zł) wypłacane jest w transzach po rozliczeniu etapów, więc nie rozwiązuje problemu natychmiast.<br><br>
+      Innymi słowy: <strong>emisja po 65 zł nie jest wyborem strategicznym — jest koniecznością.</strong> A po niej, przy niezmienionym tempie wypalania, spółka wróci w to samo miejsce przed połową 2027 roku.</div>
+
+      <div class="alert alert-warning"><strong>Wskaźnik Altmana 3,08 wygląda przyzwoicie i wymaga wyjaśnienia, bo jest tu mylący.</strong><br><br>Wartość powyżej 3,0 formalnie oznacza bezpieczeństwo. Ale wskaźnik silnie waży <strong>kapitał obrotowy w stosunku do aktywów</strong>, a XTPL ma kapitał obrotowy 18,78 mln zł przy bardzo małej sumie bilansowej. Problem w tym, że <strong>w tym kapitale obrotowym jest tylko 2,10 mln gotówki</strong> — reszta to zapasy i należności, których nie da się natychmiast zamienić na pensje.<br><br>Znacznie uczciwszym sygnałem jest tu <strong>wskaźnik Piotroskiego: 1 na 9</strong> — praktycznie najniższy możliwy. W tej serii niżej nie schodził nikt.</div>
+
+      <p><strong>Rozwodnienie jest szybkie i przyspiesza.</strong> Liczba akcji wzrosła o <strong>11,32% w samym kwartale</strong>, a emisja serii Z doda kolejne <strong>198 462 akcje, czyli +7,7%</strong> wobec obecnych 2,57 mln. Wcześniej spółka pozyskała 27,6 mln zł z serii X. <strong>Przy 2,57 miliona akcji każda emisja jest proporcjonalnie ogromna</strong> — to nie jest spółka, w której nowa emisja rozpływa się w wielkim kapitale.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Pierwsze wdrożenie przemysłowe stało się faktem.</strong> Lipcowe <strong>zamówienie ramowe na 10 modułów UPD</strong> w technologii wyświetlaczy w Chinach to kontynuacja pierwszego przemysłowego zastosowania technologii XTPL. Po dziesięciu latach spółka ma klienta, który wpuścił jej rozwiązanie na linię produkcyjną.</div>
+
+      <div class="alert alert-success"><strong>2. Inwestor strategiczny z branży, nie finansowy.</strong> Nowe akcje obejmuje <strong>podmiot z Tajwanu z doświadczeniem w inwestycjach w półprzewodniki i zaawansowane technologie</strong>. To walidacja technologiczna, nie tylko zastrzyk 12,9 mln zł — i potencjalnie drzwi do tajwańskiego ekosystemu produkcji elektroniki.</div>
+
+      <div class="alert alert-success"><strong>3. Dofinansowanie publiczne bez rozwodnienia.</strong> Umowa z NCBiR: projekt wart <strong>18,29 mln zł</strong>, rekomendowane dofinansowanie <strong>10,1 mln zł</strong>. To kwota porównywalna z całą emisją serii Z, ale pozyskana bez wydawania nowych akcji.</div>
+
+      <div class="alert alert-info"><strong>4. Udziałowcy wewnętrzni mają 13,27% akcji.</strong> Najwyżej wśród spółek analizowanych w tej serii po Fermi (27,65%) i Paramount (30,32%), a wyraźnie powyżej Vertiva (0,19%) czy Monolithic Power (3,53%). Zarząd ryzykuje własnym majątkiem.</div>
+
+      <div class="alert alert-info"><strong>5. Rynek docelowy rośnie razem z AI.</strong> Zaawansowane pakowanie półprzewodników wymaga coraz cieńszych połączeń, a XTPL drukuje struktury poniżej dziesięciu mikrometrów. Jeśli technologia zostanie zakwalifikowana u producentów pakowni, rynek jest wielokrotnie większy od dzisiejszych przychodów.</div>
+
+      <div class="alert alert-info"><strong>6. Model docelowy jest powtarzalny.</strong> Sprzedaż modułu raz, nanotuszy przez lata. Przy skali wdrożeń przychód z materiałów eksploatacyjnych byłby przewidywalny i wyżej marżowy niż dzisiejsza sprzedaż jednostkowa urządzeń.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Inwestor strategiczny płaci 65 zł, gdy rynek płaci 79.</strong> Podmiot z dostępem do ksiąg i do zarządu wynegocjował cenę <strong>17,7% poniżej kursu</strong>. To najlepsza dostępna wycena dokonana przez poinformowanego kupującego — i jest niższa od tej, którą płaci rynek. Rozwijam w sekcji 16.</div>
+
+      <div class="alert alert-danger"><strong>2. Przychody II kwartału spadły o 85%.</strong> Szacunkowo <strong>0,3 mln zł wobec 2,0 mln</strong> rok wcześniej. Dla spółki wycenianej na ponad 200 mln zł to kwartał, w którym sprzedaż praktycznie zniknęła. Wyniki z 28 września pokażą, czy to przesunięcie, czy trend.</div>
+
+      <div class="alert alert-danger"><strong>3. Gotówki na około trzy tygodnie.</strong> <strong>2,10 mln zł</strong> przy wypalaniu <strong>34,95 mln rocznie</strong>. Emisja serii Z przedłuża to o cztery i pół miesiąca. Liczba akcji wzrosła o <strong>11,32% w kwartale</strong>, seria Z doda kolejne 7,7%. Przy 2,57 mln akcji każda emisja jest proporcjonalnie ogromna.</div>
+
+      <div class="alert alert-danger"><strong>4. Ujemna marża brutto -8,82%.</strong> Strata powstaje już na poziomie sprzedaży — wzrost przychodów ją pogłębia. ROIC -29,24% przy koszcie kapitału 5,53% daje różnicę <strong>-34,77 pp</strong>, najgłębszą w tej serii. Wskaźnik Piotroskiego <strong>1 na 9</strong>.</div>
+
+      <div class="warning-box"><strong>5. Skrajnie niska płynność — ryzyko praktyczne, nie teoretyczne.</strong> Średni wolumen <strong>3 476 akcji dziennie</strong>, czyli około 275 tys. zł obrotu. Free float 1,57 mln akcji. <strong>Pozycji o istotnej wielkości nie da się tu szybko zamknąć</strong> bez znacznego wpływu na kurs. Beta 0,22 nie oznacza niskiego ryzyka, tylko rzadki handel.</div>
+
+      <div class="alert alert-warning"><strong>6. Zero pokrycia analitycznego.</strong> Żaden analityk nie publikuje prognoz ani ceny docelowej dla spółki o kapitalizacji ponad 200 mln zł. Brak niezależnego punktu odniesienia dla wyceny — poza ceną emisyjną. Do tego dane rynkowe są aktualizowane z opóźnieniem (strona wskaźników sprzed dwóch miesięcy).</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent / alternatywa</th><th>Przewaga nad XTPL</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Fotolitografia (metoda dominująca)</strong></td><td style="color:var(--ocena-sprzedaz)">Sprawdzona, zakwalifikowana, obsługiwana przez cały przemysł</td><td>Droga przy małych seriach i naprawach</td></tr>
+          <tr><td><strong>Druk strumieniowy (inkjet) przemysłowy</strong></td><td style="color:var(--ocena-sprzedaz)">Dojrzała technologia, wielu dostawców</td><td style="color:var(--ocena-kupno)">Niższa rozdzielczość niż XTPL</td></tr>
+          <tr><td><strong>Optomec, Nano Dimension i inni</strong></td><td style="color:var(--ocena-sprzedaz)">Większa skala, dłuższa obecność, notowani od lat</td><td>Też walczą o rentowność</td></tr>
+          <tr><td><strong>Zespoły wewnętrzne producentów</strong></td><td style="color:var(--ocena-uwaga)">Mogą rozwijać własne rozwiązania</td><td>Kosztowne, poza głównym biznesem</td></tr>
+          <tr><td><strong>ASML</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,45%)</span></td><td style="color:var(--ocena-sprzedaz)">Zupełnie inna liga — monopol w litografii EUV</td><td style="color:var(--ocena-kupno)">Nie konkuruje w tej niszy</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Najgroźniejszym konkurentem XTPL nie jest żadna firma — jest nim status quo.</strong><br><br>Producent wyświetlaczy albo pakowni półprzewodników ma działającą, zakwalifikowaną linię produkcyjną. Zmiana technologii oznacza dla niego ryzyko przestoju, kosztowną rekwalifikację i przekonanie własnych klientów. <strong>Nawet jeśli rozwiązanie XTPL jest lepsze, przewaga musi być na tyle duża, żeby uzasadnić to ryzyko</strong> — a decyzja zapada latami.<br><br>To tłumaczy, dlaczego spółka założona w 2015 roku ma <strong>jedno wdrożenie przemysłowe w 2026</strong>. Nie dlatego, że technologia nie działa, tylko dlatego, że przemysł zmienia się powoli.</div>
+
+      <div class="alert alert-info"><strong>Porównanie z ASML, którą masz w portfelu, jest tu pouczające przez kontrast.</strong> Obie spółki zajmują się precyzyjnym nanoszeniem struktur w elektronice. ASML ma <strong>różnicę między zwrotem z kapitału a jego kosztem na poziomie około +54 pp</strong> i faktyczny monopol technologiczny. XTPL ma <strong>-34,77 pp</strong> i jedno wdrożenie.<br><br>Różnica nie leży w jakości nauki, lecz w tym, że <strong>ASML sprzedaje coś, bez czego przemysł nie może się obejść, a XTPL coś, bez czego przemysł jak dotąd radzi sobie dobrze.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA I PŁYNNOŚĆ</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Cena przyjęta do analizy</td><td><strong>79,00 zł</strong></td><td>Podana przez użytkownika; źródło notowało 75,20 zł 04.09</td></tr>
+          <tr><td>Zakres 52 tygodni</td><td>54,00 – 87,60 zł</td><td style="color:var(--ocena-uwaga)">Kurs w górnej części przedziału</td></tr>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-uwaga)">-7,50%</td><td>Mierzone przy starszym kursie</td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td>63,69 zł</td><td style="color:var(--ocena-kupno)">Kurs ok. 24% powyżej</td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td>68,64 zł</td><td style="color:var(--ocena-kupno)">Kurs ok. 15% powyżej</td></tr>
+          <tr><td><strong>RSI (14)</strong></td><td style="color:var(--ocena-uwaga)">63,68</td><td style="color:var(--ocena-uwaga)">Mierzone przy 72,70 zł — <strong>przy 79 zł byłby wyżej</strong></td></tr>
+          <tr><td>Beta (5 lat)</td><td>0,22</td><td style="color:var(--ocena-sprzedaz)"><strong>Artefakt niskiej płynności, nie miara bezpieczeństwa</strong></td></tr>
+          <tr><td><strong>Średni wolumen (20 sesji)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>3 476 akcji</strong></td><td style="color:var(--ocena-sprzedaz)">Ok. <strong>275 tys. zł dziennie</strong> przy 79 zł</td></tr>
+          <tr><td>Free float</td><td style="color:var(--ocena-sprzedaz)">1,57 mln z 2,57 mln akcji</td><td>Ok. 124 mln zł w wolnym obrocie</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Płynność jest tu ważniejsza od jakiegokolwiek wskaźnika technicznego i wymaga osobnego potraktowania.</strong><br><br>Średni obrót to <strong>3 476 akcji dziennie</strong> — przy kursie 79 zł około <strong>275 tysięcy złotych</strong>. Dla porównania pozycja warta 20 tysięcy złotych to około 253 akcje, czyli <strong>7% dziennego obrotu</strong>. Pozycja warta 100 tysięcy to jedna trzecia dziennego obrotu.<br><br><strong>Praktyczny skutek: wyjście z pozycji o istotnej wielkości zajmuje dni i samo w sobie obniża kurs.</strong> Przy złych wiadomościach — na przykład po wynikach z 28 września — kupujących może po prostu nie być.<br><br><strong>Beta 0,22 jest w tym kontekście myląca.</strong> Model wyceny odczytuje ją jako niskie ryzyko i dlatego koszt kapitału wychodzi na zaledwie 5,53%. W rzeczywistości akcja mało się rusza, bo mało się nią handluje — a to jest ryzyko, nie jego brak.</div>
+
+      <div class="alert alert-warning"><strong>Obraz techniczny jest formalnie wzrostowy, ale oparty na nieaktualnych danych.</strong> Kurs 79 zł jest około 24% powyżej średniej 50-sesyjnej (63,69 zł) i 15% powyżej 200-sesyjnej (68,64 zł) — obie liczone na notowaniach z lipca. RSI 63,68 zmierzono przy 72,70 zł, więc przy 79 zł byłby bliżej wykupienia.<br><br><strong>Kurs znajduje się w górnej części rocznego przedziału 54,00–87,60 zł</strong> — i jednocześnie 21,5% powyżej ceny, po jakiej obejmuje akcje inwestor strategiczny.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>87,60 zł</strong></td><td>Szczyt 52-tygodniowy</td></tr>
+          <tr><td><strong>68,64 zł</strong></td><td>Średnia 200-sesyjna</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>65,00 zł</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Cena emisji serii Z — naturalny magnes dla kursu</strong></td></tr>
+          <tr><td><strong>63,69 zł</strong></td><td>Średnia 50-sesyjna</td></tr>
+          <tr><td><strong>54,00 zł</strong></td><td>Dołek 52-tygodniowy</td></tr>
+          <tr><td style="color:var(--ocena-kupno)"><strong>45,00 zł</strong></td><td style="color:var(--ocena-kupno)"><strong>Poziom rewizji tezy</strong> — dolna granica wartości godziwej; poniżej ocena sprzedaży wymaga nowego uzasadnienia</td></tr>
+          <tr><td><strong>10,97 zł</strong></td><td>Wartość księgowa na akcję — pokazuje, jak mało majątku jest pod wyceną</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>SPRZEDAŻ</strong></td><td>Wyniki 28 września i walne 29 września. Emisja po 65 zł działa jak magnes na kurs. Przychody II kwartału spadły o 85%, gotówki na trzy tygodnie.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>SPRZEDAŻ</strong></td><td>Cały przedział wartości godziwej (45 – 75 zł) leży poniżej kursu. Przy tempie wypalania emisja serii Z wystarcza na cztery i pół miesiąca.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Jeśli wdrożenie w Chinach się rozwinie, a nanotusze zaczną dawać powtarzalny przychód, spółka może być warta wielokrotnie więcej. Ale dotrwanie do tego wymaga kolejnych emisji.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Ocena sprzedaży wynika przede wszystkim z jednej obserwacji, a nie z sumy zastrzeżeń.</strong><br><br><strong>Inwestor strategiczny z Tajwanu, z doświadczeniem w półprzewodnikach, obejmuje nowe akcje po 65 złotych. Rynek płaci 79.</strong><br><br>Ten inwestor miał dostęp do ksiąg, do zarządu i do harmonogramu wdrożeń. Negocjował cenę, mając komplet informacji, których Ty i ja nie mamy. <strong>Wynegocjował 17,7% poniżej kursu giełdowego.</strong><br><br>To nie jest dowód, że spółka jest bez wartości — przeciwnie, ktoś z branży uznał ją za wartą 12,9 miliona złotych. <strong>To jest natomiast najlepsza dostępna wskazówka, ile ta wartość wynosi na akcję.</strong> I jest ona niższa od ceny rynkowej.</div>
+
+      <div class="alert alert-warning"><strong>Do tego dochodzą trzy rzeczy, z których każda osobno uzasadniałaby ostrożność.</strong><br><br><strong>Przychody II kwartału: 0,3 mln zł wobec 2,0 mln rok wcześniej</strong> — spadek o 85%. <strong>Marża brutto -8,82%</strong> — strata powstaje już na sprzedaży. <strong>Gotówka 2,10 mln zł przy wypalaniu 34,95 mln rocznie</strong> — około trzech tygodni działania przed emisją.<br><br>Wskaźnik Piotroskiego wynosi <strong>1 na 9</strong> — najniższy w całej tej serii analiz.</div>
+
+      <h3>Konkretnie</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Działanie</th><th>Szczegóły</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przy obecnej cenie 79 zł</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Nie kupować.</strong> Cały przedział wartości godziwej leży poniżej kursu</td></tr>
+          <tr><td><strong>Najbliższy punkt odniesienia</strong></td><td><strong>65 zł</strong> — cena, jaką płaci inwestor strategiczny</td></tr>
+          <tr><td><strong>Cena, przy której warto wrócić do tematu</strong></td><td><strong>poniżej 45 zł</strong> — i dopiero po dwóch kwartałach dodatniej marży brutto</td></tr>
+          <tr><td><strong>Gdybyś mimo wszystko chciał</strong></td><td>Maksymalnie <strong>0,5% portfela</strong>, wyłącznie jako zakład na wdrożenie; Twój koszyk spekulacyjny to już <strong>15,69%</strong></td></tr>
+          <tr><td><strong>Ograniczenie praktyczne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Płynność.</strong> Przy obrocie 275 tys. zł dziennie wyjście z pozycji zajmuje dni</td></tr>
+          <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>45 zł</strong></td></tr>
+          <tr><td><strong>Czego nie robić przed 28 września</strong></td><td>Niczego. Wyniki i walne wypadają w ciągu 12 dni — to rozstrzyga o wszystkim</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-kupno)">Trzy powody, żeby się zainteresować</h3>
+          <ol>
+            <li><strong>Pierwsze wdrożenie przemysłowe jest faktem.</strong> Zamówienie ramowe na 10 modułów UPD w Chinach — po dziesięciu latach technologia weszła na linię produkcyjną klienta.</li>
+            <li><strong>Inwestor z branży, nie finansowy.</strong> Podmiot z Tajwanu z doświadczeniem w półprzewodnikach wykłada 12,9 mln zł. To walidacja technologiczna i potencjalne wejście w tamtejszy ekosystem.</li>
+            <li><strong>10,1 mln zł dofinansowania z NCBiR</strong> — pieniądze bez rozwodnienia. Udziałowcy wewnętrzni trzymają 13,27% akcji, więc zarząd ryzykuje własnym majątkiem.</li>
+          </ol>
+        </div>
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-sprzedaz)">Trzy powody, żeby trzymać się z daleka</h3>
+          <ol>
+            <li><strong>Inwestor strategiczny płaci 65 zł, rynek 79.</strong> Najlepiej poinformowany kupujący wycenia akcję o 17,7% niżej, niż zapłaciłbyś Ty.</li>
+            <li><strong>Przychody II kwartału -85%</strong> (0,3 mln zł wobec 2,0 mln), <strong>marża brutto -8,82%</strong>, <strong>gotówka na trzy tygodnie</strong> przed emisją. Piotroski 1 na 9.</li>
+            <li><strong>Obrót 275 tys. zł dziennie.</strong> Z pozycji o istotnej wielkości nie da się szybko wyjść — a przy złych wiadomościach kupujących może nie być.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="alert alert-success"><strong>Thesis-breaker (co zmieniłoby ocenę sprzedaży):</strong> dodatnia marża brutto przez dwa kolejne kwartały, przychody z nanotuszy z wdrożenia w Chinach, brak kolejnej emisji przez rok, albo spadek kursu poniżej 45 zł.</div>
+      <div class="alert alert-danger"><strong>Thesis-confirmer (potwierdzenie sprzedaży):</strong> kolejny kwartał z przychodami poniżej 1 mln zł, zapowiedź następnej emisji, zejście kursu do ceny emisyjnej 65 zł albo brak zgody walnego 29 września.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>XTPL ma technologię, która prawdopodobnie działa, i właśnie zdobyła pierwszego przemysłowego klienta — ale kupując akcje po 79 złotych, płacisz o 17,7% więcej niż inwestor, który wie o tej spółce znacznie więcej od Ciebie.</strong> Podmiot z Tajwanu, z doświadczeniem w inwestycjach półprzewodnikowych, obejmuje właśnie 198 462 nowe akcje po <strong>65,00 zł</strong>, wykładając 12,9 miliona złotych. Miał dostęp do ksiąg, do zarządu i do harmonogramu wdrożeń — i wynegocjował cenę wyraźnie poniżej rynkowej. To nie znaczy, że spółka jest bez wartości; znaczy, że najlepsza dostępna wycena dokonana przez poinformowanego kupującego jest niższa od tej, którą płaci giełda.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Reszta obrazu tę wskazówkę potwierdza. <strong>Przychody drugiego kwartału wyniosły szacunkowo 0,3 miliona złotych wobec 2,0 miliona rok wcześniej — spadek o 85%.</strong> Marża brutto jest <strong>ujemna (-8,82%)</strong>, więc strata powstaje już na poziomie sprzedaży, a zwiększanie przychodów ją pogłębia. W kasie leżało <strong>2,10 miliona złotych przy rocznym wypalaniu 34,95 miliona</strong> — około trzech tygodni działania; emisja przedłuża to o cztery i pół miesiąca. Liczba akcji wzrosła o 11,32% w samym kwartale, a seria Z doda kolejne 7,7%. Wskaźnik Piotroskiego wynosi <strong>1 na 9</strong>, a różnica między zwrotem z kapitału a jego kosztem <strong>-34,77 punktu procentowego</strong> — najgłębsza w całej tej serii. <strong>Do tego obrót 275 tysięcy złotych dziennie sprawia, że z pozycji o istotnej wielkości po prostu nie da się szybko wyjść.</strong></p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza sprzedaży okazała się błędna</h4>
+        <ul class="check-list">
+          <li><span class="ck no">✗</span><span><strong>Marża brutto musi przekroczyć zero.</strong> Dziś -8,82% — przy takiej marży każda dodatkowa sprzedaż pogłębia stratę. Niespełnione i to główny powód oceny.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Sprzedaż musi wrócić.</strong> II kwartał: 0,3 mln zł wobec 2,0 mln rok wcześniej. Niespełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Rozwodnienie musi się zatrzymać.</strong> +11,32% akcji w kwartale, emisja serii Z doda 7,7% — po cenie 17,7% poniżej rynku.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Musi istnieć realny klient przemysłowy.</strong> Zamówienie ramowe na 10 modułów UPD w Chinach — spełnione i to najmocniejszy element po stronie pozytywnej.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Ktoś z branży musi uwierzyć w technologię.</strong> Inwestor z Tajwanu wykłada 12,9 mln zł; NCBiR rekomenduje 10,1 mln dofinansowania — spełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Nanotusze muszą zacząć dawać powtarzalny przychód.</strong> To jest cały sens modelu — na razie nie widać tego w liczbach.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-sprzedaz)"><strong>28 września 2026</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Publikacja wyników</strong></td><td style="color:var(--ocena-sprzedaz)">Potwierdzi albo zaprzeczy spadkowi przychodów o 85%; pokaże realny stan gotówki</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)"><strong>29 września 2026</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Walne w sprawie emisji serii Z</strong></td><td style="color:var(--ocena-sprzedaz)">Brak zgody oznaczałby problem z finansowaniem przy 2,1 mln zł gotówki</td></tr>
+            <tr><td>Na bieżąco</td><td>Realizacja zamówienia na 10 modułów UPD</td><td style="color:var(--ocena-kupno)">Jedyne wdrożenie przemysłowe — test modelu</td></tr>
+            <tr><td>Termin nieokreślony</td><td>Transze dofinansowania z NCBiR (10,1 mln zł)</td><td>Pieniądze bez rozwodnienia, ale wypłacane etapami</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">2027</td><td style="color:var(--ocena-sprzedaz)">Prawdopodobna kolejna emisja</td><td style="color:var(--ocena-sprzedaz)">Przy obecnym tempie seria Z wystarcza na ok. 4,5 miesiąca</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Marża brutto</strong></td><td>-8,82%</td><td>brak przejścia na plus</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Przychody kwartalne</strong></td><td>0,3 mln zł (II kw.)</td><td>poniżej 1 mln zł w kolejnym kwartale</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Gotówka</strong></td><td>2,10 mln zł (+12,9 mln z emisji)</td><td>spadek poniżej 5 mln zł</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Liczba akcji</strong></td><td>2,57 mln, +11,32% kw/kw</td><td>każda kolejna emisja</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Kurs wobec ceny emisyjnej</strong></td><td>79 zł wobec 65 zł (+21,5%)</td><td>zejście do 65 zł</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td><strong>Średni wolumen</strong></td><td>3 476 akcji (~275 tys. zł)</td><td>dalszy spadek</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Przy cenie 79 zł</strong></td><td>Nie kupować — cały przedział wartości godziwej (45 – 75 zł) leży poniżej kursu</td></tr>
+            <tr><td><strong>Punkt odniesienia</strong></td><td><strong>65 zł</strong> — cena inwestora strategicznego</td></tr>
+            <tr><td><strong>Powrót do tematu</strong></td><td>Poniżej <strong>45 zł</strong> i dopiero po dwóch kwartałach dodatniej marży brutto</td></tr>
+            <tr><td><strong>Wielkość gdybyś mimo wszystko wchodził</strong></td><td>Maksymalnie <strong>0,5% portfela</strong> — koszyk spekulacyjny to już 15,69%</td></tr>
+            <tr><td><strong>Ograniczenie praktyczne</strong></td><td>Płynność 275 tys. zł dziennie — wyjście zajmuje dni</td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>45 zł</strong></td></tr>
+            <tr><td><strong>Przed 28 września</strong></td><td>Nie robić nic — wyniki i walne rozstrzygają o wszystkim</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-sprzedaz)">SPRZEDAŻ</div>
+        <p>Ta ocena nie dotyczy technologii. Druk nanomateriałów o rozdzielczości poniżej dziesięciu mikrometrów jest trudny, XTPL ma w tym patenty, a lipcowe zamówienie ramowe na dziesięć modułów UPD w Chinach oznacza, że po dziesięciu latach rozwiązanie weszło na linię produkcyjną realnego klienta. Inwestor z Tajwanu, znający się na półprzewodnikach, wykłada 12,9 miliona złotych — a NCBiR rekomenduje kolejne 10,1 miliona dofinansowania. Udziałowcy wewnętrzni trzymają 13,27% akcji, więc zarząd ryzykuje własnym majątkiem.</p>
+        <p>Ocena dotyczy ceny. <strong>Ten sam inwestor strategiczny, mający dostęp do ksiąg i do zarządu, obejmuje akcje po 65 złotych — gdy giełda płaci 79.</strong> To najlepsza dostępna wycena dokonana przez kogoś poinformowanego i jest o 17,7% niższa od rynkowej. Potwierdza ją reszta liczb: <strong>przychody drugiego kwartału spadły o 85% do 0,3 miliona złotych, marża brutto jest ujemna (-8,82%), a w kasie leżało 2,10 miliona przy wypalaniu 34,95 miliona rocznie</strong> — trzy tygodnie działania. Wskaźnik Piotroskiego wynosi 1 na 9. Do tego dochodzi ograniczenie, które w praktyce waży najwięcej: <strong>przy obrocie 275 tysięcy złotych dziennie z pozycji o istotnej wielkości nie da się szybko wyjść</strong>. Naturalnym momentem na powrót do tematu jest kurs poniżej 45 złotych i dwa kwartały dodatniej marży brutto — a najbliższą datą, przed którą nie warto robić nic, jest <strong>28 września</strong>.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-sprzedaz)">Sprzedaż</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>45 – 75 zł</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">35 zł (-56%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-uwaga)">75 zł (-5%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Brak</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 28 września</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">CENA EMISYJNA 65 ZŁ JAKO PUNKT ODNIESIENIA</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="alert alert-danger"><strong>Ta sekcja istnieje, bo przy spółce bez zysku, bez dodatnich przepływów i bez pokrycia analitycznego nie ma żadnego normalnego punktu zaczepienia dla wyceny — a jeden punkt jednak jest, i to bardzo mocny.</strong></div>
+
+      <h3>Fakty</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Element</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Liczba nowych akcji (seria Z)</td><td><strong>198 462</strong></td></tr>
+          <tr><td><strong>Cena emisyjna</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>65,00 zł</strong></td></tr>
+          <tr><td>Pozyskana kwota</td><td><strong>12 900 030 zł</strong></td></tr>
+          <tr><td>Nabywca</td><td>Jeden inwestor z siedzibą na <strong>Tajwanie</strong>, z doświadczeniem w inwestycjach w półprzewodniki i zaawansowane technologie</td></tr>
+          <tr><td>Tryb</td><td>Subskrypcja prywatna; walne 29 września 2026</td></tr>
+          <tr><td><strong>Kurs rynkowy</strong></td><td><strong>79,00 zł</strong></td></tr>
+          <tr><td><strong>Dyskonto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>17,7%</strong></td></tr>
+          <tr><td>Rozwodnienie</td><td>198 462 ÷ 2 570 000 = <strong>+7,7%</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Dlaczego ta cena waży więcej niż kurs giełdowy</h3>
+      <div class="alert alert-warning"><strong>Inwestor obejmujący akcje w subskrypcji prywatnej negocjuje w zupełnie innej sytuacji informacyjnej niż inwestor giełdowy.</strong><br><br>Przed wyłożeniem 12,9 miliona złotych podmiot tej klasy przeprowadza badanie spółki: <strong>ogląda księgi, harmonogram wdrożeń, umowy z klientami, stan gotówki i plany finansowania</strong>. Rozmawia z zarządem. Zna liczby, które Ty i ja zobaczymy dopiero 28 września — albo nie zobaczymy wcale.<br><br>Jest też stroną, której zależy: to inwestor branżowy, a nie fundusz szukający szybkiego zysku. Gdyby uważał spółkę za tanią przy 79 złotych, kupiłby akcje na rynku — free float to 1,57 miliona akcji, więc miejsce by było.<br><br><strong>Zamiast tego wynegocjował nową emisję po 65 złotych.</strong></div>
+
+      <h3>Trzy możliwe interpretacje — i która jest najbardziej prawdopodobna</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Interpretacja</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1. To standardowe dyskonto za dużą transakcję i blokadę akcji</strong></td><td style="color:var(--ocena-uwaga)">Częściowo prawdziwa. Emisje prywatne zwykle mają dyskonto — ale <strong>17,7% jest po górnej stronie typowego przedziału</strong>, zwłaszcza przy tak małym free floacie</td></tr>
+          <tr><td><strong>2. Spółka potrzebowała pieniędzy i musiała przyjąć warunki kupującego</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Najbardziej prawdopodobna.</strong> Przy 2,10 mln zł gotówki i wypalaniu 34,95 mln rocznie pozycja negocjacyjna XTPL była słaba</td></tr>
+          <tr><td><strong>3. Inwestor uważa, że akcja jest warta mniej niż 79 zł</strong></td><td style="color:var(--ocena-sprzedaz)">Trudno rozdzielić od punktu 2 — ale skutek dla Ciebie jest taki sam</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Wniosek praktyczny.</strong><br><br>Niezależnie od tego, która interpretacja jest właściwa, <strong>za dwanaście dni na rynek trafi 198 462 akcje objęte po 65 złotych</strong>, przy dziennym obrocie wynoszącym 3 476 akcji. <strong>Nowa emisja odpowiada 57 dniom normalnego obrotu.</strong><br><br>Nawet jeśli inwestor strategiczny nie zamierza sprzedawać — a prawdopodobnie nie zamierza, bo to wejście branżowe — <strong>sama świadomość, że nowe akcje objęto po 65 zł, działa na kurs jak magnes</strong>. Trudno uzasadnić płacenie 79, gdy niedawno ktoś lepiej poinformowany zapłacił 65.<br><br><strong>Dlatego górną granicę wartości godziwej ustawiam na 75 zł — czyli nieco powyżej ceny emisyjnej, z niewielką premią za możliwy sukces wdrożenia w Chinach.</strong></div>
+
+      <div class="alert alert-info"><strong>Kiedy ten argument przestanie obowiązywać.</strong> Cena emisyjna jest wskazówką o dzisiejszej wartości, a nie wyrokiem. Przestanie mieć znaczenie, gdy pojawią się <strong>twarde dane operacyjne</strong>: dodatnia marża brutto, powtarzalny przychód z nanotuszy albo drugie wdrożenie przemysłowe.<br><br>Do tego czasu jest to <strong>jedyna niezależna wycena tej spółki, jaką ktokolwiek przeprowadził</strong> — bo analityków pokrywających XTPL nie ma ani jednego.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 września 2026 | Cena: <strong>79,00 zł</strong> — <strong>cena podana przez użytkownika, przyjęta jako nadrzędna</strong>. Źródło notowało 75,20 zł (04.09.2026), a strona ze wskaźnikami 72,70 zł (22.07.2026) | Pierwsza analiza XTPL — spółka spoza portfela | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>strona wskaźników ze stanem na 22.07.2026, widok podstawowy na 04.09.2026</strong>; komunikaty bieżące XTPL S.A. o emisji akcji serii Z, zamówieniu na moduły UPD i umowie z NCBiR; szacunkowe przychody II kwartału 2026 z doniesień prasowych — <strong>stan danych na 17.09.2026</strong>. <strong>Mnożniki (kapitalizacja ok. 203 mln zł, cena/sprzedaż ok. 13,7, cena/wartość księgowa ok. 7,2) przeliczone samodzielnie na kurs 79 zł</strong>, ponieważ wartości w źródle policzono przy 72,70 zł | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
