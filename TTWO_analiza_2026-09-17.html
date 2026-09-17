@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TTWO — Take-Two Interactive | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .temat:hover { background:rgba(52,211,153,.18); }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: TTWO</div>
+    <div class="company-name">Take-Two Interactive Software, Inc.</div>
+    <div class="company-sub">Rockstar Games · 2K · Zynga · premiera GTA VI 19 listopada 2026</div>
+    <div class="header-meta">
+      <span class="meta-tag">Spoza portfela — pierwsza analiza</span>
+      <span class="meta-tag">Sytuacja zdarzeniowa</span>
+      <span class="meta-tag">63 dni do premiery</span>
+      <span class="meta-tag">Poza tematem AI</span>
+      <div class="price-display">
+        <div class="price-main">$213,00</div>
+        <div class="price-sub">cena podana przez Ciebie | zamknięcie 16.09.2026: $211,81, po sesji $212,54</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Konsument i platformy</span><span class="temat">Sytuacje specjalne</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — największa premiera w historii branży za 63 dni, prognoza podtrzymana, a kurs spadł o 14% w rok; ryzykiem jest trzecie przesunięcie daty">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">zakład zdarzeniowy z twardą datą, nie inwestycja fundamentalna</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$195 – $285</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">-8% do +34%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Premiera GTA VI</span><b>19 listopada 2026</b><em>Wyniki — 5 listopada</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Wnioski</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Ryzyko daty</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$213,00</div><div class="metric-detail">9,7% pod średnią 50-sesyjną, 6,7% pod 200-sesyjną</div></div>
+    <div class="metric-card"><div class="metric-label">Premiera GTA VI</div><div class="metric-value green">19 XI 2026</div><div class="metric-detail"><strong>Za 63 dni</strong> · przedsprzedaż „bezprecedensowa"</div></div>
+    <div class="metric-card"><div class="metric-label">Prognoza bookings FY2027</div><div class="metric-value green">$8,0–8,2 mld</div><div class="metric-detail"><strong>Podtrzymana, +20% r/r</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Wynik operacyjny vs EBITDA</div><div class="metric-value">-93 / +767</div><div class="metric-detail"><strong>Różnicę robi amortyzacja $859,7 mln</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Przychody powtarzalne</div><div class="metric-value green">84%</div><div class="metric-detail">Spadek tylko o 1% r/r</div></div>
+    <div class="metric-card"><div class="metric-label">Forward P/E · PEG</div><div class="metric-value green">25,83 · 0,94</div><div class="metric-detail">P/E historyczne: nie dotyczy (strata)</div></div>
+    <div class="metric-card"><div class="metric-label">Krótka sprzedaż</div><div class="metric-value red">8,51 mln</div><div class="metric-detail"><strong>Wzrost z 6,53 mln — o 30% w miesiąc</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (29 analityków)</div><div class="metric-value green">$286,44</div><div class="metric-detail">+35,2% · mocne kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL SPÓŁKI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p><strong>TTWO jest spoza portfela</strong> — to pierwsza analiza tej spółki. Twoje $213 zgadza się z rynkiem: zamknięcie 16 września wyniosło $211,81, a po sesji $212,54.</p>
+
+      <p>Take-Two Interactive to jeden z trzech największych zachodnich wydawców gier. Trzy filary: <strong>Rockstar Games</strong> (Grand Theft Auto, Red Dead Redemption), <strong>2K</strong> (NBA 2K, Borderlands, Civilization) i <strong>Zynga</strong> (gry mobilne). Przychody za dwanaście miesięcy <strong>6,69 mld dolarów</strong>, kapitalizacja <strong>39,60 mld</strong>, 12 909 pracowników.</p>
+
+      <div class="alert alert-warning"><strong>Ta analiza musi zacząć się od postawienia sprawy jasno: dziś to nie jest inwestycja w wydawcę gier, tylko zakład na jedną datę.</strong><br><br>
+      <strong>Grand Theft Auto VI ma premierę 19 listopada 2026 — za 63 dni.</strong> Będzie to najprawdopodobniej największa premiera w historii rozrywki, nie tylko gier. Wszystkie dzisiejsze wskaźniki TTWO — strata operacyjna, ujemne pokrycie odsetek, cena do przepływów 132 — są zmierzone w <strong>najgorszym możliwym momencie cyklu</strong>: pełne koszty wytworzenia gry już obciążyły rachunek, a ani jeden dolar przychodu z niej jeszcze nie wpłynął.<br><br>
+      Trzeba więc odpowiedzieć na dwa pytania osobno: <strong>czy gra wyjdzie w terminie</strong> i <strong>ile spółka jest warta, jeśli wyjdzie</strong>. Pierwszemu poświęcam sekcję 16.</div>
+
+      <h3>Historia daty premiery — trzy terminy, dwa przesunięcia</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Termin</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Pierwotnie: <strong>2025</strong></td><td style="color:var(--ocena-sprzedaz)">Przesunięty</td></tr>
+          <tr><td>Następnie: <strong>26 maja 2026</strong></td><td style="color:var(--ocena-sprzedaz)">Przesunięty — ogłoszono przy wynikach w listopadzie 2025</td></tr>
+          <tr><td><strong>Obecnie: 19 listopada 2026</strong></td><td style="color:var(--ocena-kupno)"><strong>Podtrzymywany</strong> — Rockstar deklaruje pewność</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Rockstar uzasadniał ostatnie przesunięcie tym, że <em>„dodatkowe miesiące pozwolą dokończyć grę na poziomie dopracowania, jakiego oczekujecie i na jaki zasługujecie"</em>. W niedawnej rozmowie z japońskim „Famitsu" deweloper Rockstar <strong>Rob Nelson zapytany o możliwość kolejnego przesunięcia odpowiedział, że gra „na pewno zostanie wydana"</strong>.</p>
+
+      <h3>Wyniki za I kwartał roku obrotowego 2027 — 7 sierpnia 2026</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wynik</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Bookings netto</td><td style="color:var(--ocena-uwaga)">$1,39 mld, <strong>-3% r/r</strong></td><td>Rok wcześniej $1,41 mld</td></tr>
+          <tr><td><strong>Zysk na akcję</strong></td><td style="color:var(--ocena-kupno)"><strong>$0,35</strong></td><td style="color:var(--ocena-kupno)">Wobec oczekiwanych <strong>-$0,16</strong> — ogromne zaskoczenie</td></tr>
+          <tr><td><strong>Prognoza roczna — podtrzymana</strong></td><td style="color:var(--ocena-kupno)"><strong>$8,0–8,2 mld bookings</strong></td><td style="color:var(--ocena-kupno)"><strong>Około +20% wobec roku 2026</strong></td></tr>
+          <tr><td><strong>Przychody powtarzalne</strong></td><td style="color:var(--ocena-kupno)"><strong>84% bookings</strong></td><td style="color:var(--ocena-kupno)">Spadek tylko o 1% r/r — baza jest stabilna</td></tr>
+          <tr><td><strong>Przedsprzedaż GTA VI</strong></td><td style="color:var(--ocena-kupno)">na poziomach, <em>„jakich nikt nigdy nie widział w Take-Two ani w branży"</em></td><td>Słowa prezesa Straussa Zelnicka</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Podtrzymanie prognozy jest tu mocniejszym sygnałem, niż wygląda na pierwszy rzut oka.</strong><br><br>Prognoza <strong>8,0–8,2 miliarda bookings na rok obrotowy 2027</strong> — o około 20% wyżej niż rok wcześniej — <strong>jest osiągalna wyłącznie wtedy, gdy GTA VI ukaże się w tym roku obrotowym</strong>. Zarząd potwierdził ją 7 sierpnia, czyli ponad trzy miesiące po ostatnim przesunięciu i na kwartał przed premierą.<br><br>Zarząd, który miałby wątpliwości co do daty, obniżyłby prognozę albo ją wycofał — zwłaszcza ten, który przesuwał termin już dwukrotnie i wie, jak rynek na to reaguje. <strong>Utrzymanie liczby jest więc zakładem reputacyjnym zarządu na tę datę.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — DWA BIZNESY O RÓŻNYM RYTMIE</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Filar</th><th>Czym jest</th><th>Rytm przychodów</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rockstar Games</strong></td><td>Grand Theft Auto, Red Dead Redemption</td><td style="color:var(--ocena-uwaga)"><strong>Skokowy</strong> — premiera raz na kilka lat, potem lata GTA Online</td></tr>
+          <tr><td><strong>2K</strong></td><td>NBA 2K, Borderlands, Civilization, WWE 2K</td><td style="color:var(--ocena-kupno)">Coroczny — sport wychodzi co sezon</td></tr>
+          <tr><td><strong>Zynga</strong></td><td>Gry mobilne i przeglądarkowe</td><td style="color:var(--ocena-kupno)">Ciągły — mikropłatności</td></tr>
+          <tr><td><strong>Razem: przychody powtarzalne</strong></td><td style="color:var(--ocena-kupno)"><strong>84% bookings</strong></td><td style="color:var(--ocena-kupno)">Spadek o 1% r/r — bardzo stabilnie</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Najbardziej niedoceniana liczba w tej spółce: 84% bookings pochodzi z przychodów powtarzalnych — i spadło to tylko o 1% rok do roku.</strong><br><br>Oznacza to, że <strong>nawet gdyby GTA VI w ogóle nie istniało</strong>, Take-Two miałoby około 6,7 miliarda dolarów rocznych przychodów z NBA 2K, GTA Online, gier Zyngi i mikropłatności. To nie jest spółka przedprzychodowa czekająca na jeden produkt — to działający biznes rozrywkowy z dodatkiem w postaci największej premiery w historii branży.<br><br>Dla porównania: w tej serii analizowałem spółki, gdzie cały wzrost zależał od jednego segmentu (Innodata — dwóch klientów, 71% przychodów) albo gdzie przychodów w ogóle nie było (Fermi). <strong>Tutaj podstawa jest szeroka i sprawdzona.</strong></div>
+
+      <div class="alert alert-info"><strong>Fosa Rockstar jest nietypowa i warto ją nazwać precyzyjnie.</strong> Nie jest technologiczna ani patentowa — jest <strong>kulturowa</strong>. Grand Theft Auto to marka, której kolejna część jest wydarzeniem wykraczającym poza branżę gier; poprzednia część sprzedała się w liczbie ponad dwustu milionów egzemplarzy i jest sprzedawana nadal, dekadę po premierze.<br><br>Praktyczna konsekwencja jest taka, że <strong>po premierze przychodzi wieloletni ogon</strong>: GTA Online generowało przychody przez ponad dziesięć lat po debiucie GTA V. Premiera to nie jest jednorazowy wpływ gotówki — to otwarcie kolejnej dekady mikropłatności.<br><br>Tu leży też główne ograniczenie: <strong>taki tytuł powstaje raz na dekadę</strong>. Po szczycie cyklu baza porównawcza staje się bardzo trudna.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na TTWO</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rynek gier konsolowych i PC</strong></td><td style="color:var(--ocena-uwaga)">Dojrzały, rośnie wolno</td><td style="color:var(--ocena-kupno)">GTA VI ma potencjał powiększenia całego rynku</td></tr>
+          <tr><td><strong>Mikropłatności i tryby online</strong></td><td style="color:var(--ocena-kupno)">Główne źródło marży w branży</td><td style="color:var(--ocena-kupno)">84% bookings już stąd pochodzi</td></tr>
+          <tr><td>Gry mobilne (Zynga)</td><td style="color:var(--ocena-uwaga)">Konkurencyjne, presja na koszty pozyskania gracza</td><td>Stabilizuje, nie napędza</td></tr>
+          <tr><td>Sport (NBA 2K)</td><td style="color:var(--ocena-kupno)">Licencja wyłączna, coroczna premiera</td><td style="color:var(--ocena-kupno)">Przewidywalny strumień</td></tr>
+          <tr><td><strong>Cykliczność wydawnicza</strong></td><td style="color:var(--ocena-sprzedaz)">Skrajna przy dużych tytułach</td><td style="color:var(--ocena-sprzedaz)"><strong>Dzisiejsze wskaźniki są z dna cyklu</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ostrzeżenie o cykliczności — obowiązkowe przy wydawcach gier, ale tu działa odwrotnie niż zwykle.</strong><br><br>Standardowa pułapka cykliczna polega na tym, że kupuje się na szczycie, gdy zyski są maksymalne, a mnożnik wygląda nisko. <strong>W Take-Two jest dokładnie na odwrót: dzisiejsze wskaźniki pochodzą z dna cyklu wydawniczego.</strong><br><br>Spółka poniosła już pełny koszt wytworzenia GTA VI — widać to w amortyzacji <strong>859,70 mln dolarów</strong> rocznie — a przychodu z tej gry jeszcze nie zaksięgowała ani złotówki. Stąd strata operacyjna 93,20 mln przy dodatniej EBITDA 766,50 mln.<br><br><strong>Kupując dziś, kupujesz spółkę wycenianą wskaźnikami z najgorszego kwartału cyklu, tuż przed najlepszym.</strong> To jest asymetria, na której opiera się ocena kupna — i jednocześnie powód, dla którego ryzyko przesunięcia daty jest tak istotne.</div>
+
+      <div class="alert alert-info"><strong>Uwaga o skali zjawiska.</strong> GTA V sprzedało się w ponad dwustu milionach egzemplarzy i pozostaje w sprzedaży ponad dekadę po premierze. Jeśli GTA VI powtórzy ten wzór — nawet w połowie — mówimy o produkcie, który będzie generował przychody przez całe lata dwudzieste i trzydzieste. <strong>Prognoza wzrostu zysku na akcję o 36,59% rocznie przez trzy lata właśnie to zakłada.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I STRUKTURA WŁAŚCICIELSKA</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody powtarzalne</strong></td><td style="color:var(--ocena-kupno)"><strong>84% bookings</strong></td><td style="color:var(--ocena-kupno)">Spadek o 1% r/r — baza odporna</td></tr>
+          <tr><td>Profil odbiorcy</td><td>Detaliczny, globalny, rozproszony</td><td style="color:var(--ocena-kupno)">Brak jakiejkolwiek koncentracji klientów</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$517 972</td><td style="color:var(--ocena-uwaga)">Strata na pracownika -$24 820</td></tr>
+          <tr><td><strong>Instytucje</strong></td><td style="color:var(--ocena-kupno)"><strong>95,27%</strong></td><td>Wolny obrót 186,14 mln z 186,98 mln akcji</td></tr>
+          <tr><td><strong>Udziałowcy wewnętrzni</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>0,35%</strong></td><td style="color:var(--ocena-sprzedaz)">Praktycznie zero</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>8,51 mln (4,55% akcji)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Wzrost z 6,53 mln — o 30% w miesiąc</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Struktura odbiorców jest tu wyjątkowo zdrowa i warto to docenić na tle spółek z ostatnich tygodni.</strong><br><br>Take-Two sprzedaje dziesiątkom milionów graczy detalicznych na całym świecie. <strong>Nie ma tu żadnej koncentracji klientów</strong> — w przeciwieństwie do Innodaty (dwóch klientów, 71% przychodów), Monolithic Power (gniazda u kilku producentów platform) czy Babcock &amp; Wilcox (jeden kontrakt to 84% portfela zamówień).<br><br>Do tego <strong>84% bookings to przychody powtarzalne</strong>, które spadły w kwartale zaledwie o 1%. To jest baza, która nie zniknie niezależnie od tego, co stanie się z datą premiery.</div>
+
+      <div class="alert alert-danger"><strong>Ale jedna liczba z tej tabeli zasługuje na uwagę: krótka sprzedaż wzrosła z 6,53 do 8,51 miliona akcji — o 30% w ciągu miesiąca.</strong><br><br>Przy stabilnej bazie przychodów, podtrzymanej prognozie i „bezprecedensowej" przedsprzedaży trudno znaleźć inny powód tak szybkiego budowania pozycji krótkich niż <strong>zakład na trzecie przesunięcie daty premiery</strong>.<br><br>Ktoś pozycjonuje się na złą wiadomość — i robi to w miesiącu poprzedzającym wyniki z 5 listopada, czyli ostatni moment, w którym spółka mogłaby taką informację ogłosić przed premierą 19 listopada. <strong>To jest sygnał, którego nie zignoruję, i dlatego cała sekcja 16 poświęcona jest właśnie ryzyku daty.</strong></div>
+
+      <p>Osobno: <strong>udziałowcy wewnętrzni trzymają 0,35% akcji</strong>, a instytucje 95,27%. To spółka w całości instytucjonalna — zarząd nie ma tu istotnego majątku związanego z kursem, co przy tak binarnym zdarzeniu jest warte odnotowania.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY — DLACZEGO STRATA NIE JEST STRATĄ GOTÓWKI</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th><th>Marża</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody</strong></td><td><strong>$6,69 mld</strong></td><td>—</td></tr>
+          <tr><td>Zysk brutto</td><td style="color:var(--ocena-kupno)">$3,82 mld</td><td style="color:var(--ocena-kupno)"><strong>57,13%</strong></td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$93,20 mln</strong></td><td style="color:var(--ocena-sprzedaz)">-1,39%</td></tr>
+          <tr><td><strong>EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>+$766,50 mln</strong></td><td style="color:var(--ocena-kupno)">11,46%</td></tr>
+          <tr><td><strong>Amortyzacja</strong></td><td style="color:var(--ocena-uwaga)"><strong>$859,70 mln</strong></td><td style="color:var(--ocena-uwaga)"><strong>12,9% przychodów — tu tkwi cała różnica</strong></td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td style="color:var(--ocena-sprzedaz)">-$233,30 mln</td><td>-3,49%</td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-sprzedaz)">-$320,40 mln</td><td>-4,79% · -$1,73/akcję</td></tr>
+          <tr><td><strong>Przepływy operacyjne</strong></td><td style="color:var(--ocena-kupno)"><strong>+$500,20 mln</strong></td><td style="color:var(--ocena-kupno)">Dodatnie mimo straty księgowej</td></tr>
+          <tr><td>Nakłady inwestycyjne</td><td>-$201,50 mln</td><td>3,0% przychodów</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-uwaga)"><strong>+$298,70 mln</strong></td><td style="color:var(--ocena-uwaga)">4,47% · $1,60/akcję</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Ta tabela zawiera najważniejsze rozróżnienie w całej analizie i warto je zrozumieć dokładnie.</strong><br><br>
+      Wynik operacyjny to <strong>minus 93,20 miliona</strong>. EBITDA to <strong>plus 766,50 miliona</strong>. Różnicę — <strong>859,70 miliona</strong> — robi amortyzacja.<br><br>
+      U wydawcy gier amortyzacja to w przeważającej części <strong>odpisywanie skapitalizowanych kosztów produkcji gier</strong>. Take-Two przez lata wydawało pieniądze na tworzenie GTA VI, księgowało je jako aktywo, a teraz stopniowo odpisuje w koszty. <strong>To są pieniądze wydane w przeszłości, nie wypływające dziś.</strong><br><br>
+      Dowód jest w rachunku przepływów: mimo straty netto <strong>320,40 miliona</strong>, przepływy operacyjne wyniosły <strong>plus 500,20 miliona</strong>, a wolne przepływy <strong>plus 298,70 miliona</strong>. <strong>Spółka generuje gotówkę, mimo że raportuje stratę.</strong></div>
+
+      <div class="alert alert-warning"><strong>Ale nie należy przesadzać w drugą stronę — i tu jest granica tego argumentu.</strong><br><br>Wolne przepływy wynoszą <strong>298,70 mln dolarów</strong> przy kapitalizacji 39,60 miliarda. To daje <strong>cenę do wolnych przepływów 132,23</strong> i EV do wolnych przepływów <strong>135,97</strong> — grubo powyżej progu stukrotności, przy którym wycena opiera się wyłącznie na przyszłości.<br><br>Innymi słowy: <strong>strata księgowa przecenia problem, ale dzisiejsze przepływy nie uzasadniają wyceny.</strong> Uzasadnia ją dopiero to, co ma się wydarzyć po 19 listopada.</div>
+
+      <p>Marża brutto <strong>57,13%</strong> pokazuje, że podstawowa ekonomika jest zdrowa — problem leży wyłącznie poniżej tej linii, w kosztach wytworzenia gry jeszcze niesprzedanej. Prognoza: wzrost przychodów <strong>+12,60% rocznie</strong> przez trzy lata, wzrost zysku na akcję <strong>+36,59% rocznie</strong>.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$39,60 mld</td><td>Wartość przedsiębiorstwa $40,72 mld</td></tr>
+          <tr><td>Cena / zysk</td><td>nie dotyczy</td><td style="color:var(--ocena-uwaga)">Strata -$1,73 na akcję — <strong>z dna cyklu wydawniczego</strong></td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-kupno)"><strong>25,83</strong></td><td style="color:var(--ocena-kupno)">Implikuje zysk ok. <strong>$8,25/akcję</strong> — pełne odwrócenie</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-kupno)"><strong>0,94</strong></td><td style="color:var(--ocena-kupno)">Poniżej 1,0 — wzrost nie jest przepłacony</td></tr>
+          <tr><td>Cena / sprzedaż</td><td>5,91</td><td>Prognozowana <strong>4,29</strong>; EV/sprzedaż 6,07</td></tr>
+          <tr><td><strong>Wycena do prognozy bookings</strong></td><td><strong>ok. 4,9×</strong></td><td>$39,60 mld ÷ $8,1 mld — <strong>obliczenie własne</strong></td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>132,23</strong></td><td style="color:var(--ocena-sprzedaz)">EV/FCF 135,97 — <strong>powyżej progu stukrotności</strong></td></tr>
+          <tr><td>EV / EBITDA</td><td style="color:var(--ocena-sprzedaz)">52,99</td><td style="color:var(--ocena-uwaga)">EBITDA zaniżona amortyzacją GTA VI</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td style="color:var(--ocena-uwaga)">10,98</td><td style="color:var(--ocena-sprzedaz)">Aktywa materialne ujemne; księga $19,30/akcję</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td style="color:var(--ocena-kupno)"><strong>4,28</strong></td><td>Powyżej progu 3,0. Piotroski 4</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Źródło: StockAnalysis / S&amp;P Global Market Intelligence, stan 17.09.2026. Cena $213 podana przez użytkownika, zgodna z zamknięciem 16.09.2026 ($211,81) i notowaniem po sesji ($212,54). Wycena do prognozy bookings to obliczenie własne ze środka przedziału $8,0–8,2 mld.</p>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>nie dotyczy</td><td>Strata na akcję <strong>-$1,73</strong>; przychody TTM <strong>$6,69 mld</strong>. <strong>Strata zawiera amortyzację $859,7 mln kosztów produkcji GTA VI</strong></td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-kupno)"><strong>25,83</strong></td><td>Implikuje zysk ok. <strong>$8,25 na akcję</strong> wobec dzisiejszej straty $1,73</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-kupno)"><strong>0,94</strong></td><td style="color:var(--ocena-kupno)">&lt; 1,0 = wzrost tańszy niż mnożnik sugeruje. Prognoza zysku <strong>+36,59% rocznie</strong></td></tr>
+          <tr><td>Prognoza wzrostu (3 lata)</td><td>przychody +12,60% · zysk <strong>+36,59%</strong></td><td>Konsensus 29 analityków</td></tr>
+          <tr><td>Odniesienie branżowe</td><td>wydawcy gier: ok. 20–28× forward</td><td style="color:var(--ocena-uwaga)">TTWO w środku przedziału</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> Brak historycznego P/E nie wynika tu ze słabości biznesu, lecz z <strong>momentu w cyklu wydawniczym</strong>: pełne koszty wytworzenia GTA VI już obciążyły rachunek przez amortyzację, a przychodów z gry jeszcze nie ma. Skok z <strong>-$1,73 straty na akcję do implikowanych $8,25 zysku</strong> to właśnie zaksięgowanie premiery.</p>
+      <p><strong>Wskaźnik PEG 0,94 przy prognozie wzrostu zysku o 36,59% rocznie</strong> mówi, że przy tej dynamice mnożnik 25,83 nie jest wygórowany. Podobnie wycena na poziomie <strong>około 4,9-krotności prognozowanych bookings</strong> mieści się w historycznym przedziale dla tej spółki.</p>
+      <div class="alert alert-danger"><strong>Ostrzeżenie o cenie do przepływów — obowiązkowe przy przekroczeniu stukrotności.</strong><br><br>Cena do wolnych przepływów wynosi <strong>132,23</strong>, a EV do wolnych przepływów <strong>135,97</strong>. To znaczy, że <strong>dzisiejsze przepływy nie uzasadniają tej wyceny nawet w przybliżeniu</strong> — uzasadnia ją wyłącznie założenie o tym, co wydarzy się po premierze.<br><br>Jeśli premiera się przesunie, zostaje spółka o wolnych przepływach 298,70 mln dolarów wyceniana na 39,60 miliarda. <strong>To jest dokładnie ta liczba, która stoi za scenariuszem negatywnym.</strong></div>
+
+      <h3>Cztery scenariusze na 12–18 miesięcy</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Założenie</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Premiera 19 listopada, sprzedaż rekordowa</strong></td><td>Bookings w górnym końcu prognozy, ogon online jak przy GTA V</td><td><strong>$285</strong></td><td style="color:var(--ocena-kupno)">+34%</td></tr>
+          <tr><td><strong>Stan bazowy</strong></td><td>Premiera w terminie, wyniki zgodne z prognozą $8,0–8,2 mld</td><td><strong>$240</strong></td><td style="color:var(--ocena-kupno)">+13%</td></tr>
+          <tr><td>Premiera w terminie, ale „sprzedaj fakty"</td><td>Sukces już w cenie, mnożnik się kompresuje</td><td>$195</td><td style="color:var(--ocena-sprzedaz)">-8%</td></tr>
+          <tr><td><strong>Trzecie przesunięcie daty</strong></td><td>Prognoza roczna nie do utrzymania, przychód przesunięty o rok</td><td><strong>$160</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-25%</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Fair value: $195 – $285</strong>, środek $240 (+13%). Konsensus 29 analityków to <strong>$286,44 (+35,2%)</strong> przy rekomendacji „mocne kupno" — praktycznie na górnej granicy mojego przedziału.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻOWOŚĆ I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Marża</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Brutto</strong></td><td style="color:var(--ocena-kupno)"><strong>57,13%</strong></td><td style="color:var(--ocena-kupno)">Zdrowa — problem leży poniżej tej linii</td></tr>
+          <tr><td>Operacyjna</td><td style="color:var(--ocena-sprzedaz)">-1,39%</td><td style="color:var(--ocena-uwaga)">Obciążona amortyzacją niesprzedanej gry</td></tr>
+          <tr><td><strong>EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>11,46%</strong></td><td style="color:var(--ocena-kupno)">+$766,50 mln — miara bliższa rzeczywistości</td></tr>
+          <tr><td>Netto</td><td style="color:var(--ocena-sprzedaz)">-4,79%</td><td>-$320,40 mln · -$1,73/akcję</td></tr>
+          <tr><td>Wolnych przepływów</td><td style="color:var(--ocena-uwaga)">4,47%</td><td style="color:var(--ocena-uwaga)">+$298,70 mln — dodatnie, ale cienkie</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Wniosek</th></tr></thead>
+        <tbody>
+          <tr><td>Zwrot z zainwestowanego kapitału (ROIC)</td><td style="color:var(--ocena-sprzedaz)">-2,03%</td><td rowspan="2" style="color:var(--ocena-sprzedaz)"><strong>Różnica -11,20 pp — ale mierzona w dnie cyklu</strong></td></tr>
+          <tr><td>Średni ważony koszt kapitału (WACC)</td><td>9,17%</td></tr>
+          <tr><td>Zwrot z kapitału własnego (ROE)</td><td style="color:var(--ocena-sprzedaz)">-9,04%</td><td>ROA -0,62%, ROCE -1,48%</td></tr>
+          <tr><td>Rotacja aktywów</td><td>0,71</td><td>Typowo dla wydawcy z dużą wartością firmy</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Zwrot z kapitału jest ujemny — ale trzeba to czytać z tym samym zastrzeżeniem, co wszystkie inne wskaźniki tej spółki.</strong><br><br>Różnica między zwrotem z kapitału a jego kosztem wynosi <strong>-11,20 punktu procentowego</strong>. W innych analizach z tej serii traktowałem taki wynik jako poważne ostrzeżenie — Grab miał -2,53 pp, Plug Power -29,15 pp, XTPL -34,77 pp.<br><br>Tutaj różnica polega na tym, że <strong>mianownik zawiera pełny koszt wytworzenia gry, a licznik nie zawiera żadnego przychodu z niej</strong>. Po premierze ten sam wskaźnik odwróci się gwałtownie — jeśli prognozowany zysk 8,25 dolara na akcję się zmaterializuje, zwrot z kapitału własnego wskoczy do kilkudziesięciu procent.<br><br><strong>Nie jest to więc miara jakości biznesu, tylko miara momentu w cyklu.</strong> Uczciwie trzeba jednak dodać: to samo zdanie można powiedzieć o każdej spółce przed przełomem, który nigdy nie nastąpił.</div>
+
+      <p><strong>Marża brutto 57,13% jest tym, co warto zapamiętać z tej sekcji.</strong> Pokazuje, że podstawowa ekonomika gier — sprzedaż cyfrowa o niskim koszcie krańcowym plus mikropłatności — działa. Problem jest wyłącznie w tym, że koszty wytworzenia największego tytułu w historii spółki już przeszły przez rachunek wyników, a przychody jeszcze nie.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — NAPIĘTY PRZED PREMIERĄ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$1,83 mld</td><td>4,6% kapitalizacji</td></tr>
+          <tr><td>Zadłużenie</td><td style="color:var(--ocena-uwaga)">$2,94 mld</td><td style="color:var(--ocena-uwaga)">Dług netto <strong>$1,12 mld</strong> (-$5,98/akcję)</td></tr>
+          <tr><td>Dług / kapitał własny</td><td>0,82</td><td>Dług/EBITDA 3,49 · dług/przepływy 9,86</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-0,65</strong></td><td style="color:var(--ocena-sprzedaz)">Ujemne — wynik operacyjny nie pokrywa odsetek</td></tr>
+          <tr><td><strong>Wskaźnik bieżący</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>1,06</strong></td><td style="color:var(--ocena-sprzedaz)">Szybki <strong>0,90</strong> — poniżej jedności</td></tr>
+          <tr><td><strong>Kapitał obrotowy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$173,50 mln</strong></td><td style="color:var(--ocena-sprzedaz)">Bardzo cienko przy przychodach $6,69 mld</td></tr>
+          <tr><td>Kapitał własny</td><td>$3,61 mld</td><td style="color:var(--ocena-uwaga)">Księga $19,30/akcję; <strong>aktywa materialne ujemne</strong></td></tr>
+          <tr><td>Altman Z-Score</td><td style="color:var(--ocena-kupno)">4,28</td><td>Powyżej progu 3,0. Piotroski 4</td></tr>
+          <tr><td><strong>Zmiana liczby akcji</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+4,53% r/r</strong></td><td style="color:var(--ocena-uwaga)">Ale spłacono $550 mln zadłużenia</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Bilans jest najsłabszym elementem tej tezy i trzeba to powiedzieć wprost.</strong><br><br><strong>Kapitał obrotowy wynosi 173,50 miliona dolarów</strong> przy przychodach 6,69 miliarda — to zapas na kilka dni działalności. Wskaźnik bieżący 1,06, a <strong>szybki 0,90, czyli poniżej jedności</strong>. Pokrycie odsetek jest ujemne (-0,65), bo wynik operacyjny jest ujemny.<br><br>Dług netto to <strong>1,12 miliarda dolarów</strong>, a dług do przepływów <strong>9,86</strong>. Spółka spłaciła wprawdzie 550 milionów zobowiązań w ostatnim roku, ale zrobiła to częściowo kosztem rozwodnienia — liczba akcji wzrosła o <strong>4,53%</strong>.<br><br><strong>Wniosek praktyczny: Take-Two wchodzi w największą premierę w swojej historii z napiętym bilansem.</strong> Przy premierze w terminie to przestaje mieć znaczenie w ciągu jednego kwartału — wpływy z przedsprzedaży i sprzedaży pierwszych tygodni odbudują płynność natychmiast. Przy kolejnym przesunięciu ta sama cienkość staje się problemem.</div>
+
+      <div class="alert alert-info"><strong>Altman Z-Score 4,28 wygląda uspokajająco i w tym przypadku jest uczciwy</strong> — powyżej progu 3,0, mimo ujemnego wyniku operacyjnego. Wynika to z wysokiej wartości rynkowej kapitału w stosunku do zobowiązań i z dodatnich przepływów operacyjnych.<br><br>Dla porównania w tej serii: Monolithic Power 42,76, Western Digital 13,24, Innodata 8,02, Vertiv 5,91, <strong>Take-Two 4,28</strong>, Paramount Skydance 1,03, Plug Power -4,47.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Data jest twarda i bliska: 19 listopada 2026, za 63 dni.</strong> Rockstar podtrzymuje termin, a deweloper studia zapytany wprost o możliwość kolejnego przesunięcia odpowiedział, że gra <em>„na pewno zostanie wydana"</em>. Przedsprzedaż na poziomach, jakich — słowami prezesa — <em>„nikt nigdy nie widział w Take-Two ani w branży"</em>.</div>
+
+      <div class="alert alert-success"><strong>2. Zarząd podtrzymał prognozę po ostatnim przesunięciu.</strong> Bookings <strong>$8,0–8,2 mld na rok obrotowy 2027, czyli +20%</strong> — liczba osiągalna wyłącznie z premierą w tym roku. Potwierdzenie padło 7 sierpnia, na kwartał przed datą. <strong>To zakład reputacyjny zarządu, który przesuwał termin już dwa razy.</strong></div>
+
+      <div class="alert alert-success"><strong>3. Baza jest szeroka i odporna: 84% bookings to przychody powtarzalne</strong>, które spadły w kwartale zaledwie o 1%. NBA 2K, GTA Online i Zynga dają około 6,7 miliarda dolarów rocznie <em>niezależnie</em> od GTA VI. Zero koncentracji klientów — sprzedaż detaliczna do dziesiątek milionów graczy.</div>
+
+      <div class="alert alert-success"><strong>4. Strata księgowa przecenia problem.</strong> Wynik operacyjny -$93,20 mln, ale <strong>EBITDA +$766,50 mln</strong>, przepływy operacyjne <strong>+$500,20 mln</strong> i wolne przepływy <strong>+$298,70 mln</strong>. Różnicę robi amortyzacja $859,70 mln — pieniądze wydane w przeszłości, nie wypływające dziś.</div>
+
+      <div class="alert alert-info"><strong>5. Wycena nie jest wymagająca w ujęciu przyszłym.</strong> Forward P/E <strong>25,83</strong> przy PEG <strong>0,94</strong> i prognozie wzrostu zysku o 36,59% rocznie. Około <strong>4,9-krotności prognozowanych bookings</strong> mieści się w historycznym przedziale spółki. 29 analityków utrzymuje „mocne kupno" z celem $286,44.</div>
+
+      <div class="alert alert-info"><strong>6. Kurs już się przecenił przed katalizatorem.</strong> Spadek o <strong>14,33% w rok</strong>, 9,7% poniżej średniej 50-sesyjnej, RSI <strong>36,88</strong> blisko wyprzedania — a średnia 50-sesyjna nadal powyżej 200-sesyjnej, więc trend długoterminowy pozostaje nienaruszony. <strong>Nie kupujesz szczytu przed premierą, tylko dołek korekty.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Trzecie przesunięcie daty — ryzyko binarne i jedyne, które naprawdę się liczy.</strong> Gra była już przesuwana <strong>dwukrotnie</strong>: z 2025 na maj 2026, a potem na listopad 2026. Kolejne przesunięcie przenosi przychód o cały rok obrotowy, unieważnia prognozę $8,0–8,2 mld i zostawia spółkę wycenianą na 39,60 mld przy wolnych przepływach 298,70 mln. Rozwijam w sekcji 16.</div>
+
+      <div class="alert alert-danger"><strong>2. Krótka sprzedaż wzrosła o 30% w miesiąc</strong> — z 6,53 do <strong>8,51 mln akcji</strong>. Przy stabilnej bazie przychodów i podtrzymanej prognozie trudno o inne wytłumaczenie niż pozycjonowanie się na złą wiadomość o dacie. Ktoś zakłada, że coś jeszcze zostanie ogłoszone przed 19 listopada.</div>
+
+      <div class="alert alert-danger"><strong>3. Bilans jest napięty przed premierą.</strong> Kapitał obrotowy <strong>$173,50 mln</strong> przy przychodach $6,69 mld, wskaźnik szybki <strong>0,90</strong> (poniżej jedności), <strong>pokrycie odsetek -0,65</strong>, dług netto $1,12 mld, dług do przepływów 9,86. Przy premierze w terminie to znika w kwartał; przy przesunięciu staje się problemem.</div>
+
+      <div class="alert alert-warning"><strong>4. Cena do wolnych przepływów 132,23.</strong> EV/FCF 135,97 — powyżej progu stukrotności. Dzisiejsze przepływy nie uzasadniają wyceny nawet w przybliżeniu; uzasadnia ją wyłącznie założenie o tym, co stanie się po premierze.</div>
+
+      <div class="warning-box"><strong>5. Ryzyko „sprzedaj fakty".</strong> Przedsprzedaż jest bezprecedensowa, konsensus to „mocne kupno", 29 analityków, cel +35%. <strong>Sukces premiery może być już w znacznej części w cenie</strong> — a po zdarzeniu, nawet udanym, zniknie katalizator i pojawi się pytanie o kolejną dekadę bez tytułu tej skali.</div>
+
+      <div class="alert alert-warning"><strong>6. Rozwodnienie i brak zaangażowania zarządu.</strong> Liczba akcji wzrosła o <strong>4,53% w rok</strong> — rentowność dla akcjonariusza -4,53%. Udziałowcy wewnętrzni trzymają <strong>0,35%</strong> akcji przy 95,27% w rękach instytucji. Aktywa materialne są ujemne, księga to $19,30 na akcję wobec kursu $213.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">ANALIZA KONKURENCJI</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Przewaga nad Take-Two</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Electronic Arts</strong></td><td style="color:var(--ocena-sprzedaz)">Stabilniejsze przychody (EA Sports FC, Madden co roku), rentowność bez skoków</td><td style="color:var(--ocena-kupno)">Brak tytułu o sile kulturowej GTA</td></tr>
+          <tr><td><strong>Microsoft (Xbox, Activision Blizzard)</strong></td><td style="color:var(--ocena-sprzedaz)">Nieporównywalny bilans, własna platforma i abonament</td><td>Gry to ułamek działalności</td></tr>
+          <tr><td><strong>Sony (PlayStation Studios)</strong></td><td style="color:var(--ocena-sprzedaz)">Kontrola nad platformą, na której TTWO sprzedaje</td><td>Zależny od tytułów zewnętrznych — w tym GTA</td></tr>
+          <tr><td><strong>Ubisoft, Embracer i inni</strong></td><td>Szersze portfolio marek</td><td style="color:var(--ocena-kupno)">Słabsza egzekucja, problemy z rentownością</td></tr>
+          <tr><td><strong>Amazon</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 3,68%)</span></td><td>Prime Gaming, Twitch — dystrybucja i zasięg</td><td style="color:var(--ocena-kupno)">Nie konkuruje w dużych produkcjach</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Pozycja konkurencyjna Take-Two jest nietypowa: w swojej najważniejszej niszy spółka nie ma konkurenta.</strong><br><br>Nie istnieje drugi tytuł, który mógłby konkurować z Grand Theft Auto o tę samą uwagę w tym samym momencie. Wydawcy <strong>przesuwają własne premiery, żeby nie wypaść w tym samym oknie</strong> — to jest sytuacja, w której konkurencja ustępuje pola, zamiast walczyć.<br><br>Przewaga jest jednak wąska i czasowa. <strong>Poza cyklem GTA Take-Two konkuruje normalnie</strong> — NBA 2K z EA Sports, Zynga z całym rynkiem mobilnym — i tam nie ma żadnej wyjątkowej pozycji.</div>
+
+      <div class="alert alert-warning"><strong>Gdzie Take-Two przegrywa: na strukturze przychodów w latach między premierami.</strong> Electronic Arts wydaje kilka dużych tytułów sportowych co roku, więc jego wyniki są przewidywalne. Take-Two ma jeden tytuł, który raz na dekadę przewraca rachunek wyników do góry nogami — i osiem lat, w których trzeba się tłumaczyć z porównań.<br><br><strong>To właśnie dlatego ocena na horyzont trzech–pięciu lat wypada neutralnie, mimo pozytywnej oceny na najbliższe kwartały.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Cena przyjęta do analizy</td><td><strong>$213,00</strong></td><td>Zamknięcie 16.09: $211,81; po sesji $212,54</td></tr>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-sprzedaz)">-14,33%</td><td style="color:var(--ocena-uwaga)">Przecena przed katalizatorem</td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td>$234,59</td><td style="color:var(--ocena-sprzedaz)">Kurs 9,7% poniżej</td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td>$227,03</td><td style="color:var(--ocena-uwaga)">Kurs 6,7% poniżej — <strong>ale 50-sesyjna nadal nad 200-sesyjną</strong></td></tr>
+          <tr><td><strong>RSI (14)</strong></td><td style="color:var(--ocena-kupno)"><strong>36,88</strong></td><td style="color:var(--ocena-kupno)">Blisko wyprzedania (próg 30)</td></tr>
+          <tr><td>Beta (5 lat)</td><td style="color:var(--ocena-kupno)">0,97</td><td style="color:var(--ocena-kupno)">Zbliżona do rynku — <strong>nietypowo nisko jak na taki zakład</strong></td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>8,51 mln (4,55% akcji)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Wzrost z 6,53 mln</strong>; 3,22 dnia na zamknięcie</td></tr>
+          <tr><td>Średni wolumen</td><td>2,66 mln akcji</td><td>Płynność bez zastrzeżeń</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Układ techniczny jest tu korzystny i warto zobaczyć dlaczego.</strong><br><br>Kurs jest poniżej obu średnich, ale <strong>średnia 50-sesyjna ($234,59) nadal znajduje się powyżej 200-sesyjnej ($227,03)</strong> — czyli to korekta wewnątrz trendu wzrostowego, nie jego odwrócenie. <strong>RSI 36,88 zbliża się do wyprzedania.</strong><br><br>Najciekawsze jest jednak zestawienie: kurs spadł o <strong>14,33% w rok</strong>, mimo że w tym czasie zarząd podtrzymał prognozę, przedsprzedaż okazała się rekordowa, a wyniki I kwartału pobiły oczekiwania o 318%. <strong>Rynek wycenia więc nie wyniki, tylko ryzyko daty.</strong><br><br>Beta 0,97 przy tak binarnym zdarzeniu jest zaskakująco niska — historycznie akcja zachowywała się jak rynek, ale w najbliższych dziewięciu tygodniach to się prawie na pewno zmieni.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$227,03</strong></td><td>Średnia 200-sesyjna — pierwszy istotny opór</td></tr>
+          <tr><td><strong>$234,59</strong></td><td>Średnia 50-sesyjna — powrót powyżej zamknąłby korektę</td></tr>
+          <tr><td><strong>$286,44</strong></td><td>Konsensus 29 analityków</td></tr>
+          <tr><td><strong>$195 – $285</strong></td><td>Przedział wartości godziwej — kurs w dolnej części</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$195</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — dolna granica wartości godziwej</td></tr>
+          <tr><td><strong>$160</strong></td><td>Scenariusz trzeciego przesunięcia daty</td></tr>
+          <tr><td><strong>$19,30</strong></td><td>Wartość księgowa na akcję — bez znaczenia jako wsparcie</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Premiera 19 listopada wypada dokładnie w tym oknie, a kurs jest 9,7% pod średnią 50-sesyjną przy RSI 36,88. Wyniki 5 listopada to ostatni moment na ewentualną złą wiadomość.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Pełny rok GTA VI w wynikach plus początek ogona online. Forward P/E 25,83 przy PEG 0,94; wartość godziwa $195–285.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Po szczycie cyklu baza porównawcza staje się brutalna, a następny tytuł tej skali to perspektywa dekady. Zostaje EA-podobny biznes z trudnymi porównaniami.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Ocena kupna opiera się na czterech rzeczach, które składają się w rzadko spotykaną asymetrię.</strong><br><br>
+      <strong>Data jest twarda i bliska</strong> — 19 listopada, za 63 dni, z deklaracją dewelopera Rockstar, że gra „na pewno zostanie wydana".<br>
+      <strong>Zarząd podtrzymał prognozę</strong> $8,0–8,2 mld bookings (+20%), której nie da się osiągnąć bez premiery w tym roku obrotowym — i zrobił to po dwóch wcześniejszych przesunięciach, więc wie, co ryzykuje.<br>
+      <strong>Baza jest szeroka</strong> — 84% bookings to przychody powtarzalne, spadek o 1% r/r. To nie jest spółka jednego produktu.<br>
+      <strong>Kurs już się przecenił</strong> — minus 14,33% w rok, RSI 36,88, mimo rekordowej przedsprzedaży i wyników bijących oczekiwania o 318%.<br><br>
+      Do tego wszystkie dzisiejsze wskaźniki mierzone są <strong>w najgorszym punkcie cyklu wydawniczego</strong>: pełny koszt wytworzenia gry już w rachunku, zero przychodu z niej.</div>
+
+      <div class="alert alert-danger"><strong>Ale to jest zakład zdarzeniowy, nie inwestycja fundamentalna — i wielkość pozycji musi to odzwierciedlać.</strong><br><br>Gra była przesuwana <strong>dwa razy</strong>. Trzecie przesunięcie przenosi przychód o cały rok obrotowy i zostawia spółkę wycenianą na 39,60 miliarda przy wolnych przepływach 298,70 miliona, z <strong>kapitałem obrotowym 173,50 miliona i ujemnym pokryciem odsetek</strong>.<br><br>I ktoś się na to pozycjonuje: <strong>krótka sprzedaż wzrosła o 30% w ciągu miesiąca</strong>. Nie wiem, czy ci inwestorzy mają rację — ale wiem, że budują pozycję akurat teraz.</div>
+
+      <h3>Konkretnie</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Działanie</th><th>Szczegóły</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Sugerowana wielkość</strong></td><td><strong>1,5–2% portfela</strong> — ograniczona przez binarny charakter zdarzenia, nie przez jakość spółki</td></tr>
+          <tr><td><strong>Transza pierwsza</strong></td><td>Przy obecnych <strong>$213</strong> — połowa docelowej pozycji</td></tr>
+          <tr><td><strong>Transza druga</strong></td><td><strong>Po wynikach z 5 listopada</strong>, jeśli data zostanie potwierdzona</td></tr>
+          <tr><td><strong>Czego nie robić</strong></td><td>Nie budować pełnej pozycji przed 5 listopada — to ostatni moment na ogłoszenie przesunięcia</td></tr>
+          <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$285</strong>; rozważyć redukcję <em>po</em> premierze — ryzyko „sprzedaj fakty"</td></tr>
+          <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$195</strong></td></tr>
+          <tr><td><strong>Natychmiastowe wyjście z tezy</strong></td><td>Jakakolwiek wzmianka o przesunięciu daty albo obniżenie prognozy bookings</td></tr>
+          <tr><td><strong>Zaleta portfelowa</strong></td><td style="color:var(--ocena-kupno)"><strong>Jedyna z ostatnich analiz spoza tematu AI</strong> — patrz niżej</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Uwaga portfelowa, która wyróżnia tę spółkę na tle ostatnich analiz.</strong> Vertiv, Monolithic Power i Innodata — wszystkie pogłębiłyby Twoją ekspozycję na sztuczną inteligencję, która stanowi już około <strong>53,5%</strong> portfela. <strong>Take-Two jest od tego niezależne.</strong> Rozrywka konsumencka, beta 0,97, katalizator wyłącznie spółkowy i data wpisana w kalendarz.<br><br>W portfelu nie masz dziś żadnej spółki z branży gier ani szerzej z rozrywki — Roku, jedyną pozycję z tego obszaru, zamknąłeś w sierpniu. <strong>To jest argument dywersyfikacyjny, którego nie miała żadna z poprzednich analiz.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">KLUCZOWE WNIOSKI — ZA I PRZECIW</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="thesis-grid">
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-kupno)">Trzy powody, żeby kupić</h3>
+          <ol>
+            <li><strong>Twarda data za 63 dni</strong> i prognoza $8,0–8,2 mld bookings (+20%) podtrzymana po dwóch wcześniejszych przesunięciach. Przedsprzedaż „bezprecedensowa" według prezesa.</li>
+            <li><strong>Wskaźniki mierzone w dnie cyklu.</strong> Wynik operacyjny -$93 mln, ale EBITDA +$767 mln i wolne przepływy +$299 mln — różnicę robi amortyzacja $860 mln kosztów gry, która jeszcze nie przyniosła przychodu.</li>
+            <li><strong>Baza 84% przychodów powtarzalnych</strong> (-1% r/r), zero koncentracji klientów, kurs -14,33% w rok przy RSI 36,88. Do tego <strong>dywersyfikacja wobec 53,5% ekspozycji na AI</strong>.</li>
+          </ol>
+        </div>
+        <div class="thesis-col">
+          <h3 style="color:var(--ocena-sprzedaz)">Trzy powody do ostrożności</h3>
+          <ol>
+            <li><strong>Dwa przesunięcia już były.</strong> Trzecie przenosi przychód o rok i unieważnia prognozę — scenariusz $160, czyli -25%.</li>
+            <li><strong>Krótka sprzedaż +30% w miesiąc</strong> (6,53 → 8,51 mln akcji). Ktoś pozycjonuje się na złą wiadomość przed 5 listopada.</li>
+            <li><strong>Napięty bilans:</strong> kapitał obrotowy $173,5 mln, wskaźnik szybki 0,90, pokrycie odsetek -0,65, cena do wolnych przepływów <strong>132,23</strong>.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="alert alert-success"><strong>Thesis-confirmer (co potwierdziłoby kupno):</strong> potwierdzenie daty przy wynikach 5 listopada, utrzymanie prognozy $8,0–8,2 mld, dalszy wzrost przedsprzedaży, powrót kursu powyżej średniej 200-sesyjnej ($227,03).</div>
+      <div class="alert alert-danger"><strong>Thesis-breaker:</strong> jakakolwiek wzmianka o przesunięciu premiery, obniżenie prognozy bookings, dalszy wzrost krótkiej sprzedaży powyżej 6% akcji albo kurs poniżej $195.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Take-Two to dziś nie inwestycja w wydawcę gier, tylko zakład na jedną datę — i ta data jest wyjątkowo blisko.</strong> Grand Theft Auto VI ma premierę <strong>19 listopada 2026, czyli za 63 dni</strong>, i będzie najprawdopodobniej największą premierą w historii rozrywki. Zarząd <strong>podtrzymał 7 sierpnia prognozę 8,0–8,2 miliarda dolarów bookings na rok obrotowy 2027</strong> — o około 20% wyżej niż rok wcześniej — a tej liczby nie da się osiągnąć bez premiery w tym roku. Prezes mówił o przedsprzedaży na poziomach, <em>„jakich nikt nigdy nie widział w Take-Two ani w branży"</em>, a deweloper Rockstar zapytany wprost o kolejne przesunięcie odpowiedział, że gra <em>„na pewno zostanie wydana"</em>. Mimo to kurs spadł o <strong>14,33% w ciągu roku</strong>, jest 9,7% poniżej średniej 50-sesyjnej, a RSI wynosi 36,88.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Wszystkie dzisiejsze wskaźniki mierzone są <strong>w najgorszym możliwym punkcie cyklu wydawniczego</strong>: pełny koszt wytworzenia gry już przeszedł przez rachunek wyników w postaci amortyzacji <strong>859,70 miliona dolarów</strong>, a przychodu z niej nie ma jeszcze ani dolara. Stąd strata operacyjna 93,20 miliona przy <strong>dodatniej EBITDA 766,50 miliona</strong> i <strong>dodatnich wolnych przepływach 298,70 miliona</strong> — spółka generuje gotówkę, mimo że raportuje stratę. Ale nie wolno przesadzić w drugą stronę: <strong>cena do wolnych przepływów wynosi 132,23</strong>, kapitał obrotowy to zaledwie 173,50 miliona przy przychodach 6,69 miliarda, wskaźnik szybki jest poniżej jedności, a pokrycie odsetek ujemne. <strong>I ktoś się na to pozycjonuje: krótka sprzedaż wzrosła w miesiąc o 30%.</strong></p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Musi istnieć twarda, bliska data.</strong> 19 listopada 2026, potwierdzana przez Rockstar — spełnione i to fundament tezy.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Zarząd musi stać za prognozą.</strong> $8,0–8,2 mld bookings podtrzymane 7 sierpnia, po dwóch wcześniejszych przesunięciach — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Musi istnieć baza niezależna od premiery.</strong> 84% bookings to przychody powtarzalne, spadek o 1% r/r — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Bilans musi mieć zapas.</strong> Kapitał obrotowy $173,5 mln, wskaźnik szybki 0,90, pokrycie odsetek -0,65 — niespełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Dzisiejsze przepływy muszą uzasadniać wycenę.</strong> Cena do wolnych przepływów 132,23 — nie uzasadniają.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Data musi zostać dotrzymana.</strong> Dwa przesunięcia już były; krótka sprzedaż rośnie. Rozstrzygnie się do 19 listopada.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-sprzedaz)"><strong>5 listopada 2026</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Wyniki za II kwartał FY2027</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Ostatni moment na ogłoszenie przesunięcia</strong> przed premierą</td></tr>
+            <tr><td style="color:var(--ocena-kupno)"><strong>19 listopada 2026</strong></td><td style="color:var(--ocena-kupno)"><strong>Premiera GTA VI</strong></td><td style="color:var(--ocena-kupno)">Zdarzenie, wokół którego kręci się cała teza</td></tr>
+            <tr><td>Grudzień 2026 – styczeń 2027</td><td>Pierwsze dane o sprzedaży i oceny</td><td>Test skali oraz jakości wykonania</td></tr>
+            <tr><td>Luty 2027</td><td>Wyniki za III kwartał — pierwszy z GTA VI</td><td style="color:var(--ocena-kupno)">Pierwsze twarde liczby zamiast prognoz</td></tr>
+            <tr><td>2027 i dalej</td><td>Uruchomienie trybu online</td><td>Ogon przychodowy — przy GTA V trwał dekadę</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Data premiery</strong></td><td>19 listopada 2026, podtrzymywana</td><td>jakakolwiek wzmianka o przesunięciu</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Prognoza bookings FY2027</strong></td><td>$8,0–8,2 mld (podtrzymana)</td><td>obniżenie lub wycofanie</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Przychody powtarzalne</strong></td><td>84% bookings, -1% r/r</td><td>spadek poniżej 80%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Krótka sprzedaż</strong></td><td>8,51 mln (z 6,53 mln)</td><td>wzrost powyżej 6% akcji</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Kapitał obrotowy</strong></td><td>$173,50 mln</td><td>zejście poniżej zera</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Kurs akcji</strong></td><td>$213</td><td>spadek poniżej $195</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Wielkość docelowa</strong></td><td><strong>1,5–2% portfela</strong> — ograniczona binarnym charakterem zdarzenia</td></tr>
+            <tr><td><strong>Transza pierwsza</strong></td><td>Przy <strong>$213</strong> — połowa pozycji</td></tr>
+            <tr><td><strong>Transza druga</strong></td><td>Po wynikach <strong>5 listopada</strong>, jeśli data zostanie potwierdzona</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$285</strong>; rozważyć redukcję po samej premierze</td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$195</strong></td></tr>
+            <tr><td><strong>Warunek wyjścia</strong></td><td>Wzmianka o przesunięciu daty albo obniżenie prognozy bookings</td></tr>
+            <tr><td><strong>Zaleta portfelowa</strong></td><td>Ekspozycja poza tematem AI, który waży już ok. 53,5%</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">KUPNO</div>
+        <p>Kupuję tu asymetrię wynikającą z momentu w cyklu. <strong>Wszystkie dzisiejsze wskaźniki Take-Two — strata operacyjna, ujemne pokrycie odsetek, ujemny zwrot z kapitału — zmierzono w najgorszym punkcie cyklu wydawniczego</strong>: pełne koszty wytworzenia Grand Theft Auto VI już obciążyły rachunek amortyzacją 859,70 miliona dolarów, a przychodu z gry nie ma jeszcze wcale. Że to kwestia księgowania, a nie kondycji, widać w przepływach: mimo straty netto 320,40 miliona spółka wygenerowała <strong>500,20 miliona gotówki operacyjnej</strong>. Premiera przypada <strong>19 listopada, za 63 dni</strong>, zarząd podtrzymał prognozę 8,0–8,2 miliarda bookings, przedsprzedaż jest według prezesa bezprecedensowa, a 84% przychodów pochodzi z powtarzalnej bazy, która spadła o zaledwie 1%. Mimo to kurs stracił 14,33% w rok i jest blisko wyprzedania.</p>
+        <p>Ale nazwijmy to po imieniu: <strong>to jest zakład zdarzeniowy z twardą datą, a nie inwestycja fundamentalna.</strong> Gra była przesuwana dwukrotnie — z 2025 na maj 2026, a potem na listopad. Trzecie przesunięcie przeniosłoby przychód o cały rok obrotowy i zostawiło spółkę wycenianą na 39,60 miliarda przy wolnych przepływach 298,70 miliona, <strong>kapitale obrotowym 173,50 miliona i wskaźniku szybkim poniżej jedności</strong>. Ktoś się na to pozycjonuje: <strong>krótka sprzedaż wzrosła w ciągu miesiąca o 30%</strong>. Dlatego pozycja 1,5–2%, wejście w dwóch transzach i <strong>nie budowanie pełnej ekspozycji przed wynikami z 5 listopada</strong> — to ostatni moment, w którym zła wiadomość mogłaby się pojawić.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-kupno)">Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$195 – $285</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$160 (-25%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$285 (+34%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>1,5–2% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 5 listopada</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">RYZYKO DATY — JEDYNE, KTÓRE SIĘ LICZY</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="alert alert-danger"><strong>Cała ta analiza sprowadza się do jednego pytania: czy 19 listopada gra się ukaże. Ta sekcja zbiera dowody po obu stronach — bo od tego zależy różnica między $285 a $160.</strong></div>
+
+      <h3>Co przemawia za dotrzymaniem terminu</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Argument</th><th>Siła</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zarząd podtrzymał prognozę $8,0–8,2 mld bookings 7 sierpnia</strong> — liczby nieosiągalnej bez premiery w tym roku obrotowym</td><td style="color:var(--ocena-kupno)"><strong>Bardzo mocny.</strong> Zarząd po dwóch przesunięciach wie, jak rynek reaguje; utrzymanie prognozy to zakład reputacyjny</td></tr>
+          <tr><td><strong>Deweloper Rockstar w rozmowie z „Famitsu": gra „na pewno zostanie wydana"</strong></td><td style="color:var(--ocena-kupno)">Mocny — publiczna deklaracja osoby ze studia</td></tr>
+          <tr><td><strong>Przedsprzedaż „na poziomach, jakich nikt nigdy nie widział"</strong></td><td style="color:var(--ocena-kupno)">Mocny — przedsprzedaż uruchamia się przy wysokiej pewności daty</td></tr>
+          <tr><td>Materiały marketingowe w obiegu (zwiastuny, kampania)</td><td style="color:var(--ocena-kupno)">Umiarkowany — kampania na tę skalę jest kosztowna i planowana z wyprzedzeniem</td></tr>
+          <tr><td>Odległość od ostatniego przesunięcia</td><td style="color:var(--ocena-uwaga)">Umiarkowany — decyzja o listopadzie zapadła rok wcześniej, więc miała zapas</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Co przemawia przeciw</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Argument</th><th>Siła</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gra była przesuwana dwa razy</strong> — z 2025 na maj 2026, potem na listopad 2026</td><td style="color:var(--ocena-sprzedaz)"><strong>Bardzo mocny.</strong> Historia jest najlepszym predyktorem; Rockstar ma reputację studia, które przesuwa, gdy uzna to za konieczne</td></tr>
+          <tr><td><strong>Krótka sprzedaż +30% w miesiąc</strong> (6,53 → 8,51 mln akcji)</td><td style="color:var(--ocena-sprzedaz)"><strong>Mocny.</strong> Ktoś buduje pozycję akurat przed wynikami z 5 listopada</td></tr>
+          <tr><td>Kurs -14,33% w rok mimo dobrych informacji</td><td style="color:var(--ocena-sprzedaz)">Mocny — rynek wycenia ryzyko, którego nie widać w komunikatach</td></tr>
+          <tr><td>Skala projektu bez precedensu</td><td style="color:var(--ocena-uwaga)">Umiarkowany — im większa produkcja, tym więcej rzeczy może wymagać dopracowania</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Moja ocena: przewaga jest po stronie dotrzymania terminu, ale nie jest przytłaczająca — i dlatego pozycja ma być umiarkowana.</strong><br><br>Najmocniejszym argumentem jest <strong>podtrzymanie prognozy finansowej</strong>. Deklaracje marketingowe i wypowiedzi deweloperów bywają ostrożnościowe, ale <strong>prognoza bookings to liczba, z której zarząd jest rozliczany</strong>. Utrzymanie jej 7 sierpnia, po dwóch wcześniejszych wpadkach z datą, oznacza, że zarząd wierzy w listopad na tyle, by postawić na to własną wiarygodność.<br><br>Najmocniejszym argumentem przeciw jest <strong>po prostu historia</strong> — dwa przesunięcia w trzy lata — oraz to, że <strong>rynek i grający na spadki wyceniają to ryzyko coraz wyżej</strong>, mimo braku nowych negatywnych informacji.</div>
+
+      <h3>Jak to przełożyć na decyzję</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Moment</th><th>Co wiadomo</th><th>Działanie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Dziś (17 września)</strong></td><td>Data podtrzymana, prognoza podtrzymana, kurs -14% i RSI 36,88</td><td style="color:var(--ocena-kupno)"><strong>Pierwsza transza — połowa pozycji</strong></td></tr>
+          <tr><td><strong>5 listopada</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Wyniki — ostatni moment na ogłoszenie przesunięcia</strong></td><td>Jeśli data potwierdzona: druga transza. Jeśli nie: wyjście</td></tr>
+          <tr><td><strong>19 listopada</strong></td><td>Premiera</td><td style="color:var(--ocena-uwaga)">Rozważyć częściową realizację — ryzyko „sprzedaj fakty"</td></tr>
+          <tr><td><strong>Luty 2027</strong></td><td>Pierwszy kwartał z GTA VI w wynikach</td><td>Twarde liczby zamiast prognoz — moment na ocenę tezy długoterminowej</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Dlaczego rozbijam wejście na dwie transze zamiast czekać do 5 listopada.</strong> Gdyby data została potwierdzona przy wynikach, kurs zareagowałby natychmiast — a dziś kupuje się <strong>14% poniżej poziomu sprzed roku, przy RSI blisko wyprzedania</strong>. Czekanie na pełną pewność oznacza zapłacenie za nią.<br><br>Z drugiej strony budowanie całej pozycji przed 5 listopada byłoby zignorowaniem faktu, że <strong>ta spółka przesuwała datę już dwukrotnie</strong>. Podział na pół daje ekspozycję na dobry scenariusz przy ograniczeniu szkody w złym.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 września 2026 | Cena: <strong>$213,00</strong> — cena podana przez użytkownika, zgodna z zamknięciem sesji 16.09.2026 ($211,81) i notowaniem po sesji ($212,54) | Pierwsza analiza TTWO — spółka spoza portfela | Dane: StockAnalysis / S&amp;P Global Market Intelligence, komunikaty Take-Two Interactive IR (wyniki I kwartału roku obrotowego 2027 z 07.08.2026, podtrzymana prognoza bookings), komunikaty Rockstar Games o dacie premiery Grand Theft Auto VI, wypowiedzi zarządu i dewelopera studia w mediach branżowych — <strong>stan danych na 17.09.2026</strong>. Wycena do prognozy bookings (ok. 4,9×) to obliczenie własne ze środka przedziału $8,0–8,2 mld | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

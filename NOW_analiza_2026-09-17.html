@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOW — ServiceNow | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:12.5px; color:var(--text-muted); font-style:italic; margin-top:-4px; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: NOW</div>
+    <div class="company-name">ServiceNow, Inc.</div>
+    <div class="company-sub">Platforma automatyzacji procesów korporacyjnych · Santa Clara</div>
+    <div class="header-meta">
+      <span class="meta-tag">Druga pozycja portfela</span>
+      <span class="meta-tag">Obniżenie oceny z KUPNA</span>
+      <span class="meta-tag">Korekta pięciu błędów — sekcja 16</span>
+      <div class="price-display">
+        <div class="price-main">$139,82</div>
+        <div class="price-sub">zamknięcie 16.09.2026 (-1,47%), przed sesją: $139,23</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Oprogramowanie i SaaS</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — teza z sierpnia zadziałała i dyskonto się zamknęło; trzymać, nie dokupować powyżej 145 dolarów">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">obniżenie z KUPNA — powodem jest kurs, nie spółka</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$130 – $175</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-7% do +25%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>28 października</b><em>Q3 2026</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$139,82</div><div class="metric-detail">-26,21% w 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 21.08</div><div class="metric-value green">+8,8%</div><div class="metric-detail">Teza zadziałała — i dlatego dyskonto zniknęło</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody abonamentowe Q2</div><div class="metric-value green">+24,5%</div><div class="metric-detail">150 pb powyżej własnej prognozy spółki</div></div>
+    <div class="metric-card"><div class="metric-label">Cel AI na 2026</div><div class="metric-value green">$1,5 mld</div><div class="metric-detail"><strong>Podniesiony z miliarda</strong> — nowy fakt od sierpnia</div></div>
+    <div class="metric-card"><div class="metric-label">Marża wolnych przepływów</div><div class="metric-value green">31,09%</div><div class="metric-detail">Gotówka 2,7× wyższa od zysku księgowego</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / zysk prognozowany</div><div class="metric-value">30,86</div><div class="metric-detail">Miesiąc temu 28,64 — mnożnik się rozszerzył</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (49 analityków)</div><div class="metric-value">$143,84</div><div class="metric-detail"><strong>Tylko +2,88%</strong> — poduszka zniknęła</div></div>
+    <div class="metric-card"><div class="metric-label">Pokrycie odsetek</div><div class="metric-value red">22× czy 5×</div><div class="metric-detail"><strong>Raportowane vs realne — sekcja 8</strong></div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I CO SIĘ ZMIENIŁO OD SIERPNIA</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>ServiceNow sprzedaje platformę, na której duże organizacje układają procesy wewnętrzne — zgłoszenia informatyczne, obsługę pracownika, obieg dokumentów. Zaczynała w działach IT, dziś obsługuje też kadry, finanse i obsługę klienta. <strong>29 187 pracowników, $14,73 mld przychodu</strong> za dwanaście miesięcy. To <strong>druga pozycja Twojego portfela z wagą 13,42%</strong>, ze średnią ceną wejścia $108,42.</p>
+
+      <div class="alert alert-success"><strong>Teza z 21 sierpnia się sprawdziła — i właśnie dlatego obniżam ocenę.</strong><br><br>
+      Napisałem wtedy, że rynek wycenił ServiceNow jako ofiarę sztucznej inteligencji, podczas gdy spółka raportuje wyniki beneficjenta. Wystąpiły wszystkie trzy sygnały, które wskazałem jako potwierdzenie: <strong>zarząd podniósł cel przychodów z AI o połowę</strong>, średnie kroczące przecięły się w górę, a krótka sprzedaż spadła dalej. Kurs urósł o 8,8%.<br><br>
+      Konsekwencja jest niewygodna: <strong>okazja polegała na dyskoncie, a dyskonto zostało zamknięte.</strong> Konsensus analityków był w sierpniu 10,7% powyżej kursu — dziś jest 2,88%.</div>
+
+      <h3>Skąd wziął się ten ruch</h3>
+      <p>Przyczyna była w większości <strong>sektorowa, nie spółkowa</strong>. Pod koniec sierpnia prezes Salesforce publicznie odrzucił obawę, że sztuczna inteligencja zniszczy oprogramowanie rozliczane od użytkownika, co wywołało przeszacowanie całej branży. Wyniki ServiceNow były dobre, ale ukazały się <strong>22 lipca — miesiąc przed rajdem</strong>. Ruch oparty na zmianie nastroju wobec sektora jest odwracalny w sposób, w jaki nie jest ruch oparty na wynikach.</p>
+
+      <h3>Wyniki za II kwartał — 22 lipca 2026</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wynik</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody abonamentowe</strong></td><td style="color:var(--ocena-kupno)"><strong>$3,877 mld, +24,5% r/r</strong></td><td>+23% w stałej walucie</td></tr>
+          <tr><td><strong>Cel AI na 2026 — podniesiony</strong></td><td style="color:var(--ocena-kupno)"><strong>z $1 mld do ok. $1,5 mld</strong></td><td style="color:var(--ocena-kupno)">Najważniejsza pojedyncza zmiana; wdrożenia agentowe ×9 w dziewięć miesięcy</td></tr>
+          <tr><td>Nowi klienci kupujący AI</td><td style="color:var(--ocena-kupno)">+45% r/r</td><td>Rozszerzanie bazy, nie tylko dosprzedaż</td></tr>
+          <tr><td>Cyberbezpieczeństwo</td><td style="color:var(--ocena-kupno)">najszybciej rosnąca z 10 największych linii</td><td>Efekt przejęć — sekcja 2</td></tr>
+          <tr><td>Prognoza abonamentu na rok</td><td>$15,76–15,78 mld</td><td>Podniesiona; +21% w stałej walucie</td></tr>
+          <tr><td>Marże</td><td style="color:var(--ocena-uwaga)">pod presją kosztów AI</td><td style="color:var(--ocena-uwaga)">Jedyna rysa — mechanizm w sekcji 7</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT I DWA PRZEJĘCIA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <p><strong>Fosa nie polega na tym, że produkt jest lepszy</strong>, tylko na tym, że po wdrożeniu staje się szkieletem procesów całej organizacji. Duże wdrożenie trwa kwartały, kosztuje miliony i wchodzi w setki integracji. Wymiana dostawcy oznacza przeprojektowanie sposobu, w jaki firma działa — miary tej odporności w sekcji 4.</p>
+
+      <h3>Kwiecień 2026: druga noga</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Przejęcie</th><th>Kwota</th><th>Co wnosi</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Armis</strong></td><td><strong>ok. $7,6 mld</strong></td><td>Widoczność i ochrona urządzeń podłączonych do sieci firmy</td></tr>
+          <tr><td><strong>Veza</strong></td><td>$1,2 mld</td><td>Zarządzanie uprawnieniami — kto ma dostęp do czego</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>To zmiana kategorii spółki, której nazwa jeszcze nie przyjęła się na rynku: ServiceNow przestał być wyłącznie firmą od procesów i stał się po części firmą od cyberbezpieczeństwa.</strong><br><br>Logika jest spójna. Skoro platforma i tak wie, jakie urządzenia i jacy ludzie działają w organizacji oraz jakie procesy uruchamiają, to jest naturalnym miejscem, żeby pilnować, <em>kto i do czego ma prawo</em>. Kiedy agenty zaczynają działać w imieniu pracowników, pytanie o uprawnienia przestaje być techniczne i staje się warunkiem wdrożenia. Skutki bilansowe tych przejęć — w sekcji 8.</div>
+
+      <p><strong>Dlaczego warstwa AI działa akurat tutaj:</strong> agent jest użyteczny wtedy, gdy ma dostęp do danych i uprawnienie do działania. ServiceNow ma jedno i drugie, bo siedzi w środku procesów firmy. Konkurent budujący agenta od zera musi najpierw zdobyć te integracje — czyli wykonać pracę, która zajmuje kwartały.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">SPÓR, KTÓRY ROZSTRZYGNIE WYCENĘ</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Teza rynku z ostatniego roku</th><th>Teza wyników</th></tr></thead>
+        <tbody>
+          <tr><td>Agenty zastępują pracowników, więc licencji na stanowiska trzeba mniej</td><td>Agenty wymagają platformy, na której działają</td></tr>
+          <tr><td>Model rozliczania za użytkownika się załamie</td><td>Spółka przechodzi na rozliczanie za wykonaną pracę agenta</td></tr>
+          <tr><td>Startupy zbudują to taniej od zera</td><td>Nie mają integracji ani uprawnień; wdrożenie zajmuje kwartały</td></tr>
+          <tr><td>Wzrost zwolni do kilkunastu procent</td><td>Prognoza podnoszona, nie obniżana</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>W sierpniu kurs stał po stronie pierwszej kolumny, a dane po stronie drugiej — na tym polegała okazja. Dziś kurs przesunął się w stronę drugiej kolumny, a dane się nie zmieniły.</strong><br><br>To nie znaczy, że pierwsza kolumna jest błędna — znaczy, że <strong>przestała być tania</strong>. Obawa dotyczy lat 2028–2030 i żadna dzisiejsza liczba jej nie rozstrzyga. Nikt nie wie, jak wygląda oprogramowanie korporacyjne w świecie, gdzie połowę pracy biurowej wykonują agenty: ServiceNow może wyjść z tego mocniejszy, sprzedając pracę zamiast stanowisk, albo warstwa procesów okaże się cienka i wchłonie ją ktoś, kto ma model językowy.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI — TWARDOŚĆ BAZY</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zakontraktowany przychód (cRPO)</strong></td><td><strong>$13,2 mld</strong></td><td style="color:var(--ocena-kupno)"><strong>Ok. 10,2 miesiąca</strong> sprzedaży abonamentowej w tempie z II kwartału — już podpisane</td></tr>
+          <tr><td>Umowy powyżej $1 mln w kwartale</td><td><strong>123</strong></td><td style="color:var(--ocena-kupno)">Duzi klienci nie wstrzymują wydatków</td></tr>
+          <tr><td>Profil odbiorcy</td><td>duże przedsiębiorstwa i administracja</td><td style="color:var(--ocena-kupno)">Długi cykl zakupowy, brak koncentracji</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$504,7 tys.</td><td>Zysk na pracownika $57,2 tys.</td></tr>
+          <tr><td>Instytucje / zarząd</td><td>83,60% / <strong>0,14%</strong></td><td style="color:var(--ocena-uwaga)">Zaangażowanie zarządu śladowe</td></tr>
+        </tbody>
+      </table></div>
+      <p class="ptr">Interpretację wskaźnika cRPO poprawiam wobec poprzedniej analizy — szczegóły w sekcji 16.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PROGNOZY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th><th>Prognoza 3-letnia</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$14,73 mld</td><td>wzrost 19,87% rocznie</td></tr>
+          <tr><td>Wynik operacyjny</td><td>$1,83 mld</td><td rowspan="2">wzrost zysku 19,96% rocznie</td></tr>
+          <tr><td>Zysk netto</td><td>$1,67 mld · $1,60 na akcję</td></tr>
+          <tr><td>EBITDA</td><td>$2,90 mld</td><td>—</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-kupno)">$5,31 mld</td><td>nakłady inwestycyjne -$728 mln</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>$4,58 mld · $4,43 na akcję</strong></td><td style="color:var(--ocena-kupno)">Podstawa wyceny — sekcja 6</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Rozjazd między zyskiem a gotówką jest w tej spółce kluczem do wyceny.</strong> Wolne przepływy są <strong>2,7 raza wyższe od zysku księgowego</strong>, a różnicę robią głównie <strong>wynagrodzenia wypłacane w akcjach</strong>: obciążają rachunek zysków, ale nie zabierają gotówki.</div>
+
+      <h3>Skup akcji własnych</h3>
+      <p>W styczniu zarząd zwiększył program o <strong>$5,0 mld</strong>, a w pierwszym półroczu wykonano <strong>$2,2 mld</strong>. Liczba akcji spadła o <strong>0,40% rok do roku</strong> — rzadkość wśród spółek technologicznych, częściowo neutralizująca rozwodnienie z wynagrodzeń w akcjach. Warto zauważyć <em>kiedy</em> skupowano: w trakcie przeceny. To argument za jakością decyzji zarządu, ale nie za dokupowaniem dziś.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Dziś</th><th>21.08</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$144,55 mld</td><td>—</td><td>Wartość przedsiębiorstwa $146,30 mld</td></tr>
+          <tr><td>Cena / zysk</td><td style="color:var(--ocena-sprzedaz)">87,36</td><td>81,07</td><td>Mylące — zysk obciążony wynagrodzeniami w akcjach</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td><strong>31,56</strong></td><td>29,00</td><td><strong>Właściwa miara dla tej spółki</strong>; EV/FCF 31,94</td></tr>
+          <tr><td>Rentowność wolnych przepływów</td><td>3,17%</td><td>3,45%</td><td>Odwrotność powyższego</td></tr>
+          <tr><td>Cena / przychody</td><td>9,81</td><td>9,02</td><td>Prognozowana 8,18</td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td style="color:var(--ocena-sprzedaz)">50,50</td><td>46,45</td><td>EBITDA zaniżona wynagrodzeniami w akcjach</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Każdy mnożnik jest dziś wyższy niż miesiąc temu — i to jest sedno obniżenia oceny.</strong> Wyniki nie zmieniły się od 22 lipca; zmienił się kurs. Mnożniki wzrosły dokładnie o tyle, o ile urósł kurs, bo mianownik pozostał ten sam.</div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>87,36</td><td>Zysk $1,67 mld przy przychodach $14,73 mld — <strong>zaburzony wynagrodzeniami w akcjach</strong></td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>30,86</strong></td><td style="color:var(--ocena-uwaga)">Miesiąc temu 28,64. Rozsądnie przy wzroście ok. 20%, ale bez zapasu</td></tr>
+          <tr><td><strong>PEG</strong></td><td><strong>1,26</strong></td><td>&gt; 1,0 = wzrost droższy, niż sugeruje sam mnożnik</td></tr>
+          <tr><td>Odniesienie sektorowe</td><td>dojrzały SaaS: ok. 25–32× forward</td><td style="color:var(--ocena-uwaga)">ServiceNow w górnej części przedziału</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> Wskaźnik cena/zysk 87 sugeruje absurd, cena do wolnych przepływów 31,6 — spółkę wycenioną uczciwie. Prawdziwa jest ta druga. <strong>Ale wskaźnik PEG mówi rzecz istotną:</strong> przekroczył 1,2, czyli wzrost przestał być tańszy od mnożnika. Przy dynamice zysku około 20% rocznie dzisiejsza wycena nie zostawia marginesu na rozczarowanie.</p>
+
+      <h3>Cztery scenariusze na koniec 2027 roku</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Przepływy na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Wzrost 20% się utrzymuje, mnożnik bez zmian</strong></td><td>$5,56</td><td>31,6×</td><td><strong>$175</strong></td><td style="color:var(--ocena-kupno)">+25%</td></tr>
+          <tr><td><strong>Wzrost 20%, mnożnik schodzi do 27×</strong></td><td>$5,56</td><td>27×</td><td><strong>$150</strong></td><td style="color:var(--ocena-kupno)">+7%</td></tr>
+          <tr><td>Wzrost zwalnia do 14%</td><td>$5,22</td><td>25×</td><td>$130</td><td style="color:var(--ocena-sprzedaz)">-7%</td></tr>
+          <tr><td>Teza „AI zjada SaaS" zaczyna się materializować (wzrost 8%)</td><td>$4,88</td><td>18×</td><td>$88</td><td style="color:var(--ocena-sprzedaz)">-37%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne: przepływy na akcję $4,43 narastane wskazanym tempem przez 1,25 roku, przemnożone przez mnożnik. Scenariusz negatywny zakłada realne spowolnienie wzrostu, a nie samą kompresję mnożnika. Źródło danych wejściowych: StockAnalysis / S&amp;P Global Market Intelligence, stan 17.09.2026; kolumna „21.08" pochodzi z poprzedniej analizy.</p>
+
+      <p><strong>Fair value: $130 – $175</strong>, środek <strong>$152,50 (+9,1%)</strong>. Konsensus 49 analityków ($143,84, czyli +2,88%) mieści się w dolnej połowie tego przedziału.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Marża brutto</strong></td><td style="color:var(--ocena-kupno)"><strong>74,77%</strong></td><td style="color:var(--ocena-kupno)">Klasyczna marża dobrego oprogramowania</td></tr>
+          <tr><td>Marża operacyjna / EBITDA</td><td style="color:var(--ocena-uwaga)">12,39% / 19,66%</td><td>Obie zaniżone przez wynagrodzenia w akcjach</td></tr>
+          <tr><td>Marża netto</td><td>11,34%</td><td>Efektywna stopa podatkowa 28,82%</td></tr>
+          <tr><td><strong>Marża wolnych przepływów</strong></td><td style="color:var(--ocena-kupno)"><strong>31,09%</strong></td><td style="color:var(--ocena-kupno)">Prawdziwa rentowność tego biznesu</td></tr>
+          <tr><td>Nakłady inwestycyjne / przychody</td><td style="color:var(--ocena-kupno)">4,9%</td><td>Model bardzo lekki kapitałowo</td></tr>
+          <tr><td>Zwrot z kapitału (ROIC) vs koszt (WACC)</td><td style="color:var(--ocena-kupno)"><strong>10,28% vs 9,10%</strong></td><td style="color:var(--ocena-kupno)"><strong>Różnica +1,18 pp</strong> — ROE 14,24%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Jedyna realna rysa: marże są pod presją kosztów sztucznej inteligencji. Mechanizm warto zrozumieć, bo wróci przy każdych kolejnych wynikach.</strong><br><br>Kiedy klient korzysta z agenta, ServiceNow płaci za każde wywołanie modelu — to koszt <strong>zmienny</strong>, rosnący wraz z użyciem. Klasyczne oprogramowanie abonamentowe działa odwrotnie: raz zbudowane, kosztuje przy kolejnym kliencie prawie nic. <strong>Sztuczna inteligencja wprowadza do modelu SaaS koszt krańcowy, którego tam wcześniej nie było</strong> — i im lepiej sprzedaje się AI, tym mocniej ten koszt rośnie.<br><br>Kontrargument trzeba postawić obok uczciwie: marża brutto zostawia bardzo duży bufor, a koszt wnioskowania w modelach językowych spada systematycznie. Presja jest realna, ale zaczyna się z wysokiego pułapu.</div>
+
+      <p>Dodatnia różnica między zwrotem z kapitału a jego kosztem jest w tej serii analiz rzadkością — Coherent ma -8,4 pp, Take-Two -11,2 pp, Plug Power -29,2 pp. ServiceNow należy do mniejszości spółek, w których wzrost przychodów faktycznie przekłada się na wartość dla akcjonariusza. Zapas jest jednak cienki.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I REALNY KOSZT DŁUGU</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka / zadłużenie</td><td>$4,66 mld / $8,45 mld</td><td>Zaciągnięte netto w 12 miesięcy: <strong>$6,00 mld</strong></td></tr>
+          <tr><td><strong>Dług netto</strong></td><td style="color:var(--ocena-uwaga)"><strong>$1,75 mld</strong></td><td style="color:var(--ocena-uwaga)">Rok temu spółka miała gotówkę netto</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-uwaga)">0,68</td><td>Dług/EBITDA 2,77 · dług/przepływy 1,85</td></tr>
+          <tr><td>Wskaźnik bieżący / szybki</td><td style="color:var(--ocena-uwaga)">0,70 / 0,56</td><td>Kapitał obrotowy -$3,64 mld — wyjaśnienie niżej</td></tr>
+          <tr><td>Altman Z / Piotroski F</td><td style="color:var(--ocena-kupno)">5,48</td><td style="color:var(--ocena-uwaga)">Piotroski 4/9 — efekt mechaniczny, wyjaśnienie niżej</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Pokrycie odsetek: 22× to liczba nieaktualna z definicji</h3>
+      <p>Raportowany wskaźnik pokrycia odsetek wynosi <strong>22,0×</strong> i przy wyniku operacyjnym $1,83 mld implikuje koszt odsetek rzędu <strong>$83 mln</strong>. Liczy się go jednak <strong>z dwunastu miesięcy wstecz</strong> — a obligacje za <strong>$4,0 mld</strong> wyemitowano dopiero <strong>15 maja 2026</strong>, więc były w księgach przez niecałe cztery z tych dwunastu miesięcy. Wskaźnik mierzy świat, w którym tego długu praktycznie nie było.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Składnik</th><th>Kwota</th><th>Szacowany koszt roczny</th></tr></thead>
+        <tbody>
+          <tr><td>Obligacje z 15.05.2026 (kupony 4,250–6,300%)</td><td>$4,00 mld</td><td>ok. $208 mln przy 5,2%</td></tr>
+          <tr><td>Pozostałe zadłużenie</td><td>ok. $4,45 mld</td><td>ok. $156 mln przy 3,5%</td></tr>
+          <tr><td><strong>Razem koszt odsetek</strong></td><td><strong>$8,45 mld</strong></td><td><strong>ok. $364 mln rocznie</strong></td></tr>
+          <tr><td colspan="2"><strong>Pokrycie: wynik operacyjny $1,83 mld ÷ $364 mln</strong></td><td style="color:var(--ocena-uwaga)"><strong>ok. 5,0× zamiast 22,0×</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Wniosek się nie odwraca, ale skala tak.</strong> Pokrycie pięciokrotne to nadal komfort — spółka obsłuży ten dług bez wysiłku. Ale margines jest czterokrotnie mniejszy, niż sugeruje liczba raportowana, więc jako argument „nie ma się czym martwić" jest ona nieuprawniona. Dokładna wartość pojawi się w wynikach za trzeci kwartał.</p>
+      <p><strong>Poduszka po drugiej stronie:</strong> wynik przed opodatkowaniem ($2,35 mld) jest o <strong>$520 mln wyższy</strong> od operacyjnego, bo przychody odsetkowe z gotówki wraz z zyskami z inwestycji przewyższają dziś koszt odsetek. Ta poduszka będzie się kurczyć w miarę wydawania gotówki na skup akcji.</p>
+      <p class="ptr">W poprzedniej analizie użyłem wskaźnika 22× jako argumentu uspokajającego — korekta w sekcji 16.</p>
+
+      <div class="alert alert-info"><strong>Dwie liczby z tabeli wyglądają alarmująco i obie mają spokojne wyjaśnienie.</strong><br><br>
+      <strong>Wskaźnik bieżący poniżej jedności i ujemny kapitał obrotowy.</strong> W normalnej firmie to sygnał kłopotów z płynnością. W modelu abonamentowym to norma: klienci płacą <em>z góry</em> za rok usługi, a niezrealizowana część opłaty jest zobowiązaniem krótkoterminowym. Im lepiej spółka sprzedaje, tym gorszy ma ten wskaźnik — a zobowiązanie rozliczy świadczeniem usługi, nie wypływem gotówki.<br><br>
+      <strong>Piotroski 4 na 9.</strong> Wskaźnik przyznaje punkty za spadek zadłużenia i poprawę płynności. ServiceNow właśnie wydał blisko $9 mld na przejęcia finansowane długiem — traci więc punkty za rzeczy, które zrobił <em>celowo</em>.</div>
+
+      <p>Na całość warto spojrzeć jako na <strong>jedną decyzję zarządu</strong>: w pół roku spółka wydała około $11 mld na przejęcia i skup akcji, zamieniając bilans z gotówką netto na bilans z długiem netto. To zakład, że akcje były tanie, a cyberbezpieczeństwo jest tym, czego platformie brakowało. Jak dotąd obie części wyglądają dobrze — ale kupony sięgające 6,3% trzeba obsługiwać niezależnie od koniunktury, aż do zapadalności w 2056 roku.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Zarząd podniósł cel AI o połowę w trakcie roku.</strong> Podnoszenie celu w połowie roku robi się wtedy, gdy zamówienia wyprzedzają plan — to najmocniejszy pojedynczy dowód, że spółka jest beneficjentem, a nie ofiarą sztucznej inteligencji.</div>
+
+      <div class="alert alert-success"><strong>2. Wzrost przyspieszył zamiast zwolnić.</strong> Rynek wyceniał spowolnienie do kilkunastu procent, a dostał przekroczenie górnej granicy prognozy samej spółki. Dopóki dynamika się utrzymuje, teza niedźwiedzia pozostaje hipotezą o przyszłości.</div>
+
+      <div class="alert alert-success"><strong>3. Przejęcia dołożyły warstwę, która przy agentach staje się obowiązkowa.</strong> Kontrola uprawnień przestaje być funkcją pomocniczą w momencie, gdy oprogramowanie zaczyna działać samodzielnie w imieniu pracownika.</div>
+
+      <div class="alert alert-success"><strong>4. Jakość przepływów i dyscyplina kapitałowa.</strong> Wysoka marża gotówkowa, zwrot z kapitału powyżej jego kosztu i malejąca liczba akcji — profil spółki, która finansuje własny wzrost i jeszcze oddaje kapitał. W tym portfelu rzadki.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Teza „AI zjada SaaS" może być przedwczesna, a nie błędna.</strong> Ryzyko najpoważniejsze i dziś nierozstrzygalne. Jeśli agenty przejmą pracę biurową, model rozliczany od użytkownika przestanie działać, a dzisiejsze rekordy okażą się szczytem, nie dowodem. Ten scenariusz daje w moich wyliczeniach kurs $88.</div>
+
+      <div class="alert alert-danger"><strong>2. Rajd był sektorowy, więc może się cofnąć bez żadnej złej wiadomości o spółce.</strong> Wywołała go wypowiedź prezesa konkurenta, nie nowe dane ServiceNow. Nastrój, który przyszedł z zewnątrz, z zewnątrz też odejdzie.</div>
+
+      <div class="alert alert-danger"><strong>3. Wycena nie zostawia już marginesu.</strong> Konsensus analityków praktycznie zrównał się z kursem. Przy takim ustawieniu jedno rozczarowanie w październikowych wynikach kosztuje więcej, niż zyskuje się na jednej dobrej niespodziance.</div>
+
+      <div class="alert alert-warning"><strong>4. Dwa przejęcia integrowane naraz.</strong> Przejęcia w oprogramowaniu psują się często i późno — zwykle po roku, przez odejścia kluczowych ludzi. Na ocenę Armisu i Vezy jest jeszcze za wcześnie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Kierunek ataku</th><th>Jak groźny</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Microsoft</strong></td><td>Dokłada agenty do pakietu, który klient już kupił</td><td style="color:var(--ocena-sprzedaz)"><strong>Najgroźniejszy</strong> — konkuruje ceną krańcową bliską zeru</td></tr>
+          <tr><td><strong>Salesforce</strong></td><td>Ta sama walka o warstwę agentową w przedsiębiorstwie</td><td style="color:var(--ocena-uwaga)">Bezpośrednia, ale symetryczna — obie firmy mają ten sam problem</td></tr>
+          <tr><td><strong>SAP</strong> i <strong>Oracle</strong> <span style="color:var(--text-muted);font-size:12px">(obie masz w portfelu)</span></td><td>Procesy finansowe, bazy danych, chmura — inne warstwy</td><td style="color:var(--ocena-kupno)">Bardziej sąsiedzi niż rywale; częściej się integrują</td></tr>
+          <tr><td>Startupy agentowe</td><td>Wąskie zastosowania budowane od zera</td><td style="color:var(--ocena-uwaga)">Pojedynczo nieistotne, zbiorowo — realne ryzyko erozji</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Microsoft jest jedynym naprawdę niebezpiecznym przeciwnikiem — nie dlatego, że ma lepszy produkt, tylko dlatego, że może dołożyć „wystarczająco dobrą" automatyzację do licencji, za którą klient już płaci.</strong> Historia oprogramowania korporacyjnego pokazuje, że produkt lepszy o trzydzieści procent regularnie przegrywa z produktem darmowym w pakiecie.<br><br>Obroną ServiceNow jest głębokość wdrożenia. To jednak argument, który <strong>słabnie wraz z postępem samych agentów</strong>: jeśli nauczą się integrować z systemami samodzielnie, koszt zmiany dostawcy spadnie, a wraz z nim fosa.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-sprzedaz)">-26,21%</td><td>Miesiąc temu -27,84%</td></tr>
+          <tr><td>Średnia 50-sesyjna / 200-sesyjna</td><td>$121,51 / $117,66</td><td style="color:var(--ocena-kupno)">Kurs odpowiednio 15,1% i 18,8% powyżej</td></tr>
+          <tr><td><strong>Układ średnich</strong></td><td style="color:var(--ocena-kupno)"><strong>50 powyżej 200</strong></td><td style="color:var(--ocena-kupno)"><strong>Przecięcie w górę nastąpiło — w sierpniu jeszcze go nie było</strong></td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>57,67</td><td>Środek strefy neutralnej — brak wykupienia</td></tr>
+          <tr><td>Beta (5 lat)</td><td style="color:var(--ocena-kupno)">0,97</td><td>Zmienność zbliżona do rynku; wolumen 15,79 mln akcji</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-kupno)"><strong>30,32 mln (2,93%)</strong></td><td style="color:var(--ocena-kupno)">Miesiąc wcześniej 36,79 mln — <strong>spadek o 17,6%</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Obraz techniczny poprawił się dokładnie tak, jak zapowiadałem — i to jest problem, nie powód do satysfakcji.</strong><br><br>Pisałem w sierpniu, że przecięcie średnich w górę byłoby potwierdzeniem odwrócenia trendu. Przecięcie nastąpiło, krótka sprzedaż spadła dalej, kurs oddalił się od obu średnich. Wszystko to są sygnały pozytywne — i wszystkie są już w cenie. <strong>Kupuje się przed przecięciem średnich, nie po nim.</strong> Dzisiejszy układ mówi, że odbicie jest dojrzałe, a nie że dopiero się zaczyna.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$143,84</strong></td><td>Cena docelowa konsensusu — pierwszy poważny opór</td></tr>
+          <tr><td><strong>$152,50</strong></td><td>Środek przedziału wartości godziwej</td></tr>
+          <tr><td><strong>$121,51</strong></td><td>Średnia 50-sesyjna — pierwsze wsparcie</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$117,66</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — średnia 200-sesyjna; zejście poniżej unieważnia przeszacowanie</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Konsensus praktycznie zrównany z kursem, przecięcie średnich już za nami, rajd sektorowy dojrzały. Przed październikowymi wynikami nie ma poduszki.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Przepływy rosną około 20% rocznie, a środek wartości godziwej leży wyraźnie powyżej kursu. Integracja Armisu i skala biznesu AI rozstrzygną się w tym okresie.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Nierozstrzygnięta niepewność modelu w erze agentów. Wymaga rewizji co pół roku.</td></tr>
+        </tbody>
+      </table></div>
+
+      <p><strong>Ocena łączna: NEUTRALNA — trzymać, nie dokupować.</strong> Spółka jest dziś w lepszym stanie niż miesiąc temu; pogorszyła się wyłącznie cena, którą trzeba za nią zapłacić. Plan działania i pełne uzasadnienie — w sekcji 15.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td><strong>13,42%</strong></td><td>Druga pozycja po AMD (16,93%)</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-kupno)">+28,96%</td><td>Przy cenie wejścia $108,42</td></tr>
+          <tr><td><strong>Oprogramowanie korporacyjne razem</strong></td><td style="color:var(--ocena-uwaga)"><strong>23,08%</strong></td><td>ServiceNow + Oracle 5,08% + SAP 4,58%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Trzy powiązania warte odnotowania.</strong><br><br>
+      <strong>Oprogramowanie korporacyjne to blisko jedna czwarta portfela</strong> w trzech pozycjach. Nie są bezpośrednimi rywalami — to trzy różne warstwy — ale reagują na <em>ten sam czynnik</em>: budżety informatyczne dużych firm. W spowolnieniu tnie się je wszystkie naraz. To jest prawdziwa koncentracja w tym miejscu portfela.<br><br>
+      <strong>ServiceNow to przeciwwaga dla ekspozycji na AI.</strong> Przy około 53,5% portfela w temacie mocy obliczeniowej dla sztucznej inteligencji jest jedną z niewielu dużych pozycji <em>po drugiej stronie</em> zjawiska: zarabia na zastosowaniu AI, nie na sprzedaży sprzętu do jej trenowania. Razem z UnitedHealth i Sibanye to jedna z trzech realnych przeciwwag.<br><br>
+      <strong>Cyberbezpieczeństwo masz już dwa razy</strong> — w wersji dojrzałej i dochodowej wewnątrz ServiceNow oraz spekulacyjnej w Arqit (2,14%). Rozważając cokolwiek z tego obszaru, warto pamiętać, że ekspozycję już masz.</div>
+
+      <p class="ptr">W poprzedniej analizie użyłem tu liczby „wkład w zmienność portfela", którą wycofuję — wyjaśnienie w sekcji 16.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Teza z 21 sierpnia była słuszna i zarobiła 8,8% w cztery tygodnie — a to jest dokładnie powód, dla którego dziś obniżam ocenę do neutralnej.</strong> Napisałem wtedy, że rynek wycenia ServiceNow jako ofiarę sztucznej inteligencji, podczas gdy spółka raportuje wyniki beneficjenta. Wszystkie trzy wskazane wtedy sygnały potwierdzające wystąpiły w ciągu miesiąca.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Okazja polegała jednak na dyskoncie, a dyskonto zostało zamknięte: konsensus analityków praktycznie zrównał się z kursem, a wskaźnik PEG przekroczył 1,2, czyli wzrost przestał być tańszy od mnożnika. Do tego dochodzi rzecz, którą w sierpniu przeoczyłem — <strong>rzeczywiste pokrycie odsetek wynosi około pięciokrotności, a nie dwudziestodwukrotności</strong>, bo obligacje za $4,0 mld weszły do ksiąg dopiero w maju. Spółka jest w dobrym stanie, ale margines bezpieczeństwa — i w wycenie, i w bilansie — jest mniejszy, niż wynikało z mojej poprzedniej analizy.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się utrzymać, żeby teza działała dalej</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Wzrost abonamentu powyżej 20%</strong> — spełnione z przekroczeniem własnej prognozy spółki.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Biznes AI rosnący szybciej niż plan</strong> — cel podniesiony o połowę w trakcie roku.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Wycena zostawiająca margines</strong> — niespełnione: PEG powyżej 1,2, konsensus na poziomie kursu.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Bilans z buforem</strong> — niespełnione w stopniu, jaki zakładałem w sierpniu.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Marża brutto wytrzymująca koszty AI</strong> — zarząd przyznaje presję; rozstrzygnie się 28 października.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>28 października 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki za III kwartał</strong></td><td style="color:var(--ocena-uwaga)">Pierwszy pełny kwartał z nowym długiem — realny koszt odsetek. Plus marża brutto i realizacja podniesionego celu AI</td></tr>
+            <tr><td>Styczeń 2027</td><td>Prognoza na kolejny rok</td><td>Pierwszy test, czy wzrost utrzyma się powyżej 20% bez efektu niskiej bazy</td></tr>
+            <tr><td>2028–2030</td><td>Rozstrzygnięcie sporu o model agentowy</td><td>Horyzont, którego dotyczy cała obawa rynku — i którego żadna dzisiejsza liczba nie rozstrzyga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Marża brutto</td><td>74,77%</td><td>zejście poniżej 72%</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Pokrycie odsetek</td><td>ok. 5,0× (szacunek)</td><td>poniżej 4×</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Wskaźnik PEG</td><td>1,26</td><td>powyżej 1,5</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Wielkość pozycji</strong></td><td>Bez zmian — obecna waga jest właściwa dla spółki tej jakości przy becie 0,97</td></tr>
+            <tr><td><strong>Dokupowanie</strong></td><td>Dopiero poniżej <strong>$125</strong>; powyżej <strong>$145</strong> przewaga wyceny znika</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$175</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$117,66</strong> — średnia 200-sesyjna</td></tr>
+            <tr><td><strong>Warunek zmiany na sprzedaż</strong></td><td>Wzrost abonamentu poniżej 18% w stałej walucie 28 października</td></tr>
+            <tr><td><strong>Warunek powrotu do kupna</strong></td><td>Kurs poniżej $125 przy utrzymanym wzroście powyżej 22%</td></tr>
+            <tr><td><strong>Czego nie robić</strong></td><td>Nie sprzedawać z powodu rocznego wyniku -26,21%. Ten spadek to zmiana mnożnika, nie wyników</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p><strong>To jest obniżenie oceny za sukces, nie za porażkę.</strong> ServiceNow zrobił w ciągu miesiąca wszystko, czego od niego oczekiwałem: podniósł cel przychodów z AI, potwierdził wzrost abonamentu z przekroczeniem własnej prognozy, doczekał się przecięcia średnich w górę i dalszego zamykania pozycji krótkich. Jakość biznesu pozostaje wyraźnie wyższa od większości pozycji w tym portfelu.</p>
+        <p>Zmieniła się natomiast cena — bez jednej nowej liczby w wynikach, bo przeszacowaniu uległa cała branża. <strong>Właściwą decyzją jest trzymać i czekać na październikowe wyniki</strong>, a dokupować dopiero, gdyby rynek oddał to, co przez ostatni miesiąc dał za darmo.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$130 – $175</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$88 (-37%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$175 (+25%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Bez zmian</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 28 października</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA POPRZEDNIEJ ANALIZY</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <p>Wszystkie poprawki wobec raportu z 21 sierpnia 2026 zebrane w jednym miejscu. Trzy dotyczą merytoryki, jedna zasad publikacji, jedna języka.</p>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>„Pokrycie odsetek 22,0×"</strong> użyte dwukrotnie jako argument, że zadłużenie nie jest problemem</td>
+            <td>Wskaźnik liczony z dwunastu miesięcy wstecz, a obligacje weszły do ksiąg w maju. W tempie bieżącym pokrycie wynosi <strong>około pięciokrotności</strong> — wyliczenie w sekcji 8</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — argument zawyżony czterokrotnie</td>
+          </tr>
+          <tr>
+            <td><strong>„Wkład w zmienność portfela: 12% wobec 41%"</strong> — podane cztery razy</td>
+            <td>To była waga przemnożona przez betę, nie udział w zmienności. Nie sumuje się do stu procent i <strong>pomija korelacje</strong>, a to one decydują o wkładzie pozycji w ryzyko całości. <strong>Liczbę wycofuję</strong>; zostaje porównanie bet: 0,97 wobec 2,49</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — liczba bez pokrycia metodologicznego</td>
+          </tr>
+          <tr>
+            <td><strong>„84% tegorocznej sprzedaży jest już podpisane"</strong></td>
+            <td>cRPO dotyczy kolejnych dwunastu miesięcy od daty bilansowej, nie roku kalendarzowego, którego połowa była wtedy już <em>rozpoznana</em>. Poprawnie: <strong>około 10,2 miesiąca</strong> sprzedaży abonamentowej. Wniosek jakościowy bez zmian</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana — błąd kategorii</td>
+          </tr>
+          <tr>
+            <td><strong>Wartość pozycji podana w dolarach</strong></td>
+            <td>Poprzedni raport zawierał kwotową wartość pozycji, <strong>wbrew Twojej zasadzie</strong>, że publikowane strony pokazują wyłącznie wagi procentowe. Ten raport nie zawiera żadnej kwoty ani liczby akcji</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Naruszenie zasady publikacji</strong></td>
+          </tr>
+          <tr>
+            <td>„Beta 0,93 wobec 2,49 to o połowę niższa premia za ryzyko"</td>
+            <td>Stosunek bet to <strong>61% mniej</strong>, nie „o połowę". O połowę różnią się koszty kapitału — dwie różne wielkości zostały pomylone</td>
+            <td>Drobna</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Błąd techniczny dotyczący całego katalogu, nie tylko tego raportu.</strong><br><br>Skrypt wstawiający wykresy odświeża je aktualną ceną również w raportach już opublikowanych. W efekcie raport z 21 sierpnia podaje w nagłówku <strong>$128,48</strong>, a podpis pod wykresem w tym samym pliku — <strong>$139,82</strong>. To samo dotyczy Vertiv ($251,52 wobec $239,41) i Babcock &amp; Wilcox ($7,17 wobec $6,79), a najpewniej wszystkich raportów z wykresem.<br><br>Raport ma być zdjęciem sytuacji z konkretnego dnia. Albo wykres trzeba zamrażać razem z tekstem, albo jego podpis musi jasno mówić, że pokazuje stan bieżący.</div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Główna teza — rynek wycenił ofiarę, dane pokazują beneficjenta — okazała się trafna. Trafne były też trzy wskazane wtedy sygnały potwierdzające: przecięcie średnich, dalsze zamykanie krótkich pozycji i przekroczenie półtora miliarda w biznesie AI. Wszystkie wystąpiły w ciągu miesiąca.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 września 2026 | Cena: <strong>$139,82</strong> (zamknięcie 16.09.2026) | <strong>Aktualizacja analizy z 21 sierpnia 2026 — ocena obniżona z KUPNA do NEUTRALNEJ</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> pokrycie odsetek 22,0× → ok. 5,0× w tempie bieżącym; „wkład w zmienność portfela 12%/41%" wycofany jako liczba bez pokrycia metodologicznego; cRPO $13,2 mld = ok. 10,2 miesiąca abonamentu, a nie „84% sprzedaży roku"; usunięto kwotową wartość pozycji zgodnie z zasadą publikowania wyłącznie wag procentowych | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 17.09.2026</strong>, ServiceNow Investor Relations (wyniki Q2 2026 z 22.07.2026, podniesiony cel AI), zgłoszenia SEC (emisja obligacji 15.05.2026, przejęcia Armis i Veza); szacunek kosztu odsetek to obliczenie własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
