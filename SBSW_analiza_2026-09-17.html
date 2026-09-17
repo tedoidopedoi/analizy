@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBSW — Sibanye Stillwater | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-kupno); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:12.5px; color:var(--text-muted); font-style:italic; margin-top:-4px; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: SBSW</div>
+    <div class="company-name">Sibanye Stillwater Limited</div>
+    <div class="company-sub">Metale szlachetne i platynowce · Johannesburg, RPA · 57 857 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">W portfelu — 6,57%</span>
+      <span class="meta-tag">Jedna z siedmiu pozycji spoza tematu AI</span>
+      <span class="meta-tag">Najlepszy zwrot z kapitału w portfelu</span>
+      <div class="price-display">
+        <div class="price-main">$12,15</div>
+        <div class="price-sub">notowanie 17.09.2026, 11:15 EDT (+4,74%)</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Surowce i metale</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — wartość przedsiębiorstwa poniżej trzykrotności EBITDA przy zwrocie z kapitału 32%; ryzykiem jest rozwodnienie i cykl platynowców">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">wycena wciąż nie odzwierciedla wyników</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$10 – $20</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">-18% do +65%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Dzień dywidendy</span><b>jutro</b><em>Stopa 5,35%</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Akcjonariat</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$12,15</div><div class="metric-detail">+40,72% w 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 17.08</div><div class="metric-value green">+12,8%</div><div class="metric-detail">Kurs wszedł w mój przedział $11,50–15,00</div></div>
+    <div class="metric-card"><div class="metric-label">Skorygowana EBITDA I półrocza</div><div class="metric-value green">+111%</div><div class="metric-detail">R31,8 mld przy przychodach R90 mld</div></div>
+    <div class="metric-card"><div class="metric-label">Wartość firmy / EBITDA</div><div class="metric-value green">2,49</div><div class="metric-detail"><strong>Najniższa w całym portfelu</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot kapitału vs koszt</div><div class="metric-value green">+23,15 pp</div><div class="metric-detail"><strong>ROIC 32,00% wobec kosztu 8,85%</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Rentowność przepływów</div><div class="metric-value green">9,81%</div><div class="metric-detail">Dywidenda 5,35% · wypłata 47% zysku</div></div>
+    <div class="metric-card"><div class="metric-label">Liczba akcji</div><div class="metric-value red">+13,53%</div><div class="metric-detail"><strong>W jeden kwartał</strong> — sekcja 4</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (5 analityków)</div><div class="metric-value">$12,94</div><div class="metric-detail">+6,50% · pokrycie analityczne bardzo cienkie</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I WYNIKI Z 1 WRZEŚNIA</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Sibanye Stillwater wydobywa platynowce — platynę, pallad i rod — oraz złoto, głównie w Republice Południowej Afryki i w amerykańskim stanie Montana. Przychody za dwanaście miesięcy to <strong>$10,06 mld</strong> przy 57 857 pracownikach. To <strong>Twoja pozycja o wadze 6,57%</strong>, przy cenie wejścia $6,77, czyli wynik <strong>+79,4%</strong>.</p>
+
+      <div class="alert alert-success"><strong>Teza z 17 sierpnia zadziałała: kurs urósł o 12,8% i wszedł w wyznaczony przedział.</strong> Wyceniłem wtedy spółkę na $11,50–15,00 przy kursie $10,77. <strong>W przeciwieństwie do AMD i ServiceNow nie obniżam jednak oceny</strong> — bo tam przewaga wyceny została skonsumowana, a tutaj nadal jej nie widać w mnożnikach.<br><br>Powód jest w jednej liczbie: <strong>wartość przedsiębiorstwa odpowiada 2,49-krotności rocznej EBITDA</strong>. Dla porównania ServiceNow ma 50,50, Amphenol 21,55, a AMD 86,57. Nawet po wzroście o czterdzieści procent w rok ta spółka nie jest wyceniana jak spółka, która zarabia.</div>
+
+      <h3>Wyniki za I półrocze 2026 — 1 września</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wynik</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody</strong></td><td style="color:var(--ocena-kupno)"><strong>R90 mld — rekord</strong></td><td>Stabilna produkcja przy wyższych cenach surowców</td></tr>
+          <tr><td><strong>Skorygowana EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>R31,8 mld, +111% r/r</strong></td><td style="color:var(--ocena-kupno)">Ponad dwukrotny wzrost rok do roku</td></tr>
+          <tr><td><strong>Zysk</strong></td><td style="color:var(--ocena-kupno)"><strong>R18,8 mld</strong></td><td>Wzrost o ponad dwieście procent</td></tr>
+          <tr><td><strong>Gotówka z działalności operacyjnej</strong></td><td style="color:var(--ocena-kupno)"><strong>R19,6 mld — rekord</strong></td><td style="color:var(--ocena-kupno)">Zadłużenie wyraźnie zredukowane</td></tr>
+          <tr><td><strong>Dywidenda zaliczkowa</strong></td><td style="color:var(--ocena-kupno)"><strong>R5,7 mld</strong></td><td style="color:var(--ocena-kupno)">Dzień ustalenia prawa: 18 września</td></tr>
+          <tr><td>Produkcja platyny i palladu</td><td style="color:var(--ocena-uwaga)">138 tys. uncji, -2% r/r</td><td>Zgodnie z planem</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Warto zwrócić uwagę, skąd wziął się ten skok, bo to zmienia sposób czytania wyceny.</strong> Produkcja spadła o dwa procent, a skorygowana EBITDA wzrosła o sto jedenaście procent. <strong>Cały wynik pochodzi więc z cen surowców, a nie z operacji</strong> — co jest jednocześnie największą siłą i największą słabością tej spółki.<br><br>Siłą, bo dźwignia działa w obie strony: przy kosztach w dużej mierze stałych każdy ruch ceny metalu przekłada się na zysk wielokrotnie. Słabością, bo nad ceną platynowców zarząd nie ma żadnej kontroli.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — CZTERY METALE O RÓŻNYM LOSIE</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Metal</th><th>Główne zastosowanie</th><th>Perspektywa strukturalna</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Platyna</strong></td><td>Katalizatory samochodowe, przemysł, biżuteria, wodór</td><td style="color:var(--ocena-uwaga)">Zagrożona elektryfikacją, ale zyskuje na wodorze</td></tr>
+          <tr><td><strong>Pallad</strong></td><td>Katalizatory w silnikach benzynowych</td><td style="color:var(--ocena-sprzedaz)"><strong>Najbardziej narażony</strong> na przejście na napęd elektryczny</td></tr>
+          <tr><td><strong>Rod</strong></td><td>Katalizatory, bardzo wąski rynek</td><td style="color:var(--ocena-uwaga)">Skrajnie zmienna cena</td></tr>
+          <tr><td><strong>Złoto</strong></td><td>Rezerwy, inwestycje, biżuteria</td><td style="color:var(--ocena-kupno)">Niezależne od cyklu przemysłowego</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>W tej spółce nie ma fosy i trzeba to powiedzieć wprost — to producent surowca, a nie firma z przewagą konkurencyjną.</strong><br><br>Uncja platyny wydobyta przez Sibanye jest identyczna z uncją wydobytą przez kogokolwiek innego. Nie ma tu kosztu zmiany dostawcy, marki ani patentu. <strong>Jedyną przewagą jest położenie złóż i koszt wydobycia</strong> — a te są dane geologią, nie decyzjami zarządu.<br><br>Konsekwencja dla sposobu analizy: wskaźniki wyceny mówią tu znacznie mniej niż w spółkach przemysłowych, bo licznik i mianownik zmieniają się razem z ceną metalu. <strong>Dlatego wartość przedsiębiorstwa na poziomie 2,49-krotności EBITDA nie znaczy „tanio" w tym samym sensie, co w Amphenolu</strong> — znaczy raczej, że rynek zakłada, iż dzisiejsza EBITDA jest szczytem cyklu.</div>
+
+      <p>Najważniejsze pytanie strukturalne dotyczy <strong>palladu i platyny w katalizatorach</strong>. Oba metale służą przede wszystkim do oczyszczania spalin silników spalinowych — a samochód elektryczny katalizatora nie ma. Tempo elektryfikacji jest więc dla tej spółki zmienną ważniejszą niż cokolwiek, co dzieje się w kopalni.</p>
+      <p>Przeciwwagą jest <strong>złoto</strong>, którego popyt nie zależy od przemysłu motoryzacyjnego, oraz rosnące zastosowanie platyny w technologiach wodorowych. Obie te nogi są jednak mniejsze od katalizatorów.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK — DEFICYT W KRÓTKIM OKRESIE, PYTANIE W DŁUGIM</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Stan rynku</th><th>Wpływ na spółkę</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Najbliższe 18 miesięcy</strong></td><td style="color:var(--ocena-kupno)"><strong>Oczekiwany deficyt platyny i palladu</strong></td><td style="color:var(--ocena-kupno)">Wsparcie dla cen, a więc i dla marży</td></tr>
+          <tr><td>Średni okres</td><td style="color:var(--ocena-uwaga)">Zależny od tempa elektryfikacji</td><td>Popyt na katalizatory kurczy się stopniowo</td></tr>
+          <tr><td>Długi okres</td><td style="color:var(--ocena-sprzedaz)">Strukturalny spadek popytu motoryzacyjnego</td><td style="color:var(--ocena-uwaga)">Częściowo równoważony wodorem i złotem</td></tr>
+          <tr><td>Podaż</td><td style="color:var(--ocena-kupno)">Ograniczona geologicznie i geograficznie</td><td style="color:var(--ocena-kupno)">Nowych kopalni praktycznie się nie otwiera</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Napięcie między krótkim a długim okresem jest w platynowcach silniejsze niż w jakimkolwiek innym surowcu — i warto rozumieć, dlaczego.</strong><br><br>Po stronie popytu mamy <strong>powolny, ale pewny spad</strong>: każdy sprzedany samochód elektryczny to jeden katalizator mniej. Po stronie podaży mamy jednak ograniczenie jeszcze twardsze: <strong>złoża platynowców występują w kilku miejscach na świecie</strong>, a uruchomienie nowej kopalni zajmuje dekadę i pochłania miliardy.<br><br>Dlatego rynek może być w deficycie mimo malejącego popytu — podaż kurczy się szybciej. Oczekiwanie deficytu właśnie stąd wynika i to ono podtrzymuje dzisiejsze ceny.</div>
+
+      <p>Do tego dochodzi ryzyko, którego nie da się zmierzyć wskaźnikiem: <strong>koncentracja produkcji w Republice Południowej Afryki</strong> oznacza ekspozycję na przerwy w dostawach energii, spory zbiorowe, kurs randa i zmiany regulacyjne. To ryzyko jest w tej wycenie zawarte i częściowo tłumaczy, dlaczego mnożniki są tak niskie.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">AKCJONARIAT I ROZWODNIENIE</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zmiana liczby akcji rok do roku</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+6,77%</strong></td><td style="color:var(--ocena-sprzedaz)">Stopa skupu ujemna</td></tr>
+          <tr><td><strong>Zmiana kwartał do kwartału</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+13,53%</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>To jest najtrudniejsza liczba w całym raporcie</strong></td></tr>
+          <tr><td>Instytucje / zarząd</td><td>98,59% / <strong>0,23%</strong></td><td style="color:var(--ocena-uwaga)">Zaangażowanie zarządu praktycznie żadne</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-kupno)">8,68 mln (1,50%)</td><td style="color:var(--ocena-kupno)">Miesiąc wcześniej 11,55 mln — spadek o 24,8%</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$173,8 tys.</td><td>Zysk na pracownika $17,0 tys.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Liczba akcji wzrosła o 13,53% w ciągu jednego kwartału i nie potrafię tego dziś wyjaśnić.</strong><br><br>Jest to o tyle zaskakujące, że spółka w tym samym okresie <strong>redukowała zadłużenie i wypłaciła dywidendę zaliczkową</strong> — czyli zachowywała się jak firma z nadmiarem gotówki, a nie z jej niedoborem. Emisja akcji w takiej sytuacji wymaga wytłumaczenia.<br><br>Możliwych przyczyn jest kilka: dywidenda w formie akcji, finansowanie projektów litowych i bateryjnych, transakcja przejęcia albo techniczna zmiana liczby kwitów depozytowych notowanych w Nowym Jorku. <strong>Nie mam potwierdzenia żadnej z nich i nie będę zgadywał.</strong><br><br>Konsekwencja praktyczna jest natomiast policzalna: <strong>przy rozwodnieniu tej skali zysk na akcję rośnie wolniej niż zysk spółki</strong>. Wszystkie wskaźniki w tym raporcie liczone na akcję już to uwzględniają, ale warto wiedzieć, że to jest realny koszt ponoszony przez akcjonariusza. Zapytam o to przy kolejnych wynikach.</div>
+
+      <p>Po drugiej stronie stoi obserwacja pozytywna: <strong>grający na spadki zmniejszyli pozycje o blisko jedną czwartą w ciągu miesiąca</strong>. Przy 98,59% akcji w rękach instytucji i śladowym zaangażowaniu zarządu jest to jeden z niewielu dostępnych sygnałów o nastawieniu rynku do tej spółki.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZEPŁYWY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$10,06 mld</td></tr>
+          <tr><td>Zysk brutto</td><td>$3,00 mld</td></tr>
+          <tr><td><strong>Zysk operacyjny</strong></td><td style="color:var(--ocena-kupno)"><strong>$2,26 mld</strong></td></tr>
+          <tr><td>Zysk przed opodatkowaniem</td><td style="color:var(--ocena-uwaga)">$1,72 mld</td></tr>
+          <tr><td><strong>Zysk netto</strong></td><td style="color:var(--ocena-uwaga)"><strong>$985,82 mln · $1,42 na akcję</strong></td></tr>
+          <tr><td>EBITDA</td><td style="color:var(--ocena-kupno)">$3,74 mld</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-kupno)">$1,96 mld</td></tr>
+          <tr><td>Nakłady inwestycyjne</td><td>-$1,17 mld</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>$790,10 mln · $0,28 na akcję</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Między zyskiem operacyjnym a zyskiem netto ginie 56% wartości i warto wiedzieć, gdzie.</strong><br><br>Z <strong>$2,26 mld</strong> zysku operacyjnego zostaje <strong>$985,82 mln</strong> netto. Największą pojedynczą pozycją jest podatek: <strong>$618,87 mln przy efektywnej stopie 36,09%</strong> — to skutek opodatkowania wydobycia w Republice Południowej Afryki i jest to stawka znacznie wyższa niż w większości spółek z Twojego portfela. Reszta to koszty odsetkowe i udziały mniejszościowe w kopalniach.<br><br>Wniosek praktyczny: <strong>przy tej spółce miary przed opodatkowaniem — EBITDA i zysk operacyjny — opisują biznes lepiej niż zysk netto</strong>, bo obciążenie podatkowe jest stałą cechą jurysdykcji, a nie wynikiem zarządzania.</div>
+
+      <p>Nakłady inwestycyjne pochłaniają <strong>11,6% przychodów</strong>, co dla kopalni jest wartością umiarkowaną — złoża są rozwinięte i nie wymagają dziś budowy od zera. Dzięki temu z $1,96 mld gotówki operacyjnej zostaje <strong>$790,10 mln wolnych przepływów</strong>, czyli rentowność <strong>9,81%</strong> względem kapitalizacji.</p>
+      <p>Dywidenda wynosi <strong>$0,65 na akcję przy stopie 5,35%</strong> i pochłania 47% zysku. Jest pokryta wolnymi przepływami z zapasem, ale — jak wszystko w tej spółce — zależy od cen metali.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$8,05 mld</td><td>Wartość przedsiębiorstwa $9,31 mld</td></tr>
+          <tr><td>Cena / zysk</td><td style="color:var(--ocena-kupno)">8,17</td><td>Nisko nawet jak na spółkę surowcową</td></tr>
+          <tr><td><strong>Wartość firmy / EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>2,49</strong></td><td style="color:var(--ocena-kupno)"><strong>Najniższa w portfelu</strong>; EV/EBIT 4,11</td></tr>
+          <tr><td>Cena / sprzedaż</td><td style="color:var(--ocena-kupno)">0,80</td><td>EV/sprzedaż 0,93</td></tr>
+          <tr><td>Cena / wolne przepływy</td><td style="color:var(--ocena-kupno)">10,19</td><td>Cena do przepływów operacyjnych 4,11</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td>2,23</td><td>Księga $1,16 na akcję; aktywa materialne 2,55</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td style="color:var(--ocena-kupno)">8,17</td><td>Zysk <strong>$1,42 na akcję</strong> przy przychodach $10,06 mld</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-kupno)"><strong>4,28</strong></td><td>Implikuje zysk około <strong>$2,84 na akcję</strong> — podwojenie wobec dzisiejszego</td></tr>
+          <tr><td><strong>PEG</strong></td><td>nie dotyczy</td><td>Brak sensownej prognozy wzrostu dla spółki surowcowej; prognoza zysku +32,20% rocznie</td></tr>
+          <tr><td>Odniesienie sektorowe</td><td>wydobycie platynowców: ok. 6–10× forward</td><td style="color:var(--ocena-kupno)">Sibanye wyraźnie poniżej</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warning"><strong>Ostrzeżenie obowiązkowe przy spółkach cyklicznych — i tutaj działa w pełnej sile.</strong><br><br>Wskaźnik ceny do zysku prognozowanego na poziomie <strong>4,28</strong> wygląda jak okazja stulecia. <strong>Ale niski mnożnik w spółce surowcowej jest zwykle ostrzeżeniem, a nie zaproszeniem</strong>: rynek wycenia w ten sposób przekonanie, że dzisiejszy zysk pochodzi ze szczytu cyklu i nie utrzyma się.<br><br>Dokładnie tak jest tutaj. Skorygowana EBITDA wzrosła o sto jedenaście procent przy produkcji niższej o dwa procent — <strong>cały wynik przyniosły ceny metali</strong>. Gdyby wróciły do poziomów sprzed roku, ten sam mnożnik 4,28 okazałby się liczony od zysku, którego już nie ma.<br><br>To jest powód, dla którego mój przedział wartości godziwej sięga w dół aż do dziesięciu dolarów mimo tak niskich wskaźników.</div>
+
+      <h3>Cztery scenariusze na koniec 2027 roku</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Zysk na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Deficyt się utrzymuje, zysk zgodnie z prognozą</strong></td><td>$2,84</td><td>6×</td><td><strong>$17</strong></td><td style="color:var(--ocena-kupno)">+40%</td></tr>
+          <tr><td><strong>Zysk dowieziony, mnożnik zbliża się do sektorowego</strong></td><td>$2,84</td><td>7×</td><td><strong>$20</strong></td><td style="color:var(--ocena-kupno)">+65%</td></tr>
+          <tr><td>Ceny metali cofają się</td><td>$1,80</td><td>5×</td><td>$9</td><td style="color:var(--ocena-sprzedaz)">-26%</td></tr>
+          <tr><td><strong>Powrót dekoniunktury w platynowcach</strong></td><td style="color:var(--ocena-sprzedaz)">$1,20</td><td>5×</td><td><strong>$6</strong></td><td style="color:var(--ocena-sprzedaz)">-51%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne. Zysk prognozowany w scenariuszach pierwszym i drugim wynika ze wskaźnika ceny do zysku prognozowanego. Dane wejściowe: StockAnalysis / S&amp;P Global Market Intelligence, stan 17.09.2026; wyniki półroczne z komunikatu Sibanye-Stillwater z 01.09.2026.</p>
+
+      <p><strong>Fair value: $10 – $20</strong>, środek <strong>$15,00 (+23,5%)</strong>. Konsensus zaledwie pięciu analityków to $12,94 (+6,50%) — przy tak cienkim pokryciu analitycznym ta liczba waży mniej niż w spółkach śledzonych przez kilkudziesięciu analityków.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto</td><td>29,79%</td><td>Typowa dla wydobycia</td></tr>
+          <tr><td><strong>Marża operacyjna</strong></td><td style="color:var(--ocena-kupno)"><strong>22,49%</strong></td><td style="color:var(--ocena-kupno)">Bardzo dobra jak na kopalnię</td></tr>
+          <tr><td><strong>Marża EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>37,15%</strong></td><td style="color:var(--ocena-kupno)">Pokazuje skalę dźwigni cenowej</td></tr>
+          <tr><td>Marża netto</td><td style="color:var(--ocena-uwaga)">9,80%</td><td style="color:var(--ocena-uwaga)">Obciążona podatkiem — sekcja 5</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-kupno)"><strong>32,00% vs 8,85%</strong></td><td style="color:var(--ocena-kupno)"><strong>Różnica +23,15 pp</strong></td></tr>
+          <tr><td>Zwrot z kapitału własnego</td><td style="color:var(--ocena-kupno)">34,73%</td><td>ROA 15,24%, ROCE 27,29%; rotacja aktywów 1,08</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Różnica między zwrotem z zainwestowanego kapitału a jego kosztem wynosi ponad dwadzieścia trzy punkty procentowe — to najwyższa wartość w całym Twoim portfelu i nie jest nawet blisko.</strong><br><br>Zestawienie z innymi pozycjami: Amphenol +9,89 pp, ServiceNow +1,18 pp, Oracle +0,70 pp, AMD -8,02 pp, MARA -84,58 pp. <strong>Sibanye tworzy dziś więcej wartości ekonomicznej na każdego zainwestowanego dolara niż którakolwiek inna spółka, którą masz.</strong><br><br>Co ważne, koszt kapitału jest tu niski (8,85%), bo beta wynosi 0,97 — rynek traktuje tę spółkę jako mniej ryzykowną od typowej pozycji technologicznej. Połączenie wysokiego zwrotu z niskim kosztem daje wynik, którego nie da się zignorować.<br><br><strong>Zastrzeżenie, bez którego ta liczba wprowadza w błąd:</strong> zwrot z kapitału w spółce surowcowej porusza się razem z ceną surowca. Rok temu, przy niższych cenach platynowców, był znacznie niższy. <strong>To nie jest trwała cecha biznesu, tylko odczyt z korzystnego punktu cyklu.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka / zadłużenie</td><td>$1,37 mld / $2,28 mld</td><td style="color:var(--ocena-kupno)">Spłacono netto $304,75 mln w 12 miesięcy</td></tr>
+          <tr><td>Dług netto</td><td style="color:var(--ocena-kupno)">$909,10 mln</td><td style="color:var(--ocena-kupno)">Zaledwie $0,32 na akcję</td></tr>
+          <tr><td><strong>Dług / EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>0,61</strong></td><td style="color:var(--ocena-kupno)">Dług do wolnych przepływów 2,88 — spłacalne w trzy lata</td></tr>
+          <tr><td>Pokrycie odsetek</td><td style="color:var(--ocena-kupno)">10,03</td><td style="color:var(--ocena-kupno)">Bez zastrzeżeń; zadłużenie malejące, nie rosnące</td></tr>
+          <tr><td>Wskaźnik bieżący / szybki</td><td style="color:var(--ocena-kupno)">2,72 / 1,35</td><td style="color:var(--ocena-kupno)">Kapitał obrotowy $2,47 mld</td></tr>
+          <tr><td><strong>Altman Z / Piotroski F</strong></td><td style="color:var(--ocena-uwaga)"><strong>2,92 / 7</strong></td><td style="color:var(--ocena-uwaga)">Tuż poniżej progu 3,0, ale Piotroski wysoki</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Bilans jest mocny i — co ważniejsze — poprawia się w kierunku, który da się zweryfikować.</strong><br><br>Zadłużenie netto <strong>zmalało</strong> w ostatnich dwunastu miesiącach, a spółka jednocześnie wypłaciła dywidendę. Dług stanowi zaledwie <strong>0,61-krotność rocznej EBITDA</strong>, więc byłby spłacalny w niecały rok z samej generowanej gotówki.<br><br>Kontrola, którą stosuję po analizie ServiceNow — sprawdzenie, czy pokrycie odsetek nie jest zawyżone świeżym długiem — <strong>wypada tu odwrotnie niż zwykle</strong>: zadłużenie w okresie malało, więc wskaźnik 10,03 jeśli już, to raczej zaniża dzisiejszy komfort.<br><br><strong>Altman Z-Score 2,92 tuż poniżej progu</strong> wynika głównie z niskiej wartości księgowej i wysokiej rotacji aktywów typowej dla wydobycia. Przy wskaźniku Piotroskiego 7 na 9 i malejącym zadłużeniu nie traktuję tego jako sygnału ostrzegawczego.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Zwrot z kapitału przewyższa jego koszt o ponad dwadzieścia trzy punkty procentowe.</strong> To najwyższa wartość w całym portfelu i nie jest blisko drugiej. Przy koszcie kapitału poniżej dziewięciu procent każdy zainwestowany dolar tworzy dziś realną wartość ekonomiczną.</div>
+
+      <div class="alert alert-success"><strong>2. Wycena nie odzwierciedla wyników.</strong> Wartość przedsiębiorstwa odpowiada niecałej trzykrotności rocznej EBITDA, a skorygowana EBITDA wzrosła w półroczu o sto jedenaście procent. Rentowność wolnych przepływów sięga blisko dziesięciu procent.</div>
+
+      <div class="alert alert-success"><strong>3. Bilans poprawia się, a nie pogarsza.</strong> Zadłużenie netto zmalało przy jednoczesnej wypłacie rekordowej dywidendy zaliczkowej. To odwrotność sytuacji w Oracle i CoreWeave, gdzie wzrost jest kupowany długiem.</div>
+
+      <div class="alert alert-info"><strong>4. Deficyt platyny i palladu oczekiwany w najbliższych kwartałach.</strong> Podaż kurczy się szybciej niż popyt, bo nowych kopalni praktycznie się nie otwiera. Do tego dochodzi dywidenda o stopie ponad pięciu procent, wypłacana przy pokryciu przez wolne przepływy.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Cały wynik przyniosły ceny metali, nie operacje.</strong> Produkcja spadła o dwa procent, a zysk podwoił się z nawiązką. Ta sama dźwignia działa w drugą stronę i nad tą zmienną zarząd nie ma żadnej kontroli — mój scenariusz negatywny daje kurs sześciu dolarów.</div>
+
+      <div class="alert alert-danger"><strong>2. Rozwodnienie o kilkanaście procent w jeden kwartał, bez wyjaśnienia.</strong> Spółka redukowała zadłużenie i wypłacała dywidendę, a mimo to wyemitowała akcje. Do czasu wyjaśnienia traktuję to jako otwarte ryzyko, a nie jako zdarzenie jednorazowe.</div>
+
+      <div class="alert alert-danger"><strong>3. Strukturalny spadek popytu na katalizatory.</strong> Platyna i pallad służą przede wszystkim do oczyszczania spalin, a samochód elektryczny katalizatora nie ma. To proces powolny, ale jednokierunkowy, i dotyczy największej części przychodów spółki.</div>
+
+      <div class="alert alert-warning"><strong>4. Ryzyko jurysdykcji i brak fosy.</strong> Koncentracja wydobycia w Republice Południowej Afryki oznacza ekspozycję na przerwy w dostawach energii, spory zbiorowe i kurs randa. Do tego efektywna stopa podatkowa przekracza trzydzieści sześć procent, a produkt jest doskonale jednorodny — nie ma tu żadnej przewagi konkurencyjnej poza geologią.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Pozycja</th><th>Różnica wobec Sibanye</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Anglo American Platinum</strong></td><td>Największy producent platynowców</td><td style="color:var(--ocena-uwaga)">Większa skala, podobna ekspozycja na RPA</td></tr>
+          <tr><td><strong>Impala Platinum</strong></td><td>Bezpośredni rywal w tym samym regionie</td><td style="color:var(--ocena-uwaga)">Ta sama geologia, te same ryzyka</td></tr>
+          <tr><td><strong>Norilsk Nickel</strong></td><td>Dominujący producent palladu</td><td style="color:var(--ocena-sprzedaz)">Niższy koszt, ale obarczony ryzykiem sankcyjnym</td></tr>
+          <tr><td><strong>Recykling katalizatorów</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Rosnące źródło podaży wtórnej</strong></td><td style="color:var(--ocena-sprzedaz)">Konkurencja bez kosztów wydobycia</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Najciekawszym konkurentem Sibanye nie jest żadna kopalnia, tylko recykling.</strong><br><br>Platynowce nie zużywają się w katalizatorze — po złomowaniu samochodu da się je odzyskać. Wraz z rosnącą liczbą wycofywanych pojazdów <strong>podaż wtórna rośnie bez ponoszenia kosztów wydobycia</strong>, a jej krzywa kosztowa jest zupełnie inna niż kopalni.<br><br>W krótkim okresie nie zmienia to bilansu rynku, bo deficyt jest oczekiwany mimo recyklingu. W długim — <strong>recykling i elektryfikacja działają w tę samą stronę</strong>: mniej nowych katalizatorów i więcej metalu odzyskanego ze starych. To jest istota ryzyka strukturalnego opisanego w sekcji 3.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-kupno)">+40,72%</td><td>Mimo przeceny w połowie roku</td></tr>
+          <tr><td>Średnie kroczące 50 i 200 sesji</td><td>$10,52 / $12,72</td><td style="color:var(--ocena-uwaga)">Kurs 15,5% powyżej krótszej, <strong>4,5% poniżej dłuższej</strong></td></tr>
+          <tr><td><strong>Układ średnich</strong></td><td style="color:var(--ocena-uwaga)"><strong>50 poniżej 200</strong></td><td style="color:var(--ocena-uwaga)">Odbicie po przecenie, trend jeszcze nieodwrócony</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>54,41</td><td>Neutralnie; wolumen 5,09 mln akcji</td></tr>
+          <tr><td><strong>Beta (5 lat)</strong></td><td style="color:var(--ocena-kupno)"><strong>0,97</strong></td><td style="color:var(--ocena-kupno)">Najniższa wśród dużych pozycji razem z ServiceNow</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-kupno)">8,68 mln (1,50%)</td><td style="color:var(--ocena-kupno)">Wyraźny spadek w miesiąc</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Układ jest niemal identyczny jak w Oracle i warto to zestawienie zauważyć, bo spółki są zupełnie różne.</strong> W obu przypadkach kurs wyszedł ponad średnią z pięćdziesięciu sesji, ale <strong>ta średnia nadal leży poniżej dwustusesyjnej</strong>, a do samej dwustusesyjnej brakuje kilku procent. Technicznie jest to odbicie wewnątrz trendu spadkowego, a nie jego odwrócenie.<br><br>Różnica polega na tym, co za tym stoi: w Oracle odbicie następuje mimo ujemnych przepływów, tutaj przy rekordowej gotówce operacyjnej i malejącym zadłużeniu. <strong>Odzyskanie średniej dwustusesyjnej byłoby pierwszym technicznym potwierdzeniem, że rynek zaczyna wyceniać wyniki.</strong></div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$12,72</strong></td><td>Średnia 200-sesyjna — najbliższy istotny opór</td></tr>
+          <tr><td><strong>$12,94</strong></td><td>Cena docelowa konsensusu</td></tr>
+          <tr><td><strong>$15,00</strong></td><td>Środek przedziału wartości godziwej</td></tr>
+          <tr><td><strong>$10,52</strong></td><td>Średnia 50-sesyjna — pierwsze wsparcie</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$10,00</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — dolna granica wartości godziwej</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Kurs powyżej średniej pięćdziesięciosesyjnej, wskaźnik RSI neutralny, pozycje krótkie zamykane, dywidenda ustalana 18 września. Deficyt metali oczekiwany przez najbliższe kwartały.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Wartość przedsiębiorstwa poniżej trzykrotności EBITDA przy zwrocie z kapitału przewyższającym jego koszt o ponad dwadzieścia trzy punkty. Środek wartości godziwej wyraźnie powyżej kursu.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Elektryfikacja i recykling działają w tę samą stronę i zmniejszają popyt na katalizatory. To proces powolny, ale jednokierunkowy — na tym horyzoncie zaczyna ważyć więcej niż cykl cenowy.</td></tr>
+        </tbody>
+      </table></div>
+
+      <p><strong>Ocena łączna: KUPNO — utrzymana z 17 sierpnia, mimo że kurs urósł o 12,8%.</strong> To jedyna pozycja z odświeżanych w tym tygodniu, przy której nie obniżam oceny po wzroście kursu — bo przy wartości przedsiębiorstwa na poziomie 2,49-krotności EBITDA przewaga wyceny nadal istnieje. Plan działania w sekcji 15.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td><strong>6,57%</strong></td><td>Czwarta pozycja z osiemnastu</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-kupno)">+79,4%</td><td>Przy cenie wejścia $6,77</td></tr>
+          <tr><td><strong>Ekspozycja poza tematem AI</strong></td><td style="color:var(--ocena-kupno)"><strong>40,6%</strong></td><td style="color:var(--ocena-kupno)">Siedem pozycji, w tym Sibanye</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>To jest jedna z siedmiu pozycji spoza tematu sztucznej inteligencji — i najbardziej od niego niezależna ze wszystkich.</strong><br><br>Przy koncentracji tematycznej sięgającej 59,4% portfela Sibanye jest jedną z nielicznych spółek, których wynik nie zależy od nakładów hiperskalerów na centra danych. Zależy od cen platyny, palladu i złota, czyli od zupełnie innego strumienia popytu.<br><br><strong>Co więcej, beta 0,97 przy wadze 6,57% oznacza, że ta pozycja wnosi do portfela znacznie mniej zmienności, niż wynikałoby z jej wielkości.</strong> W zestawieniu z AMD, gdzie beta wynosi 2,48, różnica jest dwuipółkrotna przy porównywalnym udziale procentowym.<br><br>Przy dzisiejszym poziomie wykorzystania depozytu zabezpieczającego ta cecha ma znaczenie praktyczne: <strong>pozycje o niskiej becie stabilizują wartość rachunku, pozycje o wysokiej nią ruszają.</strong></div>
+
+      <div class="alert alert-info"><strong>Drugie powiązanie dotyczy metali szlachetnych jako klasy.</strong> Poza Sibanye nie masz w portfelu żadnej ekspozycji na surowce — złoto, srebro, miedź ani inne metale przemysłowe. Sibanye jest więc <strong>jedyną pozycją, która reaguje na inflację i na osłabienie dolara w sposób odwrotny do reszty portfela</strong>. To czyni ją strukturalnie cenniejszą, niż sugeruje sam udział procentowy.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Sibanye jest jedyną spółką z odświeżanych w tym tygodniu, przy której nie obniżam oceny mimo wzrostu kursu — i powodem jest jedna liczba.</strong> Wartość przedsiębiorstwa odpowiada <strong>2,49-krotności rocznej EBITDA</strong>, podczas gdy zwrot z zainwestowanego kapitału przewyższa jego koszt o <strong>23,15 punktu procentowego</strong>. Obie te wartości są skrajne w skali całego portfela, każda w swoją stronę. Wyniki półroczne pokazały skorygowaną EBITDA wyższą o <strong>111%</strong>, rekordową gotówkę operacyjną, spadek zadłużenia i rekordową dywidendę zaliczkową.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Rynek nie płaci za to, i ma ku temu powody. <strong>Cały skok wyniku przyniosły ceny metali, a nie operacje</strong> — produkcja była nawet o dwa procent niższa. Niski mnożnik w spółce surowcowej zwykle oznacza, że rynek uważa dzisiejszy zysk za szczyt cyklu, a nie że przeoczył okazję. Do tego dochodzi rozwodnienie o <strong>13,53% w jeden kwartał</strong>, którego nie potrafię dziś wyjaśnić, oraz strukturalne pytanie o popyt na katalizatory w świecie elektryfikacji i rosnącego recyklingu.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się utrzymać, żeby teza działała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Zwrot z kapitału musi przewyższać jego koszt.</strong> Różnica ponad dwadzieścia trzy punkty — spełnione z ogromnym zapasem.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Bilans musi się poprawiać, a nie pogarszać.</strong> Zadłużenie netto zmalało przy jednoczesnej dywidendzie — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Rynek metali musi pozostać w deficycie.</strong> Oczekiwany przez najbliższe osiemnaście miesięcy — spełnione na dziś.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Spółka nie powinna rozwadniać akcjonariuszy.</strong> Kilkanaście procent w kwartał — niespełnione i niewyjaśnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Wynik musi przestać zależeć wyłącznie od cen.</strong> Produkcja spadła, gdy zysk się podwoił; to samo zadziała w drugą stronę.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-kupno)"><strong>Jutro</strong></td><td style="color:var(--ocena-kupno)"><strong>Dzień ustalenia prawa do dywidendy</strong></td><td style="color:var(--ocena-kupno)">Rekordowa wypłata przy stopie ponad pięciu procent</td></tr>
+            <tr><td>Luty–marzec 2027</td><td>Wyniki za cały rok 2026</td><td>Pierwsze wyjaśnienie emisji akcji i potwierdzenie, czy marża się utrzymuje</td></tr>
+            <tr><td>Na bieżąco</td><td>Ceny platyny, palladu i złota</td><td>Jedyna zmienna, która realnie rusza tą wyceną</td></tr>
+            <tr><td>2027–2028</td><td>Tempo elektryfikacji floty samochodowej</td><td>Horyzont, na którym ryzyko strukturalne zaczyna ważyć więcej niż cykl</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Marża EBITDA</td><td>37,15%</td><td>zejście poniżej 25%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Dług netto do EBITDA</td><td>0,61×</td><td>wzrost powyżej 1,5×</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Liczba akcji</td><td>+13,53% kwartalnie</td><td>kolejny kwartał z emisją</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Kurs wobec średniej 200-sesyjnej</td><td>4,5% poniżej</td><td>brak odzyskania do końca roku</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Wielkość pozycji</strong></td><td>Jest miejsce na powiększenie — niska beta i ekspozycja spoza tematu AI działają na korzyść</td></tr>
+            <tr><td><strong>Dokupowanie</strong></td><td>W okolicach <strong>$10,50–11,00</strong>, czyli przy średniej pięćdziesięciosesyjnej</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$20</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$10,00</strong></td></tr>
+            <tr><td><strong>Warunek zmiany oceny</strong></td><td>Marża EBITDA poniżej 25% albo kolejny kwartał z istotną emisją akcji</td></tr>
+            <tr><td><strong>Do wyjaśnienia</strong></td><td>Przyczyna emisji akcji — pytanie do zadania przy wynikach rocznych</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">KUPNO</div>
+        <p><strong>Utrzymuję ocenę kupna, bo w przeciwieństwie do AMD, ServiceNow i Oracle tutaj wzrost kursu nie skonsumował przewagi wyceny.</strong> Spółka jest wyceniana na niecałą trzykrotność rocznej EBITDA, generuje blisko dziesięcioprocentową rentowność wolnych przepływów, redukuje zadłużenie, wypłaca dywidendę o stopie ponad pięciu procent i osiąga zwrot z kapitału przewyższający jego koszt o ponad dwadzieścia trzy punkty procentowe. Żadna inna pozycja w Twoim portfelu nie ma takiego zestawu liczb.</p>
+        <p>Cena tego zestawu jest jednak realna i trzeba ją nazwać: <strong>to spółka bez fosy, w której cały wynik zależy od cen surowców</strong>, działająca w jednej jurysdykcji o wysokim opodatkowaniu, rozwadniająca akcjonariuszy w tempie, którego nie umiem wyjaśnić, i sprzedająca metale, których główne zastosowanie powoli znika wraz z elektryfikacją. Dlatego przedział wartości godziwej jest szeroki, a ocena na horyzoncie trzech do pięciu lat wypada neutralnie.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-kupno)">Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$10 – $20</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$6 (-51%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$20 (+65%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Jest miejsce na powiększenie</b></div>
+          <div><span>Najbliższy katalizator</span><b>Dywidenda 18 września</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA ANALIZY Z 17 SIERPNIA</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Wartość godziwa $11,50–15,00</strong> przy kursie $10,77</td>
+            <td>Kurs wszedł w przedział i zatrzymał się w jego dolnej części — <strong>teza zadziałała</strong>. Nowy przedział <strong>$10–20</strong> jest szerszy w obie strony, bo dodałem scenariusz powrotu dekoniunktury i scenariusz zbliżenia mnożnika do sektorowego</td>
+            <td style="color:var(--ocena-kupno)">Trafna, przedział rozszerzony</td>
+          </tr>
+          <tr>
+            <td>Brak policzenia <strong>rozwodnienia</strong></td>
+            <td>Liczba akcji wzrosła o <strong>13,53% w kwartał i 6,77% w rok</strong>, a stopa skupu jest ujemna. Pominięcie tego przy spółce wypłacającej dywidendę i redukującej dług było istotnym brakiem</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — pominięty realny koszt dla akcjonariusza</td>
+          </tr>
+          <tr>
+            <td>Brak rozbicia drogi od <strong>zysku operacyjnego do netto</strong></td>
+            <td>Po drodze ginie 56% wartości, głównie przez efektywną stopę podatkową 36,09%. Bez tego rozbicia marża netto 9,80% wygląda na słabość operacyjną, a jest cechą jurysdykcji</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana</td>
+          </tr>
+          <tr>
+            <td><strong>„Jedyna prawdziwa dywersyfikacja"</strong></td>
+            <td>Określenie pozostaje trafne i po wrześniowych zmianach w portfelu jest <strong>aktualniejsze niż wtedy</strong> — sprzedane pozycje w większości również równoważyły temat AI, więc rola Sibanye wzrosła</td>
+            <td style="color:var(--ocena-kupno)">Obroniona</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Ocena kupna, diagnoza „najtańsza pozycja w portfelu" oraz wskazanie roli dywersyfikacyjnej — wszystkie trzy pozostają aktualne po miesiącu, a kurs urósł o blisko trzynaście procent. Trafne było też oparcie tezy na wartości przedsiębiorstwa do EBITDA zamiast na wskaźniku ceny do zysku.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 września 2026 | Cena: <strong>$12,15</strong> (notowanie 17.09.2026, 11:15 EDT) | <strong>Aktualizacja analizy z 17 sierpnia 2026 — ocena kupna utrzymana</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> wartość godziwa $11,50–15,00 → $10–20 wskutek rozszerzenia przedziału o scenariusz powrotu dekoniunktury i o zbliżenie mnożnika do sektorowego; dodano rozwodnienie (+13,53% kwartał do kwartału, +6,77% rok do roku) jako otwarte i niewyjaśnione ryzyko; dodano rozbicie drogi od zysku operacyjnego do netto, w której 56% wartości ginie głównie na podatku o efektywnej stopie 36,09% | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 17.09.2026</strong>, Sibanye-Stillwater — wyniki za I półrocze 2026 z komunikatu z 01.09.2026 (przychody, skorygowana EBITDA, zysk, gotówka operacyjna, dywidenda zaliczkowa, produkcja); scenariusze i wyliczenia pochodne to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

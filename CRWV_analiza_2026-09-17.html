@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRWV — CoreWeave | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:12.5px; color:var(--text-muted); font-style:italic; margin-top:-4px; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: CRWV</div>
+    <div class="company-name">CoreWeave, Inc.</div>
+    <div class="company-sub">Chmura obliczeniowa wyspecjalizowana w sztucznej inteligencji · Livingston, New Jersey</div>
+    <div class="header-meta">
+      <span class="meta-tag">W portfelu — 3,78%</span>
+      <span class="meta-tag">Mój sierpniowy przedział chybiony o 25%</span>
+      <span class="meta-tag">Najwyższa dźwignia w portfelu</span>
+      <div class="price-display">
+        <div class="price-main">$79,41</div>
+        <div class="price-sub">notowanie 17.09.2026, 11:16 EDT (-4,73%)</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Chmura i centra danych</span><span class="temat">Moc obliczeniowa dla AI</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — dług netto na akcję przewyższa cenę akcji; to opcja na wartość przedsiębiorstwa, a nie inwestycja w spółkę w zwykłym sensie">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">obniżenie z kupna spekulacyjnego — moja wycena była chybiona</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$25 – $150</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-69% do +89%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>11 sierpnia 2026</b><em>Kolejne — listopad</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$79,41</div><div class="metric-detail">-32,80% w 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 16.08</div><div class="metric-value red">-24,6%</div><div class="metric-detail"><strong>Mój przedział $120–155 był chybiony</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Dług netto na akcję</div><div class="metric-value red">$83,46</div><div class="metric-detail"><strong>Więcej niż cena jednej akcji</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Nakłady do przychodów</div><div class="metric-value red">271%</div><div class="metric-detail">Oracle, dla porównania, ma 105%</div></div>
+    <div class="metric-card"><div class="metric-label">Marża EBITDA</div><div class="metric-value green">49,92%</div><div class="metric-detail">Marża brutto 67,42% — biznes działa</div></div>
+    <div class="metric-card"><div class="metric-label">Altman Z-Score</div><div class="metric-value red">0,29</div><div class="metric-detail"><strong>Najniższy w portfelu</strong> · Piotroski 2</div></div>
+    <div class="metric-card"><div class="metric-label">Liczba akcji</div><div class="metric-value red">+75,59%</div><div class="metric-detail">W ciągu dwunastu miesięcy</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (38 analityków)</div><div class="metric-value green">$144,46</div><div class="metric-detail">+81,92% — największa rozbieżność w portfelu</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I MOJA POMYŁKA</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>CoreWeave wynajmuje moc obliczeniową wyspecjalizowaną pod sztuczną inteligencję. Przychody za dwanaście miesięcy to <strong>$7,59 mld</strong> przy zaledwie <strong>2 189 pracownikach</strong>, co daje $3,47 mln przychodu na osobę — jeden z najwyższych wskaźników, jakie widziałem. To <strong>Twoja pozycja o wadze 3,78%</strong>, przy cenie wejścia $96,97, czyli wynik <strong>-18,1%</strong>.</p>
+
+      <div class="alert alert-danger"><strong>Muszę zacząć od przyznania się do pomyłki, bo była poważna.</strong><br><br>
+      16 sierpnia wyceniłem CoreWeave na <strong>$120–155</strong> przy kursie $105,26, z oceną kupna spekulacyjnego. Od tego czasu kurs spadł do <strong>$79,41, czyli o 24,6%</strong>. Nie tylko nie zbliżył się do mojego przedziału — oddalił się od jego dolnej granicy o ponad jedną trzecią.<br><br>
+      Diagnozę postawiłem wtedy poprawnie: <em>„ogromny portfel zamówień na kruchym bilansie"</em>. Błąd polegał na tym, że <strong>wyceniłem portfel zamówień, a kruchość bilansu potraktowałem jako zastrzeżenie, a nie jako główny czynnik wyceny.</strong> To jest ten sam wzorzec, który opisałem dziś przy Oracle i przy MARA — tylko tutaj kosztował najwięcej.<br><br>
+      Ten raport zaczyna się więc od bilansu, a nie od portfela zamówień.</div>
+
+      <h3>Jedna liczba, która porządkuje wszystko pozostałe</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Cena jednej akcji</td><td>$79,41</td></tr>
+          <tr><td><strong>Dług netto przypadający na jedną akcję</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$83,46</strong></td></tr>
+          <tr><td>Kapitalizacja</td><td>$43,80 mld</td></tr>
+          <tr><td><strong>Wartość przedsiębiorstwa</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$89,83 mld</strong></td></tr>
+          <tr><td colspan="2" style="color:var(--ocena-sprzedaz)"><strong>Udział długu w wartości przedsiębiorstwa: 51%</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Dług netto przypadający na jedną akcję przewyższa cenę tej akcji.</strong><br><br>To nie jest efektowne sformułowanie, tylko opis konstrukcji tej inwestycji. <strong>Ponad połowa wartości przedsiębiorstwa należy do wierzycieli, a nie do akcjonariuszy.</strong> Akcja CoreWeave jest cienką warstwą kapitału własnego leżącą na wielkim stosie długu — czyli zachowuje się jak opcja, a nie jak udział w firmie.<br><br>Praktyczna konsekwencja jest w sekcji 6: <strong>niewielka zmiana wartości całego przedsiębiorstwa powoduje wielokrotnie większą zmianę wartości akcji</strong> — w obie strony. To wyjaśnia zarówno spadek o jedną trzecią w rok, jak i cenę docelową analityków o osiemdziesiąt procent wyżej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — WYNAJEM MOCY, NIE OPROGRAMOWANIE</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <p>CoreWeave buduje centra danych wypełnione akceleratorami obliczeniowymi i wynajmuje je klientom trenującym oraz uruchamiającym modele sztucznej inteligencji. Odróżnia ją od wielkich dostawców chmury <strong>wyspecjalizowanie</strong>: cała infrastruktura jest projektowana pod jeden rodzaj obciążenia, co daje wyższą wydajność na wydanego dolara.</p>
+
+      <div class="alert alert-info"><strong>To wyspecjalizowanie jest realną przewagą i widać je w marżach.</strong> Marża brutto wynosi <strong>67,42%</strong>, a marża EBITDA <strong>49,92%</strong> — to wartości, których nie osiąga się przy zwykłym wynajmie serwerów. Dla porównania Oracle, budujący podobną moc, ma marżę EBITDA 47,97% przy znacznie większej i dojrzalszej bazie biznesowej.<br><br>Do tego dochodzi liczba, którą trudno zignorować: <strong>$3,47 mln przychodu na pracownika przy zaledwie 2 189 zatrudnionych</strong>. Ten biznes jest skrajnie zautomatyzowany — koszt osobowy praktycznie nie rośnie wraz ze skalą.</div>
+
+      <div class="alert alert-warning"><strong>Ale fosa jest płytsza, niż sugerują marże.</strong> Wynajem mocy to sprzedaż towaru: klient porównuje cenę za godzinę i przenosi obciążenie tam, gdzie taniej. Jedyne, co go trzyma, to długoterminowa umowa — a umowy się kończą.<br><br>Przewaga wyspecjalizowania jest z natury tymczasowa: to, co dziś jest przewagą, jutro stanie się standardem u wszystkich. <strong>Tak wysoka marża przyciąga konkurencję z definicji</strong>, a konkurenci mają nieporównywalnie mocniejsze bilanse.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK — WYŚCIG FINANSOWANY DŁUGIEM</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na CoreWeave</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Popyt na moc obliczeniową</strong></td><td style="color:var(--ocena-kupno)"><strong>Wciąż przewyższa podaż</strong></td><td style="color:var(--ocena-kupno)">Prognoza wzrostu przychodów o ponad sto procent rocznie</td></tr>
+          <tr><td>Koszt akceleratorów</td><td style="color:var(--ocena-uwaga)">Wysoki, dostawy limitowane</td><td style="color:var(--ocena-sprzedaz)">Wymusza ogromne nakłady z góry</td></tr>
+          <tr><td><strong>Koszt finansowania</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Kluczowa zmienna</strong></td><td style="color:var(--ocena-sprzedaz)">Przy tej dźwigni decyduje o przetrwaniu</td></tr>
+          <tr><td>Ceny wynajmu mocy</td><td style="color:var(--ocena-uwaga)">Pod presją wraz z przyrostem podaży</td><td style="color:var(--ocena-sprzedaz)">Marża może kurczyć się szybciej niż przychody rosną</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Wszyscy budujący dziś moc obliczeniową prowadzą ten sam wyścig, ale nie z tego samego miejsca startu.</strong> Amazon, Microsoft i Google finansują rozbudowę z gotówki wypracowanej gdzie indziej. Oracle długiem, ale przy bardzo dużym zysku operacyjnym. <strong>CoreWeave długiem, mając wynik operacyjny ujemny.</strong><br><br>Jeśli ceny wynajmu spadną — a przy sprzedaży towaru spadają zawsze, gdy przybywa podaży — <strong>kolejność, w jakiej uczestnicy odpadną, wynika z bilansu.</strong> To nie teza o jakości spółki, tylko arytmetyka.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I AKCJONARIAT</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Model przychodowy</td><td style="color:var(--ocena-kupno)">Umowy wieloletnie</td><td style="color:var(--ocena-kupno)">Zapewniają widoczność przychodów</td></tr>
+          <tr><td>Koncentracja odbiorców</td><td style="color:var(--ocena-sprzedaz)">Bardzo wysoka</td><td style="color:var(--ocena-sprzedaz)">Kilku dużych klientów odpowiada za większość sprzedaży</td></tr>
+          <tr><td><strong>Zmiana liczby akcji r/r</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+75,59%</strong></td><td style="color:var(--ocena-sprzedaz)">Stopa skupu ujemna o tę samą wartość</td></tr>
+          <tr><td>Zarząd i założyciele</td><td style="color:var(--ocena-kupno)">19,33%</td><td style="color:var(--ocena-kupno)">Wysokie jak na spółkę po debiucie giełdowym</td></tr>
+          <tr><td>Wolny obrót</td><td style="color:var(--ocena-uwaga)">327,84 mln z 551,54 mln akcji</td><td style="color:var(--ocena-uwaga)">Niecałe 60% — stąd wysoka zmienność</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>10,08% akcji, 16,95% wolnego obrotu</strong></td><td style="color:var(--ocena-sprzedaz)">Zdecydowanie najwyższa w Twoim portfelu po MARA</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Rozwodnienie o ponad trzy czwarte w ciągu roku jest liczbą, przy której trzeba się zatrzymać.</strong><br><br>Liczba akcji wzrosła o <strong>75,59%</strong>. Oznacza to, że posiadacz akcji sprzed roku ma dziś prawo do znacznie mniejszej części tej samej spółki — i to niezależnie od tego, co stało się z kursem. Część tego wzrostu wynika z debiutu giełdowego i związanych z nim programów motywacyjnych, ale skala pozostaje wyjątkowa.<br><br>Zestawmy to z innymi pozycjami w Twoim portfelu: Oracle rozwodnił o 1,95%, AMD o 1,07%, Sibanye o 6,77%. <strong>CoreWeave rozwodnił o ponad siedemdziesiąt pięć procent.</strong><br><br>Element pozytywny: zarząd i założyciele trzymają <strong>19,33%</strong> akcji, co jest bardzo wysokim wskaźnikiem i oznacza, że skutki decyzji o finansowaniu ponoszą osobiście.</div>
+
+      <p>Krótka sprzedaż obejmuje <strong>16,95% wolnego obrotu</strong> — czyli mniej więcej co szósta akcja dostępna w obrocie jest pożyczona i sprzedana przez kogoś liczącego na spadek. Przy tak wąskim wolnym obrocie działa to w obie strony: pogłębia spadki, ale przy dobrej wiadomości może gwałtownie wzmocnić wzrost.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZEPŁYWY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$7,59 mld</td></tr>
+          <tr><td>Zysk brutto</td><td style="color:var(--ocena-kupno)">$5,12 mld</td></tr>
+          <tr><td>Wynik operacyjny</td><td style="color:var(--ocena-sprzedaz)">-$202 mln</td></tr>
+          <tr><td><strong>EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>$3,79 mld</strong></td></tr>
+          <tr><td>Amortyzacja</td><td>$3,99 mld</td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-sprzedaz)">-$1,93 mld · -$3,70 na akcję</td></tr>
+          <tr><td><strong>Przepływy operacyjne</strong></td><td style="color:var(--ocena-kupno)"><strong>$6,91 mld</strong></td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$20,57 mld</strong></td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$13,66 mld · -$24,76 na akcję</strong></td></tr>
+          <tr><td>Zaciągnięty dług netto</td><td style="color:var(--ocena-sprzedaz)">$17,14 mld</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Nakłady inwestycyjne wynoszą 271% przychodów — spółka wydaje na rozbudowę blisko trzy razy więcej, niż w ogóle sprzedaje.</strong><br><br>Dla skali porównania: Oracle, którego opisałem dziś jako przypadek skrajny, wydaje <strong>105%</strong> przychodów. Amphenol wydaje 4,0%. <strong>CoreWeave jest w zupełnie innej kategorii.</strong><br><br>Konsekwencja jest arytmetyczna: z $6,91 mld gotówki operacyjnej po odjęciu nakładów zostaje <strong>minus $13,66 mld</strong>. Lukę zamyka dług — zaciągnięto go netto <strong>$17,14 mld</strong> w ciągu dwunastu miesięcy.<br><br><strong>Sam biznes operacyjny działa</strong>: marża brutto powyżej 67%, EBITDA blisko $3,8 mld, gotówka operacyjna dodatnia i wysoka. Problemem nie jest zarabianie — problemem jest tempo, w jakim trzeba budować, żeby zarabiać więcej.</div>
+
+      <p>Strata netto (<strong>$1,93 mld</strong>) jest wielokrotnie większa od operacyjnej, a różnicę robią <strong>koszty odsetkowe</strong> — przy zadłużeniu tej wielkości obsługa długu przewyższa wynik z działalności.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA — DLACZEGO AKCJA JEST OPCJĄ</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Cena / sprzedaż</td><td>6,06</td><td style="color:var(--ocena-kupno)">Prognozowana <strong>2,35</strong> — przychody mają szybko rosnąć</td></tr>
+          <tr><td><strong>Wartość firmy / sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>12,12</strong></td><td style="color:var(--ocena-sprzedaz)">Dwukrotnie wyżej niż cena do sprzedaży — to różnica robiona długiem</td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td style="color:var(--ocena-uwaga)">24,28</td><td>Jedyny sensowny mnożnik dochodowy w tej spółce</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td style="color:var(--ocena-sprzedaz)">9,14</td><td>Aktywa materialne 12,50; księga $9,12 na akcję</td></tr>
+          <tr><td>Cena / zysk, forward P/E, PEG</td><td>nie dotyczy</td><td style="color:var(--ocena-sprzedaz)">Wszystkie mianowniki ujemne</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>nie dotyczy</td><td>Strata <strong>$3,70 na akcję</strong> przy przychodach $7,59 mld</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>nie dotyczy</strong></td><td style="color:var(--ocena-sprzedaz)">Konsensus nie zakłada dodatniego zysku w horyzoncie prognozy</td></tr>
+          <tr><td><strong>PEG</strong></td><td>nie dotyczy</td><td>Brak dodatniego zysku bazowego</td></tr>
+          <tr><td>Miara zastępcza</td><td style="color:var(--ocena-kupno)">cena do sprzedaży prognozowanej <strong>2,35</strong></td><td>Wobec 6,06 dzisiaj — prognoza wzrostu przychodów <strong>101,34% rocznie</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> Brak wskaźnika ceny do zysku prognozowanego jest tu informacją, a nie luką w danych: analitycy nie zakładają, że CoreWeave zacznie wykazywać zysk księgowy w przewidywalnym horyzoncie, bo <strong>amortyzacja i odsetki zjadają całą wypracowaną marżę</strong>. Jedyna miara dochodowa, która ma sens, to wartość przedsiębiorstwa do EBITDA — i właśnie na niej buduję scenariusze.</p>
+
+      <h3>Cztery scenariusze na koniec 2027 roku</h3>
+      <p>Ponieważ akcja jest cienką warstwą kapitału nad dużym długiem, wycenę trzeba prowadzić <strong>od wartości całego przedsiębiorstwa, a dopiero potem odejmować dług</strong>. Zakładam dalsze rozwodnienie do około 600 mln akcji.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>EBITDA</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody się podwajają, mnożnik utrzymany</strong></td><td>$7,6 mld</td><td>20×</td><td><strong>$153</strong></td><td style="color:var(--ocena-kupno)">+93%</td></tr>
+          <tr><td><strong>Wzrost zgodny z planem, mnożnik schodzi do 15×</strong></td><td>$7,6 mld</td><td>15×</td><td><strong>$90</strong></td><td style="color:var(--ocena-kupno)">+13%</td></tr>
+          <tr><td><strong>Wzrost zwalnia, mnożnik schodzi do 12×</strong></td><td style="color:var(--ocena-sprzedaz)">$5,5 mld</td><td>12×</td><td><strong>$13</strong></td><td style="color:var(--ocena-sprzedaz)">-84%</td></tr>
+          <tr><td>Napięcie finansowe wymuszające emisję ratunkową</td><td colspan="2" style="color:var(--ocena-sprzedaz)">kapitał własny praktycznie wyzerowany</td><td style="color:var(--ocena-sprzedaz)">bliski zeru</td><td style="color:var(--ocena-sprzedaz)">-100%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne: wartość przedsiębiorstwa jako iloczyn EBITDA i mnożnika, pomniejszona o zakładany dług netto (58–60 mld USD), podzielona przez zakładane 600 mln akcji. Dane wejściowe: StockAnalysis / S&amp;P Global Market Intelligence, stan 17.09.2026.</p>
+
+      <div class="alert alert-danger"><strong>Proszę porównać scenariusz drugi z trzecim, bo to jest najważniejsza obserwacja w całym raporcie.</strong><br><br>Między nimi <strong>EBITDA spada o 28%</strong>, a mnożnik z 15× na 12×. Wydaje się to umiarkowanym pogorszeniem. Tymczasem <strong>kurs spada z $90 do $13, czyli o 85%.</strong><br><br>Powód jest mechaniczny: dług pozostaje ten sam, więc cały spadek wartości przedsiębiorstwa uderza wyłącznie w kapitał własny. <strong>Przy dźwigni tej wielkości umiarkowane rozczarowanie nie obniża wyceny — ono ją wymazuje.</strong><br><br>I odwrotnie: dlatego właśnie trzydziestu ośmiu analityków widzi cenę docelową o osiemdziesiąt dwa procent wyżej. Ta sama dźwignia działa w obie strony i to jest cała istota tej pozycji.</div>
+
+      <p><strong>Fair value: $25 – $150</strong>, środek <strong>$87,50 (+10,2%)</strong>. Przedział jest skrajnie szeroki i tak ma być — to uczciwe odzwierciedlenie konstrukcji, w której dług netto na akcję przewyższa cenę akcji. Konsensus 38 analityków to $144,46 (+81,92%), blisko górnej granicy.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Marża brutto</strong></td><td style="color:var(--ocena-kupno)"><strong>67,42%</strong></td><td style="color:var(--ocena-kupno)">Bardzo wysoka — wyspecjalizowanie działa</td></tr>
+          <tr><td><strong>Marża EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>49,92%</strong></td><td style="color:var(--ocena-kupno)">Wyższa niż w Oracle przy znacznie mniejszej skali</td></tr>
+          <tr><td>Marża operacyjna</td><td style="color:var(--ocena-sprzedaz)">-2,66%</td><td style="color:var(--ocena-sprzedaz)">Amortyzacja zjada całą marżę EBITDA</td></tr>
+          <tr><td>Marża netto</td><td style="color:var(--ocena-sprzedaz)">-25,40%</td><td style="color:var(--ocena-sprzedaz)">Różnicę wobec operacyjnej robią odsetki</td></tr>
+          <tr><td>Zwrot z kapitału (ROIC)</td><td style="color:var(--ocena-sprzedaz)">-0,34%</td><td style="color:var(--ocena-sprzedaz)">Zwrot z kapitału własnego -43,60%</td></tr>
+          <tr><td>Rotacja aktywów</td><td style="color:var(--ocena-sprzedaz)">0,15</td><td style="color:var(--ocena-sprzedaz)">Skrajnie ciężki bilans wobec przychodów</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Tę tabelę warto przeczytać od góry do dołu, bo opowiada konkretną historię.</strong> Marża brutto 67,42% — biznes znakomity. Marża EBITDA 49,92% — po kosztach operacyjnych nadal znakomity. Marża operacyjna -2,66% — amortyzacja zjada wszystko. Marża netto -25,40% — odsetki zabierają resztę.<br><br>Innymi słowy: <strong>CoreWeave zarabia bardzo dobrze na wynajmie mocy, ale nie dość, żeby opłacić zużycie sprzętu i dług, którym ten sprzęt kupiono.</strong><br><br>Pytanie inwestycyjne brzmi: czy wzrost przychodów wyprzedzi tempo narastania amortyzacji i odsetek. <strong>Prognoza mówi, że tak. Dzisiejszy rachunek wyników — że jeszcze nie.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — I PORÓWNANIE Z ORACLE</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka / zadłużenie</td><td style="color:var(--ocena-sprzedaz)">$5,54 mld / <strong>$51,61 mld</strong></td><td style="color:var(--ocena-sprzedaz)">Dług netto <strong>$46,03 mld</strong></td></tr>
+          <tr><td><strong>Dług / kapitał własny</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>10,27</strong></td><td style="color:var(--ocena-sprzedaz)">Dług do EBITDA 9,22</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-0,11</strong></td><td style="color:var(--ocena-sprzedaz)">Ujemne — zysk operacyjny nie pokrywa odsetek</td></tr>
+          <tr><td><strong>Wskaźnik bieżący / szybki</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>0,46 / 0,39</strong></td><td style="color:var(--ocena-sprzedaz)">Kapitał obrotowy <strong>-$11,40 mld</strong></td></tr>
+          <tr><td>Kapitał własny</td><td>$5,02 mld</td><td>Księga $9,12 na akcję</td></tr>
+          <tr><td><strong>Altman Z / Piotroski F</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>0,29 / 2</strong></td><td style="color:var(--ocena-sprzedaz)">Najniższe wartości w Twoim portfelu</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Zestawienie z Oracle — obie spółki masz w portfelu</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Oracle</th><th>CoreWeave</th></tr></thead>
+        <tbody>
+          <tr><td>Nakłady do przychodów</td><td>105%</td><td style="color:var(--ocena-sprzedaz)"><strong>271%</strong></td></tr>
+          <tr><td>Dług do kapitału własnego</td><td>2,52</td><td style="color:var(--ocena-sprzedaz)"><strong>10,27</strong></td></tr>
+          <tr><td>Pokrycie odsetek</td><td>4,82</td><td style="color:var(--ocena-sprzedaz)"><strong>-0,11</strong></td></tr>
+          <tr><td>Altman Z-Score</td><td>1,93</td><td style="color:var(--ocena-sprzedaz)"><strong>0,29</strong></td></tr>
+          <tr><td>Rozwodnienie rok do roku</td><td>+1,95%</td><td style="color:var(--ocena-sprzedaz)"><strong>+75,59%</strong></td></tr>
+          <tr><td>Marża EBITDA</td><td>47,97%</td><td style="color:var(--ocena-kupno)"><strong>49,92%</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>To zestawienie warto zapamiętać, bo obie spółki robią to samo, a dzieli je przepaść.</strong><br><br>Oracle i CoreWeave budują moc obliczeniową dla sztucznej inteligencji, obie finansują to długiem, obie mają ujemne wolne przepływy i obie mają bardzo podobną marżę EBITDA. <strong>Na tym podobieństwa się kończą.</strong><br><br>CoreWeave wydaje na inwestycje niemal trzy razy więcej niż Oracle w relacji do przychodów, ma czterokrotnie wyższą dźwignię, ujemne pokrycie odsetek zamiast blisko pięciokrotnego i rozwadnia akcjonariuszy trzydzieści osiem razy szybciej.<br><br><strong>Opisałem dziś Oracle jako spółkę, która wyczerpała swobodę finansową. CoreWeave znajduje się o kilka rzędów dalej.</strong> Wskaźnik Altmana 0,29 przy Piotroskim 2 na 9 jest najniższym odczytem w Twoim portfelu — niższym niż w MARA.</div>
+
+      <p>Element łagodzący: <strong>przepływy operacyjne są dodatnie i wysokie</strong>, a umowy z klientami wieloletnie. To nie jest spółka bez przychodów — to spółka, której przychody nie nadążają za tempem budowy. Pierwsza sytuacja kończy się zawsze tak samo; druga zależy od tego, czy budowa skończy się na czas.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Dźwignia działa w obie strony.</strong> Skoro umiarkowane rozczarowanie wymazuje kapitał własny, to umiarkowane spełnienie planu go zwielokrotnia. Mój scenariusz pozytywny daje kurs powyżej stu pięćdziesięciu dolarów, a konsensus trzydziestu ośmiu analityków leży o ponad osiemdziesiąt procent powyżej dzisiejszej ceny.</div>
+
+      <div class="alert alert-success"><strong>2. Sam biznes jest bardzo dobry.</strong> Marża brutto powyżej sześćdziesięciu siedmiu procent i marża EBITDA blisko pięćdziesięciu — przy dwóch tysiącach pracowników. Przepływy operacyjne są dodatnie i wynoszą blisko siedem miliardów dolarów. Problemem nie jest zarabianie, tylko tempo budowy.</div>
+
+      <div class="alert alert-success"><strong>3. Przychody mają rosnąć o ponad sto procent rocznie.</strong> Cena do sprzedaży prognozowanej wynosi 2,35 wobec 6,06 dzisiaj — rynek zakłada więc, że mianownik szybko urośnie. Jeśli tak się stanie, dzisiejsza dźwignia zacznie się rozcieńczać sama.</div>
+
+      <div class="alert alert-info"><strong>4. Zarząd i założyciele trzymają blisko jedną piątą akcji.</strong> Przy tak wysokim ryzyku finansowym oznacza to, że osoby podejmujące decyzje o zadłużeniu ponoszą ich skutki majątkowo. Do tego wąski wolny obrót przy wysokiej krótkiej sprzedaży może gwałtownie wzmocnić ruch w górę.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Dług netto na akcję przewyższa cenę akcji.</strong> Ponad połowa wartości przedsiębiorstwa należy do wierzycieli. Umiarkowane pogorszenie wyników — spadek zysku operacyjnego o mniej niż jedną trzecią — sprowadza w moim modelu kurs do kilkunastu dolarów.</div>
+
+      <div class="alert alert-danger"><strong>2. Nakłady niemal trzykrotnie przewyższają przychody.</strong> Wolne przepływy są ujemne o blisko czternaście miliardów dolarów rocznie, a lukę zamyka kolejny dług. Każdy kwartał opóźnienia w uruchamianiu mocy to kwartał kosztu finansowania bez odpowiadającego mu przychodu.</div>
+
+      <div class="alert alert-danger"><strong>3. Rozwodnienie o ponad trzy czwarte w rok.</strong> Nawet gdyby wartość przedsiębiorstwa rosła zgodnie z planem, akcjonariusz dostaje coraz mniejszy udział w tej wartości. Przy kolejnych rundach finansowania ten mechanizm będzie się powtarzał.</div>
+
+      <div class="alert alert-warning"><strong>4. Brak fosy w biznesie o wysokiej marży.</strong> Wynajem mocy obliczeniowej to sprzedaż towaru, a marża powyżej sześćdziesięciu procent przyciąga konkurencję z definicji. Rywalami są firmy z nieporównywalnie mocniejszymi bilansami, które wytrzymają wojnę cenową dłużej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Przewaga nad CoreWeave</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Amazon</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 3,91%)</span></td><td style="color:var(--ocena-sprzedaz)">Finansuje rozbudowę z gotówki, nie z długu</td><td>Mniej wyspecjalizowana infrastruktura</td></tr>
+          <tr><td><strong>Microsoft</strong></td><td style="color:var(--ocena-sprzedaz)">Bilans i relacja z twórcami modeli</td><td>Ograniczenia mocy</td></tr>
+          <tr><td><strong>Oracle</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 5,83%)</span></td><td style="color:var(--ocena-sprzedaz)">Wielokrotnie mocniejszy bilans i zysk operacyjny</td><td style="color:var(--ocena-uwaga)">Ten sam problem z nakładami, tylko mniejszy</td></tr>
+          <tr><td><strong>IREN</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,54%)</span></td><td>Własna moc energetyczna, niższy koszt wejścia</td><td>Mniejsza skala i krótsza historia</td></tr>
+          <tr><td>Kopalnie w transformacji</td><td>Gotowe przyłącza i grunty</td><td style="color:var(--ocena-kupno)">Brak doświadczenia operacyjnego w chmurze</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Warto zauważyć, że w tym zestawieniu trzy z pięciu pozycji masz w portfelu — i wszystkie konkurują ze sobą o ten sam popyt.</strong><br><br>Amazon, Oracle, CoreWeave i IREN sprzedają tę samą rzecz: godziny pracy akceleratorów. Różnią się wyłącznie tym, skąd biorą pieniądze na ich zakup i jak szybko potrafią je uruchomić.<br><br><strong>Masz więc obstawione cztery konie w jednym wyścigu</strong>, o łącznej wadze przekraczającej szesnaście procent portfela. Nie jest to błąd — jeśli popyt na moc obliczeniową rośnie tak, jak zakłada konsensus, wygrać może kilku naraz. Ale <strong>spadek cen wynajmu uderzyłby we wszystkie cztery jednocześnie</strong>, a najmocniej w tę o najwyższej dźwigni.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-sprzedaz)">-32,80%</td><td>Spółka po debiucie giełdowym, krótka historia notowań</td></tr>
+          <tr><td>Średnie kroczące 50 i 200 sesji</td><td>$85,24 / $92,06</td><td style="color:var(--ocena-sprzedaz)">Kurs <strong>poniżej obu</strong> — o 6,8% i 13,7%</td></tr>
+          <tr><td><strong>Układ średnich</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>50 poniżej 200</strong></td><td style="color:var(--ocena-sprzedaz)">Trend spadkowy bez sygnału odwrócenia</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td style="color:var(--ocena-uwaga)">42,37</td><td>Dolna część strefy neutralnej</td></tr>
+          <tr><td>Beta</td><td>brak danych</td><td style="color:var(--ocena-uwaga)">Zbyt krótka historia notowań — to samo w sobie jest ryzykiem</td></tr>
+          <tr><td>Średni wolumen (20 sesji)</td><td>21,22 mln akcji</td><td>Wysoka płynność mimo wąskiego wolnego obrotu</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Obraz techniczny jest najsłabszy ze wszystkich pozycji odświeżanych w tym tygodniu i jako jedyny nie pokazuje odbicia.</strong><br><br>Kurs jest poniżej obu średnich, krótsza leży poniżej dłuższej, a dzisiejsza sesja przyniosła spadek o blisko pięć procent — <strong>w dniu, w którym AMD, Oracle i Sibanye rosły o ponad cztery procent każde</strong>. To rozejście się z resztą portfela jest samo w sobie informacją.<br><br>Brak wskaźnika beta wynika ze zbyt krótkiej historii notowań. W praktyce oznacza to, że <strong>nie da się dziś oszacować, jak ta spółka zachowa się w prawdziwej przecenie rynkowej</strong> — nie przeszła jeszcze żadnej.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$85,24</strong></td><td>Średnia 50-sesyjna — najbliższy opór</td></tr>
+          <tr><td><strong>$92,06</strong></td><td>Średnia 200-sesyjna — odzyskanie zmieniłoby obraz techniczny</td></tr>
+          <tr><td><strong>$144,46</strong></td><td>Cena docelowa konsensusu</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$60</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — poniżej niego scenariusz negatywny staje się scenariuszem bazowym</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs poniżej obu średnich, trend spadkowy nienaruszony, spółka rozjeżdża się z resztą sektora. Brak katalizatora przed listopadowymi wynikami.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Środek wartości godziwej nieznacznie powyżej kursu, ale przedział rozciąga się od dwudziestu pięciu do stu pięćdziesięciu dolarów. Przy takiej rozpiętości żadna ocena kierunkowa nie byłaby uczciwa.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO SPEKULACYJNE</strong></td><td>Jeśli spółka przetrwa fazę budowy i przychody wyprzedzą amortyzację z odsetkami, ta sama dźwignia zadziała w drugą stronę. To jest jednak zakład na przetrwanie, nie na wyniki.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Ocena łączna: NEUTRALNA — obniżenie z kupna spekulacyjnego, i jest to obniżenie po pomyłce, a nie po sukcesie.</strong><br><br>Trzy pozostałe spółki odświeżane w tym tygodniu obniżałem dlatego, że kurs dogonił wycenę. <strong>Tutaj obniżam dlatego, że moja wycena była błędna</strong> — przedział $120–155 nigdy nie miał uzasadnienia przy bilansie, który opisałem wtedy jako kruchy, ale wyceniłem tak, jakby nim nie był.<br><br><strong>To nie jest akcja w zwykłym sensie, tylko opcja na wartość przedsiębiorstwa</strong>, i wielkość pozycji powinna to odzwierciedlać. Decyzja należy do Ciebie; moim zadaniem jest, żeby liczby z sekcji 6 i 8 były przed nią widoczne.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td><strong>3,78%</strong></td><td>Jedenasta pozycja z osiemnastu</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-sprzedaz)">-18,1%</td><td>Przy cenie wejścia $96,97</td></tr>
+          <tr><td><strong>Wynajem mocy obliczeniowej razem</strong></td><td style="color:var(--ocena-uwaga)"><strong>16,06%</strong></td><td style="color:var(--ocena-uwaga)">Z Oracle, Amazonem i IREN</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Cztery pozycje w Twoim portfelu sprzedają tę samą rzecz i warto zobaczyć je razem.</strong><br><br>Oracle (5,83%), Amazon (3,91%), CoreWeave (3,78%) i IREN (2,54%) — razem <strong>16,06% portfela</strong> — wynajmują godziny pracy akceleratorów. Różnią się wyłącznie sposobem finansowania zakupu sprzętu:<br><br>
+      <strong>Amazon</strong> płaci z gotówki wypracowanej gdzie indziej.<br>
+      <strong>Oracle</strong> płaci długiem, mając duży zysk operacyjny.<br>
+      <strong>IREN</strong> wychodzi z wydobycia bitcoina, mając własną moc energetyczną.<br>
+      <strong>CoreWeave</strong> płaci długiem, nie mając zysku operacyjnego.<br><br>
+      Jeśli popyt rośnie tak, jak zakłada konsensus, wygrać może kilku naraz i ta konstrukcja jest sensowna. <strong>Ale spadek cen wynajmu uderzyłby we wszystkie cztery jednocześnie — a kolejność, w jakiej odczułyby to najmocniej, wynika wprost z powyższej listy.</strong></div>
+
+      <div class="alert alert-info"><strong>Osobna uwaga o wielkości pozycji.</strong> Przy 3,78% portfela CoreWeave jest jedenastą pozycją co do wielkości, co przy inwestycji o charakterze opcyjnym jest wagą umiarkowaną. Warto jednak pamiętać, że przy dzisiejszym poziomie wykorzystania depozytu zabezpieczającego <strong>strata na tej pozycji nie musi być duża w ujęciu portfelowym, żeby mieć znaczenie dla zapasu do progu</strong>.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Dług netto przypadający na jedną akcję CoreWeave wynosi $83,46, a jedna akcja kosztuje $79,41 — i to jedno zdanie opisuje całą tę inwestycję.</strong> Ponad połowa wartości przedsiębiorstwa należy do wierzycieli, a akcja jest cienką warstwą kapitału własnego leżącą na wielkim stosie długu. Zachowuje się więc jak opcja: przy wzroście wartości przedsiębiorstwa zyskuje wielokrotnie, przy spadku traci wielokrotnie. Mój model pokazuje to wprost — <strong>spadek zysku operacyjnego o niecałą jedną trzecią sprowadza kurs z dziewięćdziesięciu dolarów do trzynastu</strong>.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Sam biznes jest przy tym bardzo dobry: marża brutto <strong>67,42%</strong>, marża EBITDA blisko pięćdziesięciu procent, przepływy operacyjne <strong>$6,91 mld</strong> przy zaledwie dwóch tysiącach pracowników. Problemem nie jest zarabianie, tylko tempo budowy: <strong>nakłady inwestycyjne sięgają 271% przychodów</strong>, wolne przepływy są ujemne o blisko czternaście miliardów dolarów, a liczba akcji wzrosła w rok o ponad trzy czwarte. Wskaźnik Altmana wynosi 0,29 — najniżej w całym Twoim portfelu.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Biznes operacyjny musi zarabiać na poziomie marży.</strong> Marża brutto powyżej dwóch trzecich, EBITDA blisko połowy — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Przepływy operacyjne muszą być dodatnie.</strong> Blisko siedem miliardów dolarów rocznie — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Nakłady powinny mieścić się w możliwościach finansowych.</strong> Niemal trzykrotność przychodów — niespełnione w stopniu skrajnym.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Akcjonariusz nie powinien być rozwadniany.</strong> Ponad trzy czwarte w rok — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Przychody muszą wyprzedzić amortyzację i odsetki.</strong> Prognoza mówi, że tak; dzisiejszy rachunek wyników, że jeszcze nie.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>Listopad 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki za III kwartał</strong></td><td style="color:var(--ocena-uwaga)">Tempo uruchamiania mocy, koszt kolejnych rund finansowania, ewentualna nowa emisja</td></tr>
+            <tr><td>Na bieżąco</td><td>Warunki finansowania długiem</td><td>Przy tej dźwigni koszt pieniądza decyduje o przetrwaniu</td></tr>
+            <tr><td>2027</td><td>Moment, w którym przychody dogonią amortyzację</td><td>Punkt, od którego dźwignia zaczyna działać na korzyść</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">W dowolnej chwili</td><td style="color:var(--ocena-sprzedaz)">Emisja akcji na spłatę zadłużenia</td><td style="color:var(--ocena-sprzedaz)">Sygnał, że dług osiągnął granicę możliwości spółki</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Marża EBITDA</td><td>49,92%</td><td>zejście poniżej 40%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Nakłady do przychodów</td><td>271%</td><td>brak spadku w kolejnych kwartałach</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Liczba akcji</td><td>+75,59% rocznie</td><td>kolejna duża emisja</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Kurs wobec średniej 200-sesyjnej</td><td>13,7% poniżej</td><td>zejście poniżej $60</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Charakter pozycji</strong></td><td>Traktować jako <strong>opcję na wartość przedsiębiorstwa</strong>, nie jako udział w spółce</td></tr>
+            <tr><td><strong>Dokupowanie</strong></td><td>Nie przed listopadowymi wynikami; przy tej dźwigni każdy kwartał zmienia obraz</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$140</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$60</strong></td></tr>
+            <tr><td><strong>Warunek zmiany na sprzedaż</strong></td><td>Emisja akcji na spłatę długu albo brak spadku relacji nakładów do przychodów</td></tr>
+            <tr><td><strong>Czego nie robić</strong></td><td>Nie uśredniać w dół — przy tej konstrukcji bilansu spadek kursu nie oznacza, że jest taniej</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p><strong>Obniżam ocenę i przede wszystkim przyznaję się do błędu.</strong> W sierpniu wyceniłem CoreWeave na $120–155 i nazwałem to kupnem spekulacyjnym, mimo że w tej samej ocenie napisałem o kruchym bilansie. Kurs spadł od tego czasu o blisko jedną czwartą. Pomyłka nie polegała na złej diagnozie, tylko na tym, że <strong>potraktowałem bilans jako zastrzeżenie do tezy, zamiast uczynić go tezą</strong> — a przy spółce, w której dług netto na akcję przewyższa cenę akcji, bilans nie jest jednym z czynników. Jest jedynym.</p>
+        <p>Nie zmienia to faktu, że biznes działa i rośnie: marże są bardzo wysokie, przepływy operacyjne dodatnie, a przychody mają według konsensusu podwajać się rocznie. <strong>Pytanie brzmi jednak nie „ile ta spółka jest warta", tylko „czy dotrwa do momentu, w którym jej wartość zacznie należeć do akcjonariuszy".</strong> Dlatego przedział wartości godziwej rozciąga się od dwudziestu pięciu do stu pięćdziesięciu dolarów, a pozycję o tej konstrukcji trzeba wielkością traktować jak opcję, a nie jak akcję.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$25 – $150</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$13 (-84%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$153 (+93%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Wielkość jak przy opcji</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki w listopadzie</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA ANALIZY Z 16 SIERPNIA</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Wartość godziwa $120–155</strong> przy kursie $105,26, ocena kupna spekulacyjnego</td>
+            <td>Kurs spadł o <strong>24,6%</strong> i oddalił się od dolnej granicy przedziału o ponad jedną trzecią. Nowy przedział <strong>$25–150</strong> odzwierciedla konstrukcję, w której dług netto na akcję przewyższa cenę akcji</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Najpoważniejsza pomyłka w tej serii</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Bilans jako zastrzeżenie</strong> do tezy o portfelu zamówień</td>
+            <td>Przy dźwigni tej wielkości <strong>bilans nie jest jednym z czynników wyceny — jest jedynym</strong>. Wycenę trzeba prowadzić od wartości przedsiębiorstwa i dopiero odejmować dług, a nie od mnożników przychodowych</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — błędna metoda, nie tylko błędna liczba</td>
+          </tr>
+          <tr>
+            <td>Brak policzenia <strong>relacji nakładów do przychodów</strong></td>
+            <td>Wynosi <strong>271%</strong> — niemal trzykrotnie więcej niż w Oracle. To jest liczba, która powinna była otwierać tamtą analizę</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana</td>
+          </tr>
+          <tr>
+            <td>Brak zestawienia <strong>rozwodnienia</strong></td>
+            <td>Liczba akcji wzrosła o <strong>75,59%</strong> w rok — trzydzieści osiem razy szybciej niż w Oracle. Nawet przy rosnącej wartości przedsiębiorstwa udział akcjonariusza w niej maleje</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Wniosek metodologiczny, który dopisuję do zasad redakcyjnych.</strong><br><br>Przy spółkach, w których <strong>dług netto stanowi znaczną część wartości przedsiębiorstwa</strong>, wycena oparta na mnożnikach przychodowych albo na cenie docelowej analityków jest myląca. Trzeba prowadzić ją od wartości całego przedsiębiorstwa i dopiero odejmować dług — bo wtedy widać, że umiarkowana zmiana założeń powoduje niewspółmierną zmianę wartości akcji.<br><br>Tę samą metodę zastosowałem dziś przy MARA, gdzie po odjęciu skarbca i długu zostało $8,85 na akcję. <strong>Różnica polega na tym, że przy MARA zrobiłem to od razu, a przy CoreWeave dopiero po tym, jak kurs spadł o jedną czwartą.</strong></div>
+
+      <div class="alert alert-info"><strong>Co się obroniło.</strong> Diagnoza „ogromny portfel zamówień na kruchym bilansie" była trafna co do treści — obie jej części są dziś aktualne i obie się pogłębiły. Trafne było też wskazanie, że to pozycja spekulacyjna wymagająca ograniczonej wielkości.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 września 2026 | Cena: <strong>$79,41</strong> (notowanie 17.09.2026, 11:16 EDT) | <strong>Aktualizacja analizy z 16 sierpnia 2026 — ocena obniżona z kupna spekulacyjnego do neutralnej po pomyłce w wycenie</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> wartość godziwa $120–155 → $25–150; zmieniono metodę wyceny z mnożników przychodowych na mostek od wartości przedsiębiorstwa pomniejszonej o dług netto, bo dług stanowi 51% wartości przedsiębiorstwa, a dług netto na akcję ($83,46) przewyższa cenę akcji; dodano relację nakładów do przychodów (271%) oraz rozwodnienie (+75,59% rok do roku) | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 17.09.2026</strong>, CoreWeave Investor Relations (wyniki z 11.08.2026); scenariusze oparte na mostku od wartości przedsiębiorstwa i wszystkie wyliczenia pochodne to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
