@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVO — Novo Nordisk | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: NVO</div>
+    <div class="company-name">Novo Nordisk A/S</div>
+    <div class="company-sub">Leki na cukrzycę i otyłość · Bagsværd, Dania · 69 505 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">W portfelu — 4,32%</span>
+      <span class="meta-tag">Najlepszy zwrot z kapitału w portfelu</span>
+      <span class="meta-tag">Jedyna rekomendacja „trzymaj" z osiemnastu</span>
+      <div class="price-display">
+        <div class="price-main">$43,36</div>
+        <div class="price-sub">notowanie 17.09.2026, 15:41 EDT (+3,94%)</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Farmacja i biotech</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — najlepszy biznes w portfelu przy najniższym mnożniku, ale rynek wycenia spadek zysku o jedną piątą">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">jakość bez kierunku — zysk ma spadać, nie rosnąć</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$33 – $55</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-24% do +27%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>4 listopada</b><em>Q3 2026</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Akcjonariat</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$43,36</div><div class="metric-detail"><strong>-24,20% w 52 tygodnie</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 12.08</div><div class="metric-value red">-5,2%</div><div class="metric-detail">Mój przedział $50–60 się oddalił</div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot kapitału vs koszt</div><div class="metric-value green">+33,71 pp</div><div class="metric-detail"><strong>Najlepszy w całym portfelu</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Marża brutto / operacyjna</div><div class="metric-value green">82,0% / 49,0%</div><div class="metric-detail">Najwyższe w portfelu</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / zysk</div><div class="metric-value green">10,46</div><div class="metric-detail">Wartość firmy do EBITDA <strong>7,56</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Cena / zysk prognozowany</div><div class="metric-value red">13,89</div><div class="metric-detail"><strong>Wyżej niż historyczny</strong> — sekcja 6</div></div>
+    <div class="metric-card"><div class="metric-label">Beta</div><div class="metric-value green">0,34</div><div class="metric-detail"><strong>Najniższa w portfelu</strong> · dywidenda 2,95%</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (14 analityków)</div><div class="metric-value">$47,22</div><div class="metric-detail">+8,92% · <strong>rekomendacja „trzymaj"</strong></div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I NAJWAŻNIEJSZA LICZBA</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Novo Nordisk produkuje leki na cukrzycę i otyłość — w praktyce jest to spółka jednej klasy terapeutycznej o ogromnej skali. Przychody za dwanaście miesięcy to <strong>$50,34 mld</strong> przy 69 505 pracownikach. To <strong>Twoja pozycja o wadze 4,32%</strong>, przy cenie wejścia $50,06, czyli wynik <strong>-13,4%</strong>.</p>
+
+      <div class="alert alert-danger"><strong>Najważniejsza liczba w tym raporcie nie jest żadnym wskaźnikiem jakości, tylko relacją dwóch mnożników.</strong><br><br>
+      Cena do zysku historycznego: <strong>10,46</strong>. Cena do zysku <em>prognozowanego</em>: <strong>13,89</strong>. Różnica wynosi trzy i pół punktu.<br><br>
+      <strong>Wskaźnik prognozowany jest wyższy od historycznego</strong> — a to zdarza się tylko wtedy, gdy rynek oczekuje, że <strong>zysk spadnie</strong>. Implikowany zysk na najbliższe dwanaście miesięcy wynosi <strong>$3,12 na akcję</strong> wobec $4,00 osiągniętych, czyli zakładany spadek o <strong>22%</strong>.<br><br>To jest jedyna pozycja w Twoim portfelu, w której tak jest. We wszystkich pozostałych wskaźnik prognozowany jest niższy, bo rynek oczekuje wzrostu zysku.</div>
+
+      <div class="alert alert-warning"><strong>Teza z poprzedniej analizy była trafna w diagnozie, ale przedział wyceny się oddalił.</strong> Nazwałem wtedy sytuację „tanio, ale przed resetem cenowym 2027" i wyceniłem Novo Nordisk na <strong>$50–60</strong> przy kursie $45,76. Kurs spadł do $43,36, czyli o <strong>5,2%</strong> — dolna granica mojego przedziału jest dziś dalej, nie bliżej.<br><br>Obniżam przedział do <strong>$33–55</strong>, bo poprzedni nie uwzględniał scenariusza, w którym reset cenowy okazuje się głębszy od oczekiwań. Ocenę neutralną utrzymuję.</div>
+
+      <h3>Potwierdzenie z prognoz analityków</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Kontekst w portfelu</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Prognoza wzrostu przychodów (3 lata)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>1,43% rocznie</strong></td><td style="color:var(--ocena-sprzedaz)">Najniższa z osiemnastu pozycji</td></tr>
+          <tr><td><strong>Prognoza wzrostu zysku (3 lata)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>1,06% rocznie</strong></td><td style="color:var(--ocena-sprzedaz)">Praktycznie stagnacja</td></tr>
+          <tr><td><strong>Rekomendacja konsensusu</strong></td><td style="color:var(--ocena-uwaga)"><strong>„Trzymaj"</strong></td><td style="color:var(--ocena-uwaga)">Jedyna taka w portfelu — pozostałe to kupno lub mocne kupno</td></tr>
+          <tr><td>Liczba analityków</td><td>14</td><td>Cienkie pokrycie jak na spółkę tej wielkości</td></tr>
+          <tr><td>Cena docelowa</td><td>$47,22 (+8,92%)</td><td>Mimo rekomendacji „trzymaj"</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Zestawienie jest spójne: <strong>rynek nie spodziewa się od tej spółki wzrostu</strong>. Nie chodzi o niewiarę w jakość biznesu — chodzi o przekonanie, że dzisiejszy poziom zysku jest nie do utrzymania.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — JEDNA KLASA, OGROMNA SKALA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <p>Novo Nordisk opiera się na lekach z grupy analogów hormonu regulującego apetyt i poziom cukru. Te same substancje stosuje się w cukrzycy i w leczeniu otyłości, a zapotrzebowanie na nie okazało się większe, niż ktokolwiek przewidywał. Spółka ma też starszy, stabilny biznes insulinowy i mniejszą działalność w chorobach rzadkich.</p>
+
+      <div class="alert alert-success"><strong>Fosa Novo Nordisk jest w tym portfelu najsilniejsza, jaką widziałem — i widać ją w jednej liczbie.</strong><br><br>
+      Marża brutto wynosi <strong>81,99%</strong>, marża operacyjna <strong>48,99%</strong>, a zwrot z zainwestowanego kapitału <strong>39,22%</strong> przy koszcie kapitału zaledwie <strong>5,51%</strong>. <strong>Ta różnica jest najwyższa z osiemnastu Twoich pozycji</strong> — pełne zestawienie w sekcji 7.<br><br>Fosa wynika z trzech rzeczy naraz: <strong>ochrony patentowej</strong>, <strong>skrajnie trudnej produkcji</strong> (leki peptydowe nie są proste do skopiowania) oraz <strong>ograniczonych mocy wytwórczych w całej branży</strong>. Konkurent nie może po prostu obniżyć ceny — musi najpierw zbudować fabrykę.</div>
+
+      <div class="alert alert-danger"><strong>Ale ta sama koncentracja, która daje marżę, jest jedynym realnym ryzykiem tej spółki.</strong><br><br>Przychody zależą w przeważającej części od jednej klasy leków. Oznacza to ekspozycję na <strong>trzy zdarzenia, z których każde może nastąpić niezależnie</strong>: wygaśnięcie ochrony patentowej, negocjacje cenowe z płatnikami publicznymi oraz wejście konkurencyjnego preparatu o lepszym profilu.<br><br>To właśnie suma tych trzech ryzyk nazywana jest „resetem cenowym" i to ona tłumaczy, dlaczego wskaźnik ceny do zysku prognozowanego jest wyższy od historycznego. <strong>Nie jest to spekulacja rynku — to wliczone w prognozy oczekiwanie.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK — POPYT ROŚNIE, CENA SPADA</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Kierunek</th><th>Wpływ na Novo Nordisk</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zapotrzebowanie na leczenie otyłości</strong></td><td style="color:var(--ocena-kupno)"><strong>Rośnie</strong></td><td style="color:var(--ocena-kupno)">Rynek wciąż daleki od nasycenia</td></tr>
+          <tr><td><strong>Presja cenowa płatników</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Rośnie</strong></td><td style="color:var(--ocena-sprzedaz)">Główne źródło oczekiwanego spadku zysku</td></tr>
+          <tr><td>Konkurencja preparatów doustnych</td><td style="color:var(--ocena-sprzedaz)">Nasila się</td><td style="color:var(--ocena-sprzedaz)">Wygodniejsza forma podania zmienia układ sił</td></tr>
+          <tr><td>Moce wytwórcze w branży</td><td style="color:var(--ocena-uwaga)">Ograniczone, ale rosną</td><td style="color:var(--ocena-uwaga)">Dziś chronią marżę, z czasem przestaną</td></tr>
+          <tr><td>Refundacja i dostęp</td><td style="color:var(--ocena-kupno)">Poszerza się</td><td style="color:var(--ocena-kupno)">Większe wolumeny przy niższej cenie jednostkowej</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Mechanizm, który tu działa, jest typowy dla farmacji i warto go zrozumieć, bo tłumaczy całą wycenę.</strong><br><br>Kiedy lek okazuje się skuteczny i popularny, producent zarabia bardzo dużo na wysokiej cenie przy ograniczonym wolumenie. Potem wchodzą płatnicy publiczni i ubezpieczyciele, którzy negocjują cenę w zamian za szeroki dostęp. <strong>Wolumen rośnie, cena jednostkowa spada, a zysk zwykle spada razem z nią</strong> — bo marża była zbudowana na cenie, nie na skali.<br><br>Dlatego rosnące zapotrzebowanie na leczenie otyłości nie jest automatycznie dobrą wiadomością dla akcjonariusza. <strong>Jest dobrą wiadomością dla pacjentów i dla wolumenów, a niekoniecznie dla marży.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">AKCJONARIAT</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zmiana liczby akcji r/r</strong></td><td style="color:var(--ocena-kupno)"><strong>-0,14%</strong></td><td style="color:var(--ocena-kupno)">Skup, nie emisja</td></tr>
+          <tr><td>Instytucje</td><td style="color:var(--ocena-uwaga)">28,13%</td><td style="color:var(--ocena-uwaga)">Nisko — kontrolę sprawuje fundacja założycielska</td></tr>
+          <tr><td>Wolny obrót</td><td>3,17 mld z 4,43 mld akcji</td><td>Około 72%</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-uwaga)">31,65 mln (1,00%)</td><td style="color:var(--ocena-uwaga)">Miesiąc wcześniej 29,42 mln — wzrost o 7,6%</td></tr>
+          <tr><td>Przychód na pracownika</td><td style="color:var(--ocena-kupno)">$724,3 tys.</td><td style="color:var(--ocena-kupno)">Zysk na pracownika $256,0 tys. — bardzo wysoko</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Niski udział instytucji przy jednoczesnej stabilności kursu wymaga wyjaśnienia, bo to nie przypadek.</strong><br><br>Novo Nordisk jest kontrolowana przez fundację, której statutowym celem jest długoterminowy rozwój spółki, a nie maksymalizacja kwartalnego wyniku. Oznacza to, że <strong>nikt nie wymusi tu gwałtownych decyzji pod presją rynku</strong> — ani agresywnego skupu akcji, ani wyprzedaży aktywów.<br><br>Praktyczne skutki są dwa. Po pierwsze, <strong>beta 0,34 jest najniższa w całym Twoim portfelu</strong> — kurs reaguje na wahania rynku znacznie słabiej od niemal wszystkiego, co masz. Po drugie, zysk na pracownika przekraczający ćwierć miliona dolarów pokazuje, że struktura właścicielska nie przeszkadza w efektywności.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZEPŁYWY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$50,34 mld</td></tr>
+          <tr><td><strong>Zysk brutto</strong></td><td style="color:var(--ocena-kupno)"><strong>$41,27 mld</strong></td></tr>
+          <tr><td><strong>Zysk operacyjny</strong></td><td style="color:var(--ocena-kupno)"><strong>$24,66 mld</strong></td></tr>
+          <tr><td>Zysk netto</td><td style="color:var(--ocena-kupno)">$17,79 mld · $4,00 na akcję</td></tr>
+          <tr><td>EBITDA</td><td>$26,54 mld</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-kupno)">$20,26 mld</td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-uwaga)"><strong>-$8,61 mld, czyli 17,1% przychodów</strong></td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>$11,65 mld · $2,63 na akcję</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Jedna pozycja z tej tabeli wymaga komentarza, bo jest wyższa, niż można by się spodziewać po spółce farmaceutycznej: nakłady inwestycyjne pochłaniają 17,1% przychodów.</strong><br><br>Powód jest wprost związany z fosą opisaną w sekcji 2: <strong>produkcja leków peptydowych wymaga ogromnych, specjalistycznych zakładów</strong>, a branża nie nadąża z mocami wytwórczymi. Novo Nordisk buduje więc fabryki, żeby zaspokoić popyt — i to jest inwestycja w obronę pozycji rynkowej, nie w nowy biznes.<br><br>Mimo tych nakładów z $20,26 mld gotówki operacyjnej zostaje <strong>$11,65 mld wolnych przepływów</strong>, czyli marża <strong>23,02%</strong> i rentowność względem kapitalizacji <strong>6,26%</strong>. To jest bardzo dobry wynik — po prostu nie tak spektakularny, jak sugerowałaby marża operacyjna bliska pięćdziesięciu procent.</div>
+
+      <p>Dywidenda wynosi <strong>$1,28 na akcję przy stopie 2,95%</strong>, rośnie nieprzerwanie od sześciu lat i pochłania 32% zysku — jest więc bezpieczna z bardzo dużym zapasem. Liczba akcji nieznacznie maleje.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$186,08 mld</td><td>Wartość przedsiębiorstwa $200,76 mld</td></tr>
+          <tr><td>Cena / zysk</td><td style="color:var(--ocena-kupno)">10,46</td><td>Bardzo nisko dla spółki o takich marżach — ale patrz blok niżej</td></tr>
+          <tr><td><strong>Wartość firmy / EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>7,56</strong></td><td style="color:var(--ocena-kupno)">EV/EBIT 8,14 — druga najniższa w portfelu po Sibanye</td></tr>
+          <tr><td>Cena / wolne przepływy</td><td style="color:var(--ocena-kupno)">15,97</td><td>EV/FCF 17,23 · cena do przepływów operacyjnych 9,18</td></tr>
+          <tr><td>Cena / sprzedaż</td><td>3,70</td><td>EV/sprzedaż 3,99</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td>5,50</td><td>Księga $7,64 na akcję; aktywa materialne 12,27</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td style="color:var(--ocena-kupno)">jak w tabeli wyżej</td><td>Zysk <strong>$4,00 na akcję</strong> przy przychodach $50,34 mld</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>13,89</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Wyższy od historycznego</strong> — implikuje zysk $3,12 na akcję, czyli spadek o 22%</td></tr>
+          <tr><td><strong>PEG</strong></td><td>nie dotyczy</td><td style="color:var(--ocena-sprzedaz)">Nie da się policzyć przy prognozie wzrostu zysku <strong>1,06% rocznie</strong></td></tr>
+          <tr><td>Odniesienie sektorowe</td><td>duża farmacja: ok. 12–18× forward</td><td style="color:var(--ocena-uwaga)">Novo Nordisk w dolnej części — ale z malejącym zyskiem</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>To jest przypadek odwrotny do wszystkiego, co opisywałem w tej serii, i wymaga wyraźnego ostrzeżenia.</strong><br><br>Zwykle wskaźnik prognozowany jest niższy od historycznego, bo zysk ma rosnąć — w AMD spada z 130,81 do 46,32, w Oracle z 22,45 do 16,80. <strong>Tutaj rośnie.</strong><br><br>Oznacza to, że <strong>dzisiejsza „taniość" jest pozorna</strong>: mnożnik historyczny liczony jest od zysku, którego rynek nie oczekuje w przyszłym roku. Właściwym punktem odniesienia jest ten prognozowany — a to już nie okazja, tylko wycena uczciwa dla spółki o stagnującym zysku.<br><br><strong>Praktyczna konsekwencja:</strong> przy tej spółce nie wolno budować tezy na niskim wskaźniku ceny do zysku. Tezę trzeba budować na pytaniu, czy spadek zysku będzie mniejszy, niż zakładają prognozy.</div>
+
+      <h3>Cztery scenariusze na koniec 2027 roku</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Zysk na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Reset łagodniejszy od oczekiwań</strong></td><td>$3,50</td><td>15×</td><td><strong>$53</strong></td><td style="color:var(--ocena-kupno)">+22%</td></tr>
+          <tr><td><strong>Reset zgodny z prognozami</strong></td><td>$3,12</td><td>14×</td><td><strong>$44</strong></td><td style="color:var(--ocena-kupno)">+1%</td></tr>
+          <tr><td>Reset głębszy, presja cenowa silniejsza</td><td>$2,70</td><td>12×</td><td>$32</td><td style="color:var(--ocena-sprzedaz)">-26%</td></tr>
+          <tr><td><strong>Konkurencja doustna zabiera udziały</strong></td><td style="color:var(--ocena-sprzedaz)">$2,30</td><td>10×</td><td><strong>$23</strong></td><td style="color:var(--ocena-sprzedaz)">-47%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne. Scenariusz drugi opiera się na zysku implikowanym przez wskaźnik ceny do zysku prognozowanego. Dane wejściowe: StockAnalysis / S&amp;P Global Market Intelligence, stan 17.09.2026.</p>
+
+      <p><strong>Fair value: $33 – $55</strong>, środek <strong>$44,00 (+1,5%)</strong>. Konsensus 14 analityków to $47,22 (+8,92%) przy rekomendacji „trzymaj" — <strong>jedynej takiej rekomendacji wśród osiemnastu Twoich pozycji</strong>.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Marża brutto</strong></td><td style="color:var(--ocena-kupno)"><strong>81,99%</strong></td><td style="color:var(--ocena-kupno)">Najwyższa w całym Twoim portfelu</td></tr>
+          <tr><td><strong>Marża operacyjna</strong></td><td style="color:var(--ocena-kupno)"><strong>48,99%</strong></td><td style="color:var(--ocena-kupno)">Również najwyższa</td></tr>
+          <tr><td>Marża netto / EBITDA</td><td style="color:var(--ocena-kupno)">35,35% / 52,72%</td><td>Efektywna stopa podatkowa 21,72%</td></tr>
+          <tr><td>Marża wolnych przepływów</td><td style="color:var(--ocena-kupno)">23,02%</td><td>Obniżona nakładami na fabryki — sekcja 5</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-kupno)"><strong>39,22% vs 5,51%</strong></td><td style="color:var(--ocena-kupno)"><strong>Różnica +33,71 pp — rekord portfela</strong></td></tr>
+          <tr><td>Zwrot z kapitału własnego</td><td style="color:var(--ocena-kupno)">59,82%</td><td>ROA 18,73%, ROCE 45,35%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Pod względem jakości biznesu Novo Nordisk jest najlepszą spółką w Twoim portfelu i nie jest to blisko.</strong><br><br>Ranking różnicy między zwrotem z zainwestowanego kapitału a jego kosztem wygląda tak: <strong>Novo Nordisk +33,71 pp</strong>, Sibanye +23,15, SAP +9,92, Amphenol +9,89, ServiceNow +1,18, Oracle +0,70, AMD -8,02, Intel -11,92, MARA -84,58.<br><br>Do tego dochodzą najwyższe marże — brutto blisko osiemdziesięciu dwóch procent i operacyjna blisko czterdziestu dziewięciu — oraz koszt kapitału zaledwie <strong>5,51%</strong>, najniższy w portfelu. Ten ostatni wynika wprost z bety 0,34: rynek uznaje tę spółkę za wyjątkowo bezpieczną.<br><br><strong>Zastrzeżenie, bez którego ta sekcja wprowadza w błąd:</strong> wszystkie te wskaźniki są liczone od zysku, który według prognoz ma spaść o jedną piątą. Jakość jest realna, ale jej poziom jest odczytem z korzystnego punktu cyklu produktowego, a nie stanem trwałym.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka / zadłużenie</td><td>$6,87 mld / $21,41 mld</td><td style="color:var(--ocena-uwaga)">Zaciągnięto netto $5,60 mld w ciągu roku</td></tr>
+          <tr><td>Dług netto</td><td style="color:var(--ocena-uwaga)">$14,54 mld</td><td>$3,28 na akcję</td></tr>
+          <tr><td><strong>Dług / EBITDA</strong></td><td style="color:var(--ocena-kupno)"><strong>0,80</strong></td><td style="color:var(--ocena-kupno)">Dług do przepływów 1,84 — spłacalne w dwa lata</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-kupno)"><strong>1 566,84</strong></td><td style="color:var(--ocena-kupno)">Praktycznie bez znaczenia — zysk operacyjny przewyższa odsetki tysiąckrotnie</td></tr>
+          <tr><td>Wskaźnik bieżący / szybki</td><td style="color:var(--ocena-uwaga)">0,87 / 0,64</td><td style="color:var(--ocena-uwaga)">Kapitał obrotowy -$4,64 mld</td></tr>
+          <tr><td><strong>Altman Z / Piotroski F</strong></td><td style="color:var(--ocena-kupno)"><strong>4,21 / 5</strong></td><td style="color:var(--ocena-kupno)">Powyżej progu bezpieczeństwa</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Bilans nie budzi zastrzeżeń, ale dwie liczby warto skomentować.</strong><br><br>
+      <strong>Pokrycie odsetek przekraczające tysiąc pięćset</strong> to nie pomyłka — przy zysku operacyjnym blisko dwudziestu pięciu miliardów dolarów i minimalnym koszcie odsetek wskaźnik traci sens jako miara. Kontrola, którą stosuję po analizie ServiceNow, jest tu bezprzedmiotowa: spółka zaciągnęła wprawdzie <strong>$5,60 mld długu netto</strong> na budowę fabryk, ale przy takim zysku operacyjnym nie ma to żadnego znaczenia dla bezpieczeństwa.<br><br>
+      <strong>Wskaźnik bieżący 0,87 i ujemny kapitał obrotowy</strong> wyglądają słabo, ale w spółce farmaceutycznej o tak wysokiej rentowności wynikają z zarządzania gotówką, nie z braku płynności — spółka nie trzyma nadmiarowej gotówki, bo lepiej ją zainwestować lub wypłacić. Przy pokryciu odsetek tej wielkości i dostępie do finansowania jest to wybór, nie konieczność.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Najlepsza jakość kapitałowa w portfelu przy najniższym mnożniku dochodowym.</strong> Zwrot z kapitału przewyższa jego koszt o ponad trzydzieści trzy punkty procentowe, a wartość przedsiębiorstwa odpowiada niecałej ośmiokrotności rocznej EBITDA. Takiego połączenia nie ma żadna inna spółka, którą masz.</div>
+
+      <div class="alert alert-success"><strong>2. Oczekiwany spadek zysku może się nie zmaterializować w takiej skali.</strong> Prognozy zakładają spadek o jedną piątą. Wystarczy, żeby presja cenowa okazała się łagodniejsza albo wolumeny wyższe, i dzisiejsza wycena okaże się bardzo niska — mój scenariusz pozytywny daje kurs powyżej pięćdziesięciu dolarów.</div>
+
+      <div class="alert alert-success"><strong>3. Kurs już uwzględnia złe wiadomości.</strong> Spadek o ponad dwadzieścia cztery procent w rok, notowanie poniżej obu średnich kroczących, wskaźnik RSI poniżej czterdziestu dwóch. Rynek zdążył wycenić reset, o którym mówi się od kilku lat.</div>
+
+      <div class="alert alert-info"><strong>4. Beta 0,34 i dywidenda blisko trzech procent.</strong> Najniższa zmienność w całym portfelu przy rosnącej od sześciu lat dywidendzie pokrytej zyskiem w jednej trzeciej. W portfelu, w którym średnia beta jest wysoka, ta pozycja pełni rolę stabilizatora.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Rynek oczekuje spadku zysku o jedną piątą i mówi to wprost.</strong> Wskaźnik ceny do zysku prognozowanego jest wyższy od historycznego — jedyny taki przypadek w Twoim portfelu. Dzisiejsza taniość jest liczona od zysku, którego w przyszłym roku ma nie być.</div>
+
+      <div class="alert alert-danger"><strong>2. Prognoza wzrostu przychodów to 1,43% rocznie.</strong> Najniższa z osiemnastu pozycji i praktycznie równa stagnacji. Konsensus czternastu analityków brzmi „trzymaj" — jedyna taka rekomendacja w portfelu.</div>
+
+      <div class="alert alert-danger"><strong>3. Uzależnienie od jednej klasy terapeutycznej.</strong> Trzy niezależne ryzyka — patenty, negocjacje cenowe, konkurencja doustna — dotyczą tego samego źródła przychodów. Realizacja któregokolwiek uderza w całość, a nie w segment.</div>
+
+      <div class="alert alert-warning"><strong>4. Nakłady inwestycyjne pochłaniają siedemnaście procent przychodów.</strong> To dużo dla spółki farmaceutycznej i obniża marżę wolnych przepływów z blisko pięćdziesięciu procent operacyjnych do dwudziestu trzech. Są to inwestycje w obronę pozycji, nie w nowy wzrost.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Pozycja</th><th>Zagrożenie dla Novo Nordisk</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Eli Lilly</strong></td><td>Bezpośredni rywal w tej samej klasie leków</td><td style="color:var(--ocena-sprzedaz)"><strong>Główne zagrożenie</strong> — porównywalna skala i moce wytwórcze</td></tr>
+          <tr><td><strong>Preparaty doustne</strong></td><td>Nowa forma podania</td><td style="color:var(--ocena-sprzedaz)">Wygoda stosowania może przeważyć nad skutecznością</td></tr>
+          <tr><td>Leki generyczne po wygaśnięciu patentów</td><td>Nieuniknione w dłuższym okresie</td><td style="color:var(--ocena-uwaga)">Produkcja peptydów trudna — wejście wolniejsze niż w zwykłych lekach</td></tr>
+          <tr><td>Płatnicy publiczni i ubezpieczyciele</td><td style="color:var(--ocena-sprzedaz)"><strong>Nie konkurent, ale najsilniejszy negocjator</strong></td><td style="color:var(--ocena-sprzedaz)">Decydują o cenie w zamian za dostęp</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Najsilniejszym przeciwnikiem Novo Nordisk nie jest żadna firma farmaceutyczna, tylko płatnik.</strong><br><br>Ubezpieczyciele i systemy publiczne mają wobec producenta leku na chorobę powszechną pozycję, jakiej nie ma żaden konkurent: <strong>mogą zaoferować dostęp do milionów pacjentów w zamian za obniżkę ceny</strong> — i producent zwykle się zgadza, bo wolumen rekompensuje część marży.<br><br>Dlatego rosnąca popularność leczenia otyłości jest dla akcjonariusza zjawiskiem dwuznacznym: <strong>im powszechniejsze zastosowanie, tym silniejsza pozycja negocjacyjna płatnika.</strong> To jest mechanizm stojący za oczekiwanym resetem cenowym i nie da się go obejść lepszym produktem.</div>
+
+      <p>W Twoim portfelu Novo Nordisk nie ma żadnego odpowiednika — <strong>jest jedyną spółką farmaceutyczną i jedyną z ekspozycją na ochronę zdrowia</strong> — druga spółka z tego obszaru została sprzedana we wrześniu. Nie konkuruje z żadną inną pozycją i nie zależy od czynnika wspólnego z resztą portfela.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-sprzedaz)">-24,20%</td><td>Druga najgorsza w portfelu po Oracle</td></tr>
+          <tr><td>Średnie kroczące 50 i 200 sesji</td><td>$47,02 / $46,18</td><td style="color:var(--ocena-sprzedaz)">Kurs <strong>poniżej obu</strong> — o 7,8% i 6,1%</td></tr>
+          <tr><td><strong>Układ średnich</strong></td><td style="color:var(--ocena-uwaga)"><strong>50 powyżej 200</strong></td><td style="color:var(--ocena-uwaga)">Trend długoterminowy jeszcze nienaruszony, ale kurs pod oboma</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td style="color:var(--ocena-kupno)">41,81</td><td style="color:var(--ocena-kupno)">Dolna część strefy neutralnej</td></tr>
+          <tr><td><strong>Beta (5 lat)</strong></td><td style="color:var(--ocena-kupno)"><strong>0,34</strong></td><td style="color:var(--ocena-kupno)"><strong>Najniższa w całym portfelu</strong> — ponad siedmiokrotnie niżej niż AMD</td></tr>
+          <tr><td>Średni wolumen (20 sesji)</td><td>9,69 mln akcji</td><td>Wysoka płynność</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Obraz techniczny mówi o spółce w trwającej przecenie, ale bez paniki — i beta tłumaczy, dlaczego.</strong><br><br>Kurs jest poniżej obu średnich kroczących, ale <strong>krótsza nadal leży powyżej dłuższej</strong>, a wskaźnik RSI w dolnej strefie neutralnej wskazuje na wyprzedanie bez wykupienia w żadną stronę. Spadek o ponad dwadzieścia cztery procent w rok rozłożył się więc równomiernie, bez gwałtownych ruchów.<br><br><strong>Beta 0,34 znaczy, że ta pozycja jest o rząd wielkości spokojniejsza od większości portfela.</strong> Przy AMD (2,48), MARA (5,33) i Intelu (2,23) obecność spółki o becie jednej trzeciej rynku ma wymierne znaczenie dla zmienności całego rachunku.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$46,18</strong></td><td>Średnia 200-sesyjna — najbliższy istotny opór</td></tr>
+          <tr><td><strong>$47,22</strong></td><td>Cena docelowa konsensusu</td></tr>
+          <tr><td><strong>$44,00</strong></td><td>Środek przedziału wartości godziwej</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>Dolna granica wyceny</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — patrz sekcja 6</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs poniżej obu średnich, konsensus brzmi „trzymaj", a wyniki 4 listopada mogą przynieść pierwsze twarde dane o presji cenowej.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Środek wartości godziwej praktycznie na kursie. W tym okresie rozstrzygnie się skala resetu cenowego, a nie jakość biznesu — której nikt nie kwestionuje.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Po przejściu resetu zostaje spółka o marży brutto powyżej osiemdziesięciu procent i zwrocie z kapitału wielokrotnie przewyższającym jego koszt. Na tym horyzoncie liczy się trwałość fosy, a nie tempo najbliższych kwartałów.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ocena łączna: NEUTRALNA — utrzymana, z obniżonym przedziałem.</strong><br><br>Ta pozycja jest w Twoim portfelu wyjątkowa: <strong>ma najlepszy biznes i najsłabszą perspektywę wzrostu jednocześnie</strong>. Żadna ze standardowych ocen nie opisuje tego dobrze — „kupno" sugerowałoby, że widzę katalizator, którego nie ma; „sprzedaż" przeczyłoby jakości, która jest niepodważalna.<br><br>Neutralność znaczy tu więc coś konkretnego: <strong>trzymać, bo jakość jest realna i tania, ale nie liczyć na wzrost, dopóki nie będzie wiadomo, jak głęboki jest reset.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td><strong>4,32%</strong></td><td>Ósma pozycja z osiemnastu</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-sprzedaz)">-13,4%</td><td>Przy cenie wejścia $50,06</td></tr>
+          <tr><td><strong>Jedyna ekspozycja na ochronę zdrowia</strong></td><td style="color:var(--ocena-kupno)"><strong>4,32%</strong></td><td style="color:var(--ocena-kupno)">Druga spółka z tego obszaru sprzedana we wrześniu</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Novo Nordisk pełni w Twoim portfelu rolę, której nie zastąpi nic innego — i po wrześniowych zmianach stała się ona ważniejsza.</strong><br><br>Wrześniowa sprzedaż drugiej spółki z tego obszaru sprawiła, że <strong>NVO jest dziś jedyną ekspozycją na ochronę zdrowia</strong>. Nie zależy od nakładów na centra danych, od cen metali ani od budżetów informatycznych — czyli od żadnego czynnika, który rusza pozostałymi siedemnastoma pozycjami.<br><br>Do tego dochodzi <strong>beta 0,34</strong>, najniższa w portfelu. Wraz z SAP (0,78) i Sibanye (0,97) tworzy trzon pozycji o niskiej zmienności, stanowiący przeciwwagę dla AMD, MARA i Intela. Przy dzisiejszym poziomie wykorzystania depozytu zabezpieczającego ten trzon jest tym, co stabilizuje wartość rachunku w dniach spadkowych.</div>
+
+      <div class="alert alert-info"><strong>Warto natomiast zauważyć jedno: to jest jedyna pozycja, przy której moja ocena i ocena rynku są zbieżne.</strong> We wszystkich pozostałych siedemnastu spółkach konsensus brzmi „kupuj" lub „mocno kupuj", a ja kilkakrotnie obniżałem oceny poniżej rynkowych. Tutaj analitycy mówią „trzymaj" i ja mówię to samo — co przy rozbieżnościach widocznych w resztę portfela samo w sobie coś znaczy.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Novo Nordisk jest najlepszym biznesem w Twoim portfelu i jednocześnie jedynym, od którego rynek nie oczekuje wzrostu — te dwa fakty trzeba trzymać obok siebie.</strong> Marża brutto <strong>81,99%</strong>, marża operacyjna <strong>48,99%</strong>, a zwrot z zainwestowanego kapitału przewyższa jego koszt o <strong>33,71 punktu procentowego</strong>. Żadna z pozostałych siedemnastu pozycji nie zbliża się do tych wartości. Wartość przedsiębiorstwa odpowiada przy tym niecałej ośmiokrotności rocznej EBITDA.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">A jednak nie jest to okazja, i mówi to jedna liczba: <strong>wskaźnik ceny do zysku prognozowanego (13,89) jest wyższy od historycznego (10,46)</strong>. To jedyny taki przypadek w całym portfelu i znaczy wprost, że rynek oczekuje <strong>spadku zysku o około 22%</strong>. Prognoza wzrostu przychodów wynosi <strong>1,43% rocznie</strong>, a czternastu analityków rekomenduje „trzymaj" — jedyną taką rekomendację, jaką mają Twoje spółki. Dzisiejsza taniość jest liczona od zysku, którego w przyszłym roku ma nie być.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Jakość biznesu musi być niepodważalna.</strong> Najwyższe marże i najlepszy zwrot z kapitału w portfelu — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Bilans musi być bezpieczny.</strong> Dług do EBITDA 0,80, pokrycie odsetek bez znaczenia praktycznego — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Kurs musi już uwzględniać złe wiadomości.</strong> Spadek o ponad ćwierć w rok, notowanie pod oboma średnimi — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Zysk powinien rosnąć, a nie spadać.</strong> Wskaźnik prognozowany wyższy od historycznego — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Reset cenowy musi być łagodniejszy od oczekiwań.</strong> To cała teza i rozstrzygnie się w 2027 roku.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>4 listopada 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki za III kwartał</strong></td><td style="color:var(--ocena-uwaga)">Pierwsze twarde dane o skali presji cenowej i o wolumenach</td></tr>
+            <tr><td>Początek 2027</td><td>Prognoza roczna zarządu</td><td>Test, czy spadek zysku będzie zbliżony do oczekiwanego przez rynek</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">2027</td><td style="color:var(--ocena-sprzedaz)">Reset cenowy</td><td style="color:var(--ocena-sprzedaz)">Zdarzenie, które wyceniane jest od kilku lat i wreszcie nastąpi</td></tr>
+            <tr><td>2027–2028</td><td>Wejście konkurencyjnych preparatów doustnych</td><td>Wygoda stosowania może zmienić układ sił bardziej niż cena</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Marża brutto</td><td>81,99%</td><td>zejście poniżej 75%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Relacja mnożnika prognozowanego do historycznego</td><td>prognozowany wyżej</td><td>dalsze rozszerzanie się różnicy</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Prognoza wzrostu przychodów</td><td>1,43% rocznie</td><td>zejście poniżej zera</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Kurs wobec średniej 200-sesyjnej</td><td>6,1% poniżej</td><td>brak odzyskania do końca roku</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Wielkość pozycji</strong></td><td>Bez zmian — niska beta i unikalna ekspozycja uzasadniają obecną wagę</td></tr>
+            <tr><td><strong>Dokupowanie</strong></td><td>Dopiero poniżej <strong>$38</strong>, i tylko jako zakład na łagodniejszy reset</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$55</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td>Dolna granica przedziału wartości godziwej</td></tr>
+            <tr><td><strong>Warunek zmiany na kupno</strong></td><td>Wskaźnik prognozowany niższy od historycznego, czyli powrót oczekiwań wzrostu zysku</td></tr>
+            <tr><td><strong>Czego nie robić</strong></td><td>Nie budować tezy na wskaźniku ceny do zysku 10,46 — liczony jest od zysku, którego rynek nie oczekuje</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p><strong>To jedyna pozycja w Twoim portfelu, przy której wysoka jakość i brak perspektyw wzrostu współistnieją tak wyraźnie.</strong> Ma najwyższe marże, najlepszy zwrot z kapitału i najniższą betę z osiemnastu pozycji — a jednocześnie najniższą prognozę wzrostu przychodów i jedyną rekomendację „trzymaj". Nie jest to sprzeczność: <strong>spółka jest znakomita i tania, ale tania z powodu, który jest znany i jeszcze się nie zmaterializował.</strong></p>
+        <p>Obniżam przedział wartości godziwej z $50–60 do <strong>$33–55</strong>, bo poprzedni nie zawierał scenariusza głębszego resetu — a przy spółce jednej klasy terapeutycznej taki scenariusz musi być w przedziale obecny. Na horyzoncie trzech do pięciu lat ocena zmienia się na pozytywną: <strong>po przejściu resetu zostaje biznes o marży brutto powyżej osiemdziesięciu procent, którego nikt nie zdołał skopiować.</strong> Pytanie dotyczy więc nie jakości, tylko ceny, jaką za przejście przez ten rok trzeba zapłacić.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$33 – $55</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$23 (-47%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$53 (+22%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Bez zmian</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 4 listopada</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA ANALIZY Z 12 SIERPNIA</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Wartość godziwa $50–60</strong> przy kursie $45,76</td>
+            <td>Kurs spadł do $43,36, czyli o 5,2%, a dolna granica przedziału jest dalej niż wtedy. Poprzedni zakres <strong>nie zawierał scenariusza głębszego resetu</strong> — nowy przedział <strong>$33–55</strong> go uwzględnia</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — przedział zbyt wąski od dołu</td>
+          </tr>
+          <tr>
+            <td>Brak wyeksponowania, że <strong>mnożnik prognozowany jest wyższy od historycznego</strong></td>
+            <td>To najważniejsza liczba w tej spółce: 13,89 wobec 10,46 oznacza oczekiwany spadek zysku o 22%. Bez tego rozróżnienia wskaźnik ceny do zysku 10,46 wygląda na okazję, którą nie jest</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — pominięty klucz do wyceny</td>
+          </tr>
+          <tr>
+            <td>Brak policzenia <strong>nakładów do przychodów</strong></td>
+            <td>Wynoszą <strong>17,1%</strong> — dużo dla spółki farmaceutycznej. To one obniżają marżę wolnych przepływów z blisko pięćdziesięciu procent operacyjnych do dwudziestu trzech</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana</td>
+          </tr>
+          <tr>
+            <td>Brak odnotowania, że to <strong>jedyna ekspozycja na ochronę zdrowia</strong></td>
+            <td>Po wrześniowej sprzedaży drugiej spółki z tego obszaru Novo Nordisk pozostała w nim jedyną pozycją — a przy becie 0,34 jest też jednym z trzech stabilizatorów zmienności portfela</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana — wzrosła po zmianach w portfelu</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Sformułowanie „tanio, ale przed resetem cenowym 2027" pozostaje najlepszym jednozdaniowym opisem tej spółki i po pięciu tygodniach jest aktualne. Trafna była też ocena neutralna oraz wskazanie resetu jako czynnika decydującego — a nie jakości biznesu, której nikt nie kwestionuje.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 września 2026 | Cena: <strong>$43,36</strong> (notowanie 17.09.2026, 15:41 EDT) | <strong>Aktualizacja analizy z 12 sierpnia 2026 — ocena neutralna utrzymana, przedział wartości godziwej obniżony</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> wartość godziwa $50–60 → $33–55, bo poprzedni przedział nie zawierał scenariusza głębszego resetu cenowego; wyeksponowano relację mnożnika prognozowanego (13,89) do historycznego (10,46) jako klucz do wyceny — implikuje ona spadek zysku o 22%; dodano relację nakładów do przychodów (17,1%) oraz rolę pozycji jako jedynej ekspozycji na ochronę zdrowia po wrześniowej sprzedaży drugiej spółki z tego obszaru | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 17.09.2026</strong>; scenariusze i wyliczenia pochodne to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

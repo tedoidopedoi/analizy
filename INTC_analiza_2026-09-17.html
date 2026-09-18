@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INTC — Intel | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: INTC</div>
+    <div class="company-name">Intel Corporation</div>
+    <div class="company-sub">Procesory i odlewnia półprzewodników · Santa Clara · 85 100 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">W portfelu — 6,67%</span>
+      <span class="meta-tag">Najlepszy wynik roczny w portfelu</span>
+      <span class="meta-tag">Konsensus daje już tylko +5,8%</span>
+      <div class="price-display">
+        <div class="price-main">$109,37</div>
+        <div class="price-sub">notowanie 17.09.2026, 15:41 EDT (+8,23%)</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Półprzewodniki</span><span class="temat">Moc obliczeniowa dla AI</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — przemiana jest realna, ale po wzroście o 338% środek wartości godziwej leży poniżej kursu">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">utrzymana z sierpnia — trzymać, nie dokupować</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$60 – $150</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-45% do +37%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>22 października</b><em>Q3 2026</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Akcjonariat</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$109,37</div><div class="metric-detail"><strong>+338,43% w 52 tygodnie</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 12.08</div><div class="metric-value green">+4,6%</div><div class="metric-detail">Kurs pozostał w moim przedziale $95–130</div></div>
+    <div class="metric-card"><div class="metric-label">Wynik operacyjny</div><div class="metric-value green">+$4,46 mld</div><div class="metric-detail">Ale wynik netto <strong>-$11,29 mld</strong> — sekcja 5</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / wolne przepływy</div><div class="metric-value red">204,35</div><div class="metric-detail">EV/FCF 211,62 — dwukrotność progu ostrzegawczego</div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot kapitału vs koszt</div><div class="metric-value red">-11,92 pp</div><div class="metric-detail">ROIC 3,42% wobec kosztu 15,34%</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / zysk prognozowany</div><div class="metric-value red">60,01</div><div class="metric-detail">Wskaźnik PEG 0,87 — wzrost ma to nadrobić</div></div>
+    <div class="metric-card"><div class="metric-label">Liczba akcji</div><div class="metric-value red">+13,28%</div><div class="metric-detail">W ciągu dwunastu miesięcy</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (49 analityków)</div><div class="metric-value">$115,74</div><div class="metric-detail"><strong>Tylko +5,83%</strong> — najmniej w portfelu</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I CO SIĘ ZMIENIŁO</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Intel projektuje i — w odróżnieniu od większości konkurentów — <strong>sam produkuje</strong> układy scalone. Przychody za dwanaście miesięcy to <strong>$57,03 mld</strong> przy 85 100 pracownikach. To <strong>Twoja pozycja o wadze 6,67%</strong>, przy cenie wejścia $24,78, czyli wynik <strong>+341,4%</strong> — najlepszy procentowo w całym portfelu po IREN.</p>
+
+      <div class="alert alert-info"><strong>Teza z 12 sierpnia okazała się trafna i dlatego ocenę utrzymuję.</strong> Nazwałem wtedy sytuację „świetna przemiana, ekstremalna cena" i wyceniłem Intela na <strong>$95–130</strong> przy kursie $104,56. Po pięciu tygodniach kurs wynosi $109,37 — <strong>pozostał wewnątrz przedziału</strong>, bliżej jego środka.<br><br>Zmieniło się natomiast otoczenie wyceny: <strong>konsensus czterdziestu dziewięciu analityków daje dziś zaledwie 5,83% powyżej kursu</strong>. To najmniejszy zapas ze wszystkich osiemnastu pozycji w Twoim portfelu — mniejszy nawet niż w AMD.</div>
+
+      <h3>Skala ruchu, którą trzeba zobaczyć</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Kontekst</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zmiana za 52 tygodnie</strong></td><td style="color:var(--ocena-kupno)"><strong>+338,43%</strong></td><td style="color:var(--ocena-kupno)">Kurs urósł ponad czterokrotnie</td></tr>
+          <tr><td>Kapitalizacja</td><td>$574,66 mld</td><td>Wartość przedsiębiorstwa $595,22 mld</td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td style="color:var(--ocena-kupno)"><strong>+$4,46 mld</strong></td><td style="color:var(--ocena-kupno)">Powrót na plus po okresie strat</td></tr>
+          <tr><td><strong>Wynik netto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$11,29 mld</strong></td><td style="color:var(--ocena-sprzedaz)">Różnicę wyjaśniam w sekcji 5</td></tr>
+          <tr><td>Prognoza wzrostu zysku (3 lata)</td><td style="color:var(--ocena-kupno)">91,87% rocznie</td><td>Przychody mają rosnąć 16,02% rocznie</td></tr>
+          <tr><td>Wskaźnik PEG</td><td style="color:var(--ocena-kupno)">0,87</td><td style="color:var(--ocena-uwaga)">Poniżej jedności — ale liczony od zysku, którego jeszcze nie ma</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Kurs urósł o ponad trzysta trzydzieści procent, a spółka wciąż wykazuje stratę netto jedenastu miliardów dolarów. To zestawienie wymaga wyjaśnienia i całą tę analizę można sprowadzić do jednego pytania: czy przemiana Intela jest już w cenie, czy dopiero się zaczyna.</strong><br><br>Moja odpowiedź brzmi: <strong>przemiana jest realna, ale jej pierwsza faza została wyceniona z nawiązką</strong>. Wskaźnik ceny do wolnych przepływów wynosi 204,35, a zwrot z zainwestowanego kapitału jest o blisko dwanaście punktów procentowych niższy od jego kosztu.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — DWIE FIRMY W JEDNEJ</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Część</th><th>Czym jest</th><th>Stan</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Projektowanie układów</strong></td><td>Procesory do komputerów i serwerów</td><td style="color:var(--ocena-uwaga)">Od lat traci udziały, ale wciąż bardzo duża skala</td></tr>
+          <tr><td><strong>Odlewnia</strong></td><td>Produkcja układów — własnych i na zlecenie</td><td style="color:var(--ocena-uwaga)"><strong>Tu rozstrzyga się przyszłość spółki</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Intel jest dziś jedyną firmą na Zachodzie zdolną produkować najbardziej zaawansowane układy — i to jest sedno jego wartości, a zarazem źródło problemów.</strong><br><br>Konkurenci projektujący układy zlecają produkcję na zewnątrz i nie ponoszą kosztu fabryk. Intel ponosi oba: <strong>koszt projektowania i koszt budowy zakładów</strong>, z których każdy kosztuje dziesiątki miliardów dolarów. Stąd nakłady inwestycyjne pochłaniające ponad jedną piątą przychodów i stąd zwrot z kapitału na poziomie 3,42%.<br><br>Wartość tej konstrukcji ujawnia się dopiero wtedy, gdy klienci zewnętrzni zaczną w odlewni składać duże zamówienia. <strong>To jest właśnie przemiana, o której mowa</strong> — i to jest zmienna, od której zależy wszystko pozostałe.</div>
+
+      <p>Do tego dochodzi czynnik, którego nie ma żadna inna spółka w Twoim portfelu: <strong>Intel jest przedmiotem zainteresowania politycznego</strong>. Zdolność produkcji zaawansowanych półprzewodników poza Azją jest traktowana jako kwestia bezpieczeństwa państwowego, co przekłada się na wsparcie publiczne i na inwestycje kapitałowe od podmiotów, które w normalnych warunkach nie kupowałyby udziałów w producencie układów.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK I CYKLICZNOŚĆ</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment</th><th>Stan</th><th>Znaczenie dla Intela</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Produkcja kontraktowa</strong></td><td style="color:var(--ocena-kupno)">Popyt przewyższa podaż</td><td style="color:var(--ocena-kupno)">Jedyna droga do uzasadnienia wyceny</td></tr>
+          <tr><td>Procesory serwerowe</td><td style="color:var(--ocena-sprzedaz)">Systematyczna utrata udziałów</td><td style="color:var(--ocena-sprzedaz)">Głównie na rzecz AMD, którego masz w portfelu</td></tr>
+          <tr><td>Komputery osobiste</td><td style="color:var(--ocena-uwaga)">Dojrzały, cykliczny</td><td>Stabilna baza gotówkowa</td></tr>
+          <tr><td>Wsparcie publiczne</td><td style="color:var(--ocena-kupno)">Znaczące</td><td style="color:var(--ocena-uwaga)">Obniża ryzyko upadłości, nie poprawia rentowności</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ostrzeżenie o cykliczności przy półprzewodnikach jest obowiązkowe i tutaj przybiera nietypową postać.</strong><br><br>Zwykle pułapką jest niski wskaźnik ceny do zysku prognozowanego na szczycie cyklu. <strong>W Intelu jest odwrotnie: wskaźnik wynosi 60,01</strong>, bo zysku prawie nie ma. Rynek nie wycenia więc dzisiejszych wyników, tylko założenie, że odlewnia zapełni się zamówieniami.<br><br>Ryzyko polega na tym, że <strong>budowa zakładów produkcyjnych trwa lata i pochłania kapitał niezależnie od tego, czy zamówienia przyjdą</strong>. W półprzewodnikach nie da się „poczekać z inwestycją do czasu potwierdzenia popytu" — trzeba zbudować wcześniej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">AKCJONARIAT I ROZWODNIENIE</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zmiana liczby akcji r/r</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+13,28%</strong></td><td style="color:var(--ocena-sprzedaz)">Stopa skupu ujemna o tę samą wartość</td></tr>
+          <tr><td>Zmiana kwartał do kwartału</td><td>+0,41%</td><td style="color:var(--ocena-kupno)">Tempo wyraźnie wyhamowało</td></tr>
+          <tr><td>Instytucje / zarząd</td><td>67,66% / <strong>0,07%</strong></td><td style="color:var(--ocena-sprzedaz)">Zaangażowanie zarządu praktycznie zerowe</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>152,25 mln (2,90%)</strong></td><td style="color:var(--ocena-sprzedaz)">Miesiąc wcześniej 135,69 mln — <strong>wzrost o 12,2%</strong></td></tr>
+          <tr><td>Przychód na pracownika</td><td>$670,2 tys.</td><td style="color:var(--ocena-sprzedaz)">Strata na pracownika $132,7 tys.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Rozwodnienie o ponad trzynaście procent w rok jest ceną, którą zapłacono za ratowanie bilansu — i warto ją nazwać.</strong><br><br>Intel pozyskiwał kapitał w okresie, gdy potrzebował finansowania na budowę zakładów, a przepływy tego nie pokrywały. Posiadacz akcji sprzed roku ma dziś prawo do mniejszej części spółki. <strong>Element pozytywny: w ostatnim kwartale emisja praktycznie ustała</strong> — przyrost wyniósł 0,41%, czyli tempo spadło ponad trzydziestokrotnie.<br><br>Niepokojąca jest natomiast druga liczba: <strong>pozycje krótkie wzrosły o 12,2% w ciągu miesiąca</strong>, w którym kurs rósł. To ta sama sytuacja co w AMD — ktoś buduje zaangażowanie przeciwko dalszemu wzrostowi — ale tutaj przy wskaźniku ceny do przepływów przekraczającym dwieście.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">BIZNES — GDZIE GINIE PIĘTNAŚCIE MILIARDÓW</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$57,03 mld</td></tr>
+          <tr><td>Zysk brutto</td><td>$22,17 mld</td></tr>
+          <tr><td><strong>Zysk operacyjny</strong></td><td style="color:var(--ocena-kupno)"><strong>+$4,46 mld</strong></td></tr>
+          <tr><td><strong>Wynik przed opodatkowaniem</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$9,85 mld</strong></td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-sprzedaz)">-$11,29 mld · -$2,30 na akcję</td></tr>
+          <tr><td>EBITDA</td><td>$16,84 mld</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-kupno)">$14,94 mld</td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$12,11 mld</strong></td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-uwaga)"><strong>$2,83 mld · $0,54 na akcję</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Między zyskiem operacyjnym a wynikiem przed opodatkowaniem znika ponad czternaście miliardów dolarów — i to jest najważniejsza liczba w tym raporcie.</strong><br><br>Działalność podstawowa przyniosła <strong>plus $4,46 mld</strong>. Wynik przed opodatkowaniem to <strong>minus $9,85 mld</strong>. Różnica wynosi <strong>$14,31 mld</strong> i pochodzi spoza działalności operacyjnej — z odpisów wartości aktywów, udziałów w podmiotach powiązanych oraz kosztów restrukturyzacji.<br><br><strong>Praktyczna konsekwencja jest dwustronna.</strong> Z jednej strony strata netto przecenia problem: sama działalność wróciła na plus, a przepływy operacyjne wynoszą prawie piętnaście miliardów. Z drugiej — odpisy tej skali nie biorą się znikąd i oznaczają, że <strong>część majątku spółki okazała się warta mniej, niż zakładano</strong>.</div>
+
+      <div class="alert alert-warning"><strong>Druga liczba, która porządkuje wycenę: nakłady inwestycyjne pochłaniają 21,2% przychodów i zjadają niemal całe przepływy operacyjne.</strong><br><br>Z $14,94 mld gotówki operacyjnej po odjęciu nakładów zostaje <strong>$2,83 mld</strong> — przy kapitalizacji $574,66 mld daje to rentowność wolnych przepływów <strong>0,49%</strong> i wskaźnik ceny do przepływów <strong>204,35</strong>.<br><br>Zgodnie z zasadą stosowaną w tej serii: gdy ten wskaźnik przekracza stukrotność, wycena przestaje opierać się na dzisiejszej gotówce. <strong>Tutaj przekracza dwustukrotność.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Cena / zysk</td><td>nie dotyczy</td><td>Strata $2,30 na akcję</td></tr>
+          <tr><td>Cena / sprzedaż</td><td style="color:var(--ocena-sprzedaz)">10,14</td><td>Prognozowana 8,57; EV/sprzedaż 10,50</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>204,35</strong></td><td style="color:var(--ocena-sprzedaz)">EV/FCF 211,62 · cena do przepływów operacyjnych 38,73</td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td style="color:var(--ocena-sprzedaz)">35,58</td><td style="color:var(--ocena-sprzedaz)">EV/EBIT 134,29</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td>5,82</td><td>Księga $17,36 na akcję; aktywa materialne 8,96</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>nie dotyczy</td><td>Strata <strong>$2,30 na akcję</strong> przy przychodach $57,03 mld</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>60,01</strong></td><td>Implikuje zysk zaledwie <strong>$1,82 na akcję</strong> w najbliższych dwunastu miesiącach</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-kupno)"><strong>0,87</strong></td><td style="color:var(--ocena-uwaga)">Poniżej jedności, ale liczony od prognozy wzrostu zysku <strong>91,87% rocznie</strong> z bardzo niskiej bazy</td></tr>
+          <tr><td>Odniesienie sektorowe</td><td>półprzewodniki: ok. 25–40× forward</td><td style="color:var(--ocena-sprzedaz)">Intel wyraźnie powyżej</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> Wskaźnik PEG poniżej jedności zwykle oznacza okazję. <strong>Tutaj wymaga ostrożności</strong>, bo prognoza wzrostu zysku o blisko dziewięćdziesiąt dwa procent rocznie jest liczona od bazy bliskiej zeru — a przy takiej bazie każdy wzrost wygląda spektakularnie procentowo, nie będąc spektakularny w dolarach. Implikowany zysk prognozowany wynosi <strong>$1,82 na akcję</strong> przy kursie $109,37.</p>
+
+      <h3>Cztery scenariusze na koniec 2027 roku</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Zysk na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Odlewnia zapełnia się zamówieniami</strong></td><td>$3,20</td><td>55×</td><td><strong>$176</strong></td><td style="color:var(--ocena-kupno)">+61%</td></tr>
+          <tr><td><strong>Przemiana idzie zgodnie z planem</strong></td><td>$2,60</td><td>50×</td><td><strong>$130</strong></td><td style="color:var(--ocena-kupno)">+19%</td></tr>
+          <tr><td>Zamówienia przychodzą wolniej</td><td>$1,50</td><td>40×</td><td>$60</td><td style="color:var(--ocena-sprzedaz)">-45%</td></tr>
+          <tr><td>Odlewnia nie znajduje klientów zewnętrznych</td><td style="color:var(--ocena-sprzedaz)">$0,80</td><td>35×</td><td>$28</td><td style="color:var(--ocena-sprzedaz)">-74%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne. Mnożniki pozostają wysokie we wszystkich scenariuszach, bo rynek wycenia Intela jako historię przemiany, a nie jako spółkę dochodową. Dane wejściowe: StockAnalysis / S&amp;P Global Market Intelligence, stan 17.09.2026.</p>
+
+      <p><strong>Fair value: $60 – $150</strong>, środek <strong>$105,00, czyli 4,0% poniżej kursu</strong>. Konsensus 49 analityków to $115,74 (+5,83%). <strong>To jedyna pozycja w Twoim portfelu, w której środek mojego przedziału leży poniżej ceny rynkowej</strong> — i to jest istota dzisiejszej oceny.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto</td><td style="color:var(--ocena-uwaga)">38,87%</td><td style="color:var(--ocena-sprzedaz)">Historycznie Intel miał powyżej 60%</td></tr>
+          <tr><td>Marża operacyjna</td><td style="color:var(--ocena-uwaga)">7,82%</td><td style="color:var(--ocena-kupno)">Dodatnia — to już postęp</td></tr>
+          <tr><td>Marża EBITDA</td><td>29,53%</td><td>Pokazuje skalę amortyzacji zakładów</td></tr>
+          <tr><td>Marża wolnych przepływów</td><td style="color:var(--ocena-uwaga)">4,96%</td><td style="color:var(--ocena-sprzedaz)">Nakłady zjadają 21,2% przychodów</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>3,42% vs 15,34%</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Różnica -11,92 pp</strong></td></tr>
+          <tr><td>Zwrot z kapitału własnego</td><td style="color:var(--ocena-sprzedaz)">-10,72%</td><td>Rotacja aktywów 0,29 — bardzo ciężki bilans</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Marża brutto poniżej trzydziestu dziewięciu procent jest najlepszym pojedynczym miernikiem tego, co się z Intelem stało — i co musi się odwrócić.</strong><br><br>Przez dekady spółka utrzymywała marżę brutto powyżej sześćdziesięciu procent, bo miała przewagę technologiczną i mogła dyktować ceny. <strong>Dzisiejsze 38,87% oznacza, że tej przewagi nie ma</strong> — produkuje drożej i sprzedaje taniej, niż kiedyś.<br><br>Odbudowa marży brutto jest ważniejszym wskaźnikiem przemiany niż jakikolwiek pojedynczy kontrakt, bo <strong>pokazuje, czy zakłady produkcyjne odzyskały konkurencyjność kosztową</strong>. To jest liczba, którą warto sprawdzić 22 października.</div>
+
+      <p>Różnica między zwrotem z kapitału a jego kosztem wynosi <strong>-11,92 punktu procentowego</strong> — drugi najgorszy wynik w Twoim portfelu po MARA. Dla porównania: Novo Nordisk +33,71 pp, Sibanye +23,15 pp, SAP +9,92 pp, Amphenol +9,89 pp, AMD -8,02 pp.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka / zadłużenie</td><td>$29,73 mld / $50,54 mld</td><td style="color:var(--ocena-kupno)">Spłacono netto $1,07 mld w 12 miesięcy</td></tr>
+          <tr><td>Dług netto</td><td style="color:var(--ocena-uwaga)">$20,56 mld</td><td>$3,91 na akcję — niewiele wobec kursu</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-kupno)">0,49</td><td>Dług do EBITDA 2,96</td></tr>
+          <tr><td><strong>Dług / wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>17,85</strong></td><td style="color:var(--ocena-sprzedaz)">Spłata z generowanej gotówki zajęłaby osiemnaście lat</td></tr>
+          <tr><td>Pokrycie odsetek</td><td style="color:var(--ocena-uwaga)">3,88</td><td>Zadłużenie malejące, nie rosnące</td></tr>
+          <tr><td><strong>Altman Z / Piotroski F</strong></td><td style="color:var(--ocena-uwaga)"><strong>2,23 / 6</strong></td><td style="color:var(--ocena-uwaga)">Poniżej progu 3,0, ale Piotroski przyzwoity</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Bilans nie jest dziś głównym problemem Intela i warto to powiedzieć wyraźnie, bo łatwo o nadinterpretację wskaźnika Altmana.</strong><br><br>Kapitał własny wynosi <strong>$103,14 mld</strong>, kapitał obrotowy jest dodatni i sięga $21,54 mld, a zadłużenie netto w ostatnim roku <strong>zmalało</strong>. Kontrola, którą stosuję po analizie ServiceNow — sprawdzenie, czy pokrycie odsetek nie jest zawyżone świeżym długiem — wypada tu korzystnie: nowego zadłużenia netto nie było.<br><br><strong>Jedna liczba zasługuje jednak na uwagę: dług do wolnych przepływów wynosi 17,85.</strong> Nie oznacza to zagrożenia — spółka ma trzydzieści miliardów gotówki — ale pokazuje, jak niewiele wolnej gotówki generuje dziś w relacji do swojej wielkości.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Działalność operacyjna wróciła na plus.</strong> Zysk operacyjny wynosi $4,46 mld po okresie strat, a przepływy operacyjne blisko piętnaście miliardów. Strata netto pochodzi z odpisów, nie z bieżącej działalności — to jest zasadnicza różnica.</div>
+
+      <div class="alert alert-success"><strong>2. Jedyna zachodnia odlewnia zdolna do najbardziej zaawansowanej produkcji.</strong> Ma to wartość strategiczną wykraczającą poza rachunek ekonomiczny i przekłada się na wsparcie publiczne oraz na zainteresowanie kapitałowe podmiotów, które w innych warunkach nie inwestowałyby w producenta układów.</div>
+
+      <div class="alert alert-success"><strong>3. Rozwodnienie praktycznie ustało.</strong> Przyrost liczby akcji w ostatnim kwartale wyniósł 0,41% wobec 13,28% w skali roku — tempo spadło ponad trzydziestokrotnie. Zadłużenie netto również zmalało.</div>
+
+      <div class="alert alert-info"><strong>4. Dźwignia w wyniku jest ogromna.</strong> Przy marży brutto poniżej trzydziestu dziewięciu procent każdy punkt jej odbudowy to ponad pół miliarda dolarów zysku. Konsensus zakłada wzrost zysku o blisko dziewięćdziesiąt dwa procent rocznie, a czterdziestu dziewięciu analityków utrzymuje rekomendację kupna.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Cena do wolnych przepływów przekracza dwieście.</strong> To ponad dwukrotność progu, przy którym uznaję wycenę za opartą wyłącznie na przyszłości. Rentowność wolnych przepływów wynosi niecałe pół procenta.</div>
+
+      <div class="alert alert-danger"><strong>2. Zwrot z kapitału jest o blisko dwanaście punktów niższy od jego kosztu.</strong> Każdy dolar zainwestowany dziś w Intela zarabia wyraźnie mniej, niż kosztuje jego pozyskanie. To nie jest prognoza, tylko stan faktyczny.</div>
+
+      <div class="alert alert-danger"><strong>3. Konsensus daje najmniejszy zapas w całym portfelu.</strong> Niecałe sześć procent powyżej kursu po wzroście o ponad trzysta trzydzieści procent. Jednocześnie pozycje krótkie rosną — o ponad dwanaście procent w miesiąc.</div>
+
+      <div class="alert alert-warning"><strong>4. Marża brutto poniżej czterdziestu procent i utrata udziałów w serwerach.</strong> Historyczna przewaga technologiczna zniknęła, a największym beneficjentem jest AMD — który jest zarazem Twoją największą pozycją. Odbudowa marży wymaga lat i ogromnych nakładów.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Pole rywalizacji</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>TSMC</strong></td><td>Produkcja kontraktowa</td><td style="color:var(--ocena-sprzedaz)"><strong>Dominujący</strong> — skala, wydajność, zaufanie klientów</td></tr>
+          <tr><td><strong>AMD</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 20,92%)</span></td><td>Procesory serwerowe i komputerowe</td><td style="color:var(--ocena-sprzedaz)">Od lat przejmuje udziały Intela</td></tr>
+          <tr><td><strong>Samsung</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 3,73%)</span></td><td>Produkcja kontraktowa i pamięci</td><td style="color:var(--ocena-uwaga)">Trzeci gracz, podobne problemy z wydajnością</td></tr>
+          <tr><td>Układy własne hiperskalerów</td><td>Omijają obu projektantów</td><td style="color:var(--ocena-uwaga)">Potencjalni klienci odlewni Intela</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>W Twoim portfelu masz jednocześnie Intela i jego najskuteczniejszego przeciwnika — i to nie jest przypadek bez znaczenia.</strong><br><br>AMD od lat przejmuje udziały Intela w procesorach serwerowych i stanowi dziś <strong>20,92% Twojego portfela</strong>, podczas gdy Intel <strong>6,67%</strong>. Obstawiłeś więc obie strony tego samego sporu, z wyraźną przewagą po stronie zwycięzcy.<br><br>Warto jednak zauważyć, że <strong>rywalizacja o produkcję kontraktową jest osobnym zagadnieniem</strong>: tam przeciwnikiem Intela nie jest AMD, tylko TSMC. Nawet gdyby AMD wygrało wszystko w procesorach, odlewnia Intela mogłaby się powieść — a to ona odpowiada dziś za wycenę.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-kupno)">+338,43%</td><td>Najlepszy wynik wśród dużych pozycji</td></tr>
+          <tr><td>Średnie kroczące 50 i 200 sesji</td><td>$97,21 / $76,82</td><td style="color:var(--ocena-uwaga)">Kurs 12,5% i <strong>42,4%</strong> powyżej</td></tr>
+          <tr><td><strong>Układ średnich</strong></td><td style="color:var(--ocena-kupno)"><strong>50 powyżej 200</strong></td><td style="color:var(--ocena-kupno)">Trend wzrostowy nienaruszony, ale kurs rozciągnięty</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td style="color:var(--ocena-uwaga)">63,52</td><td>Górna część strefy neutralnej</td></tr>
+          <tr><td><strong>Beta (5 lat)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>2,23</strong></td><td style="color:var(--ocena-sprzedaz)">Trzecia najwyższa w portfelu</td></tr>
+          <tr><td>Średni wolumen (20 sesji)</td><td>91,40 mln akcji</td><td style="color:var(--ocena-kupno)">Bardzo wysoka płynność</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Kurs znajduje się ponad czterdzieści procent powyżej średniej dwustusesyjnej i jest to ten sam problem, który opisałem przy AMD — tylko przy znacznie słabszych fundamentach.</strong><br><br>Trend jest wzrostowy i nienaruszony, ale <strong>do najbliższego realnego wsparcia technicznego jest bardzo daleko</strong>. Przy becie 2,23 i braku poduszki w wycenie oznacza to, że korekta rynkowa uderzyłaby w tę pozycję ponadprzeciętnie mocno.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$115,74</strong></td><td>Cena docelowa konsensusu — pierwszy opór</td></tr>
+          <tr><td><strong>$130</strong></td><td>Scenariusz przemiany zgodnej z planem</td></tr>
+          <tr><td><strong>$97,21</strong></td><td>Średnia 50-sesyjna — pierwsze wsparcie</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$76,82</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — średnia 200-sesyjna, 30% niżej</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs rozciągnięty o ponad czterdzieści procent nad dłuższą średnią, konsensus daje niecałe sześć procent, pozycje krótkie rosną. Wyniki 22 października bez poduszki w wycenie.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Środek wartości godziwej leży poniżej kursu. Przemiana wymaga czasu, a wskaźnik ceny do przepływów przekracza dwieście.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO SPEKULACYJNE</strong></td><td>Na tym horyzoncie odlewnia może się zapełnić, a marża brutto odbudować. Jedyna zachodnia zdolność produkcyjna tej klasy ma wartość, której dziś nie da się wycenić rachunkiem.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ocena łączna: NEUTRALNA — utrzymana z sierpnia, ale z inną wymową.</strong><br><br>Miesiąc temu kurs był w dolnej części mojego przedziału i ocena neutralna znaczyła „czekać". Dziś kurs jest powyżej środka nowego przedziału, a <strong>Intel jest jedyną pozycją w Twoim portfelu, w której środek mojej wyceny leży poniżej ceny rynkowej</strong>.<br><br>Ocena neutralna znaczy tu więc: <strong>trzymać, nie dokupować</strong>. Przy wyniku pozycji przekraczającym trzysta czterdzieści procent decyzja o ewentualnej częściowej realizacji zysku należy do Ciebie i nie jest przedmiotem tej analizy.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td><strong>6,67%</strong></td><td>Trzecia pozycja z osiemnastu</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-kupno)">+341,4%</td><td>Przy cenie wejścia $24,78</td></tr>
+          <tr><td><strong>Półprzewodniki razem</strong></td><td style="color:var(--ocena-uwaga)"><strong>37%</strong></td><td style="color:var(--ocena-uwaga)">Z AMD, Marvellem, ASML i Samsungiem</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Trzy obserwacje warte zestawienia przy tej pozycji.</strong><br><br>
+      <strong>Intel i AMD razem to 27,59% portfela</strong> — a są bezpośrednimi konkurentami w procesorach, przy czym AMD wygrywa. Nie jest to sprzeczność, bo o wycenie Intela decyduje dziś odlewnia, a nie procesory; warto jednak wiedzieć, że jedna z tych pozycji zyskuje na słabości drugiej.<br><br>
+      <strong>Dwie największe zwyżki w portfelu to Intel i AMD</strong> — odpowiednio +341% i +366%. Obie są dziś wyceniane bez zapasu względem konsensusu, obie mają betę powyżej dwóch i obie znajdują się daleko powyżej swoich długoterminowych średnich.<br><br>
+      <strong>Przy wykorzystaniu depozytu zabezpieczającego na poziomie 95,2%</strong> te dwie pozycje — razem ponad jedna czwarta rachunku, o najwyższej zmienności i największych zyskach — są tymi, które najmocniej poruszają zapasem do progu.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Intel urósł o ponad trzysta trzydzieści procent w rok i nadal wykazuje stratę netto jedenastu miliardów dolarów — te dwie liczby obok siebie opisują całą tę inwestycję.</strong> Przemiana jest realna: działalność operacyjna wróciła na plus, przepływy operacyjne sięgają blisko piętnastu miliardów, rozwodnienie praktycznie ustało, a zadłużenie netto zmalało. Strata netto pochodzi z odpisów wartości aktywów, a nie z bieżącej działalności — i to rozróżnienie jest kluczowe.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Cena tej przemiany jest jednak już zapłacona z nawiązką. <strong>Wskaźnik ceny do wolnych przepływów wynosi 204,35</strong>, czyli ponad dwukrotność progu, przy którym uznaję wycenę za opartą wyłącznie na przyszłości. Zwrot z zainwestowanego kapitału jest o <strong>11,92 punktu procentowego niższy od jego kosztu</strong>, marża brutto spadła poniżej trzydziestu dziewięciu procent wobec historycznych sześćdziesięciu, a konsensus czterdziestu dziewięciu analityków daje zaledwie <strong>5,83%</strong> powyżej kursu — najmniej w całym Twoim portfelu.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Działalność operacyjna musi wrócić na plus.</strong> Zysk operacyjny $4,46 mld — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Rozwodnienie musi ustać.</strong> Przyrost kwartalny 0,41% wobec 13,28% rocznie — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Wycena powinna zostawiać margines.</strong> Cena do przepływów powyżej dwustu, konsensus niecałe sześć procent — niespełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Zwrot z kapitału powinien przewyższać koszt.</strong> Różnica minus dwanaście punktów — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Odlewnia musi zapełnić się zamówieniami zewnętrznymi.</strong> To jest cała teza i rozstrzygnie się w latach, nie kwartałach.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>22 października 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki za III kwartał</strong></td><td style="color:var(--ocena-uwaga)">Kierunek marży brutto — ważniejszy niż sam zysk</td></tr>
+            <tr><td>2027</td><td>Uruchamianie kolejnych linii produkcyjnych</td><td>Moment, w którym nakłady zaczynają zarabiać</td></tr>
+            <tr><td>W dowolnej chwili</td><td>Ogłoszenie dużego klienta odlewni</td><td>Jedyne zdarzenie, które mogłoby uzasadnić dzisiejszą wycenę</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">2027–2028</td><td style="color:var(--ocena-sprzedaz)">Kolejne odpisy wartości aktywów</td><td style="color:var(--ocena-sprzedaz)">Ryzyko powtórzenia tego, co zjadło czternaście miliardów</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Marża brutto</td><td>38,87%</td><td>brak poprawy w kolejnych kwartałach</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Wolne przepływy</td><td>$2,83 mld</td><td>powrót poniżej zera</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Liczba akcji</td><td>+0,41% kwartalnie</td><td>powrót do emisji na dużą skalę</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Krótka sprzedaż</td><td>152,25 mln akcji</td><td>wzrost powyżej 4% akcji</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Dokupowanie</strong></td><td>Nie na tym poziomie — środek wartości godziwej leży poniżej kursu</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$150</strong>, czyli górnej granicy wartości godziwej</td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$76,82</strong> — średnia 200-sesyjna</td></tr>
+            <tr><td><strong>Warunek zmiany na sprzedaż</strong></td><td>Brak poprawy marży brutto przez dwa kolejne kwartały</td></tr>
+            <tr><td><strong>Warunek powrotu do kupna</strong></td><td>Ogłoszenie dużego klienta zewnętrznego odlewni albo kurs poniżej $85</td></tr>
+            <tr><td><strong>Czego nie robić</strong></td><td>Nie traktować wyniku +341% jako argumentu w żadną stronę — to informacja o przeszłości</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p><strong>Utrzymuję ocenę z sierpnia, ale znaczy ona dziś coś innego niż wtedy.</strong> Miesiąc temu kurs leżał w dolnej części mojego przedziału i neutralność znaczyła „czekać". Dziś, po wzroście o ponad trzysta trzydzieści procent w skali roku, <strong>Intel jest jedyną pozycją w Twoim portfelu, w której środek mojej wyceny leży poniżej ceny rynkowej</strong>, a konsensus czterdziestu dziewięciu analityków daje najmniejszy zapas ze wszystkich osiemnastu spółek.</p>
+        <p>Nie zmienia to oceny samej przemiany. Działalność operacyjna wróciła na plus, emisja akcji ustała, zadłużenie maleje, a jedyna zachodnia odlewnia zdolna do najbardziej zaawansowanej produkcji ma wartość strategiczną, której nie sposób wyrazić w mnożniku. <strong>Ale wartość strategiczna i wartość dla akcjonariusza to dwie różne rzeczy</strong> — a przy cenie do wolnych przepływów przekraczającej dwieście ta druga wymaga, żeby odlewnia zaczęła zarabiać znacznie szybciej, niż wynika z dzisiejszych liczb.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$60 – $150</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$28 (-74%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$176 (+61%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Trzymać, nie dokupować</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 22 października</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA ANALIZY Z 12 SIERPNIA</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Wartość godziwa $95–130</strong>, ocena neutralna przy kursie $104,56</td>
+            <td>Kurs pozostał wewnątrz przedziału i wynosi dziś $109,37 — <strong>teza się obroniła</strong>. Nowy przedział <strong>$60–150</strong> jest szerszy w obie strony, bo dodałem scenariusz niepowodzenia odlewni i scenariusz jej zapełnienia</td>
+            <td style="color:var(--ocena-kupno)">Trafna</td>
+          </tr>
+          <tr>
+            <td>Brak rozbicia drogi od <strong>zysku operacyjnego do wyniku netto</strong></td>
+            <td>Między nimi znika <strong>$14,31 mld</strong> na odpisach i kosztach pozaoperacyjnych. Bez tego rozbicia strata netto wygląda na problem operacyjny, którym nie jest</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — pominięte kluczowe rozróżnienie</td>
+          </tr>
+          <tr>
+            <td>Brak policzenia <strong>ceny do wolnych przepływów</strong></td>
+            <td>Wynosi <strong>204,35</strong>, czyli ponad dwukrotność progu, przy którym sam wymagam wyraźnego ostrzeżenia. To powinno było stać w tamtej analizie</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — złamana własna zasada</td>
+          </tr>
+          <tr>
+            <td>Brak zestawienia z <strong>AMD w portfelu</strong></td>
+            <td>Intel i AMD to razem 27,59% portfela i bezpośredni konkurenci, przy czym AMD wygrywa. Obie są dziś rozciągnięte technicznie i pozbawione zapasu w wycenie</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Sformułowanie „świetna przemiana, ekstremalna cena" oraz przedział wyceny okazały się trafne — kurs po pięciu tygodniach pozostał wewnątrz wyznaczonych granic. Trafne było też uznanie, że o wartości spółki decyduje odlewnia, a nie procesory.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 września 2026 | Cena: <strong>$109,37</strong> (notowanie 17.09.2026, 15:41 EDT) | <strong>Aktualizacja analizy z 12 sierpnia 2026 — ocena neutralna utrzymana</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> wartość godziwa $95–130 → $60–150 wskutek rozszerzenia przedziału o scenariusz niepowodzenia odlewni i o scenariusz jej pełnego zapełnienia; dodano rozbicie drogi od zysku operacyjnego (+$4,46 mld) do wyniku przed opodatkowaniem (-$9,85 mld), w której znika $14,31 mld na odpisach; dodano wskaźnik ceny do wolnych przepływów (204,35) wraz z wymaganym ostrzeżeniem; dodano zestawienie z AMD jako bezpośrednim konkurentem w portfelu | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 17.09.2026</strong>; scenariusze i wyliczenia pochodne to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

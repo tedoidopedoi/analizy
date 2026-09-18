@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAP — SAP SE | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-kupno); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">XETRA: SAP</div>
+    <div class="company-name">SAP SE</div>
+    <div class="company-sub">Oprogramowanie dla przedsiębiorstw · Walldorf, Niemcy · 112 019 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">W portfelu — 5,04%</span>
+      <span class="meta-tag">Najniższa beta w portfelu</span>
+      <span class="meta-tag">Notowana w euro</span>
+      <div class="price-display">
+        <div class="price-main">€186,10</div>
+        <div class="price-sub">notowanie 16.09.2026, 15:35 CET (-0,52%), kurs opóźniony</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Oprogramowanie i SaaS</span><span class="temat">Chmura i centra danych</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — jakość kapitałowa wysoka, gotówka netto i skup akcji, a kurs o czternaście procent niżej niż rok temu">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">utrzymane, ale z obniżonym przedziałem</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>€165 – €230</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">-11% do +24%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>21 października</b><em>Q3 2026</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">€186,10</div><div class="metric-detail"><strong>-13,96% w 52 tygodnie</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 12.08</div><div class="metric-value green">+5,1%</div><div class="metric-detail">Mój przedział €205–235 wciąż poza zasięgiem</div></div>
+    <div class="metric-card"><div class="metric-label">Marża operacyjna</div><div class="metric-value green">28,78%</div><div class="metric-detail">Marża brutto 73,66%</div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot kapitału vs koszt</div><div class="metric-value green">+9,92 pp</div><div class="metric-detail">ROIC 18,20% wobec kosztu 8,28%</div></div>
+    <div class="metric-card"><div class="metric-label">Wolne przepływy</div><div class="metric-value green">€8,73 mld</div><div class="metric-detail">Marża 22,86% · nakłady tylko 1,9% przychodów</div></div>
+    <div class="metric-card"><div class="metric-label">Liczba akcji</div><div class="metric-value green">-0,81%</div><div class="metric-detail"><strong>Skup, nie emisja</strong> · gotówka netto €1,69 mld</div></div>
+    <div class="metric-card"><div class="metric-label">Beta</div><div class="metric-value green">0,78</div><div class="metric-detail"><strong>Najniższa w Twoim portfelu</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (28 analityków)</div><div class="metric-value green">€207,77</div><div class="metric-detail">+11,64% · mocne kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I CO SIĘ ZMIENIŁO</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>SAP dostarcza systemy, w których duże przedsiębiorstwa prowadzą finanse, logistykę, produkcję i kadry. Przychody za dwanaście miesięcy to <strong>€38,19 mld</strong> przy 112 019 pracownikach. To <strong>Twoja pozycja o wadze 5,04%</strong>, przy cenie wejścia €162,88, czyli wynik <strong>+14,3%</strong>.</p>
+
+      <div class="alert alert-info"><strong>Uwaga porządkowa: trzymasz akcje notowane na giełdzie we Frankfurcie, rozliczane w euro.</strong> Wszystkie liczby w tym raporcie podaję w euro, żeby były porównywalne z Twoją ceną wejścia. Amerykański kwit depozytowy tej samej spółki notowany jest w dolarach po innej cenie nominalnej — nie należy ich mylić.</div>
+
+      <div class="alert alert-warning"><strong>Teza z 12 sierpnia nie zadziałała w oczekiwanym stopniu i muszę obniżyć przedział.</strong><br><br>Wyceniłem wtedy SAP na <strong>€205–235</strong> przy kursie €177,00, nazywając sytuację „backlog przyspiesza, wycena o połowę niższa". Po pięciu tygodniach kurs wynosi €186,10 — urósł o <strong>5,1%</strong>, ale <strong>do dolnej granicy mojego przedziału wciąż brakuje dziesięciu procent</strong>.<br><br>Obniżam przedział do <strong>€165–230</strong>, bo poprzedni zakładał powrót mnożnika do poziomów, których przy dzisiejszej dynamice wzrostu nic nie uzasadnia. Ocenę kupna utrzymuję — ale z innych powodów niż w sierpniu, i o tym jest ten raport.</div>
+
+      <h3>Dlaczego kurs jest niżej niż rok temu</h3>
+      <p>Spadek o <strong>13,96% w dwanaście miesięcy</strong> nie wynika ze słabych wyników. Marża operacyjna wynosi <strong>28,78%</strong>, wolne przepływy <strong>€8,73 mld</strong>, a spółka skupuje własne akcje. Kurs spadł z tego samego powodu co ServiceNow: <strong>rynek obawiał się, że sztuczna inteligencja podważy model oprogramowania sprzedawanego na stanowiska</strong>.</p>
+      <p>Od tego czasu kurs odbił — leży dziś ponad dziesięć procent powyżej obu średnich kroczących — ale nie odrobił rocznej straty. <strong>To jest odwrotność sytuacji w AMD i Intelu</strong>, gdzie wyceny pobiegły przed wynikami.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — SYSTEM, KTÓREGO SIĘ NIE WYMIENIA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <p>SAP sprzedaje system planowania zasobów przedsiębiorstwa — oprogramowanie, w którym firma rejestruje każdą fakturę, każdą dostawę i każdą wypłatę. Sprzedaje też coraz większą część tego w modelu chmurowym, co zamienia jednorazowe licencje na abonament.</p>
+
+      <div class="alert alert-success"><strong>Fosa SAP jest jedną z najtrwalszych w całym oprogramowaniu i opiera się na czymś prostym: wymiana tego systemu oznacza wymianę sposobu, w jaki firma działa.</strong><br><br>Wdrożenie trwa lata, kosztuje dziesiątki milionów i angażuje każdy dział organizacji. Migracja oznacza przeniesienie dekad historii transakcyjnej i przeszkolenie tysięcy osób. <strong>Dlatego klient, który raz wdrożył SAP, zwykle zostaje na dziesięciolecia</strong> — a spółka może co roku podnosić ceny.<br><br>Widać to w liczbach: marża brutto <strong>73,66%</strong> i marża operacyjna <strong>28,78%</strong> to wartości nieosiągalne w biznesie, w którym klient może łatwo odejść.</div>
+
+      <p>Trwa przy tym przejście z licencji na chmurę, które przejściowo obniża raportowane przychody — klient zamiast zapłacić raz płaci co miesiąc — ale <strong>podnosi ich powtarzalność i jakość</strong>. To przejście jest już mocno zaawansowane i stanowi główny motor wzrostu.</p>
+
+      <div class="alert alert-info"><strong>Sztuczna inteligencja jest tu zagadnieniem podobnym jak w ServiceNow, ale SAP ma przewagę, o której warto wiedzieć: posiada dane.</strong> Agent AI jest użyteczny dopiero wtedy, gdy wie, co się w firmie dzieje — a to wie system, w którym zarejestrowano wszystkie transakcje. Konkurent budujący narzędzie od zera musi najpierw uzyskać dostęp do tych danych, czyli przejść przez SAP.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na SAP</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przejście na chmurę</strong></td><td style="color:var(--ocena-kupno)">Zaawansowane</td><td style="color:var(--ocena-kupno)">Podnosi powtarzalność przychodów</td></tr>
+          <tr><td>Budżety informatyczne dużych firm</td><td style="color:var(--ocena-uwaga)">Pod presją kosztową</td><td style="color:var(--ocena-uwaga)">Wydłuża cykle zakupowe</td></tr>
+          <tr><td><strong>Obawa o model licencji na stanowiska</strong></td><td style="color:var(--ocena-uwaga)">Wyceniona w kursie</td><td style="color:var(--ocena-kupno)">Dotąd nie potwierdzona w wynikach</td></tr>
+          <tr><td>Ekspozycja walutowa</td><td style="color:var(--ocena-uwaga)">Przychody globalne, sprawozdania w euro</td><td>Kurs dolara wpływa na wyniki raportowane</td></tr>
+          <tr><td>Prognoza wzrostu (3 lata)</td><td>przychody 11,04%, zysk <strong>16,74%</strong> rocznie</td><td style="color:var(--ocena-kupno)">Solidnie, choć wolniej niż w amerykańskim oprogramowaniu</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Główny spór wokół SAP jest ten sam co wokół ServiceNow, ale rozstrzyga się wolniej — i to działa na korzyść spółki.</strong><br><br>Obawa brzmi: jeśli agenty sztucznej inteligencji wykonają pracę urzędnika, firma będzie potrzebowała mniej licencji. W ServiceNow rozstrzygnie się to szybko, bo cykl zakupowy jest krótki. <strong>W SAP cykle liczy się w latach</strong>, a systemy raz wdrożone działają dekadami — więc nawet jeśli obawa jest trafna, jej skutki rozłożą się na znacznie dłuższy okres.<br><br>Ta sama cecha działa jednak w drugą stronę: <strong>SAP nie skorzysta na sztucznej inteligencji tak szybko jak spółki o krótszym cyklu sprzedaży.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I AKCJONARIAT</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Profil odbiorcy</td><td style="color:var(--ocena-kupno)">Duże przedsiębiorstwa, globalnie</td><td style="color:var(--ocena-kupno)">Brak koncentracji; bardzo niska rotacja klientów</td></tr>
+          <tr><td>Przychód na pracownika</td><td>€340,9 tys.</td><td>Zysk na pracownika €69,6 tys.</td></tr>
+          <tr><td><strong>Zmiana liczby akcji r/r</strong></td><td style="color:var(--ocena-kupno)"><strong>-0,81%</strong></td><td style="color:var(--ocena-kupno)">Stopa skupu dodatnia — rzadkość w tym portfelu</td></tr>
+          <tr><td>Zarząd i założyciele</td><td style="color:var(--ocena-kupno)">5,38%</td><td style="color:var(--ocena-kupno)">Wysoko jak na spółkę tej wielkości</td></tr>
+          <tr><td>Instytucje</td><td>41,51%</td><td>Niżej niż w spółkach amerykańskich</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>SAP należy do wąskiej grupy spółek w Twoim portfelu, które zmniejszają liczbę akcji zamiast ją zwiększać — i warto zobaczyć, jak wąskiej.</strong><br><br>Na osiemnaście pozycji tylko cztery mają dodatnią stopę skupu: SAP, ServiceNow, Novo Nordisk i MARA. Pozostałe czternaście rozwadnia akcjonariuszy, część bardzo mocno — CoreWeave o ponad trzy czwarte w rok, Intel o ponad trzynaście procent, Sibanye o blisko siedem.<br><br><strong>Skup akcji przy jednoczesnej wypłacie dywidendy i gotówce netto w bilansie oznacza, że spółka generuje więcej gotówki, niż potrzebuje na rozwój.</strong> To jest najkrótsza definicja dojrzałego, dobrego biznesu.</div>
+
+      <p>Zaangażowanie zarządu i założycieli na poziomie <strong>5,38%</strong> jest wyjątkowo wysokie jak na spółkę wartą ponad dwieście miliardów euro. Dla porównania w Twoim portfelu: Intel 0,07%, Amphenol 0,53%, ServiceNow 0,14%.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL BIZNESOWY I PRZEPŁYWY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>€38,19 mld</td></tr>
+          <tr><td>Zysk brutto</td><td style="color:var(--ocena-kupno)">€28,13 mld</td></tr>
+          <tr><td><strong>Zysk operacyjny</strong></td><td style="color:var(--ocena-kupno)"><strong>€10,99 mld</strong></td></tr>
+          <tr><td>Zysk netto</td><td style="color:var(--ocena-kupno)">€7,80 mld · €6,68 na akcję</td></tr>
+          <tr><td>EBITDA</td><td>€11,76 mld</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-kupno)">€9,47 mld</td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-kupno)"><strong>-€735 mln, czyli 1,9% przychodów</strong></td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>€8,73 mld · €7,56 na akcję</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Nakłady inwestycyjne pochłaniają niecałe dwa procent przychodów — i to jest liczba, która najlepiej pokazuje różnicę między SAP a resztą Twojego portfela.</strong><br><br>Zestawienie z pozycjami odświeżanymi w tym tygodniu: CoreWeave wydaje <strong>271%</strong> przychodów, Oracle <strong>105%</strong>, Intel <strong>21,2%</strong>, Sibanye 11,6%, Amphenol 4,0%. <strong>SAP: 1,9%.</strong><br><br>Konsekwencja jest arytmetyczna i bardzo korzystna: z €9,47 mld gotówki operacyjnej zostaje <strong>€8,73 mld wolnych przepływów</strong> — czyli 92% gotówki operacyjnej trafia do dyspozycji spółki. Przy marży wolnych przepływów <strong>22,86%</strong> pozwala to jednocześnie płacić dywidendę, skupować akcje i utrzymywać gotówkę netto.</div>
+
+      <p>Zysk przed opodatkowaniem (<strong>€11,05 mld</strong>) jest wyższy od operacyjnego, bo spółka zarabia na odsetkach od gotówki. Efektywna stopa podatkowa wynosi 28,19%. Dywidenda to <strong>€2,50 na akcję przy stopie 1,38%</strong> i pochłania niecałe 37% zysku — jest więc bardzo bezpieczna.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WSKAŹNIKI WYCENY</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>€215,93 mld</td><td style="color:var(--ocena-kupno)">Wartość przedsiębiorstwa <strong>niższa</strong> — spółka ma gotówkę netto</td></tr>
+          <tr><td>Cena / zysk</td><td>28,01</td><td>Typowo dla dojrzałego oprogramowania</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>24,73</strong></td><td style="color:var(--ocena-kupno)">EV/FCF 24,60 — <strong>obie miary spójne</strong>, co ułatwia wycenę</td></tr>
+          <tr><td>Cena / sprzedaż</td><td>5,65</td><td>EV/sprzedaż 5,62</td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td>17,84</td><td>EV/EBIT 19,54</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td>4,77</td><td>Księga €38,76 na akcję; aktywa materialne 18,46</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>28,01</td><td>Zysk <strong>€6,68 na akcję</strong> przy przychodach €38,19 mld</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-kupno)"><strong>24,08</strong></td><td>Implikuje zysk około <strong>€7,73 na akcję</strong> w najbliższych dwunastu miesiącach</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-uwaga)"><strong>1,60</strong></td><td style="color:var(--ocena-uwaga)">Powyżej 1,0 — <strong>najwyższy wśród jakościowych pozycji Twojego portfela</strong>. Prognoza zysku +16,74% rocznie</td></tr>
+          <tr><td>Odniesienie sektorowe</td><td>dojrzałe oprogramowanie: ok. 22–30× forward</td><td style="color:var(--ocena-kupno)">SAP w dolnej części przedziału</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> Wskaźnik ceny do zysku prognozowanego 24,08 jest umiarkowany dla spółki o takiej jakości. <strong>Ale wskaźnik PEG na poziomie 1,60 jest tu najsłabszym punktem</strong> i trzeba go nazwać: przy dynamice zysku niecałych siedemnastu procent rocznie mnożnik nie jest okazyjny, tylko uczciwy. Dla porównania ServiceNow ma PEG 1,26, Amphenol 1,35, Oracle 0,56, AMD 0,70.</p>
+      <p>Zaletą SAP jest natomiast <strong>spójność miar</strong>: cena do wolnych przepływów (24,73) i wartość przedsiębiorstwa do wolnych przepływów (24,60) są praktycznie identyczne, bo spółka nie ma zadłużenia netto. Nie trzeba więc wybierać, na którą liczbę patrzeć — wszystkie mówią to samo.</p>
+
+      <h3>Cztery scenariusze na koniec 2027 roku</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Zysk na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Wzrost utrzymany, mnożnik wraca do średniej sektorowej</strong></td><td>€8,50</td><td>26×</td><td><strong>€221</strong></td><td style="color:var(--ocena-kupno)">+19%</td></tr>
+          <tr><td><strong>Wzrost utrzymany, mnożnik bez zmian</strong></td><td>€8,50</td><td>24×</td><td><strong>€204</strong></td><td style="color:var(--ocena-kupno)">+10%</td></tr>
+          <tr><td>Przejście na chmurę spowalnia</td><td>€7,50</td><td>20×</td><td>€150</td><td style="color:var(--ocena-sprzedaz)">-19%</td></tr>
+          <tr><td><strong>Obawa o model licencyjny potwierdza się w liczbach</strong></td><td style="color:var(--ocena-sprzedaz)">€7,00</td><td>17×</td><td><strong>€119</strong></td><td style="color:var(--ocena-sprzedaz)">-36%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne w euro, zgodnie z walutą notowania. Dane wejściowe: StockAnalysis / S&amp;P Global Market Intelligence, stan 16.09.2026 (kurs opóźniony).</p>
+
+      <p><strong>Fair value: €165 – €230</strong>, środek <strong>€197,50 (+6,1%)</strong>. Konsensus 28 analityków to €207,77 (+11,64%) przy rekomendacji mocnego kupna — w górnej połowie mojego przedziału.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Marża brutto</strong></td><td style="color:var(--ocena-kupno)"><strong>73,66%</strong></td><td style="color:var(--ocena-kupno)">Klasyczna marża dobrego oprogramowania</td></tr>
+          <tr><td><strong>Marża operacyjna</strong></td><td style="color:var(--ocena-kupno)"><strong>28,78%</strong></td><td style="color:var(--ocena-kupno)">Bardzo wysoka i — w odróżnieniu od ServiceNow — nie zaniżona</td></tr>
+          <tr><td>Marża netto / EBITDA</td><td>20,41% / 30,79%</td><td>Efektywna stopa podatkowa 28,19%</td></tr>
+          <tr><td>Marża wolnych przepływów</td><td style="color:var(--ocena-kupno)">22,86%</td><td style="color:var(--ocena-kupno)">Blisko marży netto — gotówka potwierdza zysk</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-kupno)"><strong>18,20% vs 8,28%</strong></td><td style="color:var(--ocena-kupno)"><strong>Różnica +9,92 pp</strong></td></tr>
+          <tr><td>Zwrot z kapitału własnego</td><td style="color:var(--ocena-kupno)">18,32%</td><td>ROA 9,54%, ROCE 19,67%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Warto zestawić marżę operacyjną SAP z ServiceNow, bo obie spółki robią podobne rzeczy, a liczby wyglądają odwrotnie.</strong><br><br>ServiceNow raportuje marżę operacyjną <strong>12,39%</strong>, ale to wartość zaniżona przez wynagrodzenia wypłacane w akcjach — gotówka jest tam prawie trzykrotnie wyższa od zysku księgowego. <strong>SAP raportuje 28,78% i ta liczba nie wymaga korekty</strong>: marża wolnych przepływów wynosi 22,86%, czyli jest zbliżona do marży netto.<br><br>Praktyczna konsekwencja: <strong>w SAP zysk księgowy i gotówka mówią to samo</strong>, więc nie trzeba wybierać między miarami ani korygować ich o rozwodnienie. To rzadka i bardzo pożądana cecha.<br><br>Różnica między zwrotem z kapitału a jego kosztem wynosi <strong>+9,92 punktu procentowego</strong> — trzeci wynik w Twoim portfelu, tuż za Novo Nordisk (+33,71) i Sibanye (+23,15), praktycznie równo z Amphenolem (+9,89).</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka / zadłużenie</td><td style="color:var(--ocena-kupno)">€11,63 mld / €9,94 mld</td><td style="color:var(--ocena-kupno)"><strong>Gotówka netto €1,69 mld</strong> (€1,46 na akcję)</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-kupno)">0,22</td><td style="color:var(--ocena-kupno)">Dług do EBITDA 0,83 · dług do przepływów 1,14</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-kupno)"><strong>24,64</strong></td><td style="color:var(--ocena-kupno)">Bez zastrzeżeń</td></tr>
+          <tr><td>Wskaźnik bieżący / szybki</td><td style="color:var(--ocena-uwaga)">1,15 / 0,98</td><td>Typowo dla modelu abonamentowego — płatności z góry</td></tr>
+          <tr><td>Kapitał własny</td><td>€45,25 mld</td><td>Kapitał obrotowy €2,92 mld</td></tr>
+          <tr><td><strong>Altman Z / Piotroski F</strong></td><td style="color:var(--ocena-kupno)"><strong>6,46 / 6</strong></td><td style="color:var(--ocena-kupno)">Wyraźnie powyżej progu bezpieczeństwa</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Bilans nie wymaga żadnych zastrzeżeń i jest to w tym portfelu rzadkość.</strong><br><br>Spółka ma <strong>gotówkę netto zamiast długu</strong>, wskaźnik Altmana ponad dwukrotnie powyżej progu bezpieczeństwa i zadłużenie spłacalne w nieco ponad rok z samej generowanej gotówki. Kontrola, którą stosuję po analizie ServiceNow — sprawdzenie, czy pokrycie odsetek nie jest zawyżone świeżo zaciągniętym długiem — <strong>nie ma tu zastosowania</strong>, bo zadłużenie jest marginalne wobec skali spółki.<br><br>Wskaźnik bieżący poniżej 1,2 wygląda przeciętnie, ale wynika z tej samej przyczyny co w ServiceNow: <strong>klienci płacą z góry za abonament</strong>, a niezrealizowana część opłaty jest zobowiązaniem krótkoterminowym. Im lepiej spółka sprzedaje, tym niższy ma ten wskaźnik.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Kurs jest niżej niż rok temu mimo niezmienionych fundamentów.</strong> Spadek o blisko czternaście procent wynikał z obawy o model licencyjny, której dotąd nie potwierdziła żadna liczba. To odwrotność sytuacji w AMD i Intelu, gdzie kursy pobiegły przed wynikami.</div>
+
+      <div class="alert alert-success"><strong>2. Jakość kapitałowa w ścisłej czołówce portfela.</strong> Zwrot z kapitału przewyższa jego koszt o blisko dziesięć punktów procentowych, marża operacyjna przekracza dwadzieścia osiem procent, a nakłady inwestycyjne pochłaniają niecałe dwa procent przychodów.</div>
+
+      <div class="alert alert-success"><strong>3. Spółka skupuje akcje, płaci dywidendę i ma gotówkę netto naraz.</strong> Tylko cztery z osiemnastu Twoich pozycji zmniejszają liczbę akcji. Przy wskaźniku Altmana 6,46 bilans nie ogranicza niczego.</div>
+
+      <div class="alert alert-info"><strong>4. Fosa oparta na kosztach zmiany, która rozstrzyga się wolno.</strong> Wymiana systemu planowania zasobów oznacza wymianę sposobu działania firmy, a cykle liczy się w latach. Nawet gdyby obawa o sztuczną inteligencję była trafna, jej skutki rozłożyłyby się na znacznie dłuższy okres niż w spółkach o krótkim cyklu sprzedaży.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Wskaźnik PEG 1,60 jest najwyższy wśród jakościowych pozycji portfela.</strong> Przy dynamice zysku niecałych siedemnastu procent rocznie mnożnik dwudziestoczterokrotny nie jest okazyjny, tylko uczciwy. Nie ma tu zapasu na rozczarowanie.</div>
+
+      <div class="alert alert-danger"><strong>2. Obawa o model licencyjny może być przedwczesna, a nie błędna.</strong> To samo ryzyko co w ServiceNow: jeśli agenty przejmą pracę biurową, zapotrzebowanie na licencje spadnie. Wolniejszy cykl SAP opóźnia skutki, ale ich nie znosi.</div>
+
+      <div class="alert alert-warning"><strong>3. Wzrost wolniejszy niż u amerykańskich konkurentów.</strong> Prognoza zakłada jedenaście procent wzrostu przychodów rocznie wobec dwudziestu w ServiceNow i czterdziestu w Oracle. SAP jest spółką jakościową, ale nie szybką.</div>
+
+      <div class="alert alert-warning"><strong>4. Kurs odbił już o ponad dziesięć procent ponad obie średnie.</strong> Najłatwiejsza część odbicia jest za nami — w sierpniu kurs był poniżej średnich, dziś wyraźnie powyżej. Do tego dochodzi ekspozycja walutowa, bo przychody są globalne, a sprawozdania w euro.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Pole rywalizacji</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Oracle</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 5,83%)</span></td><td>Aplikacje dla przedsiębiorstw i bazy danych</td><td style="color:var(--ocena-uwaga)">Bezpośredni rywal w aplikacjach; rozjechały się strategicznie</td></tr>
+          <tr><td><strong>ServiceNow</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 16,43%)</span></td><td>Inna warstwa — procesy, nie transakcje</td><td style="color:var(--ocena-kupno)">Bardziej sąsiad niż rywal; często się integrują</td></tr>
+          <tr><td><strong>Microsoft</strong></td><td>Aplikacje biznesowe w pakiecie</td><td style="color:var(--ocena-uwaga)">Groźny w segmencie średnich firm</td></tr>
+          <tr><td><strong>Salesforce</strong></td><td>Obsługa klienta i sprzedaż</td><td style="color:var(--ocena-kupno)">Ograniczone nakładanie się z rdzeniem SAP</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Najciekawsze w tej tabeli jest to, jak bardzo Oracle i SAP się rozeszły, mimo że dekadę temu były bezpośrednimi rywalami.</strong><br><br>Oracle postawił na budowę mocy obliczeniowej i wydaje dziś na inwestycje tyle, ile zarabia. <strong>SAP pozostał przy oprogramowaniu i wydaje niecałe dwa procent przychodów.</strong> Pierwszy ma dług netto liczony w setkach miliardów, drugi ma gotówkę netto.<br><br>Masz obie w portfelu, razem <strong>10,87%</strong>, i są to dziś dwa zupełnie różne rodzaje ryzyka: Oracle to zakład na to, czy nakłady się zwrócą, SAP to zakład na trwałość fosy. <strong>Nie jest to powielona ekspozycja</strong>, choć obie spółki zależą od budżetów informatycznych dużych firm.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-sprzedaz)">-13,96%</td><td>Mimo niezmienionych fundamentów</td></tr>
+          <tr><td>Średnie kroczące 50 i 200 sesji</td><td>€168,25 / €167,22</td><td style="color:var(--ocena-kupno)">Kurs 10,6% i 11,3% powyżej</td></tr>
+          <tr><td><strong>Układ średnich</strong></td><td style="color:var(--ocena-kupno)"><strong>50 powyżej 200</strong></td><td style="color:var(--ocena-kupno)">Trend odzyskany; obie średnie blisko siebie</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>56,09</td><td>Górna część strefy neutralnej</td></tr>
+          <tr><td><strong>Beta (5 lat)</strong></td><td style="color:var(--ocena-kupno)"><strong>0,78</strong></td><td style="color:var(--ocena-kupno)"><strong>Najniższa w całym Twoim portfelu</strong></td></tr>
+          <tr><td>Średni wolumen (20 sesji)</td><td>2,27 mln akcji</td><td style="color:var(--ocena-uwaga)">Niski — to giełda europejska, nie amerykańska</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Obraz techniczny pokazuje spółkę, która przecenę ma już za sobą i właśnie odzyskała trend.</strong><br><br>Obie średnie kroczące leżą praktycznie na tym samym poziomie i kurs jest ponad dziesięć procent powyżej nich — <strong>to układ typowy dla zakończonej korekty</strong>. W sierpniu kurs był w okolicach tych średnich; dziś jest wyraźnie wyżej.<br><br><strong>Beta 0,78 zasługuje na osobne zdanie</strong>, bo jest najniższa w całym portfelu. Przy wadze ponad pięciu procent oznacza to, że SAP wnosi do rachunku wyraźnie mniej zmienności, niż wynikałoby z wielkości pozycji — dokładnie odwrotnie niż AMD z betą 2,48.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>€197,50</strong></td><td>Środek przedziału wartości godziwej</td></tr>
+          <tr><td><strong>€207,77</strong></td><td>Cena docelowa konsensusu</td></tr>
+          <tr><td><strong>€168</strong></td><td>Obie średnie kroczące — pierwsze realne wsparcie</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>Dolna granica wartości godziwej</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — patrz sekcja 6</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs odbił już ponad dziesięć procent nad obie średnie, a wskaźnik RSI jest w górnej strefie neutralnej. Najłatwiejsza część odbicia jest za nami; wyniki 21 października bez wyraźnej poduszki.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Środek wartości godziwej powyżej kursu, konsensus wyraźnie wyżej. Jakość kapitałowa w czołówce portfela przy najniższej becie.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Fosa oparta na kosztach zmiany rozstrzyga się w dekadach, a spółka generuje gotówkę wystarczającą na dywidendę, skup akcji i rozwój jednocześnie.</td></tr>
+        </tbody>
+      </table></div>
+
+      <p><strong>Ocena łączna: KUPNO — utrzymana z 12 sierpnia, ale z obniżonym przedziałem wartości godziwej.</strong> Poprzedni zakres €205–235 zakładał powrót mnożnika do poziomów, których przy wzroście zysku poniżej siedemnastu procent rocznie nic nie uzasadnia. Nowy przedział opiera się na dzisiejszej dynamice, a nie na oczekiwanym przeszacowaniu. Plan działania w sekcji 15.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td><strong>5,04%</strong></td><td>Szósta pozycja z osiemnastu</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-kupno)">+14,3%</td><td>Przy cenie wejścia €162,88</td></tr>
+          <tr><td><strong>Oprogramowanie korporacyjne razem</strong></td><td style="color:var(--ocena-uwaga)"><strong>27,30%</strong></td><td style="color:var(--ocena-uwaga)">Z ServiceNow (16,43%) i Oracle (5,83%)</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>SAP pełni w Twoim portfelu rolę, której nie pełni żadna inna pozycja: jest jednocześnie jakościowy i spokojny.</strong><br><br>Zestawienie mówi samo za siebie. <strong>Beta 0,78 jest najniższa z osiemnastu pozycji</strong>, a zwrot z kapitału przewyższa jego koszt o blisko dziesięć punktów. Większość spółek w tym portfelu łączy wysoką jakość z wysoką zmiennością (Amphenol, beta 1,24) albo niską zmienność z niższą jakością.<br><br>Przy dzisiejszym poziomie wykorzystania depozytu zabezpieczającego ta cecha ma znaczenie praktyczne: <strong>pozycje o niskiej becie stabilizują wartość rachunku wtedy, gdy pozycje o wysokiej nią ruszają.</strong> Obok Sibanye (beta 0,97) i Novo Nordisk (0,34) SAP należy do trzech najspokojniejszych spółek, jakie masz.</div>
+
+      <div class="alert alert-warning"><strong>Warto natomiast zauważyć skalę koncentracji w oprogramowaniu korporacyjnym: ponad ćwierć portfela.</strong> ServiceNow, SAP i Oracle to trzy różne warstwy tego samego rynku i nie konkurują ze sobą bezpośrednio, ale <strong>wszystkie trzy zależą od budżetów informatycznych dużych przedsiębiorstw</strong>. W spowolnieniu gospodarczym tnie się je razem.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>SAP jest w Twoim portfelu spółką, która łączy wysoką jakość kapitałową z najniższą zmiennością — i to połączenie jest rzadkie.</strong> Zwrot z zainwestowanego kapitału przewyższa jego koszt o <strong>9,92 punktu procentowego</strong>, marża operacyjna wynosi <strong>28,78%</strong> i nie wymaga żadnych korekt, a nakłady inwestycyjne pochłaniają zaledwie <strong>1,9% przychodów</strong>. Spółka ma gotówkę netto, skupuje własne akcje i płaci rosnącą dywidendę jednocześnie — co robią tylko cztery z osiemnastu Twoich pozycji.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Kurs jest przy tym o <strong>13,96% niżej niż rok temu</strong>, bo rynek wyceniał obawę, że sztuczna inteligencja podważy model licencji na stanowiska — tę samą, która przeceniła ServiceNow. Żadna liczba jej dotąd nie potwierdziła. <strong>Słabszym punktem jest tempo: wskaźnik PEG 1,60</strong> przy wzroście zysku niecałych siedemnastu procent rocznie oznacza, że mnożnik jest uczciwy, a nie okazyjny — i dlatego obniżam przedział wartości godziwej wobec sierpniowego.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się utrzymać, żeby teza działała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Zwrot z kapitału musi przewyższać jego koszt.</strong> Różnica blisko dziesięciu punktów — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Gotówka musi potwierdzać zysk księgowy.</strong> Marża wolnych przepływów zbliżona do netto — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Spółka nie może rozwadniać akcjonariuszy.</strong> Liczba akcji maleje — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Wycena powinna być okazyjna wobec wzrostu.</strong> Wskaźnik PEG powyżej 1,5 — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Obawa o model licencyjny musi pozostać niepotwierdzona.</strong> Rozstrzyga się wolno; pierwszy sprawdzian 21 października.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-kupno)"><strong>21 października 2026</strong></td><td style="color:var(--ocena-kupno)"><strong>Wyniki za III kwartał</strong></td><td style="color:var(--ocena-kupno)">Tempo przechodzenia klientów na chmurę i kierunek marży operacyjnej</td></tr>
+            <tr><td>Styczeń 2027</td><td>Prognoza na kolejny rok</td><td>Test, czy dynamika przychodów utrzyma się powyżej dziesięciu procent</td></tr>
+            <tr><td>2027–2028</td><td>Rozstrzygnięcie sporu o model licencyjny</td><td>Ten sam czynnik, który ciąży ServiceNow — tu działa wolniej</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Marża operacyjna</td><td>28,78%</td><td>zejście poniżej 25%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Liczba akcji</td><td>-0,81% rocznie</td><td>powrót do emisji</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Wskaźnik PEG</td><td>1,60</td><td>powyżej 2,0</td><td><span class="mon-dot y"></span>Uwaga</td></tr>
+            <tr><td>Kurs wobec średnich kroczących</td><td>ponad 10% powyżej</td><td>zejście poniżej dolnej granicy wyceny</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Wielkość pozycji</strong></td><td>Jest miejsce na powiększenie — niska beta i wysoka jakość działają na korzyść</td></tr>
+            <tr><td><strong>Dokupowanie</strong></td><td>W okolicach <strong>€168–172</strong>, czyli przy średnich kroczących; powyżej <strong>€210</strong> przewaga wyceny zanika</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>€230</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td>Dolna granica przedziału wartości godziwej</td></tr>
+            <tr><td><strong>Warunek zmiany oceny</strong></td><td>Marża operacyjna poniżej 25% albo spadek dynamiki przychodów poniżej 8%</td></tr>
+            <tr><td><strong>Co obserwować 21 października</strong></td><td>Tempo migracji klientów do chmury — ważniejsze niż sam zysk kwartalny</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">KUPNO</div>
+        <p><strong>Utrzymuję ocenę kupna, ale obniżam przedział wartości godziwej — i powód jest ten sam, który przewijał się przez wszystkie dzisiejsze korekty.</strong> W sierpniu wyceniłem SAP na €205–235, zakładając powrót mnożnika do poziomów sprzed przeceny. Przy wzroście zysku niecałych siedemnastu procent rocznie i wskaźniku PEG na poziomie 1,60 <strong>takie przeszacowanie nie ma uzasadnienia w liczbach</strong>, tylko w nadziei. Nowy przedział opiera się na dzisiejszej dynamice.</p>
+        <p>Ocena pozostaje pozytywna, bo to jest spółka, której jakości nie podważa żaden ze wskaźników: gotówka netto, skup akcji, marża operacyjna blisko dwudziestu dziewięciu procent potwierdzona przepływami, nakłady poniżej dwóch procent przychodów i najniższa beta w całym portfelu. <strong>SAP nie jest okazją cenową — jest dobrą spółką kupowaną po uczciwej cenie</strong>, a przy koncentracji tego portfela w pozycjach o wysokiej zmienności ta cecha ma wartość sama w sobie.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-kupno)">Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>€165 – €230</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">€119 (-36%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">€221 (+19%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Jest miejsce na powiększenie</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 21 października</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA ANALIZY Z 12 SIERPNIA</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Wartość godziwa €205–235</strong> przy kursie €177,00</td>
+            <td>Po pięciu tygodniach kurs wynosi €186,10 i do dolnej granicy wciąż brakuje dziesięciu procent. Przedział zakładał <strong>powrót mnożnika</strong>, którego przy wzroście zysku poniżej siedemnastu procent rocznie nic nie uzasadnia. Nowy zakres: <strong>€165–230</strong></td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — wycena oparta na oczekiwanym przeszacowaniu</td>
+          </tr>
+          <tr>
+            <td><strong>„Wycena o połowę niższa"</strong> jako argument</td>
+            <td>Porównanie z amerykańskim oprogramowaniem pomijało to, że SAP rośnie wyraźnie wolniej. Właściwą miarą jest <strong>wskaźnik PEG 1,60</strong>, który jest najwyższy wśród jakościowych pozycji portfela</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — mylące porównanie</td>
+          </tr>
+          <tr>
+            <td>Brak zestawienia <strong>marży operacyjnej z ServiceNow</strong></td>
+            <td>SAP raportuje 28,78% i liczba ta nie wymaga korekty, podczas gdy ServiceNow raportuje 12,39% zaniżone wynagrodzeniami w akcjach. To zestawienie pokazuje realną przewagę SAP i powinno było się znaleźć</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana</td>
+          </tr>
+          <tr>
+            <td>Brak policzenia <strong>nakładów do przychodów</strong></td>
+            <td>Wynoszą <strong>1,9%</strong> — najmniej ze wszystkich pozycji w portfelu. Przy spółkach, które w tym tygodniu okazały się wydawać 105% i 271% przychodów, jest to liczba warta wyeksponowania</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Ocena kupna pozostaje aktualna, a kurs urósł o pięć procent w pięć tygodni. Trafne było wskazanie, że przecena wynikała z obawy o model licencyjny, a nie z wyników — i że obawa ta nie znalazła potwierdzenia w liczbach.</div>
+
+      <div class="alert alert-warning"><strong>Wzorzec, który powtarza się w moich sierpniowych wycenach.</strong> Przy SAP, MARA, Oracle i CoreWeave wyznaczałem przedziały zakładające <strong>powrót mnożnika do wcześniejszych poziomów</strong>. W każdym z tych przypadków było to założenie o zachowaniu rynku, a nie wniosek z liczb spółki. Dzisiejsze przedziały opieram na dynamice wyników — i dlatego są niższe, ale sprawdzalne.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 17 września 2026 | Cena: <strong>€186,10</strong> (notowanie XETRA 16.09.2026, kurs opóźniony) | <strong>Aktualizacja analizy z 12 sierpnia 2026 — ocena kupna utrzymana, przedział wartości godziwej obniżony</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> wartość godziwa €205–235 → €165–230, bo poprzedni przedział zakładał powrót mnożnika, którego przy wzroście zysku poniżej 17% rocznie nic nie uzasadnia; wycofano argument „wycena o połowę niższa" jako mylący, zastąpiony wskaźnikiem PEG 1,60; dodano zestawienie marży operacyjnej z ServiceNow oraz relację nakładów do przychodów (1,9%) | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 17.09.2026</strong>, notowanie i sprawozdania w euro zgodnie z giełdą notowania; scenariusze i wyliczenia pochodne to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
