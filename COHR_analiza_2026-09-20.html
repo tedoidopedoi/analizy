@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COHR — Coherent Corp. | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-sprzedaz); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:13px; color:var(--text-muted); font-style:italic; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: COHR</div>
+    <div class="company-name">Coherent Corp.</div>
+    <div class="company-sub">Optyka, lasery i materiały dla centrów danych, przemysłu i telekomunikacji · Saxonburg · 51 478 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">Spoza portfela — obserwowana</span>
+      <span class="meta-tag">Obniżenie oceny: kupno → sprzedaż</span>
+      <span class="meta-tag">Zysk nie zamienia się w gotówkę</span>
+      <div class="price-display">
+        <div class="price-main">$317,36</div>
+        <div class="price-sub">zamknięcie 18.09.2026 (+7,22%), po sesji $317,30</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Optyka i łączność</span><span class="temat">Moc obliczeniowa dla AI</span><span class="temat">Przemysł</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-sprzedaz" data-ocena="SPRZEDAŻ — zysk netto jest blisko dziesięciokrotnie wyższy od gotówki operacyjnej, zwrot z kapitału nie pokrywa jego kosztu, a rozwodnienie przekracza jedną czwartą rocznie">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">SPRZEDAŻ</span><span class="rb-qual">obniżenie z kupna — lipcowa teza się nie sprawdziła, a przepływy tłumaczą, dlaczego</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$70 – $385</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-sprzedaz)">-78% do +21%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>4 listopada</b><em>Q1 roku obrotowego 2027</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$317,36</div><div class="metric-detail">+206,90% w 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 06.07</div><div class="metric-value red">-6,7%</div><div class="metric-detail"><strong>Mój przedział $380–450 nie został osiągnięty</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Gotówka operacyjna</div><div class="metric-value red">$79,51 mln</div><div class="metric-detail">Przy zysku netto blisko dziesięciokrotnie wyższym</div></div>
+    <div class="metric-card"><div class="metric-label">Wolne przepływy</div><div class="metric-value red">-$1,02 mld</div><div class="metric-detail">Nakłady $1,10 mld</div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot z kapitału vs koszt</div><div class="metric-value red">-8,50 pp</div><div class="metric-detail">6,74% wobec 15,24% — niszczenie wartości</div></div>
+    <div class="metric-card"><div class="metric-label">Liczba akcji</div><div class="metric-value red">+26,26%</div><div class="metric-detail">W rok — tak sfinansowano wypalanie</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / zysk</div><div class="metric-value red">77,03</div><div class="metric-detail">Prognozowana <strong>33,70</strong> · PEG 0,64</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (23 analityków)</div><div class="metric-value green">$415,36</div><div class="metric-detail">+30,88% · kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I STAN POPRZEDNIEJ TEZY</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Coherent powstał z połączenia dwóch firm i sprzedaje optykę, lasery oraz materiały podłożowe — do centrów danych, przemysłu, motoryzacji i telekomunikacji. Przychody roczne <strong>$7,12 mld</strong> przy <strong>51 478 pracownikach</strong>, kapitalizacja <strong>$62,15 mld</strong>. <strong>Spółki nie masz w portfelu</strong> — jest w obserwowanych.</p>
+
+      <div class="alert alert-warning"><strong>Teza z 6 lipca się nie sprawdziła, a dzisiejsza analiza pokazuje, dlaczego — i jest to porównanie, które warto zobaczyć obok raportu Lumentum z tego samego dnia.</strong><br><br>
+      Oceniłem wtedy COHR na <strong>kupno</strong> przy kursie około $340 i wyceniłem na <strong>$380–450</strong>. Kurs wynosi dziś <strong>$317,36</strong>, czyli o kilka procent mniej, i nie zbliżył się do przedziału.<br><br>
+      <strong>W tym samym czasie Lumentum, którego analizowałem trzy dni wcześniej, wzrósł o 27,5% i wypełnił swój przedział.</strong> Obie spółki działają w tej samej branży i korzystają z tej samej fali popytu — a wynik jest przeciwny. <strong>Różnicę tłumaczy jedna liczba: gotówka.</strong></div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara (12 miesięcy)</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody</strong></td><td style="color:var(--ocena-kupno)"><strong>$7,12 mld</strong></td><td style="color:var(--ocena-kupno)">Prognoza wzrostu 39,16% rocznie na trzy lata</td></tr>
+          <tr><td><strong>Zysk netto</strong></td><td style="color:var(--ocena-kupno)"><strong>$769,90 mln</strong> · $4,12 na akcję</td><td style="color:var(--ocena-uwaga)">Wspierany bardzo niską stawką podatku</td></tr>
+          <tr><td><strong>Gotówka operacyjna</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>zaledwie $79,51 mln</strong></td><td style="color:var(--ocena-sprzedaz)">Sedno tego raportu — sekcja 5</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$1,02 mld</strong></td><td style="color:var(--ocena-sprzedaz)">Przy nakładach $1,10 mld — sekcja 5</td></tr>
+          <tr><td><strong>Liczba akcji</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+26,26% r/r</strong></td><td style="color:var(--ocena-sprzedaz)">Tak pokryto lukę między zyskiem a gotówką</td></tr>
+          <tr><td>Zwrot z kapitału wobec kosztu</td><td style="color:var(--ocena-sprzedaz)">ujemna nadwyżka</td><td style="color:var(--ocena-sprzedaz)">Kapitał nie zarabia na swój koszt — sekcja 7</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — SZEROKI KATALOG, ROZMYTY ŚRODEK</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Obszar</th><th>Rola</th><th>Charakter</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Optyka dla centrów danych</strong></td><td style="color:var(--ocena-kupno)">Najszybciej rosnąca część</td><td style="color:var(--ocena-kupno)">Ta sama fala popytu co u Lumentum</td></tr>
+          <tr><td>Lasery przemysłowe</td><td>Stabilny przychód</td><td style="color:var(--ocena-uwaga)">Cykliczny, zależny od inwestycji w przemyśle</td></tr>
+          <tr><td>Materiały podłożowe i półprzewodnikowe</td><td>Baza technologiczna</td><td style="color:var(--ocena-uwaga)">Integracja pionowa, kapitałochłonna</td></tr>
+          <tr><td>Telekomunikacja i motoryzacja</td><td>Uzupełnienie</td><td style="color:var(--text-muted)">Rozprasza kapitał</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Coherent ma szerszy katalog i większą skalę niż Lumentum — i po policzeniu liczb okazuje się, że to raczej obciążenie niż przewaga.</strong><br><br><strong>Przychody są ponad dwukrotnie wyższe, ale marża brutto wynosi 37,50% wobec 44,24%, a operacyjna 12,67% wobec 17,79%.</strong> Zatrudnienie jest blisko czterokrotnie większe, co daje przychód na pracownika $138 tys. wobec $219 tys.<br><br><strong>Wniosek:</strong> szeroki katalog i pionowa integracja w materiałach oznaczają więcej etapów produkcji na dolara sprzedaży i więcej zamrożonego kapitału. <strong>Skala nie przekłada się tu na rentowność, a na złożoność.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na Coherent</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Popyt na optykę w centrach danych</strong></td><td style="color:var(--ocena-kupno)">Bardzo mocny</td><td style="color:var(--ocena-kupno)">Napędza cały wzrost przychodów</td></tr>
+          <tr><td><strong>Ceny modułów optycznych</strong></td><td style="color:var(--ocena-uwaga)">Pod presją przy rosnącej podaży</td><td style="color:var(--ocena-sprzedaz)">Niska marża brutto daje mały bufor</td></tr>
+          <tr><td>Przemysł i motoryzacja</td><td style="color:var(--ocena-uwaga)">Słabo</td><td style="color:var(--ocena-sprzedaz)">Ta część katalogu nie rośnie</td></tr>
+          <tr><td><strong>Wymagania kapitału obrotowego</strong></td><td style="color:var(--ocena-sprzedaz)">Rosną wraz z przychodami</td><td style="color:var(--ocena-sprzedaz)"><strong>Przyczyna braku gotówki</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Otoczenie rynkowe Coherent jest dobre i nie to jest problemem tej spółki.</strong> Popyt na optykę rośnie tak samo, jak opisywałem przy Lumentum i Marvellu, a prognoza wzrostu przychodów <strong>39,16% rocznie</strong> jest wiarygodna.<br><br><strong>Problem jest wewnętrzny: spółka rośnie, ale nie zamienia wzrostu w gotówkę.</strong> Przy rosnących przychodach trzeba budować zapas i finansować należności, a Coherent robi to drożej niż konkurent. <strong>Wzrost przychodów jest tu kosztem, nie tylko korzyścią.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I AKCJONARIAT</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Struktura odbiorców</td><td style="color:var(--ocena-kupno)">Szeroka</td><td style="color:var(--ocena-kupno)">Mniejsza koncentracja niż w Lumentum</td></tr>
+          <tr><td>Przychód na pracownika</td><td style="color:var(--ocena-sprzedaz)">$138 276</td><td style="color:var(--ocena-sprzedaz)">Zysk na pracownika $14 956</td></tr>
+          <tr><td><strong>Zmiana liczby akcji r/r</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+26,26%</strong></td><td style="color:var(--ocena-sprzedaz)">Plus 2,97% w kwartale — tempo nie hamuje</td></tr>
+          <tr><td>Instytucje / zarząd</td><td>87,95% / 0,29%</td><td style="color:var(--ocena-uwaga)">Udział kierownictwa minimalny</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-kupno)">3,34% akcji</td><td>Rynek nie obstawia przeciw</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Rozwodnienie o ponad jedną czwartą w rok jest w tym raporcie najważniejszą liczbą po przepływach — i te dwie rzeczy są związane.</strong><br><br>Spółka wypaliła wolne przepływy i jednocześnie <strong>spłaciła $478,30 mln długu netto</strong>. Pieniądze na jedno i drugie przyszły z emisji akcji.<br><br><strong>Skutek: zysk na akcję wynosi $4,12, ale rozkłada się na bazę większą o ponad jedną czwartą niż rok wcześniej.</strong> Nawet gdyby zysk łączny rósł, udział w nim maleje. Dla porównania <strong>Lumentum rozwodnił się o siedem procent</strong> — i to w wyniku jednorazowej zamiany obligacji, nie bieżącego finansowania.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">BIZNES — ZYSK, KTÓRY NIE ZAMIENIA SIĘ W GOTÓWKĘ</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$7,12 mld</td></tr>
+          <tr><td>Zysk brutto</td><td>$2,67 mld — marża 37,50%</td></tr>
+          <tr><td>Wynik operacyjny</td><td>$901,52 mln — marża 12,67%</td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td>$847,73 mln — <strong>niższy od operacyjnego, bez zniekształceń</strong></td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-kupno)">$769,90 mln · $4,12 na akcję</td></tr>
+          <tr><td><strong>Przepływy operacyjne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$79,51 mln</strong></td></tr>
+          <tr><td>Amortyzacja</td><td>$521,90 mln</td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$1,10 mld — 15,4% przychodów</strong></td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$1,02 mld · -$5,23 na akcję</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>To jest najważniejsza liczba w całym raporcie i warto ją postawić wprost: zysk netto jest blisko dziesięciokrotnie wyższy od gotówki operacyjnej.</strong><br><br>
+      Rachunek: zysk netto <strong>$769,90 mln</strong> plus amortyzacja <strong>$521,90 mln</strong> dają <strong>$1 291,8 mln</strong>, które w normalnej spółce byłyby punktem wyjścia dla przepływów operacyjnych. Faktyczne przepływy wyniosły <strong>$79,51 mln</strong>. <strong>Różnica — około $1 212 mln — została pochłonięta przez kapitał obrotowy i pozycje pokrewne.</strong><br><br>
+      Innymi słowy: <strong>gotówka operacyjna stanowi 1,1% przychodów, a zysk netto 11,31%.</strong> Sprawozdanie nie jest zniekształcone zdarzeniami jednorazowymi — wynik przedpodatkowy jest prawidłowo niższy od operacyjnego. <strong>Problemem nie jest księgowanie, a to, że sprzedaż zamienia się w zapasy i należności, nie w pieniądze</strong> — co potwierdza rotacja zapasów <strong>2,21</strong>, czyli blisko pięć i pół miesiąca w magazynie.</div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne: suma zysku netto i amortyzacji porównana z raportowanymi przepływami operacyjnymi; różnica przypisana zmianom kapitału obrotowego i pozycjom pokrewnym.</p>
+
+      <div class="alert alert-danger"><strong>Druga liczba dopełnia obrazu: przy nakładach $1,10 mld, czyli 15,4% przychodów, wolne przepływy wynoszą minus $1,02 mld.</strong><br><br>
+      Spółka nie jest w stanie sfinansować własnej rozbudowy z działalności. Lukę pokryto <strong>emisją akcji</strong> — i to jest moment, w którym trzy liczby z tego raportu łączą się w jedno zjawisko: <strong>zysk księgowy istnieje, gotówki nie ma, a różnicę płaci akcjonariusz udziałem w spółce.</strong><br><br>
+      Zestawienie nakładów do przychodów dla spółek, które przeliczałem: IREN 612% · CoreWeave 271% · Oracle 105% · Amazon 22,3% · Intel 21,2% · Novo Nordisk 17,1% · <strong>Coherent 15,4%</strong> · Lumentum 15,0% · Sibanye 11,6% · Samsung 10,7% · ASML 4,1% · KLA 2,77%.<br><br>
+      <strong>Nakłady obu spółek są niemal identyczne — ale Lumentum przy nich generuje dodatnie wolne przepływy, a Coherent nie.</strong> Różnica nie leży w inwestycjach, a w konwersji sprzedaży na gotówkę.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja / wartość firmy</td><td>$62,15 mld / $63,71 mld</td><td>Różnica to dług netto</td></tr>
+          <tr><td>Cena / sprzedaż</td><td style="color:var(--ocena-uwaga)">8,73</td><td>Prognozowana 5,86</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>nie dotyczy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Przepływy są ujemne</strong> — wskaźnika nie da się policzyć</td></tr>
+          <tr><td><strong>Cena / przepływy operacyjne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>781,61</strong></td><td style="color:var(--ocena-sprzedaz)">Liczba mówiąca wszystko o konwersji gotówki</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td>5,70</td><td style="color:var(--ocena-uwaga)">Aktywa materialne <strong>17,06</strong> — wartość firmy z połączenia</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td style="color:var(--ocena-sprzedaz)">77,03</td><td style="color:var(--ocena-uwaga)">Stawka podatku <strong>7,18%</strong> — nietrwała</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>33,70</strong></td><td style="color:var(--ocena-uwaga)">Wymaga ponad dwukrotności dzisiejszego zysku</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-kupno)"><strong>0,64</strong></td><td style="color:var(--ocena-kupno)">Poniżej jedności — jedyny wskaźnik mówiący „tanio"</td></tr>
+          <tr><td>Prognozy na trzy lata</td><td style="color:var(--ocena-kupno)">przychody 39,16% rocznie</td><td>Zysk na akcję 48,98% rocznie</td></tr>
+          <tr><td>Mediana producentów komponentów</td><td>okolice 25×</td><td style="color:var(--ocena-sprzedaz)">Premia na wskaźniku bieżącym</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać — i dlaczego wskaźniki zyskowe są przy tej spółce najmniej wiarygodne.</strong> Zysk netto opiera się na <strong>efektywnej stawce podatku 7,18%</strong>, a jednocześnie nie zamienia się w gotówkę. Przy takim zestawie <strong>wskaźnik ceny do zysku, choć formalnie policzalny, opisuje wielkość papierową.</strong> Miarą, która mówi więcej, jest cena do przepływów operacyjnych — i wynosi ona <strong>781,61</strong>. Iloraz wobec tempa wzrostu na poziomie 0,64 sugeruje okazję, ale liczony jest od tego samego papierowego zysku. <strong>Dopóki gotówka nie zacznie nadążać za zyskiem, żaden wskaźnik oparty na zysku nie jest tu wiarygodny.</strong></p>
+      <p style="color:var(--text-muted);font-size:13px">Dane: StockAnalysis / S&amp;P Global Market Intelligence, stan 20.09.2026. Przeliczenie wskaźnika prognozowanego na wymagany zysk na akcję — obliczenie własne.</p>
+
+      <h3>Cztery scenariusze na 2028 rok</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Zysk na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Wzrost dowieziony, marża poprawiona, premia utrzymana</strong></td><td>$10,05</td><td>38×</td><td><strong>$382</strong></td><td style="color:var(--ocena-kupno)">+20%</td></tr>
+          <tr><td><strong>Wzrost dowieziony, mnożnik normalizuje</strong></td><td>$10,05</td><td>30×</td><td><strong>$302</strong></td><td style="color:var(--ocena-uwaga)">-5%</td></tr>
+          <tr><td>Wzrost wolniejszy od prognoz</td><td>$5,95</td><td>25×</td><td>$149</td><td style="color:var(--ocena-sprzedaz)">-53%</td></tr>
+          <tr><td><strong>Kapitał obrotowy nie zwalnia, cykl się odwraca</strong></td><td style="color:var(--ocena-sprzedaz)">$3,40</td><td>20×</td><td><strong>$68</strong></td><td style="color:var(--ocena-sprzedaz)">-79%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne. Ścieżka scenariusza podstawowego: przychody rosnące zgodnie z prognozą konsensusu do około $13,8 mld, marża operacyjna podniesiona do 18%, stawka podatku znormalizowana do 15%, liczba akcji zwiększona dalszym rozwodnieniem do około 210 mln. Mnożniki odzwierciedlają rozpiętość wycen producentów komponentów optycznych.</p>
+
+      <p><strong>Fair value: $70 – $385</strong>, środek <strong>$227,50 (-28,3%)</strong>. Po nadaniu scenariuszom wag 20/30/30/20 — z większym prawdopodobieństwem przypisanym wariantom słabszym, bo problem z gotówką trwa już rok — wynik wypada na <strong>$225 (-29,0%)</strong>. Konsensus 23 analityków to $415,36 (+30,88%) przy rekomendacji kupna, czyli <strong>powyżej mojego scenariusza najlepszego</strong>.</p>
+
+      <div class="alert alert-danger"><strong>Rozbieżność z konsensusem jest tu największa ze wszystkich spółek, jakie przeliczałem.</strong> Analitycy wyceniają Coherent na podstawie prognozowanego zysku i tempa wzrostu — i przy tych danych ich cel jest spójny. <strong>Ja wyceniam z uwzględnieniem tego, że zysk nie zamienia się w gotówkę, a różnicę finansuje rozwodnienie.</strong><br><br>Nie twierdzę, że konsensus się myli, tylko że <strong>wskaźnik zysku mierzy tu coś innego niż wartość dla akcjonariusza.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto</td><td style="color:var(--ocena-sprzedaz)">37,50%</td><td style="color:var(--ocena-sprzedaz)">Niżej niż u Lumentum — mniejszy bufor na presję cenową</td></tr>
+          <tr><td>Marża operacyjna / netto</td><td style="color:var(--ocena-uwaga)">12,67% / 11,31%</td><td style="color:var(--ocena-kupno)">Kolejność prawidłowa, bez zniekształceń</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>6,74% vs 15,24%</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Różnica -8,50 pp</strong></td></tr>
+          <tr><td>Zwrot z kapitału własnego / aktywów</td><td style="color:var(--ocena-sprzedaz)">7,98% / 3,39%</td><td style="color:var(--ocena-sprzedaz)">Majątek pracuje wolno</td></tr>
+          <tr><td>Efektywna stawka podatku</td><td style="color:var(--ocena-uwaga)">7,18%</td><td style="color:var(--ocena-sprzedaz)">Zawyża zysk netto wobec stanu docelowego</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Nadwyżka zwrotu z zainwestowanego kapitału nad kosztem wynosi minus 8,50 pp — i ta liczba rozstrzyga ocenę tej spółki.</strong> Umiejscowienie wśród dwudziestu spółek, które przeliczyłem: KLA +54,77 · ASML +54,26 · Novo Nordisk +33,71 · Samsung +24,25 · Sibanye +23,15 · SAP +9,92 · Amphenol +9,89 · Caterpillar +6,59 · Lumentum +3,54 · ServiceNow +1,18 · Oracle +0,70 · Amazon +0,69 · AMD −8,02 · <strong>Coherent −8,50</strong> · Marvell −9,38 · Intel −11,92.<br><br>
+      <strong>Znaczenie jest konkretne: każdy dolar inwestowany dziś w Coherent zarabia mniej, niż kosztuje jego pozyskanie.</strong> Przy nakładach rzędu piętnastu procent przychodów i finansowaniu emisją akcji oznacza to, że <strong>rozbudowa zmniejsza wartość na akcję</strong>, dopóki ta relacja się nie odwróci.<br><br>
+      <strong>Porównanie z Lumentum jest tu najbardziej wymowne: ta sama branża, ta sama fala popytu, niemal identyczne nakłady — a nadwyżka dodatnia wobec ujemnej.</strong> Różnica dwunastu punktów procentowych bierze się z marży i z tempa, w jakim sprzedaż zamienia się w gotówkę.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka / zadłużenie</td><td>$1,99 mld / $3,55 mld</td><td style="color:var(--ocena-uwaga)">Dług netto <strong>$1,56 mld</strong> ($7,98 na akcję)</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-kupno)">0,32</td><td style="color:var(--ocena-uwaga)">Dług do EBITDA 2,39 — umiarkowanie</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-uwaga)"><strong>4,74</strong></td><td style="color:var(--ocena-uwaga)">Najniżej w tej czwórce; wskaźnik aktualny</td></tr>
+          <tr><td><strong>Wskaźnik bieżący / szybki</strong></td><td style="color:var(--ocena-uwaga)"><strong>2,43 / 1,17</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Ogromna różnica to zapasy</strong> — patrz niżej</td></tr>
+          <tr><td>Kapitał własny</td><td>$11,24 mld</td><td style="color:var(--ocena-uwaga)">Księga $55,70 na akcję</td></tr>
+          <tr><td>Altman Z / Piotroski F</td><td style="color:var(--ocena-kupno)">4,1 / 7</td><td style="color:var(--ocena-kupno)">Bezpieczna strefa</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Bilans nie jest dziś zagrożeniem, ale zawiera ten sam sygnał co rachunek przepływów.</strong><br><br><strong>Wskaźnik bieżący wynosi 2,43, a szybki tylko 1,17</strong> — różnicę stanowią zapasy, co potwierdza to, co widać w przepływach.<br><br><strong>Sprawdzenie, czy pokrycie odsetek nie jest wskaźnikiem martwym, wypada pozytywnie:</strong> spółka spłaciła w okresie $478,30 mln długu netto, więc wskaźnik opisuje stan bieżący. Jest jednak najniższy w tej czwórce.<br><br><strong>Wniosek: niewypłacalność nie jest ryzykiem — Altman 4,1 to potwierdza. Ryzykiem jest konieczność dalszego rozwodniania akcjonariuszy, żeby finansować rozbudowę.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Popyt jest realny i prognoza wzrostu przychodów wynosi 39,16% rocznie.</strong> Coherent uczestniczy w tej samej fali, którą potwierdzają niezależnie Lumentum i Marvell — optyka rośnie szybciej niż sama moc obliczeniowa.</div>
+
+      <div class="alert alert-success"><strong>2. Skala i szeroki katalog dają odporność na jedno rozczarowanie.</strong> Przychody ponad dwukrotnie wyższe od Lumentum, odbiorcy w centrach danych, przemyśle i telekomunikacji, mniejsza koncentracja klientów.</div>
+
+      <div class="alert alert-info"><strong>3. Niewypłacalność nie jest ryzykiem.</strong> Wskaźnik Altmana 4,1, wskaźnik Piotroskiego 7, wskaźnik bieżący 2,43 i spłacony w okresie dług netto. Spółka ma czas na naprawę konwersji gotówki.</div>
+
+      <div class="alert alert-info"><strong>4. Gdyby kapitał obrotowy przestał rosnąć, efekt byłby skokowy.</strong> Przy zysku netto i amortyzacji sumujących się do blisko $1,3 mld sama stabilizacja zapasów zamieniłaby ujemne wolne przepływy w wyraźnie dodatnie — i to jest właściwy wskaźnik do obserwowania.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Zysk netto jest blisko dziesięciokrotnie wyższy od gotówki operacyjnej.</strong> Przepływy stanowią 1,1% przychodów, a różnicę pochłania kapitał obrotowy. Przy takim rozjeździe każdy wskaźnik oparty na zysku opisuje wielkość papierową.</div>
+
+      <div class="alert alert-danger"><strong>2. Zwrot z kapitału nie pokrywa jego kosztu.</strong> Każdy dolar inwestowany w rozbudowę zarabia mniej, niż kosztuje — więc przy nakładach 15,4% przychodów rozbudowa zmniejsza wartość na akcję.</div>
+
+      <div class="alert alert-danger"><strong>3. Rozwodnienie o ponad jedną czwartą w rok i bez hamowania</strong> — plus blisko trzy procent w samym kwartale. To jest cena, jaką akcjonariusz płaci za lukę między zyskiem a gotówką.</div>
+
+      <div class="alert alert-warning"><strong>4. Zysk wspiera bardzo niska stawka podatku.</strong> Normalizacja opodatkowania obniżyłaby zysk netto niezależnie od tego, co zrobi działalność — a wskaźnik prognozowany już dziś wymaga ponad dwukrotności dzisiejszego zysku na akcję.</div>
+
+      <div class="alert alert-warning"><strong>5. Próg, przy którym wracam do neutralnej:</strong> dwa kolejne kwartały z gotówką operacyjną przekraczającą połowę zysku netto, przy zatrzymanym rozwodnieniu.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Przewaga nad Coherent</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Lumentum</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz — obserwowana)</span></td><td style="color:var(--ocena-sprzedaz)"><strong>Wyższa marża, dodatnie przepływy, zwrot powyżej kosztu kapitału</strong></td><td>Mniejsza skala i węższy katalog</td></tr>
+          <tr><td><strong>Marvell</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 3,84%)</span></td><td style="color:var(--ocena-sprzedaz)">Warstwa wyżej — krzem przetwarzający sygnał, wyższa marża</td><td style="color:var(--ocena-uwaga)">Zależny od tego samego cyklu nakładów</td></tr>
+          <tr><td>Producenci modułów z Azji</td><td style="color:var(--ocena-sprzedaz)">Niższe koszty wytwarzania</td><td style="color:var(--ocena-kupno)">Słabsza pozycja w najnowszych generacjach</td></tr>
+          <tr><td><strong>Amphenol</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,46%)</span></td><td style="color:var(--ocena-sprzedaz)">Zdywersyfikowany, nadwyżka zwrotu nad kosztem kapitału +9,89 pp</td><td>Inna warstwa — łączność fizyczna, nie optyczna</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Pierwszy wiersz tej tabeli jest całą tezą tego raportu: bezpośredni konkurent robi to samo lepiej, i to widać w każdej liczbie, która ma znaczenie.</strong><br><br>
+      <strong>Marża brutto: 44,24% wobec 37,50%. Marża operacyjna: 17,79% wobec 12,67%. Wolne przepływy: dodatnie wobec ujemnych. Nadwyżka zwrotu nad kosztem kapitału: dodatnia wobec ujemnej. Rozwodnienie: siedem procent wobec dwudziestu sześciu.</strong><br><br>
+      Coherent ma za to większą skalę i szerszy katalog — <strong>ale przy identycznych niemal nakładach inwestycyjnych i tej samej fali popytu przewaga skali nie przełożyła się na ani jedną z tych miar.</strong><br><br>
+      <strong>To jest praktyczny wniosek dla obserwowanych: jeśli szukasz ekspozycji na optykę dla centrów danych, w tej parze wybór jest jednoznaczny — i nie jest to Coherent.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-kupno)">+206,90%</td><td style="color:var(--ocena-uwaga)">Ale od lipca kurs spadł</td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td>$296,77</td><td style="color:var(--ocena-kupno)">Kurs 6,9% powyżej</td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td>$282,97</td><td style="color:var(--ocena-kupno)">Kurs 12,2% powyżej — rozciągnięcie małe</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>56,14</td><td>Neutralnie; wolumen 5,94 mln akcji</td></tr>
+          <tr><td><strong>Beta (5 lat)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>2,10</strong></td><td style="color:var(--ocena-sprzedaz)">Znacznie wyżej niż u Lumentum</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-kupno)">3,34% akcji</td><td>Niska i malejąca</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Obraz techniczny jest tu najzdrowszy z całej czwórki i to jedyny argument, który łagodzi ocenę.</strong><br><br>
+      Kurs stoi powyżej obu średnich, ale tylko <strong>12,2% nad dwustusesyjną</strong> — czyli znacznie mniej niż Lumentum z trzydziestoprocentowym rozciągnięciem. Wskaźnik siły relatywnej jest neutralny, krótka sprzedaż niska i malejąca, a ostatnia sesja przyniosła wzrost o 7,22%.<br><br>
+      <strong>Jest to jednak obraz cenowy, nie fundamentalny.</strong> Rajd o dwieście siedem procent w rok odbył się przed lipcem; od mojej poprzedniej analizy kurs spadł. <strong>Przy becie 2,10 i rozjeździe między zyskiem a gotówką techniczny spokój niewiele mówi o ryzyku.</strong></div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$415,36</strong></td><td>Cena docelowa konsensusu — powyżej mojego scenariusza najlepszego</td></tr>
+          <tr><td><strong>$302</strong></td><td>Scenariusz podstawowy z sekcji 6</td></tr>
+          <tr><td><strong>$296,77</strong></td><td>Średnia 50-sesyjna — pierwsze wsparcie</td></tr>
+          <tr><td><strong>$282,97</strong></td><td><strong>Średnia 200-sesyjna — kluczowe wsparcie</strong></td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$227</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Środek mojej wyceny</strong></td></tr>
+          <tr><td><strong>$55,70</strong></td><td>Wartość księgowa na akcję — w większości wartość firmy z połączenia</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs powyżej obu średnich przy niewielkim rozciągnięciu, wskaźnik siły relatywnej neutralny, krótka sprzedaż niska. Technicznie nic nie wskazuje na spadek przed wynikami z 4 listopada.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>SPRZEDAŻ</strong></td><td>Środek wyceny leży blisko trzydzieści procent poniżej kursu, zwrot z kapitału nie pokrywa jego kosztu, a rozbudowa finansowana rozwodnieniem o jedną czwartą rocznie zmniejsza wartość na akcję.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Jeśli kapitał obrotowy przestanie rosnąć, a marża dogoni konkurenta, dzisiejsza cena okaże się uzasadniona. Dotychczasowy dorobek w zakresie dyscypliny kapitałowej nie daje jednak podstaw, by na to zakładać.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Ocena łączna: SPRZEDAŻ — obniżenie z kupna z 6 lipca o dwa stopnie. To najostrzejsza ocena, jaką postawiłem w tej serii, więc uzasadnię ją punktowo.</strong><br><br>
+      <strong>Po pierwsze, teza z lipca się nie sprawdziła</strong> — kurs spadł, gdy bezpośredni konkurent w tym samym czasie wzrósł o 27,5%. To nie był ruch sektorowy.<br><br>
+      <strong>Po drugie, dane tłumaczą tę różnicę jednoznacznie:</strong> gotówka operacyjna to jedna dziesiąta zysku netto, wolne przepływy są ujemne o miliard dolarów, zwrot z kapitału nie pokrywa jego kosztu, a rozwodnienie przekracza jedną czwartą rocznie.<br><br>
+      <strong>Po trzecie, środek mojej wyceny leży blisko trzydzieści procent poniżej kursu</strong>, a scenariusz, w którym prognozy się sprawdzają i mnożnik normalizuje, daje wynik ujemny.<br><br>
+      <strong>Czego ta ocena nie znaczy:</strong> nie jest to teza o niewypłacalności — Altman 4,1 i wskaźnik bieżący 2,43 ją wykluczają. Jest to teza o tym, że <strong>przy tej cenie akcjonariusz płaci za zysk, który nie zamienia się w gotówkę, a rozbudowę finansuje własnym rozwodnieniem.</strong> <strong>Próg powrotu do neutralnej: dwa kwartały z gotówką operacyjną powyżej połowy zysku netto.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Stan</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Coherent w portfelu</strong></td><td style="color:var(--ocena-uwaga)"><strong>Nie masz</strong></td><td>Pozycja obserwowana od lipca — i dobrze, że tylko obserwowana</td></tr>
+          <tr><td>Najbliższa istniejąca ekspozycja</td><td>Marvell 3,84%, Amphenol 2,46%</td><td>Obie w łączności dla centrów danych, obie w lepszej formie</td></tr>
+          <tr><td><strong>Wybór w parze optycznej</strong></td><td style="color:var(--ocena-kupno)"><strong>Lumentum</strong></td><td style="color:var(--ocena-kupno)">Lepszy w każdej mierze, która przekłada się na wartość</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Najbardziej użyteczny wniosek z tego raportu jest porównawczy.</strong> Lipcowe analizy Lumentum i Coherent postawiły <strong>tę samą ocenę na obie spółki</strong>, bo obie korzystają z tego samego popytu — a po dwóch i pół miesiąca jedna zarobiła blisko trzydzieści procent, druga straciła.<br><br><strong>Wspólny temat nie oznacza wspólnego wyniku.</strong> Różnicę zrobiły marża, konwersja zysku na gotówkę i dyscyplina w rozwodnieniu — rzeczy widoczne w sprawozdaniu, nie w opisie rynku.<br><br><strong>Praktycznie:</strong> Twój portfel ma już ekspozycję na łączność dla centrów danych przez Marvella i Amphenola, oba z lepszą nadwyżką zwrotu nad kosztem kapitału. <strong>Dokładanie tej spółki powtarzałoby temat w gorszym wykonaniu.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Coherent rośnie, wykazuje zysk i nie generuje z tego gotówki — a to jest różnica, która w tej branży rozstrzyga o wszystkim.</strong> Przychody wynoszą <strong>$7,12 mld</strong>, zysk netto <strong>$769,90 mln</strong>, a przepływy operacyjne zaledwie <strong>$79,51 mln</strong> — czyli <strong>1,1% przychodów</strong>. Suma zysku i amortyzacji daje blisko $1,3 mld, więc <strong>około $1,21 mld pochłonął kapitał obrotowy</strong>. Po nakładach rzędu piętnastu procent przychodów wolne przepływy są <strong>ujemne o miliard dolarów</strong>, a lukę pokryto emisją akcji.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Do tego dochodzi miara, która tłumaczy, dlaczego ta rozbudowa nie pomaga akcjonariuszowi: <strong>zwrot z zainwestowanego kapitału 6,74% przy koszcie 15,24%, czyli nadwyżka minus 8,50 pp.</strong> Zysk netto opiera się przy tym na jednocyfrowej efektywnej stawce podatku. Porównanie z bezpośrednim konkurentem jest bezlitosne: <strong>Lumentum ma wyższą marżę, dodatnie wolne przepływy, zwrot powyżej kosztu kapitału i czterokrotnie mniejsze rozwodnienie</strong> — przy tych samych nakładach i tej samej fali popytu.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Popyt musi być realny.</strong> Prognoza wzrostu przychodów 39,16% rocznie, potwierdzona niezależnie przez dwie inne spółki — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Niewypłacalność nie może być ryzykiem.</strong> Altman 4,1, wskaźnik bieżący 2,43, dług spłacany — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Zysk musi zamieniać się w gotówkę.</strong> Przepływy operacyjne to jedna dziesiąta zysku netto — niespełnione i to jest sedno.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Zwrot z kapitału musi przewyższać jego koszt.</strong> Jest niższy — niespełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Akcjonariusz nie powinien być rozwadniany.</strong> Ponad jedna czwarta nowych akcji w rok — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Kapitał obrotowy musi przestać rosnąć.</strong> Jedyna zmienna, która mogłaby odwrócić tę ocenę.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>4 listopada 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki pierwszego kwartału roku obrotowego 2027</strong></td><td style="color:var(--ocena-uwaga)">Relacja przepływów operacyjnych do zysku netto — jedyna liczba, która teraz się liczy</td></tr>
+            <tr><td>Każdy kwartał</td><td>Poziom zapasów i rotacja</td><td>Pokaże, czy kapitał obrotowy zaczyna zwalniać</td></tr>
+            <tr><td>2027</td><td>Normalizacja stawki podatkowej</td><td>Obniżyłaby zysk netto niezależnie od działalności</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">W dowolnej chwili</td><td style="color:var(--ocena-sprzedaz)">Kolejna emisja akcji</td><td style="color:var(--ocena-sprzedaz)">Przy ujemnych wolnych przepływach jest praktycznie nieunikniona</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Gotówka operacyjna do zysku netto</strong></td><td>ok. jedna dziesiąta</td><td>brak poprawy w dwóch kwartałach</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td><strong>Liczba akcji</strong></td><td>+2,97% kwartalnie</td><td>utrzymanie tempa</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Rotacja zapasów</td><td>2,21</td><td>dalszy spadek</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Marża brutto</td><td>37,50%</td><td>zejście poniżej 35%</td><td><span class="mon-dot y"></span>Wymaga uwagi</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Charakter pozycji</strong></td><td>Właściwy temat w gorszym wykonaniu — w parze optycznej wybór jest jednoznaczny</td></tr>
+            <tr><td><strong>Kupno</strong></td><td>Nie przy tej cenie; rozważać dopiero po dwóch kwartałach poprawy konwersji gotówki</td></tr>
+            <tr><td><strong>Poziom, przy którym wracam do rozmowy</strong></td><td><strong>$227</strong> — środek mojej wyceny</td></tr>
+            <tr><td><strong>Warunek zmiany oceny na neutralną</strong></td><td>Dwa kwartały z gotówką operacyjną powyżej połowy zysku netto przy zatrzymanym rozwodnieniu</td></tr>
+            <tr><td><strong>Czego nie robić</strong></td><td>Nie oceniać tej spółki po wskaźniku ceny do zysku ani po ilorazie wobec tempa wzrostu — oba liczone są od zysku, który nie zamienia się w gotówkę</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-sprzedaz)">SPRZEDAŻ</div>
+        <p><strong>To najostrzejsza ocena w całej tej serii i stawiam ją dlatego, że mam obok bezpośredni punkt odniesienia.</strong> W lipcu oceniłem Coherent i Lumentum identycznie — kupno, bo obie korzystają z tego samego popytu na optykę w centrach danych. Po dwóch i pół miesiąca Lumentum wzrósł o 27,5% i wypełnił mój przedział, a Coherent spadł o 6,7% i do niego nie dotarł. <strong>Nie był to ruch sektorowy, tylko różnica w wykonaniu — i sprawozdanie ją tłumaczy w całości.</strong></p>
+        <p><strong>Trzy liczby wystarczają: gotówka operacyjna równa jednej dziesiątej zysku netto, ujemne wolne przepływy i rozwodnienie przekraczające jedną czwartą rocznie.</strong> Do tego zwrot z kapitału niższy od jego kosztu, co oznacza, że rozbudowa finansowana emisją akcji zmniejsza wartość przypadającą na akcję. Nie jest to teza o niewypłacalności — bilans jest bezpieczny. Jest to teza o tym, że <strong>przy 77-krotności zysku płaci się tu za wielkość papierową, podczas gdy w tej samej branży, przy niemal identycznych nakładach, konkurent generuje dodatnią gotówkę i zarabia powyżej kosztu kapitału.</strong> Obserwować, wrócić do rozmowy po dwóch kwartałach poprawy przepływów.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-sprzedaz)">Sprzedaż</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$70 – $385</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$68 (-79%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$382 (+20%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Nie kupować</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 4 listopada</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA POPRZEDNIEJ ANALIZY (06.07.2026)</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Ocena kupno, wartość godziwa $380–450</strong> przy kursie około $340</td>
+            <td>Kurs spadł do <strong>$317,36</strong> i nie zbliżył się do przedziału. <strong>Obniżam ocenę o dwa stopnie — do sprzedaży</strong>; nowy przedział <strong>$70–385</strong></td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — teza błędna, nie tylko zbyt optymistyczna</td>
+          </tr>
+          <tr>
+            <td><strong>Brak analizy konwersji zysku na gotówkę</strong></td>
+            <td>Przepływy operacyjne stanowią jedną dziesiątą zysku netto. <strong>Ta jedna relacja wystarczała, by nie stawiać oceny kupna</strong> — i była dostępna w lipcu</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — pominięta miara rozstrzygająca</td>
+          </tr>
+          <tr>
+            <td><strong>Taka sama ocena dla Coherent i Lumentum</strong>, postawiona w odstępie trzech dni</td>
+            <td>Spółki różnią się marżą, konwersją gotówki, zwrotem z kapitału i rozwodnieniem. <strong>Po dwóch i pół miesiąca jedna zarobiła 27,5%, druga straciła 6,7%</strong></td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — wspólny temat wzięty za wspólną jakość</td>
+          </tr>
+          <tr>
+            <td>Raport w starym formacie — 14 sekcji, cena przybliżona</td>
+            <td>Nowy plik zgodny z zasadami z 17.09.2026; poprzednia wersja trafia do archiwum</td>
+            <td style="color:var(--text-muted)">Porządkowa</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Trzecia pozycja w tej tabeli jest najważniejsza i dopisuję ją do zasad redakcyjnych jako osobną regułę.</strong><br><br>
+      W lipcu analizowałem dwie spółki z tej samej branży w odstępie trzech dni i <strong>postawiłem im tę samą ocenę, bo opisywały ten sam rynek.</strong> To był błąd kategorii: <strong>wspólna teza rynkowa nie oznacza wspólnej jakości wykonania.</strong><br><br>
+      Różnica była widoczna w danych już wtedy — niższa marża, gotówka operacyjna rzędu jednej dziesiątej zysku, rozwodnienie czterokrotnie większe. <strong>Nie porównałem tych dwóch sprawozdań ze sobą, bo patrzyłem na każde osobno przez pryzmat rynku, a nie na oba przez pryzmat wykonania.</strong><br><br>
+      <strong>Nowa zasada: analizując dwie spółki z tej samej branży, trzeba postawić obok siebie marżę, konwersję zysku na gotówkę, zwrot z kapitału i rozwodnienie — i uzasadnić różnicę ocen albo jej brak.</strong> Sam wspólny rynek nie jest uzasadnieniem.</div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Lipcowy opis rynku był trafny: popyt na optykę w centrach danych rzeczywiście okazał się bardzo mocny, a prognoza wzrostu przychodów przekraczająca trzydzieści dziewięć procent rocznie to potwierdza. <strong>Pomyliłem się nie w ocenie rynku, a w ocenie tego, kto na nim zarabia.</strong></div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 20 września 2026 | Cena: <strong>$317,36</strong> (zamknięcie 18.09.2026) | <strong>Aktualizacja analizy z 6 lipca 2026 — OBNIŻENIE OCENY O DWA STOPNIE: kupno → sprzedaż</strong> | Spółka <strong>nie znajduje się w portfelu TP Corp</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> wartość godziwa $380–450 → $70–385 i obniżenie oceny do sprzedaży, bo teza była błędna, a nie tylko zbyt optymistyczna; dodano analizę konwersji zysku na gotówkę — przepływy operacyjne stanowią 1,1% przychodów przy zysku netto 11,31%; dodano zwrot z kapitału wobec kosztu i skalę rozwodnienia; skorygowano błąd postawienia identycznej oceny dla Coherent i Lumentum w odstępie trzech dni; raport przepisany z formatu 14-sekcyjnego z ceną przybliżoną na obowiązujący | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 20.09.2026</strong>; rozłożenie różnicy między zyskiem a gotówką, scenariusze i relacja nakładów do przychodów to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

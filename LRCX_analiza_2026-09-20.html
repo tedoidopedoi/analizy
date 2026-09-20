@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LRCX — Lam Research | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:13px; color:var(--text-muted); font-style:italic; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: LRCX</div>
+    <div class="company-name">Lam Research Corporation</div>
+    <div class="company-sub">Maszyny do trawienia i osadzania warstw w produkcji układów — silna ekspozycja na pamięci · Fremont · 23 300 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">Spoza portfela — obserwowana</span>
+      <span class="meta-tag">Najwyższy zwrot z kapitału w całym katalogu</span>
+      <span class="meta-tag">Kurs 20,8% niżej niż w lipcu</span>
+      <div class="price-display">
+        <div class="price-main">$288,11</div>
+        <div class="price-sub">zamknięcie 18.09.2026 (+6,98%), po sesji $288,44</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Półprzewodniki</span><span class="temat">Pamięci</span><span class="temat">Moc obliczeniowa dla AI</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — najwyższy zwrot z kapitału w całym katalogu, ale też największa ekspozycja na cykl pamięciowy, który wygląda na rozciągnięty">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">teza z lipca nie zadziałała, ale spadek poprawił układ ryzyka do zysku</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$80 – $420</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-72% do +46%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>21 października</b><em>Q1 roku obrotowego 2027</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$288,11</div><div class="metric-detail">+136,35% w 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 06.07</div><div class="metric-value red">-20,8%</div><div class="metric-detail"><strong>Kurs spadł poniżej mojego przedziału</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot z kapitału vs koszt</div><div class="metric-value green">+55,72 pp</div><div class="metric-detail"><strong>Najwyżej w całym katalogu</strong> — sekcja 7</div></div>
+    <div class="metric-card"><div class="metric-label">Marża operacyjna</div><div class="metric-value green">35,29%</div><div class="metric-detail">Marża wolnych przepływów 21,05%</div></div>
+    <div class="metric-card"><div class="metric-label">Nakłady do przychodów</div><div class="metric-value green">4,2%</div><div class="metric-detail">Lekka kapitałowo — jak ASML i KLA</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / zysk</div><div class="metric-value red">50,02</div><div class="metric-detail">Prognozowana <strong>30,30</strong> · PEG 1,13</div></div>
+    <div class="metric-card"><div class="metric-label">Altman Z</div><div class="metric-value green">17,9</div><div class="metric-detail">Najwyżej w całym katalogu · liczba akcji -2,25%</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (35 analityków)</div><div class="metric-value green">$373,13</div><div class="metric-detail">+29,51% · mocne kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I STAN POPRZEDNIEJ TEZY</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Lam Research buduje maszyny do dwóch operacji powtarzanych w produkcji układu setki razy: <strong>trawienia i osadzania warstw</strong>. Przychody roczne <strong>$23,23 mld</strong>, kapitalizacja <strong>$360,52 mld</strong>. <strong>Spółki nie masz w portfelu</strong> — jest w obserwowanych.</p>
+
+      <div class="alert alert-warning"><strong>Teza z 6 lipca nie zadziałała, ale jej niepowodzenie zmieniło sytuację na lepsze — rzadki przypadek w tej serii.</strong><br><br>Oceniłem wtedy LRCX na <strong>„neutralna / kupno"</strong> przy kursie około $364 i wyceniłem na <strong>$315–440</strong>. Kurs wynosi dziś <strong>$288,11</strong>, czyli <strong>20,8% mniej</strong> — <em>poniżej</em> dolnej granicy. <strong>Sama ocena była przy tym niepoprawna formalnie</strong>, bo skala nie dopuszcza ocen łączonych; poprawiam to w sekcji 16.<br><br><strong>Zysk z tego spadku jest praktyczny:</strong> ta sama spółka, z tymi samymi wskaźnikami rentowności, jest dziś o jedną piątą tańsza — jako jedyna z czterech, które odświeżam dzisiaj.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara (12 miesięcy)</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td style="color:var(--ocena-kupno)">$23,23 mld</td><td style="color:var(--ocena-kupno)">Prognoza wzrostu 25,97% rocznie na trzy lata</td></tr>
+          <tr><td><strong>Zysk netto</strong></td><td style="color:var(--ocena-kupno)"><strong>$7,27 mld</strong> · $5,76 na akcję</td><td style="color:var(--ocena-kupno)">Marża netto 31,27%; prognoza wzrostu zysku 34,24% rocznie</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>$4,89 mld</strong> · $3,91 na akcję</td><td style="color:var(--ocena-kupno)">Marża 21,05% — gotówka realna, nie papierowa</td></tr>
+          <tr><td>Przychód na pracownika</td><td style="color:var(--ocena-kupno)">$997 111</td><td style="color:var(--ocena-kupno)">Najwyżej w całym katalogu, przed ASML</td></tr>
+          <tr><td>Dywidenda</td><td>$1,04 na akcję — stopa 0,36%</td><td style="color:var(--ocena-kupno)">Rośnie <strong>jedenasty rok z rzędu</strong>, wypłata 19,27% zysku</td></tr>
+          <tr><td>Najbliższe wyniki</td><td>21 października 2026</td><td>Odcięcie dywidendy 23 września</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — DWIE OPERACJE POWTARZANE SETKI RAZY</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <p>Wytworzenie układu polega na wielokrotnym powtarzaniu tego samego cyklu: naniesienie warstwy, naświetlenie wzoru, usunięcie nadmiaru materiału. <strong>Lam dostarcza maszyny do dwóch z tych trzech etapów</strong> — osadzania warstw i trawienia. Litografię, czyli naświetlanie, obsługuje ASML.</p>
+
+      <div class="alert alert-success"><strong>Kluczowa własność tego biznesu: znaczenie Lam rośnie szczególnie tam, gdzie układ budowany jest w górę, a nie w płaszczyźnie.</strong> W pamięciach trójwymiarowych warstwy układa się setkami jedna na drugiej, a <strong>każda oznacza kolejne osadzenie i trawienie — tym trudniejsze, im głębszy jest wykonywany otwór.</strong> Litografia odgrywa w tej części procesu mniejszą rolę.<br><br>Skutek widać w rentowności: <strong>zwrot z zainwestowanego kapitału 70,07% przy koszcie 14,35%</strong> — nadwyżka wyższa niż w KLA i ASML, i najwyższa z dwudziestu policzonych spółek.</div>
+
+      <div class="alert alert-warning"><strong>Ta sama cecha jest źródłem największego ryzyka: silna pozycja w pamięciach oznacza silną ekspozycję na najbardziej cykliczną część branży.</strong><br><br>Przy Samsungu policzyłem marżę operacyjną wielokrotnie powyżej normy historycznej i kurs wyższy o ponad dwieście trzydzieści procent w rok. <strong>To są liczby szczytu cyklu pamięciowego.</strong><br><br><strong>Lam sprzedaje maszyny właśnie tym producentom</strong>, a oni wstrzymują zamówienia niemal natychmiast, gdy ich marże spadają. <strong>Z trójki ASML, KLA i Lam to Lam jest najmocniej narażony na zwrot w pamięciach.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na Lam</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rynek maszyn do produkcji wafli</strong></td><td style="color:var(--ocena-kupno)">Prognoza około $190 mld w 2027</td><td style="color:var(--ocena-kupno)">Budżet, z którego Lam jest opłacany</td></tr>
+          <tr><td><strong>Liczba warstw w pamięciach</strong></td><td style="color:var(--ocena-kupno)">Rośnie z każdą generacją</td><td style="color:var(--ocena-kupno)"><strong>Każda warstwa to kolejne trawienie i osadzanie</strong></td></tr>
+          <tr><td>Zaawansowane pakowanie układów</td><td style="color:var(--ocena-kupno)">Rynek powstaje</td><td style="color:var(--ocena-kupno)">Nowe zastosowania dla obu technologii Lam</td></tr>
+          <tr><td><strong>Cykl pamięciowy</strong></td><td style="color:var(--ocena-sprzedaz)">Wygląda na rozciągnięty</td><td style="color:var(--ocena-sprzedaz)"><strong>Główne ryzyko tej pozycji</strong></td></tr>
+          <tr><td>Ograniczenia eksportowe</td><td style="color:var(--ocena-uwaga)">Utrzymują się wobec Chin</td><td style="color:var(--ocena-uwaga)">Ucina część rynku decyzją polityczną</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Wszystkie trzy spółki sprzętowe czerpią z jednego budżetu, ale z różnych jego części — i to tłumaczy różnicę w zachowaniu kursów.</strong> <strong>ASML zależy głównie od inwestycji w zaawansowaną logikę, Lam w dużym stopniu od pamięci</strong>, a KLA stoi pośrodku, bo kontroli procesu potrzebuje każda fabryka.<br><br><strong>Widać to w kursach:</strong> od początku lipca ASML i KLA utrzymały poziom, a <strong>Lam spadł o ponad jedną piątą</strong>. Rynek rozróżnił ekspozycje wewnątrz tego samego tematu i przypisał pamięciom wyższe ryzyko.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I AKCJONARIAT</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Struktura odbiorców</td><td style="color:var(--ocena-sprzedaz)">Skrajnie skoncentrowana</td><td style="color:var(--ocena-sprzedaz)">Producenci pamięci i logiki — w tym Samsung i Intel, których masz</td></tr>
+          <tr><td>Zysk na pracownika</td><td style="color:var(--ocena-kupno)">$311 820</td><td style="color:var(--ocena-kupno)">Najwyżej w całym katalogu, przed ASML</td></tr>
+          <tr><td><strong>Zmiana liczby akcji r/r</strong></td><td style="color:var(--ocena-kupno)"><strong>-2,25%</strong></td><td style="color:var(--ocena-kupno)">Spada; stopa zwrotu dla akcjonariusza łącznie 2,61%</td></tr>
+          <tr><td>Instytucje / zarząd</td><td>87,76% / 0,26%</td><td style="color:var(--ocena-uwaga)">Udział kierownictwa minimalny</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-kupno)">2,22% akcji</td><td>Spadek wobec poprzedniego miesiąca</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Koncentracja odbiorców jest podobna jak w ASML i KLA, ale z jedną istotną różnicą.</strong> Maszyny do trawienia i osadzania kupuje kilkunastu producentów, a <strong>dwóch z nich masz w portfelu jako akcje: Samsunga i Intela</strong>.<br><br><strong>Różnica polega na tym, że wśród klientów Lam producenci pamięci ważą więcej</strong>, a oni najszybciej reagują na zmianę cen swojego towaru. Przy litografii cykl zamówień jest dłuższy, bo maszyna jest droższa i planowana na lata — <strong>przy trawieniu decyzje podejmuje się szybciej, w obie strony.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">BIZNES I PRZEPŁYWY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$23,23 mld</td></tr>
+          <tr><td>Zysk brutto</td><td>$11,73 mld — marża 50,47%</td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td style="color:var(--ocena-kupno)"><strong>$8,20 mld — marża 35,29%</strong></td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td>$8,26 mld — nadwyżka to odsetki od gotówki</td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-kupno)">$7,27 mld · $5,76 na akcję</td></tr>
+          <tr><td><strong>Przepływy operacyjne</strong></td><td style="color:var(--ocena-kupno)"><strong>$5,86 mld</strong></td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-kupno)"><strong>-$966,41 mln — 4,2% przychodów</strong></td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>$4,89 mld — marża 21,05%</strong></td></tr>
+          <tr><td>Efektywna stawka podatku</td><td>12,07%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Konwersja zysku na gotówkę jest wzorowa — i po dzisiejszym raporcie o Coherent warto to docenić wprost.</strong> <strong>Gotówka operacyjna stanowi 81% zysku netto, a marża wolnych przepływów sięga 21,05%.</strong> Dla porównania <strong>Coherent ma przepływy operacyjne równe jednej dziesiątej zysku netto</strong> — ta sama branża, przeciwny obraz konwersji.<br><br>Nakłady stanowią <strong>4,2% przychodów</strong>, czyli tyle co ASML i Amphenol. Zestawienie, które prowadzę: IREN 612% · CoreWeave 271% · Oracle 105% · Amazon 22,3% · Intel 21,2% · Novo Nordisk 17,1% · Coherent 15,4% · Lumentum 15,0% · Sibanye 11,6% · Samsung 10,7% · ASML 4,1% · <strong>Lam 4,2%</strong> · Amphenol 4,0% · KLA 2,77% · SAP 1,9%.</div>
+
+      <div class="alert alert-info"><strong>Jedna liczba wyróżnia Lam na tle dwóch pozostałych dostawców i jest przewagą operacyjną, nie księgową: rotacja aktywów 1,04</strong> wobec 0,80 w KLA i 0,74 w ASML. <strong>Każdy dolar majątku Lam generuje więcej sprzedaży</strong>, bo jego maszyny są tańsze jednostkowo od litografów i kupuje się ich więcej.<br><br><strong>To arytmetyczne źródło najwyższego zwrotu z kapitału w tej trójce</strong> — nie wynika on z wyższej marży, bo ASML ma podobną, lecz z tego, że majątek pracuje szybciej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja / wartość firmy</td><td>$360,52 mld / $359,06 mld</td><td style="color:var(--ocena-kupno)">Wartość firmy niższa — gotówka netto $1,46 mld</td></tr>
+          <tr><td>Cena / sprzedaż</td><td style="color:var(--ocena-uwaga)">15,52</td><td>Prognozowana 10,39</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-uwaga)"><strong>73,71</strong></td><td style="color:var(--ocena-uwaga)">Poniżej progu stu — wycena oparta na realnych przepływach</td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td style="color:var(--ocena-uwaga)">41,55</td><td>Wartość firmy do wolnych przepływów 73,41</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td style="color:var(--ocena-sprzedaz)">28,91</td><td style="color:var(--ocena-uwaga)">Efekt wieloletniego skupu akcji — księga $9,97 na akcję</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td style="color:var(--ocena-sprzedaz)">50,02</td><td>Zysk niezaburzony zdarzeniami jednorazowymi</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>30,30</strong></td><td style="color:var(--ocena-uwaga)">Wymaga zysku około <strong>$9,51 na akcję</strong> — o 65% więcej</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-uwaga)"><strong>1,13</strong></td><td>Nieco powyżej jedności — za wzrost płaci się pełną cenę</td></tr>
+          <tr><td>Prognozy na trzy lata</td><td style="color:var(--ocena-kupno)">przychody 25,97% rocznie</td><td>Zysk na akcję 34,24% rocznie</td></tr>
+          <tr><td>Porównanie z dwoma rywalami</td><td>ASML 29,61 · KLA 32,45</td><td style="color:var(--ocena-uwaga)">Wszyscy trzej notowani na tym samym poziomie</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać — to porównanie jest najbardziej użyteczne w raporcie.</strong> Trzy spółki sprzętowe notowane są przy niemal identycznym wskaźniku prognozowanym: <strong>ASML 29,61, Lam 30,30, KLA 32,45.</strong> Skoro rynek wycenia je tak samo, pytanie brzmi, <strong>która zarabia najlepiej na kapitale i która niesie najwięcej ryzyka</strong> — a odpowiedź na oba to Lam. <strong>Rynek nie odróżnia więc jakości, odróżnia ryzyko: Lam spadł od lipca o jedną piątą, pozostali dwaj nie.</strong></p>
+      <p style="color:var(--text-muted);font-size:13px">Dane: StockAnalysis / S&amp;P Global Market Intelligence, stan 20.09.2026. Przeliczenie wskaźnika prognozowanego na wymagany zysk na akcję — obliczenie własne.</p>
+
+      <h3>Cztery scenariusze na 2028 rok</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Zysk na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cykl trwa, premia za jakość utrzymana</strong></td><td>$12,00</td><td>35×</td><td><strong>$420</strong></td><td style="color:var(--ocena-kupno)">+46%</td></tr>
+          <tr><td><strong>Wzrost dowieziony, mnożnik normalizuje</strong></td><td>$11,00</td><td>28×</td><td><strong>$308</strong></td><td style="color:var(--ocena-kupno)">+7%</td></tr>
+          <tr><td>Cykl pamięciowy się odwraca</td><td>$7,00</td><td>22×</td><td>$154</td><td style="color:var(--ocena-sprzedaz)">-47%</td></tr>
+          <tr><td><strong>Głęboki dołek w nakładach fabryk</strong></td><td style="color:var(--ocena-sprzedaz)">$4,50</td><td>18×</td><td><strong>$81</strong></td><td style="color:var(--ocena-sprzedaz)">-72%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne. Ścieżka scenariusza podstawowego wyprowadzona z prognozy konsensusu wynikającej ze wskaźnika prognozowanego, przedłużonej o rok z malejącym tempem, przy marży operacyjnej podniesionej dźwignią skali i liczbie akcji zmniejszanej skupem. Mnożniki odzwierciedlają rozpiętość historycznych wycen dostawców sprzętu: 18–22× w dołku cyklu, 28–35× przy silnym popycie.</p>
+
+      <p><strong>Fair value: $80 – $420</strong>, środek <strong>$250,00 (-13,2%)</strong>. Po nadaniu scenariuszom wag 25/35/25/15 wynik wypada na <strong>$263 (-8,6%)</strong>. Konsensus 35 analityków to $373,13 (+29,51%) przy rekomendacji mocnego kupna — czyli między moim scenariuszem podstawowym a najlepszym.</p>
+
+      <div class="alert alert-info"><strong>Zwracam uwagę na scenariusz drugi, bo różni się od tego, co wychodziło przy ASML i KLA — i jest to efekt spadku kursu.</strong> Tam „wzrost dowieziony, mnożnik normalizuje" dawał wynik ujemny; <strong>przy Lam daje plus siedem procent</strong>.<br><br><strong>Nie wystarcza to na ocenę kupna, bo dolne scenariusze są przy pamięciach głębsze niż przy litografii.</strong> Wystarcza jednak, by powiedzieć, że <strong>z trzech dostawców sprzętu Lam ma dziś najlepszy układ ryzyka do zysku</strong>.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto</td><td style="color:var(--ocena-kupno)">50,47%</td><td style="color:var(--ocena-kupno)">Marża EBITDA 37,19%, marża netto 31,27%</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-kupno)"><strong>70,07% vs 14,35%</strong></td><td style="color:var(--ocena-kupno)"><strong>Różnica +55,72 pp — najwyżej ze wszystkiego</strong></td></tr>
+          <tr><td>Zwrot z kapitału własnego (ROE)</td><td style="color:var(--ocena-kupno)">65,07%</td><td style="color:var(--ocena-kupno)"><strong>Niższy od zwrotu z kapitału</strong> — liczba uczciwa, jak w ASML</td></tr>
+          <tr><td>Zwrot z aktywów</td><td style="color:var(--ocena-kupno)">22,84%</td><td style="color:var(--ocena-kupno)">Rotacja aktywów 1,04 — najwyżej w trójce sprzętowej</td></tr>
+          <tr><td>Rotacja zapasów</td><td style="color:var(--ocena-uwaga)">2,68</td><td style="color:var(--ocena-uwaga)">Zapas leży około czterech i pół miesiąca</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Nadwyżka zwrotu z zainwestowanego kapitału nad jego kosztem wynosi 55,72 punktu procentowego. Po przeliczeniu dwudziestu spółek Lam jest pierwszy — przed KLA i ASML.</strong><br><br>
+      Pełna kolejność: <strong>Lam +55,72</strong> · KLA +54,77 · ASML +54,26 · Novo Nordisk +33,71 · Samsung +24,25 · Sibanye +23,15 · SAP +9,92 · Amphenol +9,89 · Caterpillar +6,59 · Lumentum +3,54 · ServiceNow +1,18 · Oracle +0,70 · Amazon +0,69 · AMD −8,02 · Coherent −8,50 · Marvell −9,38 · Intel −11,92 · IREN −26,44 · MARA −84,58 · Strategy −93,38.<br><br>
+      <strong>Wniosek z tej listy jest najmocniejszym, jaki wyszedł z całego przeglądu: trzy pierwsze miejsca zajmują dostawcy sprzętu dla fabryk półprzewodników</strong> — nie producenci układów, nie operatorzy chmury, nie projektanci krzemu.<br><br>Zastrzeżenie jest to samo co przy Samsungu: <strong>wskaźnik jest mierzony w górze cyklu</strong>, a w dołku pamięciowym spadnie głębiej niż w ASML czy KLA.</div>
+
+      <div class="alert alert-info"><strong>Uwaga porównawcza: zwrot z kapitału własnego jest <em>niższy</em> od zwrotu z zainwestowanego kapitału — tak jak w ASML, a odwrotnie niż w KLA i Caterpillarze.</strong> Oznacza to, że przy Lam <strong>nie trzeba korygować tej miary o efekt skupu akcji</strong>, mimo że księga wynosi tylko $9,97 na akcję.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — NAJMOCNIEJSZY W CAŁYM KATALOGU</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gotówka / zadłużenie</strong></td><td style="color:var(--ocena-kupno)">$5,58 mld / $4,12 mld</td><td style="color:var(--ocena-kupno)"><strong>Gotówka netto +$1,46 mld</strong></td></tr>
+          <tr><td>Dług / EBITDA</td><td style="color:var(--ocena-kupno)">0,47</td><td style="color:var(--ocena-kupno)">Dług do wolnych przepływów 0,84 — spłacalny w rok</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-kupno)"><strong>52,27</strong></td><td style="color:var(--ocena-kupno)">Wskaźnik <strong>aktualny</strong> — dług netto zmalał o $755,43 mln</td></tr>
+          <tr><td>Wskaźnik bieżący / szybki</td><td style="color:var(--ocena-kupno)">2,63 / 1,84</td><td>Kapitał obrotowy $9,67 mld</td></tr>
+          <tr><td><strong>Altman Z / Piotroski F</strong></td><td style="color:var(--ocena-kupno)"><strong>17,9 / 6</strong></td><td style="color:var(--ocena-kupno)"><strong>Najwyższy wskaźnik Altmana w całym katalogu</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Wskaźnik Altmana 17,9 jest najwyższym, jaki policzyłem dla którejkolwiek spółki — a przy firmie zależnej od cyklu inwestycyjnego kilku klientów jest to cecha decydująca.</strong><br><br>Dla porównania: KLA 12,01, Caterpillar 4,44, Amazon 4,17, Coherent 4,1, Strategy 2,99. <strong>Lam ma gotówkę netto, dług spłacalny z rocznych przepływów i pokrycie odsetek przekraczające pięćdziesiąt razy</strong>, a w ostatnim roku <strong>zmniejszył zadłużenie netto o $755,43 mln</strong> — więc wskaźnik nie jest martwy.<br><br><strong>Konsekwencja: Lam przejdzie przez pełny dołek pamięciowy bez finansowania zewnętrznego, a nawet będzie mógł w tym czasie skupować własne akcje.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Najwyższy zwrot z kapitału w całym katalogu.</strong> Nadwyżka nad kosztem kapitału przekraczająca pięćdziesiąt pięć punktów procentowych, przed KLA i ASML. Źródłem jest nie wyższa marża, a szybciej pracujący majątek — rotacja aktywów 1,04.</div>
+
+      <div class="alert alert-success"><strong>2. Konwersja zysku na gotówkę jest wzorowa.</strong> Przepływy operacyjne stanowią cztery piąte zysku netto, marża wolnych przepływów sięga 21,05%, a nakłady tylko 4,2% przychodów. To gotówka realna, nie papierowa.</div>
+
+      <div class="alert alert-success"><strong>3. Bilans najmocniejszy w katalogu.</strong> Wskaźnik Altmana 17,9, gotówka netto, dług spłacalny z rocznych przepływów. Spółka może skupować akcje także w dołku cyklu — i już zmniejszyła ich liczbę o 2,25%.</div>
+
+      <div class="alert alert-info"><strong>4. Kurs spadł o jedną piątą od lipca, gdy dwaj rywale utrzymali poziom.</strong> Przy niemal identycznym wskaźniku prognozowanym w całej trójce daje to Lam najlepszy układ ryzyka do zysku wśród dostawców sprzętu — scenariusz podstawowy jest dodatni, a nie ujemny.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Największa ekspozycja na cykl pamięciowy z całej trójki sprzętowej.</strong> Producenci pamięci notują dziś marże wielokrotnie powyżej normy historycznej, a to są liczby szczytu. Gdy zamówienia zostaną wstrzymane, stanie się to szybko.</div>
+
+      <div class="alert alert-danger"><strong>2. Zwrot z kapitału jest mierzony w górze cyklu.</strong> Pięćdziesiąt pięć punktów nadwyżki to liczba prawdziwa i nietrwała — w dołku pamięciowym spadnie głębiej niż w ASML czy KLA, bo klienci Lam reagują szybciej.</div>
+
+      <div class="alert alert-warning"><strong>3. Wskaźnik prognozowany wymaga zysku wyższego o 65%.</strong> Iloraz wobec tempa wzrostu przekracza jedność, więc za wzrost płaci się pełną cenę — a pięćdziesięciokrotność zysku bieżącego to wysoko dla spółki cyklicznej.</div>
+
+      <div class="alert alert-warning"><strong>4. Ograniczenia eksportowe to ryzyko polityczne.</strong> Odcinają część rynku decyzją, na którą ani spółka, ani jej klienci nie mają wpływu.</div>
+
+      <div class="alert alert-warning"><strong>5. Próg, przy którym zmieniam ocenę na sprzedaż:</strong> dwa kolejne kwartały spadku zamówień od producentów pamięci przy mnożniku utrzymanym powyżej trzydziestu razy zysk bieżący.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Podmiot</th><th>Relacja z Lam</th><th>Kto ma przewagę</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Applied Materials</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz)</span></td><td>Bezpośredni konkurent w osadzaniu i trawieniu</td><td style="color:var(--ocena-uwaga)">Podobna skala; Applied ma szerszy katalog, Lam głębszą specjalizację w pamięciach</td></tr>
+          <tr><td><strong>Tokyo Electron</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz)</span></td><td>Konkurent w obu technologiach</td><td style="color:var(--ocena-uwaga)">Silniejsza pozycja w Azji</td></tr>
+          <tr><td><strong>ASML</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,54%)</span></td><td><strong>Uzupełnienie, nie konkurent</strong> — litografia wobec trawienia i osadzania</td><td style="color:var(--ocena-uwaga)">Ten sam budżet fabryk, inna jego część</td></tr>
+          <tr><td><strong>KLA</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz — obserwowana)</span></td><td><strong>Uzupełnienie</strong> — kontrola procesu po każdym etapie</td><td style="color:var(--ocena-uwaga)">KLA mniej narażona na cykl pamięciowy</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Najważniejsze w tym zestawieniu: ASML i KLA nie konkurują z Lam — obsługują inne etapy procesu i fabryka kupuje od wszystkich trzech.</strong> Realnymi rywalami są Applied Materials i Tokyo Electron.<br><br>Różnica wobec ASML jest zasadnicza: <strong>ASML nie ma konkurenta w litografii w skrajnym ultrafiolecie, Lam konkurentów ma.</strong> Jego pozycja wynika ze specjalizacji w najtrudniejszych zastosowaniach, nie z braku alternatywy. <strong>Lam zarabia więc więcej na kapitale niż ASML, ale jego przewaga jest bardziej podatna na konkurencję — wyższy zwrot nie oznacza trwalszej fosy.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-kupno)">+136,35%</td><td style="color:var(--ocena-uwaga)">Ale od lipca kurs spadł o jedną piątą</td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td style="color:var(--ocena-sprzedaz)">$307,38</td><td style="color:var(--ocena-sprzedaz)">Kurs <strong>6,3% poniżej</strong></td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td style="color:var(--ocena-uwaga)">$267,20</td><td style="color:var(--ocena-uwaga)">Kurs <strong>7,8% powyżej</strong> — wąski korytarz</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>45,52</td><td>Neutralnie; wolumen 8,48 mln akcji</td></tr>
+          <tr><td><strong>Beta (5 lat)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>1,86</strong></td><td style="color:var(--ocena-sprzedaz)">Wyższa niż ASML 1,36 i KLA 1,44 — potwierdza ekspozycję na pamięci</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-kupno)">2,22% akcji</td><td>Spadek wobec poprzedniego miesiąca</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Układ jest piąty w tej serii o tym samym kształcie — kurs między średnimi po wrześniowym cofnięciu — ale z jedną różnicą.</strong> ASML, KLA, Caterpillar i Samsung stały nieco poniżej krótszej średniej i wyraźnie powyżej dłuższej; <strong>Lam stoi w znacznie węższym korytarzu</strong>, co oznacza, że cofnięcie było u niego głębsze.<br><br><strong>Beta 1,86 potwierdza to ilościowo</strong> — rynek prawidłowo wycenia większe ryzyko cykliczne przy ekspozycji na pamięci. Do odzyskania krótszej średniej brakuje ponad sześciu procent.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$373,13</strong></td><td>Cena docelowa konsensusu</td></tr>
+          <tr><td><strong>$308</strong></td><td>Scenariusz podstawowy z sekcji 6</td></tr>
+          <tr><td><strong>$307,38</strong></td><td>Średnia 50-sesyjna — pierwszy opór, praktycznie na scenariuszu podstawowym</td></tr>
+          <tr><td><strong>$267,20</strong></td><td><strong>Średnia 200-sesyjna — kluczowe wsparcie</strong></td></tr>
+          <tr><td style="color:var(--ocena-kupno)"><strong>$240</strong></td><td style="color:var(--ocena-kupno)"><strong>Poziom, przy którym rozkład scenariuszy wyraźnie się przechyla</strong></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs poniżej krótszej średniej po głębszym cofnięciu niż u rywali, wskaźnik siły relatywnej neutralny. Wyniki z 21 października pokażą, czy zamówienia z pamięci utrzymują tempo.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Scenariusz podstawowy daje plus siedem procent — najlepiej z trójki sprzętowej — ale dolne scenariusze są przy pamięciach głębsze. Wynik po uwzględnieniu prawdopodobieństw wypada blisko dziewięć procent poniżej kursu.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Najwyższy zwrot z kapitału w katalogu, najmocniejszy bilans, wzorowa konwersja gotówki i malejąca liczba akcji. Przez pełny cykl te cechy decydują, a bilans pozwala skupować akcje także w dołku.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ocena łączna: NEUTRALNA — tym razem jednak podniesiona w treści, mimo że postawiona po nieudanej tezie.</strong><br><br>Lipcowa ocena „neutralna / kupno" była formalnie nieprawidłowa. <strong>Dzisiejsza jest jednoznaczna — ale z innym uzasadnieniem niż przy ASML czy KLA.</strong> Tam neutralna oznaczała „dobra firma, cena bez zapasu"; tutaj oznacza <strong>najlepsze wskaźniki rentowności w katalogu i cenę o jedną piątą niższą niż w lipcu, przy największej w tej grupie ekspozycji na rozciągnięty cykl pamięciowy.</strong><br><br><strong>Gdybym miał wybrać jedną spółkę z trójki dostawców sprzętu na dzisiejszych cenach, byłby to Lam.</strong> Nie stawiam oceny kupna, bo dolne scenariusze przy pamięciach sięgają głębiej — <strong>postawię ją w okolicach $240.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Stan</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Lam w portfelu</strong></td><td style="color:var(--ocena-uwaga)"><strong>Nie masz</strong></td><td>Pozycja obserwowana od lipca</td></tr>
+          <tr><td>Najbliższa istniejąca ekspozycja</td><td>ASML — 2,54%</td><td>Dostawca sprzętu, inna część procesu i mniejsze ryzyko cykliczne</td></tr>
+          <tr><td><strong>Półprzewodniki razem</strong></td><td style="color:var(--ocena-uwaga)"><strong>36,45%</strong></td><td style="color:var(--ocena-uwaga)">Pięć pozycji; dodanie Lam byłoby szóstą</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Najciekawsza rzecz dla Twojego portfela wynika z zestawienia powstałego po przeliczeniu dwudziestu spółek: trzy najbardziej rentowne firmy w katalogu to dostawcy sprzętu dla fabryk, a Ty masz tylko jedną z nich.</strong><br><br><strong>Lam +55,72 pp, KLA +54,77 pp, ASML +54,26 pp</strong> — w portfelu jest wyłącznie ASML z wagą 2,54%, podczas gdy trzy pozycje z ujemną nadwyżką ważą razem ponad trzydzieści jeden procent.<br><br><strong>Nie jest to rekomendacja</strong>, a obserwacja, że w największym skupieniu tematycznym Twojego rachunku pieniądze są ulokowane odwrotnie do tego, co pokazuje zwrot z kapitału.<br><br><strong>Zastrzeżenie:</strong> Lam i ASML nie są wymienne — <strong>dodanie Lam obok ASML byłoby zwiększeniem ekspozycji na ten sam budżet fabryk, tylko w jego bardziej cyklicznej części.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Lam Research zarabia na kapitale lepiej niż każda z dwudziestu spółek, które przeliczyłem w tej serii — i jednocześnie niesie największe ryzyko cykliczne z trójki dostawców sprzętu.</strong> Nadwyżka zwrotu z zainwestowanego kapitału nad jego kosztem wynosi <strong>55,72 pp</strong>, przed KLA i ASML. Źródłem nie jest wyższa marża, bo ASML ma podobną, lecz <strong>rotacja aktywów 1,04</strong> — majątek Lam pracuje szybciej, bo jego maszyny są tańsze jednostkowo i kupuje się ich więcej. Konwersja zysku na gotówkę jest wzorowa: przepływy operacyjne to cztery piąte zysku netto, marża wolnych przepływów <strong>21,05%</strong>, nakłady zaledwie <strong>4,2% przychodów</strong>. Bilans jest najmocniejszy w całym katalogu — <strong>wskaźnik Altmana 17,9</strong>, gotówka netto, malejąca liczba akcji.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Cena jest jednak wysoka i ryzyko konkretne. <strong>Pięćdziesięciokrotność zysku bieżącego</strong>, wskaźnik prognozowany wymagający zysku wyższego o sześćdziesiąt pięć procent i iloraz wobec tempa wzrostu przekraczający jedność. Przede wszystkim jednak <strong>Lam jest z tej trójki najmocniej narażony na cykl pamięciowy</strong> — a wczorajsza analiza Samsunga pokazała marże wielokrotnie powyżej normy historycznej i kurs wyższy o ponad dwieście trzydzieści procent w rok, czyli liczby szczytu. <strong>Rynek to już częściowo wycenił: kurs spadł od lipca o jedną piątą, gdy ASML i KLA utrzymały poziom.</strong></p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Zwrot z kapitału musi wyraźnie przewyższać jego koszt.</strong> Ponad pięćdziesiąt pięć punktów nadwyżki — spełnione najlepiej w katalogu.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Zysk musi zamieniać się w gotówkę.</strong> Przepływy operacyjne równe czterem piątym zysku netto — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Bilans musi wytrzymać dołek bez emisji akcji.</strong> Altman 17,9, gotówka netto, dług spłacany — spełnione z ogromnym zapasem.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Wycena powinna dawać wyraźną asymetrię.</strong> Scenariusz podstawowy tylko plus siedem procent przy dolnym sięgającym minus siedemdziesięciu dwóch — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Cykl pamięciowy musi utrzymać się przez 2027 rok.</strong> Jedyna zmienna rozstrzygająca i najbardziej niepewna.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Zysk na akcję musi wzrosnąć o około sześćdziesiąt pięć procent.</strong> Tyle zapisuje wskaźnik prognozowany.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>21 października 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki pierwszego kwartału roku obrotowego 2027</strong></td><td style="color:var(--ocena-uwaga)">Udział pamięci w zamówieniach i prognoza na kolejny kwartał</td></tr>
+            <tr><td>23 września 2026</td><td>Odcięcie prawa do dywidendy</td><td>Techniczne</td></tr>
+            <tr><td>2027</td><td>Decyzje inwestycyjne producentów pamięci</td><td>Rozstrzygną, czy szczyt cyklu jest przed nami czy za nami</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">Na bieżąco</td><td style="color:var(--ocena-sprzedaz)">Kwotowania cen pamięci</td><td style="color:var(--ocena-sprzedaz)">Wyprzedzają zamówienia na sprzęt o dwa do trzech kwartałów</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Marża operacyjna</strong></td><td>35,29%</td><td>zejście poniżej 28%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża wolnych przepływów</td><td>21,05%</td><td>spadek poniżej 12%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Liczba akcji</td><td>-2,25% rocznie</td><td>zatrzymanie skupu</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Rotacja zapasów</strong></td><td>2,68</td><td>spadek przy rosnącym zapasie</td><td><span class="mon-dot y"></span>Wymaga uwagi</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Charakter pozycji</strong></td><td>Najwyższa rentowność kapitału w katalogu przy największym ryzyku cyklicznym w swojej grupie</td></tr>
+            <tr><td><strong>Wejście</strong></td><td>W okolicach <strong>$240</strong>, czyli poniżej średniej długoterminowej</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$400</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$267</strong> — utrata średniej 200-sesyjnej</td></tr>
+            <tr><td><strong>Warunek zmiany na sprzedaż</strong></td><td>Dwa kwartały spadku zamówień od producentów pamięci przy mnożniku powyżej trzydziestu razy zysk bieżący</td></tr>
+            <tr><td><strong>Czego nie robić</strong></td><td>Nie traktować Lam i ASML jako pozycji wymiennych — ASML nie ma konkurenta w swojej linii, Lam ma</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p><strong>To pierwszy raport w tej serii, w którym nieudana teza poprawiła sytuację.</strong> W lipcu postawiłem ocenę „neutralna / kupno" przy około $364 — formalnie nieprawidłową, bo skala nie dopuszcza ocen łączonych, i była to raczej ucieczka od decyzji niż ocena. Kurs spadł o jedną piątą, a spółka w tym czasie pokazała <strong>najwyższy zwrot z kapitału w całym katalogu</strong>, najmocniejszy bilans i wzorową konwersję zysku na gotówkę.</p>
+        <p><strong>Dlaczego nadal nie kupno.</strong> Lam jest z trójki dostawców sprzętu najmocniej narażony na cykl pamięciowy, a ten wygląda dziś na rozciągnięty — marże producentów są wielokrotnie powyżej normy, co historycznie kończyło się falą nowych mocy i spadkiem zamówień. <strong>Dlatego scenariusz podstawowy daje plus siedem procent, ale dolny minus siedemdziesiąt dwa.</strong> Przy pięćdziesięciokrotności zysku bieżącego taka asymetria nie uzasadnia oceny kupna. <strong>Gdybym miał jednak wybrać jedną spółkę z trójki na dzisiejszych cenach, byłby to Lam — i przy $240 postawię ocenę kupna bez zastrzeżeń.</strong></p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$80 – $420</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$81 (-72%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$420 (+46%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Obserwować, kupno przy $240</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 21 października</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA POPRZEDNIEJ ANALIZY (06.07.2026)</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Ocena „neutralna / kupno"</strong></td>
+            <td><strong>Obowiązująca skala nie dopuszcza ocen łączonych.</strong> Ocena łączona nie jest kompromisem, a uchyleniem się od decyzji — czytelnik nie wie, co z nią zrobić. Dziś: <strong>neutralna</strong>, jednoznacznie</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — błąd formalny ukrywający brak decyzji</td>
+          </tr>
+          <tr>
+            <td><strong>Wartość godziwa $315–440</strong> przy kursie około $364</td>
+            <td>Kurs spadł do <strong>$288,11</strong> — <strong>poniżej dolnej granicy</strong>. Przedział nie obejmował scenariusza zwrotu w cyklu pamięciowym; nowy zakres <strong>$80–420</strong></td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — pominięte główne ryzyko spółki</td>
+          </tr>
+          <tr>
+            <td><strong>Brak rozróżnienia ekspozycji wewnątrz trójki sprzętowej</strong></td>
+            <td>ASML zależy od logiki, Lam w dużym stopniu od pamięci, KLA stoi pośrodku. <strong>Od lipca ASML i KLA utrzymały poziom, a Lam spadł o jedną piątą</strong> — rynek to rozróżnienie zrobił, ja go nie zrobiłem</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — ten sam wzorzec co przy parze Lumentum i Coherent</td>
+          </tr>
+          <tr>
+            <td>Raport w starym formacie — 14 sekcji, cena przybliżona</td>
+            <td>Nowy plik zgodny z zasadami z 17.09.2026; poprzednia wersja trafia do archiwum</td>
+            <td style="color:var(--text-muted)">Porządkowa</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Trzecia pozycja w tej tabeli powtarza błąd, który opisałem dzisiaj przy Coherent — i to czyni go wzorcem, nie przypadkiem.</strong><br><br>W lipcu analizowałem <strong>trzech dostawców sprzętu i dwie spółki optyczne</strong>, traktując każdą grupę jako jedną ekspozycję. <strong>W obu grupach rynek w ciągu dwóch i pół miesiąca wyraźnie je rozróżnił.</strong><br><br><strong>Wniosek dopisuję do zasad redakcyjnych: przy spółkach z tej samej branży trzeba wskazać, od jakiej konkretnie części popytu zależy każda z nich</strong> — przy sprzęcie dla fabryk pytanie brzmi: logika czy pamięci; przy optyce: marża i konwersja gotówki. <strong>To najważniejszy wniosek metodyczny z dzisiejszej czwórki raportów.</strong></div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Lipcowa ocena jakości Lam była trafna i dziś jest potwierdzona liczbą, której wtedy nie policzyłem: <strong>nadwyżka zwrotu nad kosztem kapitału przekraczająca pięćdziesiąt pięć punktów procentowych jest najwyższą w całym katalogu dwudziestu spółek</strong>. Lipcowa ostrożność co do wyceny również okazała się zasadna — kurs spadł.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 20 września 2026 | Cena: <strong>$288,11</strong> (zamknięcie 18.09.2026) | <strong>Aktualizacja analizy z 6 lipca 2026 — ocena ujednoznaczniona: „neutralna / kupno" → neutralna</strong> | Spółka <strong>nie znajduje się w portfelu TP Corp</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> usunięto ocenę łączoną, której obowiązująca skala nie dopuszcza; wartość godziwa $315–440 → $80–420, bo poprzedni przedział nie obejmował scenariusza zwrotu w cyklu pamięciowym, a kurs spadł poniżej jego dolnej granicy; dodano rozróżnienie ekspozycji wewnątrz trójki dostawców sprzętu (logika wobec pamięci); dodano zwrot z kapitału wobec kosztu (+55,72 pp — najwyżej w katalogu) oraz rotację aktywów jako jego źródło; raport przepisany z formatu 14-sekcyjnego z ceną przybliżoną na obowiązujący | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 20.09.2026</strong>; scenariusze, przeliczenie wskaźnika prognozowanego i relacja nakładów do przychodów to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GWRE — Guidewire Software | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-kupno); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:13px; color:var(--text-muted); font-style:italic; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: GWRE</div>
+    <div class="company-name">Guidewire Software, Inc.</div>
+    <div class="company-sub">Systemy centralne dla ubezpieczycieli majątkowych — polisy, szkody, rozliczenia · San Mateo · 4 174 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">Spoza portfela — obserwowana</span>
+      <span class="meta-tag">Jedyna ocena kupna w tej serii</span>
+      <span class="meta-tag">Spadek o 29% po jednym punkcie prognozy</span>
+      <div class="price-display">
+        <div class="price-main">$144,29</div>
+        <div class="price-sub">zamknięcie 18.09.2026 (-0,48%), po sesji $143,00</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Oprogramowanie abonamentowe</span><span class="temat">Fintech</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — rynek ukarał spadkiem o 29% obniżenie tempa wzrostu o jeden punkt, przy odejściach klientów poniżej jednego procenta rocznie">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">najostrożniejsza ocena kupna — przewaga wynika z retencji, nie z mnożnika</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$70 – $240</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">-51% do +66%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>3 września</b><em>Kolejne na przełomie listopada</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$144,29</div><div class="metric-detail">-41,57% w 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Od szczytu z 3 września</div><div class="metric-value red">-28,9%</div><div class="metric-detail">Ze $202,86 — po jednym punkcie prognozy</div></div>
+    <div class="metric-card"><div class="metric-label">Odejścia klientów</div><div class="metric-value green">poniżej 1%</div><div class="metric-detail">Rocznie, w systemach centralnych</div></div>
+    <div class="metric-card"><div class="metric-label">Wolne przepływy</div><div class="metric-value green">$377,66 mln</div><div class="metric-detail"><strong>2,71× zysk netto</strong> — sekcja 5</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / zysk</div><div class="metric-value red">88,52</div><div class="metric-detail">Ale cena do przepływów tylko <strong>31,33</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Nakłady do przychodów</div><div class="metric-value green">0,8%</div><div class="metric-detail">Najniżej w całym katalogu</div></div>
+    <div class="metric-card"><div class="metric-label">Beta</div><div class="metric-value green">0,97</div><div class="metric-detail">Jedyna poniżej jedności · RSI 38,13</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (16 analityków)</div><div class="metric-value green">$213,29</div><div class="metric-detail">+47,82% · kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I STAN POPRZEDNIEJ TEZY</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Guidewire dostarcza ubezpieczycielom majątkowym <strong>systemy centralne</strong> — oprogramowanie obsługujące polisy, szkody i rozliczenia. Przychody roczne <strong>$1,48 mld</strong> przy 4 174 pracownikach, kapitalizacja <strong>$11,83 mld</strong>. <strong>Spółki nie masz w portfelu</strong> — jest w obserwowanych.</p>
+
+      <div class="alert alert-warning"><strong>Teza z 21 lipca zadziałała, a potem została w całości odwrócona w ciągu jednej sesji — i to jest najciekawsza historia w dzisiejszej czwórce raportów.</strong><br><br>
+      Oceniłem wtedy GWRE na <strong>kupno</strong> przy kursie około $144 i wyceniłem na <strong>$180–230</strong>. <strong>Kurs doszedł do $202,86</strong>, czyli wszedł w ten przedział — a następnie po wynikach z 3 września spadł o blisko dwadzieścia procent w jednej sesji i osuwa się dalej. Dziś wynosi <strong>$144,29</strong>, czyli dokładnie tyle, ile w lipcu.<br><br>
+      <strong>Powód spadku jest wyjątkowo konkretny i wart zapamiętania:</strong> spółka pobiła oczekiwania co do wyników, ale podała prognozę na kolejny rok zakładającą <strong>wzrost powtarzalnego przychodu rocznego o 18% zamiast dotychczasowych 19%</strong>. <strong>Jeden punkt procentowy — i przecena o blisko dwadzieścia dziewięć procent od szczytu.</strong></div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Dane z wyników z 3 września</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody roku obrotowego 2026</strong></td><td style="color:var(--ocena-kupno)"><strong>$1 475,4 mln (+23%)</strong></td><td style="color:var(--ocena-kupno)">Przychód abonamentowy wzrósł o 33%</td></tr>
+          <tr><td>Czwarty kwartał</td><td style="color:var(--ocena-kupno)">$411 mln (+15%), zysk $0,99 na akcję</td><td style="color:var(--ocena-kupno)">Powyżej oczekiwań</td></tr>
+          <tr><td><strong>Powtarzalny przychód roczny</strong></td><td style="color:var(--ocena-kupno)"><strong>$1,242 mld (+19%)</strong></td><td style="color:var(--ocena-kupno)">Prognoza $1,45–1,46 mld</td></tr>
+          <tr><td><strong>Odejścia klientów</strong></td><td style="color:var(--ocena-kupno)"><strong>poniżej 1% w systemach centralnych</strong></td><td style="color:var(--ocena-kupno)"><strong>Sedno tej tezy</strong></td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>Prognoza przychodów na bieżący kwartał</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$372–378 mln wobec oczekiwanych $386 mln</strong></td><td style="color:var(--ocena-sprzedaz)">Ta liczba wywołała przecenę</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)">Reakcja kursu</td><td style="color:var(--ocena-sprzedaz)">Spadek o blisko 20% w jednej sesji</td><td style="color:var(--ocena-sprzedaz)">Łącznie -28,9% od szczytu</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — SYSTEM, KTÓREGO SIĘ NIE WYMIENIA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <p>System centralny ubezpieczyciela zawiera wszystkie polisy, szkody i rozliczenia. <strong>Pracuje nieprzerwanie, jest zintegrowany z kilkudziesięcioma innymi systemami i obsługuje produkty tworzone przez dekady.</strong> Guidewire dostarcza taki system i przenosi klientów na model abonamentowy w chmurze.</p>
+
+      <div class="alert alert-success"><strong>Przewaga Guidewire daje się zmierzyć jedną liczbą, wyjątkową nawet na tle oprogramowania: odejścia klientów w systemach centralnych wynoszą poniżej jednego procenta rocznie.</strong> Ci, którzy odchodzą, robią to najczęściej przez przejęcie przez innego ubezpieczyciela, nie przez wybór konkurenta.<br><br>Powód jest praktyczny: <strong>wymiana systemu centralnego to projekt na kilka lat, kosztujący wielokrotność rocznej opłaty i obarczony ryzykiem zatrzymania wypłat odszkodowań.</strong><br><br><strong>To ta sama kategoria przewagi, którą opisywałem przy KLA</strong> — nie polega na tym, że konkurencja nie potrafi, tylko na tym, że klient nie może ryzykować zmiany.</div>
+
+      <div class="alert alert-warning"><strong>Zastrzeżenie: ta sama bezwładność, która chroni Guidewire przed utratą klientów, ogranicza tempo pozyskiwania nowych.</strong> Ubezpieczyciel wymienia system raz na kilkanaście lat, więc <strong>rynek nie rośnie szybko — rośnie przewidywalnie</strong>.<br><br><strong>Konsekwencja dla wyceny:</strong> to nie jest spółka, która zaskoczy przyspieszeniem. Jej wartość bierze się z tego, że przychód raz zdobyty zostaje na lata — <strong>rynek zdaje się oczekiwać czegoś innego, i stąd wrześniowa reakcja.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na Guidewire</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przenoszenie systemów do chmury</strong></td><td style="color:var(--ocena-kupno)">Trwa</td><td style="color:var(--ocena-kupno)"><strong>Główne źródło wzrostu</strong></td></tr>
+          <tr><td>Konsolidacja ubezpieczycieli</td><td style="color:var(--ocena-uwaga)">Postępuje</td><td style="color:var(--ocena-uwaga)">Główna przyczyna odejść klientów</td></tr>
+          <tr><td>Sztuczna inteligencja w obsłudze szkód</td><td style="color:var(--ocena-kupno)">Wczesna faza</td><td style="color:var(--ocena-kupno)">Nowe moduły dla istniejących klientów</td></tr>
+          <tr><td><strong>Cykl ubezpieczeniowy</strong></td><td style="color:var(--ocena-kupno)">Nieistotny dla tej spółki</td><td style="color:var(--ocena-kupno)">Abonament nie zależy od rentowności klienta</td></tr>
+          <tr><td><strong>Oczekiwania rynku wobec tempa</strong></td><td style="color:var(--ocena-sprzedaz)">Wysokie</td><td style="color:var(--ocena-sprzedaz)">Jeden punkt niżej — przecena o 20%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>To otoczenie różni się zasadniczo od trzech pozostałych spółek, które odświeżam dzisiaj.</strong> Lumentum, Coherent i Lam zależą od <strong>nakładów na infrastrukturę obliczeniową</strong>, a <strong>Guidewire od tego, ilu ubezpieczycieli przenosi w danym roku system do chmury</strong> — proces rozłożony na dekadę, niezwiązany z cyklem technologicznym.<br><br>Potwierdza to <strong>beta 0,97, jedyna poniżej jedności w całym katalogu.</strong> Przy Lam jest to 1,86, przy Coherent 2,10. <strong>To jedyna z dzisiejszej czwórki, która nie jest zakładem na nakłady na sztuczną inteligencję.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI, RETENCJA I AKCJONARIAT</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Powtarzalny przychód roczny</strong></td><td style="color:var(--ocena-kupno)"><strong>$1,242 mld (+19%)</strong></td><td style="color:var(--ocena-kupno)">Prognoza na kolejny rok zakłada wzrost o 18%</td></tr>
+          <tr><td><strong>Odejścia klientów — systemy centralne</strong></td><td style="color:var(--ocena-kupno)"><strong>poniżej 1% rocznie</strong></td><td style="color:var(--ocena-kupno)">Poniżej 1,5% dla całości</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$353 465</td><td style="color:var(--ocena-uwaga)">Zysk księgowy zaniżony — sekcja 5</td></tr>
+          <tr><td>Zmiana liczby akcji r/r</td><td style="color:var(--ocena-kupno)">-0,59%</td><td style="color:var(--ocena-kupno)">Minus 1,70% w samym kwartale</td></tr>
+          <tr><td>Instytucje / zarząd</td><td>96,18% / 1,00%</td><td>Krótka sprzedaż 5,03% i maleje</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Odejścia klientów poniżej jednego procenta rocznie to liczba, której nie spotkałem w żadnej innej spółce w katalogu — i na niej opiera się dzisiejsza ocena.</strong><br><br>Przekłada się na konkretne stwierdzenie: <strong>przychód powtarzalny będzie istniał za rok niemal w całości</strong>, niezależnie od gospodarki i rynku technologicznego. Wzrost dochodzi do tej bazy, a nie zastępuje odchodzącą część.<br><br><strong>Dlatego wrześniowa reakcja jest tak dziwna:</strong> spółka podała, że baza urośnie o osiemnaście, a nie dziewiętnaście procent — i straciła blisko dwadzieścia dziewięć procent wartości, choć <strong>nie zmieniło się nic w retencji, marży, przepływach ani bilansie.</strong><br><br>Rynek ma prawo obniżyć mnożnik spółce, która zwalnia. <strong>Ale skala reakcji jest nieproporcjonalna do zmiany — a to sytuacja, w której warto policzyć, ile się dziś płaci.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">BIZNES — ZYSK KSIĘGOWY ZANIŻA GOTÓWKĘ</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (rok obrotowy 2026)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$1,48 mld — wzrost o 23%</td></tr>
+          <tr><td>Zysk brutto</td><td style="color:var(--ocena-kupno)">$947,37 mln — marża 64,21%</td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td style="color:var(--ocena-uwaga)"><strong>$149,87 mln — marża tylko 10,16%</strong></td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td>$164,12 mln — nadwyżka to odsetki od gotówki</td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-uwaga)">$139,28 mln · $1,63 na akcję</td></tr>
+          <tr><td><strong>Przepływy operacyjne</strong></td><td style="color:var(--ocena-kupno)"><strong>$389,72 mln — ponad dwa i pół raza więcej niż zysk</strong></td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-kupno)"><strong>-$12,06 mln — 0,8% przychodów</strong></td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>$377,66 mln · $4,61 na akcję — marża 25,60%</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>To dokładne przeciwieństwo tego, co znalazłem dzisiaj w Coherent — i różnica decyduje o obu ocenach.</strong><br><br>Rachunek: zysk netto <strong>$139,28 mln</strong> plus amortyzacja <strong>$13,55 mln</strong> dają $152,83 mln, a faktyczne przepływy operacyjne wyniosły <strong>$389,72 mln</strong> — o <strong>$236,9 mln więcej</strong>. <strong>Wolne przepływy stanowią 2,71-krotność zysku netto</strong>, podczas gdy w Coherent gotówka operacyjna równała się jednej dziesiątej zysku.<br><br><strong>Przyczyna jest typowa dla oprogramowania abonamentowego i całkowicie zdrowa:</strong> klienci płacą z góry, a wynagrodzenie w akcjach obciąża zysk bez wypływu pieniędzy.<br><br><strong>Wniosek: wskaźnik ceny do zysku jest tu bezużyteczny, a właściwą miarą jest cena do wolnych przepływów</strong> — 88,52 wobec 31,33.</div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne: suma zysku netto i amortyzacji porównana z raportowanymi przepływami operacyjnymi; różnica przypisana przedpłatom klientów i kosztom bezgotówkowym.</p>
+
+      <div class="alert alert-info"><strong>Druga liczba warta odnotowania: nakłady inwestycyjne stanowią 0,8% przychodów — najmniej w całym katalogu.</strong><br><br>
+      Zestawienie, które prowadzę: IREN 612% · CoreWeave 271% · Oracle 105% · Amazon 22,3% · Intel 21,2% · Novo Nordisk 17,1% · Coherent 15,4% · Lumentum 15,0% · Sibanye 11,6% · Samsung 10,7% · Lam 4,2% · ASML 4,1% · Amphenol 4,0% · KLA 2,77% · SAP 1,9% · <strong>Guidewire 0,8%</strong>.<br><br>
+      <strong>Znaczenie jest bezpośrednie: praktycznie cała gotówka operacyjna zostaje do dyspozycji akcjonariusza.</strong> Marża wolnych przepływów sięga 25,60%, a spółka zaczęła zmniejszać liczbę akcji — o 1,70% w samym ostatnim kwartale.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja / wartość firmy</td><td>$11,83 mld / $11,77 mld</td><td style="color:var(--ocena-kupno)">Gotówka netto $62,17 mln</td></tr>
+          <tr><td>Cena / sprzedaż</td><td style="color:var(--ocena-uwaga)">8,02</td><td>Prognozowana 6,89</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>31,33</strong></td><td style="color:var(--ocena-kupno)"><strong>Miara właściwa</strong></td></tr>
+          <tr><td><strong>Wartość firmy / EBITDA</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>72,01</strong></td><td style="color:var(--ocena-sprzedaz)">Zniekształcona kosztami bezgotówkowymi</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td>9,91</td><td>Księga $14,56 na akcję</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td style="color:var(--ocena-sprzedaz)">88,52</td><td style="color:var(--ocena-sprzedaz)"><strong>Bezużyteczny</strong> — zysk zaniża gotówkę</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>34,45</strong></td><td style="color:var(--ocena-kupno)">Odpowiada zyskowi bliskiemu dzisiejszym przepływom</td></tr>
+          <tr><td>PEG</td><td>nie podany przez dostawcę danych</td><td>Wzrost zysku 25,70% rocznie</td></tr>
+          <tr><td><strong>Miara właściwa</strong></td><td style="color:var(--ocena-kupno)"><strong>cena do wolnych przepływów 31,33</strong></td><td style="color:var(--ocena-kupno)">Na niej opieram wycenę</td></tr>
+          <tr><td>Mediana oprogramowania abonamentowego</td><td>okolice 30× wolnych przepływów</td><td style="color:var(--ocena-kupno)">W okolicach mediany, bez premii</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać — i jest to przypadek, w którym rozjazd między wskaźnikami sam w sobie jest odkryciem.</strong> Wskaźnik bieżący wynosi 88,52, prognozowany 34,45, a cena do wolnych przepływów 31,33. <strong>Ta rozpiętość nie jest błędem — mierzy tempo, w jakim zysk księgowy dogania gotówkę.</strong> Prognozowany zysk $4,19 na akcję jest niemal równy dzisiejszym wolnym przepływom wynoszącym $4,61 — czyli analitycy zakładają, że w ciągu roku księgowość zrówna się z rzeczywistością pieniężną. <strong>Wniosek jest praktyczny: kto ocenia tę spółkę po wskaźniku ceny do zysku, widzi ją trzykrotnie drożej, niż jest.</strong></p>
+      <p style="color:var(--text-muted);font-size:13px">Dane: StockAnalysis / S&amp;P Global Market Intelligence, stan 20.09.2026. Przeliczenie wskaźnika prognozowanego na zysk na akcję i porównanie z przepływami — obliczenie własne.</p>
+
+      <h3>Cztery scenariusze na rok obrotowy 2029</h3>
+      <p>Buduję je od wolnych przepływów na akcję, bo to one opisują tę spółkę.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Przepływy na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przenoszenie do chmury zakończone, retencja utrzymana</strong></td><td>$8,00</td><td>30×</td><td><strong>$240</strong></td><td style="color:var(--ocena-kupno)">+66%</td></tr>
+          <tr><td><strong>Wzrost przychodu powtarzalnego 18% utrzymany</strong></td><td>$7,00</td><td>25×</td><td><strong>$175</strong></td><td style="color:var(--ocena-kupno)">+21%</td></tr>
+          <tr><td>Tempo zwalnia do kilkunastu procent</td><td>$5,80</td><td>20×</td><td>$116</td><td style="color:var(--ocena-sprzedaz)">-20%</td></tr>
+          <tr><td><strong>Utrata przewagi w systemach centralnych</strong></td><td style="color:var(--ocena-sprzedaz)">$4,50</td><td>15×</td><td><strong>$68</strong></td><td style="color:var(--ocena-sprzedaz)">-53%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne. Ścieżka scenariusza podstawowego: przychód powtarzalny rosnący zgodnie z prognozą zarządu, marża wolnych przepływów podnoszona wraz z zakończeniem przenoszenia klientów do chmury, liczba akcji zmniejszana skupem. Mnożniki odzwierciedlają rozpiętość wycen oprogramowania abonamentowego o wysokiej retencji.</p>
+
+      <p><strong>Fair value: $70 – $240</strong>, środek <strong>$155,00 (+7,4%)</strong>. Po nadaniu scenariuszom wag 25/35/25/15 wynik wypada na <strong>$160 (+11,2%)</strong>. Konsensus 16 analityków to $213,29 (+47,82%) przy rekomendacji kupna — powyżej mojego scenariusza umiarkowanego.</p>
+
+      <div class="alert alert-success"><strong>Zwracam uwagę na scenariusz drugi, bo jest to jedyny przypadek w całej tej serii, gdzie wariant „nic nadzwyczajnego się nie dzieje" daje wyraźnie dodatni wynik.</strong><br><br>
+      Przy ASML, KLA, Caterpillarze i Lumentum scenariusz „wzrost dowieziony, mnożnik normalizuje" dawał wynik ujemny albo bliski zera. <strong>Tutaj utrzymanie osiemnastoprocentowego tempa — czyli dokładnie tego, co spółka sama prognozuje — daje plus dwadzieścia jeden procent.</strong><br><br>
+      Powodem jest wrześniowa przecena: <strong>kurs spadł o blisko dwadzieścia dziewięć procent od szczytu, a prognoza obniżyła się o jeden punkt procentowy.</strong> To właśnie ta nieproporcjonalność tworzy dzisiejszą okazję.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Marża brutto</strong></td><td style="color:var(--ocena-kupno)"><strong>64,21%</strong></td><td style="color:var(--ocena-kupno)">Typowa dla oprogramowania w migracji do chmury</td></tr>
+          <tr><td><strong>Marża operacyjna</strong></td><td style="color:var(--ocena-uwaga)"><strong>10,16%</strong></td><td style="color:var(--ocena-uwaga)">Obciążona migracją i wynagrodzeniem w akcjach</td></tr>
+          <tr><td><strong>Marża wolnych przepływów</strong></td><td style="color:var(--ocena-kupno)"><strong>25,60%</strong></td><td style="color:var(--ocena-kupno)"><strong>Dwa i pół raza wyższa od operacyjnej</strong></td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-uwaga)"><strong>10,59% vs 9,11%</strong></td><td style="color:var(--ocena-uwaga)"><strong>Różnica tylko +1,48 pp</strong></td></tr>
+          <tr><td>Zwrot z kapitału własnego / aktywów</td><td>10,51% / 3,54%</td><td style="color:var(--ocena-uwaga)">Liczone od zysku księgowego — zaniżone</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Nadwyżka zwrotu z zainwestowanego kapitału nad kosztem wynosi tylko 1,48 pp — najsłabszy punkt tej tezy, więc nie będę go ukrywał.</strong> Umiejscowienie wśród dwudziestu jeden spółek: Lam +55,72 · KLA +54,77 · ASML +54,26 · Novo Nordisk +33,71 · Samsung +24,25 · Sibanye +23,15 · SAP +9,92 · Amphenol +9,89 · Caterpillar +6,59 · Lumentum +3,54 · <strong>Guidewire +1,48</strong> · ServiceNow +1,18 · Oracle +0,70 · Amazon +0,69 · AMD −8,02 · Coherent −8,50.<br><br>
+      <strong>Trzeba dodać, że wskaźnik liczony jest od zysku księgowego</strong>, który przy tej spółce zaniża rzeczywistość o ponad dwie trzecie. <strong>Policzony od wolnych przepływów wypadłby wyraźnie wyżej</strong> — nie podaję własnej wersji, bo byłaby niespójna z resztą zestawienia.<br><br><strong>Uczciwy wniosek: Guidewire nie jest maszyną do zarabiania na kapitale jak Lam czy ASML</strong>, lecz spółką, której wartość bierze się z trwałości przychodu.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gotówka / zadłużenie</strong></td><td style="color:var(--ocena-kupno)">$777,16 mln / $714,99 mln</td><td style="color:var(--ocena-kupno)"><strong>Gotówka netto +$62,17 mln</strong></td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-uwaga)">0,60</td><td style="color:var(--ocena-sprzedaz)">Dług do EBITDA 3,94 — wskaźnik zniekształcony</td></tr>
+          <tr><td><strong>Dług / wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>1,89</strong></td><td style="color:var(--ocena-kupno)"><strong>Miara właściwa</strong> — dwa lata gotówki</td></tr>
+          <tr><td>Pokrycie odsetek</td><td style="color:var(--ocena-uwaga)">11,25</td><td>Aktualny</td></tr>
+          <tr><td>Wskaźnik bieżący / szybki</td><td style="color:var(--ocena-kupno)">1,79 / 1,67</td><td>Kapitał obrotowy dodatni</td></tr>
+          <tr><td>Altman Z / Piotroski F</td><td style="color:var(--ocena-kupno)">6,94 / 6</td><td style="color:var(--ocena-kupno)">Bezpieczna strefa</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>W bilansie Guidewire powtarza się ten sam wzorzec co w rachunku wyników — i warto go rozpoznać, żeby nie wyciągnąć złego wniosku.</strong><br><br>
+      <strong>Dług do zysku EBITDA wynosi 3,94</strong>, co przy spółce technologicznej wyglądałoby niepokojąco. <strong>Ale dług do wolnych przepływów to tylko 1,89</strong> — czyli całe zadłużenie da się spłacić z niecałych dwóch lat generowanej gotówki.<br><br>
+      Rozbieżność ma to samo źródło co przy wskaźnikach wyceny: <strong>zysk EBITDA jest obciążony kosztami bezgotówkowymi, a wolne przepływy nie.</strong> Przy tej spółce wszystkie miary oparte na zysku księgowym trzeba podwójnie sprawdzać.<br><br>
+      <strong>Stan faktyczny jest bezpieczny:</strong> gotówka przewyższa zadłużenie, wskaźnik Altmana wysoko w bezpiecznej strefie, a minimalne nakłady inwestycyjne oznaczają, że spółka nie potrzebuje kapitału na rozwój.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Odejścia klientów poniżej jednego procenta rocznie</strong> — liczba, której nie spotkałem w żadnej innej spółce w katalogu. Dzisiejszy przychód powtarzalny będzie istniał za rok niemal w całości.</div>
+
+      <div class="alert alert-success"><strong>2. Zysk księgowy zaniża gotówkę o ponad dwie trzecie.</strong> Klienci płacą z góry, a wynagrodzenie w akcjach obciąża wynik bez wypływu pieniędzy — cena do przepływów wynosi 31,33 wobec ceny do zysku 88,52.</div>
+
+      <div class="alert alert-success"><strong>3. Przecena jest nieproporcjonalna do zmiany.</strong> Kurs spadł o blisko dwadzieścia dziewięć procent po obniżeniu prognozy o jeden punkt procentowy — retencja, marża i przepływy pozostały bez zmian.</div>
+
+      <div class="alert alert-info"><strong>4. Jedyna spółka w katalogu z betą poniżej jedności i najniższymi nakładami.</strong> Nie jest to zakład na cykl technologiczny — w portfelu zdominowanym przez ten temat jest to cecha, nie wada.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Nadwyżka zwrotu nad kosztem kapitału jest ledwie dodatnia.</strong> To najsłabszy punkt tej tezy. Nawet po uwzględnieniu zaniżenia przez zysk księgowy Guidewire nie jest maszyną do zarabiania na kapitale jak dostawcy sprzętu dla fabryk.</div>
+
+      <div class="alert alert-danger"><strong>2. Marża operacyjna wynosi 10,16% przy marży brutto 64,21%.</strong> Między nimi znikają koszty migracji i wynagrodzenie w akcjach — jeśli nie spadną po jej zakończeniu, teza o zbieżności zysku z gotówką upada.</div>
+
+      <div class="alert alert-warning"><strong>3. Rynek karze za zwolnienie, a ta spółka nie przyspieszy.</strong> Tempo pozyskiwania nowych klientów jest z natury ograniczone, więc kolejne obniżenie prognozy wywoła kolejną przecenę.</div>
+
+      <div class="alert alert-warning"><strong>4. Konsolidacja ubezpieczycieli jest główną przyczyną odejść</strong> — klient przejęty przez większego gracza migruje na jego system, a na to Guidewire nie ma wpływu.</div>
+
+      <div class="alert alert-warning"><strong>5. Próg, przy którym zmieniam ocenę na neutralną:</strong> wzrost odejść klientów w systemach centralnych powyżej dwóch procent rocznie albo obniżenie prognozy wzrostu przychodu powtarzalnego poniżej piętnastu procent.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Przewaga nad Guidewire</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Duck Creek i inni dostawcy systemów</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz)</span></td><td>Niższa cena wdrożenia</td><td style="color:var(--ocena-kupno)">Mniejsza baza zainstalowana i słabsza pozycja u dużych ubezpieczycieli</td></tr>
+          <tr><td><strong>Systemy budowane wewnętrznie</strong></td><td>Pełna kontrola nad funkcjami</td><td style="color:var(--ocena-kupno)">Koszt rośnie z każdą zmianą regulacji</td></tr>
+          <tr><td><strong>ServiceNow</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 16,43%)</span></td><td style="color:var(--ocena-sprzedaz)">Znacznie większa skala i szerszy rynek</td><td>Inna warstwa — procesy, nie system centralny</td></tr>
+          <tr><td><strong>SAP</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 5,04%)</span></td><td style="color:var(--ocena-sprzedaz)">Dużo wyższa marża operacyjna i nadwyżka zwrotu +9,92 pp</td><td>Nie konkuruje w tej niszy</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Najważniejsze w tym zestawieniu: dwie spółki, które masz w portfelu, robią rzecz pokrewną, ale nie tę samą.</strong> <strong>ServiceNow i SAP sprzedają oprogramowanie przedsiębiorstwom</strong>, ale na znacznie szerszym rynku i z wyższą marżą operacyjną — nadwyżka zwrotu nad kosztem kapitału wynosi u SAP +9,92 pp, u ServiceNow +1,18 pp.<br><br><strong>Przewaga Guidewire leży w wąskości rynku:</strong> systemy centralne dla ubezpieczycieli majątkowych to nisza na tyle specjalistyczna i regulowana, że wielcy dostawcy do niej nie wchodzą.<br><br><strong>Guidewire nie konkuruje więc z Twoimi pozycjami programistycznymi, tylko uzupełnia je o sektor niezwiązany z cyklem technologicznym.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-sprzedaz)">-41,57%</td><td style="color:var(--ocena-sprzedaz)">Jedyna spadkowa z czwórki</td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td style="color:var(--ocena-sprzedaz)">$163,55</td><td style="color:var(--ocena-sprzedaz)">Kurs <strong>11,8% poniżej</strong></td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td style="color:var(--ocena-sprzedaz)">$154,02</td><td style="color:var(--ocena-sprzedaz)">Kurs <strong>6,3% poniżej</strong> — obie średnie utracone</td></tr>
+          <tr><td><strong>Wskaźnik RSI (14)</strong></td><td style="color:var(--ocena-kupno)"><strong>38,13</strong></td><td style="color:var(--ocena-kupno)"><strong>Najbliżej wyprzedania w całym katalogu</strong></td></tr>
+          <tr><td><strong>Beta (5 lat)</strong></td><td style="color:var(--ocena-kupno)"><strong>0,97</strong></td><td style="color:var(--ocena-kupno)">Jedyna poniżej jedności</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-kupno)">4,12 mln akcji — 5,03%</td><td style="color:var(--ocena-kupno)">Obstawiający przeciw zamykają pozycje</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Obraz techniczny jest jednoznacznie słaby i nie zamierzam go upiększać — kurs stracił obie średnie.</strong> <strong>Jest to jednak jedyna z dzisiejszej czwórki, gdzie wskaźnik siły relatywnej zbliża się do wyprzedania</strong>, a krótka sprzedaż spada.<br><br>Kurs stracił w rok 41,57%, ale <strong>od mojej lipcowej analizy jest dokładnie na tym samym poziomie</strong> — po drodze wzrósł do $202,86 i wrócił. Przecena ma więc konkretną datę i przyczynę, a nie jest powolnym osuwaniem się.<br><br><strong>Nie ma tu sygnału technicznego do wejścia</strong> — jest rozbieżność między ceną a sprawozdaniem, i to na niej opieram ocenę.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$213,29</strong></td><td>Cena docelowa konsensusu</td></tr>
+          <tr><td><strong>$202,86</strong></td><td>Szczyt z 3 września — przed publikacją wyników</td></tr>
+          <tr><td><strong>$175</strong></td><td>Scenariusz podstawowy z sekcji 6</td></tr>
+          <tr><td><strong>$163,55</strong></td><td>Średnia 50-sesyjna — pierwszy opór</td></tr>
+          <tr><td><strong>$154,02</strong></td><td><strong>Średnia 200-sesyjna — kluczowy opór do odzyskania</strong></td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$116</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — scenariusz zwolnienia tempa</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs poniżej obu średnich, trend spadkowy nienaruszony. Wskaźnik siły relatywnej zbliża się do wyprzedania i krótka sprzedaż maleje, ale sygnału odwrócenia jeszcze nie ma.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Scenariusz, w którym spółka realizuje własną prognozę, daje plus dwadzieścia jeden procent — jedyny taki przypadek w tej serii. Przecena o 29% wynikła z obniżenia tempa o jeden punkt, przy niezmienionej retencji i przepływach.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Odejścia poniżej jednego procenta rocznie, minimalne nakłady i zakończenie przenoszenia klientów do chmury, po którym zysk księgowy powinien zrównać się z gotówką.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Ocena łączna: KUPNO — pierwsza i jedyna w całej tej serii aktualizacji, więc uzasadnię ją ostrożnie i wskażę, gdzie jest słaba.</strong><br><br>
+      <strong>Na czym opieram ocenę:</strong> odejścia klientów poniżej jednego procenta rocznie, wolne przepływy stanowiące 2,71-krotność zysku księgowego, minimalne nakłady inwestycyjne i przecena o blisko dwadzieścia dziewięć procent wywołana obniżeniem prognozy tempa o jeden punkt procentowy. <strong>Scenariusz, w którym spółka po prostu wykonuje własną prognozę, daje plus dwadzieścia jeden procent</strong> — a taki przypadek nie wystąpił w żadnym z dwudziestu poprzednich raportów.<br><br>
+      <strong>Gdzie ta teza jest słaba i nie będę tego ukrywał:</strong> nadwyżka zwrotu nad kosztem kapitału jest ledwie dodatnia, marża operacyjna wynosi 10,16%, a środek mojej wyceny leży tylko siedem procent powyżej kursu. <strong>To nie jest okazja o dużym marginesie bezpieczeństwa — to ocena kupna oparta na jakości przychodu, nie na taniości mnożnika.</strong><br><br>
+      <strong>Dlatego nazywam ją najostrożniejszą oceną kupna:</strong> uzasadnia niewielką pozycję i cierpliwość, a nie przekonanie. <strong>Próg rewizji: $116.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Stan</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Guidewire w portfelu</strong></td><td style="color:var(--ocena-uwaga)"><strong>Nie masz</strong></td><td>Pozycja obserwowana od lipca</td></tr>
+          <tr><td>Najbliższe istniejące ekspozycje</td><td>ServiceNow 16,43%, SAP 5,04%</td><td>Oprogramowanie dla przedsiębiorstw — razem 21,47%</td></tr>
+          <tr><td><strong>Ekspozycja na nakłady dla AI</strong></td><td style="color:var(--ocena-kupno)"><strong>Brak</strong></td><td style="color:var(--ocena-kupno)">Jedyna z dzisiejszej czwórki niezwiązana z tym tematem</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Najważniejszy wniosek portfelowy nie dotyczy samej spółki, a tego, czego w Twoim portfelu brakuje.</strong><br><br>Po przeliczeniu dwudziestu jeden spółek obraz jest jednoznaczny: <strong>półprzewodniki ważą 36,45%, wynajem mocy obliczeniowej 16,06%, a Caterpillar przestał być przeciwwagą i stał się kolejną ekspozycją na ten sam temat.</strong> Ponad połowa rachunku zależy od jednego pytania: czy nakłady na infrastrukturę obliczeniową będą rosły.<br><br><strong>Guidewire jako jedyna z dzisiejszej czwórki na to pytanie nie odpowiada.</strong><br><br><strong>Nie sugeruję decyzji</strong> — zwracam uwagę, że <strong>jest to jedna z niewielu spółek w Twoich obserwowanych, która realnie różnicowałaby ryzyko, zamiast je powielać.</strong> Trzy pozostałe dokładałyby ekspozycji do tematu, który już dominuje.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Guidewire stracił blisko trzydzieści procent wartości, bo zapowiedział wzrost o osiemnaście zamiast dziewiętnastu procent — i to jest cała historia tej spółki w jednym zdaniu.</strong> Wyniki z 3 września pobiły oczekiwania: przychody roczne <strong>$1 475,4 mln (+23%)</strong>, przychód abonamentowy <strong>+33%</strong>, powtarzalny przychód roczny <strong>$1,242 mld (+19%)</strong>, a <strong>odejścia klientów w systemach centralnych poniżej jednego procenta rocznie</strong> — liczba, której nie spotkałem w żadnej innej spółce w katalogu. Przecenę wywołała prognoza przychodów na bieżący kwartał niższa od oczekiwań o kilkanaście milionów dolarów.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Do tego dochodzi rzecz, którą trzeba policzyć, żeby zobaczyć: <strong>zysk księgowy zaniża gotówkę o ponad dwie trzecie.</strong> Wolne przepływy wynoszą <strong>$377,66 mln</strong>, czyli <strong>2,71-krotność zysku netto</strong>, bo klienci płacą z góry, a wynagrodzenie w akcjach obciąża wynik bez wypływu pieniędzy. <strong>Cena do zysku wynosi 88,52, ale cena do wolnych przepływów tylko 31,33</strong> — a nakłady inwestycyjne są najniższe w całym katalogu. Słabym punktem pozostaje <strong>ledwie dodatnia nadwyżka zwrotu nad kosztem kapitału</strong>.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Klienci nie mogą odchodzić.</strong> Poniżej jednego procenta rocznie w systemach centralnych — spełnione wyjątkowo.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Gotówka musi przewyższać zysk księgowy.</strong> Wolne przepływy blisko trzykrotnie wyższe — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Spółka nie może potrzebować kapitału na rozwój.</strong> Nakłady 0,8% przychodów, gotówka netto — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Zwrot z kapitału powinien wyraźnie przewyższać jego koszt.</strong> Nadwyżka ledwie dodatnia — niespełnione i jest to najsłabszy punkt tezy.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Marża operacyjna musi wzrosnąć po zakończeniu przenoszenia do chmury.</strong> Rozstrzygnie, czy zysk księgowy dogoni gotówkę.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Tempo wzrostu przychodu powtarzalnego musi utrzymać się na poziomie osiemnastu procent.</strong> Tyle prognozuje zarząd.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>Przełom listopada 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki pierwszego kwartału roku obrotowego 2027</strong></td><td style="color:var(--ocena-uwaga)">Czy przychód mieści się w prognozie $372–378 mln i czy retencja się utrzymuje</td></tr>
+            <tr><td>Każdy kwartał</td><td>Odejścia klientów</td><td>Jedyna liczba, która może podważyć całą tezę</td></tr>
+            <tr><td>2027–2028</td><td>Zakończenie przenoszenia klientów do chmury</td><td>Moment, w którym marża operacyjna powinna zacząć doganiać przepływową</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">Na bieżąco</td><td style="color:var(--ocena-sprzedaz)">Przejęcia wśród ubezpieczycieli</td><td style="color:var(--ocena-sprzedaz)">Główna przyczyna odejść, na którą spółka nie ma wpływu</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Odejścia klientów</strong></td><td>poniżej 1% rocznie</td><td>wzrost powyżej 2%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Wzrost przychodu powtarzalnego</strong></td><td>19%, prognoza 18%</td><td>zejście poniżej 15%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża operacyjna</td><td>10,16%</td><td>brak poprawy przez cztery kwartały</td><td><span class="mon-dot y"></span>Wymaga uwagi</td></tr>
+            <tr><td>Marża wolnych przepływów</td><td>25,60%</td><td>spadek poniżej 18%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Charakter pozycji</strong></td><td>Jakość przychodu, nie taniość mnożnika — uzasadnia niewielką pozycję i cierpliwość</td></tr>
+            <tr><td><strong>Wejście</strong></td><td>Dwie transze: pierwsza w okolicach dzisiejszego kursu, druga przy <strong>$120</strong></td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$210</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$116</strong></td></tr>
+            <tr><td><strong>Warunek zmiany na neutralną</strong></td><td>Odejścia klientów powyżej dwóch procent rocznie albo prognoza wzrostu przychodu powtarzalnego poniżej piętnastu procent</td></tr>
+            <tr><td><strong>Czego nie robić</strong></td><td>Nie używać wskaźnika ceny do zysku ani długu do EBITDA — oba zniekształca zysk księgowy zaniżony kosztami bezgotówkowymi</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">KUPNO</div>
+        <p><strong>To jedyna ocena kupna, jaką postawiłem w całej tej serii dwudziestu jeden raportów — i stawiam ją nie dlatego, że spółka jest najlepsza, ale dlatego, że reakcja rynku była nieproporcjonalna do tego, co się wydarzyło.</strong> Guidewire pobił oczekiwania co do wyników, zwiększył przychód abonamentowy o jedną trzecią i utrzymał odejścia klientów poniżej jednego procenta rocznie. Następnie podał prognozę zakładającą wzrost przychodu powtarzalnego o osiemnaście zamiast dziewiętnastu procent — i stracił blisko trzydzieści procent wartości.</p>
+        <p><strong>Liczby, które o tym rozstrzygają, są trzy.</strong> Wolne przepływy stanowią <strong>2,71-krotność zysku księgowego</strong>, więc cena do przepływów wynosi 31,33, a nie 88,52. Nakłady inwestycyjne są <strong>najniższe w katalogu</strong>. A scenariusz, w którym spółka po prostu wykonuje własną prognozę, daje <strong>plus dwadzieścia jeden procent</strong>, co nie zdarzyło się w żadnym z poprzednich raportów tej serii. <strong>Słaby punkt tezy jest równie konkretny: nadwyżka zwrotu nad kosztem kapitału jest ledwie dodatnia, a środek wyceny leży siedem procent powyżej kursu.</strong> Dlatego jest to kupno ostrożne — uzasadniające niewielką pozycję, dwie transze i cierpliwość, a nie przekonanie.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-kupno)">Kupno</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$70 – $240</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$68 (-53%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$240 (+66%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Niewielka, dwie transze</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki na przełomie listopada</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA POPRZEDNIEJ ANALIZY (21.07.2026)</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Ocena kupno, wartość godziwa $180–230</strong> przy kursie około $144</td>
+            <td><strong>Kurs wszedł w przedział</strong> — doszedł do $202,86 — a następnie spadł z powrotem do punktu wyjścia. <strong>Teza zadziałała i została odwrócona przez jeden punkt prognozy.</strong> Nowy przedział <strong>$70–240</strong>, szerszy w obie strony</td>
+            <td style="color:var(--ocena-kupno)">Trafna, przedział poszerzony</td>
+          </tr>
+          <tr>
+            <td><strong>Brak rozróżnienia zysku księgowego od przepływów</strong></td>
+            <td>Wolne przepływy stanowią <strong>2,71-krotność zysku netto</strong>. Bez tego rozróżnienia wskaźnik ceny do zysku 88,52 sugeruje spółkę trzykrotnie droższą, niż jest</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — pominięta miara rozstrzygająca</td>
+          </tr>
+          <tr>
+            <td>Brak odnotowania <strong>odejść klientów</strong> jako miary kluczowej</td>
+            <td>Poniżej 1% rocznie w systemach centralnych. <strong>To ta liczba, a nie tempo wzrostu, jest właściwym miernikiem jakości tego biznesu</strong> — i to na niej opieram dzisiejszą ocenę</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana</td>
+          </tr>
+          <tr>
+            <td>Raport w starym formacie — 14 sekcji, cena przybliżona</td>
+            <td>Nowy plik zgodny z zasadami z 17.09.2026; poprzednia wersja trafia do archiwum</td>
+            <td style="color:var(--text-muted)">Porządkowa</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Wniosek metodyczny domykający dzisiejszą czwórkę — i całą serię dwudziestu jeden raportów.</strong><br><br>
+      W czterech dzisiejszych spółkach ten sam wskaźnik — <strong>relacja zysku księgowego do gotówki operacyjnej</strong> — okazał się rozstrzygający cztery razy, za każdym razem inaczej. <strong>W Coherent gotówka to jedna dziesiąta zysku i była powodem oceny sprzedaży. W Guidewire jest blisko trzykrotnie wyższa od zysku i jest powodem oceny kupna.</strong> W Lumentum strata księgowa okazała się bezgotówkowa, a w Lam konwersja była wzorowa.<br><br>
+      <strong>Dopisuję do zasad redakcyjnych: relację zysku netto do przepływów operacyjnych trzeba policzyć w każdym raporcie, obok porównania marży netto z operacyjną i wskaźnika prognozowanego z bieżącym.</strong> Jest to trzecia kontrola wstępna, a po dzisiejszym dniu — najbardziej produktywna z nich.</div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Lipcowa ocena kierunku była trafna — kurs doszedł do przedziału, który postawiłem. Trafne było również wskazanie, że jest to spółka o wyjątkowo trwałym przychodzie; dziś mam na to liczbę, której wtedy nie podałem.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 20 września 2026 | Cena: <strong>$144,29</strong> (zamknięcie 18.09.2026) | <strong>Aktualizacja analizy z 21 lipca 2026 — ocena kupna utrzymana, przedział poszerzony</strong> | Spółka <strong>nie znajduje się w portfelu TP Corp</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> wartość godziwa $180–230 → $70–240, bo kurs wszedł w poprzedni przedział i wrócił do punktu wyjścia po obniżeniu prognozy tempa o jeden punkt; dodano relację wolnych przepływów do zysku netto (2,71×) jako miarę właściwą wobec bezużytecznego wskaźnika ceny do zysku; dodano odejścia klientów poniżej 1% rocznie jako kluczowy miernik jakości biznesu; raport przepisany z formatu 14-sekcyjnego z ceną przybliżoną na obowiązujący | Dane: StockAnalysis / S&amp;P Global Market Intelligence oraz komunikat wyników spółki z 03.09.2026 — <strong>stan danych na 20.09.2026</strong>; rozłożenie różnicy między zyskiem a gotówką, scenariusze i relacja nakładów do przychodów to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

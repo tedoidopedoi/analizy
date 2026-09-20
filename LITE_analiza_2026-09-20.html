@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LITE — Lumentum Holdings | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:13px; color:var(--text-muted); font-style:italic; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: LITE</div>
+    <div class="company-name">Lumentum Holdings Inc.</div>
+    <div class="company-sub">Optyka dla centrów danych — lasery, moduły nadawczo-odbiorcze i komponenty fotoniczne · San Jose · 13 757 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">Spoza portfela — obserwowana</span>
+      <span class="meta-tag">Teza z lipca zadziałała</span>
+      <span class="meta-tag">Strata $6,94 mld bez wypływu gotówki</span>
+      <div class="price-display">
+        <div class="price-main">$930,91</div>
+        <div class="price-sub">zamknięcie 18.09.2026 (+4,17%), po sesji $930,38</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Optyka i łączność</span><span class="temat">Moc obliczeniowa dla AI</span><span class="temat">Półprzewodniki</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — lipcowa teza zadziałała i się wyczerpała; wycena wymaga dowiezienia całej trzyletniej ścieżki wzrostu">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">obniżenie z kupna — kurs wszedł w mój przedział i go wypełnił</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$180 – $1 220</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-81% do +31%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>3 listopada</b><em>Q1 roku obrotowego 2027</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$930,91</div><div class="metric-detail"><strong>+469,92% w 52 tygodnie</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 03.07</div><div class="metric-value green">+27,5%</div><div class="metric-detail"><strong>Kurs wszedł w mój przedział $750–1 100</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Strata roczna</div><div class="metric-value red">-$92,96</div><div class="metric-detail">Na akcję — <strong>w całości bezgotówkowa</strong>, sekcja 5</div></div>
+    <div class="metric-card"><div class="metric-label">Wynik operacyjny</div><div class="metric-value green">+$536,20 mln</div><div class="metric-detail">Marża 17,79% — działalność jest rentowna</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / zysk operacyjny</div><div class="metric-value red">ok. 197×</div><div class="metric-detail">Prognozowana <strong>42,96×</strong> · PEG 0,40</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / wolne przepływy</div><div class="metric-value red">278,25</div><div class="metric-detail">Ponad dwustukrotność — wycena z przyszłości</div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot z kapitału vs koszt</div><div class="metric-value">+3,54 pp</div><div class="metric-detail">16,03% wobec 12,49%</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (26 analityków)</div><div class="metric-value green">$1 149,38</div><div class="metric-detail">+23,47% · kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I STAN POPRZEDNIEJ TEZY</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Lumentum produkuje elementy optyczne, dzięki którym dane poruszają się światłem w centrum danych — lasery, moduły nadawczo-odbiorcze i komponenty fotoniczne. Przychody roczne <strong>$3,01 mld</strong>, kapitalizacja <strong>$83,50 mld</strong>. <strong>Spółki nie masz w portfelu</strong> — jest w obserwowanych.</p>
+
+      <div class="alert alert-success"><strong>Teza z 3 lipca zadziałała i jest to jedna z niewielu, o których mogę to powiedzieć bez zastrzeżeń.</strong><br><br>
+      Oceniłem wtedy LITE na <strong>kupno</strong> przy kursie około $730 i wyceniłem na <strong>$750–1 100</strong>. Kurs wynosi dziś <strong>$930,91</strong>, czyli <strong>27,5% więcej</strong>, i znajduje się wewnątrz tego przedziału, w jego górnej części.<br><br>
+      <strong>Dlatego dziś obniżam ocenę</strong> — nie dlatego, że coś się popsuło, ale dlatego, że przedział został wypełniony. To ten sam mechanizm, który opisywałem przy Marvellu: teza się nie zepsuła, tylko wyczerpała.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Zdarzenie</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody roku obrotowego 2026</strong></td><td style="color:var(--ocena-kupno)"><strong>$3,01 mld</strong>, wzrost o 83%</td><td style="color:var(--ocena-kupno)">Sam czwarty kwartał dał $1,01 mld</td></tr>
+          <tr><td><strong>Strata księgowa roku</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$6,94 mld</strong> · -$92,96 na akcję</td><td style="color:var(--ocena-sprzedaz)">Pochodzi z jednego zdarzenia — patrz wiersz niżej</td></tr>
+          <tr><td><strong>Zamiana obligacji zamiennych na akcje</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Odpis $7,8 mld, bezgotówkowy</strong></td><td style="color:var(--ocena-sprzedaz)">Wydano ok. 10,6 mln akcji za ok. $1,125 mld długu</td></tr>
+          <tr><td>Ceny konwersji obligacji</td><td>od $69,54 do $187,77</td><td style="color:var(--ocena-uwaga)">Przy kursie powyżej $900 były głęboko w pieniądzu</td></tr>
+          <tr><td>Reakcja rynku na te wyniki</td><td style="color:var(--ocena-kupno)">Wzrost kursu</td><td style="color:var(--ocena-kupno)">Rynek uznał prognozę za ważniejszą od odpisu</td></tr>
+          <tr><td>Prognoza wzrostu przychodów</td><td style="color:var(--ocena-kupno)">65,64% rocznie na trzy lata</td><td style="color:var(--ocena-kupno)">Napędzana budową infrastruktury dla sztucznej inteligencji</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — WĄSKIE GARDŁO, KTÓRE ROŚNIE SZYBCIEJ NIŻ KLASTRY</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <p>Akceleratory w centrum danych muszą wymieniać dane między sobą, a przy dzisiejszej skali klastrów przewód miedziany przestaje wystarczać już na dystansie kilku metrów. Rolę tę przejmuje światło — i to właśnie sprzedaje Lumentum: <strong>lasery, moduły nadawczo-odbiorcze i elementy fotoniczne zamieniające sygnał elektryczny na optyczny</strong>.</p>
+
+      <div class="alert alert-success"><strong>Kluczowa własność tego rynku: liczba połączeń optycznych rośnie szybciej niż liczba akceleratorów.</strong><br><br>
+      Klaster o podwojonej liczbie układów potrzebuje więcej niż dwa razy tyle połączeń, bo każdy element musi widzieć każdy inny. <strong>Dlatego wydatki na optykę rosną szybciej niż same nakłady na moc obliczeniową</strong> — i to tłumaczy prognozę wzrostu przychodów przekraczającą sześćdziesiąt procent rocznie.<br><br>
+      Potwierdzenie z innego raportu: <strong>Marvell, którego masz w portfelu, podniósł prognozę roczną o $1,5 mld i wskazał optykę jako główne źródło tej korekty.</strong> Dwie niezależne spółki opisują więc to samo zjawisko od dwóch stron.</div>
+
+      <div class="alert alert-warning"><strong>Zastrzeżenie: to nadal sprzedaż elementów, a nie systemów.</strong> Marża brutto <strong>44,24%</strong> jest wyraźnie niższa niż u projektantów układów sprzedających własność intelektualną — Lumentum sprzedaje fizyczne moduły, przy których klient przy każdej generacji negocjuje cenę.<br><br><strong>Konsekwencja:</strong> przewaga polega nie na tym, że nikt inny nie umie, tylko na tym, kto zdąży z mocami i utrzyma jakość przy skali. Realna, ale odtwarzalna — inaczej niż w litografii.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na Lumentum</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Skala klastrów obliczeniowych</strong></td><td style="color:var(--ocena-kupno)">Rośnie</td><td style="color:var(--ocena-kupno)"><strong>Połączeń przybywa szybciej niż układów</strong></td></tr>
+          <tr><td>Przejście na wyższe przepustowości</td><td style="color:var(--ocena-kupno)">Trwa</td><td style="color:var(--ocena-kupno)">Każda generacja wymusza wymianę modułów</td></tr>
+          <tr><td><strong>Moce produkcyjne w branży</strong></td><td style="color:var(--ocena-sprzedaz)">Rozbudowywane przez wszystkich</td><td style="color:var(--ocena-sprzedaz)">Tak kończy się każdy niedobór komponentów</td></tr>
+          <tr><td>Optyka wbudowana w układ</td><td style="color:var(--ocena-uwaga)">Technologia się rozwija</td><td style="color:var(--ocena-uwaga)">Może w przyszłości przenieść wartość do projektanta układu</td></tr>
+          <tr><td><strong>Koncentracja odbiorców</strong></td><td style="color:var(--ocena-sprzedaz)">Wysoka</td><td style="color:var(--ocena-sprzedaz)">Kilku operatorów chmury decyduje o zamówieniach</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Największe ryzyko strategiczne nie polega na konkurencji cenowej, a na tym, że optyka przeniesie się do wnętrza układu.</strong> Branża pracuje nad rozwiązaniami, w których <strong>element fotoniczny jest zintegrowany z układem scalonym</strong> — jeśli to się upowszechni, wartość przesunie się do projektanta krzemu.<br><br><strong>Nie jest to zagrożenie na dwa lata</strong>, bo skala wdrożenia jest niewielka. Ale przy wycenie zakładającej trzyletnią ścieżkę wzrostu warto wiedzieć, skąd może przyjść jej koniec.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I AKCJONARIAT</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Struktura odbiorców</td><td style="color:var(--ocena-sprzedaz)">Skoncentrowana</td><td style="color:var(--ocena-sprzedaz)">Operatorzy chmury i producenci sprzętu sieciowego</td></tr>
+          <tr><td>Przychód na pracownika</td><td style="color:var(--ocena-uwaga)">$219 088</td><td style="color:var(--ocena-uwaga)">Nisko — to produkcja fizyczna, nie projektowanie</td></tr>
+          <tr><td><strong>Zmiana liczby akcji r/r</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+7,18%</strong></td><td style="color:var(--ocena-sprzedaz)">Skutek zamiany obligacji — rozwodnienie realne</td></tr>
+          <tr><td>Instytucje / zarząd</td><td>93,99% / 0,61%</td><td style="color:var(--ocena-uwaga)">Udział kierownictwa minimalny</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-uwaga)">7,12 mln akcji — 7,94%</td><td>Spadek wobec poprzedniego miesiąca</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Tu trzeba postawić rzecz, którą „skorygowane" wyniki spółki chowają: rozwodnienie o 7,18% nie jest kosmetyką, tylko ceną zapłaconą obligatariuszom.</strong><br><br>
+      Spółka wydała <strong>około 10,6 mln nowych akcji</strong> — czyli blisko <strong>11,8% dzisiejszej liczby akcji</strong> — w zamian za umorzenie około <strong>$1,125 mld</strong> obligacji zamiennych.<br><br>
+      <strong>Przy dzisiejszym kursie te akcje są warte około $9,9 mld.</strong> Obligatariusze mieli do nich prawo, bo kupili opcję konwersji po cenach od $69,54 do $187,77, a kurs poszedł znacznie wyżej — to nie był prezent, tylko realizacja umowy. <strong>Ale z punktu widzenia akcjonariusza jest to trwały transfer wartości, a nie zdarzenie do pominięcia.</strong><br><br>
+      Rozwijam skutki księgowe tej operacji w sekcji 5, bo to ona odpowiada za całą roczną stratę.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">BIZNES — STRATA, KTÓRA NIE JEST STRATĄ, I DYLUCJA, KTÓRA JEST</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (rok obrotowy 2026)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$3,01 mld — wzrost o 83%</td></tr>
+          <tr><td>Zysk brutto</td><td>$1,33 mld — marża 44,24%</td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td style="color:var(--ocena-kupno)"><strong>+$536,20 mln — marża 17,79%</strong></td></tr>
+          <tr><td><strong>Wynik przed opodatkowaniem</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$7,17 mld — różnica $7,71 mld</strong></td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-sprzedaz)">-$6,94 mld · -$92,96 na akcję</td></tr>
+          <tr><td><strong>Przepływy operacyjne</strong></td><td style="color:var(--ocena-kupno)"><strong>+$751,40 mln — dodatnie</strong></td></tr>
+          <tr><td>Nakłady inwestycyjne</td><td>-$451,30 mln — 15,0% przychodów</td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>+$300,10 mln · $3,35 na akcję</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Rozjazd między wynikiem operacyjnym a przedpodatkowym wynosi $7,71 mld — i jest to lustrzane odbicie tego, co znalazłem w Marvellu i Amazonie.</strong><br><br>
+      Tam marża netto <em>przewyższała</em> operacyjną, bo poniżej linii operacyjnej doszły zyski jednorazowe zawyżające zysk. <strong>Tutaj jest odwrotnie: działalność zarobiła $536,20 mln, a poniżej linii pojawiła się strata o rząd wielkości większa.</strong><br><br>
+      <strong>Przyczyna jest jedna i została potwierdzona w komunikacie spółki:</strong> odpis <strong>$7,8 mld na zamianie obligacji zamiennych na akcje</strong>, z czego $7 755,1 mln to wartość konwersji przewyższająca wartość nominalną długu. <strong>Operacja była bezgotówkowa, zmniejszyła zadłużenie i zwiększyła kapitał własny</strong>, a spółka wyłączyła ją ze swoich miar skorygowanych.<br><br>
+      <strong>Test rozstrzygający jest prosty i wypada jednoznacznie: przepływy operacyjne wyniosły plus $751,40 mln, a wolne plus $300,10 mln.</strong> Gdyby strata była realna gotówkowo, zobaczylibyśmy ją tutaj. Nie widać jej.</div>
+
+      <div class="alert alert-warning"><strong>Nie znaczy to jednak, że odpis można po prostu pominąć — i tu nie zgadzam się z ujęciem „skorygowanym".</strong><br><br>
+      <strong>Ten odpis mierzy dokładnie wartość, którą dotychczasowi akcjonariusze oddali obligatariuszom.</strong> Gotówka nie wypłynęła, bo zapłacono akcjami — ale zapłata nastąpiła. Liczba akcji wzrosła o 7,18% w rok, a prawa do przyszłych zysków rozłożyły się na większą bazę.<br><br>
+      <strong>Uczciwe podsumowanie brzmi tak: strata nie jest stratą operacyjną i nie zagraża płynności, ale dylucja, którą ona opisuje, jest trwała.</strong> Właściwą miarą działalności jest zysk operacyjny; właściwą miarą kosztu dla akcjonariusza jest liczba akcji.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja / wartość firmy</td><td>$83,50 mld / $82,44 mld</td><td style="color:var(--ocena-kupno)">Wartość firmy niższa — spółka ma gotówkę netto</td></tr>
+          <tr><td><strong>Cena / sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>27,70</strong></td><td style="color:var(--ocena-sprzedaz)">Prognozowana 13,34 — rynek zakłada podwojenie przychodów</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>278,25</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Grubo powyżej stu</strong> — wycena opiera się na przyszłości, nie na dzisiejszych przepływach</td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td style="color:var(--ocena-sprzedaz)">102,95</td><td style="color:var(--ocena-sprzedaz)">Wartość firmy do wolnych przepływów 274,69</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td style="color:var(--ocena-sprzedaz)">17,76</td><td>Księga $52,41 na akcję, gotówka netto $11,90</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>nie dotyczy</td><td>Strata <strong>$92,96 na akcję</strong> z odpisu na obligacjach</td></tr>
+          <tr><td><strong>P/E od zysku operacyjnego</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>ok. 197×</strong></td><td style="color:var(--ocena-sprzedaz)">Miara właściwa dziś — rachunek pod tabelą</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>42,96</strong></td><td style="color:var(--ocena-uwaga)">Wymaga zysku około <strong>$21,67 na akcję</strong> — ponad czterokrotności dzisiejszego</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-kupno)"><strong>0,40</strong></td><td style="color:var(--ocena-kupno)">Poniżej jedności — jedyny wskaźnik mówiący „tanio"</td></tr>
+          <tr><td>Prognozy na trzy lata</td><td style="color:var(--ocena-kupno)">przychody 65,64% rocznie</td><td>Zysk na akcję 76,21% rocznie</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać — tu wskaźniki mówią rzeczy przeciwne i trzeba rozstrzygnąć, który z nich ma rację.</strong> Zysk operacyjny $536,20 mln po podatku dwudziestoprocentowym daje około <strong>$4,72 na akcję</strong>, więc dzisiejszy kurs to blisko dwieście razy to, co spółka zarabia z działalności. Jednocześnie <strong>iloraz wobec tempa wzrostu wynosi 0,40</strong>, co sugeruje okazję. <strong>Różnica bierze się z horyzontu:</strong> pierwsza liczba opisuje dziś, druga zakłada, że tempo sześćdziesięciu pięciu procent rocznie utrzyma się przez trzy lata. <strong>Jedno i drugie nie może być jednocześnie właściwym opisem — i właśnie to napięcie jest treścią tej wyceny.</strong></p>
+      <p style="color:var(--text-muted);font-size:13px">Dane: StockAnalysis / S&amp;P Global Market Intelligence, stan 20.09.2026. Przeliczenie zysku operacyjnego na akcję i wynikający z niego mnożnik — obliczenie własne przy założeniu stawki podatku 21%.</p>
+
+      <h3>Cztery scenariusze na 2028 rok</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Zysk na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cykl optyczny trwa, premia utrzymana</strong></td><td>$38,00</td><td>32×</td><td><strong>$1 216</strong></td><td style="color:var(--ocena-kupno)">+31%</td></tr>
+          <tr><td><strong>Wzrost dowieziony, mnożnik normalizuje</strong></td><td>$35,00</td><td>26×</td><td><strong>$910</strong></td><td style="color:var(--ocena-uwaga)">-2%</td></tr>
+          <tr><td>Wzrost wolniejszy od prognoz</td><td>$22,00</td><td>22×</td><td>$484</td><td style="color:var(--ocena-sprzedaz)">-48%</td></tr>
+          <tr><td><strong>Cykl nakładów się odwraca</strong></td><td style="color:var(--ocena-sprzedaz)">$10,00</td><td>18×</td><td><strong>$180</strong></td><td style="color:var(--ocena-sprzedaz)">-81%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne. Ścieżka scenariusza podstawowego wyprowadzona z prognozy konsensusu na najbliższy rok, wynikającej ze wskaźnika prognozowanego, przedłużonej o dwa lata z malejącym tempem. Mnożniki odzwierciedlają rozpiętość historycznych wycen producentów komponentów optycznych — od kilkunastu razy zysk w dołku do ponad trzydziestu przy silnym popycie.</p>
+
+      <p><strong>Fair value: $180 – $1 220</strong>, prosty środek <strong>$700,00 (-24,8%)</strong>. Po nadaniu scenariuszom wag 25/35/25/15 wynik wypada wyżej, na <strong>$770 (-17,2%)</strong> — i na tej liczbie się opieram. Konsensus 26 analityków to $1 149,38 (+23,47%) przy rekomendacji kupna, czyli blisko mojego scenariusza najlepszego.</p>
+
+      <div class="alert alert-warning"><strong>Zwracam uwagę na scenariusz drugi, bo to on jest najbardziej pouczający: przy dowiezionym wzroście i mnożniku spadającym do dwudziestu sześciu razy zysk kurs wypada dwa procent poniżej dzisiejszego.</strong><br><br>
+      <strong>Oznacza to, że dzisiejsza cena dyskontuje już pomyślne wykonanie całej trzyletniej ścieżki wzrostu.</strong> Żeby zarobić, nie wystarczy, by prognozy się sprawdziły — musi się sprawdzić prognoza <em>i</em> rynek musi nadal płacić premię. To jest dokładnie ten układ, przy którym obniżam ocenę.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto</td><td style="color:var(--ocena-uwaga)">44,24%</td><td style="color:var(--ocena-uwaga)">Poniżej projektantów układów — to producent komponentów</td></tr>
+          <tr><td><strong>Marża operacyjna</strong></td><td style="color:var(--ocena-kupno)"><strong>17,79%</strong></td><td style="color:var(--ocena-kupno)">Marża EBITDA 26,57%, marża wolnych przepływów 9,96%</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-kupno)"><strong>16,03% vs 12,49%</strong></td><td style="color:var(--ocena-kupno)"><strong>Różnica +3,54 pp</strong></td></tr>
+          <tr><td><strong>Zwrot z kapitału własnego (ROE)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-240,03%</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Liczba bez treści</strong> — licznikiem jest odpis na obligacjach</td></tr>
+          <tr><td>Rotacja zapasów</td><td style="color:var(--ocena-uwaga)">2,89</td><td>Zapas leży około czterech miesięcy</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Nadwyżka zwrotu z zainwestowanego kapitału nad jego kosztem wynosi 3,54 pp — i to jest liczba znacznie skromniejsza, niż sugerowałby wzrost kursu o blisko pięćset procent.</strong><br><br>
+      Umiejscowienie wśród dziewiętnastu spółek, które przeliczyłem: KLA +54,77 · ASML +54,26 · Novo Nordisk +33,71 · Samsung +24,25 · Sibanye +23,15 · SAP +9,92 · Amphenol +9,89 · Caterpillar +6,59 · <strong>Lumentum +3,54</strong> · ServiceNow +1,18 · Oracle +0,70 · Amazon +0,69 · AMD −8,02 · Marvell −9,38 · Intel −11,92.<br><br>
+      <strong>Wniosek jest przydatny: Lumentum tworzy wartość na kapitale, ale niewiele powyżej jego kosztu.</strong> Jest to biznes produkcyjny z realnym majątkiem i nakładami sięgającymi piętnastu procent przychodów, a nie lekka kapitałowo maszyna do zarabiania jak ASML czy KLA. <strong>Rajd kursu wyprzedził poprawę zwrotu z kapitału, a nie za nią podążył.</strong></div>
+
+      <div class="alert alert-warning"><strong>Uwaga do zwrotu z kapitału własnego: wartość minus 240,03% jest formalnie poprawna i całkowicie bezużyteczna.</strong> Licznikiem jest strata księgowa pochodząca z zamiany obligacji, a nie z działalności. <strong>Przy tej spółce jedynymi sensownymi miarami rentowności są marża operacyjna i zwrot z zainwestowanego kapitału</strong> — obie liczone od wyniku, który rzeczywiście powstał z prowadzenia biznesu.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — POPRAWIONY PRZEZ TĘ SAMĄ OPERACJĘ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gotówka / zadłużenie</strong></td><td style="color:var(--ocena-kupno)">$2,74 mld / $1,67 mld</td><td style="color:var(--ocena-kupno)"><strong>Gotówka netto +$1,07 mld</strong> ($11,90 na akcję)</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-kupno)">0,36</td><td style="color:var(--ocena-kupno)">Dług do EBITDA 2,05</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-kupno)"><strong>24,60</strong></td><td style="color:var(--ocena-kupno)">Wskaźnik <strong>aktualny</strong> — zadłużenie netto zmalało o $74,50 mln</td></tr>
+          <tr><td>Wskaźnik bieżący / szybki</td><td style="color:var(--ocena-kupno)">1,68 / 1,32</td><td>Kapitał obrotowy $1,68 mld</td></tr>
+          <tr><td>Altman Z / Piotroski F</td><td style="color:var(--ocena-kupno)">6,81 / 6</td><td style="color:var(--ocena-kupno)">Wysoko w bezpiecznej strefie</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Paradoks tej spółki: operacja, która wygenerowała stratę siedmiu miliardów dolarów, jednocześnie naprawiła bilans.</strong><br><br>
+      Zamiana obligacji na akcje <strong>usunęła z bilansu $1,125 mld zadłużenia i o tyle samo podniosła kapitał własny</strong>. Skutek widać w liczbach: spółka ma dziś <strong>gotówkę netto plus $1,07 mld</strong>, wskaźnik Altmana 6,81 i pokrycie odsetek przekraczające dwadzieścia cztery razy.<br><br>
+      <strong>Sprawdzenie, czy pokrycie odsetek nie jest wskaźnikiem martwym, wypada tu pozytywnie:</strong> w ciągu roku zadłużenie netto <em>zmalało</em> o $74,50 mln, więc spółka nie pożyczała, tylko spłacała. Wskaźnik opisuje stan bieżący.<br><br>
+      <strong>Bilans przestał więc być ryzykiem tej pozycji.</strong> Całe ryzyko przeniosło się do wyceny — i o tym jest ten raport.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Optyka rośnie szybciej niż sama moc obliczeniowa.</strong> Podwojenie klastra wymaga więcej niż dwukrotności połączeń, bo każdy element musi widzieć każdy inny. Stąd prognoza wzrostu przychodów przekraczająca sześćdziesiąt procent rocznie.</div>
+
+      <div class="alert alert-success"><strong>2. Przychody wzrosły o 83% w jednym roku obrotowym</strong>, a sam czwarty kwartał dał ponad miliard dolarów. To nie jest prognoza, tylko wykonanie — i rynek zareagował na nie wzrostem mimo siedmiomiliardowego odpisu.</div>
+
+      <div class="alert alert-success"><strong>3. Bilans został naprawiony tą samą operacją, która wygenerowała stratę.</strong> Zadłużenie zamienione na kapitał, gotówka netto dodatnia, wskaźnik Altmana wysoko w bezpiecznej strefie. Spółka nie potrzebuje rynku kapitałowego.</div>
+
+      <div class="alert alert-info"><strong>4. Potwierdzenie z niezależnego źródła.</strong> Marvell, którego masz w portfelu, podniósł prognozę roczną o $1,5 mld i wskazał optykę jako główny powód. Dwie różne spółki opisują to samo zjawisko od dwóch stron łańcucha.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Cena dyskontuje już całą trzyletnią ścieżkę wzrostu.</strong> Scenariusz, w którym prognozy się sprawdzają, a mnożnik normalizuje, daje kurs poniżej dzisiejszego. Żeby zarobić, musi się sprawdzić prognoza <em>i</em> utrzymać premia.</div>
+
+      <div class="alert alert-danger"><strong>2. Cena do wolnych przepływów przekracza 278×.</strong> Przepływy są dodatnie — to przewaga nad wieloma spółkami z tego tematu — ale znikome wobec kapitalizacji. Stopa zwrotu z nich wynosi 0,36%.</div>
+
+      <div class="alert alert-warning"><strong>3. To producent komponentów, nie właściciel własności intelektualnej.</strong> Marża brutto 44,24% i nakłady sięgające piętnastu procent przychodów pokazują, że przewaga polega na mocach i jakości przy skali — a taka przewaga jest odtwarzalna.</div>
+
+      <div class="alert alert-warning"><strong>4. Integracja optyki z układem scalonym przesunęłaby wartość do projektanta krzemu.</strong> Nie jest to zagrożenie na dwa lata, ale przy wycenie zakładającej trzyletni wzrost warto wiedzieć, skąd może przyjść jego koniec.</div>
+
+      <div class="alert alert-warning"><strong>5. Próg, przy którym zmieniam ocenę na sprzedaż:</strong> spadek dynamiki przychodów poniżej dwudziestu procent rocznie przy mnożniku utrzymanym powyżej trzydziestu razy zysk prognozowany.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Przewaga nad Lumentum</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Coherent</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz — obserwowana)</span></td><td style="color:var(--ocena-sprzedaz)">Szerszy katalog i większa skala przychodów</td><td>Bardziej rozproszona działalność</td></tr>
+          <tr><td><strong>Marvell</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 3,84%)</span></td><td><strong>Warstwa wyżej</strong> — sprzedaje krzem przetwarzający sygnał, nie sam moduł</td><td style="color:var(--ocena-uwaga)">Zależny od tych samych klientów i tego samego cyklu</td></tr>
+          <tr><td>Producenci modułów z Azji</td><td style="color:var(--ocena-sprzedaz)">Niższe koszty wytwarzania</td><td style="color:var(--ocena-kupno)">Słabsza pozycja w najnowszych generacjach</td></tr>
+          <tr><td><strong>Optyka wbudowana w układ</strong></td><td>Eliminuje osobny moduł</td><td style="color:var(--ocena-kupno)">Skala wdrożenia wciąż niewielka</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Najważniejsze w tym zestawieniu jest rozróżnienie warstw, bo decyduje o tym, gdzie zostaje marża.</strong><br><br>
+      <strong>Marvell sprzedaje krzem, który przetwarza sygnał; Lumentum sprzedaje element, który zamienia go na światło.</strong> Obie firmy zarabiają na tym samym zjawisku, ale Marvell operuje w warstwie o wyższej marży i trudniejszej do podmiany.<br><br>
+      Widać to w liczbach: <strong>Lumentum ma marżę brutto 44,24%, Marvell wyraźnie wyższą</strong>, a przychód na pracownika w Lumentum wynosi $219 tys. wobec wielokrotnie wyższego u projektantów układów. <strong>To jest cena bycia producentem fizycznego komponentu — i warto ją znać, oceniając mnożnik.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zmiana za 52 tygodnie</strong></td><td style="color:var(--ocena-kupno)"><strong>+469,92%</strong></td><td><strong>Najwyżej ze wszystkiego, co analizowałem w tej serii</strong></td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td style="color:var(--ocena-kupno)">$841,77</td><td style="color:var(--ocena-uwaga)">Kurs <strong>10,6% powyżej</strong></td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td style="color:var(--ocena-kupno)">$713,73</td><td style="color:var(--ocena-uwaga)">Kurs <strong>30,4% powyżej</strong> — rozciągnięcie duże</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>54,02</td><td>Neutralnie mimo rajdu; wolumen 4,37 mln akcji</td></tr>
+          <tr><td>Beta (5 lat)</td><td style="color:var(--ocena-uwaga)">1,54</td><td>Tyle samo co Samsung; mniej, niż sugerowałby rajd</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-uwaga)">7,94% akcji</td><td>Spadek z 7,27 mln do 7,12 mln akcji</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Lumentum wyłamuje się z obrazu, który powtarzał się w tej serii raportów — i to jest informacja sama w sobie.</strong><br><br>
+      ASML, KLA, Caterpillar i Samsung stały <em>poniżej</em> krótszej średniej po wrześniowym cofnięciu sektorowym. <strong>Lumentum stoi ponad dziesięć procent powyżej krótszej średniej i trzydzieści procent powyżej dłuższej.</strong> Wrześniowe cofnięcie albo go ominęło, albo zostało już w całości odrobione.<br><br>
+      <strong>Wskaźnik siły relatywnej 54,02 po wzroście o blisko pięćset procent w rok jest wart osobnej uwagi:</strong> oznacza, że rajd odbywa się spokojnie, bez paniki zakupowej. To zachowanie typowe dla trendu opartego na kolejnych dobrych wynikach, a nie na spekulacji — <strong>ale nie zmienia faktu, że kurs jest trzydzieści procent nad swoją długoterminową średnią</strong>.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$1 149,38</strong></td><td>Cena docelowa konsensusu — blisko mojego scenariusza najlepszego</td></tr>
+          <tr><td><strong>$910</strong></td><td>Scenariusz podstawowy z sekcji 6 — praktycznie dzisiejszy kurs</td></tr>
+          <tr><td><strong>$841,77</strong></td><td>Średnia 50-sesyjna — pierwsze wsparcie</td></tr>
+          <tr><td><strong>$713,73</strong></td><td><strong>Średnia 200-sesyjna — kluczowe wsparcie</strong></td></tr>
+          <tr><td style="color:var(--ocena-kupno)"><strong>$600</strong></td><td style="color:var(--ocena-kupno)"><strong>Poziom, przy którym rozkład scenariuszy przechyla się na korzyść</strong></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Trend nienaruszony, wskaźnik siły relatywnej neutralny mimo rajdu, ale kurs trzydzieści procent nad długoterminową średnią. Wyniki z 3 listopada rozstrzygną, czy tempo się utrzymuje.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Scenariusz z dowiezionym wzrostem i normalizacją mnożnika daje kurs poniżej dzisiejszego. Wynik po uwzględnieniu prawdopodobieństw wypada siedemnaście procent niżej.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Optyka pozostanie wąskim gardłem klastrów obliczeniowych, a bilans z gotówką netto pozwala przetrwać przerwę w cyklu. W tym horyzoncie wzrost przychodów zdąży zamortyzować dzisiejszy mnożnik.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ocena łączna: NEUTRALNA — obniżenie z kupna z 3 lipca, i chcę powiedzieć wprost, że to obniżenie po udanej tezie.</strong><br><br>
+      <strong>Lipcowa analiza była trafna.</strong> Kupno przy około $730 z przedziałem $750–1 100 dało kurs $930,91, czyli wejście w przedział i wypełnienie go w trzech czwartych. Spółka dowiozła: przychody wzrosły o 83%, działalność jest rentowna, a bilans został naprawiony.<br><br>
+      <strong>Obniżam ocenę, bo przewaga została skonsumowana.</strong> Przy dzisiejszej cenie scenariusz, w którym prognozy się sprawdzają, a mnożnik wraca do rozsądnego poziomu, daje wynik ujemny. <strong>Żeby zarobić od tego miejsca, potrzebne jest jednoczesne spełnienie dwóch warunków — a to nie jest już ta sama inwestycja co w lipcu.</strong><br><br>
+      <strong>Poziom, przy którym wracam do kupna: okolice $600</strong>, czyli poniżej średniej długoterminowej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Stan</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Lumentum w portfelu</strong></td><td style="color:var(--ocena-uwaga)"><strong>Nie masz</strong></td><td>Pozycja obserwowana od lipca</td></tr>
+          <tr><td>Najbliższa istniejąca ekspozycja</td><td>Marvell — 3,84%</td><td style="color:var(--ocena-uwaga)">Ta sama fala popytu, warstwa wyżej w łańcuchu</td></tr>
+          <tr><td><strong>Półprzewodniki i łączność razem</strong></td><td style="color:var(--ocena-uwaga)"><strong>38,91%</strong></td><td style="color:var(--ocena-uwaga)">Pięć spółek półprzewodnikowych plus Amphenol</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Gdybyś rozważał dołożenie Lumentum, najważniejsze pytanie brzmi: czy to nowa ekspozycja, czy powtórzenie istniejącej.</strong><br><br>
+      <strong>Marvell, którego masz, zarabia na tej samej fali popytu na optykę</strong> — i sam wskazał ją jako główny powód podniesienia prognozy o $1,5 mld. Amphenol sprzedaje elementy łączności do tych samych centrów danych. <strong>Lumentum byłby trzecią pozycją na to samo zjawisko</strong>, tylko w warstwie komponentu.<br><br>
+      Różnica jest realna, ale węższa, niż się wydaje: <strong>Marvell operuje w warstwie o wyższej marży i trudniejszej do podmiany, Lumentum w produkcji fizycznej o marży brutto czterdziestu czterech procent.</strong> Gdyby ceny modułów spadły przy utrzymanym popycie, Lumentum ucierpiałby pierwszy.<br><br>
+      <strong>Nie sugeruję decyzji</strong> — nie jestem doradcą. Zwracam uwagę, że przy tej cenie doszłaby pozycja o niskiej nadwyżce zwrotu nad kosztem kapitału do tematu, który już waży blisko czterdzieści procent Twojego rachunku.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Lumentum dowiózł wszystko, czego oczekiwałem w lipcu, i właśnie dlatego przestaje być okazją.</strong> Przychody wzrosły o <strong>83%</strong> do $3,01 mld, działalność jest rentowna z marżą operacyjną <strong>17,79%</strong>, przepływy operacyjne są dodatnie, a bilans ma <strong>gotówkę netto +$1,07 mld</strong>. Roczna strata <strong>$92,96 na akcję</strong> wygląda dramatycznie, ale pochodzi w całości z jednego zdarzenia: bezgotówkowego odpisu <strong>$7,8 mld</strong> przy zamianie obligacji zamiennych na akcje. Dodatnie wolne przepływy potwierdzają, że gotówka nie wypłynęła.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Odpisu nie należy jednak po prostu pominąć, jak robią to miary skorygowane. <strong>Mierzy on wartość, którą akcjonariusze oddali obligatariuszom — około 10,6 mln nowych akcji, czyli blisko dwunastą część spółki.</strong> Co do wyceny: kurs wzrósł w rok o <strong>469,92%</strong>, cena do wolnych przepływów przekracza <strong>278×</strong>, a mnożnik liczony od zysku operacyjnego wynosi około <strong>197×</strong>. Scenariusz, w którym prognozy się sprawdzają, a mnożnik normalizuje, daje kurs <em>poniżej</em> dzisiejszego — <strong>cena dyskontuje już całą trzyletnią ścieżkę wzrostu.</strong></p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Popyt na optykę musi rosnąć szybciej niż moc obliczeniowa.</strong> Potwierdzone niezależnie przez Marvella — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Działalność musi być rentowna.</strong> Marża operacyjna blisko osiemnastu procent, dodatnie wolne przepływy — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Bilans nie może ograniczać.</strong> Gotówka netto, Altman wysoko w bezpiecznej strefie, dług spłacany — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Wycena powinna dawać asymetrię.</strong> Scenariusz podstawowy poniżej dzisiejszej ceny — niespełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Akcjonariusz nie powinien być rozwadniany.</strong> Ponad siedem procent nowych akcji w rok — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Tempo wzrostu musi utrzymać się przez trzy lata.</strong> Jedyna zmienna rozstrzygająca; dziś niesprawdzalna.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>3 listopada 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki pierwszego kwartału roku obrotowego 2027</strong></td><td style="color:var(--ocena-uwaga)">Czy dynamika przychodów utrzymuje się po rekordowym kwartale</td></tr>
+            <tr><td>Każdy kwartał</td><td>Marża brutto</td><td>Pokaże, czy skala poprawia rentowność, czy pożerają ją ceny</td></tr>
+            <tr><td>2027</td><td>Skala wdrożeń optyki wbudowanej w układ</td><td>Moment, w którym wartość może zacząć przesuwać się do projektanta krzemu</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">Na bieżąco</td><td style="color:var(--ocena-sprzedaz)">Rozbudowa mocy u konkurentów</td><td style="color:var(--ocena-sprzedaz)">Tak kończy się każdy niedobór komponentów</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Dynamika przychodów</strong></td><td>+83% rocznie</td><td>zejście poniżej 20%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Marża brutto</td><td>44,24%</td><td>spadek przy rosnących przychodach</td><td><span class="mon-dot y"></span>Wymaga uwagi</td></tr>
+            <tr><td><strong>Liczba akcji</strong></td><td>+7,18% rocznie</td><td>dalsze konwersje obligacji</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Wolne przepływy</td><td>+$300,10 mln</td><td>powrót poniżej zera</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Charakter pozycji</strong></td><td>Producent komponentów w środku cyklu optycznego — cena dyskontuje sukces</td></tr>
+            <tr><td><strong>Wejście</strong></td><td>Dopiero w okolicach <strong>$600</strong>, czyli poniżej średniej długoterminowej</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$1 150</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$713</strong> — utrata średniej 200-sesyjnej</td></tr>
+            <tr><td><strong>Warunek zmiany na sprzedaż</strong></td><td>Dynamika przychodów poniżej dwudziestu procent rocznie przy mnożniku powyżej trzydziestu razy zysk prognozowany</td></tr>
+            <tr><td><strong>Czego nie robić</strong></td><td>Nie używać zwrotu z kapitału własnego ani wskaźnika ceny do zysku — oba zniekształca odpis na obligacjach</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p><strong>To jest obniżenie oceny po tezie, która zadziałała — i takich obniżeń powinno być w tym katalogu więcej.</strong> W lipcu oceniłem Lumentum na kupno przy około $730 z przedziałem $750–1 100. Kurs doszedł do $930,91, spółka zwiększyła przychody o osiemdziesiąt trzy procent, a bilans naprawiła sobie sama, zamieniając obligacje na akcje. Siedmiomiliardowa strata w rachunku wyników jest księgowym zapisem tej zamiany, nie wypływem gotówki — potwierdzają to dodatnie przepływy operacyjne.</p>
+        <p><strong>Zmieniła się natomiast relacja ceny do tego, co spółka zarabia dzisiaj.</strong> Blisko dwieście razy zysk operacyjny, dwieście siedemdziesiąt osiem razy wolne przepływy, dwadzieścia osiem razy sprzedaż. <strong>Scenariusz, w którym prognozy się sprawdzają, a mnożnik wraca do rozsądku, daje kurs niższy od dzisiejszego</strong> — czyli żeby od tego miejsca zarobić, musi się udać jedno i drugie naraz. To już inna inwestycja niż w lipcu. Obserwować, wrócić do rozmowy o kupnie w okolicach $600.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$180 – $1 220</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$180 (-81%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$1 216 (+31%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Obserwować, nie kupować</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 3 listopada</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA POPRZEDNIEJ ANALIZY (03.07.2026)</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Ocena kupno, wartość godziwa $750–1 100</strong> przy kursie około $730</td>
+            <td>Kurs doszedł do <strong>$930,91</strong> — wewnątrz przedziału, w jego górnej części. <strong>Teza zadziałała</strong>; obniżam ocenę, bo przewaga została skonsumowana</td>
+            <td style="color:var(--ocena-kupno)"><strong>Trafna</strong> — ocena zaktualizowana po sukcesie</td>
+          </tr>
+          <tr>
+            <td>Cena podana jako <strong>„około $730"</strong></td>
+            <td>Przybliżenie zamiast ceny zamknięcia z konkretnego dnia. <strong>Uniemożliwia późniejsze rozliczenie tezy z dokładnością do procenta</strong> — obowiązujący format tego zakazuje</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana — wada formatu</td>
+          </tr>
+          <tr>
+            <td>Brak analizy <strong>obligacji zamiennych</strong></td>
+            <td>W lipcu obligacje o cenach konwersji od $69,54 do $187,77 były już głęboko w pieniądzu przy kursie $730. <strong>Rozwodnienie było przewidywalne i nie zostało policzone</strong></td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — pominięte przewidywalne rozwodnienie</td>
+          </tr>
+          <tr>
+            <td>Raport w starym formacie — 14 sekcji, znaki graficzne w ocenie</td>
+            <td>Nowy plik zgodny z zasadami z 17.09.2026; poprzednia wersja trafia do archiwum</td>
+            <td style="color:var(--text-muted)">Porządkowa</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Trzecia pozycja w tej tabeli jest tą, z której wyciągam wniosek na przyszłość — i jest to nowy rodzaj przeoczenia w tej serii.</strong><br><br>
+      Dotąd korygowałem wskaźniki zniekształcone przez zdarzenia, których nie dało się przewidzieć. <strong>Tutaj zdarzenie było w pełni przewidywalne:</strong> obligacje zamienne z ceną konwersji na poziomie kilkudziesięciu dolarów przy kursie $730 musiały skończyć się zamianą na akcje. Wystarczyło zajrzeć do struktury zadłużenia.<br><br>
+      <strong>Dopisuję do zasad redakcyjnych: przy spółce z obligacjami zamiennymi trzeba policzyć rozwodnienie przy bieżącym kursie i podać je jako część tezy</strong> — a nie odkrywać je post factum jako „bezgotówkowy odpis".</div>
+
+      <div class="alert alert-success"><strong>Co się obroniło, i warto to zapisać.</strong> Lipcowa ocena kierunku była trafna, a przedział wyceny — mimo braku sekcji korekty i przybliżonej ceny — okazał się właściwy. <strong>Jest to pierwsza teza w tej serii aktualizacji, która zadziałała w pełni</strong>: kurs wszedł w przedział od dołu i wypełnił go w trzech czwartych.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 20 września 2026 | Cena: <strong>$930,91</strong> (zamknięcie 18.09.2026) | <strong>Aktualizacja analizy z 3 lipca 2026 — OBNIŻENIE OCENY: kupno → neutralna, po udanej tezie</strong> | Spółka <strong>nie znajduje się w portfelu TP Corp</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> wartość godziwa $750–1 100 → $180–1 220 i obniżenie oceny, bo kurs wypełnił poprzedni przedział; dodano analizę odpisu $7,8 mld na zamianie obligacji zamiennych — bezgotówkowego, ale mierzącego realne rozwodnienie o ok. 10,6 mln akcji; dodano przeliczenie mnożnika od zysku operacyjnego (ok. 197×) wobec nieistniejącego wskaźnika raportowanego; raport przepisany z formatu 14-sekcyjnego z ceną przybliżoną na obowiązujący | Dane: StockAnalysis / S&amp;P Global Market Intelligence oraz komunikat wyników spółki za rok obrotowy 2026 — <strong>stan danych na 20.09.2026</strong>; przeliczenie zysku operacyjnego na akcję, scenariusze i relacja nakładów do przychodów to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
