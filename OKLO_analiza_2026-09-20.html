@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OKLO — Oklo Inc. | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:13px; color:var(--text-muted); font-style:italic; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: OKLO</div>
+    <div class="company-name">Oklo Inc.</div>
+    <div class="company-sub">Małe reaktory jądrowe — pierwsza elektrownia w budowie, przychodu jeszcze nie ma · Santa Clara · 215 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">W portfelu — 1,93%</span>
+      <span class="meta-tag">Pozycja spekulacyjna</span>
+      <span class="meta-tag">Najsłabszy wynik w portfelu</span>
+      <div class="price-display">
+        <div class="price-main">$38,00</div>
+        <div class="price-sub">zamknięcie 18.09.2026 (-4,16%), po sesji $38,12</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Energia jądrowa</span><span class="temat">Moc obliczeniowa dla AI</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA SPEKULACYJNA — gotówka na dziewięć lat i budowa w toku, ale przychodu nie ma i rozstrzygnięcie jest binarne">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">spekulacyjna — utrzymana; wielkość pozycji ma tu znaczenie większe niż ocena</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$10 – $90</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-74% do +137%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Cel uruchomienia</span><b>2028</b><em>Pierwsza elektrownia Aurora w Idaho</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$38,00</div><div class="metric-detail">-60,12% w 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 21.08</div><div class="metric-value">-8,8%</div><div class="metric-detail"><strong>Kurs pozostał w moim przedziale $32–50</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Przychody roczne</div><div class="metric-value red">$1,21 mln</div><div class="metric-detail">Spółka przed pierwszym przychodem</div></div>
+    <div class="metric-card"><div class="metric-label">Gotówka netto</div><div class="metric-value green">$13,23</div><div class="metric-detail">Na akcję; księga <strong>$17,69</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Wypalanie gotówki</div><div class="metric-value">-$275,82 mln</div><div class="metric-detail">Rocznie — zapas na <strong>około 9 lat</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Liczba akcji</div><div class="metric-value red">+29,85%</div><div class="metric-detail">W rok — tak powstała ta gotówka</div></div>
+    <div class="metric-card"><div class="metric-label">Krótka sprzedaż</div><div class="metric-value red">17,31%</div><div class="metric-detail">Akcji; <strong>21,54% wolnego obrotu</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (26 analityków)</div><div class="metric-value green">$78,69</div><div class="metric-detail">+107,08% · kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I STAN POPRZEDNIEJ TEZY</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Oklo projektuje małe reaktory jądrowe i zamierza <strong>sprzedawać energię, a nie reaktory</strong> — buduje, posiada i eksploatuje elektrownie, sprzedając prąd na wieloletnie umowy. Przychody roczne to <strong>$1,21 mln</strong> przy 215 pracownikach, więc spółka jest praktycznie przed pierwszym przychodem. Kapitalizacja <strong>$7,07 mld</strong>. <strong>Twoja pozycja waży 1,93%</strong>, przy cenie wejścia $57,08 daje <strong>-33,4%</strong> — najsłabszy wynik w portfelu.</p>
+
+      <div class="alert alert-info"><strong>Teza z 21 sierpnia się obroniła — to jedna z niewielu, o których mogę to dziś powiedzieć.</strong><br><br>
+      Oceniłem wtedy OKLO na <strong>neutralnie</strong> z kwalifikatorem „mocny bilans i realny postęp, ale emisja akcji dławi kurs" i wyceniłem na <strong>$32–50</strong> przy kursie $41,66. Kurs wynosi dziś $38,00, czyli <strong>8,8% mniej</strong> — <strong>wewnątrz przedziału</strong>.<br><br>
+      Oba członki kwalifikatora pozostają aktualne: bilans jest nadal wyjątkowo mocny, postęp budowy realny, a liczba akcji wzrosła w rok o <strong>29,85%</strong>.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>22.09.2025</strong></td><td><strong>Rozpoczęcie budowy pierwszej elektrowni Aurora</strong> w Idaho National Laboratory</td><td style="color:var(--ocena-kupno)">Projekt wyszedł z fazy papierowej — to buduje się fizycznie</td></tr>
+          <tr><td><strong>2026</strong></td><td><strong>Zatwierdzenie raportu z głównymi kryteriami projektowymi</strong> przez komisję dozoru jądrowego, w trybie przyspieszonym</td><td style="color:var(--ocena-kupno)">Najważniejszy dotąd kamień milowy regulacyjny</td></tr>
+          <tr><td><strong>2026</strong></td><td><strong>Pierwsza elektrownia licencjonowana przez departament energii, a nie komisję dozoru</strong> — w ramach programu pilotażowego reaktorów</td><td style="color:var(--ocena-kupno)">Ścieżka znacznie szybsza; obniża ryzyko regulacyjne dla jednostki numer jeden</td></tr>
+          <tr><td>2026</td><td>Podtrzymany cel: <strong>uruchomienie komercyjne w 2028</strong></td><td style="color:var(--ocena-uwaga)">Dwa lata do pierwszego przychodu z energii</td></tr>
+          <tr><td>07.08.2026</td><td>Ostatnie wyniki kwartalne — strata <strong>$0,93 na akcję</strong> rocznie</td><td>Strata jest kosztem rozwoju, nie skutkiem słabej działalności</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)">Rok do 09.2026</td><td style="color:var(--ocena-sprzedaz)"><strong>Spadek kursu o 60,12%</strong> przy wzroście liczby akcji o blisko trzydzieści procent</td><td style="color:var(--ocena-sprzedaz)">Rynek przestał płacić za obietnicę, zaczął czekać na dowód</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — SPRZEDAJE PRĄD, NIE REAKTORY</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <p>Aurora to reaktor na neutronach prędkich chłodzony metalem ciekłym, zaprojektowany do pracy przez lata bez wymiany paliwa. Zamiast sprzedawać urządzenie, Oklo <strong>buduje elektrownię na własny koszt i sprzedaje wyprodukowaną energię</strong>.</p>
+
+      <div class="alert alert-info"><strong>Ten model ma jedną istotną zaletę i jedną wadę.</strong> <strong>Zaleta:</strong> klient nie kupuje reaktora ani nie bierze ryzyka licencyjnego — podpisuje umowę na dostawę prądu, czyli coś, co potrafi ocenić. Dlatego zainteresowanie zgłaszają operatorzy centrów danych.<br><br><strong>Wada:</strong> cały koszt budowy i całe ryzyko ponosi Oklo, a przychód pojawia się po uruchomieniu — dlatego wolne przepływy są głęboko ujemne (sekcja 5).</div>
+
+      <div class="alert alert-success"><strong>Najważniejsza zmiana od poprzedniej analizy dotyczy ścieżki regulacyjnej i jest wyraźnie na korzyść.</strong> <strong>Pierwsza elektrownia będzie licencjonowana przez departament energii, a nie komisję dozoru jądrowego</strong>, w ramach programu pilotażowego — to ścieżka istotnie krótsza od pełnego postępowania, które przy nowych konstrukcjach trwa latami. Doszło też <strong>zatwierdzenie raportu z głównymi kryteriami projektowymi w trybie przyspieszonym</strong>, czyli formalne uznanie założeń bezpieczeństwa.<br><br><strong>Zastrzeżenie:</strong> szybsza ścieżka dotyczy <em>pierwszej</em> jednostki. Flota komercyjna będzie wymagać postępowania przed komisją dozoru, więc ryzyko regulacyjne zostało przesunięte, nie usunięte.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK — POPYT JEST, PODAŻY NIE MA</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na Oklo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zapotrzebowanie centrów danych na moc</strong></td><td style="color:var(--ocena-kupno)">Rośnie szybciej niż przepustowość sieci</td><td style="color:var(--ocena-kupno)">Tworzy odbiorców gotowych podpisać umowy wieloletnie</td></tr>
+          <tr><td><strong>Nastawienie regulacyjne w USA</strong></td><td style="color:var(--ocena-kupno)">Przychylne — program pilotażowy skraca ścieżkę</td><td style="color:var(--ocena-kupno)">Bezpośrednio przyspiesza pierwszą jednostkę</td></tr>
+          <tr><td>Paliwo</td><td style="color:var(--ocena-uwaga)">Łańcuch dostaw wciąż powstaje</td><td style="color:var(--ocena-uwaga)">Reaktory prędkie wymagają paliwa o wyższym wzbogaceniu</td></tr>
+          <tr><td><strong>Alternatywy dostępne dziś</strong></td><td style="color:var(--ocena-sprzedaz)">Turbiny gazowe i zespoły prądotwórcze</td><td style="color:var(--ocena-sprzedaz)">Rozwiązują ten sam problem <em>teraz</em>, nie w 2028</td></tr>
+          <tr><td>Akceptacja społeczna</td><td style="color:var(--ocena-uwaga)">Poprawia się, ale lokalnie bywa przeszkodą</td><td style="color:var(--ocena-uwaga)">Ryzyko opóźnień na poziomie konkretnych lokalizacji</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Największe ryzyko rynkowe Oklo nie polega na braku popytu, a na tym, że popyt zostanie zaspokojony przed 2028 rokiem — i to przez spółkę, którą również masz w portfelu.</strong><br><br>Centrum danych potrzebujące mocy dziś nie będzie czekać dwa lata na reaktor. Kupi <strong>turbiny gazowe albo zespoły prądotwórcze — dokładnie to, czego sprzedaż w Caterpillarze rośnie o blisko trzydzieści procent.</strong><br><br><strong>Wniosek jest niewygodny: Oklo i Caterpillar konkurują o ten sam budżet energetyczny, tylko w różnych momentach.</strong> Energii zabraknie na tyle, że zmieszczą się oba rozwiązania — ale <strong>opóźnienie Oklo pomaga Caterpillarowi, i odwrotnie</strong>.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I AKCJONARIAT</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody z umów</td><td style="color:var(--ocena-sprzedaz)">$1,21 mln</td><td style="color:var(--ocena-sprzedaz)">Praktycznie brak — przychód z energii pojawi się po uruchomieniu</td></tr>
+          <tr><td><strong>Zarząd i osoby powiązane</strong></td><td style="color:var(--ocena-kupno)"><strong>15,19%</strong></td><td style="color:var(--ocena-kupno)">Najwyżej w całym portfelu — założyciele ponoszą skutki majątkowo</td></tr>
+          <tr><td>Instytucje</td><td>44,38%</td><td>Wolny obrót 149,51 mln z 186,02 mln akcji</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>32,20 mln akcji — 17,31%</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>21,54% wolnego obrotu</strong>; wzrost z 30,33 mln miesiąc wcześniej</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Dwie liczby w tej tabeli mówią rzeczy przeciwne i to zestawienie najlepiej opisuje tę pozycję.</strong><br><br><strong>Zarząd trzyma 15,19% akcji</strong> — najwięcej w Twoim portfelu, więcej niż w IREN, Amazonie czy Strategy; ludzie prowadzący tę spółkę stracą razem z akcjonariuszami. <strong>Jednocześnie ponad jedna piąta wolnego obrotu jest sprzedana na krótko</strong> — rynek obstawia przeciw w stopniu, jaki w Twoim portfelu spotyka tylko IREN.<br><br><strong>Nie da się rozstrzygnąć, kto ma rację, i nie próbuję.</strong> Warto wiedzieć, że przy takim poziomie krótkiej sprzedaży <strong>każda dobra wiadomość wywoła ruch nieproporcjonalny do jej treści</strong> — i tak samo zadziała każde opóźnienie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">BIZNES — GDZIE IDĄ PIENIĄDZE</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$1,21 mln</td></tr>
+          <tr><td>Wynik operacyjny</td><td style="color:var(--ocena-sprzedaz)">-$217,57 mln</td></tr>
+          <tr><td><strong>Wynik przed opodatkowaniem</strong></td><td style="color:var(--ocena-kupno)"><strong>-$153,32 mln — czyli o $64,25 mln lepiej</strong></td></tr>
+          <tr><td>Wynik netto</td><td>-$152,77 mln · strata na akcję <strong>-$0,93</strong></td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-uwaga)">-$116,92 mln</td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-uwaga)"><strong>-$158,90 mln — więcej niż wypalanie operacyjne</strong></td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$275,82 mln · -$1,48 na akcję</strong></td></tr>
+          <tr><td>Zaciągnięty dług netto</td><td style="color:var(--ocena-kupno)">-$2,12 mln — spółka nie pożycza</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Pierwsza rzecz, której nie zauważyłem w sierpniu i która jest wyraźnie na korzyść: gotówka Oklo pokrywa jedną trzecią jego własnej straty operacyjnej.</strong><br><br>
+      Wynik operacyjny to minus $217,57 mln, ale wynik przed opodatkowaniem tylko minus $153,32 mln. <strong>Różnica $64,25 mln to przede wszystkim odsetki od zgromadzonych $2,47 mld.</strong><br><br>
+      Jest to sytuacja odwrotna do tej, którą opisywałem przy Marvellu i Amazonie. <strong>Tam nadwyżka nad wynikiem operacyjnym była powodem do ostrożności, bo zawyżała zysk. Tutaj jest realna i powtarzalna</strong> — dopóki spółka ma gotówkę, odsetki od niej finansują istotną część kosztów rozwoju.</div>
+
+      <div class="alert alert-warning"><strong>Druga rzecz — to, na co idą pieniądze, zmieniło charakter.</strong> <strong>Nakłady inwestycyjne $158,90 mln przewyższają wypalanie operacyjne $116,92 mln</strong>, czyli większość gotówki nie idzie już na projektowanie, a na <strong>fizyczną budowę elektrowni</strong>. To potwierdzenie, że rozpoczęcie prac w Idaho nie było komunikatem prasowym.<br><br><strong>Łączne wypalanie to $275,82 mln rocznie przy $2,47 mld w kasie — zapas na około dziewięć lat obecnego tempa.</strong> Tempo będzie rosnąć w miarę postępu budowy, więc realny zapas jest krótszy, ale <strong>ryzyka wyczerpania środków przed docelowym terminem uruchomienia nie ma.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja / wartość firmy</td><td>$7,07 mld / <strong>$4,61 mld</strong></td><td style="color:var(--ocena-kupno)">Wartość firmy niższa o gotówkę netto</td></tr>
+          <tr><td>Cena / sprzedaż</td><td style="color:var(--ocena-sprzedaz)">5 841,88</td><td style="color:var(--ocena-sprzedaz)"><strong>Liczba bez treści</strong> — mianownik to $1,21 mln</td></tr>
+          <tr><td><strong>Cena / wartość księgowa</strong></td><td><strong>2,15</strong></td><td><strong>Jedyny wskaźnik, który tu działa</strong> — księga $17,69 na akcję</td></tr>
+          <tr><td>Cena / zysk i cena / przepływy</td><td>nie dotyczy</td><td style="color:var(--ocena-sprzedaz)">Strata $0,93 na akcję, przepływy ujemne</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>nie dotyczy</td><td>Strata <strong>$0,93 na akcję</strong> przy przychodach $1,21 mln</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>nie dotyczy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Analitycy nie prognozują dodatniego zysku</strong> w horyzoncie prognozy</td></tr>
+          <tr><td>PEG</td><td>nie dotyczy</td><td>Brak dodatniego zysku bazowego</td></tr>
+          <tr><td><strong>Miara zastępcza</strong></td><td><strong>gotówka netto $13,23 na akcję</strong></td><td>Reszta ceny to wycena projektu — rachunek niżej</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> Brak wskaźnika prognozowanego nie jest luką w danych — jest informacją. <strong>Dwudziestu sześciu analityków pokrywających tę spółkę nie zakłada dodatniego zysku w horyzoncie swoich prognoz</strong>, mimo ceny docelowej ponad dwukrotnie wyższej od kursu. Oznacza to, że cała ich wycena opiera się na wartości przyszłych przepływów po 2028 roku, a nie na żadnym mnożniku. <strong>Przy takiej spółce jedyną uczciwą metodą jest rozłożenie ceny na gotówkę i wycenę projektu.</strong></p>
+
+      <h3>Rozłożenie dzisiejszej ceny</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Składnik</th><th>Na akcję</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka netto</td><td style="color:var(--ocena-kupno)"><strong>$13,23</strong></td><td>Twarda, policzalna, dostępna</td></tr>
+          <tr><td>Pozostała wartość księgowa</td><td>$4,46</td><td>Głównie budowa w toku — łącznie księga $17,69</td></tr>
+          <tr><td><strong>Wycena projektu ponad księgę</strong></td><td style="color:var(--ocena-uwaga)"><strong>$20,31</strong></td><td style="color:var(--ocena-uwaga)"><strong>To jest cena opcji na to, że elektrownia zadziała</strong></td></tr>
+          <tr><td>Razem</td><td><strong>$38,00</strong></td><td>Cena rynkowa</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne: gotówka netto i wartość księgowa na akcję z danych bilansowych, wycena projektu jako różnica między ceną rynkową a wartością księgową.</p>
+
+      <h3>Cztery scenariusze na 12–18 miesięcy</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Budowa w terminie, podpisane umowy na odbiór energii</strong></td><td><strong>$90</strong></td><td style="color:var(--ocena-kupno)">+137%</td></tr>
+          <tr><td><strong>Postęp regulacyjny bez opóźnień, wciąż bez przychodu</strong></td><td><strong>$55</strong></td><td style="color:var(--ocena-kupno)">+45%</td></tr>
+          <tr><td>Opóźnienie o dwa lata i kolejna emisja akcji</td><td>$22</td><td style="color:var(--ocena-sprzedaz)">-42%</td></tr>
+          <tr><td><strong>Porzucenie projektu — zostaje gotówka po wypalaniu</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$10</strong></td><td style="color:var(--ocena-sprzedaz)">-74%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne. Scenariusz dolny wyprowadzony z gotówki netto pomniejszonej o dwa lata wypalania i typowego dyskonta, z jakim rynek wycenia spółki przedprzychodowe po utracie tezy. Scenariusze górne oparte na wielokrotności wyceny projektu ponad księgę, nie na mnożniku zysku, którego nie ma.</p>
+
+      <p><strong>Fair value: $10 – $90</strong>, prosty środek <strong>$50,00 (+31,6%)</strong>. <strong>Ale ten środek wprowadza w błąd i nie na nim opieram ocenę.</strong> Po nadaniu scenariuszom wag 15/30/35/20 — z największym prawdopodobieństwem przypisanym opóźnieniu, bo tak zwykle kończą się pierwsze projekty jądrowe — wynik wypada na <strong>$40, czyli 4,5% powyżej kursu</strong>. Konsensus 26 analityków to $78,69 (+107,08%), czyli blisko mojego scenariusza najlepszego.</p>
+
+      <div class="alert alert-warning"><strong>Różnica między prostym środkiem przedziału ($50) a wynikiem po uwzględnieniu prawdopodobieństw ($40) jest tu największa ze wszystkich spółek, jakie przeliczałem — i warto wiedzieć, skąd się bierze.</strong><br><br>
+      Przy rozkładzie skrajnie asymetrycznym prosty środek nadaje scenariuszowi „wszystko idzie idealnie" taką samą wagę jak „projekt opóźniony o dwa lata". <strong>Przy pierwszym w historii firmy projekcie jądrowym te wagi nie mogą być równe</strong> — opóźnienia są w tej branży regułą, nie wyjątkiem. Dlatego liczbą, na której się opieram, jest $40.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Marża operacyjna</td><td style="color:var(--ocena-sprzedaz)">-17 981,07%</td><td style="color:var(--ocena-sprzedaz)">Liczba bez treści — mianownikiem jest przychód rzędu miliona dolarów</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-uwaga)"><strong>-6,84% vs 10,82%</strong></td><td style="color:var(--ocena-uwaga)"><strong>Różnica -17,66 pp</strong> — ale patrz niżej</td></tr>
+          <tr><td>Zwrot z aktywów</td><td>-6,65%</td><td>Aktywa to głównie gotówka i budowa w toku</td></tr>
+          <tr><td><strong>Piotroski F</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>1</strong></td><td style="color:var(--ocena-sprzedaz)">Praktycznie najniższa możliwa wartość</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Podobnie jak przy Strategy, muszę powstrzymać się przed użyciem własnej głównej miary — ale z innej przyczyny.</strong> Nadwyżka zwrotu z kapitału nad kosztem wynosi <strong>-17,66 pp</strong>, co umieściłoby Oklo między Intelem i IREN. <strong>Liczba jest jednak pozbawiona treści: spółka jeszcze nie zaczęła używać kapitału do zarabiania.</strong><br><br>Kapitał Oklo to gotówka i niedokończona elektrownia, więc zwrot <em>musi</em> być ujemny — nie dlatego, że jest źle inwestowany, ale dlatego, że inwestycja jest w połowie. <strong>Ta miara zacznie znaczyć po 2028 roku.</strong> To samo dotyczy wskaźnika Piotroskiego: opiera się na kryteriach, których <strong>spółka przedprzychodowa spełnić nie może z definicji</strong>.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — NAJMOCNIEJSZA STRONA TEJ POZYCJI</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gotówka / zadłużenie</strong></td><td style="color:var(--ocena-kupno)">$2,47 mld / <strong>$4,15 mln</strong></td><td style="color:var(--ocena-kupno)"><strong>Gotówka netto $2,46 mld</strong> — długu praktycznie nie ma</td></tr>
+          <tr><td><strong>Wskaźnik bieżący / szybki</strong></td><td style="color:var(--ocena-kupno)"><strong>48,46 / 47,63</strong></td><td style="color:var(--ocena-kupno)">Najwyżej w całym portfelu, z ogromnym odstępem</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-kupno)">0,00</td><td style="color:var(--ocena-kupno)">Zerowa dźwignia</td></tr>
+          <tr><td>Kapitał obrotowy</td><td style="color:var(--ocena-kupno)">$2,47 mld</td><td>Kapitał własny $3,27 mld</td></tr>
+          <tr><td>Altman Z</td><td>nie wyliczany</td><td style="color:var(--ocena-uwaga)">Wzór nie ma zastosowania przy przychodach rzędu miliona dolarów</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>To najmocniejszy bilans w Twoim portfelu — mocniejszy nawet niż ASML — i przy spółce przedprzychodowej cecha decydująca.</strong><br><br><strong>Wskaźnik bieżący 48,46</strong> oznacza, że aktywa obrotowe niemal pięćdziesięciokrotnie przewyższają zobowiązania krótkoterminowe, przy zadłużeniu nieistotnym.<br><br><strong>Dlaczego to najważniejsze:</strong> spółka przedprzychodowa umiera zwykle nie z powodu złej technologii, a z <strong>konieczności pozyskania kapitału w najgorszym momencie</strong>. Oklo tego przymusu nie ma — przejdzie przez opóźnienie i spadek kursu bez proszenia nikogo o pieniądze.<br><br><strong>Cena tej odporności została już zapłacona: liczba akcji wzrosła w rok o 29,85%.</strong> Bezpieczeństwo kupiono rozwodnieniem — dokładnie ten mechanizm, który w sierpniu nazwałem „emisja akcji dławi kurs".</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Ścieżka regulacyjna pierwszej jednostki została skrócona.</strong> Licencjonowanie przez departament energii w ramach programu pilotażowego omija pełne postępowanie przed komisją dozoru, a kryteria projektowe zostały zatwierdzone w trybie przyspieszonym.</div>
+
+      <div class="alert alert-success"><strong>2. Budowa trwa fizycznie, nie na papierze.</strong> Nakłady inwestycyjne przewyższają już wypalanie operacyjne, co potwierdza, że pieniądze idą na elektrownię, a nie na projektowanie.</div>
+
+      <div class="alert alert-success"><strong>3. Bilans eliminuje ryzyko przymusowej emisji.</strong> Gotówka na około dziewięć lat obecnego tempa, zerowa dźwignia i wskaźnik bieżący najwyższy w portfelu. Spółka może przeczekać opóźnienie bez proszenia rynku o pieniądze.</div>
+
+      <div class="alert alert-info"><strong>4. Zarząd trzyma piętnaście procent akcji, a jedna piąta wolnego obrotu jest sprzedana na krótko.</strong> Pierwsze oznacza realne zaangażowanie majątkowe; drugie, że każda dobra wiadomość regulacyjna wywoła ruch nieproporcjonalny do jej treści.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Przychodu nie ma i nie będzie przed 2028 rokiem.</strong> Wszystko, co dziś się wycenia, jest obietnicą. Ponad połowa dzisiejszej ceny — $20,31 na akcję — to wartość przypisana temu, że elektrownia zadziała.</div>
+
+      <div class="alert alert-danger"><strong>2. Opóźnienia są w tej branży regułą, nie wyjątkiem.</strong> Dlatego w wycenie przypisuję im największe prawdopodobieństwo, a scenariusz opóźnienia o dwa lata z kolejną emisją akcji oznacza kurs niższy o ponad czterdzieści procent.</div>
+
+      <div class="alert alert-warning"><strong>3. Ryzyko regulacyjne zostało przesunięte, nie usunięte.</strong> Szybsza ścieżka dotyczy pierwszej jednostki; flota komercyjna wymaga pełnego postępowania przed komisją dozoru, którego czasu nie da się dziś oszacować.</div>
+
+      <div class="alert alert-warning"><strong>4. Konkurencja rozwiązuje ten sam problem dwa lata wcześniej.</strong> Centrum danych potrzebujące mocy dziś kupi turbinę gazową. Każdy rok opóźnienia oddaje część rynku rozwiązaniom dostępnym natychmiast.</div>
+
+      <div class="alert alert-warning"><strong>5. Próg, przy którym zmieniam ocenę na sprzedaż:</strong> przesunięcie celu uruchomienia poza 2029 rok albo emisja akcji rozwadniająca powyżej dwudziestu procent bez towarzyszącego kamienia milowego.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Rozwiązanie</th><th>Przewaga nad Oklo</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Caterpillar i turbiny gazowe</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 3,15%)</span></td><td style="color:var(--ocena-sprzedaz)"><strong>Dostępne dziś</strong>, sprawdzone, finansowane z bieżących zysków</td><td>Emisyjne, droższe w eksploatacji przy wysokich cenach gazu</td></tr>
+          <tr><td><strong>Inni projektanci małych reaktorów</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz)</span></td><td>Część ma silniejszych partnerów przemysłowych</td><td style="color:var(--ocena-kupno)">Żaden nie jest istotnie dalej w budowie</td></tr>
+          <tr><td>Duża energetyka jądrowa</td><td>Sprawdzona technologia, ogromna moc jednostkowa</td><td style="color:var(--ocena-kupno)">Czas budowy liczony w dekadach</td></tr>
+          <tr><td>Odnawialne źródła z magazynowaniem</td><td>Najszybsze do postawienia, brak ryzyka licencyjnego</td><td>Nie dają stałej mocy podstawowej, której wymaga centrum danych</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Najważniejsza obserwacja: prawdziwym konkurentem Oklo nie jest inny reaktor, a rozwiązanie tymczasowe, które przestanie być tymczasowe.</strong><br><br>
+      Jeśli operatorzy centrów danych postawią dziś turbiny gazowe i zespoły prądotwórcze, będą je eksploatować przez dwadzieścia lat, bo tyle wynosi żywotność takiego sprzętu. <strong>Popyt nie czeka — on się zaspokaja tym, co dostępne.</strong><br><br>
+      Dlatego <strong>rok 2028 nie jest dla Oklo terminem ambicji, a terminem istotności.</strong> Każde opóźnienie nie tylko odsuwa przychód, ale też zmniejsza rynek, na który spółka wejdzie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-sprzedaz)">-60,12%</td><td style="color:var(--ocena-sprzedaz)">Drugi najgorszy roczny wynik w portfelu po Strategy</td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td style="color:var(--ocena-sprzedaz)">$41,90</td><td style="color:var(--ocena-sprzedaz)">Kurs <strong>9,3% poniżej</strong></td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td style="color:var(--ocena-sprzedaz)">$62,49</td><td style="color:var(--ocena-sprzedaz)">Kurs <strong>39,2% poniżej</strong> — trend spadkowy bez zastrzeżeń</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>44,63</td><td>Neutralnie, bez wyprzedania; wolumen 10,74 mln akcji</td></tr>
+          <tr><td><strong>Beta (5 lat)</strong></td><td style="color:var(--ocena-uwaga)"><strong>1,20</strong></td><td style="color:var(--ocena-uwaga)"><strong>Liczba zwodnicza</strong> — spółka ma zbyt krótką historię, a roczny spadek o sześćdziesiąt procent przeczy tej wartości</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-sprzedaz)">17,31% akcji</td><td>Wzrost z 30,33 mln do 32,20 mln akcji w miesiąc</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Obraz techniczny jest tu najgorszy w portfelu i nie ma sensu go upiększać: kurs stoi poniżej obu średnich, a od dłuższej jest oddalony o blisko czterdzieści procent w dół.</strong><br><br>Jest to trend spadkowy bez elementów dwuznacznych, ale <strong>wskaźnik siły relatywnej 44,63 pokazuje brak wyprzedania</strong> — kurs nie spada panicznie, on osuwa się od roku. <strong>Zachowanie typowe dla spółki, od której rynek przestał oczekiwać wiadomości.</strong><br><br><strong>Konsekwencja: tej pozycji nie uratuje analiza techniczna, a jedynie komunikat o postępie budowy albo licencji.</strong> Przy siedemnastu procentach akcji na krótko zadziała on gwałtownie — ale bez niego nie ma powodu do odwrócenia trendu.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$78,69</strong></td><td>Cena docelowa konsensusu — blisko mojego scenariusza najlepszego</td></tr>
+          <tr><td><strong>$57,08</strong></td><td>Twoja cena wejścia</td></tr>
+          <tr><td><strong>$41,90</strong></td><td>Średnia 50-sesyjna — pierwszy opór</td></tr>
+          <tr><td><strong>$17,69</strong></td><td><strong>Wartość księgowa na akcję — twarde dno wyceny majątkowej</strong></td></tr>
+          <tr><td style="color:var(--ocena-kupno)"><strong>$13,23</strong></td><td style="color:var(--ocena-kupno)"><strong>Sama gotówka netto na akcję</strong> — poniżej tego poziomu rynek wyceniałby projekt na mniej niż zero</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs poniżej obu średnich, wskaźnik siły relatywnej neutralny, brak zaplanowanego katalizatora. Bez komunikatu o postępie nie ma powodu do odwrócenia trendu, a przy tym poziomie krótkiej sprzedaży taki komunikat zadziałałby gwałtownie.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA SPEKULACYJNA</strong></td><td>Wynik po uwzględnieniu prawdopodobieństw wypada cztery i pół procent powyżej kursu. Rozstrzygnięcie jest binarne i zależy od terminu budowy, nie od żadnego wskaźnika finansowego.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO SPEKULACYJNE</strong></td><td>Jeśli pierwsza elektrownia zadziała i umowy na odbiór energii zostaną podpisane, dzisiejsza cena okaże się niska. Bilans daje na to czas, którego większość spółek przedprzychodowych nie ma.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ocena łączna: NEUTRALNA SPEKULACYJNA — utrzymana z 21 sierpnia, i przy tej pozycji ważniejsze od oceny jest coś innego.</strong><br><br>
+      <strong>Przy spółce, która nie ma przychodu, o wyniku decyduje wielkość pozycji, nie ocena.</strong> Rozstrzygnięcie jest binarne: albo elektrownia zadziała, albo nie. Mój przedział rozciąga się od minus siedemdziesięciu czterech do plus stu trzydziestu siedmiu procent i tej rozpiętości nie da się uczciwie zwęzić.<br><br>
+      <strong>Waga 1,93% jest w tym kontekście właściwa</strong> — przy takiej rozpiętości scenariuszy pozycja większa oznaczałaby, że pojedyncza decyzja regulacyjna wpływa istotnie na cały rachunek.<br><br>
+      <strong>Co zmieniło się na lepsze od sierpnia:</strong> ścieżka licencyjna pierwszej jednostki została skrócona, a nakłady inwestycyjne przewyższyły wypalanie operacyjne, co potwierdza fizyczny postęp. <strong>Co się nie zmieniło:</strong> rozwodnienie blisko trzydziestu procent rocznie i brak jakiegokolwiek przychodu.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td><strong>1,93%</strong></td><td>Najmniejsza z osiemnastu pozycji</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-sprzedaz)">-33,4%</td><td style="color:var(--ocena-sprzedaz)">Najsłabszy w portfelu, przy cenie wejścia $57,08</td></tr>
+          <tr><td><strong>Rola w portfelu</strong></td><td><strong>Opcja, nie pozycja</strong></td><td>Jedyna spółka przedprzychodowa na rachunku</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Oklo jest w Twoim portfelu wyjątkiem i warto go tak traktować świadomie.</strong> Pozostałe siedemnaście pozycji mają przychód, a większość zysk — <strong>Oklo jest jedyną, którą kupuje się za to, czego jeszcze nie ma</strong>, i dlatego jedyną, przy której waga poniżej dwóch procent jest cechą, nie niedopatrzeniem.<br><br><strong>Warto zobaczyć, że najsłabszy wynik w portfelu ma pozycja o najmocniejszym bilansie.</strong> Strata 33,4% nie wynika z problemów finansowych, a z tego, że rynek przestał płacić za obietnicę — to inna przyczyna niż przy CoreWeave czy Novo Nordisku, gdzie pogorszyły się liczby.</div>
+
+      <div class="alert alert-warning"><strong>Druga rzecz: Oklo i Caterpillar stoją po przeciwnych stronach tego samego pytania.</strong> Oba sprzedają rozwiązanie niedoboru mocy dla centrów danych — <strong>Caterpillar dostarcza je dziś, Oklo obiecuje taniej i bezemisyjnie, ale za dwa lata.</strong><br><br><strong>Nie jest to zła konstrukcja</strong> przy łącznej wadze około pięciu procent. Warto jednak wiedzieć, że <strong>te dwie pozycje nie potwierdzają wzajemnie tej samej tezy, tylko konkurują o ten sam budżet</strong>.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Oklo to jedyna pozycja w Twoim portfelu, której nie da się wycenić żadnym wskaźnikiem — i jedyna, przy której bilans jest ważniejszy od rachunku wyników.</strong> Przychody wynoszą <strong>$1,21 mln</strong>, więc każdy mnożnik oparty na sprzedaży czy zysku jest liczbą bez treści. Za to bilans jest najmocniejszy w całym portfelu: <strong>gotówka netto $2,46 mld przy zadłużeniu $4,15 mln</strong>, wskaźnik bieżący 48,46 i zapas na około dziewięć lat obecnego wypalania. Przy spółce przedprzychodowej to cecha decydująca, bo takie firmy umierają nie od złej technologii, a od konieczności pozyskania kapitału w najgorszym momencie — <strong>i tego przymusu Oklo nie ma</strong>.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Postęp jest realny i mierzalny. <strong>Nakłady inwestycyjne przewyższyły już wypalanie operacyjne</strong>, co znaczy, że pieniądze idą na fizyczną budowę, a nie na projektowanie. <strong>Pierwsza elektrownia będzie licencjonowana szybszą ścieżką — przez departament energii, nie komisję dozoru</strong> — a kryteria projektowe zatwierdzono w trybie przyspieszonym. Ale przychodu nie będzie przed 2028 rokiem, <strong>ponad połowa dzisiejszej ceny to wartość przypisana samej obietnicy</strong>, liczba akcji wzrosła w rok o blisko trzydzieści procent, a ponad jedna piąta wolnego obrotu jest sprzedana na krótko.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Spółka nie może być zmuszona do emisji w złym momencie.</strong> Gotówka na około dziewięć lat obecnego tempa — spełnione z ogromnym zapasem.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Budowa musi postępować fizycznie.</strong> Nakłady przewyższają wypalanie operacyjne — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Ścieżka licencyjna musi być przejezdna.</strong> Kryteria projektowe zatwierdzone, pierwsza jednostka na szybszej ścieżce — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Rozwodnienie nie powinno pochłaniać postępu.</strong> Blisko trzydzieści procent nowych akcji w rok — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Elektrownia musi zostać uruchomiona w terminie.</strong> Cel to 2028; opóźnienia są w tej branży regułą.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Umowy na odbiór energii muszą zostać podpisane.</strong> To one zamienią obietnicę w przychód.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>Na bieżąco</strong></td><td style="color:var(--ocena-uwaga)"><strong>Komunikaty o postępie budowy w Idaho</strong></td><td style="color:var(--ocena-uwaga)">Jedyne zdarzenia, które realnie ruszają tym kursem</td></tr>
+            <tr><td>2027</td><td>Umowy na odbiór energii z pierwszej elektrowni</td><td>Zamieniają moc w zakontraktowany przychód</td></tr>
+            <tr><td><strong>2028</strong></td><td><strong>Uruchomienie komercyjne</strong></td><td>Moment, w którym spółka przestaje być przedprzychodowa</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">W dowolnej chwili</td><td style="color:var(--ocena-sprzedaz)">Kolejna emisja akcji albo przesunięcie terminu</td><td style="color:var(--ocena-sprzedaz)">Każde z osobna uderza w tezę; razem oznaczałyby jej koniec</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Nakłady wobec wypalania operacyjnego</strong></td><td>$158,90 mln wobec $116,92 mln</td><td>spadek nakładów poniżej wypalania</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Gotówka netto</td><td>$2,46 mld</td><td>zejście poniżej trzech lat wypalania</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Liczba akcji</strong></td><td>+3,46% kwartalnie</td><td>utrzymanie tempa bez kamienia milowego</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Termin uruchomienia</td><td>2028</td><td>przesunięcie poza 2029</td><td><span class="mon-dot y"></span>Wymaga uwagi</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Charakter pozycji</strong></td><td>Opcja na rozstrzygnięcie binarne — wielkość pozycji decyduje o wyniku bardziej niż ocena</td></tr>
+            <tr><td><strong>Wielkość docelowa</strong></td><td>Nie więcej niż obecna — poniżej dwóch procent portfela</td></tr>
+            <tr><td><strong>Dokupowanie</strong></td><td>Wyłącznie po komunikacie o kamieniu milowym, nie na spadku ceny</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$75</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$17,69</strong> — wartość księgowa; poniżej niej rynek wycenia projekt poniżej zera</td></tr>
+            <tr><td><strong>Warunek zmiany na sprzedaż</strong></td><td>Przesunięcie uruchomienia poza 2029 albo emisja rozwadniająca powyżej dwudziestu procent bez kamienia milowego</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA SPEKULACYJNA</div>
+        <p><strong>To jedna z niewielu tez z sierpnia, która się obroniła — i jedyna pozycja w portfelu, przy której ocena jest mniej ważna od wielkości pozycji.</strong> Kurs pozostał w moim przedziale, a oba członki kwalifikatora — mocny bilans i realny postęp z jednej strony, dławiące emisje z drugiej — pozostają aktualne. Od sierpnia doszły dwie rzeczy na plus: <strong>pierwsza elektrownia będzie licencjonowana szybszą ścieżką</strong>, a nakłady inwestycyjne przewyższyły wypalanie operacyjne, co jest twardym potwierdzeniem, że budowa idzie fizycznie.</p>
+        <p><strong>Ale rozstrzygnięcie pozostaje binarne, a rozpiętość wyceny — od minus siedemdziesięciu czterech do plus stu trzydziestu siedmiu procent — nie jest przyznaniem się do niewiedzy, tylko uczciwym opisem spółki, która nie ma przychodu.</strong> Prosty środek przedziału wypada trzydzieści procent powyżej kursu, ale po przypisaniu opóźnieniu prawdopodobieństwa, na jakie zasługuje w tej branży, wynik wypada praktycznie na dzisiejszej cenie. Trzymać przy wadze poniżej dwóch procent, dokupować wyłącznie po kamieniu milowym — nigdy na samym spadku ceny.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna spekulacyjna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$10 – $90</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$10 (-74%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$90 (+137%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Poniżej 2% portfela</b></div>
+          <div><span>Najbliższy katalizator</span><b>Komunikat o postępie budowy</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA POPRZEDNIEJ ANALIZY (21.08.2026)</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Ocena neutralna, wartość godziwa $32–50</strong> przy kursie $41,66</td>
+            <td>Kurs spadł do $38,00 — <strong>wewnątrz przedziału</strong>. Teza się obroniła; rozszerzam przedział do <strong>$10–90</strong>, bo poprzedni pomijał oba skrajne rozstrzygnięcia binarne</td>
+            <td style="color:var(--ocena-kupno)">Trafna, przedział rozszerzony</td>
+          </tr>
+          <tr>
+            <td>Brak wskazania, że <strong>gotówka finansuje część straty</strong></td>
+            <td>Wynik przed opodatkowaniem jest lepszy od operacyjnego o <strong>$64,25 mln</strong> — to odsetki od zgromadzonych środków, pokrywające blisko jedną trzecią straty operacyjnej</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana — pominięta informacja korzystna</td>
+          </tr>
+          <tr>
+            <td>Brak rozłożenia ceny na <strong>gotówkę i wycenę projektu</strong></td>
+            <td>Z $38,00 kursu <strong>$13,23 to gotówka netto, $17,69 wartość księgowa, a $20,31 wycena samej obietnicy</strong>. Bez tego rozbicia nie da się powiedzieć, za co się płaci</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana</td>
+          </tr>
+          <tr>
+            <td>Brak odnotowania <strong>konkurencji z Caterpillarem</strong> wewnątrz portfela</td>
+            <td>Obie pozycje sprzedają rozwiązanie tego samego problemu, w odstępie dwóch lat. <strong>Opóźnienie Oklo jest dobrą wiadomością dla Caterpillara</strong></td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana — pominięte powiązanie portfelowe</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Wniosek metodologiczny — dotyczy nie tego raportu, a sposobu, w jaki dobierałem szerokość przedziałów w całej tej serii.</strong><br><br>
+      Przy Amazonie, Caterpillarze i ASML przedziały były <strong>za wysokie</strong>, bo kotwiczyłem je w konsensusie albo w oczekiwaniu wobec rynku. Przy Strategy był <strong>za wąski</strong>. Tutaj był <strong>trafny, ale zbyt gładki</strong> — obejmował scenariusze pośrednie i pomijał oba rozstrzygnięcia skrajne, mimo że przy spółce przedprzychodowej to właśnie one są najbardziej prawdopodobne.<br><br>
+      <strong>Dopisuję do zasad redakcyjnych: przy spółce o rozstrzygnięciu binarnym przedział musi obejmować oba końce, a ocenę należy opierać na wyniku po nadaniu scenariuszom wag, nie na prostym środku przedziału.</strong> Różnica między tymi dwiema liczbami wyniosła przy Oklo blisko trzydzieści procent — to zbyt dużo, by ją pominąć.</div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Kwalifikator „mocny bilans i realny postęp, ale emisja akcji dławi kurs" pozostaje po miesiącu precyzyjnym opisem tej spółki w każdym z trzech członów, a ocena neutralna i przedział wyceny okazały się trafne.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 20 września 2026 | Cena: <strong>$38,00</strong> (zamknięcie 18.09.2026) | <strong>Aktualizacja analizy z 21 sierpnia 2026 — ocena neutralna spekulacyjna utrzymana, przedział rozszerzony</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> wartość godziwa $32–50 → $10–90, bo poprzedni przedział pomijał oba skrajne rozstrzygnięcia binarne; dodano rozłożenie ceny na gotówkę netto ($13,23), wartość księgową ($17,69) i wycenę samej obietnicy ($20,31); dodano informację, że odsetki od zgromadzonej gotówki pokrywają $64,25 mln, czyli blisko jedną trzecią straty operacyjnej; dodano powiązanie portfelowe z Caterpillarem jako konkurentem o ten sam budżet energetyczny | Dane: StockAnalysis / S&amp;P Global Market Intelligence oraz komunikaty spółki i komisji dozoru jądrowego o statusie licencjonowania — <strong>stan danych na 20.09.2026</strong>; rozłożenie ceny, zapas gotówki, scenariusze i ich wagi to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

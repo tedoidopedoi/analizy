@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMSN — Samsung Electronics | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:13px; color:var(--text-muted); font-style:italic; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">KRX: 005930 · LSE: SMSN</div>
+    <div class="company-name">Samsung Electronics Co., Ltd.</div>
+    <div class="company-sub">Pamięci DRAM i HBM, odlewnia krzemu, elektronika użytkowa · Suwon, Korea Południowa · 128 612 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">W portfelu — 3,73% (kwit GDR)</span>
+      <span class="meta-tag">Obniżenie oceny: kupno → neutralna</span>
+      <span class="meta-tag">Najwyższy roczny wzrost w portfelu</span>
+      <div class="price-display">
+        <div class="price-main">₩250 000</div>
+        <div class="price-sub">akcja w Seulu, 14.09.2026 (-3,66%) · Twój kwit GDR wyceniony na $4 768</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Pamięci</span><span class="temat">Półprzewodniki</span><span class="temat">Moc obliczeniowa dla AI</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — wyniki rekordowe i wskaźnik prognozowany skrajnie niski, ale to właśnie tak wygląda szczyt cyklu pamięciowego">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">obniżenie z kupna — po wzroście o 232% w rok mnożnik nie jest okazją, a ostrzeżeniem</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>₩110 000 – ₩385 000</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-56% do +54%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>28 października</b><em>Trzeci kwartał 2026</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena akcji w Seulu</div><div class="metric-value">₩250 000</div><div class="metric-detail"><strong>+232,23% w 52 tygodnie</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Marża operacyjna</div><div class="metric-value green">36,88%</div><div class="metric-detail">Wielokrotnie powyżej historycznych poziomów</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / zysk</div><div class="metric-value">12,74</div><div class="metric-detail">Prognozowana <strong>4,17</strong> — sekcja 6</div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot z kapitału vs koszt</div><div class="metric-value green">+24,25 pp</div><div class="metric-detail">36,86% wobec 12,61% — czwarte miejsce</div></div>
+    <div class="metric-card"><div class="metric-label">Gotówka netto</div><div class="metric-value green">₩167,59 bln</div><div class="metric-detail"><strong>₩25 518 na akcję</strong> — dziesiąta część kursu</div></div>
+    <div class="metric-card"><div class="metric-label">Wolne przepływy</div><div class="metric-value green">₩144,80 bln</div><div class="metric-detail">Stopa zwrotu <strong>8,77%</strong>, wypłata tylko 7,44%</div></div>
+    <div class="metric-card"><div class="metric-label">Liczba akcji</div><div class="metric-value green">-1,20%</div><div class="metric-detail">Spada — trzecia taka pozycja w portfelu</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (36 analityków)</div><div class="metric-value green">₩480 295</div><div class="metric-detail">+92,12% · mocne kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL, WALUTA I STAN POPRZEDNIEJ TEZY</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Samsung produkuje pamięci DRAM i HBM dla akceleratorów sztucznej inteligencji, prowadzi odlewnię krzemu na zlecenie i sprzedaje elektronikę użytkową. Przychody roczne <strong>₩485,27 bln</strong>, kapitalizacja <strong>₩1 651,19 bln</strong>. <strong>Twoja pozycja waży 3,73%</strong> i jest kwitem depozytowym z Londynu notowanym w dolarach, o wartości <strong>$4 768</strong> przy cenie wejścia $3 698, czyli <strong>+28,9%</strong>.</p>
+
+      <div class="alert alert-warning"><strong>Dwie uwagi porządkowe, a pierwsza jest korektą mojego błędu z sierpnia.</strong><br><br><strong>Waluta.</strong> Dane finansowe Samsunga są w wonach, a Twój kwit notowany jest w dolarach. W sierpniu popełniłem błąd, którego zabraniają moje własne zasady: <strong>postawiłem przedział wartości godziwej w dolarach dla kwitu, opierając go na wskaźnikach policzonych w wonach.</strong> Tutaj wycena jest w wonach, bo w tej walucie są zyski.<br><br><strong>Data.</strong> Notowanie z Seulu jest opóźnione — cena pochodzi z <strong>14 września</strong>, nie z 18, jak w pozostałych raportach tej serii.</div>
+
+      <div class="alert alert-info"><strong>Teza z 24 sierpnia nie zadziałała, a jej kwalifikator opierał się na wskaźniku, który dziś uważam za ostrzeżenie, nie za argument.</strong> Oceniłem wtedy SMSN na <strong>kupno</strong> z kwalifikatorem „cena/zysk 4,4 przy rekordowym zwrocie dla akcjonariuszy", a kurs w Seulu spadł od tamtej analizy z ₩281 500 do <strong>₩250 000</strong>, czyli o <strong>11,2%</strong>.<br><br>
+      <strong>Rekordowe wyniki się potwierdziły — i to jest dokładnie problem.</strong> Marża operacyjna jest wielokrotnie powyżej historycznych poziomów tej spółki, a kurs wzrósł w rok o <strong>232,23%</strong>. Przy producencie pamięci taki zestaw liczb nie oznacza taniości, tylko szczyt cyklu; rozwijam to w sekcji 6.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Przychody</strong></td><td>₩485,27 bln</td><td style="color:var(--ocena-kupno)">Prognoza wzrostu <strong>46,49% rocznie</strong></td></tr>
+          <tr><td><strong>Zysk netto</strong></td><td style="color:var(--ocena-kupno)">₩135,26 bln · <strong>₩20 373 na akcję</strong></td><td style="color:var(--ocena-kupno)">Wzrost zysku <strong>124,09% rocznie</strong></td></tr>
+          <tr><td>Najbliższe wyniki</td><td>28 października 2026</td><td>Odcięcie dywidendy: 29 września</td></tr>
+          <tr><td>Wskaźnik Altmana / Piotroskiego</td><td style="color:var(--ocena-kupno)">6,01 / 7</td><td style="color:var(--ocena-kupno)">Wysoko w bezpiecznej strefie</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — TRZY BIZNESY, JEDEN DECYDUJE</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment</th><th>Rola</th><th>Charakter</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Pamięci DRAM i HBM</strong></td><td style="color:var(--ocena-kupno)">Większość zysku grupy</td><td style="color:var(--ocena-sprzedaz)"><strong>Skrajnie cykliczny</strong> — cena towaru</td></tr>
+          <tr><td>Odlewnia krzemu na zlecenie</td><td style="color:var(--ocena-uwaga)">Przychód bez rentowności</td><td style="color:var(--ocena-uwaga)">Silniejszy rywal na rynku</td></tr>
+          <tr><td>Elektronika użytkowa i telefony</td><td>Stabilny, niska marża</td><td style="color:var(--ocena-kupno)">Łagodzi cykl pamięciowy</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Samsung jest konglomeratem, ale o jego wycenie decyduje jeden segment — najbardziej cykliczny ze wszystkich, jakie występują w technologii.</strong><br><br>Pamięć jest towarem: kupuje się ją za pojemność i przepustowość, a ceny ustala relacja podaży do popytu. <strong>Dlatego marża potrafi wahać się od ujemnej do przekraczającej pięćdziesiąt procent w ciągu dwóch lat</strong> — i to samo dotyczy zysku grupy.<br><br><strong>Wyjątkiem jest pamięć o wysokiej przepustowości do akceleratorów AI:</strong> dłuższe kontrakty, trudniejsze specyfikacje, mniej dostawców, czyli łagodniejszy cykl. <strong>Pytania, jaka część obecnej marży pochodzi z tej trwalszej części, dziś rozstrzygnąć nie można.</strong></div>
+
+      <div class="alert alert-info"><strong>Rzecz, którą warto zobaczyć w kontekście całego portfela: podwyżka nakładów Amazona była tłumaczona właśnie wyższymi kosztami pamięci.</strong> Ten sam wzrost cen, który obciąża jedną Twoją pozycję, jest źródłem rekordowej marży drugiej. <strong>To jest najczystszy przykład tego, że masz na rachunku obie strony tej samej faktury.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na Samsunga</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Popyt na pamięć do akceleratorów AI</strong></td><td style="color:var(--ocena-kupno)">Przewyższa podaż</td><td style="color:var(--ocena-kupno)">Przyczyna rekordowej marży</td></tr>
+          <tr><td><strong>Ceny pamięci</strong></td><td style="color:var(--ocena-kupno)">Wysokie</td><td style="color:var(--ocena-sprzedaz)"><strong>Wysokie ceny przyciągają podaż</strong></td></tr>
+          <tr><td>Nakłady konkurencji na nowe moce</td><td style="color:var(--ocena-sprzedaz)">Rosną w całej branży</td><td style="color:var(--ocena-sprzedaz)">Moce z 2027–2028 zderzą się z popytem</td></tr>
+          <tr><td>Odlewnia na zlecenie</td><td style="color:var(--ocena-uwaga)">Pod presją</td><td style="color:var(--ocena-uwaga)">Nie dorównuje rentownością liderowi</td></tr>
+          <tr><td>Kurs wona</td><td style="color:var(--ocena-uwaga)">Zmienny</td><td style="color:var(--ocena-sprzedaz)"><strong>Pozycja w dolarach, zyski w wonach</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Mechanizm cyklu pamięciowego jest prosty i działa od czterdziestu lat bez wyjątku.</strong> Wysokie ceny dają wysokie marże, wysokie marże skłaniają wszystkich producentów do budowy mocy, a <strong>moce uruchamiają się jednocześnie dwa do trzech lat później — wtedy ceny spadają szybciej, niż ktokolwiek zakładał.</strong><br><br>
+      <strong>Dzisiejsza marża operacyjna jest więc jednocześnie najlepszą wiadomością i najpoważniejszym ostrzeżeniem.</strong> Historycznie Samsung notował ją w przedziale kilku do dwudziestu kilku procent; obecny poziom nie jest nowym stanem równowagi, a punktem, od którego branża zaczyna inwestować w nadwyżkę podaży.<br><br>
+      <strong>Nie twierdzę, że szczyt już był.</strong> Twierdzę, że po wzroście kursu o 232% w rok wycenianie tej spółki tak, jakby dzisiejsze marże były trwałe, jest założeniem, nie analizą.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I AKCJONARIAT</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Struktura odbiorców pamięci</td><td style="color:var(--ocena-uwaga)">Skoncentrowana</td><td style="color:var(--ocena-uwaga)">Producenci akceleratorów i operatorzy chmury</td></tr>
+          <tr><td>Przychód na pracownika</td><td style="color:var(--ocena-kupno)">₩3,78 mld</td><td style="color:var(--ocena-kupno)">Zysk na pracownika ₩1,05 mld</td></tr>
+          <tr><td><strong>Zmiana liczby akcji r/r</strong></td><td style="color:var(--ocena-kupno)"><strong>-1,20%</strong></td><td style="color:var(--ocena-kupno)">Stopa zwrotu łącznie 2,09%</td></tr>
+          <tr><td>Instytucje / zarząd i podmioty powiązane</td><td>34,59% / 3,94%</td><td>Wolny obrót 5,20 mld z 6,57 mld akcji</td></tr>
+          <tr><td>Dywidenda</td><td>₩2 264 na akcję — stopa 0,89%</td><td style="color:var(--ocena-kupno)"><strong>Wypłata 7,44% zysku</strong>, wzrost 14,81%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Najciekawsza liczba w tej tabeli to wskaźnik wypłaty dywidendy: 7,44% zysku.</strong> Spółka zatrzymuje ponad dziewięćdziesiąt procent zysku, a przy wolnych przepływach ₩144,80 bln <strong>ma ogromną przestrzeń na podnoszenie dywidendy albo skup akcji</strong> — i już ją wykorzystuje.<br><br><strong>Zastrzeżenie cykliczne:</strong> niska wypłata przy szczytowym zysku wygląda konserwatywnie, ale liczona jest od zysku, który może się skurczyć. <strong>Policzona od zysku typowego dla środka cyklu byłaby wielokrotnie wyższa.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">BIZNES I PRZEPŁYWY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>₩485,27 bln</td></tr>
+          <tr><td>Zysk brutto</td><td style="color:var(--ocena-kupno)">₩278,96 bln — marża 57,48%</td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td style="color:var(--ocena-kupno)"><strong>₩178,96 bln — marża 36,88%</strong></td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td>₩187,84 bln — nadwyżka z odsetek</td></tr>
+          <tr><td>Wynik netto</td><td>₩135,26 bln — marża 30,84%</td></tr>
+          <tr><td>Przepływy operacyjne</td><td style="color:var(--ocena-kupno)">₩196,73 bln</td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td><strong>-₩51,93 bln — 10,7% przychodów</strong></td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>₩144,80 bln · ₩22 048 na akcję</strong></td></tr>
+          <tr><td>Efektywna stawka podatku</td><td>19,76%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Ta tabela pokazuje spółkę w najlepszej formie od lat.</strong> Przepływy operacyjne przekraczają ₩196 bln, a po nakładach zostaje <strong>₩144,80 bln wolnej gotówki</strong> — blisko trzydzieści procent przychodów.<br><br><strong>Nakłady inwestycyjne stanowią 10,7% przychodów</strong> — poziom właściwy dla producenta z własnymi fabrykami i znacznie niższy niż u Intela. W zestawieniu, które prowadzę: IREN 612% · CoreWeave 271% · Oracle 105% · Amazon 22,3% · Intel 21,2% · Novo Nordisk 17,1% · Sibanye 11,6% · <strong>Samsung 10,7%</strong> · ASML 4,1% · Amphenol 4,0% · KLA 2,77% · SAP 1,9%.</div>
+
+      <div class="alert alert-warning"><strong>Ostrożność dotyczy nie poziomu tych liczb, a ich trwałości — i tu przydaje się jedna kontrola.</strong><br><br>
+      Wynik przed opodatkowaniem przewyższa operacyjny o <strong>₩8,88 bln</strong>. Sprawdziłem tę nadwyżkę, bo w Marvellu i Amazonie okazała się ona zdarzeniem jednorazowym zawyżającym zysk. <strong>Tutaj to odsetki od gotówki netto wynoszącej ₩167,59 bln — pozycja realna i powtarzalna.</strong> Rachunek wyników Samsunga nie jest zniekształcony.<br><br>
+      <strong>Problemem jest natomiast to, że cały ten zysk pochodzi z ceny towaru.</strong> Nie ma tu zdarzenia księgowego do rozłożenia — jest po prostu marża, która historycznie w tej branży nie utrzymywała się dłużej niż dwa do trzech lat.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja / wartość firmy</td><td>₩1 651,19 bln / ₩1 497,84 bln</td><td style="color:var(--ocena-kupno)">Niższa od kapitalizacji — gotówka netto</td></tr>
+          <tr><td>Cena / sprzedaż</td><td>3,40</td><td>Wartość firmy do sprzedaży 3,09</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>11,40</strong></td><td style="color:var(--ocena-kupno)">Stopa zwrotu <strong>8,77%</strong> — najwyżej w portfelu</td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td style="color:var(--ocena-kupno)">6,57</td><td style="color:var(--ocena-kupno)">Wartość firmy do wolnych przepływów 10,34</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td>2,85</td><td>Księga <strong>₩86 052 na akcję</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>12,74</td><td>Zysk niezaburzony zdarzeniami jednorazowymi</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>4,17</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>To nie jest okazja — to ostrzeżenie</strong>, patrz niżej</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>0,05</strong></td><td style="color:var(--ocena-sprzedaz)">Przy cyklicznych oznacza szczyt prognoz</td></tr>
+          <tr><td>Prognozy na trzy lata</td><td>przychody 46,49% rocznie</td><td style="color:var(--ocena-sprzedaz)">Tempo zysku nie do utrzymania</td></tr>
+          <tr><td>Mediana producentów pamięci w cyklu</td><td>okolice 8–12×</td><td>Samsung w górnej części tego przedziału</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać — najważniejszy akapit raportu.</strong> Wskaźnik prognozowany <strong>4,17</strong> i iloraz wobec tempa wzrostu <strong>0,05</strong> wyglądają jak wycena spółki oddawanej za darmo. <strong>Przy producencie pamięci znaczą coś innego: konsensus zakłada wzrost zysku na akcję z ₩20 373 do okolic ₩59 950, czyli o blisko dwieście procent.</strong> Taki mianownik daje niski wskaźnik — ale tylko dopóki się utrzyma.<br><br><strong>Najniższe wskaźniki prognozowane w tej branży pojawiają się dokładnie na szczycie cyklu</strong>, bo prognoza zysku jest wtedy najwyższa i spada szybciej, niż analitycy zdążą ją obniżyć. To miara optymizmu, nie bezpieczeństwa — identyczne ostrzeżenie postawiłem przy KLA.</p>
+      <p style="color:var(--text-muted);font-size:13px">Dane: StockAnalysis / S&amp;P Global Market Intelligence dla notowania w Seulu (KRX:005930), stan cenowy 14.09.2026. Przeliczenie wskaźnika prognozowanego na wymagany zysk na akcję — obliczenie własne.</p>
+
+      <h3>Cztery scenariusze na 2028 rok</h3>
+      <p>Buduję je od zysku na akcję i mnożnika właściwego dla fazy cyklu; scenariusz dolny opieram na wartości księgowej, bo w dołkach pamięciowych rynek wycenia tę spółkę względem księgi.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Zysk na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cykl trwa przez 2027, mnożnik szczytowy</strong></td><td>₩48 000</td><td>8×</td><td><strong>₩384 000</strong></td><td style="color:var(--ocena-kupno)">+54%</td></tr>
+          <tr><td><strong>Wzrost dowieziony, mnożnik niższy</strong></td><td>₩48 000</td><td>6×</td><td><strong>₩288 000</strong></td><td style="color:var(--ocena-kupno)">+15%</td></tr>
+          <tr><td>Cykl przechodzi w spadek w 2027</td><td>₩26 000</td><td>8×</td><td>₩208 000</td><td style="color:var(--ocena-sprzedaz)">-17%</td></tr>
+          <tr><td><strong>Pełne odwrócenie — wycena wraca do księgi</strong></td><td style="color:var(--ocena-sprzedaz)">księga ₩86 052</td><td>1,3× księgi</td><td><strong>₩112 000</strong></td><td style="color:var(--ocena-sprzedaz)">-55%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne. Zysk na akcję w scenariuszach górnych wyprowadzony z prognozy konsensusu obniżonej o margines ostrożności; mnożniki odzwierciedlają rozpiętość, w jakiej historycznie notowani są producenci pamięci — sześć do dziesięciu razy zysk szczytowy, około jednej do półtora raza wartość księgowa w dołku.</p>
+
+      <p><strong>Fair value: ₩110 000 – ₩385 000</strong>, środek <strong>₩247 500 (-1,0%)</strong>. Po nadaniu scenariuszom wag 25/35/25/15 wynik wypada na <strong>₩265 600, czyli 6,2% powyżej kursu</strong>. Konsensus 36 analityków to ₩480 295 (+92,12%) przy rekomendacji mocnego kupna — <strong>powyżej mojego scenariusza najlepszego</strong>.</p>
+
+      <div class="alert alert-warning"><strong>Warto zauważyć, gdzie leży konsensus, bo to samo w sobie jest informacją o ryzyku.</strong> Cena docelowa analityków przewyższa mój scenariusz, w którym cykl trwa <em>i</em> utrzymuje się szczytowy mnożnik. <strong>Rynek wycenia zatem kontynuację obecnej fazy jako stan bazowy</strong> — a przy pamięciach jest to najmocniejsze założenie, jakie można postawić.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto / operacyjna</td><td style="color:var(--ocena-kupno)">57,48% / 36,88%</td><td style="color:var(--ocena-sprzedaz)">Wielokrotnie powyżej normy historycznej</td></tr>
+          <tr><td>Marża netto / EBITDA</td><td style="color:var(--ocena-kupno)">30,84% / 46,80%</td><td style="color:var(--ocena-kupno)">Kolejność prawidłowa, bez zniekształceń</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-kupno)"><strong>36,86% vs 12,61%</strong></td><td style="color:var(--ocena-kupno)"><strong>Różnica +24,25 pp</strong></td></tr>
+          <tr><td>Zwrot z kapitału własnego / aktywów</td><td style="color:var(--ocena-kupno)">30,79% / 17,69%</td><td style="color:var(--ocena-kupno)">Zwrot z kapitału własnego niższy — liczba uczciwa</td></tr>
+          <tr><td>Rotacja zapasów</td><td style="color:var(--ocena-uwaga)">3,37</td><td style="color:var(--ocena-uwaga)">Zapas leży blisko trzy i pół miesiąca</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Nadwyżka zwrotu z zainwestowanego kapitału nad kosztem wynosi 24,25 pp — po przeliczeniu siedemnastu spółek Samsung jest czwarty.</strong> Kolejność: KLA +54,77 · ASML +54,26 · Novo Nordisk +33,71 · <strong>Samsung +24,25</strong> · Sibanye +23,15 · SAP +9,92 · Amphenol +9,89 · Caterpillar +6,59 · ServiceNow +1,18 · Oracle +0,70 · Amazon +0,69 · AMD −8,02 · Marvell −9,38 · Intel −11,92 · IREN −26,44 · MARA −84,58 · Strategy −93,38.<br><br>
+      <strong>Ta lista mówi o Twoim portfelu jedno: cztery pierwsze miejsca zajmują spółki, które sprzedają narzędzia do produkcji układów albo same je produkują z własnym majątkiem wytwórczym.</strong> Projektanci krzemu bez fabryk — AMD i Marvell — są poniżej zera.<br><br><strong>Zastrzeżenie:</strong> wskaźnik mierzony jest w szczycie cyklu, a w dołku pamięciowym zwrot z kapitału Samsunga spadał w przeszłości <em>poniżej</em> kosztu kapitału. <strong>Liczba prawdziwa, ale nietrwała.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — DRUGI NAJMOCNIEJSZY W PORTFELU</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gotówka / zadłużenie</strong></td><td style="color:var(--ocena-kupno)">₩190,00 bln / ₩22,41 bln</td><td style="color:var(--ocena-kupno)"><strong>Gotówka netto ₩167,59 bln</strong></td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-kupno)">0,04</td><td style="color:var(--ocena-kupno)">Dług do EBITDA 0,10</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-kupno)"><strong>236,78</strong></td><td style="color:var(--ocena-kupno)">Wskaźnik <strong>aktualny</strong></td></tr>
+          <tr><td>Wskaźnik bieżący / szybki</td><td style="color:var(--ocena-kupno)">2,83 / 2,20</td><td style="color:var(--ocena-kupno)">Kapitał obrotowy ₩245,52 bln</td></tr>
+          <tr><td>Kapitał własny</td><td style="color:var(--ocena-kupno)">₩579,31 bln</td><td>Jedna trzecia dzisiejszego kursu</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Po ASML to drugi bilans w Twoim portfelu z dodatnią pozycją gotówkową netto — a przy spółce skrajnie cyklicznej znaczy to więcej niż przy jakiejkolwiek innej.</strong><br><br>Gotówka przewyższa zadłużenie o <strong>₩167,59 bln</strong>, czyli <strong>₩25 518 na akcję — ponad dziesiątą część kursu</strong>, przy praktycznie zerowej dźwigni.<br><br><strong>Dlaczego to decydujące:</strong> producent pamięci w dołku traci zdolność finansowania nakładów z bieżących przepływów, a ponosić je musi dalej, bo inaczej wypada z gry technologicznej. <strong>Spółki bez zapasu gotówki wychodzą z dołka słabsze; Samsung wychodzi silniejszy, bo inwestuje, gdy konkurenci muszą ciąć.</strong> Dodatkowo <strong>wartość księgowa ₩86 052 na akcję stanowi realne dno wyceny</strong> i wyznacza scenariusz najgorszy z sekcji 6.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Wyniki są rekordowe w każdej linii</strong> — marże wielokrotnie powyżej normy historycznej, wolne przepływy przekraczające sto czterdzieści bilionów wonów. To najlepsza forma tej spółki od lat.</div>
+
+      <div class="alert alert-success"><strong>2. Pamięć o wysokiej przepustowości jest mniej cykliczna od zwykłej</strong> — dłuższe kontrakty i mniej dostawców oznaczają, że część obecnej marży może być trwalsza niż w poprzednich szczytach.</div>
+
+      <div class="alert alert-success"><strong>3. Bilans pozwala inwestować w dołku, gdy konkurenci muszą ciąć</strong> — w tej branży to przewaga strategiczna, nie tylko bezpieczeństwo.</div>
+
+      <div class="alert alert-info"><strong>4. Przestrzeń na zwrot dla akcjonariusza jest ogromna i nietknięta.</strong> Wypłata pochłania 7,44% zysku, stopa zwrotu z przepływów przekracza osiem i pół procenta, liczba akcji maleje.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Wskaźnik prognozowany nie jest okazją, a ostrzeżeniem</strong> — zapisuje założenie wzrostu zysku na akcję o blisko dwieście procent, a najniższe takie wskaźniki w pamięciach pojawiają się na szczycie cyklu.</div>
+
+      <div class="alert alert-danger"><strong>2. Wysokie marże same wywołują swój koniec.</strong> Cała branża inwestuje dziś w moce, które uruchomią się w latach 2027–2028 — wtedy ceny spadają szybciej, niż ktokolwiek zakłada.</div>
+
+      <div class="alert alert-warning"><strong>3. Kurs wzrósł o 232% w rok</strong>, a konsensus analityków wskazuje cenę wyższą od mojego scenariusza najlepszego. Wycenianie obecnych marż jako nowego stanu równowagi jest założeniem, nie analizą.</div>
+
+      <div class="alert alert-warning"><strong>4. Twoja pozycja jest w dolarach, a zyski spółki w wonach.</strong> Kurs walutowy zmienia Twój wynik niezależnie od spółki — akcja w Seulu spadła o 11,2%, a Twój kwit znacznie mniej.</div>
+
+      <div class="alert alert-warning"><strong>5. Próg, przy którym zmieniam ocenę na sprzedaż:</strong> spadek marży operacyjnej poniżej dwudziestu pięciu procent w dwóch kolejnych kwartałach przy utrzymanym kursie — byłby to dowód, że cykl się odwraca, a wycena tego nie odzwierciedla.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Podmiot</th><th>Przewaga nad Samsungiem</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>SK hynix</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz — obserwowana)</span></td><td style="color:var(--ocena-sprzedaz)">Mocniejszy w pamięci o wysokiej przepustowości</td><td>Brak dywersyfikacji w elektronikę użytkową</td></tr>
+          <tr><td><strong>Micron</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz — obserwowana)</span></td><td>Czysta ekspozycja na cykl pamięciowy</td><td style="color:var(--ocena-kupno)">Mniejsza skala i słabszy bilans</td></tr>
+          <tr><td><strong>TSMC</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz)</span></td><td style="color:var(--ocena-sprzedaz)">Wyraźnie silniejszy w odlewni na zlecenie</td><td>Brak ekspozycji na pamięci</td></tr>
+          <tr><td><strong>ASML i KLA</strong> <span style="color:var(--text-muted);font-size:12px">(ASML masz — 2,54%)</span></td><td><strong>Dostawcy, nie konkurenci</strong> — Samsung kupuje od nich maszyny</td><td style="color:var(--ocena-uwaga)">Zarabiają niezależnie od cen pamięci</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Najważniejsza obserwacja dotyczy miejsca Samsunga w łańcuchu — i tego, że masz w portfelu trzy jego ogniwa.</strong> <strong>Kupuje maszyny od ASML</strong>, którą masz, i <strong>sprzedaje pamięć operatorom chmury, w tym Amazonowi</strong>, którego też masz.<br><br><strong>Konsekwencja: przy spadku cen pamięci Samsung traci, Amazon zyskuje, a ASML jest obojętny, dopóki nakłady branży się utrzymują.</strong> Te trzy pozycje nie reagują identycznie na tę samą informację — w tym portfelu rzadkość.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zmiana za 52 tygodnie</strong></td><td style="color:var(--ocena-kupno)"><strong>+232,23%</strong></td><td><strong>Najwyżej w Twoim portfelu</strong></td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td style="color:var(--ocena-uwaga)">₩258 750</td><td style="color:var(--ocena-uwaga)">Kurs <strong>3,4% poniżej</strong></td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td style="color:var(--ocena-kupno)">₩216 701</td><td style="color:var(--ocena-kupno)">Kurs <strong>15,4% powyżej</strong> — układ średnich prawidłowy</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>45,32</td><td>Neutralnie; wolumen 19,41 mln akcji</td></tr>
+          <tr><td>Beta (5 lat)</td><td style="color:var(--ocena-uwaga)">1,54</td><td>Między ASML i Caterpillarem</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>brak danych</td><td style="color:var(--ocena-uwaga)">Brak dla notowania w Seulu</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Układ jest czwartym w tej serii o tym samym kształcie: kurs nieco poniżej krótszej średniej, wyraźnie powyżej dłuższej, wskaźnik siły relatywnej w okolicach 45 — po bardzo mocnym roku.</strong> Tak samo wyglądają dziś ASML, KLA i Caterpillar, a <strong>wszystkie cztery cofnęły się w połowie września razem z tematem sztucznej inteligencji.</strong><br><br>Samsung wyróżnia się skalą rocznego wzrostu: <strong>ponad dwa razy więcej niż ASML czy Caterpillar.</strong> Przy spółce cyklicznej taki wzrost nie dowodzi niczego, ale nie pozwala twierdzić, że to wczesna faza.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>₩480 295</strong></td><td>Cena docelowa konsensusu — powyżej mojego scenariusza najlepszego</td></tr>
+          <tr><td><strong>₩288 000</strong></td><td>Scenariusz z dowiezionym wzrostem i niższym mnożnikiem</td></tr>
+          <tr><td><strong>₩258 750</strong></td><td>Średnia 50-sesyjna — pierwszy opór</td></tr>
+          <tr><td><strong>₩216 701</strong></td><td><strong>Średnia 200-sesyjna — kluczowe wsparcie</strong></td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>₩180 000</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — poniżej niego rynek wycenia zwrot cyklu</td></tr>
+          <tr><td><strong>₩86 052</strong></td><td>Wartość księgowa na akcję — dno scenariusza najgorszego</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs nieco poniżej krótszej średniej po cofnięciu sektorowym, wskaźnik siły relatywnej neutralny. Wyniki z 28 października pokażą, czy marża utrzymuje poziom, a to jedyne, co teraz ma znaczenie.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Środek wyceny wypada praktycznie na kursie, a wynik po uwzględnieniu prawdopodobieństw sześć procent wyżej. Rozstrzyga faza cyklu pamięciowego, nie jakość spółki.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Gotówka netto ponad dziesiątą część kapitalizacji, zerowa dźwignia i zdolność inwestowania w dołku, gdy konkurenci muszą ciąć. Przez pełny cykl to właśnie ta cecha decyduje o pozycji technologicznej.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ocena łączna: NEUTRALNA — obniżenie z kupna z 24 sierpnia.</strong><br><br><strong>Spółka jest w najlepszej formie od lat i nie podważam ani jednej liczby:</strong> marże rekordowe, zwrot z kapitału o ponad dwadzieścia cztery punkty powyżej kosztu, bilans z gotówką netto, malejąca liczba akcji.<br><br><strong>Obniżenie wynika z dwóch rzeczy, obu związanych z cyklem.</strong> Kurs wzrósł w rok o 232,23%, więc obecna faza jest w cenie. A <strong>mój sierpniowy argument „cena/zysk 4,4" był wskaźnikiem wziętym z gotowej tabeli, którego przy producencie pamięci nie wolno używać bez ostrzeżenia</strong> — niski wskaźnik prognozowany w tej branży jest cechą szczytu, nie taniości.<br><br><strong>Nie jest to zalecenie sprzedaży pozycji z wynikiem blisko trzydziestu procent</strong>, lecz wskazanie, że dokupowanie przy tej cenie oznacza zakład na trwałość obecnych marż.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td><strong>3,73%</strong></td><td>Dwunasta pozycja z osiemnastu</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-kupno)">+28,9%</td><td>Kwit GDR w dolarach, cena wejścia $3 698</td></tr>
+          <tr><td><strong>Półprzewodniki razem</strong></td><td style="color:var(--ocena-uwaga)"><strong>36,45%</strong></td><td style="color:var(--ocena-uwaga)">AMD, Intel, Marvell, Samsung i ASML — suma pięciu pozycji</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Samsung zajmuje w tym portfelu miejsce, którego nie zajmuje żadna inna pozycja: jest jednocześnie dostawcą i odbiorcą dwóch innych Twoich spółek.</strong> Kupuje maszyny od ASML, a podwyżka nakładów Amazona była tłumaczona właśnie wyższymi kosztami pamięci.<br><br><strong>Te trzy pozycje faktycznie się różnicują</strong> — w przeciwieństwie do ASML i Caterpillara albo AMD i Marvella, które reagują na tę samą zmienną.</div>
+
+      <div class="alert alert-warning"><strong>Druga rzecz, porządkująca po całym przeglądzie.</strong> Zestawienie nadwyżki zwrotu nad kosztem kapitału w grupie półprzewodnikowej: <strong>ASML +54,26 pp, Samsung +24,25 pp, AMD −8,02 pp, Marvell −9,38 pp, Intel −11,92 pp.</strong> Dwie pozycje dodatnie ważą razem 6,27% portfela; trzy ujemne — 31,43%.<br><br><strong>Nie jest to rekomendacja przesunięcia kapitału</strong> — decyzja jest Twoja. Jest to wskazanie, że w największym skupieniu tematycznym Twojego rachunku <strong>wielkość pozycji jest odwrotnie proporcjonalna do zwrotu z kapitału</strong>.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Samsung jest dziś w najlepszej formie od lat i właśnie dlatego trzeba obniżyć ocenę.</strong> Marża brutto <strong>57,48%</strong>, operacyjna <strong>36,88%</strong> — oba wielokrotnie powyżej historycznej normy tej spółki. Wolne przepływy przekraczają <strong>₩144 bln</strong>, stopa zwrotu z nich blisko <strong>8,8%</strong>, a wypłata dywidendy pochłania zaledwie 7,44% zysku. Zwrot z zainwestowanego kapitału przewyższa jego koszt o <strong>24,25 pp</strong>, co daje czwarte miejsce wśród siedemnastu policzonych spółek. Bilans jest drugi w portfelu po ASML: <strong>gotówka netto ₩167,59 bln, czyli ponad dziesiąta część kursu</strong>, przy praktycznie zerowej dźwigni.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Problem polega na tym, że wszystkie te liczby są liczbami szczytu cyklu. <strong>Wskaźnik ceny do zysku prognozowanego wynosi 4,17, a iloraz wobec tempa wzrostu 0,05</strong> — i przy producencie pamięci nie są to miary taniości, lecz zapis założenia, że zysk na akcję wzrośnie o blisko dwieście procent. <strong>Najniższe wskaźniki prognozowane w tej branży pojawiają się dokładnie na szczycie</strong>, bo wysokie marże skłaniają wszystkich producentów do budowy mocy, które uruchamiają się jednocześnie dwa-trzy lata później. Kurs wzrósł w rok o <strong>232,23%</strong>, a cena docelowa analityków leży powyżej mojego scenariusza najlepszego.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Wyniki muszą potwierdzać siłę.</strong> Marże wielokrotnie powyżej normy historycznej — spełnione z nadwyżką.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Bilans musi pozwolić przejść dołek bez cięcia nakładów.</strong> Gotówka netto ponad dziesiątą część kapitalizacji — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Rachunek wyników nie może być zniekształcony.</strong> Nadwyżka nad wynikiem operacyjnym to odsetki od gotówki — sprawdzone, pozycja realna.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Wycena powinna dawać asymetrię.</strong> Środek przedziału praktycznie na kursie, konsensus powyżej mojego scenariusza najlepszego — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Marża musi się utrzymać przez 2027 rok.</strong> Jedyna zmienna rozstrzygająca; historia branży mówi, że nie utrzymuje się dłużej niż dwa-trzy lata.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Pamięć o wysokiej przepustowości musi okazać się trwalsza od zwykłej.</strong> Jeśli tak, cykl będzie łagodniejszy niż poprzednie.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>28 października 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki trzeciego kwartału</strong></td><td style="color:var(--ocena-uwaga)">Czy marża operacyjna utrzymuje poziom</td></tr>
+            <tr><td>29 września 2026</td><td>Odcięcie prawa do dywidendy</td><td>Techniczne</td></tr>
+            <tr><td>2027</td><td>Uruchamianie nowych mocy w całej branży</td><td>Podaż zaczyna gonić popyt</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">Na bieżąco</td><td style="color:var(--ocena-sprzedaz)">Kwotowania cen pamięci na rynku kasowym</td><td style="color:var(--ocena-sprzedaz)">Wyprzedzają wyniki o kwartał</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Marża operacyjna</strong></td><td>36,88%</td><td>zejście poniżej 25% w dwóch kwartałach</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Gotówka netto</td><td>₩167,59 bln</td><td>przejście na dług netto</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Liczba akcji</td><td>-1,20% rocznie</td><td>zatrzymanie skupu</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Rotacja zapasów</strong></td><td>3,37</td><td>spadek przy jednoczesnym wzroście zapasu</td><td><span class="mon-dot y"></span>Wymaga uwagi</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Charakter pozycji</strong></td><td>Cykliczna spółka w szczytowej formie — trzymać, nie powiększać</td></tr>
+            <tr><td><strong>Dokupowanie</strong></td><td>W okolicach <strong>₩217 000</strong>, czyli po powrocie do średniej długoterminowej</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>₩350 000</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>₩180 000</strong></td></tr>
+            <tr><td><strong>Warunek zmiany na sprzedaż</strong></td><td>Marża operacyjna poniżej dwudziestu pięciu procent w dwóch kolejnych kwartałach przy utrzymanym kursie</td></tr>
+            <tr><td><strong>Czego nie robić</strong></td><td>Nie czytać wskaźnika prognozowanego jako miary taniości i nie mieszać walut — wycena w wonach, pozycja w dolarach</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p><strong>Obniżam ocenę spółki, która ma najlepsze wyniki w swojej historii i najniższy wskaźnik wyceny w całym Twoim portfelu — i nie jest to sprzeczność, tylko istota inwestowania w pamięci.</strong> Samsung zarabia dziś marżę operacyjną blisko trzydziestu siedmiu procent przy zwrocie z kapitału o ponad dwadzieścia cztery punkty powyżej jego kosztu, ma gotówkę netto stanowiącą dziesiątą część kursu, maleje liczbę akcji i wypłaca zaledwie siedem procent zysku. Każda z tych liczb jest prawdziwa.</p>
+        <p><strong>Żadna z nich nie jest trwała — i to właśnie mówi wskaźnik prognozowany na poziomie czterech razy zysk.</strong> W sierpniu użyłem tej liczby jako argumentu za kupnem; dziś uważam to za błąd metodyczny, bo przy producencie towaru niski mnożnik prognozowany jest cechą szczytu, nie taniości. Kurs wzrósł w rok o dwieście trzydzieści dwa procent, a cena docelowa analityków leży powyżej scenariusza, w którym cykl trwa <em>i</em> utrzymuje się szczytowy mnożnik. <strong>Trzymać, nie dokupować, obserwować marżę operacyjną — i wrócić do rozmowy o kupnie przy powrocie kursu do średniej długoterminowej.</strong></p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>₩110 000 – ₩385 000</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">₩112 000 (-55%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">₩384 000 (+54%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Utrzymać, nie powiększać</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 28 października</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA POPRZEDNIEJ ANALIZY (24.08.2026)</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Wartość godziwa postawiona w dolarach dla kwitu GDR</strong>, przy wskaźnikach policzonych w wonach</td>
+            <td><strong>Mieszanie walut, którego zabraniają moje własne zasady.</strong> Wycena musi być w walucie zysków — czyli w wonach; wartość pozycji podaję osobno w dolarach. Nowy przedział <strong>₩110 000–385 000</strong></td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — błąd metodyczny, nie tylko liczbowy</td>
+          </tr>
+          <tr>
+            <td><strong>„Cena/zysk 4,4" jako argument za kupnem</strong></td>
+            <td>Przy producencie pamięci <strong>niski wskaźnik prognozowany jest cechą szczytu cyklu, nie taniości</strong> — zapisuje założenie wzrostu zysku o blisko dwieście procent. Ta sama liczba jest dziś w raporcie ostrzeżeniem</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — wskaźnik wzięty z gotowej tabeli bez wymaganego zastrzeżenia</td>
+          </tr>
+          <tr>
+            <td><strong>Ocena kupno</strong> przy kursie ₩281 500 w Seulu</td>
+            <td>Kurs spadł do ₩250 000, czyli o <strong>11,2%</strong>. Obniżam ocenę na neutralną — nie z powodu spółki, a z powodu fazy cyklu i poziomu ceny</td>
+            <td style="color:var(--ocena-uwaga)">Ocena zaktualizowana</td>
+          </tr>
+          <tr>
+            <td>Raport w starym formacie — 15 sekcji, bez sekcji korekty</td>
+            <td>Nowy plik zgodny z zasadami z 17.09.2026; poprzednia wersja trafia do archiwum</td>
+            <td style="color:var(--text-muted)">Porządkowa</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Druga pozycja w tej tabeli domyka wzorzec przechodzący przez całą tę serię aktualizacji — a to ostatni raport z osiemnastu.</strong><br><br>Przy Marvellu, Amazonie i Caterpillarze wziąłem wskaźnik z gotowej tabeli, nie sprawdzając, co dzieli się przez co. <strong>Tutaj zrobiłem to samo z drugiej strony: wziąłem wskaźnik wyjątkowo niski i uznałem go za argument, nie pytając, dlaczego jest tak niski.</strong><br><br><strong>Wniosek dopisuję do zasad redakcyjnych: wskaźnik skrajny — bardzo wysoki albo bardzo niski — jest zawsze pytaniem, nigdy odpowiedzią.</strong> Przy Marvellu skrajność brała się ze zdarzeń jednorazowych, przy KLA z premii za monopol, przy Strategy z przeszacowania aktywa, a tutaj z zysku szczytu cyklu.</div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Druga część sierpniowego kwalifikatora — „rekordowy zwrot dla akcjonariuszy" — pozostaje trafna i dziś jest mocniejsza: wypłata pochłania 7,44% zysku, liczba akcji maleje, a stopa zwrotu z wolnych przepływów przekracza osiem i pół procenta. Trafne było również wskazanie, że to najmocniejszy bilans wśród Twoich spółek półprzewodnikowych poza ASML.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 20 września 2026 | Cena: <strong>₩250 000</strong> (akcja w Seulu, notowanie opóźnione, 14.09.2026); Twoja pozycja to kwit GDR wyceniony na <strong>$4 768</strong> | <strong>Aktualizacja analizy z 24 sierpnia 2026 — OBNIŻENIE OCENY: kupno → neutralna</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> wartość godziwa przeniesiona z dolarów na wony, bo w tej walucie są zyski spółki — poprzednie zestawienie mieszało waluty; wskaźnik ceny do zysku prognozowanego przeklasyfikowany z argumentu za kupnem na ostrzeżenie o szczycie cyklu pamięciowego; nowy przedział ₩110 000–385 000 ze scenariuszem dolnym opartym na wartości księgowej; raport przepisany z formatu 15-sekcyjnego na obowiązujący | Dane: StockAnalysis / S&amp;P Global Market Intelligence dla notowania KRX:005930 — <strong>stan danych na 20.09.2026, cena z 14.09.2026</strong>; scenariusze, przeliczenie wskaźnika prognozowanego oraz relacja nakładów do przychodów to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

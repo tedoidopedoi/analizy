@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSTR — Strategy Inc | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:13px; color:var(--text-muted); font-style:italic; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: MSTR</div>
+    <div class="company-name">Strategy Inc</div>
+    <div class="company-sub">Spółka trzymająca bitcoina, finansowana długiem i akcjami preferowanymi · Tysons Corner · 1 539 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">W portfelu — 2,02%</span>
+      <span class="meta-tag">Ocena neutralna utrzymana</span>
+      <span class="meta-tag">Mój sierpniowy przedział był za NISKI</span>
+      <div class="price-display">
+        <div class="price-main">$153,92</div>
+        <div class="price-sub">zamknięcie 18.09.2026 (+16,39%), po sesji $153,13</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Bitcoin i kopalnie</span><span class="temat">Fintech</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — płacisz premię do wartości bitcoina, stoisz za 22 miliardami roszczeń, a dywidendy preferowane wymagają gotówki, której spółka nie zarabia">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">utrzymana — ale z nowego, poważniejszego powodu niż w sierpniu</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$40 – $250</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-74% do +62%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>29 października</b><em>Trzeci kwartał 2026</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Struktura</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$153,92</div><div class="metric-detail">-53,32% w 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 21.08</div><div class="metric-value green">+37,0%</div><div class="metric-detail"><strong>Kurs przebił górę mojego przedziału $85–130</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Bitcoin w posiadaniu</div><div class="metric-value">845 050 szt.</div><div class="metric-detail">Wartość <strong>$66,2 mld</strong> (31.08.2026)</div></div>
+    <div class="metric-card"><div class="metric-label">Wartość dla akcji zwykłych</div><div class="metric-value">$114,59</div><div class="metric-detail">Na akcję, po odjęciu wszystkich roszczeń</div></div>
+    <div class="metric-card"><div class="metric-label">Premia rynkowa</div><div class="metric-value red">1,34×</div><div class="metric-detail">Płacisz $1,34 za dolara bitcoina netto</div></div>
+    <div class="metric-card"><div class="metric-label">Roszczenia przed Tobą</div><div class="metric-value red">$22,17 mld</div><div class="metric-detail"><strong>33,5% wartości bitcoina</strong> — dług i akcje preferowane</div></div>
+    <div class="metric-card"><div class="metric-label">Liczba akcji</div><div class="metric-value red">+24,59%</div><div class="metric-detail">W rok; +5,58% w samym kwartale</div></div>
+    <div class="metric-card"><div class="metric-label">Beta</div><div class="metric-value red">3,60</div><div class="metric-detail">Sesja 18.09 zamknęła się wzrostem o 16,39%</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I STAN POPRZEDNIEJ TEZY</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Strategy nie jest spółką technologiczną. Jest <strong>wehikułem trzymającym bitcoina</strong>, finansowanym długiem i akcjami preferowanymi, z resztkowym biznesem oprogramowania o przychodach <strong>$498,35 mln</strong>. Kapitalizacja <strong>$59,14 mld</strong>. <strong>Twoja pozycja waży 2,02%</strong>, przy cenie wejścia $154,78 daje <strong>-0,6%</strong>.</p>
+
+      <div class="alert alert-info"><strong>Teza z 21 sierpnia okazała się trafna w treści, ale mój przedział wyceny był za NISKI — pierwszy taki przypadek w całej tej serii.</strong><br><br>Oceniłem wtedy MSTR na <strong>neutralnie</strong> z kwalifikatorem „płacisz 1,35 dolara za dolara bitcoina" i wyceniłem na <strong>$85–130</strong> przy kursie $112,39. Dziś jest $153,92, czyli <strong>37,0% więcej</strong> — powyżej górnej granicy.<br><br>
+      <strong>Sama premia do wartości bitcoina okazała się policzona dobrze</strong> — dziś jest praktycznie taka sama. Błędem była <strong>szerokość przedziału</strong>: dla aktywa o tak wysokiej becie rozstawiłem widełki na pięćdziesiąt procent, gdy powinny obejmować kilkukrotność. Szczegóły w sekcji 16.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>31.08.2026</strong></td><td><strong>Stan posiadania: 845 050 bitcoinów</strong> o wartości <strong>$66,2 mld</strong>, przy koszcie nabycia $63,73 mld</td><td>Około czterech procent podaży bitcoina; implikowana cena ok. $78,3 tys.</td></tr>
+          <tr><td>08.2026</td><td>Wznowienie zakupów — pakiet 4 603 bitcoinów</td><td>Po okresie wstrzymania akumulacji</td></tr>
+          <tr><td><strong>02.08.2026</strong></td><td><strong>Podniesienie rezerwy dolarowej do $4 mld</strong> — pokrycie około <strong>2,3 roku</strong> zobowiązań z tytułu dywidend i odsetek</td><td style="color:var(--ocena-kupno)">Odpowiedź na ryzyko z sekcji 5</td></tr>
+          <tr><td>do końca 07.2026</td><td style="color:var(--ocena-sprzedaz)"><strong>Wypłacone dywidendy z akcji preferowanych: $1,06 mld</strong></td><td style="color:var(--ocena-sprzedaz)">Zobowiązanie gotówkowe przy znikomych przychodach</td></tr>
+          <tr><td>27.06.2026</td><td style="color:var(--ocena-sprzedaz)">Wskaźnik wartości przedsiębiorstwa do wartości bitcoina spadł <strong>poniżej 1,0×</strong></td><td style="color:var(--ocena-sprzedaz)">Rynek wycenił przedsiębiorstwo niżej niż jego bitcoina</td></tr>
+          <tr><td><strong>18.09.2026</strong></td><td><strong>Wzrost kursu o 16,39% w jednej sesji</strong></td><td style="color:var(--ocena-uwaga)">Skala ruchu pokazuje, czym jest ta pozycja — dźwignią na bitcoina</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — MECHANIZM, NIE FIRMA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <p>Mechanizm jest prosty: spółka pozyskuje kapitał — emisją akcji zwykłych, preferowanych i obligacji zamiennych — i kupuje za niego bitcoina. Resztkowy biznes oprogramowania nie ma wpływu na wycenę.</p>
+
+      <div class="alert alert-info"><strong>Cała idea opiera się na jednym warunku: emisja akcji musi odbywać się powyżej wartości bitcoina przypadającej na akcję.</strong> Wtedy za pozyskane pieniądze spółka kupi więcej bitcoina, niż rozwodni, i <strong>wartość na akcję rośnie mimo rozwodnienia</strong>.<br><br><strong>Ale mechanizm działa tylko przy premii.</strong> Kiedy kurs spada poniżej wartości bitcoina na akcję, każda emisja <em>niszczy</em> wartość dotychczasowych akcjonariuszy — dlatego <strong>istnienie premii jest tu najważniejszym wskaźnikiem operacyjnym</strong>, ważniejszym niż cokolwiek w rachunku wyników.</div>
+
+      <div class="alert alert-danger"><strong>Element, którego w sierpniu nie doceniłem: akcje preferowane nie są kapitałem, są zobowiązaniem gotówkowym.</strong> Strategy wyemitowała wieczyste akcje preferowane w czterech seriach, płacące dywidendę <strong>w dolarach</strong>, nie w bitcoinie — do końca lipca wypłaciła z tego tytułu <strong>$1,06 mld</strong>.<br><br>Tymczasem przepływy operacyjne są ujemne. Spółka nie zarabia gotówki na te wypłaty, więc musi brać ją z rezerwy, z emisji albo ze sprzedaży bitcoina. <strong>To zegar, nie ryzyko teoretyczne</strong> — rozwijam go w sekcji 5.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK — JEDNA ZMIENNA</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na MSTR</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cena bitcoina</strong></td><td style="color:var(--ocena-uwaga)">Około $78,3 tys. wynikające ze stanu posiadania</td><td style="color:var(--ocena-uwaga)"><strong>Jedyna zmienna decydująca</strong></td></tr>
+          <tr><td><strong>Dostępność funduszy giełdowych na bitcoina</strong></td><td style="color:var(--ocena-sprzedaz)">Powszechna</td><td style="color:var(--ocena-sprzedaz)">Osłabia uzasadnienie premii</td></tr>
+          <tr><td>Stopy procentowe</td><td style="color:var(--ocena-uwaga)">Kluczowe dla kosztu akcji preferowanych</td><td style="color:var(--ocena-sprzedaz)">Podnoszą koszt kolejnych emisji</td></tr>
+          <tr><td>Apetyt rynku na dźwignię</td><td style="color:var(--ocena-uwaga)">Zmienny</td><td style="color:var(--ocena-uwaga)">Decyduje o wielkości premii</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Największa zmiana w otoczeniu tej spółki nie ma nic wspólnego z bitcoinem: dostęp do bitcoina przestał być trudny.</strong> Kiedy Strategy zaczynała kupować, jej akcje były dla instytucji najprostszą drogą do tej ekspozycji i premia miała uzasadnienie w wygodzie. <strong>Dziś fundusze giełdowe na bitcoina są powszechne, tańsze i bez dźwigni.</strong><br><br><strong>Zostaje jedno uzasadnienie premii: przekonanie, że spółka powiększy wartość bitcoina na akcję szybciej, niż rośnie sam bitcoin.</strong> Jest to możliwe, ale nie jest już przewagą strukturalną — tylko zakładem na sprawność finansowania.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">STRUKTURA KAPITAŁU I AKCJONARIAT</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Warstwa</th><th>Wielkość</th><th>Pozycja w kolejce</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zadłużenie</strong></td><td>$6,77 mld</td><td style="color:var(--ocena-sprzedaz)">Pierwsza w kolejce</td></tr>
+          <tr><td><strong>Akcje preferowane</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>$15,4 mld</strong></td><td style="color:var(--ocena-sprzedaz)">Druga — dywidenda płatna w dolarach</td></tr>
+          <tr><td><strong>Akcje zwykłe</strong></td><td>384,23 mln sztuk</td><td style="color:var(--ocena-sprzedaz)"><strong>Ostatnia — to Twoja warstwa</strong></td></tr>
+          <tr><td>Zmiana liczby akcji zwykłych</td><td style="color:var(--ocena-sprzedaz)">+24,59% r/r, +5,58% kwartalnie</td><td style="color:var(--ocena-sprzedaz)">Narzędzie pracy, nie skutek uboczny</td></tr>
+          <tr><td>Zarząd i osoby powiązane</td><td style="color:var(--ocena-kupno)">5,31%</td><td>Instytucje 57,81%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>To najważniejsza tabela w raporcie: przed akcjonariuszem zwykłym stoi $22,17 mld roszczeń, czyli 33,5% wartości posiadanego bitcoina.</strong><br><br>Rachunek: bitcoin wart <strong>$66,2 mld</strong>, minus dług <strong>$6,77 mld</strong>, minus akcje preferowane, daje <strong>$44,03 mld</strong> dla akcji zwykłych, czyli <strong>$114,59 na akcję</strong>.<br><br><strong>Konsekwencja tej dźwigni jest policzalna: spadek ceny bitcoina o 67% zeruje wartość przypadającą na akcje zwykłe.</strong> Nie obniża jej — zeruje, bo roszczenia są nominalne, a nie proporcjonalne.<br><br>
+      Nie jest to teoria. <strong>Gdy trzymasz MSTR, nie trzymasz bitcoina — trzymasz bitcoina z dźwignią przekraczającą jedną trzecią.</strong></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne na podstawie stanu posiadania bitcoina z 31.08.2026, danych bilansowych oraz publicznie raportowanej wielkości akcji preferowanych. Próg zerujący policzony jako udział roszczeń w wartości bitcoina.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">BIZNES — ZEGAR DOLAROWY</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody z oprogramowania</td><td>$498,35 mln — marża brutto 67,60%</td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$36,36 mld</strong> — przeszacowanie bitcoina, nie działalność</td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-sprzedaz)">-$31,37 mld · strata na akcję <strong>-$99,30</strong></td></tr>
+          <tr><td>Korzyść podatkowa z straty</td><td>$5,86 mld</td></tr>
+          <tr><td><strong>Przepływy operacyjne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$20,09 mln</strong></td></tr>
+          <tr><td>Wolne przepływy</td><td style="color:var(--ocena-sprzedaz)">-$41,19 mln</td></tr>
+          <tr><td><strong>Spłacony dług netto</strong></td><td style="color:var(--ocena-kupno)"><strong>-$1,36 mld — spółka spłacała, nie pożyczała</strong></td></tr>
+          <tr><td><strong>Rezerwa dolarowa</strong></td><td style="color:var(--ocena-kupno)"><strong>$4 mld — pokrycie ok. 2,3 roku zobowiązań</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Pierwsza rzecz: strata 31,37 miliarda dolarów nie jest stratą operacyjną.</strong> Przy księgowaniu bitcoina w wartości godziwej spadek ceny przechodzi wprost przez rachunek wyników, więc <strong>strata -$99,30 na akcję to zapis spadku ceny aktywa</strong> — co potwierdzają przepływy operacyjne wynoszące minus dwadzieścia milionów, a nie minus trzydzieści miliardów.<br><br>Konsekwencja: <strong>wszystkie wskaźniki oparte na zysku są tu bezużyteczne.</strong> Jedyną sensowną miarą jest wartość bitcoina minus roszczenia — podejście z sekcji 4.</div>
+
+      <div class="alert alert-danger"><strong>Druga rzecz i najważniejsza nowość tej aktualizacji: Strategy ma zegar dolarowy, którego w sierpniu nie umieściłem w centrum analizy.</strong><br><br>Dywidendy z akcji preferowanych wyniosły <strong>$1,06 mld do końca lipca 2026</strong> i są płatne w dolarach, przy przepływach operacyjnych <strong>minus $20,09 mln</strong>. Zarząd odpowiedział wprost: <strong>2 sierpnia podniósł rezerwę dolarową do $4 mld, co pokrywa około 2,3 roku dywidend i odsetek</strong> — działanie właściwe, ale <strong>zamieniające problem strukturalny w problem z terminem.</strong><br><br><strong>Po wyczerpaniu rezerwy zostają trzy wyjścia: emisja, sprzedaż bitcoina albo obniżenie dywidendy.</strong> Pierwsze wymaga premii, drugie łamie tezę spółki, trzecie uderza w zaufanie do jej papierów. <strong>To jest realne ryzyko tej pozycji — nie zmienność bitcoina, a dolarowe zobowiązanie w spółce, która dolarów nie zarabia.</strong></div>
+
+      <div class="alert alert-success"><strong>Element pozytywny, który trzeba odnotować: w ostatnich dwunastu miesiącach spółka spłaciła dług netto na $1,36 mld.</strong> Nie zwiększała dźwigni kredytowej, a ją zmniejszała — i to w okresie, gdy kurs spadł o połowę. Przy wskaźniku bieżącym 5,39 pozycja płynnościowa w krótkim terminie nie budzi zastrzeżeń.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Premia do wartości bitcoina netto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>1,34×</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Jedyna miara, która tu działa</strong> — rachunek w sekcji 4</td></tr>
+          <tr><td>Wskaźnik podstawowy: kapitalizacja do wartości bitcoina</td><td style="color:var(--ocena-kupno)">0,89×</td><td style="color:var(--ocena-uwaga)">Poniżej jedności, ale <strong>ignoruje dług i akcje preferowane</strong></td></tr>
+          <tr><td>Wskaźnik przedsiębiorstwa do wartości bitcoina</td><td style="color:var(--ocena-uwaga)">1,23×</td><td>Uwzględnia wszystkie roszczenia na poziomie przedsiębiorstwa</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td style="color:var(--ocena-sprzedaz)">1,85</td><td style="color:var(--ocena-sprzedaz)"><strong>Nie używać</strong> — księga pochodzi z innej daty niż stan bitcoina</td></tr>
+          <tr><td>Cena / sprzedaż</td><td style="color:var(--ocena-sprzedaz)">118,67</td><td style="color:var(--ocena-sprzedaz)">Bez znaczenia — przychód nie jest źródłem wartości</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>nie dotyczy</td><td>Strata <strong>$99,30 na akcję</strong> przy przychodach $498,35 mln</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>3,58</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Liczba pozornie sensacyjna i całkowicie bezużyteczna</strong> — patrz niżej</td></tr>
+          <tr><td>PEG</td><td>nie dotyczy</td><td>Brak dodatniego zysku bazowego</td></tr>
+          <tr><td><strong>Miara zastępcza</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>premia 1,34× do wartości bitcoina</strong></td><td>To ona zastępuje tu wszystkie wskaźniki zyskowe</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać — i jest to przykład wskaźnika, który wprost wprowadza w błąd.</strong> Wskaźnik ceny do zysku prognozowanego na poziomie 3,58 sugerowałby spółkę skrajnie tanią. W rzeczywistości <strong>zapisuje on oczekiwanie, że przeszacowanie bitcoina odwróci się i wróci do rachunku wyników jako zysk księgowy.</strong> Nie jest to prognoza rentowności, tylko prognoza ceny aktywa przebrana w kształt wskaźnika. <strong>Przy spółce trzymającej aktywo w wartości godziwej każdy wskaźnik zyskowy jest ukrytym prognozowaniem ceny tego aktywa</strong> — dlatego cała wycena poniżej opiera się na wartości bitcoina, a nie na zysku.</p>
+
+      <h3>Cztery scenariusze na 12–18 miesięcy</h3>
+      <p>Buduję je od ceny bitcoina i wielkości premii, bo to jedyne dwie zmienne, które tu działają. Zakładam dalsze rozwodnienie do około 400 mln akcji oraz niezmienione roszczenia.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Wartość na akcję</th><th>Premia</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Bitcoin +50%, premia utrzymana</strong></td><td>$192,82</td><td>1,3×</td><td><strong>$251</strong></td><td style="color:var(--ocena-kupno)">+63%</td></tr>
+          <tr><td><strong>Bitcoin +15%, premia spada</strong></td><td>$134,90</td><td>1,1×</td><td><strong>$148</strong></td><td style="color:var(--ocena-uwaga)">-4%</td></tr>
+          <tr><td>Bitcoin bez zmian, premia zanika</td><td>$110,08</td><td>0,9×</td><td>$99</td><td style="color:var(--ocena-sprzedaz)">-36%</td></tr>
+          <tr><td><strong>Bitcoin -40%, premia zanika</strong></td><td style="color:var(--ocena-sprzedaz)">$43,88</td><td>0,9×</td><td><strong>$39</strong></td><td style="color:var(--ocena-sprzedaz)">-74%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne. Wartość na akcję w każdym scenariuszu: wartość bitcoina po zmianie ceny, minus wszystkie roszczenia z sekcji 4, podzielone przez 400 mln akcji. Premia to mnożnik, jaki rynek historycznie przyznawał tej spółce — od poniżej jedności w czerwcu 2026 do wielokrotności w okresach euforii.</p>
+
+      <p><strong>Fair value: $40 – $250</strong>, środek <strong>$145,00 (-5,8%)</strong>. Konsensus 16 analityków to $228,53 (+48,47%), ale <strong>sam rozrzut ich celów jest informacją</strong> — od $160–179 u trzech domów do $217 i wyżej u innych.</p>
+
+      <div class="alert alert-warning"><strong>Ta rozpiętość — od minus siedemdziesięciu czterech do plus sześćdziesięciu dwóch procent — nie jest przyznaniem się do niewiedzy. Jest opisem instrumentu.</strong><br><br>
+      Przy tej becie, dźwigni sięgającej jednej trzeciej wartości aktywa i premii, która w tym roku wahała się od poniżej jedności do wyraźnie powyżej, <strong>każdy węższy przedział byłby fikcją precyzji.</strong> Właśnie na tym polegał błąd mojej sierpniowej wyceny, którą opisuję w sekcji 16.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU — GDZIE MIARA SIĘ ŁAMIE</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto na oprogramowaniu</td><td>67,60%</td><td>Jedyna marża opisująca działalność — nieistotna dla wyceny</td></tr>
+          <tr><td>Marża operacyjna</td><td style="color:var(--ocena-sprzedaz)">-7 295,38%</td><td style="color:var(--ocena-sprzedaz)">Liczba bez treści</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-71,75% vs 21,63%</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Różnica -93,38 pp — formalnie najgorzej w portfelu</strong></td></tr>
+          <tr><td>Rotacja aktywów</td><td>0,01</td><td>Aktywa trzymają wartość, nie generują przychodu</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Tutaj muszę zrobić coś, czego nie robiłem w żadnym innym raporcie tej serii: odmówić użycia własnej głównej miary.</strong><br><br>Nadwyżka zwrotu z kapitału nad kosztem wynosi formalnie <strong>-93,38 pp</strong>, co stawiałoby MSTR na ostatnim miejscu wśród szesnastu policzonych spółek, poniżej MARA z -84,58. <strong>Ale ta liczba nie mówi tego, co zwykle mówi:</strong> w pozostałych spółkach ujemna nadwyżka oznacza działalność niezarabiającą na swój koszt, a <strong>tutaj licznikiem jest spadek ceny bitcoina</strong>. Gdyby bitcoin wzrósł, ten sam wskaźnik byłby skrajnie dodatni bez żadnej zmiany w spółce.<br><br><strong>Wniosek: przy spółce, której rachunek wyników jest wykresem ceny aktywa, wskaźniki rentowności kapitału mierzą kierunek rynku, nie jakość.</strong> Odnotowuję je dla porządku i nie buduję na nich oceny.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka / zadłużenie</td><td>$2,45 mld / $6,77 mld</td><td style="color:var(--ocena-uwaga)">Dług netto <strong>$4,32 mld</strong> ($11,25 na akcję)</td></tr>
+          <tr><td><strong>Wskaźnik bieżący / szybki</strong></td><td style="color:var(--ocena-kupno)"><strong>5,39 / 5,22</strong></td><td style="color:var(--ocena-kupno)">Brak krótkoterminowej presji</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-kupno)">0,15</td><td style="color:var(--ocena-uwaga)">Nisko, ale wskaźnik <strong>pomija akcje preferowane</strong></td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-608,87</strong></td><td style="color:var(--ocena-sprzedaz)">Miara bez treści</td></tr>
+          <tr><td><strong>Altman Z / Piotroski F</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>2,99 / 3</strong></td><td style="color:var(--ocena-sprzedaz)">Dostawca danych wskazuje podwyższone ryzyko niewypłacalności</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Bilans Strategy wygląda bezpiecznie i jest to złudzenie dwóch wskaźników, które pomijają akcje preferowane.</strong><br><br><strong>Dług do kapitału własnego 0,15</strong> sugeruje niemal brak dźwigni, ale kapitał własny obejmuje akcje preferowane, ekonomicznie działające jak dług wieczysty. <strong>Policzona uczciwie dźwignia to jedna trzecia wartości aktywa, nie piętnaście procent.</strong><br><br><strong>Wskaźnik Altmana 2,99 jest jedyną liczbą, która to dostrzega</strong> — dostawca danych sam oznacza go jako wskazujący podwyższone ryzyko. Po stronie plus: <strong>wskaźnik bieżący 5,39</strong> i spłata długu netto oznaczają brak przymusu działania w najbliższych kwartałach.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Dźwignia działa w obie strony, a w górę mocno.</strong> Przy roszczeniach stanowiących jedną trzecią wartości aktywa wzrost bitcoina o połowę podnosi wartość na akcję o blisko siedemdziesiąt procent.</div>
+
+      <div class="alert alert-success"><strong>2. Mechanizm emisji powyżej wartości realnie powiększa majątek na akcję.</strong> Dopóki premia istnieje, każda emisja kupuje więcej bitcoina, niż rozwadnia — a spółka wznowiła zakupy, więc mechanizm znów działa.</div>
+
+      <div class="alert alert-success"><strong>3. Zarząd zaadresował ryzyko dolarowe, zanim stało się problemem.</strong> Rezerwa czterech miliardów dolarów daje około dwóch i pół roku spokoju — to zarządzanie ryzykiem, nie jego ignorowanie.</div>
+
+      <div class="alert alert-info"><strong>4. Dźwignia kredytowa maleje, nie rośnie.</strong> Spółka spłaciła dług netto na ponad miliard dolarów w okresie, gdy jej kurs spadł o połowę, utrzymując przy tym skalę posiadania.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Spadek bitcoina o 67% zeruje wartość przypadającą na akcje zwykłe.</strong> Roszczenia są nominalne i zostają w całości, więc cała strata spada na ostatnią warstwę kapitału — Twoją.</div>
+
+      <div class="alert alert-danger"><strong>2. Dywidendy z akcji preferowanych są zobowiązaniem dolarowym w spółce, która dolarów nie zarabia.</strong> Rezerwa kupuje około dwóch i pół roku, ale problemu nie rozwiązuje.</div>
+
+      <div class="alert alert-danger"><strong>3. Premia jest odwracalna i już raz w tym roku zniknęła</strong> — w czerwcu wskaźnik przedsiębiorstwa do wartości bitcoina spadł poniżej jedności. Bez premii mechanizm emisji przestaje działać, a wraz z nim cała teza.</div>
+
+      <div class="alert alert-warning"><strong>4. Rozwodnienie o blisko jedną czwartą w rok.</strong> Jest to narzędzie pracy tej spółki, ale przy zaniku premii zaczyna niszczyć wartość.</div>
+
+      <div class="alert alert-warning"><strong>5. Próg, przy którym zmieniam ocenę na sprzedaż:</strong> spadek premii poniżej jedności utrzymujący się przez dwa kwartały <strong>przy jednoczesnej kontynuacji emisji akcji</strong>. Byłby to dowód, że zarząd niszczy wartość świadomie, żeby obsłużyć akcje preferowane.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Alternatywa</th><th>Przewaga nad MSTR</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Fundusze giełdowe na bitcoina</strong></td><td style="color:var(--ocena-sprzedaz)">Brak premii, dźwigni i roszczeń przed Tobą</td><td>Brak dźwigni działa też w górę</td></tr>
+          <tr><td><strong>Bitcoin kupiony bezpośrednio</strong></td><td style="color:var(--ocena-sprzedaz)">Pełna kontrola, zero roszczeń</td><td>Wymaga własnego przechowywania</td></tr>
+          <tr><td><strong>MARA</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 4,33%)</span></td><td>Wydobywa bitcoina, a nie tylko go kupuje</td><td style="color:var(--ocena-kupno)">Transformacja wciąż przed nią</td></tr>
+          <tr><td>Inne spółki skarbcowe</td><td>Mniejsza skala, czasem niższa premia</td><td style="color:var(--ocena-kupno)">Brak dostępu MSTR do rynku papierów preferowanych</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Najważniejsza rzecz w tej tabeli jest niewygodna: dwie pierwsze pozycje dają tę samą ekspozycję taniej i bez ryzyka struktury kapitału.</strong> Kupując MSTR, płacisz <strong>premię</strong> i wchodzisz za wszystkie roszczenia; kupując fundusz giełdowy na bitcoina, płacisz opłatę za zarządzanie i nie masz przed sobą nikogo.<br><br><strong>Uzasadnieniem premii może być tylko jedno: przekonanie, że spółka powiększy wartość bitcoina na akcję szybciej, niż wzrośnie sam bitcoin.</strong> Historycznie się to zdarzało — ale wymaga, żeby premia istniała nadal, a to założenie o zachowaniu rynku, nie o działaniu spółki.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-sprzedaz)">-53,32%</td><td style="color:var(--ocena-sprzedaz)"><strong>Najgorszy roczny wynik w Twoim portfelu</strong></td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td>$110,82</td><td style="color:var(--ocena-sprzedaz)">Kurs <strong>38,9% powyżej</strong> — skrajne rozciągnięcie</td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td style="color:var(--ocena-kupno)">$137,04</td><td style="color:var(--ocena-kupno)">Kurs 12,3% powyżej — odzyskana w tym miesiącu</td></tr>
+          <tr><td><strong>Wskaźnik RSI (14)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>66,08</strong></td><td style="color:var(--ocena-sprzedaz)">Najwyżej w portfelu — zbliża się do wykupienia</td></tr>
+          <tr><td>Beta (5 lat)</td><td style="color:var(--ocena-sprzedaz)">3,60</td><td style="color:var(--ocena-sprzedaz)">Druga najwyższa po IREN</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-uwaga)">32,62 mln akcji — 8,49%</td><td style="color:var(--ocena-uwaga)">Przy takim poziomie odbicia są gwałtowne</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Obraz techniczny MSTR jest przeciwieństwem wszystkich pozostałych pozycji z tego tygodnia — i to najważniejsza informacja praktyczna.</strong><br><br>ASML, KLA i Caterpillar stały nieco poniżej krótszej średniej po cofnięciu, ze wskaźnikiem siły relatywnej w okolicach 48. <strong>MSTR stoi 38,9% powyżej swojej średniej pięćdziesięciosesyjnej, ze wskaźnikiem 66,08.</strong> Tamte były po cofnięciu; <strong>ta jest w środku gwałtownego odbicia po rocznym spadku o połowę</strong>, a przy ośmiu i pół procenta akcji na krótko takie odbicia bywają szybko oddawane.<br><br><strong>Wniosek: to najgorszy moment na dokupowanie tej pozycji w całym portfelu</strong> — nie dlatego, że teza jest zła, ale dlatego, że kurs jest czterdzieści procent nad własną krótkoterminową średnią.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$228,53</strong></td><td>Cena docelowa konsensusu</td></tr>
+          <tr><td><strong>$154,78</strong></td><td>Twoja cena wejścia — kurs jest na niej</td></tr>
+          <tr><td><strong>$145</strong></td><td>Środek przedziału wartości godziwej</td></tr>
+          <tr><td><strong>$137,04</strong></td><td>Średnia 200-sesyjna — pierwsze wsparcie</td></tr>
+          <tr><td><strong>$114,59</strong></td><td><strong>Wartość bitcoina na akcję po odjęciu roszczeń — granica premii</strong></td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$110,82</strong></td><td style="color:var(--ocena-sprzedaz)">Średnia 50-sesyjna — poniżej niej premia znika</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>SPRZEDAŻ</strong></td><td>Nie z powodu spółki, a z powodu poziomu: kurs prawie czterdzieści procent nad krótszą średnią, wskaźnik siły relatywnej najwyższy w portfelu, po sesji ze wzrostem o ponad szesnaście procent. To jest moment na realizację, nie na wejście.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Środek wyceny wypada blisko sześć procent poniżej kursu. Rozstrzyga cena bitcoina i istnienie premii — dwie zmienne, których nie da się prognozować z użyteczną dokładnością.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA SPEKULACYJNA</strong></td><td>W tym horyzoncie rozstrzygnie się, czy struktura z akcjami preferowanymi wytrzyma pełny cykl bitcoina. Jeśli tak, dźwignia zadziała na korzyść. Jeśli nie, warstwa zwykła poniesie całą stratę.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ocena łączna: NEUTRALNA — utrzymana z 21 sierpnia, ale z nowego i poważniejszego powodu.</strong><br><br>
+      W sierpniu powodem była <strong>premia</strong>: płacisz więcej niż wart jest bitcoin, a masz już inną ekspozycję. Ten powód pozostaje aktualny — premia jest dziś praktycznie taka sama.<br><br>
+      <strong>Doszedł jednak drugi, którego wagi wcześniej nie oddałem: zobowiązanie dolarowe z akcji preferowanych.</strong> Ponad miliard dolarów dywidend wypłaconych do końca lipca w spółce o ujemnych przepływach operacyjnych. Rezerwa czterech miliardów kupuje około dwóch i pół roku — po czym pozostaje emisja, sprzedaż bitcoina albo cięcie dywidendy.<br><br>
+      <strong>Ocena krótkoterminowa jest niższa od łącznej, i nie zmieniło się nic w spółce — zmieniła się cena.</strong> Kurs stoi prawie czterdzieści procent nad własną średnią pięćdziesięciosesyjną po jednosesyjnym wzroście o szesnaście procent. <strong>Przy tej becie taki poziom rozciągnięcia jest sam w sobie ryzykiem</strong>, niezależnie od tego, co się myśli o bitcoinie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td><strong>2,02%</strong></td><td>Najmniejsza pozycja z osiemnastu poza Oklo</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-uwaga)">-0,6%</td><td>Przy cenie wejścia $154,78 — po roku praktycznie zero</td></tr>
+          <tr><td><strong>Ekspozycja na bitcoina razem</strong></td><td style="color:var(--ocena-uwaga)"><strong>6,35%</strong></td><td style="color:var(--ocena-uwaga)">Z MARA — to suma dwóch pozycji</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Masz dwie ekspozycje na bitcoina o łącznej wadze 6,35% i różnią się bardziej, niż sugeruje wspólny temat.</strong><br><br><strong>MARA wydobywa bitcoina</strong> i przechodzi transformację w stronę wynajmu mocy energetycznej, więc jej wartość zależy od kosztu energii i powodzenia tej zmiany. <strong>Strategy po prostu bitcoina trzyma</strong>, z dźwignią jednej trzeciej wartości aktywa.<br><br><strong>Jeśli chcesz ekspozycji na samą cenę bitcoina, MSTR daje ją czyściej</strong> — ale z premią i dwiema warstwami roszczeń. Przy mocnym spadku MSTR ucierpi bardziej, niż wynikałoby z samego spadku ceny; MARA z innej przyczyny, przez marże wydobycia.<br><br>
+      <strong>Nie sugeruję, którą trzymać</strong> — decyzja jest Twoja. Zwracam uwagę, że dwie pozycje na jeden temat mają tu zupełnie inne mechanizmy ryzyka, więc nie znoszą się wzajemnie.</div>
+
+      <div class="alert alert-info"><strong>Rzecz warta odnotowania: po roku ta pozycja jest praktycznie na zero, mimo że kurs spadł w tym czasie o ponad połowę.</strong> Cena wejścia wypadła blisko dzisiejszego poziomu, więc roczny spadek Cię nie dotyczy — <strong>dobry przykład, dlaczego wynik pozycji i zmiana kursu to dwie różne informacje.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Strategy nie jest spółką, którą można wycenić rachunkiem wyników — jest warstwą kapitału w strukturze trzymającej bitcoina, i tylko tak ma sens ją analizować.</strong> Spółka posiada <strong>845 050 bitcoinów wartych $66,2 mld</strong>, około czterech procent całej podaży. Przed akcjonariuszem zwykłym stoi jednak <strong>$22,17 mld roszczeń</strong> — dług i wieczyste akcje preferowane — czyli <strong>33,5% wartości aktywa</strong>. Po ich odjęciu na akcję przypada <strong>$114,59</strong>, a rynek płaci $153,92, czyli <strong>premię 1,34×</strong>.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Z tej arytmetyki wynikają dwie rzeczy, które trzeba trzymać na widoku. <strong>Pierwsza: spadek bitcoina o 67% zeruje wartość przypadającą na akcje zwykłe</strong>, bo roszczenia są nominalne i zostają w całości. <strong>Druga i nowa: dywidendy z akcji preferowanych są zobowiązaniem dolarowym</strong> — ponad miliard wypłacony do końca lipca — w spółce o przepływach operacyjnych wynoszących minus dwadzieścia milionów. Zarząd podniósł rezerwę do czterech miliardów dolarów, co daje około dwóch i pół roku; potem trzeba będzie emitować akcje, sprzedać bitcoina albo obniżyć tę dywidendę.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Premia musi istnieć, by emisje powiększały majątek na akcję.</strong> Dziś wynosi 1,34× i spółka wznowiła zakupy — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Nie może być przymusu działania w krótkim terminie.</strong> Wskaźnik bieżący 5,39, rezerwa dolarowa na ponad dwa lata — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Dźwignia kredytowa nie powinna rosnąć.</strong> Dług netto spłacony o ponad miliard w rok — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Rozwodnienie nie powinno wyprzedzać wzrostu majątku.</strong> Blisko jedna czwarta nowych akcji w rok — niespełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Struktura nie powinna stawiać akcjonariusza za innymi.</strong> Jedna trzecia wartości aktywa jest obciążona roszczeniami — niespełnione i nieusuwalne.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Bitcoin musi rosnąć.</strong> Jedyna zmienna rozstrzygająca, nieprognozowalna.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>29 października 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki trzeciego kwartału</strong></td><td style="color:var(--ocena-uwaga)">Stan rezerwy dolarowej, tempo emisji i wielkość wypłat z akcji preferowanych</td></tr>
+            <tr><td>Co tydzień</td><td>Komunikaty o zakupach bitcoina</td><td>Brak zakupów oznaczałby zanik premii</td></tr>
+            <tr><td>2027–2028</td><td>Wyczerpanie rezerwy dolarowej</td><td>Wybór: emisja, sprzedaż bitcoina albo cięcie dywidendy</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">W dowolnej chwili</td><td style="color:var(--ocena-sprzedaz)">Nowa emisja akcji preferowanych</td><td style="color:var(--ocena-sprzedaz)">Podnosi roszczenia przed akcjonariuszem zwykłym</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Premia do wartości bitcoina netto</strong></td><td>jak w sekcji 6</td><td>zejście poniżej 1,0× na dwa kwartały</td><td><span class="mon-dot y"></span>Wymaga uwagi</td></tr>
+            <tr><td><strong>Rezerwa dolarowa</strong></td><td>$4 mld</td><td>zejście poniżej rocznych zobowiązań</td><td><span class="mon-dot y"></span>Wymaga uwagi</td></tr>
+            <tr><td>Roszczenia wobec wartości bitcoina</td><td>33,5%</td><td>wzrost powyżej 45%</td><td><span class="mon-dot y"></span>Neutralnie</td></tr>
+            <tr><td>Liczba akcji zwykłych</td><td>+5,58% kwartalnie</td><td>utrzymanie tempa przy premii poniżej 1,0×</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Charakter pozycji</strong></td><td>Bitcoin z dźwignią jednej trzeciej, kupiony z premią — nie substytut bitcoina</td></tr>
+            <tr><td><strong>Dokupowanie</strong></td><td>Nie przy tym poziomie; sensowne dopiero w okolicach <strong>$115</strong>, czyli przy zaniku premii</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$220</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$110</strong> — poniżej niego rynek wycenia spółkę z dyskontem do własnego bitcoina</td></tr>
+            <tr><td><strong>Warunek zmiany na sprzedaż</strong></td><td>Premia poniżej jedności przez dwa kwartały przy kontynuowanej emisji akcji</td></tr>
+            <tr><td><strong>Czego nie robić</strong></td><td>Nie używać wskaźnika ceny do zysku prognozowanego ani wskaźnika długu do kapitału własnego — pierwszy prognozuje cenę bitcoina, drugi pomija akcje preferowane</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p><strong>Utrzymuję ocenę, ale zmieniam jej uzasadnienie — i to jest istotniejsze od samej oceny.</strong> W sierpniu problemem była premia, i pozostaje nim dziś. Ale ważniejsze jest to, czego wtedy nie postawiłem w centrum: <strong>Strategy ma zobowiązanie dolarowe z akcji preferowanych, którego nie pokrywa żadnym przepływem z działalności</strong> — ponad miliard dywidend do końca lipca przy przepływach operacyjnych minus dwadzieścia milionów. Rezerwa czterech miliardów kupuje około dwóch i pół roku; zarząd zrobił dobrze, że ją zbudował, ale zamienił problem strukturalny w problem z terminem.</p>
+        <p><strong>Trzy liczby opisują tę pozycję lepiej niż jakikolwiek wskaźnik: premia 1,34×, roszczenia stanowiące 33,5% wartości bitcoina i próg 67% spadku, przy którym warstwa zwykła się zeruje.</strong> Z tego wynika przedział od minus siedemdziesięciu czterech do plus sześćdziesięciu dwóch procent — i jego szerokość nie jest przyznaniem się do niewiedzy, lecz opisem instrumentu. Krótkoterminowo widzę tu okazję do realizacji, nie do wejścia — kurs stoi prawie czterdzieści procent nad własną krótszą średnią. Dokupowanie ma sens w okolicach $115, czyli przy zaniku premii.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$40 – $250</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$39 (-74%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$251 (+63%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Utrzymać, nie powiększać</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 29 października</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA POPRZEDNIEJ ANALIZY (21.08.2026)</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Wartość godziwa $85–130</strong> przy kursie $112,39</td>
+            <td>Kurs wzrósł do $153,92 i <strong>przebił górną granicę</strong>. Przedział o szerokości pięćdziesięciu procent był <strong>zbyt wąski dla aktywa o becie 3,60</strong>. Nowy zakres <strong>$40–250</strong></td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — pierwszy przypadek w tej serii, gdy przedział był za niski</td>
+          </tr>
+          <tr>
+            <td>Akcje preferowane traktowane jako <strong>element struktury kapitału</strong></td>
+            <td>Są <strong>zobowiązaniem dolarowym</strong>: $1,06 mld wypłaconych dywidend do końca lipca przy przepływach operacyjnych minus $20,09 mln. To jest zegar, nie pozycja bilansowa</td><td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — pominięte główne ryzyko</td>
+          </tr>
+          <tr>
+            <td>Premia policzona jako <strong>1,35×</strong></td>
+            <td>Dziś praktycznie identyczna — liczba się obroniła. Ale wskaźnik ceny do wartości księgowej pokazuje 1,85×, bo księga pochodzi z innej daty niż stan bitcoina; <strong>trzeba liczyć od bitcoina, nie od bilansu</strong></td>
+            <td style="color:var(--ocena-kupno)">Trafna, z dodanym zastrzeżeniem</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Wniosek metodologiczny, inny niż w pozostałych raportach tej serii — i dlatego wart zapisania.</strong><br><br>
+      Przy Amazonie, Caterpillarze i ASML mój przedział wyceny był <strong>za wysoki</strong>, bo zakotwiczyłem go w oczekiwaniu wobec rynku albo w konsensusie analityków. <strong>Tutaj był za niski, i to z odwrotnej przyczyny: byłem zbyt precyzyjny.</strong><br><br>
+      Postawiłem widełki o szerokości pięćdziesięciu procent wokół wartości bitcoina na akcję, jakby premia była stabilna. <strong>Przy premii, która w jednym roku spadła poniżej jedności i wróciła powyżej, taka precyzja jest fikcją.</strong><br><br>
+      <strong>Dopisuję do zasad redakcyjnych: szerokość przedziału wartości godziwej musi odpowiadać zmienności instrumentu.</strong> Dla spółki o becie powyżej trzech przedział węższy niż kilkukrotność jest pozorną dokładnością, która wygląda na analizę, a jest tylko ładnie zapisanym zgadywaniem.</div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Sposób liczenia — premia do wartości bitcoina po odjęciu wszystkich roszczeń — okazał się właściwy i dał praktycznie tę samą liczbę po miesiącu. Trafne było również ostrzeżenie, że masz już inną ekspozycję na ten temat, i że fundusze giełdowe dają ją bez premii.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 20 września 2026 | Cena: <strong>$153,92</strong> (zamknięcie 18.09.2026) | <strong>Aktualizacja analizy z 21 sierpnia 2026 — ocena neutralna utrzymana, uzasadnienie zmienione</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> wartość godziwa $85–130 → $40–250, bo poprzedni przedział był zbyt wąski dla aktywa o becie 3,60 i kurs przebił jego górną granicę; akcje preferowane przeklasyfikowane z elementu struktury kapitału na zobowiązanie dolarowe — $1,06 mld dywidend przy przepływach operacyjnych minus $20,09 mln; dodano próg spadku bitcoina zerujący wartość akcji zwykłych (-67%); wskazano, że wskaźnika ceny do wartości księgowej nie należy używać jako miary premii | Dane: StockAnalysis / S&amp;P Global Market Intelligence oraz komunikaty spółki o stanie posiadania bitcoina z 31.08.2026 — <strong>stan danych na 20.09.2026</strong>; wartość na akcję, premia, próg zerujący i scenariusze to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
