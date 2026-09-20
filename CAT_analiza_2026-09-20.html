@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAT — Caterpillar | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:13px; color:var(--text-muted); font-style:italic; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NYSE: CAT</div>
+    <div class="company-name">Caterpillar Inc.</div>
+    <div class="company-sub">Maszyny budowlane i górnicze, silniki i turbiny do wytwarzania energii · Irving · 118 000 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">W portfelu — 3,15%</span>
+      <span class="meta-tag">Obniżenie oceny: kupno → neutralna</span>
+      <span class="meta-tag">Cykliczna spółka wyceniana jak wzrostowa</span>
+      <div class="price-display">
+        <div class="price-main">$808,99</div>
+        <div class="price-sub">zamknięcie 18.09.2026 (+1,30%), po sesji $809,43</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Przemysł</span><span class="temat">Moc obliczeniowa dla AI</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — wyniki rekordowe i backlog mocny, ale mnożnik wycenia cyklicznego producenta jak spółkę wzrostową">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">obniżenie z kupna — ryzyko leży w mnożniku, nie w zyskach</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$370 – $1 040</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-54% do +29%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>28 października</b><em>Trzeci kwartał, przed otwarciem</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$808,99</div><div class="metric-detail">+79,51% w 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 17.08</div><div class="metric-value red">-5,6%</div><div class="metric-detail"><strong>Mój przedział $900–1 020 nie został osiągnięty</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Kwartał rekordowy</div><div class="metric-value green">$20,5 mld</div><div class="metric-detail">+24% r/r — pierwszy raz powyżej dwudziestu miliardów</div></div>
+    <div class="metric-card"><div class="metric-label">Backlog zamówień</div><div class="metric-value green">$72,1 mld</div><div class="metric-detail">Blisko trzy i pół kwartału sprzedaży</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / zysk</div><div class="metric-value red">34,86</div><div class="metric-detail">Prognozowana <strong>28,14</strong> · PEG 1,54</div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot z kapitału vs koszt</div><div class="metric-value green">+6,59 pp</div><div class="metric-detail">18,30% wobec 11,71%</div></div>
+    <div class="metric-card"><div class="metric-label">Liczba akcji</div><div class="metric-value green">-2,67%</div><div class="metric-detail">Spada · dywidenda rośnie <strong>33. rok</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (28 analityków)</div><div class="metric-value green">$975,61</div><div class="metric-detail">+20,60% · kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I STAN POPRZEDNIEJ TEZY</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Caterpillar sprzedaje maszyny budowlane i górnicze, silniki wysokoprężne oraz turbiny gazowe, a przez Caterpillar Financial finansuje klientom ich zakup. Kapitalizacja <strong>$371,87 mld</strong>, przychody roczne <strong>$74,73 mld</strong>. <strong>Twoja pozycja waży 3,15%</strong>, przy cenie wejścia $310,00 daje <strong>+161,0%</strong>.</p>
+
+      <div class="alert alert-warning"><strong>Teza z 17 sierpnia nie zadziałała, choć jej treść była trafna.</strong> Oceniłem wtedy CAT na <strong>kupno</strong> z kwalifikatorem „ale to nie jest już dywersyfikacja przemysłowa" i wyceniłem na <strong>$900–1 020</strong> przy kursie $856,57 — dziś jest $808,99, czyli <strong>5,6% mniej</strong>.<br><br><strong>Opis spółki się obronił, wycena nie.</strong> Caterpillar rzeczywiście przestał być zwykłym producentem maszyn budowlanych, ale z tego nie wynikał przedział, który postawiłem; szczegóły w sekcji 16.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>04.08.2026</strong></td><td><strong>Wyniki drugiego kwartału: przychody $20,5 mld (+24% r/r)</strong> — pierwszy kwartał w historii spółki powyżej dwudziestu miliardów dolarów</td><td style="color:var(--ocena-kupno)">Rekord w spółce o stuletniej historii</td></tr>
+          <tr><td>04.08.2026</td><td style="color:var(--ocena-kupno)"><strong>Skorygowany zysk na akcję $8,17 (+73% r/r)</strong>, skorygowana marża operacyjna <strong>21,9%</strong></td><td style="color:var(--ocena-kupno)">Marża powyżej historycznych poziomów</td></tr>
+          <tr><td><strong>04.08.2026</strong></td><td><strong>Zamówienia w kwartale $9,4 mld, backlog $72,1 mld</strong></td><td style="color:var(--ocena-kupno)">Widoczność na blisko trzy i pół kwartału</td></tr>
+          <tr><td>04.08.2026</td><td style="color:var(--ocena-kupno)"><strong>Segment Power &amp; Energy: $8,2 mld (+17%)</strong>, w tym sprzedaż zespołów prądotwórczych <strong>+29%</strong> — głównie do centrów danych</td><td style="color:var(--ocena-kupno)">Nowy silnik spółki i powód jej przewartościowania</td></tr>
+          <tr><td>04.08.2026</td><td>Podniesienie prognozy wzrostu przychodów na 2026 do przedziału „od średnich do wysokich kilkunastu procent"</td><td style="color:var(--ocena-kupno)">Wzmocnienie tezy operacyjnej</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)">Połowa 09.2026</td><td style="color:var(--ocena-sprzedaz)">Cofnięcie kursu wraz z całym tematem sztucznej inteligencji</td><td style="color:var(--ocena-sprzedaz)">Ruch sektorowy — CAT jest już z tego tematu</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — TRZECI SEGMENT PRZEJĄŁ NARRACJĘ</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment</th><th>Co sprzedaje</th><th>Charakter popytu</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Power &amp; Energy</strong></td><td>Silniki wysokoprężne i turbiny gazowe — zasilanie podstawowe i awaryjne</td><td style="color:var(--ocena-kupno)"><strong>Rosnący strukturalnie</strong> — sieć nie nadąża za centrami danych</td></tr>
+          <tr><td>Maszyny budowlane</td><td>Koparki, ładowarki, sprzęt drogowy</td><td style="color:var(--ocena-uwaga)">Cykliczny — stopy i inwestycje publiczne</td></tr>
+          <tr><td>Maszyny górnicze</td><td>Sprzęt do wydobycia odkrywkowego i podziemnego</td><td style="color:var(--ocena-uwaga)">Cykliczny — ceny surowców</td></tr>
+          <tr><td><strong>Serwis i części</strong></td><td>Obsługa maszyn pracujących dziesiątki lat</td><td style="color:var(--ocena-kupno)"><strong>Powtarzalny</strong> — podtrzymuje marżę w dołku</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Sedno dzisiejszego Caterpillara: rynek przestał go wyceniać jako producenta maszyn budowlanych, a zaczął jako dostawcę energii dla centrów danych — co jest uzasadnione, ale niepełne.</strong><br><br>Powód jest fizyczny: nowe centrum danych potrzebuje mocy natychmiast, a przyłączenie do sieci zajmuje lata. Rozwiązaniem są <strong>zespoły prądotwórcze i turbiny gazowe stawiane na miejscu</strong> — dokładnie to, co Caterpillar produkuje od dekad dla kopalń. Sprzedaż w tej kategorii wzrosła o <strong>29%</strong>.<br><br><strong>Trzeba jednak zachować proporcje:</strong> Power &amp; Energy to około dwóch piątych sprzedaży grupy, a wytwarzanie energii jest tylko jego częścią. <strong>Większość Caterpillara to nadal biznes cykliczny</strong> — a wycena zaczęła wyglądać, jakby nie był.</div>
+
+      <p>Najmocniejszą przewagą pozostaje <strong>serwis i części</strong>. Maszyna pracuje dwadzieścia lat, a przez ten czas właściciel kupuje podzespoły i przeglądy — ten strumień nie zanika w dołku cyklu i pozwala utrzymać marżę, gdy sprzedaż nowych maszyn spada.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na CAT</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zapotrzebowanie na moc dla centrów danych</strong></td><td style="color:var(--ocena-kupno)">Rośnie szybciej niż przepustowość sieci</td><td style="color:var(--ocena-kupno)">Napędza najszybciej rosnącą część spółki</td></tr>
+          <tr><td>Inwestycje infrastrukturalne</td><td style="color:var(--ocena-kupno)">Wspierane programami publicznymi</td><td style="color:var(--ocena-kupno)">Stabilizuje segment budowlany</td></tr>
+          <tr><td>Ceny surowców</td><td style="color:var(--ocena-uwaga)">Wysokie, ale zmienne</td><td style="color:var(--ocena-uwaga)">Decydują o inwestycjach kopalń</td></tr>
+          <tr><td><strong>Stopy procentowe</strong></td><td style="color:var(--ocena-uwaga)">Kluczowe dla popytu na maszyny</td><td style="color:var(--ocena-sprzedaz)">Klient kupuje koparkę na kredyt</td></tr>
+          <tr><td><strong>Cykl budowlany</strong></td><td style="color:var(--ocena-sprzedaz)">Nieusuwalny</td><td style="color:var(--ocena-sprzedaz)">Historycznie obniżał zysk o dziesiątki procent</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Kluczowe napięcie tej spółki nie dotyczy wyników, ale tego, do jakiej kategorii ją zaliczyć.</strong><br><br>Jeśli energia dla centrów danych jest <strong>trwałą zmianą struktury</strong>, Caterpillar zasługuje na wyższy mnożnik niż producent maszyn. Jeśli jest <strong>szczytem wyjątkowo dobrego cyklu wzmocnionym falą zamówień</strong>, obecny mnożnik jest kosztowną pułapką, bo cykliczne spółki tracą mnożnik i zysk jednocześnie.<br><br><strong>Dane nie rozstrzygają tego dziś.</strong> Backlog pokazuje popyt zakontraktowany na kilka kwartałów, nie na lata — dlatego dolny scenariusz w sekcji 6 jest tak niski.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI, BACKLOG I AKCJONARIAT</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Backlog zamówień</strong></td><td style="color:var(--ocena-kupno)"><strong>$72,1 mld</strong></td><td style="color:var(--ocena-kupno)">Zamówienia w kwartale $9,4 mld</td></tr>
+          <tr><td>Struktura odbiorców</td><td style="color:var(--ocena-kupno)">Rozproszona</td><td style="color:var(--ocena-kupno)">Sieć niezależnych dealerów</td></tr>
+          <tr><td>Przychód na pracownika</td><td>$633 297</td><td>Zysk na pracownika $91 898</td></tr>
+          <tr><td>Instytucje / zarząd</td><td>73,20% / 0,21%</td><td style="color:var(--ocena-uwaga)">Udział kierownictwa minimalny</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-uwaga)">1,64% akcji</td><td style="color:var(--ocena-uwaga)">Wzrost o 10,2% w miesiąc</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Sprzedaż przez niezależnych dealerów jest przewagą, o której rzadko się mówi, a która ma znaczenie właśnie w cyklu.</strong> W dołku <strong>dealerzy absorbują część zapasu i ryzyka</strong>; w górze cyklu ten sam mechanizm działa odwrotnie i ich zamówienia przyspieszają szybciej niż sprzedaż końcowa.<br><br><strong>Konsekwencja dla czytania backlogu:</strong> są to zamówienia w kanale, nie umowy z użytkownikami końcowymi. Tak działa ta branża — ale przy odwróceniu cyklu backlog topnieje szybciej, niż sugeruje jego wielkość.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">BIZNES — I DLACZEGO DANE ROCZNE ZANIŻAJĄ OBRAZ</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$74,73 mld</td></tr>
+          <tr><td>Zysk brutto</td><td>$22,20 mld — marża 29,71%</td></tr>
+          <tr><td>Wynik operacyjny</td><td style="color:var(--ocena-kupno)">$13,94 mld — marża 18,65%</td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td>$14,11 mld — <strong>niewielka nadwyżka, bez zniekształceń</strong></td></tr>
+          <tr><td>Wynik netto</td><td>$10,84 mld · zysk na akcję <strong>$23,21</strong></td></tr>
+          <tr><td>Przepływy operacyjne</td><td>$13,57 mld</td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-kupno)"><strong>-$4,58 mld — 6,1% przychodów</strong></td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>$8,99 mld · $19,57 na akcję</strong></td></tr>
+          <tr><td><strong>Zwrócone akcjonariuszom</strong></td><td style="color:var(--ocena-kupno)">Dywidenda $6,52 na akcję plus skup — stopa łączna <strong>3,47%</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Najważniejsze zastrzeżenie do tej tabeli: zysk na akcję za dwanaście miesięcy istotnie zaniża bieżące tempo spółki.</strong><br><br>W samym drugim kwartale skorygowany zysk wyniósł <strong>$8,17 na akcję</strong>, czyli w ujęciu rocznym około <strong>$32,7</strong>, podczas gdy wartość roczna obejmuje trzy wcześniejsze, znacznie słabsze kwartały.<br><br><strong>Skutek:</strong> wskaźnik ceny do zysku z danych rocznych wynosi 34,86, ale od bieżącego tempa kwartalnego wypada w okolicach <strong>25×</strong>. <strong>Jest to dokładnie ta kontrola, którą dopisałem do zasad po pomyłce z ServiceNow</strong> — i tutaj wypada ona na korzyść CAT, nie przeciw niemu.</div>
+
+      <div class="alert alert-success"><strong>Druga rzecz warta odnotowania: pieniądze wracają do akcjonariusza.</strong> Nakłady to tylko <strong>6,1% przychodów</strong>, więc zostaje <strong>$8,99 mld wolnych przepływów</strong> przy marży 12,04%. Liczba akcji spadła o <strong>2,67% w rok</strong>, a dywidenda rośnie <strong>trzydziesty trzeci rok z rzędu</strong> przy wypłacie poniżej trzydziestu procent zysku — w tym portfelu cecha rzadka.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja / wartość firmy</td><td>$371,87 mld / $411,07 mld</td><td>Różnica to dług — w większości Caterpillar Financial</td></tr>
+          <tr><td>Cena / sprzedaż</td><td style="color:var(--ocena-uwaga)">4,98</td><td>Prognozowana 4,49 — wysoko dla producenta maszyn</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>41,35</strong></td><td style="color:var(--ocena-sprzedaz)">Stopa zwrotu z przepływów <strong>2,42%</strong></td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td style="color:var(--ocena-sprzedaz)">25,30</td><td>Wartość firmy do wolnych przepływów 45,71</td></tr>
+          <tr><td><strong>Cena / wartość księgowa</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>19,17</strong></td><td style="color:var(--ocena-uwaga)">Efekt skupu akcji, nie wyceny majątku</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td style="color:var(--ocena-sprzedaz)">34,86</td><td style="color:var(--ocena-sprzedaz)"><strong>Zawyżony</strong> — obejmuje trzy słabsze kwartały; od bieżącego tempa wypada około 25× (sekcja 5)</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>28,14</strong></td><td style="color:var(--ocena-kupno)"><strong>Niższy od bieżącego</strong> — rynek oczekuje wzrostu zysku</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-uwaga)"><strong>1,54</strong></td><td>Powyżej 1,0 — za wzrost płaci się pełną cenę</td></tr>
+          <tr><td>Prognozy na trzy lata</td><td>przychody 13,50% rocznie</td><td style="color:var(--ocena-kupno)">Zysk na akcję <strong>26,90% rocznie</strong> — dźwignia operacyjna plus skup</td></tr>
+          <tr><td><strong>Mediana producentów maszyn</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>okolice 15–20×</strong></td><td style="color:var(--ocena-sprzedaz)">Caterpillar notowany z premią blisko dwukrotną wobec własnej branży</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> Wskaźnik prognozowany niższy od bieżącego mówi, że rynek oczekuje wzrostu zysku, a prognoza tempa blisko dwudziestu siedmiu procent rocznie jest przy obecnym tempie kwartalnym wiarygodna. <strong>Problemem nie jest więc zysk, a mnożnik.</strong> Najważniejszy jest ostatni wiersz tabeli: producenci maszyn notowani są historycznie przy piętnastu do dwudziestu razy zysku, a Caterpillar przy niemal dwukrotności. <strong>Cała różnica opiera się na przekonaniu, że zmiana kategorii jest trwała.</strong></p>
+      <p style="color:var(--text-muted);font-size:13px">Dane: StockAnalysis / S&amp;P Global Market Intelligence, stan 20.09.2026. Przeliczenie wskaźnika z bieżącego tempa kwartalnego — obliczenie własne na podstawie skorygowanego zysku za drugi kwartał z komunikatu spółki.</p>
+
+      <h3>Cztery scenariusze na 2028 rok</h3>
+      <p>Buduję je od zysku na akcję i mnożnika, bo rozstrzyga jedno i drugie.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Zysk na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Energia dla centrów danych trwałym silnikiem, premia utrzymana</strong></td><td>$40,00</td><td>26×</td><td><strong>$1 040</strong></td><td style="color:var(--ocena-kupno)">+29%</td></tr>
+          <tr><td><strong>Wzrost dowieziony, mnożnik normalizuje</strong></td><td>$40,00</td><td>22×</td><td><strong>$880</strong></td><td style="color:var(--ocena-kupno)">+9%</td></tr>
+          <tr><td>Szczyt cyklu, mnożnik wraca do średniej branży</td><td>$32,00</td><td>17×</td><td>$544</td><td style="color:var(--ocena-sprzedaz)">-33%</td></tr>
+          <tr><td><strong>Spowolnienie w budownictwie i górnictwie</strong></td><td style="color:var(--ocena-sprzedaz)">$26,50</td><td>14×</td><td><strong>$370</strong></td><td style="color:var(--ocena-sprzedaz)">-54%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne. Ścieżka scenariusza podstawowego wyprowadzona z prognozy wzrostu przychodów, marży operacyjnej utrzymanej w okolicach dwudziestu procent i malejącej liczby akcji. Mnożniki odzwierciedlają rozpiętość historycznych wycen producentów maszyn: 13–17× w dołku i okolicach szczytu cyklu, 20–26× przy przekonaniu rynku o zmianie kategorii spółki.</p>
+
+      <p><strong>Fair value: $370 – $1 040</strong>, środek <strong>$705,00 (-12,9%)</strong>. Po nadaniu scenariuszom wag 30/30/25/15 wynik wypada wyżej, na <strong>$767 (-5,2%)</strong> — i to na tej liczbie się opieram. Konsensus 28 analityków to $975,61 (+20,60%) przy rekomendacji kupna, czyli między moim scenariuszem umiarkowanym a najlepszym.</p>
+
+      <div class="alert alert-danger"><strong>Szerokość tego przedziału jest jego treścią.</strong> Od dolnej do górnej granicy jest niemal trzykrotność — nie z powodu niepewności co do zysku, bo <strong>zysk jest dziś przewidywalny i rośnie</strong>, ale z powodu niepewności co do mnożnika. <strong>Spółka cykliczna traci mnożnik i zysk jednocześnie</strong>, i to złożenie daje scenariusz dolny. <strong>Ryzyko tej pozycji nie leży w wynikach kwartalnych, lecz w kategorii, do jakiej rynek zaliczy Caterpillara za dwa lata.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto</td><td>29,71%</td><td>Typowa dla producenta maszyn</td></tr>
+          <tr><td><strong>Marża operacyjna</strong></td><td style="color:var(--ocena-kupno)"><strong>18,65%</strong></td><td style="color:var(--ocena-kupno)">Skorygowana w ostatnim kwartale <strong>21,9%</strong> — powyżej historycznych poziomów</td></tr>
+          <tr><td>Marża netto / EBITDA</td><td>14,51% / 21,75%</td><td style="color:var(--ocena-kupno)">Kolejność prawidłowa, bez zniekształceń</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-kupno)"><strong>18,30% vs 11,71%</strong></td><td style="color:var(--ocena-kupno)"><strong>Różnica +6,59 pp</strong></td></tr>
+          <tr><td>Zwrot z kapitału własnego (ROE)</td><td style="color:var(--ocena-uwaga)">56,97%</td><td style="color:var(--ocena-uwaga)">Zawyżony skupem akcji — zwrot z aktywów 9,03%</td></tr>
+          <tr><td>Rotacja zapasów</td><td style="color:var(--ocena-uwaga)">2,50</td><td style="color:var(--ocena-uwaga)">Zapas leży blisko pięć miesięcy</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Nadwyżka zwrotu z zainwestowanego kapitału nad kosztem wynosi 6,59 pp — po przeliczeniu czternastu spółek Caterpillar jest szósty.</strong> Kolejność: KLA +54,77 · Novo Nordisk +33,71 · Sibanye +23,15 · SAP +9,92 · Amphenol +9,89 · <strong>Caterpillar +6,59</strong> · ServiceNow +1,18 · Oracle +0,70 · Amazon +0,69 · AMD −8,02 · Marvell −9,38 · Intel −11,92 · IREN −26,44 · MARA −84,58.<br><br>
+      Dla spółki przemysłowej o tak dużym majątku jest to dobry wynik i <strong>argument, że premia w wycenie nie jest bezpodstawna</strong>. Trzeba jednak pamiętać, że <strong>wskaźnik jest liczony w górze cyklu</strong> — w dołku spada razem z marżą.</div>
+
+      <div class="alert alert-warning"><strong>Uwaga do zwrotu z kapitału własnego, taka sama jak przy KLA: 56,97% to w znacznej części artefakt.</strong> Kapitał własny wynosi tylko <strong>$19,39 mld</strong>, bo wieloletni skup akcji po cenach wielokrotnie wyższych od wartości księgowej tę pozycję pomniejsza. <strong>Miarą uczciwą jest zwrot z zainwestowanego kapitału</strong>, a zwrot z aktywów 9,03% pokazuje realną rentowność majątku.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — DWA WSKAŹNIKI, KTÓRE MYLĄ</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka / zadłużenie</td><td>$5,95 mld / $45,15 mld</td><td style="color:var(--ocena-uwaga)">Dług netto <strong>$39,20 mld</strong> ($85,28 na akcję)</td></tr>
+          <tr><td><strong>Dług / kapitał własny</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>2,33</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wskaźnik mylący</strong> — patrz niżej</td></tr>
+          <tr><td>Dług / EBITDA</td><td style="color:var(--ocena-kupno)">2,73</td><td style="color:var(--ocena-kupno)">Dług do przepływów 5,02</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td>26,35</td><td style="color:var(--ocena-uwaga)"><strong>Drugi wskaźnik mylący</strong> — patrz niżej</td></tr>
+          <tr><td>Wskaźnik bieżący / szybki</td><td style="color:var(--ocena-uwaga)">1,37 / 0,78</td><td>Kapitał obrotowy $14,66 mld</td></tr>
+          <tr><td>Altman Z / Piotroski F</td><td style="color:var(--ocena-kupno)">4,44 / 6</td><td style="color:var(--ocena-kupno)">Bezpieczna strefa</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Bilansu Caterpillara nie da się czytać jak bilansu zwykłego producenta, bo zawiera w sobie bank — i dwa popularne wskaźniki są z tego powodu bezwartościowe.</strong><br><br><strong>Pierwszy: dług do kapitału własnego 2,33.</strong> Większość zadłużenia to finansowanie <strong>Caterpillar Financial</strong>, udzielającego klientom kredytów na zakup maszyn; po drugiej stronie stoi portfel należności. Jest to <strong>bilans instytucji finansowej wkomponowany w bilans producenta</strong>, nie dźwignia na działalność przemysłową.<br><br><strong>Drugi: pokrycie odsetek 26,35.</strong> Koszty finansowania segmentu kredytowego księgowane są w kosztach działalności, więc wskaźnik opisuje część przemysłową, a nie grupę.<br><br><strong>Miarami użytecznymi są:</strong> dług do EBITDA 2,73, dług do wolnych przepływów 5,02 i wskaźnik Altmana 4,44 — wszystkie mówią, że zadłużenie nie jest problemem.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Wyniki są rekordowe, a nie tylko dobre.</strong> Pierwszy kwartał w historii spółki powyżej dwudziestu miliardów dolarów przychodu i skorygowany zysk wyższy o siedemdziesiąt trzy procent rok do roku.</div>
+
+      <div class="alert alert-success"><strong>2. Energia dla centrów danych to popyt, którego sieć nie zaspokoi.</strong> Przyłączenie obiektu zajmuje lata, a zespół prądotwórczy da się postawić na miejscu — sprzedaż w tej kategorii rośnie o blisko trzydzieści procent.</div>
+
+      <div class="alert alert-success"><strong>3. Serwis i części łagodzą cykl.</strong> Maszyna pracuje dwadzieścia lat, generując przychód niezależny od sprzedaży nowych urządzeń.</div>
+
+      <div class="alert alert-info"><strong>4. Kapitał wraca do akcjonariusza od dziesięcioleci.</strong> Trzydziesty trzeci rok wzrostu dywidendy, malejąca liczba akcji, łączna stopa zwrotu 3,47%.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Spółka cykliczna wyceniana jak wzrostowa.</strong> Producenci maszyn notowani są historycznie przy piętnastu do dwudziestu razy zysku, Caterpillar przy niemal dwukrotności — cała premia opiera się na przekonaniu, że zmiana kategorii jest trwała.</div>
+
+      <div class="alert alert-danger"><strong>2. W odwróceniu cyklu mnożnik i zysk spadają jednocześnie</strong> — to złożenie dwóch spadków, nie jeden, i dlatego dolny scenariusz sięga tak głęboko.</div>
+
+      <div class="alert alert-warning"><strong>3. Stopa zwrotu z wolnych przepływów wynosi 2,42%.</strong> Dla cyklicznej spółki przemysłowej w górze cyklu bardzo cienko — inwestor płaci czterdzieści jeden razy gotówkę, którą firma faktycznie generuje.</div>
+
+      <div class="alert alert-warning"><strong>4. Backlog to zamówienia dealerów, nie umowy z użytkownikami końcowymi</strong> — przy odwróceniu popytu kanał redukuje zapas i backlog topnieje szybciej, niż sugeruje jego wielkość.</div>
+
+      <div class="alert alert-warning"><strong>5. Próg zmiany zdania na sprzedaż:</strong> spadek zamówień kwartalnych poniżej siedmiu miliardów dolarów przy mnożniku utrzymanym powyżej dwudziestu pięciu razy zysku — cykl odwraca się, a wycena tego nie odzwierciedla.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Przewaga nad Caterpillarem</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Komatsu</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz)</span></td><td>Silniejsza pozycja w Azji, tańsza oferta</td><td style="color:var(--ocena-kupno)">Słabsza sieć serwisowa i brak segmentu turbin</td></tr>
+          <tr><td><strong>Deere</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz)</span></td><td>Dominacja w maszynach rolniczych</td><td style="color:var(--ocena-kupno)">Brak ekspozycji na wytwarzanie energii</td></tr>
+          <tr><td><strong>GE Vernova, Cummins</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz)</span></td><td style="color:var(--ocena-sprzedaz)">Bezpośredni rywale w zasilaniu centrów danych, bez balastu maszyn budowlanych</td><td style="color:var(--ocena-uwaga)">Mniejsza sieć dystrybucji i serwisu</td></tr>
+          <tr><td><strong>Amphenol</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,46%)</span></td><td>Zdywersyfikowana na wiele branż, wyższa nadwyżka zwrotu nad kosztem kapitału</td><td>Mniejsza wartość dodana na jednostkę produktu</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Najważniejsze w tym zestawieniu: Caterpillar wchodzi na rynek, gdzie konkurenci są od niego czystsi.</strong> Spółki sprzedające wyłącznie urządzenia energetyczne nie mają segmentu maszyn budowlanych rozcieńczającego wzrost, więc <strong>ekspozycję na zasilanie centrów danych da się dziś kupić bez balastu</strong> — co ogranicza trwałość premii przyznanej Caterpillarowi.<br><br>Przewagą CAT pozostaje to, czego rywale nie zbudują szybko: <strong>globalna sieć dealerów i serwisu</strong>. Przy urządzeniu, które musi działać nieprzerwanie, dostępność części w ciągu godzin bije cenę.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-kupno)">+79,51%</td><td>Praktycznie tyle samo co KLA</td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td style="color:var(--ocena-sprzedaz)">$840,14</td><td style="color:var(--ocena-sprzedaz)">Kurs <strong>3,7% poniżej</strong> — cofnięcie od szczytu</td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td style="color:var(--ocena-uwaga)">$784,11</td><td style="color:var(--ocena-uwaga)">Kurs 3,2% powyżej — wąski korytarz między średnimi</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>47,88</td><td>Neutralnie; wolumen 2,26 mln akcji</td></tr>
+          <tr><td><strong>Beta (5 lat)</strong></td><td style="color:var(--ocena-uwaga)"><strong>1,59</strong></td><td style="color:var(--ocena-uwaga)">Wyższa niż Amazon i KLA po 1,44</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-uwaga)">7,55 mln akcji — 1,64%</td><td style="color:var(--ocena-uwaga)">Poziom nadal niski</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Układ jest bliźniaczo podobny do KLA: kurs stoi w wąskim korytarzu między średnimi po mocnym roku, a cofnięcie ma przyczynę sektorową, nie spółkową.</strong> Wyniki z sierpnia były rekordowe, prognoza podniesiona, backlog wzrósł — a spadek nastąpił w połowie września razem z całym tematem sztucznej inteligencji.<br><br><strong>To samo w sobie jest istotną informacją: Caterpillar handluje się dziś jak spółka z sektora AI, a nie jak producent koparek</strong>, czyli zmienność przyszła do tej pozycji razem z wyższym mnożnikiem. Korytarz między średnimi ma niespełna siedem procent szerokości, a rozstrzygnięcie przyniosą <strong>wyniki z 28 października</strong>.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$975,61</strong></td><td>Cena docelowa konsensusu</td></tr>
+          <tr><td><strong>$880</strong></td><td>Scenariusz umiarkowany z sekcji 6</td></tr>
+          <tr><td><strong>$840,14</strong></td><td>Średnia 50-sesyjna — pierwszy opór</td></tr>
+          <tr><td><strong>$784,11</strong></td><td><strong>Średnia 200-sesyjna — kluczowe wsparcie</strong></td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$650</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — poniżej niego rynek wycenia powrót do cyklu</td></tr>
+          <tr><td><strong>$310,00</strong></td><td>Twoja cena wejścia</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs w wąskim korytarzu między średnimi, wskaźnik siły relatywnej neutralny, cofnięcie sektorowe przy mocnych danych własnych. Wyniki z 28 października rozstrzygną kierunek w jedną albo drugą stronę.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Środek wyceny leży poniżej kursu, a wynik po uwzględnieniu prawdopodobieństw wypada około pięć procent niżej. Scenariusz umiarkowany daje tylko dziewięć procent zwrotu, a dolny sięga minus pięćdziesięciu czterech — asymetria działa przeciw akcjonariuszowi.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Zwrot z kapitału trwale przewyższa jego koszt, serwis łagodzi cykl, dywidenda rośnie trzydziesty trzeci rok, a liczba akcji maleje. W tym horyzoncie wzrost zysku zdąży zamortyzować dzisiejszy mnożnik, o ile nie nastąpi pełne odwrócenie cyklu.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ocena łączna: NEUTRALNA — obniżenie z kupna z 17 sierpnia.</strong><br><br><strong>Spółka nie pogorszyła się ani trochę — wręcz przeciwnie.</strong> Od tamtego raportu poznaliśmy rekordowy kwartał, podniesioną prognozę roczną i backlog na blisko trzy i pół kwartału sprzedaży. Gdyby oceniać wyłącznie działalność, ocena powinna iść w górę.<br><br><strong>Obniżenie dotyczy relacji ceny do kategorii spółki.</strong> Mnożnik jest niemal dwukrotnie wyższy od typowego dla producentów maszyn, a zysk — choć rekordowy — pozostaje w większości zależny od cyklu budowlanego i górniczego. <strong>Ryzyko leży w mnożniku, nie w zyskach</strong>, i jest niesymetryczne: dziewięć procent w górę w scenariuszu umiarkowanym wobec pięćdziesięciu czterech w dół.<br><br><strong>Nie jest to zalecenie sprzedaży pozycji z wynikiem +161%</strong>, lecz wskazanie, że dokupowanie przy tej cenie oznacza płacenie pełnej ceny za niesprawdzalne dziś założenie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td><strong>3,15%</strong></td><td>Trzynasta pozycja z osiemnastu</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-kupno)">+161,0%</td><td>Drugi najlepszy procentowo po IREN, przy cenie wejścia $310,00</td></tr>
+          <tr><td><strong>Rola w portfelu</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Już nie dywersyfikacja</strong></td><td style="color:var(--ocena-sprzedaz)">Pozycja przemysłowa, która stała się kolejną ekspozycją na budowę infrastruktury AI</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>To najważniejszy wniosek portfelowy z tego raportu i potwierdzenie obawy zapisanej w sierpniu: Caterpillar przestał pełnić funkcję, dla której zwykle trzyma się spółkę przemysłową.</strong><br><br>Sprzęt przemysłowy ma zazwyczaj równoważyć technologię, czyli reagować na inny cykl. <strong>Caterpillar tego już nie robi</strong> — jego najszybciej rosnący segment sprzedaje moc do centrów danych, a kurs cofa się razem z całym tematem AI.<br><br><strong>Arytmetyka:</strong> półprzewodniki 36,45% w pięciu pozycjach, wynajem mocy obliczeniowej 16,06% w czterech. Doliczając Caterpillara, <strong>ponad połowa rachunku zależy od jednego pytania — czy nakłady na infrastrukturę obliczeniową będą rosły.</strong><br><br><strong>Nie sugeruję, co z tym zrobić</strong> — to Twoja decyzja i nie jestem doradcą. Zwracam uwagę, że tę rolę pozycja przestała spełniać, i lepiej wiedzieć to teraz niż w dołku.</div>
+
+      <div class="alert alert-info"><strong>Rzecz pozytywna: Caterpillar jest jedną z niewielu spółek w tym przeglądzie zmniejszających liczbę akcji.</strong> Przy trzydziestu trzech latach wzrostu dywidendy i wypłacie poniżej trzydziestu procent zysku jest to najbardziej przewidywalny strumień zwrotu w portfelu — niezależnie od tego, co zrobi mnożnik.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Caterpillar ma dziś najlepsze wyniki w swojej historii i mnożnik, który zakłada, że nie są one szczytem cyklu.</strong> Drugi kwartał przyniósł <strong>$20,5 mld</strong> przychodu, pierwszy raz powyżej dwudziestu miliardów, przy wzroście o blisko jedną czwartą i skorygowanym zysku wyższym o siedemdziesiąt trzy procent. Backlog wynosi <strong>$72,1 mld</strong>, a segment sprzedający moc energetyczną do centrów danych rośnie o blisko trzydzieści procent. Zwrot z zainwestowanego kapitału przewyższa jego koszt o <strong>6,59 pp</strong>, liczba akcji maleje, a dywidenda rośnie trzydziesty trzeci rok z rzędu.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Problemem nie jest więc zysk, ale kategoria. <strong>Producenci maszyn notowani są historycznie przy piętnastu do dwudziestu razy zysku, a Caterpillar przy niemal dwukrotności tego poziomu</strong> — cała różnica opiera się na przekonaniu, że energia dla centrów danych zmieniła tę spółkę na trwałe. Jeżeli tak jest, dzisiejsza cena jest uzasadniona. Jeżeli nie, <strong>mnożnik i zysk spadną jednocześnie</strong>, bo tak zachowują się spółki cykliczne — i to złożenie, nie sam spadek zamówień, daje dolny scenariusz sięgający minus pięćdziesięciu czterech procent. Stopa zwrotu z wolnych przepływów na poziomie <strong>2,42%</strong> nie daje przy tym żadnego buforu.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Wyniki muszą potwierdzać tempo.</strong> Rekordowy kwartał i podniesiona prognoza roczna — spełnione z nadwyżką.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Zwrot z kapitału musi przewyższać jego koszt.</strong> Nadwyżka ponad sześć punktów procentowych — spełnione, choć mierzone w górze cyklu.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Kapitał musi wracać do akcjonariusza.</strong> Malejąca liczba akcji i trzydziesty trzeci rok wzrostu dywidendy — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Wycena powinna dawać asymetrię.</strong> Dziewięć procent w górę w scenariuszu umiarkowanym wobec pięćdziesięciu czterech w dół — niespełnione, i to jest sedno oceny.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Energia dla centrów danych musi okazać się zmianą trwałą, nie falą zamówień.</strong> Jedyna zmienna, która naprawdę decyduje.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Cykl budowlany i górniczy nie może się odwrócić w ciągu dwóch lat.</strong> Historycznie żaden nie trwał wiecznie.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>28 października 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki trzeciego kwartału, przed otwarciem</strong></td><td style="color:var(--ocena-uwaga)">Tempo zamówień, kierunek backlogu, marża energetyki</td></tr>
+            <tr><td>Każdy kwartał</td><td>Udział wytwarzania energii w sprzedaży segmentu</td><td>Rozstrzygnie, czy zmiana kategorii jest trwała</td></tr>
+            <tr><td>2027</td><td>Reakcja popytu na maszyny budowlane na poziom stóp procentowych</td><td>Najczulszy punkt cyklu</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">Na bieżąco</td><td style="color:var(--ocena-sprzedaz)">Redukcja zapasów przez dealerów</td><td style="color:var(--ocena-sprzedaz)">Pierwszy sygnał odwrócenia</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Zamówienia kwartalne</strong></td><td>$9,4 mld</td><td>zejście poniżej $7 mld</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Backlog</td><td>$72,1 mld</td><td>dwa kwartały spadku z rzędu</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Skorygowana marża operacyjna</td><td>21,9%</td><td>zejście poniżej 17%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td><strong>Stopa zwrotu z wolnych przepływów</strong></td><td>2,42%</td><td>utrzymanie poniżej 3% przy słabszych zamówieniach</td><td><span class="mon-dot r"></span>Wymaga uwagi</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Charakter pozycji</strong></td><td>Ekspozycja na infrastrukturę AI w przemysłowym opakowaniu — nie przeciwwaga dla technologii</td></tr>
+            <tr><td><strong>Dokupowanie</strong></td><td>Nie przy tej cenie; rozważać poniżej <strong>$700</strong></td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$950</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$650</strong></td></tr>
+            <tr><td><strong>Warunek zmiany na sprzedaż</strong></td><td>Spadek zamówień kwartalnych poniżej siedmiu miliardów dolarów przy mnożniku utrzymanym powyżej dwudziestu pięciu razy zysku</td></tr>
+            <tr><td><strong>Czego nie robić</strong></td><td>Nie oceniać zadłużenia po wskaźniku długu do kapitału własnego ani po pokryciu odsetek — oba zniekształca obecność spółki finansowej w grupie</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p><strong>Obniżam ocenę spółki, która właśnie pokazała najlepszy kwartał w swojej historii — i to wymaga jasnego uzasadnienia.</strong> Caterpillar robi wszystko dobrze: rekordowe przychody, marża powyżej historycznych poziomów, backlog na blisko trzy i pół kwartału, zwrot z kapitału wyraźnie powyżej jego kosztu, malejąca liczba akcji i trzydziesty trzeci rok wzrostu dywidendy. Sierpniowy opis, że przestał to być zwykły producent maszyn, w pełni się potwierdził.</p>
+        <p><strong>Nie potwierdziła się natomiast moja wycena — i nie potwierdzi jej dobry kwartał, bo problem leży w mnożniku.</strong> Rynek płaci za Caterpillara niemal dwukrotność tego, co historycznie płacił za producentów maszyn, w zamian za założenie, że energia dla centrów danych zmieniła tę spółkę na trwałe. Może tak być. Ale scenariusz umiarkowany daje tylko dziewięć procent zwrotu, a niekorzystny zabiera ponad połowę wartości, bo <strong>cykliczna spółka traci mnożnik i zysk w tym samym momencie</strong>. Trzymać pozycję z wynikiem przekraczającym sto sześćdziesiąt procent, nie dokupować, obserwować zamówienia kwartalne — i pamiętać, że nie jest to już przemysłowa przeciwwaga dla technologii w Twoim portfelu.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$370 – $1 040</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$370 (-54%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$1 040 (+29%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Utrzymać, nie powiększać</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 28 października</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA POPRZEDNIEJ ANALIZY (17.08.2026)</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Ocena kupno, wartość godziwa $900–1 020</strong> przy kursie $856,57</td>
+            <td>Kurs spadł do $808,99 i nie zbliżył się do przedziału. <strong>Ten przedział leżał blisko ceny docelowej konsensusu, a nie wynikał z rozpiętości mnożników, przy jakich notowani są producenci maszyn.</strong> Nowy przedział <strong>$370–1 040</strong></td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — wycena zakotwiczona w konsensusie, nie w liczbach</td>
+          </tr>
+          <tr>
+            <td>Brak policzenia <strong>rozpiętości mnożnika w dołku cyklu</strong></td>
+            <td>Cykliczna spółka traci mnożnik i zysk jednocześnie. Uwzględnienie tego złożenia obniża dolny scenariusz do <strong>$370</strong> — czyli poniżej połowy dzisiejszej ceny</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — pominięte najistotniejsze ryzyko tej pozycji</td>
+          </tr>
+          <tr>
+            <td>Dług do kapitału własnego i pokrycie odsetek podane <strong>bez zastrzeżenia</strong></td>
+            <td>Oba wskaźniki zniekształca obecność <strong>Caterpillar Financial</strong> w grupie: dług jest w większości portfelem finansującym zakupy klientów, a koszty jego obsługi księgowane są w kosztach działalności</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana</td>
+          </tr>
+          <tr>
+            <td>Wskaźnik ceny do zysku podany tylko z danych rocznych</td>
+            <td>Dane roczne <strong>zaniżają</strong> bieżące tempo, bo obejmują trzy słabsze kwartały. Od tempa z ostatniego kwartału mnożnik wypada w okolicach 25×, nie 34,86× — tym razem kontrola wypada <strong>na korzyść</strong> spółki</td>
+            <td style="color:var(--ocena-kupno)">Uzupełnienie, nie błąd</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Wniosek metodologiczny — ten sam wzorzec, który nazwałem przy Amazonie kilka godzin temu, choć mechanizm jest inny.</strong><br><br>
+      Przy Amazonie postawiłem przedział zakładający wyższy mnożnik za te same zyski. Tutaj postawiłem przedział <strong>tuż pod ceną docelową analityków</strong>, zamiast policzyć, ile taka spółka kosztuje w różnych fazach cyklu. <strong>W obu przypadkach wartość godziwa nie wyszła z liczb, tylko z oczekiwania wobec rynku</strong> — raz wobec jego przyszłego nastroju, raz wobec jego dzisiejszego konsensusu.<br><br>
+      <strong>Dopisuję do zasad redakcyjnych: przedział wartości godziwej musi być zbudowany od rozpiętości mnożników właściwej dla branży i fazy cyklu, a cena docelowa konsensusu może być wyłącznie punktem odniesienia w komentarzu — nigdy kotwicą przedziału.</strong></div>
+
+      <div class="alert alert-success"><strong>Co się obroniło, i to mocno.</strong> Kwalifikator „ale to nie jest już dywersyfikacja przemysłowa" był trafny i stał się jeszcze trafniejszy: segment energetyczny rośnie najszybciej, a kurs cofa się razem z całym tematem sztucznej inteligencji. Sierpniowa obserwacja, że Caterpillar przestał być przeciwwagą dla technologii w tym portfelu, jest dziś potwierdzona zachowaniem kursu, nie tylko strukturą przychodów.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 20 września 2026 | Cena: <strong>$808,99</strong> (zamknięcie 18.09.2026) | <strong>Aktualizacja analizy z 17 sierpnia 2026 — OBNIŻENIE OCENY: kupno → neutralna</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> wartość godziwa $900–1 020 → $370–1 040, bo poprzedni przedział był zakotwiczony w cenie docelowej konsensusu, a nie w rozpiętości mnożników właściwej dla producentów maszyn; dodano scenariusz jednoczesnego spadku mnożnika i zysku w odwróceniu cyklu; dodano zastrzeżenia do wskaźnika długu do kapitału własnego i pokrycia odsetek z powodu obecności Caterpillar Financial w grupie; dodano przeliczenie mnożnika od bieżącego tempa kwartalnego (około 25× wobec 34,86× z danych rocznych) | Dane: StockAnalysis / S&amp;P Global Market Intelligence, komunikat wyników z 04.08.2026 — <strong>stan danych na 20.09.2026</strong>; scenariusze, przeliczenie mnożnika z tempa kwartalnego i relacja nakładów do przychodów to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

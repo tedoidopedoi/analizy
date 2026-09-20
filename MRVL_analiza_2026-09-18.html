@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MRVL — Marvell Technology | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: MRVL</div>
+    <div class="company-name">Marvell Technology, Inc.</div>
+    <div class="company-sub">Układy do łączności w centrach danych — optyka, sieć i krzem projektowany na zamówienie · Santa Clara · 7 480 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">W portfelu — 3,84%</span>
+      <span class="meta-tag">Obniżenie oceny: kupno → neutralna</span>
+      <span class="meta-tag">Zysk raportowany wymaga rozłożenia</span>
+      <div class="price-display">
+        <div class="price-main">$240,76</div>
+        <div class="price-sub">zamknięcie 17.09.2026 (+4,81%), po sesji $239,81</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Półprzewodniki</span><span class="temat">Moc obliczeniowa dla AI</span><span class="temat">Optyka i łączność</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — biznes rośnie wyjątkowo, ale zysk raportowany zawiera zdarzenia jednorazowe i kurs dogonił wycenę">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">obniżenie z kupna — poprzednia teza się sprawdziła i została wyczerpana</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$160 – $300</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-34% do +25%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>początek grudnia</b><em>Kwartał kończący się 31.10</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$240,76</div><div class="metric-detail">Zakres roku $68,36 – $329,88</div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 16.08</div><div class="metric-value green">+8,4%</div><div class="metric-detail">Kurs wszedł w mój przedział $240–285</div></div>
+    <div class="metric-card"><div class="metric-label">Przychody (12 mies.)</div><div class="metric-value green">$9,45 mld</div><div class="metric-detail">+30,6% — a bieżący kwartał już +37%</div></div>
+    <div class="metric-card"><div class="metric-label">Zysk na akcję</div><div class="metric-value">$2,98</div><div class="metric-detail"><strong>Blisko połowa jednorazowo</strong> — sekcja 5</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / zysk podstawowy</div><div class="metric-value red">ok. 154×</div><div class="metric-detail">Raportowana <strong>80,89×</strong> zaniża obraz</div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot z kapitału vs koszt</div><div class="metric-value red">-9,38 pp</div><div class="metric-detail">6,94% wobec 16,32%</div></div>
+    <div class="metric-card"><div class="metric-label">Krótka sprzedaż</div><div class="metric-value red">+34,5%</div><div class="metric-detail">W ciągu miesiąca, do 38,18 mln akcji</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (45 analityków)</div><div class="metric-value green">$289,04</div><div class="metric-detail">+20,05% · mocne kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I STAN POPRZEDNIEJ TEZY</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Marvell projektuje układy przenoszące dane w centrach danych: sterowniki ethernetowe, nadajniki optyczne, przełączniki oraz krzem projektowany na zamówienie. Kapitalizacja to <strong>$211,13 mld</strong> przy przychodach <strong>$9,45 mld</strong>. <strong>Twoja pozycja waży 3,84%</strong>, przy cenie wejścia $200,93 daje <strong>+19,8%</strong>.</p>
+
+      <div class="alert alert-success"><strong>Teza z 16 sierpnia zadziałała — i właśnie dlatego trzeba ją dziś zmienić.</strong><br><br>
+      Oceniłem wtedy MRVL na <strong>kupno</strong> z kwalifikatorem „wzrost wyjątkowy, cena już wymagająca" i wyceniłem na <strong>$240–285</strong> przy kursie $222,02. Kurs wszedł w dolną krawędź tego przedziału, dając <strong>+8,4%</strong>.<br><br>
+      <strong>Teza się nie zepsuła, tylko wyczerpała.</strong> Utrzymanie oceny kupna wymagałoby podniesienia przedziału, a do tego potrzebna byłaby nowa przesłanka — tymczasem okazuje się, że jedna kluczowa liczba wymaga rozłożenia.</div>
+
+      <div class="alert alert-danger"><strong>Najważniejsze odkrycie tej aktualizacji: marża netto jest wyższa od marży operacyjnej.</strong><br><br>
+      Marża netto wynosi <strong>27,93%</strong>, a operacyjna jest o jedenaście punktów niższa. Normalnie jest odwrotnie, bo między nimi stoją odsetki i podatek, które zawsze obniżają wynik. <strong>Odwrócenie tej kolejności oznacza, że poniżej linii operacyjnej doszło coś dużego i niezwiązanego z podstawową działalnością</strong> — około <strong>$1,47 mld</strong>.<br><br>
+      Skutek dla wyceny jest zasadniczy i rozwijam go w sekcji 5: <strong>z raportowanych $2,98 zysku na akcję około $1,42 nie pochodzi z prowadzenia biznesu.</strong> Wskaźnik ceny do zysku podstawowego jest wtedy prawie dwa razy wyższy od raportowanego.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>17.09.2026</strong></td><td style="color:var(--ocena-kupno)"><strong>Rozszerzona umowa z GlobalFoundries</strong> na moc produkcyjną w technologii krzemowo-germanowej</td><td style="color:var(--ocena-kupno)">Zabezpiecza podaż układów do łączności optycznej — powód wzrostu kursu tego dnia</td></tr>
+          <tr><td>17.09.2026</td><td>Wspólne rozwiązanie z Microsoftem i firmą Utimaco do zabezpieczania płatności w chmurze</td><td>Nowy, ale niewielki rynek — szacowany na $5 mld</td></tr>
+          <tr><td>10.09.2026</td><td>Konferencja branżowa Citi: cel <strong>$30 mld przychodów w dwa lata</strong></td><td>Spójne z prognozą zarządu: $12 mld i $18 mld</td></tr>
+          <tr><td>27.08.2026</td><td><strong>Wyniki kwartalne:</strong> przychody $2,739 mld (+37%), centra danych $2,172 mld (+46%)</td><td style="color:var(--ocena-kupno)">Podniesienie prognozy o $1,5 mld, głównie dzięki optyce</td></tr>
+          <tr><td>Sierpień 2026</td><td>Rozszerzona umowa z Google na krzem projektowany na zamówienie</td><td style="color:var(--ocena-kupno)">Drugi duży odbiorca obok dotychczasowego głównego klienta</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)">14.09.2026</td><td style="color:var(--ocena-sprzedaz)">Spadek o blisko 8% w jednej sesji po wypowiedziach o tempie rozwoju modeli AI</td><td style="color:var(--ocena-sprzedaz)">Pokazuje, jak wrażliwy jest kurs na narrację, nie na wyniki</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — TRZY BIZNESY O RÓŻNEJ TRWAŁOŚCI</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Linia</th><th>Co robi</th><th>Trwałość przewagi</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Optyka i łączność</strong></td><td>Układy przetwarzające sygnał w nadajnikach optycznych łączących szafy serwerowe</td><td style="color:var(--ocena-kupno)"><strong>Najwyższa</strong> — wieloletni dorobek w przetwarzaniu sygnału, trudny do nadrobienia</td></tr>
+          <tr><td><strong>Krzem na zamówienie</strong></td><td>Projektowanie akceleratorów pod konkretnego odbiorcę</td><td style="color:var(--ocena-uwaga)">Umiarkowana — przewaga leży w relacji z klientem, nie w technologii</td></tr>
+          <tr><td>Sieć przedsiębiorstw i telekomunikacja</td><td>Starsze linie sprzed zwrotu w stronę centrów danych</td><td style="color:var(--text-muted)">Niska, ale i nieistotna — biznes zanikający</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Wbrew potocznemu obrazowi Marvella jako „projektanta układów na zamówienie", trwalszą wartość ma w nim optyka — i sam rynek zaczął to dostrzegać.</strong><br><br>
+      Podniesienie prognozy o $1,5 mld przy sierpniowych wynikach wynikało <strong>głównie z optyki i łączności</strong>, nie z krzemu projektowanego na zamówienie. Różnica ma znaczenie strategiczne:<br><br>
+      <strong>Krzem na zamówienie jest z natury kruchy:</strong> klient zleca projekt raz na kilka lat, negocjuje twardo i może przy kolejnej generacji odejść albo zbudować zespół u siebie — jeden przegrany projekt zabiera cały strumień przychodów. <strong>Optyka działa inaczej:</strong> każde połączenie w centrum danych potrzebuje układu przetwarzającego sygnał, każde podniesienie przepustowości wymaga nowej generacji, a klientów jest wielu. To biznes powtarzalny, oparty na dorobku gromadzonym latami.</div>
+
+      <p>Rozszerzenie umowy z Google na krzem projektowany na zamówienie łagodzi problem koncentracji — <strong>obok dotychczasowego głównego odbiorcy pojawia się drugi duży</strong>. Zarząd zapowiada, że sprzedaż krzemu na zamówienie ma się w roku obrotowym 2028 więcej niż podwoić.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNKI I OTOCZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Nakłady operatorów chmury</strong></td><td style="color:var(--ocena-kupno)">Wciąż rosną</td><td style="color:var(--ocena-kupno)">Prognoza wzrostu przychodów <strong>47,22% rocznie</strong></td></tr>
+          <tr><td><strong>Przepustowość jako wąskie gardło</strong></td><td style="color:var(--ocena-kupno)">Pogłębia się</td><td style="color:var(--ocena-kupno)">Im większe klastry, tym większy udział łączności w koszcie</td></tr>
+          <tr><td>Moc produkcyjna u dostawców</td><td style="color:var(--ocena-uwaga)">Ograniczona</td><td style="color:var(--ocena-kupno)">Rozszerzona umowa z GlobalFoundries częściowo to rozwiązuje</td></tr>
+          <tr><td><strong>Cykliczność półprzewodników</strong></td><td style="color:var(--ocena-sprzedaz)">Nieusunięta, tylko odłożona</td><td style="color:var(--ocena-sprzedaz)">Historycznie branża zawsze wracała do cyklu</td></tr>
+          <tr><td>Konkurencja o zlecenia na krzem</td><td style="color:var(--ocena-sprzedaz)">Rośnie</td><td style="color:var(--ocena-sprzedaz)">Odbiorcy budują też własne zespoły projektowe</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Warto zważyć dwie liczby z tej samej spółki, bo mówią rzeczy przeciwne.</strong><br><br>
+      Przychody za dwanaście miesięcy wzrosły o <strong>30,6%</strong>. Sam ostatni kwartał wzrósł o <strong>37%</strong>, a jego część związana z centrami danych o <strong>46%</strong>.<br><br>
+      <strong>Dane za dwanaście miesięcy zaniżają więc obecne tempo</strong> — bieżący kwartał w ujęciu rocznym daje około $10,96 mld, o szesnaście procent więcej. Każdy wskaźnik liczony od przychodów rocznych jest dla Marvella zbyt surowy; odnotowuję to uczciwie, bo w tej samej analizie wykazuję, że wskaźnik zysku jest z kolei zbyt łagodny.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I KONCENTRACJA</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Udział centrów danych w sprzedaży</strong></td><td style="color:var(--ocena-uwaga)"><strong>79%</strong></td><td style="color:var(--ocena-uwaga)">Cztery piąte biznesu zależy od jednej grupy odbiorców</td></tr>
+          <tr><td>Model sprzedaży</td><td>Wyłącznie do przedsiębiorstw</td><td>Kilku odbiorców odpowiada za większość obrotu</td></tr>
+          <tr><td><strong>Największe ryzyko relacyjne</strong></td><td style="color:var(--ocena-sprzedaz)">Krzem na zamówienie</td><td style="color:var(--ocena-sprzedaz)">Utrata jednego projektu zabiera cały strumień</td></tr>
+          <tr><td>Kierunek zmiany</td><td style="color:var(--ocena-kupno)">Rozszerzona umowa z Google</td><td style="color:var(--ocena-kupno)">Drugi duży odbiorca zmniejsza zależność od pierwszego</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Koncentracja na poziomie czterech piątych sprzedaży w jednym obszarze to najważniejsze ryzyko strukturalne tej spółki — i różni ją od Amphenola, który masz w portfelu i który zarabia na podobnym zjawisku.</strong><br><br>
+      Amphenol także sprzedaje elementy łączności do centrów danych, ale jego przychody rozkładają się na motoryzację, lotnictwo, przemysł i sprzęt medyczny. <strong>Gdyby nakłady na sztuczną inteligencję wyhamowały, Amphenol straciłby część wzrostu, a Marvell straciłby fundament.</strong><br><br>Jest to świadomy wybór zarządu: dekadę temu Marvell robił układy do dysków i sieci konsumenckich, a zwrot w stronę centrów danych okazał się trafny. Ale wraz z nagrodą przyszła zależność.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL I ROZŁOŻENIE ZYSKU RAPORTOWANEGO</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$9,45 mld (+30,6%)</td></tr>
+          <tr><td><strong>Wynik operacyjny</strong></td><td>$1,59 mld — marża <strong>16,81%</strong></td></tr>
+          <tr><td><strong>Wynik przed opodatkowaniem</strong></td><td style="color:var(--ocena-uwaga)"><strong>$3,06 mld — czyli o $1,47 mld więcej</strong></td></tr>
+          <tr><td>Wynik netto</td><td>$2,64 mld — marża 27,93%</td></tr>
+          <tr><td>Zysk na akcję</td><td>$2,98 · liczba akcji 876,93 mln</td></tr>
+          <tr><td>Dywidenda</td><td>$0,24 rocznie — 0,10%, symboliczna</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Ile z zysku na akcję pochodzi z prowadzenia biznesu</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Krok</th><th>Rachunek</th><th>Wynik</th></tr></thead>
+        <tbody>
+          <tr><td>Wynik operacyjny</td><td>$9,45 mld × 16,81%</td><td>$1,59 mld</td></tr>
+          <tr><td>Efektywna stawka podatku</td><td>$2,64 mld ÷ $3,06 mld</td><td>13,7%</td></tr>
+          <tr><td>Zysk podstawowy po podatku</td><td>$1,59 mld × 86,3%</td><td>$1,37 mld</td></tr>
+          <tr><td><strong>Zysk podstawowy na akcję</strong></td><td>$1,37 mld ÷ 876,93 mln</td><td style="color:var(--ocena-sprzedaz)"><strong>$1,56</strong></td></tr>
+          <tr><td><strong>Część jednorazowa</strong></td><td>$2,98 − $1,56</td><td style="color:var(--ocena-sprzedaz)"><strong>$1,42 na akcję</strong></td></tr>
+          <tr><td><strong>Cena do zysku podstawowego</strong></td><td>$240,76 ÷ $1,56</td><td style="color:var(--ocena-sprzedaz)"><strong>ok. 154×</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne na danych StockAnalysis / S&amp;P Global Market Intelligence, stan 18.09.2026. Uproszczenie: całą nadwyżkę nad wynikiem operacyjnym traktuję jako niepowtarzalną — kierunek wniosku nie zależy od tego założenia.</p>
+
+      <div class="alert alert-danger"><strong>Prawie połowa raportowanego zysku na akcję nie pochodzi z działalności operacyjnej.</strong><br><br>
+      Nie jest to zarzut wobec sprawozdania — takie pozycje mogą być prawidłowe (przeszacowania, sprzedaż aktywów, rozliczenia podatkowe). <strong>Problem polega na tym, że wpadają do mianownika wskaźnika ceny do zysku</strong> — a raportowane 80,89× wygląda wtedy jak wysokie, ale mieszczące się w normie wzrostowej spółki półprzewodnikowej.<br><br>
+      <strong>Przy zysku podstawowym mnożnik wynosi około 154×, czyli prawie dwa razy więcej.</strong> To zmienia charakter pozycji: nie jest to spółka wzrostowa notowana wysoko, ale spółka wyceniona prawie wyłącznie na przyszłość.<br><br>
+      <strong>Sprawdzenie z drugiej strony potwierdza rachunek.</strong> Wskaźnik ceny do zysku prognozowanego wynosi <strong>44,12×</strong>, co przy obecnym kursie oznacza oczekiwany zysk około <strong>$5,46 na akcję</strong>. Wobec zysku podstawowego $1,56 rynek zakłada więc jego <strong>ponad trzykrotny wzrost</strong> — i to jest właściwa miara tego, ile optymizmu jest już w cenie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$211,13 mld</td><td>Wzrost o 255,7% w rok</td></tr>
+          <tr><td>Cena / sprzedaż</td><td style="color:var(--ocena-sprzedaz)">22,34</td><td>Od tempa bieżącego kwartału: około <strong>19,3</strong></td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>122,03</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Powyżej 100× — wycena opiera się na przyszłości, nie na dzisiejszych przepływach</strong></td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td style="color:var(--ocena-sprzedaz)">74,55</td><td>Wartość firmy do wolnych przepływów 122,81</td></tr>
+          <tr><td><strong>Cena / aktywa materialne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>102,78</strong></td><td>Kapitał własny to głównie wartości niematerialne z przejęć</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>80,89</td><td style="color:var(--ocena-sprzedaz)"><strong>Zaniża obraz</strong> — liczony od zysku ze zdarzeniami jednorazowymi</td></tr>
+          <tr><td><strong>P/E od zysku podstawowego</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>ok. 154×</strong></td><td style="color:var(--ocena-sprzedaz)">Miara właściwa dla oceny wyceny — rachunek w sekcji 5</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>44,12</strong></td><td style="color:var(--ocena-kupno)"><strong>Niższy od trailing</strong> — rynek oczekuje wzrostu zysku, nie spadku</td></tr>
+          <tr><td><strong>PEG (od prognozy zysku)</strong></td><td style="color:var(--ocena-kupno)"><strong>ok. 0,81</strong></td><td style="color:var(--ocena-kupno)">Poniżej 1,0 przy prognozie wzrostu zysku 54,19% rocznie</td></tr>
+          <tr><td>Mediana sektora półprzewodników</td><td>okolice 30×</td><td style="color:var(--ocena-sprzedaz)">Marvell notowany z wyraźną premią również na wskaźniku prognozowanym</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> Trzy wskaźniki układają się w spójną historię: <strong>zysk prognozowany jest wyceniany niżej niż trailing, co znaczy, że rynek spodziewa się jego wzrostu, a nie spadku</strong> — to sytuacja odwrotna niż w Novo Nordisku, gdzie wskaźnik prognozowany był wyższy od bieżącego. Iloraz wskaźnika i tempa wzrostu poniżej jedności wypada wręcz korzystnie. <strong>Ale wszystkie trzy opierają się na prognozach, nie na dzisiejszym zarobku z działalności.</strong> Napięcie między tym, co jest, a tym, co ma być, jest przy tej pozycji największe w Twoim portfelu.</p>
+
+      <h3>Cztery scenariusze na rok obrotowy 2028</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Zysk na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Prognoza $18 mld dowieziona, premia utrzymana</strong></td><td>$6,50</td><td>45×</td><td><strong>$292</strong></td><td style="color:var(--ocena-kupno)">+21%</td></tr>
+          <tr><td><strong>Prognoza dowieziona, premia maleje</strong></td><td>$6,50</td><td>38×</td><td><strong>$247</strong></td><td style="color:var(--ocena-uwaga)">+3%</td></tr>
+          <tr><td>Wzrost o rok opóźniony</td><td>$4,50</td><td>32×</td><td>$144</td><td style="color:var(--ocena-sprzedaz)">-40%</td></tr>
+          <tr><td><strong>Pauza w nakładach na AI</strong></td><td style="color:var(--ocena-sprzedaz)">$3,00</td><td>25×</td><td><strong>$75</strong></td><td style="color:var(--ocena-sprzedaz)">-69%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne. Zysk na akcję dla scenariusza podstawowego wyprowadzony z prognozy zarządu przy marży podniesionej dźwignią skali; mnożniki odzwierciedlają rozpiętość, w jakiej historycznie notowane są wzrostowe spółki półprzewodnikowe.</p>
+
+      <div class="alert alert-warning"><strong>Uwaga o cykliczności, obowiązkowa przy tej branży.</strong> Wskaźnik zysku prognozowanego na poziomie 44,12× wygląda umiarkowanie <strong>tylko jeśli prognoza jest trafna</strong>. Historia półprzewodników pokazuje, że najniższe wskaźniki prognozowane pojawiają się na szczycie cyklu, tuż przed spadkiem mianownika. Nie twierdzę, że jesteśmy na szczycie — twierdzę, że ten wskaźnik nie jest zabezpieczeniem.</div>
+
+      <p><strong>Fair value: $160 – $300</strong>, środek <strong>$230,00 (-4,5%)</strong>. Konsensus 45 analityków to $289,04 (+20,05%) przy rekomendacji mocnego kupna — blisko górnej granicy mojego przedziału.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE, ZWROT Z KAPITAŁU I PRZEPŁYWY</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Marża operacyjna</td><td style="color:var(--ocena-uwaga)">poniżej siedemnastu procent</td><td>Niska dla projektanta układów — obciążona amortyzacją przejęć</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>6,94%</strong></td><td style="color:var(--ocena-sprzedaz)">Wobec kosztu kapitału <strong>16,32%</strong> — różnica <strong>-9,38 pp</strong></td></tr>
+          <tr><td>Prognoza wzrostu przychodów</td><td style="color:var(--ocena-kupno)">47,22% rocznie</td><td style="color:var(--ocena-kupno)">Prognoza wzrostu zysku 54,19% rocznie</td></tr>
+          <tr><td><strong>Relacja przepływów do kursu</strong></td><td style="color:var(--ocena-sprzedaz)">122,03×</td><td style="color:var(--ocena-sprzedaz)">Wolne przepływy istnieją, ale są małe wobec kapitalizacji</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Po policzeniu różnicy między zwrotem z kapitału a jego kosztem dla całego portfela Marvell wypada ósmy na jedenaście.</strong><br><br>
+      Kolejność: <strong>Novo Nordisk +33,71</strong> · Sibanye +23,15 · SAP +9,92 · Amphenol +9,89 · ServiceNow +1,18 · Oracle +0,70 · AMD −8,02 · <strong>Marvell −9,38</strong> · Intel −11,92 · IREN −26,44 · MARA −84,58.<br><br>
+      <strong>Przyczyna jest w dużej mierze historyczna, nie operacyjna.</strong> Marvell przez lata rósł przez przejęcia, a zapłacona za nie nadwyżka siedzi w mianowniku zainwestowanego kapitału i w amortyzacji obciążającej marżę operacyjną. Dlatego marża operacyjna jest niska dla firmy, która sama nie prowadzi fabryk.<br><br>
+      <strong>Praktyczny wniosek: dźwignia operacyjna jest silna i działa w obie strony.</strong> Przy podwojeniu przychodów na tych samych kosztach stałych marża i zwrot z kapitału poprawią się skokowo; przy zatrzymaniu wzrostu ta sama dźwignia zadziała odwrotnie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — TU NIE MA PROBLEMU</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Dług netto</strong></td><td style="color:var(--ocena-kupno)"><strong>$1,35 mld</strong></td><td style="color:var(--ocena-kupno)">Znikomy przy kapitalizacji $211,13 mld</td></tr>
+          <tr><td><strong>Altman Z</strong></td><td style="color:var(--ocena-kupno)"><strong>7,97</strong></td><td style="color:var(--ocena-kupno)">Bezpieczna strefa z dużym zapasem</td></tr>
+          <tr><td>Liczba akcji</td><td style="color:var(--ocena-kupno)">+2,56% r/r</td><td style="color:var(--ocena-kupno)">Rozwodnienie na poziomie zwykłych programów motywacyjnych</td></tr>
+          <tr><td>Aktywa materialne</td><td style="color:var(--ocena-uwaga)">Niewielkie</td><td style="color:var(--ocena-uwaga)">Kapitał własny to głównie wartość firmy z przejęć</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Bilans Marvella jest jedną z mocniejszych stron tej pozycji i warto to powiedzieć wprost, bo w tym portfelu jest rzadkie.</strong><br><br>
+      <strong>Dług netto $1,35 mld to mniej niż procent kapitalizacji.</strong> Wskaźnik Altmana 7,97 lokuje spółkę w bezpiecznej strefie z zapasem. Rozwodnienie o 2,56% rocznie odpowiada normalnym programom motywacyjnym.<br><br>
+      Zestawienie z innymi Twoimi pozycjami zajmującymi się infrastrukturą dla sztucznej inteligencji jest wymowne: <strong>CoreWeave ma ujemny kapitał obrotowy, IREN nakłady sześciokrotnie wyższe od przychodów, MARA finansuje się emisjami, Oracle podnosi dług.</strong> Marvell nie ma żadnego z tych problemów — <strong>ryzyko tej pozycji jest wyłącznie ryzykiem wyceny, nie ryzykiem przetrwania.</strong><br><br>
+      Jedyne zastrzeżenie: kapitał własny składa się głównie z wartości niematerialnych powstałych przy przejęciach, dlatego cena do aktywów materialnych przekracza sto. Gdyby przyszła potrzeba odpisu, uderzyłby on w kapitał własny — ale nie w płynność.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Optyka jest lepszym biznesem, niż sugerowała narracja o krzemie na zamówienie.</strong> Podniesienie prognozy o $1,5 mld wyszło głównie z tej linii. Jest powtarzalna, rozłożona na wielu klientów i oparta na dorobku, którego nie da się szybko nadrobić.</div>
+
+      <div class="alert alert-success"><strong>2. Prognoza zarządu jest konkretna i potwierdzona publicznie dwa razy:</strong> $12 mld w roku obrotowym 2027 i $18 mld w 2028, czyli $30 mld łącznie — powtórzone na konferencji branżowej we wrześniu, ze sprzedażą krzemu na zamówienie mającą się więcej niż podwoić.</div>
+
+      <div class="alert alert-success"><strong>3. Dźwignia operacyjna jest duża i jeszcze nieuruchomiona.</strong> Marża operacyjna jest niska z powodu amortyzacji przejęć, która nie rośnie razem z przychodami — i to jest właśnie ścieżka, którą wycenia wskaźnik prognozowany 44,12×.</div>
+
+      <div class="alert alert-info"><strong>4. Rynek obstawia przeciw.</strong> Krótka sprzedaż wzrosła w miesiąc o ponad trzydzieści procent — <strong>przy dobrych wynikach w grudniu może zadziałać jako paliwo</strong>, tak jak sesja z 17 września, gdy sam komunikat o mocy produkcyjnej dał +4,81%.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Prawie połowa raportowanego zysku na akcję nie pochodzi z działalności.</strong> Kto oceniał tę spółkę po wskaźniku raportowanym, widział ją jako dwukrotnie tańszą, niż jest — rachunek w sekcji 5.</div>
+
+      <div class="alert alert-danger"><strong>2. Cena do wolnych przepływów przekracza 122×.</strong> Wolne przepływy istnieją — to przewaga nad CoreWeave czy IREN — ale są znikome wobec kapitalizacji. Cała wycena opiera się na tym, czym spółka będzie, nie na tym, co dziś generuje.</div>
+
+      <div class="alert alert-warning"><strong>3. Cztery piąte sprzedaży zależy od nakładów operatorów chmury.</strong> Sesja z 14 września, gdy kurs spadł o blisko osiem procent po samych wypowiedziach o tempie rozwoju modeli AI, pokazuje wrażliwość tej pozycji na narrację.</div>
+
+      <div class="alert alert-warning"><strong>4. Krótka sprzedaż wzrosła w miesiąc o 34,5%, do 38,18 mln akcji.</strong> To nadal tylko 4,35% akcji, więc nie jest to poziom jak w MARA czy IREN — ale kierunek zmiany jest jednoznaczny i pokazuje, że pojawił się kapitał obstawiający spadek po wzroście kursu o 255,7% w rok.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Przewaga nad Marvellem</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Broadcom</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz — obserwowana)</span></td><td style="color:var(--ocena-sprzedaz)">Większa skala, wyższe marże, silniejsza pozycja w krzemie na zamówienie</td><td>Znacznie większa kapitalizacja ogranicza tempo wzrostu</td></tr>
+          <tr><td><strong>Nvidia</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz — obserwowana)</span></td><td style="color:var(--ocena-sprzedaz)">Własny ekosystem sieciowy konkurujący z rozwiązaniami Marvella</td><td style="color:var(--ocena-kupno)">Jest też odbiorcą — klienci chcą alternatywy dla jednego dostawcy</td></tr>
+          <tr><td><strong>Coherent i Lumentum</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz)</span></td><td>Silna pozycja w elementach optycznych</td><td style="color:var(--ocena-kupno)">Działają warstwę niżej — są raczej partnerem niż rywalem</td></tr>
+          <tr><td><strong>Zespoły projektowe u odbiorców</strong></td><td style="color:var(--ocena-sprzedaz)">Odbiorca nie musi płacić marży</td><td>Kosztowne i wolne — dlatego zlecenia wciąż wracają na rynek</td></tr>
+          <tr><td><strong>Amphenol</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,46%)</span></td><td style="color:var(--ocena-sprzedaz)">Zdywersyfikowany na wiele branż, zwrot z kapitału dodatni o 9,89 pp</td><td>Rośnie wolniej, sprzedaje elementy o mniejszej wartości dodanej</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Najważniejsze w tym zestawieniu jest to, że dwaj najgroźniejsi konkurenci są jednocześnie powodem, dla którego Marvell istnieje na tym rynku.</strong><br><br>
+      Operatorzy chmury zlecają projekty właśnie dlatego, że <strong>nie chcą zależeć od jednego dostawcy akceleratorów</strong> — dopóki ta motywacja działa, Marvell ma zamówienia. Ryzyko pojawi się, gdy któryś odbiorca uzna własny zespół projektowy za tańszy. Dlatego optyka, oparta na dorobku technicznym, a nie na jednej relacji, jest trwalszą częścią spółki.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zakres 52 tygodni</td><td>$68,36 – $329,88</td><td style="color:var(--ocena-uwaga)">Kurs <strong>27,0% poniżej szczytu</strong>, ponad trzykrotnie powyżej dna</td></tr>
+          <tr><td><strong>Odległość od średniej 200-sesyjnej</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+52,7%</strong></td><td style="color:var(--ocena-sprzedaz)">Bardzo duże rozciągnięcie — trend silny, ale napięty</td></tr>
+          <tr><td>Zmiana kapitalizacji w rok</td><td style="color:var(--ocena-kupno)">+255,7%</td><td>Sesja 17.09 zamknęła się wzrostem o 4,81%</td></tr>
+          <tr><td>Beta (5 lat)</td><td style="color:var(--ocena-uwaga)">2,25</td><td>Wolumen 20,97 mln akcji</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-uwaga)"><strong>38,18 mln akcji</strong></td><td style="color:var(--ocena-uwaga)">Wzrost z 28,39 mln miesiąc wcześniej — <strong>+34,5%</strong></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Kurs znajduje się ponad pięćdziesiąt procent powyżej średniej dwustusesyjnej — to najbardziej rozciągnięty układ wśród Twoich pozycji.</strong><br><br>
+      Nie jest to sygnał sprzedaży — w silnych trendach takie rozciągnięcie trwa miesiącami — ale ma dwie konsekwencje. <strong>Po pierwsze, najbliższe realne wsparcie jest bardzo daleko</strong> — powrót do średniej oznaczałby zejście do dolnej granicy mojego przedziału wyceny. <strong>Po drugie, przy becie 2,25 takie zejście może nastąpić w kilka sesji.</strong></div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$289,04</strong></td><td>Cena docelowa konsensusu</td></tr>
+          <tr><td><strong>$329,88</strong></td><td>Szczyt roku — najbliższy istotny opór historyczny</td></tr>
+          <tr><td><strong>$230,00</strong></td><td>Środek przedziału wartości godziwej</td></tr>
+          <tr><td><strong>$200,93</strong></td><td>Twoja cena wejścia</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$160</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — okolice średniej 200-sesyjnej</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs rozciągnięty ponad pięćdziesiąt procent nad średnią, krótka sprzedaż rośnie, najbliższy katalizator dopiero w grudniu. Po wzroście o 255,7% w rok momentum jest silne, ale wsparcie odległe.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Środek wartości godziwej leży niżej niż kurs. Scenariusz z dowiezioną prognozą i utrzymaną premią daje +21%, ten sam z premią niższą już tylko +3% — zbyt mało asymetrii, żeby nazwać to kupnem.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Optyka jest trwałym biznesem, bilans nie ogranicza niczego, a dźwignia operacyjna pozostaje nieuruchomiona — w tym horyzoncie premia za wzrost ma czas się zamortyzować.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ocena łączna: NEUTRALNA — obniżenie z kupna z 16 sierpnia.</strong> Powody są dwa, oba z rachunku, a nie ze zmiany zdania o spółce.<br><br>
+      <strong>Pierwszy: cena doszła tam, gdzie ją wyceniałem.</strong> Poprzedni przedział został osiągnięty, a to ten sam mechanizm, który opisywałem przy Oracle i ServiceNow — teza zadziałała i się wyczerpała.<br><br>
+      <strong>Drugi: po rozłożeniu zysku wycena okazuje się prawie dwukrotnie wyższa, niż wynikało z mnożnika raportowanego.</strong> Nowy przedział jest szerszy w obie strony, bo taka jest rzeczywista rozpiętość scenariuszy.<br><br>
+      <strong>To nie jest zalecenie wyjścia</strong> — biznes rośnie, bilans jest zdrowy, a konsensus analityków pozostaje wyżej. Zmienia się tylko odpowiedź na pytanie, czy przy tej cenie dokupować.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td><strong>3,84%</strong></td><td>Dziesiąta pozycja z osiemnastu</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-kupno)">+19,8%</td><td>Przy cenie wejścia $200,93</td></tr>
+          <tr><td><strong>Półprzewodniki razem</strong></td><td style="color:var(--ocena-uwaga)"><strong>36,45%</strong></td><td style="color:var(--ocena-uwaga)">Z AMD, Intelem, ASML i Samsungiem</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Marvell jest częścią największego skupienia w Twoim portfelu — i to ono, a nie sama ta pozycja, wymaga uwagi.</strong><br><br>
+      Pięć spółek półprzewodnikowych waży razem <strong>36,45%</strong>: AMD 20,92%, Intel 6,67%, Marvell 3,84%, Samsung 3,73%, ASML 2,54%. <strong>Wszystkie pięć zarabia na tym samym cyklu nakładów na sztuczną inteligencję.</strong> Dochodzą do tego cztery pozycje wynajmujące moc obliczeniową, które razem ważą jeszcze 16,06%.<br><br>
+      Marvell jest wewnątrz tej grupy pozycją o <strong>najlepszym bilansie i najwyższej wycenie względem dzisiejszych zysków</strong>. To jakościowy wybór w ryzykownym temacie — ale nie zmniejsza skupienia, tylko poprawia jego skład.</div>
+
+      <div class="alert alert-info"><strong>Dwie obserwacje porządkujące.</strong><br><br>
+      <strong>Marvell i Amphenol to dwie strony tego samego zjawiska</strong> — krzem przetwarzający sygnał i elementy fizyczne. Amphenol ma dodatni zwrot ponad kosztem kapitału i dywersyfikację, Marvell wyższy wzrost i wyższą wycenę, więc <strong>trzymanie obu jest sensowne</strong>, choć oba przegrałyby na tym samym wyhamowaniu nakładów.<br><br>
+      <strong>Przy AMD wynoszącym 20,92% portfela obniżenie oceny Marvella niewiele zmienia w łącznym ryzyku.</strong> Ekspozycja na półprzewodniki jest w Twoim portfelu rozstrzygana przez AMD, nie przez tę pozycję.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>Marvell jest dobrą spółką, której poprzednia teza się sprawdziła, i właśnie dlatego trzeba obniżyć ocenę.</strong> W sierpniu wyceniłem ją przy kursie $222,02 na przedział, w który kurs wszedł po pięciu tygodniach. Biznes rośnie szybciej, niż pokazują dane roczne: sprzedaż w ostatnim kwartale wzrosła o <strong>37%</strong>, a jej część związana z centrami danych o <strong>46%</strong>. Zarząd potwierdził publicznie cel <strong>$30 mld przychodów w dwa lata</strong>, a najmocniejszą częścią spółki okazuje się nie krzem na zamówienie, lecz <strong>optyka</strong>.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Zmieniło się natomiast to, jak wygląda wycena po rozłożeniu zysku. <strong>Marża netto przewyższa marżę operacyjną</strong>, co oznacza około <strong>$1,47 mld zdarzeń poza działalnością podstawową</strong>. Z raportowanego zysku na akcję z prowadzenia biznesu pochodzi niecała połowa — a wtedy mnożnik jest niemal dwukrotnie wyższy od raportowanego. Potwierdza to wskaźnik prognozowany 44,12×, zakładający ponad trzykrotny wzrost zysku podstawowego. <strong>Bilans natomiast nie budzi zastrzeżeń:</strong> dług netto poniżej procenta kapitalizacji i Altman w bezpiecznej strefie — ryzyko tej pozycji jest ryzykiem wyceny, nie przetrwania.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Wzrost musi się utrzymać.</strong> Ostatni kwartał +37%, centra danych +46% — spełnione i przyspieszające.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Bilans nie może ograniczać.</strong> Dług netto $1,35 mld, Altman 7,97 — spełnione z zapasem.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Przewaga musi być trwalsza niż jedna relacja z klientem.</strong> Optyka spełnia ten warunek; rozszerzona umowa z Google zmniejsza zależność od pierwszego odbiorcy.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Wycena powinna dawać asymetrię.</strong> Środek przedziału leży poniżej kursu, scenariusz z niższą premią daje +3% — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Zysk podstawowy musi wzrosnąć ponad trzykrotnie.</strong> To dokładnie tyle, ile zakłada wskaźnik prognozowany; rozstrzygnie rok obrotowy 2028.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>Początek grudnia 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki kwartalne</strong></td><td style="color:var(--ocena-uwaga)">Potwierdzenie prognozy $12 mld, udział optyki we wzroście, relacja wyniku operacyjnego do przedpodatkowego</td></tr>
+            <tr><td>Na bieżąco</td><td>Nowe zlecenia na krzem projektowany na zamówienie</td><td>Trzeci duży odbiorca byłby istotnym przełomem w kwestii koncentracji</td></tr>
+            <tr><td>Rok obrotowy 2028</td><td>Docelowy poziom przychodów</td><td>Punkt, w którym dźwignia operacyjna ma podnieść marżę i zwrot z kapitału</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">W dowolnej chwili</td><td style="color:var(--ocena-sprzedaz)">Sygnały spowolnienia nakładów operatorów chmury</td><td style="color:var(--ocena-sprzedaz)">Przy czterech piątych sprzedaży w tym obszarze uderzyłyby bezpośrednio</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Wynik operacyjny vs przedpodatkowy</strong></td><td>rozjazd $1,47 mld</td><td>utrzymanie rozjazdu w kolejnych kwartałach</td><td><span class="mon-dot r"></span>Wymaga uwagi</td></tr>
+            <tr><td>Marża operacyjna</td><td>16,81%</td><td>brak poprawy przy rosnących przychodach</td><td><span class="mon-dot y"></span>Neutralnie</td></tr>
+            <tr><td>Wzrost sprzedaży centrów danych</td><td>+46% kwartalnie</td><td>zejście poniżej 25%</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Dług netto</td><td>$1,35 mld</td><td>wzrost powyżej $10 mld</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Charakter pozycji</strong></td><td>Jakościowy wybór w ryzykownym temacie — trzymać, nie powiększać przy tej cenie</td></tr>
+            <tr><td><strong>Dokupowanie</strong></td><td>Dopiero poniżej <strong>$200</strong>, czyli poniżej własnej ceny wejścia</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$300</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$160</strong></td></tr>
+            <tr><td><strong>Warunek zmiany na sprzedaż</strong></td><td>Spadek tempa wzrostu centrów danych poniżej dwudziestu pięciu procent przy utrzymanej wycenie</td></tr>
+            <tr><td><strong>Czego nie robić</strong></td><td>Nie używać raportowanego wskaźnika ceny do zysku — zaniża wycenę o połowę</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p><strong>Obniżam ocenę spółki, o której mam dziś lepsze zdanie niż w sierpniu — i to nie jest sprzeczność.</strong> Optyka okazała się trwalszym biznesem, niż zakładałem, gdy patrzyłem na Marvella głównie przez krzem projektowany na zamówienie. Bilans jest najlepszy wśród wszystkich Twoich pozycji związanych z infrastrukturą dla sztucznej inteligencji. Tempo wzrostu przyspiesza, a nie zwalnia.</p>
+        <p><strong>Ale cena doszła tam, gdzie ją wyceniałem, a rozłożenie zysku pokazało, że wycena jest niemal dwukrotnie wyższa, niż sugeruje raportowany mnożnik.</strong> Rynek płaci dziś około stu pięćdziesięciu razy zysk podstawowy i zakłada jego ponadtrzykrotny wzrost. To może się wydarzyć — prognoza zarządu jest konkretna i dwukrotnie potwierdzona. <strong>Kupno oznaczałoby jednak, że kurs ma jeszcze zapas, a przy środku wyceny poniżej dzisiejszego poziomu tego twierdzić nie mogę.</strong> Trzymać i nie powiększać.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>jak w pasku oceny</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$75 (-69%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$292 (+21%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Utrzymać obecną</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki w grudniu</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA POPRZEDNIEJ ANALIZY (16.08.2026)</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Wycena oparta na <strong>raportowanym wskaźniku ceny do zysku 80,9×</strong>, bez rozłożenia zysku</td>
+            <td>Marża netto przewyższa operacyjną, więc <strong>blisko połowa zysku na akcję nie pochodzi z działalności</strong>. Mnożnik na zysku podstawowym jest niemal dwukrotnie wyższy</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — wycena wyglądała na dwukrotnie niższą</td>
+          </tr>
+          <tr>
+            <td><strong>Ocena kupno</strong>, wartość godziwa $240–285 przy kursie $222,02</td>
+            <td>Kurs osiągnął dolną krawędź przedziału. <strong>Teza trafna, ale wyczerpana</strong> — obniżam ocenę na neutralną i rozszerzam przedział w obie strony</td>
+            <td style="color:var(--ocena-kupno)">Trafna kierunkowo, ocena zaktualizowana</td>
+          </tr>
+          <tr>
+            <td>Opis spółki skupiony na <strong>krzemie projektowanym na zamówienie</strong></td>
+            <td>Podniesienie prognozy o $1,5 mld wyszło <strong>głównie z optyki</strong>, która jest biznesem trwalszym i lepiej rozłożonym na klientów</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana — zły akcent na najważniejszej linii</td>
+          </tr>
+          <tr>
+            <td>Brak policzenia <strong>zwrotu z kapitału wobec jego kosztu</strong></td>
+            <td>Ósme miejsce na jedenaście policzonych pozycji portfela; przyczyna leży w amortyzacji przejęć, nie w słabości operacyjnej</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Wniosek metodologiczny — trzeci raz w tej serii aktualizacji ta sama kategoria błędu.</strong><br><br>
+      Przy Novo Nordisku pominąłem, że wskaźnik prognozowany jest wyższy od bieżącego. Przy IREN, że gotówka operacyjna trzykrotnie przewyższa przychody. Tutaj, że marża netto przewyższa operacyjną.<br><br>
+      <strong>Wszystkie trzy przypadki to ta sama luka: brałem wskaźnik gotowy, zamiast najpierw sprawdzić, czy jego licznik i mianownik mierzą to, co mają mierzyć.</strong> Dopisuję do zasad redakcyjnych stałą kontrolę wstępną: <strong>porównać marżę netto z operacyjną, przepływy operacyjne z przychodami i wskaźnik prognozowany z bieżącym — przed użyciem którejkolwiek z tych liczb w argumencie.</strong> Każde odwrócenie normalnej kolejności oznacza, że pod spodem jest coś, co trzeba rozłożyć.</div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Kwalifikator „wzrost wyjątkowy, cena już wymagająca" był trafny w obu członach, a wyceniony przedział został osiągnięty od dołu. Ostrzeżenie o koncentracji na centrach danych pozostaje aktualne — a sama koncentracja jeszcze wzrosła.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 18 września 2026 | Cena: <strong>$240,76</strong> (zamknięcie 17.09.2026) | <strong>Aktualizacja analizy z 16 sierpnia 2026 — OBNIŻENIE OCENY: kupno → neutralna</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> rozłożono zysk raportowany — marża netto 27,93% przewyższa operacyjną, co oznacza ok. $1,47 mld zdarzeń poza działalnością podstawową i blisko połowę zysku na akcję jednorazowo; wskaźnik ceny do zysku podstawowego ok. 154× zamiast raportowanego 80,89×; przeniesiono akcent z krzemu na zamówienie na optykę jako trwalszą część biznesu; dodano zwrot z kapitału wobec kosztu (-9,38 pp); wartość godziwa $240–285 → $160–300 | Dane: StockAnalysis / S&amp;P Global Market Intelligence, komunikaty spółki i Business Wire — <strong>stan danych na 18.09.2026</strong>; rozłożenie zysku na część podstawową i jednorazową, scenariusze oraz wszystkie wyliczenia pochodne to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IREN — IREN Limited | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: IREN</div>
+    <div class="company-name">IREN Limited</div>
+    <div class="company-sub">Chmura obliczeniowa dla AI po wyjściu z wydobycia bitcoina · Sydney · 685 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">W portfelu — 2,54%</span>
+      <span class="meta-tag">Najlepszy wynik procentowy w portfelu</span>
+      <span class="meta-tag">Korekta mojego opisu z raportu MARA</span>
+      <div class="price-display">
+        <div class="price-main">$43,48</div>
+        <div class="price-sub">zamknięcie 17.09.2026 (+2,02%), po sesji $43,55</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Moc obliczeniowa dla AI</span><span class="temat">Chmura i centra danych</span><span class="temat">Bitcoin i kopalnie</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — kontrakty są prawdziwe, ale nakłady sięgają sześciu razy przychodów, a gotówka operacyjna zawiera przedpłaty">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">utrzymana — teza z sierpnia się obroniła</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$20 – $78</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-54% do +79%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>5 listopada</b><em>Kwartał kończący się 30.09</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Akcjonariat</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$43,48</div><div class="metric-detail">+19,29% w 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 16.08</div><div class="metric-value">-1,3%</div><div class="metric-detail">Kurs pozostał w moim przedziale $38–56</div></div>
+    <div class="metric-card"><div class="metric-label">Nakłady do przychodów</div><div class="metric-value red">612%</div><div class="metric-detail"><strong>Najwyżej w portfelu</strong> — CoreWeave ma 271%</div></div>
+    <div class="metric-card"><div class="metric-label">Gotówka operacyjna</div><div class="metric-value red">2,97× sprzedaży</div><div class="metric-detail"><strong>Zawiera przedpłaty</strong> — sekcja 5</div></div>
+    <div class="metric-card"><div class="metric-label">Marża EBITDA</div><div class="metric-value red">5,42%</div><div class="metric-detail">Przy marży brutto <strong>68,92%</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Liczba akcji</div><div class="metric-value red">+41,60%</div><div class="metric-detail">W rok; +8,89% w samym kwartale</div></div>
+    <div class="metric-card"><div class="metric-label">Beta</div><div class="metric-value red">4,28</div><div class="metric-detail">Druga najwyższa po MARA · short 23,76%</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (17 analityków)</div><div class="metric-value green">$79,03</div><div class="metric-detail">+81,76% · mocne kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I KOREKTA MOJEGO OPISU</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>IREN wyszedł z wydobycia bitcoina i wynajmuje dziś moc obliczeniową pod sztuczną inteligencję, mając własne aktywa energetyczne. Przychody za dwanaście miesięcy to <strong>$707,01 mln</strong> przy zaledwie 685 pracownikach. To <strong>Twoja pozycja o wadze 2,54%</strong>, przy cenie wejścia $5,10, czyli wynik <strong>+752,5%</strong> — najlepszy procentowo w całym portfelu.</p>
+
+      <div class="alert alert-warning"><strong>Muszę zacząć od korekty, która nie dotyczy tego raportu, ale trzech innych napisanych wczoraj.</strong><br><br>
+      W analizach MARA i CoreWeave przedstawiałem IREN jako <strong>wzorzec udanej transformacji</strong> — spółkę, która wyszła z wydobycia i „jej się udało". To skrót zbyt daleko idący.<br><br>
+      IREN rzeczywiście ma to, czego MARA nie ma: <strong>podpisane wieloletnie umowy na moc obliczeniową</strong>. Ale jego własne wskaźniki są dziś słabe: zwrot z zainwestowanego kapitału wynosi <strong>-7,18%</strong> przy koszcie kapitału 19,26%, wskaźnik Altmana <strong>0,98</strong>, wolne przepływy <strong>minus $2,23 mld</strong>, a liczba akcji wzrosła w rok o <strong>41,60%</strong>.<br><br>
+      <strong>Sukces IREN polega więc na zdobyciu kontraktów, nie na uzyskaniu zwrotu z kapitału.</strong> Ta różnica jest istotna i pisząc „wzorzec udanej transformacji" ją zatarłem.</div>
+
+      <div class="alert alert-info"><strong>Teza z 16 sierpnia się obroniła.</strong> Nazwałem wtedy sytuację „zysk nie pochodzi z działalności, wycena skrajna" i wyceniłem IREN na <strong>$38–56</strong> przy kursie $44,06. Po pięciu tygodniach kurs wynosi $43,48 — zmiana o <strong>-1,3%</strong>, wewnątrz przedziału. Rozszerzam go dziś w obie strony do <strong>$20–78</strong>, bo poprzedni był zbyt wąski dla spółki o tak wysokiej becie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — MOC ELEKTRYCZNA JAKO PRZEWAGA</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <p>IREN buduje i eksploatuje centra danych wypełnione akceleratorami obliczeniowymi, a wynajmuje je klientom trenującym modele sztucznej inteligencji. Prowadzi też resztkową działalność wydobywczą, ale nie ona decyduje dziś o wycenie.</p>
+
+      <div class="alert alert-success"><strong>Przewaga IREN nad innymi budującymi moc obliczeniową jest konkretna i wynika z historii spółki: ma własne, podłączone źródła energii.</strong><br><br>Wydobywając bitcoina przez lata, IREN zdobył to, co dziś jest najtrudniejsze do kupienia: <strong>grunty z gotowym przyłączem energetycznym</strong>. Budowa centrum danych od zera wymaga zgód na przyłączenie, których oczekiwanie liczy się w latach. IREN te zgody już ma.<br><br>Widać to w marży brutto: <strong>68,92%</strong>, czyli powyżej CoreWeave (67,42%) i Oracle (63,96%). Tania energia z własnych aktywów przekłada się bezpośrednio na koszt godziny pracy akceleratora.</div>
+
+      <div class="alert alert-danger"><strong>Ale poniżej marży brutto ta przewaga znika, i to jest najważniejsza obserwacja w tym raporcie.</strong><br><br>Marża brutto wynosi blisko sześćdziesiąt dziewięć procent. <strong>Marża EBITDA — zaledwie 5,42%.</strong> Między nimi znikają koszty ogólne, sprzedaży i utrzymania, a jeszcze niżej amortyzacja sprzętu sprowadza marżę operacyjną do <strong>minus 53,57%</strong>.<br><br>Innymi słowy: <strong>tania energia nie wystarcza</strong>. Sprzęt obliczeniowy zużywa się i traci konkurencyjność szybciej, niż spółka zdąża go zamortyzować z przychodu — bo przychodu jest wciąż zbyt mało wobec skali inwestycji.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK I POZYCJA</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na IREN</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Popyt na moc obliczeniową</strong></td><td style="color:var(--ocena-kupno)"><strong>Przewyższa podaż</strong></td><td style="color:var(--ocena-kupno)">Prognoza wzrostu przychodów <strong>168,01% rocznie</strong></td></tr>
+          <tr><td><strong>Dostęp do energii</strong></td><td style="color:var(--ocena-kupno)">Wąskie gardło całej branży</td><td style="color:var(--ocena-kupno)">Główna przewaga IREN</td></tr>
+          <tr><td>Koszt akceleratorów</td><td style="color:var(--ocena-sprzedaz)">Wysoki, dostawy limitowane</td><td style="color:var(--ocena-sprzedaz)">Wymusza nakłady wielokrotnie większe od przychodów</td></tr>
+          <tr><td><strong>Koszt finansowania</strong></td><td style="color:var(--ocena-sprzedaz)">Kluczowy</td><td style="color:var(--ocena-sprzedaz)">Koszt kapitału bardzo wysoki</td></tr>
+          <tr><td>Ceny wynajmu mocy</td><td style="color:var(--ocena-uwaga)">Pod presją wraz z przyrostem podaży</td><td style="color:var(--ocena-uwaga)">Erozja marży przy rosnącej konkurencji</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>IREN znajduje się dokładnie pośrodku spektrum, które opisałem wczoraj przy Oracle i CoreWeave — i warto zobaczyć, gdzie.</strong><br><br>Wszyscy czterej wynajmujący moc obliczeniową z Twojego portfela finansują sprzęt inaczej: <strong>Amazon długiem, mimo trzech biznesów — jego wolne przepływy są ujemne</strong>, <strong>Oracle długiem przy dużym zysku operacyjnym</strong>, <strong>CoreWeave długiem bez zysku operacyjnego</strong>, a <strong>IREN długiem i emisją akcji, mając własną energię</strong>.<br><br>Przewaga energetyczna stawia IREN wyżej niż CoreWeave pod względem kosztu wytworzenia, ale niżej pod względem skali: przychody IREN to niecały dziesiąty procent tego, co generuje CoreWeave. <strong>Tania energia przy małej skali nie wystarcza, żeby pokryć koszty stałe.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">AKCJONARIAT I ROZWODNIENIE</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zmiana liczby akcji r/r</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+41,60%</strong></td><td style="color:var(--ocena-sprzedaz)">Stopa skupu ujemna o tę samą wartość</td></tr>
+          <tr><td><strong>Zmiana kwartał do kwartału</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>+8,89%</strong></td><td style="color:var(--ocena-sprzedaz)">Tempo emisji nie hamuje</td></tr>
+          <tr><td>Zarząd i założyciele</td><td style="color:var(--ocena-kupno)">12,11%</td><td style="color:var(--ocena-kupno)">Wysoko — skutki decyzji ponoszą majątkowo</td></tr>
+          <tr><td>Instytucje</td><td>56,19%</td><td>Wolny obrót 346,18 mln z 394,06 mln akcji</td></tr>
+          <tr><td><strong>Krótka sprzedaż</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>93,61 mln — 23,76% akcji</strong></td><td style="color:var(--ocena-sprzedaz)">27,04% wolnego obrotu; miesiąc wcześniej 94,25 mln</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Prawie co czwarta akcja IREN jest sprzedana na krótko — to najwyższy odsetek w Twoim portfelu.</strong><br><br>Zestawienie: IREN <strong>23,76%</strong> akcji, MARA 28,50%, CoreWeave 10,08%, Marvell 4,35%, AMD 2,56%. Przy wolnym obrocie odsetek rośnie do <strong>27,04%</strong> — czyli ponad jedna czwarta dostępnych akcji jest pożyczona i sprzedana.<br><br>Działa to w obie strony. W dół pogłębia spadki, w górę może gwałtownie je odwrócić. <strong>W połączeniu z tak wysoką betą oznacza to, że ta pozycja porusza się skokami, nie po trendzie</strong> — co widać w tym, że przy wzroście kursu o niecałe dwadzieścia procent w rok Twój wynik na niej to ponad siedemset pięćdziesiąt procent.</div>
+
+      <p>Rozwodnienie o <strong>41,60% rocznie i 8,89% w samym kwartale</strong> jest ceną budowy. Dla porównania w portfelu: CoreWeave +75,59%, Intel +13,28%, Sibanye +6,77%, Marvell +2,56%. <strong>Element pozytywny: zarząd i założyciele trzymają 12,11% akcji</strong> i rozwadniają także siebie.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">BIZNES — I PUŁAPKA W PRZEPŁYWACH</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 miesięcy)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$707,01 mln</td></tr>
+          <tr><td><strong>Zysk brutto</strong></td><td style="color:var(--ocena-kupno)"><strong>$487,30 mln</strong></td></tr>
+          <tr><td><strong>EBITDA</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>tylko $38,35 mln</strong></td></tr>
+          <tr><td>Wynik operacyjny</td><td style="color:var(--ocena-sprzedaz)">-$378,75 mln</td></tr>
+          <tr><td>Wynik netto</td><td style="color:var(--ocena-sprzedaz)">-$702,62 mln · -$2,22 na akcję</td></tr>
+          <tr><td><strong>Przepływy operacyjne</strong></td><td style="color:var(--ocena-uwaga)"><strong>$2,10 mld — wymaga komentarza</strong></td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$4,33 mld</strong></td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-$2,23 mld · -$5,67 na akcję</strong></td></tr>
+          <tr><td>Zaciągnięty dług netto</td><td style="color:var(--ocena-sprzedaz)">$5,56 mld</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Gotówka operacyjna wynosi $2,10 mld przy przychodach $707 mln — czyli jest blisko trzykrotnie wyższa od całej sprzedaży. Tego nie da się wytłumaczyć rentownością i trzeba to nazwać wprost.</strong><br><br>
+      Żadna działalność nie generuje gotówki trzy razy przewyższającej przychód. Taka relacja powstaje wyłącznie ze <strong>zmian w kapitale obrotowym</strong> — a w tym przypadku najprawdopodobniej z <strong>przedpłat od klientów za moc obliczeniową, która jeszcze nie została dostarczona</strong>. Umowy wieloletnie na moc dla sztucznej inteligencji często zawierają płatności z góry.<br><br>
+      <strong>Praktyczna konsekwencja jest istotna: wskaźnik ceny do przepływów operacyjnych 8,16 jest mylący.</strong> Wygląda na bardzo niski, ale liczony jest od gotówki, która nie jest zarobkiem — jest zobowiązaniem do wykonania usługi. Przy tej spółce jedyną uczciwą miarą przepływów są <strong>wolne przepływy: minus $2,23 mld</strong>.<br><br>To ten sam mechanizm, który opisywałem przy Innodacie — z tą różnicą, że tam skala rozjazdu była mniejsza.</div>
+
+      <div class="alert alert-warning"><strong>Druga liczba, która porządkuje wycenę: nakłady inwestycyjne stanowią 612% przychodów.</strong><br><br>Spółka wydaje na rozbudowę ponad sześć razy więcej, niż w ogóle sprzedaje. Dla porównania w Twoim portfelu: CoreWeave <strong>271%</strong>, Oracle 105%, Intel 21,2%, Sibanye 11,6%, Amphenol 4,0%, SAP 1,9%.<br><br><strong>IREN jest pod tym względem najbardziej skrajnym przypadkiem, jaki masz</strong> — i to jest zarazem miara ambicji, i miara ryzyka. Lukę zamyka dług (zaciągnięty netto $5,56 mld) oraz emisja akcji.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$17,13 mld</td><td>Wartość przedsiębiorstwa $19,08 mld</td></tr>
+          <tr><td>Cena / sprzedaż</td><td style="color:var(--ocena-sprzedaz)">24,23</td><td style="color:var(--ocena-kupno)">Prognozowana <strong>6,10</strong> — rynek zakłada czterokrotny wzrost przychodów</td></tr>
+          <tr><td><strong>Wartość firmy / EBITDA</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>497,50</strong></td><td style="color:var(--ocena-sprzedaz)">Praktycznie bez znaczenia — mianownik jest znikomy</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td>3,95</td><td>Księga $11,01 na akcję; aktywa materialne 4,47</td></tr>
+          <tr><td>Cena / zysk i forward P/E</td><td>nie dotyczy</td><td style="color:var(--ocena-sprzedaz)">Strata $2,22 na akcję</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>nie dotyczy</td><td>Strata <strong>$2,22 na akcję</strong> przy przychodach $707,01 mln</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>nie dotyczy</strong></td><td style="color:var(--ocena-sprzedaz)">Konsensus nie zakłada dodatniego zysku w horyzoncie prognozy</td></tr>
+          <tr><td><strong>PEG</strong></td><td>nie dotyczy</td><td>Brak dodatniego zysku bazowego</td></tr>
+          <tr><td>Miara zastępcza</td><td style="color:var(--ocena-kupno)">cena do sprzedaży prognozowanej <strong>6,10</strong></td><td>Wobec 24,23 dzisiaj — prognoza wzrostu przychodów <strong>168,01% rocznie</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> Brak wskaźnika zysku prognozowanego jest informacją: analitycy nie oczekują dodatniego wyniku, bo amortyzacja i odsetki pochłaniają całą wypracowaną marżę. <strong>Jedyna miara, która ma tu sens, to wartość przedsiębiorstwa do prognozowanych przychodów</strong> — i dlatego na niej buduję scenariusze.</p>
+
+      <h3>Cztery scenariusze na koniec 2027 roku</h3>
+      <p>Ponieważ zysku nie ma, wyceniam od przychodów i odejmuję dług netto. Zakładam dalsze rozwodnienie do około 430 mln akcji i dług netto rzędu $2,5 mld.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Przychody</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rampa dowieziona, mnożnik utrzymany</strong></td><td>$2,8 mld</td><td>12×</td><td><strong>$72</strong></td><td style="color:var(--ocena-kupno)">+66%</td></tr>
+          <tr><td><strong>Rampa dowieziona, mnożnik spada do 9×</strong></td><td>$2,8 mld</td><td>9×</td><td><strong>$53</strong></td><td style="color:var(--ocena-kupno)">+21%</td></tr>
+          <tr><td>Rampa przesuwa się o rok</td><td>$1,8 mld</td><td>7×</td><td>$23</td><td style="color:var(--ocena-sprzedaz)">-46%</td></tr>
+          <tr><td><strong>Pauza w nakładach na AI</strong></td><td style="color:var(--ocena-sprzedaz)">$1,2 mld</td><td>5×</td><td><strong>$8</strong></td><td style="color:var(--ocena-sprzedaz)">-81%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne: przychody pomnożone przez mnożnik wartości przedsiębiorstwa do sprzedaży, pomniejszone o zakładany dług netto, podzielone przez zakładaną liczbę akcji. Dane wejściowe: StockAnalysis / S&amp;P Global Market Intelligence, stan 18.09.2026.</p>
+
+      <p><strong>Fair value: $20 – $78</strong>, środek <strong>$49,00 (+12,7%)</strong>. Konsensus 17 analityków to $79,03 (+81,76%) przy rekomendacji mocnego kupna — powyżej górnej granicy mojego przedziału.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Marża brutto</strong></td><td style="color:var(--ocena-kupno)"><strong>68,92%</strong></td><td style="color:var(--ocena-kupno)">Wyższa niż w CoreWeave i Oracle — efekt własnej energii</td></tr>
+          <tr><td><strong>Marża EBITDA</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>5,42%</strong></td><td style="color:var(--ocena-sprzedaz)">Koszty ogólne zjadają niemal całą marżę brutto</td></tr>
+          <tr><td>Marża operacyjna</td><td style="color:var(--ocena-sprzedaz)">-53,57%</td><td style="color:var(--ocena-sprzedaz)">Amortyzacja sprzętu przeważa nad przychodem</td></tr>
+          <tr><td>Marża netto</td><td style="color:var(--ocena-sprzedaz)">-99,38%</td><td style="color:var(--ocena-sprzedaz)">Strata mniej więcej równa przychodom</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-7,18% vs 19,26%</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Różnica -26,44 pp</strong></td></tr>
+          <tr><td>Rotacja aktywów</td><td style="color:var(--ocena-sprzedaz)">0,08</td><td style="color:var(--ocena-sprzedaz)">Najniższa w portfelu — ogromny majątek, mały przychód</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-danger"><strong>Rozjazd między marżą brutto a marżą EBITDA jest w tej spółce największy, jaki widziałem — i to on opisuje jej problem najprecyzyjniej.</strong><br><br>
+      Marża brutto <strong>68,92%</strong>, marża EBITDA <strong>5,42%</strong>. Różnica przekracza sześćdziesiąt trzy punkty procentowe. W CoreWeave, przy podobnym modelu, jest to 67,42% wobec 49,92% — czyli różnica siedemnastu punktów.<br><br>
+      Powód jest prosty i wynika ze skali: <strong>koszty ogólne i utrzymania nie zależą liniowo od przychodu</strong>, więc przy sprzedaży poniżej miliarda dolarów pochłaniają niemal całą marżę. IREN ma więc bardzo dobrą ekonomikę jednostkową i bardzo słabą ekonomikę całości — i różnica zniknie dopiero przy kilkukrotnie większych przychodach.<br><br>Różnica między zwrotem z kapitału a jego kosztem wynosi <strong>-26,44 pp</strong> — trzeci najgorszy wynik w portfelu po MARA i po samym koszcie kapitału tej spółki, który przy tej becie sięga dziewiętnastu procent.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS — MOCNIEJSZY, NIŻ SUGERUJE ALTMAN</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka / zadłużenie</td><td>$5,90 mld / $7,84 mld</td><td style="color:var(--ocena-uwaga)">Dług netto <strong>$1,94 mld</strong> ($4,93 na akcję)</td></tr>
+          <tr><td>Dług / kapitał własny</td><td style="color:var(--ocena-uwaga)">1,87</td><td style="color:var(--ocena-sprzedaz)">Dług do EBITDA 204,44 — miara bez sensu przy tak małej EBITDA</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-6,39</strong></td><td style="color:var(--ocena-sprzedaz)">Ujemne — wynik operacyjny nie pokrywa odsetek</td></tr>
+          <tr><td><strong>Wskaźnik bieżący / szybki</strong></td><td style="color:var(--ocena-kupno)"><strong>3,55 / 2,66</strong></td><td style="color:var(--ocena-kupno)">Kapitał obrotowy <strong>+$5,67 mld</strong></td></tr>
+          <tr><td>Kapitał własny</td><td>$4,19 mld</td><td>Księga $11,01 na akcję</td></tr>
+          <tr><td>Altman Z / Piotroski F</td><td style="color:var(--ocena-sprzedaz)">0,98 / 3</td><td style="color:var(--ocena-sprzedaz)">Formalnie strefa podwyższonego ryzyka</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Tu trzeba postawić rzecz, która odróżnia IREN od CoreWeave, mimo że oba wskaźniki Altmana są niskie: IREN ma pieniądze.</strong><br><br>
+      <strong>Gotówka $5,90 mld przy kapitale obrotowym plus $5,67 mld</strong> i wskaźniku bieżącym 3,55. CoreWeave, przy podobnie niskim Altmanie, ma wskaźnik bieżący <strong>0,46</strong> i kapitał obrotowy <strong>minus $11,40 mld</strong>.<br><br>To zupełnie inna sytuacja płynnościowa. IREN pozyskał kapitał z wyprzedzeniem — częściowo długiem, częściowo emisją akcji, częściowo przedpłatami klientów — i ma z czego finansować budowę przez najbliższe kwartały. <strong>Altman 0,98 odzwierciedla tu przede wszystkim ujemny wynik operacyjny, a nie brak środków.</strong><br><br>Zastrzeżenie: gotówka ta jest przeznaczona na nakłady, których roczne tempo wynosi $4,33 mld. <strong>Przy niezmienionym tempie zapas wystarcza na kilka kwartałów, nie na lata</strong> — i kolejna runda finansowania będzie potrzebna.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Własna energia jest dziś najtrudniejszym do skopiowania zasobem w tej branży.</strong> Podłączone przyłącza i grunty zdobyte w czasach wydobycia bitcoina skracają drogę do uruchomienia mocy o lata. Widać to w marży brutto wyższej niż u CoreWeave i Oracle.</div>
+
+      <div class="alert alert-success"><strong>2. Prognoza wzrostu przychodów to 168% rocznie.</strong> Cena do sprzedaży prognozowanej wynosi 6,10 wobec 24,23 dzisiaj — rynek zakłada, że mianownik wzrośnie czterokrotnie. Siedemnastu analityków utrzymuje rekomendację mocnego kupna z ceną docelową o ponad osiemdziesiąt procent wyżej.</div>
+
+      <div class="alert alert-success"><strong>3. Płynność jest zabezpieczona z wyprzedzeniem.</strong> Blisko sześć miliardów dolarów gotówki, kapitał obrotowy dodatni o ponad pięć i pół miliarda, wskaźnik bieżący 3,55. To zasadnicza różnica wobec CoreWeave, gdzie kapitał obrotowy jest ujemny o jedenaście miliardów.</div>
+
+      <div class="alert alert-info"><strong>4. Zarząd rozwadnia także siebie.</strong> Założyciele i kierownictwo trzymają 12,11% akcji — jeden z wyższych wskaźników w portfelu. Przy krótkiej sprzedaży obejmującej ponad ćwierć wolnego obrotu dobra wiadomość może wywołać gwałtowny ruch w górę.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Nakłady sięgają sześciokrotności przychodów.</strong> Najbardziej skrajna relacja w Twoim portfelu. Wolne przepływy są ujemne o ponad dwa miliardy dolarów rocznie, a przy obecnym tempie wydatków posiadana gotówka wystarcza na kwartały, nie na lata.</div>
+
+      <div class="alert alert-danger"><strong>2. Gotówka operacyjna zawiera przedpłaty i nie jest zarobkiem.</strong> Trzykrotność przychodów w gotówce operacyjnej to zobowiązanie do wykonania usługi, nie wynik. Każdy wskaźnik oparty na tej liczbie — w tym cena do przepływów operacyjnych 8,16 — wprowadza w błąd.</div>
+
+      <div class="alert alert-danger"><strong>3. Rozwodnienie o ponad czterdzieści procent w rok i bez hamowania.</strong> W samym ostatnim kwartale przybyło blisko dziewięć procent akcji. Nawet przy rosnącej wartości przedsiębiorstwa udział akcjonariusza w niej maleje.</div>
+
+      <div class="alert alert-warning"><strong>4. Beta powyżej czterech przy krótkiej sprzedaży obejmującej ćwierć akcji.</strong> Druga najwyższa zmienność w portfelu po MARA. Koszt kapitału wynikający z tej bety sięga 19,26%, co przy zwrocie minus siedem procent daje najgorszą różnicę po MARA.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Przewaga nad IREN</th><th>Słabość</th></tr></thead>
+        <tbody>
+          <tr><td><strong>CoreWeave</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 3,78%)</span></td><td style="color:var(--ocena-sprzedaz)">Dziesięciokrotnie większa skala przychodów</td><td style="color:var(--ocena-kupno)">Ujemny kapitał obrotowy, brak własnej energii</td></tr>
+          <tr><td><strong>Oracle</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 5,83%)</span></td><td style="color:var(--ocena-sprzedaz)">Duży zysk operacyjny finansujący budowę</td><td style="color:var(--ocena-uwaga)">Nakłady równe przychodom</td></tr>
+          <tr><td><strong>Amazon</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 3,91%)</span></td><td style="color:var(--ocena-sprzedaz)">Nieporównywalnie większa skala i dodatni wynik operacyjny</td><td>Mniej wyspecjalizowana infrastruktura</td></tr>
+          <tr><td><strong>MARA</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 4,33%)</span></td><td>Większy zasób mocy energetycznej w planie</td><td style="color:var(--ocena-kupno)">Brak podpisanego najemcy — IREN jest o rok dalej</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Warto zauważyć, że w tym zestawieniu wszystkie cztery pozycje masz w portfelu — i że IREN jest wśród nich najmniejszy przychodowo, a najwyżej wyceniany względem sprzedaży.</strong><br><br>Cena do sprzedaży IREN wynosi <strong>24,23</strong>, CoreWeave <strong>6,06</strong>. Rynek płaci więc za każdego dolara przychodu IREN cztery razy więcej — w zamian za szybszy zakładany wzrost i za własną energię.<br><br><strong>To jest realna premia za jakość aktywów energetycznych, ale trzeba wiedzieć, że się ją płaci.</strong> Jeśli tempo wzrostu przychodów okaże się niższe od zakładanych stu sześćdziesięciu ośmiu procent rocznie, ta premia zniknie pierwsza.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-kupno)">+19,29%</td><td>Twój wynik jest wielokrotnie wyższy — wejście było znacznie niżej</td></tr>
+          <tr><td>Średnie kroczące 50 i 200 sesji</td><td>$40,28 / $45,55</td><td style="color:var(--ocena-uwaga)">Kurs 7,9% powyżej krótszej, <strong>4,5% poniżej dłuższej</strong></td></tr>
+          <tr><td><strong>Układ średnich</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>50 poniżej 200</strong></td><td style="color:var(--ocena-sprzedaz)">Odbicie wewnątrz trendu spadkowego</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>53,28</td><td>Neutralnie; wolumen 41,13 mln akcji</td></tr>
+          <tr><td><strong>Beta (5 lat)</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>4,28</strong></td><td style="color:var(--ocena-sprzedaz)">Druga najwyższa w portfelu</td></tr>
+          <tr><td>Krótka sprzedaż</td><td style="color:var(--ocena-sprzedaz)">93,61 mln akcji</td><td>Praktycznie bez zmian wobec poprzedniego miesiąca</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Obraz techniczny jest niemal identyczny jak w Oracle i Sibanye: kurs wyszedł ponad krótszą średnią, ale dłuższa nadal jest wyżej.</strong><br><br>Technicznie to odbicie wewnątrz trendu spadkowego, nie jego odwrócenie. Do średniej dwustusesyjnej brakuje kursowi niecałych pięciu procent — <strong>jej odzyskanie byłoby pierwszym sygnałem zmiany obrazu</strong>.<br><br>Przy becie 4,28 znaczenie tych poziomów jest jednak ograniczone: <strong>ta akcja porusza się skokami wywołanymi informacjami o kontraktach, nie płynnym trendem.</strong> Wyniki 5 listopada są ważniejsze niż każdy poziom techniczny.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$45,55</strong></td><td>Średnia 200-sesyjna — najbliższy istotny opór</td></tr>
+          <tr><td><strong>$49,00</strong></td><td>Środek przedziału wartości godziwej</td></tr>
+          <tr><td><strong>$79,03</strong></td><td>Cena docelowa konsensusu</td></tr>
+          <tr><td><strong>$40,28</strong></td><td>Średnia 50-sesyjna — pierwsze wsparcie</td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$30</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Poziom rewizji tezy</strong> — poniżej niego scenariusz opóźnionej rampy staje się bazowym</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs poniżej dłuższej średniej, wskaźnik RSI neutralny, brak katalizatora przed wynikami 5 listopada. Przy tej becie ruchy będą gwałtowne w obie strony.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Środek wartości godziwej powyżej kursu, ale przedział rozciąga się od dwudziestu do siedemdziesięciu ośmiu dolarów. Rozstrzygnie się, czy rampa przychodowa dowiezie zakładane tempo.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO SPEKULACYJNE</strong></td><td>Jeśli przychody dogonią amortyzację i koszty ogólne, własna energia stanie się trwałą przewagą kosztową. To jest zakład na skalę, nie na dzisiejsze wyniki.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ocena łączna: NEUTRALNA — utrzymana z 16 sierpnia, z rozszerzonym przedziałem.</strong><br><br>Teza „zysk nie pochodzi z działalności, wycena skrajna" pozostaje trafna i po pięciu tygodniach nic się w niej nie zmieniło — kurs zmienił się o niecały procent w dół. <strong>Rozszerzam natomiast przedział z $38–56 do $20–78</strong>, bo poprzedni był zbyt wąski dla spółki o tej becie, przy której scenariusze rozjeżdżają się znacznie mocniej.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Udział w portfelu</td><td><strong>2,54%</strong></td><td>Czternasta pozycja z osiemnastu</td></tr>
+          <tr><td>Wynik pozycji</td><td style="color:var(--ocena-kupno)">+752,5%</td><td>Przy cenie wejścia $5,10 — najlepszy procentowo w portfelu</td></tr>
+          <tr><td><strong>Wynajem mocy obliczeniowej razem</strong></td><td style="color:var(--ocena-uwaga)"><strong>16,06%</strong></td><td style="color:var(--ocena-uwaga)">Z Oracle, Amazonem i CoreWeave</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Dwie obserwacje warte odnotowania przy tej pozycji.</strong><br><br>
+      <strong>Wynik +752,5% przy wadze 2,54% oznacza, że pozycja urosła sama.</strong> Cena wejścia $5,10 wobec dzisiejszych $43,48 — nie dokupywałeś, a udział w portfelu podniósł się wielokrotnie. Przy tak wysokiej becie taka pozycja wymaga świadomej decyzji o wielkości, bo inaczej rośnie do momentu, w którym zaczyna ważyć nieproporcjonalnie.<br><br>
+      <strong>Cztery pozycje w portfelu sprzedają godziny pracy akceleratorów</strong> — Oracle, Amazon, CoreWeave i IREN, razem 16,06%. Spadek cen wynajmu uderzyłby we wszystkie naraz, a najmocniej w tę o najwyższej becie i najmniejszej skali przychodowej. <strong>To jest IREN.</strong></div>
+
+      <div class="alert alert-info"><strong>Z drugiej strony IREN jest jedyną z tych czterech, która ma własne aktywa energetyczne.</strong> To realne zróżnicowanie wewnątrz tej samej ekspozycji: gdyby wąskim gardłem branży okazała się energia, a nie sprzęt, IREN wyszedłby z tego najlepiej. Przy MARA, którą też masz, to samo aktywo jest dopiero w budowie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>IREN ma najlepszą ekonomikę jednostkową i jedną z najsłabszych ekonomik całości w Twoim portfelu — a różnicę robi skala.</strong> Marża brutto <strong>68,92%</strong> jest wyższa niż w CoreWeave i Oracle, bo spółka ma własne, podłączone źródła energii zdobyte w czasach wydobycia bitcoina. Ale marża EBITDA to zaledwie <strong>5,42%</strong>: przy przychodach poniżej miliarda dolarów koszty ogólne i utrzymania pochłaniają niemal całą marżę brutto, a amortyzacja sprzętu sprowadza wynik operacyjny do minus pięćdziesięciu trzech procent.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Dwie liczby wymagają szczególnej ostrożności. <strong>Nakłady inwestycyjne sięgają 612% przychodów</strong> — najwięcej w całym portfelu, przed CoreWeave z 271%. I <strong>gotówka operacyjna jest blisko trzykrotnie wyższa od sprzedaży</strong>, co nie jest wynikiem rentowności, a najpewniej przedpłatami klientów za moc jeszcze niedostarczoną; każdy wskaźnik oparty na tej liczbie wprowadza w błąd. Po stronie plus stoi płynność: blisko sześć miliardów dolarów gotówki i kapitał obrotowy dodatni o ponad pięć i pół miliarda — sytuacja zupełnie inna niż w CoreWeave.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Ekonomika jednostkowa musi być dobra.</strong> Marża brutto najwyższa wśród wynajmujących moc — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Płynność musi być zabezpieczona.</strong> Wskaźnik bieżący 3,55, kapitał obrotowy dodatni — spełnione na najbliższe kwartały.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Nakłady powinny mieścić się w możliwościach.</strong> Sześciokrotność przychodów — niespełnione w stopniu skrajnym.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Akcjonariusz nie powinien być rozwadniany.</strong> Ponad czterdzieści procent w rok, bez hamowania — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Przychody muszą dogonić koszty stałe.</strong> Prognoza mówi o wzroście stukrotnie szybszym od dzisiejszego; rozstrzygnie się w 2027 roku.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>5 listopada 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki kwartalne</strong></td><td style="color:var(--ocena-uwaga)">Tempo uruchamiania mocy, relacja gotówki operacyjnej do przychodów, ewentualna nowa emisja</td></tr>
+            <tr><td>Na bieżąco</td><td>Nowe umowy na moc obliczeniową</td><td>Jedyne zdarzenia, które realnie ruszają tą wyceną</td></tr>
+            <tr><td>2027</td><td>Moment zrównania przychodów z kosztami stałymi</td><td>Punkt, od którego marża EBITDA zacznie zbliżać się do marży brutto</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">W dowolnej chwili</td><td style="color:var(--ocena-sprzedaz)">Kolejna runda finansowania</td><td style="color:var(--ocena-sprzedaz)">Przy tempie nakładów $4,33 mld rocznie jest nieunikniona</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Marża EBITDA</td><td>5,42%</td><td>brak poprawy w kolejnych kwartałach</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Nakłady do przychodów</td><td>612%</td><td>brak spadku relacji</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Liczba akcji</td><td>+8,89% kwartalnie</td><td>utrzymanie tego tempa</td><td><span class="mon-dot r"></span>Słabo</td></tr>
+            <tr><td>Kapitał obrotowy</td><td>+$5,67 mld</td><td>zejście poniżej zera</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Charakter pozycji</strong></td><td>Zakład na skalę przy becie powyżej czterech — wielkość powinna to odzwierciedlać</td></tr>
+            <tr><td><strong>Dokupowanie</strong></td><td>Nie przed wynikami 5 listopada; przy tej becie każdy kwartał zmienia obraz</td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$70</strong></td></tr>
+            <tr><td><strong>Poziom rewizji tezy</strong></td><td><strong>$30</strong></td></tr>
+            <tr><td><strong>Warunek zmiany na sprzedaż</strong></td><td>Brak poprawy marży EBITDA przy kolejnej dużej emisji akcji</td></tr>
+            <tr><td><strong>Czego nie robić</strong></td><td>Nie używać wskaźnika ceny do przepływów operacyjnych — liczony jest od przedpłat, nie od zarobku</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p><strong>Utrzymuję ocenę, ale poprawiam sposób, w jaki opisywałem tę spółkę w innych raportach.</strong> Przedstawiając IREN jako „wzorzec udanej transformacji" w analizach MARA i CoreWeave, zatarłem istotną różnicę: <strong>IREN wygrał etap zdobywania kontraktów, ale nie etap uzyskiwania zwrotu z kapitału</strong>. Zwrot z zainwestowanego kapitału wynosi minus siedem procent przy koszcie kapitału dziewiętnastu, marża EBITDA to pięć procent, a liczba akcji rośnie o ponad czterdzieści procent rocznie.</p>
+        <p>Teza z sierpnia pozostaje jednak trafna, a przewaga energetyczna jest realna i najtrudniejsza do skopiowania w całej branży. <strong>Pytanie brzmi nie „czy IREN ma dobre aktywa", tylko „czy przychody zdążą dogonić koszty stałe, zanim skończy się cierpliwość rynku do finansowania tej budowy".</strong> Przy gotówce blisko sześciu miliardów dolarów odpowiedź na kilka kwartałów jest twierdząca; dalej trzeba będzie zapytać ponownie.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$20 – $78</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$8 (-81%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$72 (+66%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Wielkość jak przy zakładzie</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 5 listopada</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA — DWA RAPORTY, NIE JEDEN</div></div><div class="section-toggle" id="s16-toggle">▾</div></div>
+    <div class="section-body" id="s16-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co było</th><th>Co jest poprawnie</th><th>Waga</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>W raportach MARA i CoreWeave</strong> (17.09) opisałem IREN jako „wzorzec udanej transformacji"</td>
+            <td>IREN ma podpisane kontrakty, których MARA nie ma — to prawda. Ale jego <strong>zwrot z kapitału wynosi -7,18% przy koszcie 19,26%</strong>, wskaźnik Altmana 0,98, a rozwodnienie 41,60% rocznie. <strong>Sukces dotyczy kontraktów, nie zwrotu z kapitału</strong></td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — skrót zniekształcający porównanie w dwóch raportach</td>
+          </tr>
+          <tr>
+            <td><strong>Wartość godziwa $38–56</strong> przy kursie $44,06 (16.08)</td>
+            <td>Kurs pozostał wewnątrz przedziału i wynosi $43,48 — <strong>teza się obroniła</strong>. Ale przedział był zbyt wąski dla spółki o becie 4,28; nowy zakres <strong>$20–78</strong></td>
+            <td style="color:var(--ocena-uwaga)">Trafna, przedział rozszerzony</td>
+          </tr>
+          <tr>
+            <td>Brak ostrzeżenia o <strong>gotówce operacyjnej</strong></td>
+            <td>Wynosi <strong>2,97-krotność przychodów</strong> i zawiera przedpłaty klientów. Wskaźnik ceny do przepływów operacyjnych 8,16 jest przez to bezużyteczny — a wyglądał na bardzo korzystny</td>
+            <td style="color:var(--ocena-sprzedaz)"><strong>Poważna</strong> — pominięte zniekształcenie kluczowej miary</td>
+          </tr>
+          <tr>
+            <td>Brak policzenia <strong>nakładów do przychodów</strong></td>
+            <td>Wynoszą <strong>612%</strong> — najwięcej w portfelu. Ta liczba powinna otwierać każdą analizę spółki budującej moc obliczeniową</td>
+            <td style="color:var(--ocena-uwaga)">Umiarkowana</td>
+          </tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Wniosek metodologiczny, który dopisuję do zasad redakcyjnych.</strong><br><br>Porównując spółki między raportami, łatwo zbudować skrót, który upraszcza jedną stronę porównania. Pisząc o MARA potrzebowałem punktu odniesienia dla udanej transformacji i użyłem IREN — nie sprawdzając przy tym jego własnych wskaźników zwrotu z kapitału. <strong>Punkt odniesienia w porównaniu wymaga takiej samej weryfikacji jak spółka analizowana</strong>, bo inaczej pochlebne zdanie o jednej spółce staje się nieuprawnionym zarzutem wobec drugiej.</div>
+
+      <div class="alert alert-success"><strong>Co się obroniło.</strong> Sformułowanie „zysk nie pochodzi z działalności, wycena skrajna" pozostaje precyzyjnym opisem tej spółki, a ocena neutralna okazała się trafna — kurs zmienił się o niecały procent w pięć tygodni przy becie przekraczającej cztery.</div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 18 września 2026 | Cena: <strong>$43,48</strong> (zamknięcie 17.09.2026) | <strong>Aktualizacja analizy z 16 sierpnia 2026 — ocena neutralna utrzymana, przedział rozszerzony</strong> | <strong>Dziennik korekt (pełny wykaz w sekcji 16):</strong> skorygowano opis IREN jako „wzorca udanej transformacji" użyty w raportach MARA i CoreWeave z 17.09 — sukces dotyczy zdobytych kontraktów, nie zwrotu z kapitału, który wynosi -7,18% przy koszcie 19,26%; dodano ostrzeżenie, że gotówka operacyjna stanowi 2,97-krotność przychodów i zawiera przedpłaty, co czyni wskaźnik ceny do przepływów operacyjnych bezużytecznym; dodano relację nakładów do przychodów (612%); wartość godziwa $38–56 → $20–78 | Dane: StockAnalysis / S&amp;P Global Market Intelligence — <strong>stan danych na 18.09.2026</strong>; scenariusze oparte na mnożniku przychodowym i wszystkie wyliczenia pochodne to obliczenia własne | <strong>KOREKTA 20.09.2026:</strong> zawarte w tym raporcie twierdzenie, że Amazon finansuje rozbudowę centrów danych z gotówki, a nie z długu, było nieprawdziwe — wolne przepływy Amazona są ujemne (-$11,63 mld), a zaciągnięcie długu netto w ostatnich dwunastu miesiącach wyniosło $75,16 mld. Poprawione w treści; pełne omówienie w raporcie AMZN z 20.09.2026 | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

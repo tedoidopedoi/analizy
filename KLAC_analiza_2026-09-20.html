@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLAC — KLA Corporation | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:13px; color:var(--text-muted); font-style:italic; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: KLAC</div>
+    <div class="company-name">KLA Corporation</div>
+    <div class="company-sub">Kontrola procesu w produkcji półprzewodników — wykrywanie defektów i pomiar struktur na wafflach · Milpitas · 17 200 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">Spoza portfela — pierwsza analiza</span>
+      <span class="meta-tag">Najwyższy zwrot z kapitału, jaki policzyłem</span>
+      <span class="meta-tag">Split 10:1 z 12.06.2026</span>
+      <div class="price-display">
+        <div class="price-main">$176,99</div>
+        <div class="price-sub">zamknięcie 18.09.2026 (+4,74%), po sesji $177,15</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Półprzewodniki</span><span class="temat">Moc obliczeniowa dla AI</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — biznes najlepszy jakościowo w całym przeglądzie, ale jakość jest już w cenie, a ryzykiem jest cykl">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">wyjątkowa spółka, wycena bez zapasu — poziom wejścia decyduje o wyniku</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$130 – $234</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-27% do +32%</b></div>
+    <div class="rb-sep"></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>28 października</b><em>Q1 roku obrotowego 2027</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$176,99</div><div class="metric-detail">+78,80% w 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot z kapitału vs koszt</div><div class="metric-value green">+54,77 pp</div><div class="metric-detail"><strong>Najwyżej ze wszystkich policzonych</strong> — sekcja 7</div></div>
+    <div class="metric-card"><div class="metric-label">Nakłady do przychodów</div><div class="metric-value green">2,77%</div><div class="metric-detail">Sprzedaje maszyny, a nie buduje fabryk</div></div>
+    <div class="metric-card"><div class="metric-label">Liczba akcji</div><div class="metric-value green">-1,34%</div><div class="metric-detail">Spada, a nie rośnie — rzadkość w tym przeglądzie</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / zysk</div><div class="metric-value red">48,36</div><div class="metric-detail">Prognozowana <strong>32,45</strong> · PEG 1,61</div></div>
+    <div class="metric-card"><div class="metric-label">Marża brutto</div><div class="metric-value">61,30%</div><div class="metric-detail"><strong>Spadła o 200 pb r/r</strong> — jedyny realny problem</div></div>
+    <div class="metric-card"><div class="metric-label">Kurs vs średnia 50-sesyjna</div><div class="metric-value red">-8,2%</div><div class="metric-detail">Cofnięcie sektorowe, nie spółkowe — sekcja 12</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (29 analityków)</div><div class="metric-value green">$233,77</div><div class="metric-detail">+32,08% · kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL — SPRZEDAWCA PEWNOŚCI</div></div><div class="section-toggle open" id="s1-toggle">▾</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>KLA nie produkuje układów — produkuje maszyny, które <strong>sprawdzają, czy układy wychodzą poprawnie</strong>: wykrywają defekty na waflu i mierzą wymiary struktur. Kapitalizacja <strong>$231,25 mld</strong>, przychody roczne <strong>$13,58 mld</strong>.</p>
+
+      <div class="alert alert-info"><strong>Tej spółki nie masz w portfelu</strong> — to pierwsza analiza KLA, trafia do obserwowanych.<br><br><strong>Podana przez Ciebie cena 176 USD jest prawidłowa.</strong> Nisko wygląda tylko dlatego, że <strong>12 czerwca 2026 spółka przeprowadziła split dziesięć do jednego</strong> — wykresy sprzed czerwca pokazują kursy dziesięciokrotnie wyższe.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>28.07.2026</strong></td><td><strong>Wyniki Q4 roku obrotowego 2026:</strong> przychody <strong>$3 658 mln</strong> (+7,1% kwartalnie, +15,2% rocznie), zysk na akcję <strong>$1,04</strong> wobec $0,91 kwartał wcześniej</td><td style="color:var(--ocena-kupno)">Rekord przychodów, wynik w górnej części prognozy</td></tr>
+          <tr><td>tego samego dnia</td><td style="color:var(--ocena-sprzedaz)"><strong>Marża brutto 60,6% wobec 62,6% rok wcześniej</strong></td><td style="color:var(--ocena-sprzedaz)">Powód spadku kursu po wynikach — szczegóły w sekcji 7</td></tr>
+          <tr><td><strong>tego samego dnia</strong></td><td><strong>Prognoza na kwartał wrześniowy:</strong> przychody <strong>$4,0 mld ±$200 mln</strong>, zysk na akcję <strong>$1,14 ±$0,10</strong>, marża brutto 61,6% ±1,0 pp</td><td style="color:var(--ocena-kupno)">Przyspieszenie: +9,3% przychodów i +9,6% zysku kwartał do kwartału</td></tr>
+          <tr><td><strong>tego samego dnia</strong></td><td><strong>Podniesiona prognoza rynku maszyn do produkcji wafli:</strong> 2026 z „ponad $140 mld" do <strong>dolnych $150 mld</strong>, a 2027 do <strong>około $190 mld</strong></td><td style="color:var(--ocena-kupno)">Wzrost rynku o blisko 27% w 2027 — to jest sedno tezy wzrostowej</td></tr>
+                    <tr><td>Rok obrotowy 2026</td><td>Zwroty do akcjonariuszy <strong>$3,35 mld</strong> przy wolnych przepływach $3,77 mld</td><td style="color:var(--ocena-kupno)">Blisko dziewięćdziesiąt procent gotówki oddane właścicielom</td></tr>
+        </tbody>
+      </table></div>
+
+      <p>Rok obrotowy KLA kończy się <strong>30 czerwca</strong>, więc dane roczne obejmują okres od lipca 2025 do czerwca 2026.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT — DLACZEGO TEGO NIE DA SIĘ PODMIENIĆ</div></div><div class="section-toggle" id="s2-toggle">▾</div></div>
+    <div class="section-body" id="s2-body">
+      <p>Nowoczesny układ powstaje w kilkuset następujących po sobie operacjach na tej samej płytce. Bez kontroli błąd w operacji pięćdziesiątej ujawniłby się dopiero na testach końcowych — po tygodniach pracy na materiale już zepsutym.</p>
+
+      <div class="alert alert-success"><strong>Przewaga KLA nie polega na tym, że maszyna jest lepsza, ale na tym, że fabryka nie może jej wymienić bez zatrzymania produkcji.</strong><br><br>Urządzenie kontrolne nie daje odpowiedzi „dobre albo złe" — daje <strong>strumień danych, do którego fabryka dopasowała progi decyzyjne przez lata produkcji</strong>. Podmiana dostawcy to więc <strong>utrata historii pomiarowej i przekalibrowanie linii, która w tym czasie produkuje z nieznaną jakością</strong> — czego przy fabryce wartej dziesiątki miliardów dolarów nikt nie robi dla oszczędności na urządzeniu.<br><br>Skutek widać w liczbach: <strong>zwrot z zainwestowanego kapitału 66,75%</strong> przy koszcie 11,98%. Żadna z osiemnastu pozycji Twojego rachunku nie ma takiej relacji.</div>
+
+      <p>Drugi filar to <strong>serwis i części</strong>. Maszyna pracuje w fabryce ponad dziesięć lat, więc zainstalowana baza daje przychód niezależny od tego, czy klienci właśnie kupują nowe urządzenia — i to ona łagodzi cykliczność.</p>
+
+      <div class="alert alert-info"><strong>Nowy obszar wskazywany przez zarząd: zaawansowane pakowanie.</strong> Akceleratory dla sztucznej inteligencji to kilka układów i pamięć w jednej obudowie — każde połączenie jest nowym miejscem powstawania defektów, <strong>a więc rynkiem, którego dekadę temu w tej skali nie było.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK — I JEDYNE PYTANIE, KTÓRE MA ZNACZENIE</div></div><div class="section-toggle" id="s3-toggle">▾</div></div>
+    <div class="section-body" id="s3-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Czynnik</th><th>Stan</th><th>Wpływ na KLA</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rynek maszyn do produkcji wafli</strong></td><td style="color:var(--ocena-kupno)">Prognoza podniesiona dwukrotnie w tym roku</td><td style="color:var(--ocena-kupno)">To budżet, z którego KLA jest opłacana</td></tr>
+          <tr><td><strong>Liczba warstw i złożoność układów</strong></td><td style="color:var(--ocena-kupno)">Rośnie z każdą generacją</td><td style="color:var(--ocena-kupno)"><strong>Więcej operacji = więcej punktów kontroli na tym samym waflu</strong></td></tr>
+          <tr><td>Zaawansowane pakowanie</td><td style="color:var(--ocena-kupno)">Rynek dopiero powstaje</td><td style="color:var(--ocena-kupno)">Portfolio już gotowe</td></tr>
+          <tr><td>Inwestycje w pamięci</td><td style="color:var(--ocena-uwaga)">Wracają, ale z niższą marżą dla dostawcy</td><td style="color:var(--ocena-sprzedaz)">Główna przyczyna spadku marży brutto</td></tr>
+          <tr><td><strong>Cykliczność</strong></td><td style="color:var(--ocena-sprzedaz)">Nieusuwalna cecha branży</td><td style="color:var(--ocena-sprzedaz)">Przychody zależą od decyzji kilku firm</td></tr>
+                  </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Cała teza KLA sprowadza się do jednego pytania: czy fabryki będą nadal wydawać coraz więcej.</strong><br><br>KLA sprzedaje nie właścicielom układów, lecz właścicielom fabryk — jej przychód to <strong>pozycja w budżecie inwestycyjnym pięciu-sześciu firm na świecie</strong>. Kiedy budżet rośnie, KLA rośnie szybciej od rynku, bo punktów kontroli przybywa szybciej niż wafli; kiedy się kurczy, żadna przewaga technologiczna tego nie łagodzi.<br><br><strong>Dziś dane mówią „rośnie"</strong> — prognoza na 2027 to <strong>około $190 mld</strong> wobec dolnych $150 mld w 2026. <strong>Trzeba jednak wiedzieć, w co się wtedy wierzy:</strong> nie w to, że KLA jest dobrą firmą, bo to jest mierzalne i ustalone, lecz w <strong>trafność prognozy wydatków na rok, który się jeszcze nie zaczął.</strong> Każdy poprzedni szczyt w tej branży wyglądał z bliska jak trwałe przyspieszenie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI I AKCJONARIAT</div></div><div class="section-toggle" id="s4-toggle">▾</div></div>
+    <div class="section-body" id="s4-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+                    <tr><td>Przychód na pracownika</td><td style="color:var(--ocena-kupno)">$789 504</td><td style="color:var(--ocena-kupno)">Zysk na pracownika $280 859</td></tr>
+          <tr><td>Instytucje</td><td>92,72%</td><td>Wolny obrót równy niemal całej liczbie akcji</td></tr>
+          <tr><td><strong>Zarząd i osoby powiązane</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>0,10%</strong></td><td style="color:var(--ocena-sprzedaz)">Kierownictwo nie ma istotnego udziału majątkowego</td></tr>
+                  </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Koncentracja odbiorców jest strukturalna i nie da się jej zdywersyfikować.</strong> Fabryk zdolnych produkować najbardziej zaawansowane układy jest na świecie garść, a ich właściciele to najwięksi klienci KLA — <strong>dwóch z nich masz w portfelu jako akcje: Intela i Samsunga</strong> (sekcja 14).<br><br>Ryzyko nie polega na tym, że klient odejdzie do konkurenta — w kontroli procesu praktycznie nie odchodzi — lecz na tym, że <strong>odłoży inwestycję</strong>, a wtedy odkładają wszyscy naraz.<br><br>Warto odnotować <strong>udział zarządu na poziomie jednej dziesiątej procenta</strong> — przy spółce o tej historii nie jest to sygnał alarmowy, ale różni KLA od IREN, gdzie założyciele odpowiadają majątkowo.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">MODEL — GOTÓWKA I CO SIĘ Z NIĄ DZIEJE</div></div><div class="section-toggle" id="s5-toggle">▾</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (rok obrotowy 2026)</th><th>Wartość</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td>$13,58 mld</td></tr>
+          <tr><td>Zysk brutto</td><td>$8,32 mld</td></tr>
+          <tr><td>Wynik operacyjny</td><td style="color:var(--ocena-kupno)">$5,66 mld</td></tr>
+          <tr><td>Wynik przed opodatkowaniem</td><td>$5,61 mld — <strong>niższy od operacyjnego, tak jak być powinno</strong></td></tr>
+          <tr><td>Wynik netto</td><td>$4,83 mld · zysk na akcję <strong>$3,66</strong></td></tr>
+          <tr><td>Przepływy operacyjne</td><td>$4,14 mld</td></tr>
+          <tr><td><strong>Nakłady inwestycyjne</strong></td><td style="color:var(--ocena-kupno)"><strong>tylko $375,95 mln</strong></td></tr>
+          <tr><td><strong>Wolne przepływy</strong></td><td style="color:var(--ocena-kupno)"><strong>$3,77 mld · $2,88 na akcję</strong></td></tr>
+          <tr><td><strong>Zwrócone akcjonariuszom</strong></td><td style="color:var(--ocena-kupno)"><strong>$3,35 mld</strong> — dywidenda $0,92 na akcję plus skup</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Rzecz, która odróżnia KLA od wszystkiego, co analizowałem w tym tygodniu: nakłady inwestycyjne stanowią 2,77% przychodów.</strong> Zestawienie tej relacji dla kolejno przeliczanych spółek tłumaczy więcej niż tabela mnożników: IREN <strong>612%</strong> · CoreWeave 271% · Oracle 105% · Intel 21,2% · Novo Nordisk 17,1% · Sibanye 11,6% · Amphenol 4,0% · <strong>KLA 2,77%</strong> · SAP 1,9%.<br><br><strong>KLA to producent sprzętu, który mieści się przy spółce oprogramowania.</strong> Sprzedaje maszyny warte miliony dolarów za sztukę, ale sam fabryk nie buduje, więc kapitał w majątku trwałym jest znikomy — i to jest arytmetyczne źródło zwrotu z kapitału z sekcji 7.<br><br><strong>Skutek dla akcjonariusza:</strong> gotówka niepotrzebna na rozbudowę wraca do właścicieli — <strong>$3,35 mld z $3,77 mld wolnych przepływów</strong>.</div>
+
+      <div class="alert alert-info"><strong>Druga rzecz, w tym portfelu rzadka: liczba akcji spada</strong> — o <strong>1,34% w rok i 0,19% w kwartale</strong>. U pozycji przeliczonych w ostatnich dniach <em>rosła</em>: CoreWeave +75,59%, IREN +41,60%, Intel +13,28%, Sibanye +6,77%, Marvell +2,56%. Dochodzi dywidenda podnoszona <strong>szesnasty rok z rzędu</strong>, ostatnio o 16,67%, przy wypłacie poniżej jednej czwartej zysku — sama stopa (0,52%) jest symboliczna, istotna jest konsekwencja.<br><br><strong>Zastrzeżenie:</strong> tak agresywny skup zniekształca jeden z popularnych wskaźników rentowności — wyjaśniam to w sekcji 7.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">▾</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Jak to czytać</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja / wartość firmy</td><td>$231,25 mld / $232,50 mld</td><td>Różnica minimalna — długu netto praktycznie nie ma</td></tr>
+          <tr><td>Cena / sprzedaż</td><td style="color:var(--ocena-sprzedaz)">17,03</td><td>Prognozowana <strong>12,76</strong></td></tr>
+          <tr><td>Cena / wolne przepływy</td><td style="color:var(--ocena-uwaga)">61,39</td><td>Poniżej progu stu — wycena opiera się na realnych przepływach</td></tr>
+          <tr><td>Wartość firmy / EBITDA</td><td style="color:var(--ocena-sprzedaz)">38,40</td><td>Wartość firmy do wolnych przepływów 61,72</td></tr>
+          <tr><td><strong>Cena / wartość księgowa</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>36,43</strong></td><td style="color:var(--ocena-sprzedaz)">Aktywa materialne 53,71 — <strong>efekt skupu akcji, nie wyceny</strong></td></tr>
+                  </tbody>
+      </table></div>
+
+      <h3>Forward P/E — wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td style="color:var(--ocena-sprzedaz)">48,36</td><td>Liczony od zysku niezaburzonego zdarzeniami jednorazowymi</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>32,45</strong></td><td style="color:var(--ocena-kupno)"><strong>Niższy od bieżącego</strong> — rynek oczekuje wzrostu zysku o blisko połowę</td></tr>
+          <tr><td><strong>PEG</strong></td><td style="color:var(--ocena-uwaga)"><strong>1,61</strong></td><td>Powyżej 1,0 — wzrost <em>nie</em> jest tańszy, niż sugeruje mnożnik</td></tr>
+          <tr><td>Prognozy na trzy lata</td><td>przychody 22,05% rocznie</td><td>Zysk na akcję 29,19% — różnica to dźwignia i skup akcji</td></tr>
+          <tr><td>Mediana sektora półprzewodników</td><td>okolice 30×</td><td style="color:var(--ocena-uwaga)">Premia utrzymuje się też na wskaźniku prognozowanym</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać.</strong> Wskaźnik prognozowany poniżej bieżącego oznacza, że rynek spodziewa się wzrostu zysku, nie spadku — odwrotnie niż w Novo Nordisku. Przy dzisiejszym kursie odpowiada zyskowi około <strong>$5,45 na akcję</strong> rocznie, czyli <strong>kwartalny zysk musi dojść z prognozowanych $1,14 do okolic $1,50</strong>. Wykonalne, ale nieostrożne. <strong>PEG powyżej jedności mówi to samo krócej: za ten wzrost płaci się pełną cenę.</strong></p>
+      <p style="color:var(--text-muted);font-size:13px">Dane: StockAnalysis / S&amp;P Global Market Intelligence. Przeliczenie wskaźnika prognozowanego na zysk na akcję i wymagane tempo kwartalne — obliczenie własne.</p>
+
+      <h3>Cztery scenariusze na rok obrotowy 2028</h3>
+      <p>Buduję je od rynku maszyn, bo to on decyduje o przychodzie. Zakładam skup zmniejszający liczbę akcji do około 1,25 mld i dźwignię operacyjną: koszty rosną według zarządu o $15–20 mln kwartalnie, wolniej niż przychody.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Zysk na akcję</th><th>Mnożnik</th><th>Kurs</th><th>Od dziś</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rynek $190 mld dowieziony, premia za jakość utrzymana</strong></td><td>$5,85</td><td>40×</td><td><strong>$234</strong></td><td style="color:var(--ocena-kupno)">+32%</td></tr>
+          <tr><td><strong>Rynek dowieziony, mnożnik normalizuje</strong></td><td>$5,85</td><td>33×</td><td><strong>$193</strong></td><td style="color:var(--ocena-kupno)">+9%</td></tr>
+          <tr><td>Cykl przesuwa się o rok</td><td>$4,90</td><td>27×</td><td>$132</td><td style="color:var(--ocena-sprzedaz)">-25%</td></tr>
+          <tr><td><strong>Szczyt cyklu okazuje się za nami</strong></td><td style="color:var(--ocena-sprzedaz)">$3,60</td><td>21×</td><td><strong>$76</strong></td><td style="color:var(--ocena-sprzedaz)">-57%</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--text-muted);font-size:13px">Obliczenia własne. Ścieżka scenariusza podstawowego: przychody $19 mld × marża brutto 62% = $11,8 mld zysku brutto, minus koszty operacyjne $3,2 mld = $8,6 mld wyniku operacyjnego; po podatku 14% i podziale przez 1,25 mld akcji daje $5,85. Mnożniki odzwierciedlają rozpiętość historycznych wycen dostawców sprzętu: 20–25× przy szczycie cyklu, 28–33× w środku, powyżej 35× przy silnym przekonaniu rynku.</p>
+
+      <div class="alert alert-warning"><strong>Ostrzeżenie o cykliczności — przy tej branży obowiązkowe.</strong> Wskaźnik prognozowany wygląda umiarkowanie, ale <strong>u dostawców sprzętu najniższe wskaźniki prognozowane pojawiają się dokładnie na szczycie cyklu</strong>: prognoza zysku jest wtedy najwyższa i spada szybciej, niż analitycy zdążą ją obniżyć. Jest to miara optymizmu, nie zabezpieczenie — dlatego dolny scenariusz jest tak niski. Nie jest prognozą, lecz odpowiedzią na pytanie, ile taka spółka kosztuje, gdy rynek uzna, że budżety przestały rosnąć.</div>
+
+      <p><strong>Fair value: $130 – $234</strong>, środek <strong>$182,00 (+2,8%)</strong>. Przy wagach prawdopodobieństwa 30/35/25/10 wynik wypada niemal identycznie, w okolicach $178 — czyli <strong>na dzisiejszym kursie</strong>. Konsensus 29 analityków to $233,77 (+32,08%), równo z moim scenariuszem najlepszym.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">▾</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Marża brutto</strong></td><td style="color:var(--ocena-uwaga)"><strong>61,30%</strong></td><td style="color:var(--ocena-sprzedaz)">W ostatnim kwartale 60,6% wobec 62,6% rok wcześniej</td></tr>
+          <tr><td><strong>Marża operacyjna</strong></td><td style="color:var(--ocena-kupno)"><strong>41,69%</strong></td><td style="color:var(--ocena-kupno)">EBITDA 44,59%, netto 35,57% — kolejność prawidłowa</td></tr>
+          <tr><td>Marża wolnych przepływów</td><td style="color:var(--ocena-kupno)">27,74%</td><td>Ponad ćwierć każdego dolara sprzedaży zostaje jako wolna gotówka</td></tr>
+          <tr><td><strong>Zwrot z kapitału (ROIC) vs koszt (WACC)</strong></td><td style="color:var(--ocena-kupno)"><strong>66,75% vs 11,98%</strong></td><td style="color:var(--ocena-kupno)"><strong>Różnica +54,77 pp</strong></td></tr>
+          <tr><td>Zwrot z kapitału własnego (ROE)</td><td style="color:var(--ocena-uwaga)">87,50%</td><td style="color:var(--ocena-uwaga)"><strong>Liczba zniekształcona — patrz niżej</strong></td></tr>
+          <tr><td>Efektywna stawka podatku</td><td>13,83%</td><td>Niska — przy zmianie przepisów realna pozycja ryzyka</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-success"><strong>Nadwyżka zwrotu z zainwestowanego kapitału nad kosztem przekracza pięćdziesiąt cztery punkty procentowe — po przeliczeniu dwunastu spółek KLA jest pierwsza, z dużym odstępem.</strong> Kolejność: <strong>KLA +54,77</strong> · Novo Nordisk +33,71 · Sibanye +23,15 · SAP +9,92 · Amphenol +9,89 · ServiceNow +1,18 · Oracle +0,70 · AMD −8,02 · Marvell −9,38 · Intel −11,92 · IREN −26,44 · MARA −84,58.<br><br>Miara ta mówi, czy spółka tworzy wartość, wydając pieniądze. Przy KLA nadwyżka jest pięciokrotnie większa od kosztu kapitału — zbieg wysokiej marży ze znikomym kapitałem potrzebnym do jej uzyskania (sekcja 5).</div>
+
+      <div class="alert alert-warning"><strong>Rzecz, o którą łatwo się potknąć, i którą wskazuję, bo dwa dni temu popełniłem błąd tej samej kategorii przy Marvellu: zwrot z kapitału własnego 87,50% jest w znacznej części artefaktem księgowym.</strong><br><br>Kapitał własny to zaledwie <strong>$6,35 mld, czyli $4,86 na akcję</strong> — nie dlatego, że spółka jest wydrążona, lecz dlatego, że <strong>przez lata skupowała własne akcje po cenach wielokrotnie wyższych od wartości księgowej, a każdy taki skup kapitał własny zmniejsza.</strong> Mianownik został więc sztucznie zmniejszony i iloraz musi być wysoki: <strong>ten wskaźnik mierzy tu historię skupu, nie rentowność</strong> — podobnie jak cena do wartości księgowej z sekcji 6.<br><br><strong>Miarą uczciwą jest zwrot z zainwestowanego kapitału</strong>, bo obejmuje cały kapitał pracujący w firmie. Przy Marvellu zniekształcony był licznik, tutaj mianownik — wniosek ten sam: <strong>przed użyciem wskaźnika trzeba sprawdzić, co dzieli się przez co.</strong></div>
+
+      <div class="alert alert-danger"><strong>Jedyny realny problem operacyjny: marża brutto spada.</strong> W kwartale zakończonym w czerwcu wyniosła <strong>60,6% wobec 62,6% rok wcześniej</strong> — dwa punkty mniej przy przychodach wyższych o piętnaście procent, i to na tym rynek się potknął mimo rekordowej sprzedaży.<br><br><strong>Przyczyną jest struktura zamówień, nie utrata konkurencyjności:</strong> wracają inwestycje w pamięci, a kontrola procesu dla pamięci daje niższą marżę niż dla najbardziej zaawansowanej logiki. Prognoza zakłada powrót w górę, ale nadal poniżej poziomu z poprzedniego roku. <strong>Próg zmiany zdania: zejście poniżej 60% przy rosnących przychodach</strong> — oznaczałoby, że przesunięcie sprzedaży jest trwałe, a wtedy premia w wycenie traci uzasadnienie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS</div></div><div class="section-toggle" id="s8-toggle">▾</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Ocena</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka / zadłużenie</td><td>$4,90 mld / $6,15 mld</td><td style="color:var(--ocena-kupno)">Dług netto <strong>$1,25 mld</strong> — poniżej procenta kapitalizacji</td></tr>
+          <tr><td>Dług / EBITDA</td><td style="color:var(--ocena-kupno)">1,01</td><td style="color:var(--ocena-kupno)">Spłacalny z niespełna dwóch lat wolnych przepływów</td></tr>
+          <tr><td><strong>Pokrycie odsetek</strong></td><td style="color:var(--ocena-kupno)"><strong>19,90</strong></td><td style="color:var(--ocena-kupno)">Wskaźnik <strong>aktualny</strong> — nie zaciągnięto nowego długu</td></tr>
+          <tr><td>Wskaźnik bieżący / szybki</td><td style="color:var(--ocena-kupno)">2,88 / 1,84</td><td>Kapitał obrotowy $8,08 mld</td></tr>
+          <tr><td>Altman Z / Piotroski F</td><td style="color:var(--ocena-kupno)">12,01 / 6</td><td style="color:var(--ocena-kupno)">Wysoko w bezpiecznej strefie</td></tr>
+          <tr><td><strong>Rotacja zapasów</strong></td><td style="color:var(--ocena-uwaga)"><strong>1,53</strong></td><td style="color:var(--ocena-uwaga)">Zapas leży około ośmiu miesięcy — patrz niżej</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Sprawdzenie, które od tego tygodnia robię obowiązkowo: czy pokrycie odsetek nie jest wskaźnikiem martwym.</strong> Przy ServiceNow użyłem takiej liczby, nie zauważając, że obligacje weszły do ksiąg w połowie okresu. Tutaj <strong>zaciągnięcie długu netto wyniosło minus $1,60 mln</strong> — spółka nic nowego nie pożyczyła, więc wskaźnik jest aktualny.</div>
+
+      <div class="alert alert-warning"><strong>Jedna rzecz psuje obraz spółki lekkiej kapitałowo: kapitał nie jest zamrożony w fabrykach, ale w zapasach.</strong> Rotacja <strong>1,53</strong> oznacza, że materiał i gotowe urządzenia leżą w magazynie średnio <strong>osiem miesięcy</strong>, a kapitał obrotowy sięga blisko sześćdziesięciu procent rocznych przychodów. Nie jest to zaniedbanie — takie maszyny buduje się miesiącami z komponentów o długich terminach dostaw. Ale <strong>przy nagłym spadku zamówień zapas staje się problemem szybciej niż koszty stałe</strong>, bo jest już kupiony i opłacony.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE (BULL CASE)</div></div><div class="section-toggle" id="s9-toggle">▾</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Kontrola procesu jest najtrudniejszym do podmiany elementem fabryki</strong> — nie z powodu technologii, lecz dlatego że wymiana dostawcy oznacza utratę historii pomiarowej i produkcję o nieznanej jakości w trakcie przekalibrowania.</div>
+
+      <div class="alert alert-success"><strong>2. KLA rośnie szybciej niż rynek, na którym działa</strong> — każda generacja układów ma więcej warstw i ciaśniejsze tolerancje, czyli więcej punktów kontroli na tym samym waflu.</div>
+
+      <div class="alert alert-success"><strong>3. Zaawansowane pakowanie to nowy rynek, na którym portfolio jest już gotowe</strong> — a zarząd wskazuje ten obszar jako źródło wzrostu wykraczające poza zwykły cykl.</div>
+
+      <div class="alert alert-info"><strong>4. Gotówka wraca do właścicieli, a nie do maszyn</strong> — blisko dziewięćdziesiąt procent wolnych przepływów, rosnąca dywidenda, malejąca liczba akcji.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA (BEAR CASE)</div></div><div class="section-toggle" id="s10-toggle">▾</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Przychód KLA to pozycja w budżecie inwestycyjnym kilku firm,</strong> a teza wzrostowa opiera się na prognozie tego budżetu na rok, który się jeszcze nie zaczął. Gdy budżety przestają rosnąć, klient nie zmienia dostawcy — po prostu nie kupuje.</div>
+
+      <div class="alert alert-danger"><strong>2. Marża brutto spadła o dwa punkty procentowe rok do roku.</strong> Zejście poniżej sześćdziesięciu procent przy rosnących przychodach oznaczałoby, że przesunięcie sprzedaży jest trwałe.</div>
+
+      <div class="alert alert-warning"><strong>3. Za wzrost płaci się pełną cenę.</strong> Wskaźnik prognozowany wymaga, by kwartalny zysk wzrósł w ciągu roku o około trzydzieści procent względem prognozy zarządu.</div>
+
+      <div class="alert alert-warning"><strong>4. Zapasy są kanałem, przez który cykl uderza najpierw.</strong> Koszty stałe da się ciąć, zapasu już kupionego i opłaconego — nie.</div>
+
+      <div class="alert alert-warning"><strong>5. Niska stawka podatkowa jest realną pozycją ryzyka.</strong> Opodatkowanie poniżej czternastu procent podnosi zysk netto w stopniu, który zmiana przepisów mogłaby odwrócić bez związku z jakością działalności.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">▾</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Podmiot</th><th>Relacja z KLA</th><th>Kto ma przewagę</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ASML</strong> <span style="color:var(--text-muted);font-size:12px">(masz — 2,54%)</span></td><td><strong>Uzupełnienie, nie konkurent</strong> — sprzedaje maszyny, które <em>nanoszą</em> wzór, KLA te, które <em>sprawdzają</em> wynik</td><td style="color:var(--ocena-uwaga)">Obie czerpią z tego samego budżetu inwestycyjnego fabryk</td></tr>
+          <tr><td><strong>Applied Materials</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz)</span></td><td>Konkurent częściowy — szeroki katalog urządzeń, w tym kontrola procesu</td><td style="color:var(--ocena-kupno)"><strong>KLA</strong> w samej kontroli; Applied ma szerszy zakres i mniejszą specjalizację</td></tr>
+          <tr><td><strong>Onto Innovation, Camtek, Nova</strong> <span style="color:var(--text-muted);font-size:12px">(nie masz)</span></td><td>Konkurenci w wybranych niszach pomiarowych i w pakowaniu</td><td style="color:var(--ocena-kupno)"><strong>KLA</strong> skalą i zainstalowaną bazą; oni bywają tańsi w pojedynczym zastosowaniu</td></tr>
+          <tr><td><strong>Zespoły pomiarowe u klientów</strong></td><td>Fabryki mają własne laboratoria metrologiczne</td><td style="color:var(--ocena-kupno)"><strong>KLA</strong> — kontrola musi pracować w linii i w tempie produkcji, nie w laboratorium</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Najważniejsze w tym zestawieniu nie jest to, kto z kim konkuruje, ale to, że ASML — którą masz — i KLA nie są dla siebie alternatywą.</strong><br><br>ASML sprzedaje maszyny nanoszące wzór na wafel, KLA te, które sprawdzają, czy wzór jest poprawny — fabryka kupuje jedno i drugie z tego samego budżetu. <strong>Konsekwencja dla portfela: trzymanie obu nie jest dywersyfikacją</strong>, a podwojeniem zakładu na wielkość wydatków na budowę fabryk.<br><br>Różnica jest w charakterze: ASML sprzedaje pojedyncze maszyny o ekstremalnej cenie jednostkowej, KLA więcej tańszych urządzeń przy szerszym serwisie. <strong>Ekspozycja mniej skokowa, ale z tego samego źródła.</strong></div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">▾</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Parametr</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Zmiana za 52 tygodnie</td><td style="color:var(--ocena-kupno)">+78,80%</td><td>Sesja 18.09 zamknęła się wzrostem o 4,74%</td></tr>
+          <tr><td><strong>Średnia 50-sesyjna</strong></td><td style="color:var(--ocena-sprzedaz)">$192,75</td><td style="color:var(--ocena-sprzedaz)">Kurs <strong>8,2% poniżej</strong> — cofnięcie z ostatnich tygodni</td></tr>
+          <tr><td><strong>Średnia 200-sesyjna</strong></td><td style="color:var(--ocena-uwaga)">$174,29</td><td style="color:var(--ocena-uwaga)">Kurs <strong>1,5% powyżej</strong> — praktycznie na niej</td></tr>
+          <tr><td>Wskaźnik RSI (14)</td><td>45,95</td><td>Neutralnie, bez wyprzedania; wolumen 9,50 mln</td></tr>
+          <tr><td>Beta (5 lat)</td><td style="color:var(--ocena-uwaga)">1,44</td><td>Umiarkowana — dla porównania Marvell 2,25, IREN 4,28</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>29,40 mln akcji — 2,25%</td><td style="color:var(--ocena-uwaga)">Wzrost z 25,34 mln miesiąc wcześniej, czyli o 16,0%</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-info"><strong>Układ jest czytelny: kurs siedzi na średniej długoterminowej po mocnym roku i po cofnięciu od szczytu.</strong> Kluczowe jest, co to cofnięcie spowodowało — i <strong>nie stoi za nim nic spółkowego</strong>: wyniki z końca lipca były rekordowe, a prognozy idą w górę.<br><br><strong>Spadek jest sektorowy.</strong> W połowie września cała branża cofnęła się po wypowiedziach o tempie rozwoju modeli sztucznej inteligencji; tego samego dnia Marvell stracił blisko osiem procent bez żadnej informacji o sobie. Ruch wywołany nastrojem wobec tematu odwraca się <strong>szybciej i bez potrzeby naprawiania czegokolwiek w spółce</strong>, a ostatnia sesja ze wzrostem o blisko pięć procent jest pierwszym śladem odwrócenia. Utrata średniej długoterminowej otwierałaby natomiast drogę do dolnej części przedziału wyceny.</div>
+
+      <div class="table-wrap"><table>
+        <thead><tr><th>Poziom</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>$233,77</strong></td><td>Cena docelowa konsensusu, zbieżna ze scenariuszem najbardziej korzystnym</td></tr>
+          <tr><td><strong>$192,75</strong></td><td>Średnia 50-sesyjna — pierwszy istotny opór</td></tr>
+          <tr><td><strong>$182,00</strong></td><td>Środek przedziału wartości godziwej</td></tr>
+          <tr><td><strong>$174,29</strong></td><td><strong>Średnia 200-sesyjna — kluczowe wsparcie, kurs jest na niej</strong></td></tr>
+          <tr><td style="color:var(--ocena-kupno)"><strong>$150</strong></td><td style="color:var(--ocena-kupno)"><strong>Poziom, przy którym rozkład scenariuszy wyraźnie się przechyla</strong></td></tr>
+          <tr><td style="color:var(--ocena-sprzedaz)"><strong>$130</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>Dolna granica wyceny</strong></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">▾</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1–3 miesiące</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Kurs cofnął się z przyczyn sektorowych, nie spółkowych, i siedzi na średniej długoterminowej, podczas gdy prognoza zarządu przewiduje wzrost przychodów i zysku. Rozbieżność między ceną a bieżącymi danymi jest teraz najwyraźniejsza.</td></tr>
+          <tr><td><strong>6–18 miesięcy</strong></td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Środek wyceny leży niespełna trzy procent powyżej kursu, a wynik po uwzględnieniu prawdopodobieństw wypada na dzisiejszej cenie. Dwa z czterech scenariuszy są korzystne, ale dolny sięga minus pięćdziesięciu siedmiu procent — asymetrii nie ma.</td></tr>
+          <tr><td><strong>3–5 lat</strong></td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Pozycja w kontroli procesu jest trwała, punktów kontroli przybywa z każdą generacją układów, a nadwyżka zwrotu nad kosztem kapitału daje czas na przetrwanie pełnego cyklu bez uszczerbku dla akcjonariusza.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Ocena łączna: NEUTRALNA — i chcę być precyzyjny co do tego, czego nie znaczy.</strong><br><br><strong>Nie jest to krytyka spółki.</strong> Po przeliczeniu dwunastu firm KLA ma najwyższą nadwyżkę zwrotu nad kosztem kapitału, drugie najniższe nakłady w relacji do przychodów i jako jedna z niewielu zmniejsza liczbę akcji. Jakościowo jest to najlepsza spółka w całym przeglądzie.<br><br><strong>Ocena dotyczy ceny.</strong> Środek wyceny wypada na dzisiejszym kursie, PEG przekracza jedność — jakość jest już opłacona. <strong>Dlatego poziom wejścia decyduje tu o wyniku bardziej niż zwykle: przy $150 byłoby to kupno bez zastrzeżeń.</strong></div>
+
+      
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA</div></div><div class="section-toggle" id="s14-toggle">▾</div></div>
+    <div class="section-body" id="s14-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Stan</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>KLA w portfelu</strong></td><td style="color:var(--ocena-uwaga)"><strong>Nie masz</strong></td><td>Pierwsza analiza</td></tr>
+          <tr><td><strong>Półprzewodniki razem</strong></td><td style="color:var(--ocena-uwaga)"><strong>36,45%</strong></td><td style="color:var(--ocena-uwaga)">AMD 20,92% · Intel 6,67% · Marvell 3,84% · Samsung 3,73% · ASML 2,54% — to suma pięciu pozycji</td></tr>
+          <tr><td>Najbliższa istniejąca pozycja</td><td>ASML 2,54%</td><td style="color:var(--ocena-sprzedaz)">Ta sama zmienna wejściowa — nie dywersyfikacja</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="alert alert-warning"><strong>Półprzewodniki to już ponad trzydzieści sześć procent Twojego rachunku w pięciu pozycjach, a KLA byłaby szóstą — ale nie wszystkie są tym samym rodzajem zakładu.</strong><br><br><strong>AMD, Intel, Marvell i Samsung wygrywają lub przegrywają w rywalizacji o to, czyj układ zostanie wybrany.</strong> KLA i ASML są wobec tego obojętne: sprzedają do fabryki i dostają zapłatę niezależnie od tego, czyj projekt w niej powstaje. <strong>To realny argument za dywersyfikacją wewnątrz tematu</strong> — zakład, że ktoś zbuduje moc obliczeniową, jest bezpieczniejszy niż zakład na konkretną firmę. <strong>Wobec ASML jednak nie działa</strong>, bo obie czerpią z tego samego budżetu.</div>
+
+      <div class="alert alert-info"><strong>Druga rzecz, ciekawsza: kupując KLA, trzymałbyś obie strony tej samej faktury.</strong><br><br><strong>Intel, którego masz, jest klientem KLA.</strong> Jego wydatki inwestycyjne — ponad jedna piąta przychodów — są po drugiej stronie przychodem dostawców sprzętu; to samo dotyczy Samsunga. Nie jest to sprzeczność, lecz rodzaj równowagi: <strong>kiedy Intel wydaje dużo i cierpi na tym jego przepływ gotówki, dostawca sprzętu zarabia.</strong><br><br>Gdyby KLA weszła do portfela, byłaby też pierwszą pozycją z nadwyżką zwrotu nad kosztem kapitału przekraczającą pięćdziesiąt punktów — przed Novo Nordiskiem, dotąd pierwszym.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">▾</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead"><strong>KLA jest najlepszą jakościowo spółką, jaką przeliczyłem w tym przeglądzie — i nie jest to ocena impresyjna, lecz wynik arytmetyki.</strong> Nadwyżka zwrotu z zainwestowanego kapitału nad jego kosztem przekracza <strong>pięćdziesiąt cztery punkty procentowe</strong>, pierwsze miejsce z dużym odstępem wśród dwunastu policzonych firm. Źródłem jest zbieg wysokiej marży operacyjnej z nakładami na poziomie <strong>2,77% przychodów</strong>: producent maszyn wartych miliony dolarów za sztukę jest kapitałowo lżejszy niż większość spółek przemysłowych, bo sam fabryk nie buduje. Gotówka wraca więc do właścicieli — blisko dziewięćdziesiąt procent wolnych przepływów, dywidenda rosnąca szesnasty rok z rzędu i <strong>malejąca liczba akcji</strong>.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Cena tę jakość już odzwierciedla. Środek mojej wyceny wypada <strong>niespełna trzy procent powyżej kursu</strong>, a wskaźnik PEG przekracza jedność. Dochodzą dwie rzeczy do trzymania na widoku: <strong>marża brutto spadła o dwa punkty procentowe rok do roku</strong> wskutek przesunięcia sprzedaży w stronę segmentów mniej dochodowych, a <strong>cała teza wzrostowa opiera się na prognozie wydatków inwestycyjnych na rok, który się jeszcze nie zaczął.</strong> U dostawców sprzętu dla półprzewodników każdy poprzedni szczyt wyglądał z bliska jak trwałe przyspieszenie.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">✓</span><span><strong>Pozycja konkurencyjna musi być nie do podmiany.</strong> Spełnione i widoczne w zwrocie z kapitału.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Bilans nie może ograniczać.</strong> Dług netto poniżej procenta kapitalizacji, Altman wysoko w bezpiecznej strefie — spełnione.</span></li>
+          <li><span class="ck yes">✓</span><span><strong>Bieżące dane muszą potwierdzać kierunek.</strong> Prognoza przewiduje wzrost przychodów i zysku oraz odbicie marży — spełnione.</span></li>
+          <li><span class="ck no">✗</span><span><strong>Wycena powinna dawać asymetrię.</strong> Środek przedziału na dzisiejszym kursie, PEG powyżej jedności — niespełnione.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Marża brutto musi wrócić powyżej poziomu z poprzedniego roku.</strong> Rozstrzygnie się w kolejnych dwóch kwartałach.</span></li>
+          <li><span class="ck wait">?</span><span><strong>Rynek maszyn musi dojść do prognozowanego poziomu w 2027.</strong> Jedyna zmienna, która naprawdę decyduje — i dziś nie sposób jej sprawdzić.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--ocena-uwaga)"><strong>28 października 2026</strong></td><td style="color:var(--ocena-uwaga)"><strong>Wyniki pierwszego kwartału roku obrotowego 2027</strong></td><td style="color:var(--ocena-uwaga)">Czy marża brutto rzeczywiście odbiła i czy kolejna prognoza utrzymuje tempo</td></tr>
+            <tr><td>Styczeń 2027</td><td>Potwierdzenie lub korekta prognozy rynku maszyn na 2027</td><td>Jedyna zmienna decydująca o wartości tej spółki</td></tr>
+            <tr><td>2027</td><td>Skala przychodów z zaawansowanego pakowania</td><td>Pokaże, czy nowy rynek jest realny, czy tylko narracyjny</td></tr>
+            <tr><td style="color:var(--ocena-sprzedaz)">Na bieżąco</td><td style="color:var(--ocena-sprzedaz)">Zapowiedzi cięć nakładów przez właścicieli fabryk</td><td style="color:var(--ocena-sprzedaz)">Wyprzedzają spadek przychodów KLA o kilka kwartałów</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Marża brutto</strong></td><td>61,30%</td><td>zejście poniżej 60% przy rosnących przychodach</td><td><span class="mon-dot y"></span>Wymaga uwagi</td></tr>
+                        <tr><td>Liczba akcji</td><td>-1,34% rocznie</td><td>zatrzymanie skupu</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+            <tr><td>Nadwyżka zwrotu nad kosztem kapitału</td><td>+54,77 pp</td><td>zejście poniżej 30 pp</td><td><span class="mon-dot g"></span>Dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><td><strong>Charakter pozycji</strong></td><td>Jakość w cenie — zakład na wielkość wydatków inwestycyjnych fabryk, nie na rywalizację projektantów układów</td></tr>
+            <tr><td><strong>Pierwsza transza</strong></td><td>Dopiero <strong>po publikacji wyników</strong> — wcześniej byłby to zakład na komunikat</td></tr>
+            <tr><td><strong>Kolejne transze</strong></td><td><strong>$155–160</strong> oraz <strong>$135–140</strong></td></tr>
+            <tr><td><strong>Realizacja zysku</strong></td><td>Częściowa powyżej <strong>$230</strong></td></tr>
+            <tr><td><strong>Wielkość docelowa</strong></td><td>Mniejsza, niż sugeruje jakość firmy — ASML reaguje na tę samą zmienną</td></tr>
+            <tr><td><strong>Warunek porzucenia tezy</strong></td><td>Marża brutto poniżej sześćdziesięciu procent przy rosnących przychodach <strong>albo</strong> obniżenie prognozy rynku maszyn</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p><strong>To jest spółka, którą chciałbym mieć, po cenie, która nie daje przewagi.</strong> KLA sprzedaje fabrykom rzecz, której nie da się podmienić bez zatrzymania produkcji, i robi to bez zamrażania kapitału w majątku trwałym — stąd nadwyżka zwrotu nad kosztem kapitału wyższa niż w którejkolwiek z Twoich pozycji i gotówka wracająca do właścicieli zamiast do maszyn.</p>
+        <p><strong>Rynek to wszystko widzi i wycenił.</strong> Rozkład scenariuszy jest symetryczny, a najgorszy sięga bardzo daleko, bo tak zachowują się dostawcy sprzętu, kiedy cykl się odwraca. <strong>Krótkoterminowo widzę tu okazję:</strong> kurs cofnął się z powodu nastroju wobec całego sektora, nie tej firmy, a jej własne dane idą w górę. <strong>Średnioterminowo to cena uczciwa, nie dobra.</strong> Obserwować, wejść po publikacji wyników, a $150 traktować jako poziom, przy którym analiza zmienia się w kupno bez zastrzeżeń.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">Neutralna</b></div>
+          <div><span>Fair value 12–18 mies.</span><b>$130 – $234</b></div>
+          <div><span>Scenariusz negatywny</span><b style="color:var(--ocena-sprzedaz)">$76 (-57%)</b></div>
+          <div><span>Scenariusz pozytywny</span><b style="color:var(--ocena-kupno)">$234 (+32%)</b></div>
+          <div><span>Sugerowana pozycja</span><b>Obserwować, transze po wynikach</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki 28 października</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+<div class="footer">
+<div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+Analiza: 20 września 2026 | Cena: <strong>$176,99</strong> (zamknięcie 18.09.2026; cena podana przez użytkownika — 176 USD — jest zgodna ze źródłem) | <strong>Pierwsza analiza tej spółki</strong> — brak poprzedniej tezy do skorygowania | <strong>Wszystkie dane na akcję po splicie 10:1 z 12.06.2026</strong> | Spółka <strong>nie znajduje się w portfelu TP Corp</strong> | Dane: StockAnalysis / S&amp;P Global Market Intelligence, komunikat wyników z 28.07.2026 (PR Newswire / ir.kla.com) — <strong>stan danych na 20.09.2026</strong>; scenariusze, ścieżka zysku na akcję, przeliczenie wskaźnika prognozowanego oraz relacja nakładów do przychodów to obliczenia własne | Nie stanowi porady inwestycyjnej
+</div>
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
