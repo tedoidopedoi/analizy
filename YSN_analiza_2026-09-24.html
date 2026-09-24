@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YSN — secunet Security Networks AG | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:12.5px; color:var(--text-muted); font-style:italic; margin-top:-4px; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">XETRA: YSN</div>
+    <div class="company-name">secunet Security Networks AG</div>
+    <div class="company-sub">Cyberbezpieczeństwo dla niemieckiego państwa · Essen, Niemcy · 1 226 pracowników · notowana od 1999 · waluta EUR</div>
+    <div class="header-meta">
+      <span class="meta-tag">Spoza portfela — obserwowana</span>
+      <span class="meta-tag">Pierwsza analiza tej spółki</span>
+      <span class="meta-tag">Ograniczona jakość danych — sekcja 1</span>
+      <div class="price-display">
+        <div class="price-main">€203,50</div>
+        <div class="price-sub">notowanie 18.09.2026, 17:35 CET (+0,25%)</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Kwanty i cyberbezpieczeństwo</span><span class="temat">Kosmos i obronność</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — realny wiatr w plecy z niemieckich budżetów obronnych, ale kurs stoi na scenariuszu bazowym, a płynność i 79-procentowy właściciel to ograniczenia strukturalne">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">dobra spółka, pełna cena, trudny dostęp</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>&euro;130 &ndash; &euro;300</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-uwaga)">-36% do +47%</b></div>
+    <div class="rb-kal"><span>Najbliższe wyniki</span><b>12 listopada 2026</b><em>Q3 2026</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klient</a><a class="nav-link" onclick="goSec('s5')">Segmenty</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Kurs (18.09)</div><div class="metric-value">&euro;203,50</div><div class="metric-detail">Zakres 52 tyg. &euro;152,80&ndash;&euro;246,50</div></div>
+    <div class="metric-card"><div class="metric-label">Wpływy z zamówień H1</div><div class="metric-value green">+80%</div><div class="metric-detail"><strong>Rekordowy portfel zleceń</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Sektor publiczny w H1</div><div class="metric-value red">94,1%</div><div class="metric-detail">przychodów &mdash; <strong>jeden typ odbiorcy</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Sektor komercyjny H1</div><div class="metric-value red">-47,4%</div><div class="metric-detail">Obliczenie własne &mdash; sekcja 5</div></div>
+    <div class="metric-card"><div class="metric-label">Marża brutto</div><div class="metric-value red">21,99%</div><div class="metric-detail"><strong>To nie jest marża oprogramowania</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot vs koszt kapitału</div><div class="metric-value green">+18,60 pp</div><div class="metric-detail">Przy nakładach 1,80% przychodów</div></div>
+    <div class="metric-card"><div class="metric-label">Giesecke+Devrient</div><div class="metric-value red">79%</div><div class="metric-detail">Mniejszość nie ma kontroli &mdash; sekcja 8</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / zysk</div><div class="metric-value">38,48</div><div class="metric-detail">Prognozowana 29,80 &middot; 3 analitycy</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL &mdash; I OSTRZEŻENIE O JAKOŚCI DANYCH</div></div><div class="section-toggle open" id="s1-toggle">&#9660;</div></div>
+    <div class="section-body open" id="s1-body">
+      <div class="alert alert-danger"><strong>Zanim cokolwiek policzę &mdash; czego nie mam.</strong> Dostawca danych obsługuje ten ticker nierówno: trzy strony tego samego serwisu podały trzy kursy z trzech dni (&euro;168,20 z 26 czerwca, &euro;177,80 z 30 lipca, &euro;203,50 z 18 września). Przyjmuję najświeższy, ale <strong>nie jest to notowanie z dnia analizy</strong>. Wskaźniki bilansowe, zwrot z kapitału i średnie kroczące są ze stanu na <strong>26 czerwca</strong>, przepływy tylko roczne do 2025. Ocena Altmana niedostępna, ocena Piotroskiego 1 &mdash; przy gotówce netto i rosnącym zysku operacyjnym niewiarygodna, więc <strong>odrzucam ją jako artefakt</strong>. Liczby półroczne biorę z komunikatu spółki z 13 sierpnia.</div>
+      <p>secunet to niemiecka spółka cyberbezpieczeństwa z Essen, notowana w Prime Standard od 1999. Dwa segmenty: <strong>Public Sector</strong> i <strong>Business Sector</strong>. Produkt flagowy to <strong>stacje SINA</strong> do przetwarzania danych niejawnych, obok tego automatyczna kontrola granic, infrastruktura klucza publicznego dla dokumentów elektronicznych, biometria i audyty.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>27.03.2026</td><td>Nowa, elastyczna polityka dywidendowa</td><td>Wypłata uznaniowa zamiast mechanicznej &mdash; swoboda w latach inwestycyjnych</td></tr>
+          <tr><td>30.03.2026</td><td>Wyniki 2025: przychody <strong>&euro;458,83 mln</strong> (+12,91%), EBIT <strong>&euro;51,7 mln</strong> (+22%)</td><td>Rekordowy rok</td></tr>
+          <tr><td>13.04.2026</td><td>Zakupy akcji przez osoby zarządzające</td><td>Sygnał, nie dowód &mdash; kierunek właściwy</td></tr>
+          <tr><td>05.05.2026</td><td>Q1 2026: przychody +4,4%, <strong>EBIT chwilowo ujemny</strong> przez zdarzenie jednorazowe. Wpływy z zamówień prawie podwojone</td><td>Kwartał, który sam wygląda źle, a w rocznym ujęciu nic nie znaczy &mdash; sezonowość w sekcji 7</td></tr>
+          <tr><td><strong>13.08.2026</strong></td><td><strong>H1 2026: przychody +19,2% do &euro;204,7 mln, EBIT +20,4% do &euro;8,7 mln.</strong> Sam Q2: przychody +31,6% do &euro;122,9 mln, EBITDA <strong>+77,6%</strong> do &euro;17,9 mln. Wpływy z zamówień <strong>+80%</strong>, rekordowy portfel. <strong>Prognoza podniesiona do górnej granicy &euro;460&ndash;500 mln</strong></td><td>Najważniejsze zdarzenie roku &mdash; popyt publiczny i obronny gwałtownie przyspieszył</td></tr>
+        </tbody>
+      </table></div>
+      <p>Etap: <strong>dojrzały dostawca państwowy w fazie przyspieszenia popytu</strong> &mdash; przychód rośnie tam, gdzie rośnie budżet klienta, a nie tam, gdzie spółka wygrywa konkurencją.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT &mdash; CERTYFIKAT JAKO FOSA</div></div><div class="section-toggle" id="s2-toggle">&#9660;</div></div>
+    <div class="section-body" id="s2-body">
+      <p>Fosa secunetu nie jest technologiczna, a <strong>administracyjna</strong> &mdash; i to czyni ją mocniejszą, niż wygląda. Urządzenie przetwarzające dane niejawne w niemieckiej administracji musi mieć dopuszczenie krajowego urzędu bezpieczeństwa informacji: lata audytów, inspekcji kodu i weryfikacji łańcucha dostaw, a przy najwyższych klauzulach także niemiecka kontrola nad producentem.</p>
+      <p>Konsekwencja: <strong>lista dopuszczonych dostawców jest krótka i nie rozszerza się szybko</strong>. Konkurent nie wchodzi lepszym produktem ani niższą ceną, tylko cierpliwością mierzoną w latach &mdash; odwrotnie niż w oprogramowaniu konsumenckim, gdzie koszt zbudowania rywala spadł do ułamka dawnego.</p>
+      <p><strong>Skalowalność jest jednak ograniczona.</strong> Stacja SINA to fizyczne urządzenie, kontrola granic to bramki i kioski, wdrożenie wymaga integracji u klienta &mdash; kolejny użytkownik nie kosztuje zera, co widać w marży brutto z sekcji 7. Koszt zmiany dostawcy jest za to bardzo wysoki: wymiana urządzeń wpisanych w procedury bezpieczeństwa oznacza przeprojektowanie procesu, nie podmianę aplikacji.</p>
+      <div class="alert alert-info"><strong>Kierunek rozwoju:</strong> spółka mówi o transformacji chmurowej i wzroście udziału przychodów powracających. Właściwy kierunek, bo dziś model opiera się na dostawach sprzętu i projektach. Na ocenę postępu za wcześnie &mdash; udział przychodu abonamentowego nie jest ujawniany.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK &mdash; BUDŻET, NIE POPYT</div></div><div class="section-toggle" id="s3-toggle">&#9660;</div></div>
+    <div class="section-body" id="s3-body">
+      <p>Najważniejsza rzecz do zrozumienia: <strong>rynkiem secunetu nie jest gospodarka, a niemiecka ustawa budżetowa.</strong> Popyt nie zależy od cyklu, stóp ani nastroju wobec technologii &mdash; zależy od tego, ile państwo przeznaczy na obronność, cyfryzację administracji i ochronę infrastruktury krytycznej.</p>
+      <p>Ten strumień rośnie szybko i to wyjaśnia wynik półroczny: <strong>wpływy z zamówień wyższe o około 80%</strong> i rekordowy portfel to nie efekt lepszej sprzedaży, a przyspieszenia wydatków publicznych na bezpieczeństwo.</p>
+      <p><strong>Cykliczność ma inny charakter niż w przemyśle:</strong> nie ma cyklu zapasów ani nakładów przedsiębiorstw, jest cykl polityczny i sezonowość roku budżetowego. Zamówienia publiczne domykają się pod koniec roku, dlatego druga połowa zawsze niesie nieproporcjonalną część wyniku. To struktura, nie anomalia.</p>
+      <div class="alert alert-warning"><strong>Ryzyko lustrzane do tezy:</strong> skoro popyt tworzy budżet, ten sam mechanizm może go zabrać. Zmiana koalicji, konsolidacja finansów publicznych albo przesunięcie priorytetu na sprzęt wojskowy uderzyłyby w przychód bez winy spółki. Portfel zleceń osłania kwartały, nie lata.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENT &mdash; JEDEN, I TO ROŚNIE</div></div><div class="section-toggle" id="s4-toggle">&#9660;</div></div>
+    <div class="section-body" id="s4-body">
+      <p>Koncentracja odbiorcy jest skrajna i &mdash; co ważniejsze &mdash; <strong>pogłębia się</strong>.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Segment, H1</th><th>2026</th><th>2025</th><th>Zmiana</th><th>Udział w H1 2026</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Public Sector</strong></td><td><strong>&euro;192,7 mln</strong></td><td>&euro;148,9 mln</td><td style="color:var(--ocena-kupno)"><strong>+29,4%</strong></td><td><strong>94,1%</strong></td></tr>
+          <tr><td>Business Sector (reszta)</td><td>&euro;12,0 mln</td><td>&euro;22,8 mln</td><td style="color:var(--ocena-sprzedaz)"><strong>-47,4%</strong></td><td>5,9%</td></tr>
+          <tr><td><strong>Razem</strong></td><td><strong>&euro;204,7 mln</strong></td><td>&euro;171,7 mln</td><td>+19,2%</td><td>100%</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Źródło: komunikat secunet z 13.08.2026 podaje przychód grupy i segment publiczny. Segment komercyjny i jego zmianę policzyłem jako różnicę &mdash; obliczenie własne, obarczone tym, że pozycje konsolidacyjne mogą nie sumować się dokładnie.</p></div>
+      <div class="alert alert-danger"><strong>Segment komercyjny skurczył się o blisko połowę.</strong> Rynek czyta wynik półroczny jako „przychody +19,2%" i ma rację, ale pod spodem dzieją się dwie przeciwstawne rzeczy: biznes państwowy przyspiesza, a biznes prywatny się zapada. Spółka nie staje się więc bardziej zdywersyfikowana wraz ze wzrostem &mdash; staje się <em>mniej</em>. Dziś to praktycznie dostawca jednego rodzaju klienta.</div>
+      <p>Druga strona tej koncentracji jest jednak inna niż koncentracja komercyjna. <strong>Państwo nie negocjuje agresywnie ceny, nie bankrutuje i nie odchodzi z dnia na dzień.</strong> Kontrakty są długie, zmiana dostawcy wymaga przetargu i recertyfikacji. Ryzyko nie polega więc na utracie klienta, a na <strong>zmianie wielkości jego budżetu</strong> &mdash; czyli jest polityczne i nie da się go zabezpieczyć analizą spółki.</p>
+      <p>Jedyną realną dźwignią dywersyfikacji jest sprzedaż tego samego produktu innym państwom europejskim. Spółka mówi o ekspansji, ale nie ujawnia jej udziału &mdash; traktuję to jako zamiar, nie fakt.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">BIZNES I PRZEPŁYWY</div></div><div class="section-toggle" id="s5-toggle">&#9660;</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Rok</th><th>Przepływy operacyjne</th><th>Nakłady</th><th>Wolne przepływy</th><th>Marża przepływów</th></tr></thead>
+        <tbody>
+          <tr><td><strong>2025</strong></td><td><strong>&euro;62,50 mln</strong></td><td>-&euro;8,24 mln</td><td><strong>&euro;54,26 mln</strong></td><td>11,83%</td></tr>
+          <tr><td>2024</td><td>&euro;60,98 mln</td><td>-&euro;14,13 mln</td><td>&euro;46,85 mln</td><td>11,53%</td></tr>
+          <tr><td>2023</td><td>&euro;51,88 mln</td><td>-&euro;8,81 mln</td><td>&euro;43,07 mln</td><td>10,94%</td></tr>
+          <tr><td><strong>2022</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-&euro;3,96 mln</strong></td><td>-&euro;5,54 mln</td><td style="color:var(--ocena-sprzedaz)"><strong>-&euro;9,51 mln</strong></td><td style="color:var(--ocena-sprzedaz)">-2,74%</td></tr>
+          <tr><td>2021</td><td>&euro;53,76 mln</td><td>-&euro;6,78 mln</td><td>&euro;46,98 mln</td><td>13,92%</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Źródło: rachunek przepływów secunet za lata 2021&ndash;2025 (Fiscal.ai). Dane wyłącznie roczne &mdash; wersja półroczna niedostępna.</p></div>
+      <p>Dwa wnioski. <strong>Nakłady to 1,80% przychodów</strong> w 2025 roku (obliczenie własne) &mdash; model niemal bezkapitałowy, co tłumaczy zwrot z kapitału z sekcji 7. I <strong>konwersja zysku na gotówkę jest dobra</strong>: przepływy &euro;54,26 mln wobec zysku netto &euro;33,34 mln to 1,63×.</p>
+      <div class="alert alert-warning"><strong>Trzeci wniosek jest ostrzeżeniem i dotyczy roku 2022.</strong> Wolne przepływy były wtedy <em>ujemne</em>, mimo że spółka wykazała zysk &mdash; należności wzrosły o &euro;68,07 mln w ciągu jednego roku. To pokazuje wadę modelu opartego na fakturowaniu jednego wielkiego odbiorcy: <strong>kapitał obrotowy potrafi zjeść cały roczny przepływ</strong>, gdy terminy płatności po stronie administracji się przesuną. Przy skokowym wzroście zamówień, jaki spółka właśnie raportuje, to ryzyko rośnie, nie maleje &mdash; szybszy wzrost oznacza większe zaangażowanie w należności i zapasy.</div>
+      <p>Dywidenda wypłacona w 2025 roku to &euro;17,66 mln, czyli <strong>32,5% wolnych przepływów</strong> (obliczenie własne) &mdash; pokrycie komfortowe. Spółka nie potrzebuje rynku kapitałowego do finansowania rozwoju.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA</div></div><div class="section-toggle" id="s6-toggle">&#9660;</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>&euro;1,32 mld</td><td>Przy 6,47 mln akcji; wartość przedsiębiorstwa ok. &euro;1,25 mld po odjęciu gotówki netto</td></tr>
+          <tr><td>Cena / zysk</td><td><strong>38,48</strong></td><td>Zysk na akcję &euro;5,29 za ostatnie dwanaście miesięcy</td></tr>
+          <tr><td>Cena / wolne przepływy</td><td><strong>24,3</strong></td><td>Obliczenie własne od przepływów 2025 (&euro;8,39 na akcję); rentowność 4,12%</td></tr>
+          <tr><td>Wartość przedsiębiorstwa / EBITDA</td><td><strong>14,9&ndash;16,4</strong></td><td>Obliczenie własne od prognozy zarządu &euro;76&ndash;84 mln na 2026</td></tr>
+          <tr><td>Wartość przedsiębiorstwa / sprzedaż</td><td>2,54</td><td>Obliczenie własne od przychodu &euro;491,81 mln</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td>7,88</td><td>Obliczenie własne: wartość księgowa &euro;25,82 na akcję</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Kurs i mnożniki zysku ze stanu na 18.09.2026; gotówka netto i wartość księgowa ze stanu na 26.06.2026. Przepływy z pełnego roku 2025.</p></div>
+
+      <h3>Forward P/E &mdash; wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>38,48</td><td>Zysk niezaburzony zdarzeniami jednorazowymi; efektywna stawka podatku <strong>37,80%</strong> &mdash; wysoka, typowa dla Niemiec</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>29,80</strong></td><td>Niższy od bieżącego &mdash; implikuje zysk ok. <strong>&euro;6,83</strong> na akcję, czyli wzrost o ok. 29% z dzisiejszych &euro;5,29</td></tr>
+          <tr><td><strong>PEG</strong></td><td><strong>1,44</strong></td><td>&lt; 1,0 = wzrost tańszy niż mnożnik sugeruje. Powyżej jedności, czyli cena wyprzedza tempo. Uwaga: liczony przy kursie z 26.06, więc dziś jest wyższy</td></tr>
+          <tr><td>Prognoza konsensusu na 3 lata</td><td>przychody +9,94%, zysk +18,16%</td><td>Zysk szybciej niż sprzedaż &mdash; zakładana dźwignia operacyjna</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> mnożnik prognozowany niższy od bieżącego przy oczekiwanym wzroście zysku szybszym niż przychód znaczy, że rynek liczy na poprawę marży. <strong>Własna prognoza zarządu tego nie potwierdza</strong>: przy przychodzie na górnej granicy &euro;500 mln i EBIT &euro;53&ndash;58 mln marża operacyjna wychodzi <strong>10,6&ndash;11,6%</strong> wobec 11,27% w 2025 roku &mdash; płasko, a w dolnym scenariuszu niżej. To rozbieżność, którą warto trzymać w pamięci.</p>
+      <div class="alert alert-warning"><strong>Uwaga cykliczna.</strong> Przychód rośnie o ok. 9%, EBIT w środku prognozy o ok. 7,4% &mdash; zysk operacyjny rośnie <em>wolniej</em> niż sprzedaż, bo mix przesuwa się ku dostawom sprzętowym. Do tego cała rentowność siedzi w drugiej połowie roku: po sześciu miesiącach EBIT wynosi &euro;8,7 mln, więc druga połowa musi dostarczyć <strong>83&ndash;85% całorocznego zysku operacyjnego</strong>. Kto wycenia tę spółkę kwartalnie, wycenia szum.</div>
+
+      <h3>Scenariusze i wartość godziwa</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Założenia</th><th>Wynik</th></tr></thead>
+        <tbody>
+          <tr><td>Negatywny</td><td>Wydatki publiczne na bezpieczeństwo normalizują się, segment komercyjny dalej się kurczy, kapitał obrotowy zabiera przepływ jak w 2022 roku; zysk na akcję spada do ok. &euro;4,50, rynek płaci 29×</td><td><strong>ok. &euro;130</strong></td></tr>
+          <tr><td>Bazowy</td><td>Prognoza dostarczona: przychód ok. &euro;500 mln, EBIT w środku przedziału, zysk na akcję ok. &euro;5,60; mnożnik bez zmian</td><td><strong>ok. &euro;215</strong></td></tr>
+          <tr><td>Pozytywny</td><td>Portfel zleceń konwertuje się w przychód, marża operacyjna wraca ku 13%, zysk na akcję ok. &euro;7,30 do 2027 roku; mnożnik 41× z premią za rzadkość</td><td><strong>ok. &euro;300</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Wartość godziwa: &euro;130 &ndash; &euro;300.</strong> Kurs stoi praktycznie na scenariuszu bazowym, około 5% pod środkiem przedziału. Konsensus trzech analityków (&euro;241,33) leży między bazowym a pozytywnym; przy tak cienkim pokryciu to wskazówka, nie punkt odniesienia.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE &mdash; LICZBA, KTÓRA ZDRADZA MODEL</div></div><div class="section-toggle" id="s7-toggle">&#9660;</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Marża brutto</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>21,99%</strong></td><td><strong>Najniższa ze wszystkiego, co liczyłem w tym tygodniu</strong> &mdash; omówienie niżej</td></tr>
+          <tr><td>Marża operacyjna</td><td>9,76%</td><td>EBITDA 12,92%; w samym H1 2026 tylko <strong>4,25%</strong> wskutek sezonowości</td></tr>
+          <tr><td>Marża netto</td><td>6,96%</td><td>Obliczenie własne: &euro;34,21 mln zysku na &euro;491,81 mln przychodu</td></tr>
+          <tr><td>Marża wolnych przepływów</td><td>11,83%</td><td>Rok 2025 &mdash; wyższa od operacyjnej przez minimalne nakłady</td></tr>
+          <tr><td><strong>Nakłady do przychodów</strong></td><td><strong>1,80%</strong></td><td>Obliczenie własne za 2025 rok</td></tr>
+          <tr><td>Zwrot z kapitału (ROIC)</td><td>28,12%</td><td rowspan="2"><strong>Różnica +18,60 pp</strong> (obliczenie własne). Solidnie &mdash; w górnej trzeciej części spółek z mojego katalogu</td></tr>
+          <tr><td>Koszt kapitału (WACC)</td><td>9,52%</td></tr>
+          <tr><td>Przychód na pracownika</td><td>&euro;401 tys.</td><td>Obliczenie własne &mdash; profil usługowy, nie programistyczny</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Marże i zwrot z kapitału ze stanu na 26.06.2026; marża przepływów i nakłady z pełnego roku 2025.</p></div>
+      <div class="alert alert-danger"><strong>Marża brutto 21,99% jest najważniejszą liczbą w tym raporcie i przeczy klasyfikacji sektorowej.</strong> Serwis przypisuje secunet do oprogramowania infrastrukturalnego, ale spółka z marżą brutto poniżej jednej czwartej nie sprzedaje oprogramowania &mdash; sprzedaje urządzenia i wdrożenia. Dla porównania, w spółkach analizowanych przeze mnie w tym tygodniu: oprogramowanie konsumenckie 80,98%, sprzęt do kontroli procesu w fabrykach chipów 61,30%, przygotowywanie danych treningowych 43,20%. <strong>secunet jest integratorem systemów z dopuszczeniem urzędowym, nie producentem oprogramowania</strong> &mdash; i tak trzeba go wyceniać.</div>
+      <p>Dwie konsekwencje. <strong>Dźwignia operacyjna jest ograniczona</strong> &mdash; podwojenie przychodu wymaga podwojenia dostaw sprzętu i godzin wdrożeniowych, co widać w prognozie zarządu. I <strong>mnożnik zysku powyżej trzydziestu ośmiu jest przy takiej marży ceną wysoką</strong>, nawet przy dobrym zwrocie z kapitału.</p>
+      <p>Zwrot z kapitału jest natomiast naprawdę dobry: <strong>blisko dziewiętnaście punktów nad jego kosztem</strong>. Bierze się jednak nie z marży, a z tego, że model nie potrzebuje aktywów. Spółka tworzy wartość przez efektywność kapitałową, nie przez rentowność sprzedaży.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS I STRUKTURA WŁAŚCICIELSKA</div></div><div class="section-toggle" id="s8-toggle">&#9660;</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>&euro;87,41 mln</td><td>Dług &euro;20,19 mln, głównie leasingi &mdash; brak długu bankowego</td></tr>
+          <tr><td><strong>Gotówka netto</strong></td><td><strong>&euro;67,22 mln</strong></td><td>&euro;10,39 na akcję, 5,1% kapitalizacji</td></tr>
+          <tr><td>Dług / kapitał własny</td><td>0,12</td><td>Dług / EBITDA 0,30 &mdash; nieistotne</td></tr>
+          <tr><td>Pokrycie odsetek</td><td>67,66</td><td>Koszt finansowy praktycznie nie istnieje</td></tr>
+          <tr><td>Kapitał własny</td><td>&euro;167,03 mln</td><td>&euro;25,82 na akcję</td></tr>
+          <tr><td>Ocena Altmana / Piotroskiego</td><td><strong>niedostępna / 1</strong></td><td><strong>Obie odrzucam</strong> &mdash; brak danych wejściowych, patrz sekcja 1</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Stan bilansu na 26.06.2026.</p></div>
+      <p>Bilans jest mocny i prosty: gotówka netto, brak długu bankowego, koszt finansowy bez znaczenia. Ryzyka wypłacalności nie ma. Prawdziwe ograniczenia leżą w strukturze właścicielskiej i w płynności.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Struktura akcjonariatu</th><th>Wartość</th><th>Konsekwencja</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Giesecke+Devrient</strong></td><td><strong>79%</strong></td><td>Właściciel większościowy od 2004. <strong>Mniejszość nie ma kontroli</strong></td></tr>
+          <tr><td>Instytucje</td><td>8,74%</td><td>Stan na 26.06.2026</td></tr>
+          <tr><td>Wolny obrót</td><td>ok. 10&ndash;25%</td><td><strong>Źródła niezgodne:</strong> serwis 1,61 mln akcji (24,9%), źródła niemieckie ok. 10%</td></tr>
+          <tr><td>Średni obrót dzienny</td><td>4&ndash;9 tys. akcji</td><td>Obrót rzędu <strong>miliona euro dziennie</strong></td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-danger"><strong>To ograniczenia strukturalne, nie ryzyka biznesowe &mdash; i dla inwestora prywatnego ważą więcej niż większość wskaźników wyżej.</strong> Przy 79% u jednego właściciela każda uchwała przechodzi bez udziału mniejszości, a <strong>przymusowy wykup pozostaje trwale otwartą możliwością</strong> &mdash; działa w obie strony, bo bywa z premią, ale odbiera decyzję o momencie wyjścia. Obrót rzędu miliona euro dziennie oznacza, że większa pozycja buduje się i likwiduje tygodniami. A <strong>pokrycie trzech analityków</strong> sprawia, że reakcja kursu na wyniki bywa nieproporcjonalna.</div>
+      <p>Dywidenda to &euro;2,58 na akcję, około 1,27% przy dzisiejszym kursie, i spadła o 5,49% rok do roku. Nowa polityka z marca zamienia wypłatę mechaniczną na uznaniową &mdash; rozsądne przy rosnącym zapotrzebowaniu na kapitał obrotowy, ale odbiera przewidywalność. Tej pozycji nie kupuje się dla dochodu.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE</div></div><div class="section-toggle" id="s9-toggle">&#9660;</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Wpływy z zamówień wyższe o około 80% i rekordowy portfel.</strong> Najmocniejszy argument, bo dotyczy przychodu już zakontraktowanego. Daje widoczność, której nie ma większość spółek technologicznych, i był powodem podniesienia prognozy w sierpniu.</div>
+      <div class="alert alert-success"><strong>2. Popyt tworzy ustawa, nie koniunktura.</strong> Europejskie wydatki na obronność rosną na podstawie decyzji rozpisanych na lata &mdash; wiatr w plecy o innej trwałości niż cykl zamówień przedsiębiorstw i niewrażliwy na recesję.</div>
+      <div class="alert alert-info"><strong>3. Dopuszczenie urzędowe jako bariera wejścia.</strong> Lista dostawców uprawnionych do przetwarzania danych niejawnych w Niemczech jest krótka i nie rozszerza się szybko. Konkurent musi przejść lata certyfikacji, a nie zbudować lepszy produkt.</div>
+      <div class="alert alert-success"><strong>4. Zwrot z kapitału blisko dziewiętnaście punktów nad jego kosztem</strong> przy nakładach poniżej dwóch procent przychodów. Wzrost nie wymaga ani długu, ani emisji akcji.</div>
+      <div class="alert alert-info"><strong>5. Dwie opcje w zapasie.</strong> Ten sam produkt sprzedany innym państwom europejskim byłby realną dywersyfikacją. Niezależnie od tego właściciel większościowy może zdecydować o wykupie mniejszości, historycznie zwykle z premią.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA</div></div><div class="section-toggle" id="s10-toggle">&#9660;</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Segment komercyjny skurczył się o blisko połowę.</strong> Spółka staje się w miarę wzrostu <em>bardziej</em> zależna od jednego typu odbiorcy, nie mniej. Próg zmiany tezy: kolejne półrocze spadku przy udziale sektora publicznego powyżej 95% &mdash; wtedy to dostawca budżetowy, a nie spółka technologiczna, i mnożnik powinien to odzwierciedlać.</div>
+      <div class="alert alert-danger"><strong>2. Marża brutto poniżej dwudziestu dwóch procent przy mnożniku zysku powyżej trzydziestu ośmiu.</strong> Rynek płaci cenę oprogramowania za ekonomikę integratora. Próg: marża brutto pod 20% albo marża operacyjna całoroczna pod 10%.</div>
+      <div class="alert alert-danger"><strong>3. Kapitał obrotowy potrafi zabrać cały przepływ.</strong> W 2022 roku należności wzrosły o &euro;68,07 mln i wolne przepływy wyszły ujemne mimo zysku. Przy skoku zamówień, jaki spółka właśnie raportuje, to ryzyko rośnie. Próg: ujemne wolne przepływy w pełnym roku.</div>
+      <div class="alert alert-danger"><strong>4. Ryzyko polityczne, którego nie da się przeanalizować.</strong> Zmiana priorytetów budżetowych albo konsolidacja finansów publicznych uderzy w przychód bez winy spółki. Portfel zleceń osłania kwartały, nie lata. Próg: wpływy z zamówień ujemne rok do roku w dwóch kolejnych kwartałach.</div>
+      <div class="alert alert-danger"><strong>5. Płynność i brak kontroli mniejszości.</strong> Nie ryzyko wyniku, a ryzyko wykonania &mdash; pozycji nie da się zbudować ani zlikwidować szybko, a o momencie wyjścia może zdecydować ktoś inny.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA</div></div><div class="section-toggle" id="s11-toggle">&#9660;</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Kierunek ataku</th><th>Jak groźny</th></tr></thead>
+        <tbody>
+          <tr><td>Rohde &amp; Schwarz Cybersecurity, Atos/Eviden, Thales</td><td>Ta sama nisza kryptografii państwowej w Europie</td><td><strong>Najgroźniejsi</strong> &mdash; porównywalne dopuszczenia, walka o przetargi, nie o produkt</td></tr>
+          <tr><td>Wielkie amerykańskie platformy bezpieczeństwa</td><td>Lepszy produkt komercyjny, niższy koszt krańcowy</td><td>Niegroźne w danych niejawnych, <strong>bardzo groźne w segmencie komercyjnym</strong> &mdash; co prawdopodobnie tłumaczy jego spadek</td></tr>
+          <tr><td>Integratorzy IT i konsultanci</td><td>Wchodzą na warstwę wdrożenia i utrzymania</td><td>Umiarkowany &mdash; odbierają usługi, nie dopuszczony sprzęt</td></tr>
+          <tr><td>Giesecke+Devrient, właściciel</td><td>Nie konkurent, a strona powiązana</td><td>Ryzyko transakcji wewnątrzgrupowych po cenach nierynkowych &mdash; nie stwierdzone, strukturalnie możliwe</td></tr>
+        </tbody>
+      </table></div>
+      <p>Pozycja rynkowa jest nierówna i to wyjaśnia rozjazd segmentów z sekcji 4. <strong>W danych niejawnych secunet jest zasiedziały i chroniony wymogami formalnymi</strong>, z konkurencją ograniczoną do kilku graczy o podobnym statusie. <strong>W segmencie komercyjnym takiej osłony nie ma</strong> &mdash; musi konkurować z globalnymi platformami, mając ułamek ich skali badawczej. Spadek tego segmentu potwierdza więc, że przewaga secunetu jest lokalna i regulacyjna, nie produktowa.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA &mdash; OGRANICZONA DANYMI</div></div><div class="section-toggle" id="s12-toggle">&#9660;</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="alert alert-warning"><strong>Tej sekcji nie mogę zrobić rzetelnie i wolę to powiedzieć, niż udawać.</strong> Średnie kroczące (50 sesji &euro;191,25, 200 sesji &euro;191,72) oraz wskaźnik RSI 28,44 pochodzą ze stanu na <strong>26 czerwca</strong>, gdy kurs wynosił &euro;168,20. Od tego czasu kurs wzrósł o ponad jedną piątą, więc <strong>te średnie i ten RSI już nie opisują rzeczywistości</strong> &mdash; podaję je wyłącznie jako kontekst historyczny, nie jako poziomy do handlu.</div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Kurs (18.09.2026)</td><td><strong>&euro;203,50</strong></td><td>+0,25%; zakres dnia &euro;200,50&ndash;&euro;207,00</td></tr>
+          <tr><td>Zakres 52 tygodni</td><td>&euro;152,80 &ndash; &euro;246,50</td><td><strong>+33,2% nad dołkiem, -17,4% pod szczytem</strong> (obliczenie własne)</td></tr>
+          <tr><td>Beta</td><td>0,99</td><td>Zmienność jak rynek &mdash; nietypowo niska dla tej wielkości</td></tr>
+          <tr><td>Obrót</td><td>8 839 akcji</td><td>Miesiąc wcześniej średnio 3 751 &mdash; wzrósł, ale pozostaje minimalny</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>niedostępna</td><td>Przy małym wolnym obrocie zapewne znikoma</td></tr>
+          <tr><td>Średnie kroczące, RSI</td><td><em>dane z 26.06</em></td><td><em>Odrzucone jako nieaktualne &mdash; patrz ramka wyżej</em></td></tr>
+        </tbody>
+      </table></div>
+      <p>Co można powiedzieć uczciwie: kurs jest <strong>w środkowej części rocznego zakresu</strong>, bliżej szczytu niż dołka, po wzroście o ponad jedną piątą od końca czerwca &mdash; rynek już zareagował na sierpniowe podniesienie prognozy. <strong>Wsparciem</strong> jest okolica &euro;180&ndash;185, skąd wyszedł ruch po wynikach półrocznych, głębiej dołek roczny. <strong>Oporem</strong> szczyt roczny, poniżej niego cel analityków. Przy obrocie kilku tysięcy akcji dziennie poziomy techniczne znaczą tu mniej niż zwykle &mdash; pojedyncze zlecenie potrafi przesunąć kurs o kilka procent.</p>
+      <p class="ptr">Aktualne średnie kroczące i RSI podam, gdy dostawca odświeży dane dla tego tickera.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">&#9660;</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td>Krótki (1&ndash;3 mies.)</td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Rynek już odreagował sierpniowe podniesienie prognozy, a listopadowe wyniki i tak nie pokażą kluczowego czwartego kwartału</td></tr>
+          <tr><td>Średni (6&ndash;18 mies.)</td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs stoi na scenariuszu bazowym. Rozstrzyga wykonanie prognozy w czwartym kwartale, gdzie siedzi ponad cztery piąte całorocznego zysku</td></tr>
+          <tr><td>Długi (3&ndash;5 lat)</td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Tu ocena jest najtrudniejsza. Wiatr budżetowy jest realny, ale marża integratora i pogłębiająca się zależność od jednego odbiorcy nie uzasadniają mnożnika oprogramowania</td></tr>
+        </tbody>
+      </table></div>
+      <p>Nie daję kupna z dwóch powodów. <strong>Wycenowego:</strong> kurs jest na scenariuszu bazowym, a mnożnik zysku powyżej trzydziestu ośmiu przy marży brutto poniżej dwudziestu dwóch procent nie zostawia marginesu bezpieczeństwa. I <strong>wykonawczego, który dotyczy Ciebie, nie spółki:</strong> obrót rzędu miliona euro dziennie plus właściciel z 79-procentowym pakietem to warunki, w których trafna teza może się nie przełożyć na wynik. Nie daję też sprzedaży &mdash; spółka rośnie, ma rekordowy portfel, gotówkę netto i wiatr w plecy z budżetów, który nie zniknie w tym roku.</p>
+      <h3>Strategia</h3>
+      <p><strong>Pozycja bardzo mała, budowana zleceniami z limitem ceny</strong> &mdash; przy takim obrocie zlecenie rynkowe samo sobie podnosi cenę. Wejście po cofnięciu ku wsparciu z sekcji 12, nie przy dzisiejszym kursie. Warunek dokupienia: segment komercyjny przestaje się kurczyć albo spółka ujawnia udział przychodów powracających &mdash; jedno z dwóch przesunęłoby ją ku kategorii, za którą rynek dziś płaci.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA TP CORP</div></div><div class="section-toggle" id="s14-toggle">&#9660;</div></div>
+    <div class="section-body" id="s14-body">
+      <p><strong>secunetu nie masz &mdash; to spółka obserwowana, spoza portfela</strong>, i pierwsza jej analiza w tym katalogu, więc nie ma poprzedniej tezy do skorygowania.</p>
+      <p>Najciekawsze jest to, czego secunet <em>nie</em> powtarza. Twoje pozycje technologiczne są w przeważającej części ekspozycją na <strong>jeden temat &mdash; budowę infrastruktury AI</strong>. secunet do niego nie należy: jego popyt tworzy niemiecka ustawa budżetowa, nie nakłady hiperskalerów. To rzadkość w tym katalogu i sama w sobie argument, by się spółce przyjrzeć.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Cecha</th><th>secunet</th><th>Typowa pozycja technologiczna w Twoim portfelu</th></tr></thead>
+        <tbody>
+          <tr><td>Źródło popytu</td><td>Budżet państwa</td><td>Nakłady przedsiębiorstw na AI</td></tr>
+          <tr><td>Wrażliwość na cykl AI</td><td><strong>Brak</strong></td><td>Wysoka</td></tr>
+          <tr><td>Beta</td><td>0,99</td><td>Od 1,1 do ponad 5</td></tr>
+          <tr><td>Płynność</td><td><strong>Bardzo niska</strong></td><td>Wysoka</td></tr>
+        </tbody>
+      </table></div>
+      <p>Ostrożność dotyczy dwóch rzeczy. <strong>Dywersyfikacja kupiona za cenę płynności jest dywersyfikacją tylko na papierze</strong> &mdash; w momencie, w którym trzeba by ją wykorzystać, czyli przy panicznej wyprzedaży, mały wolny obrót działa przeciw właścicielowi. I <strong>ekspozycję na europejski wzrost wydatków na bezpieczeństwo masz już</strong> przez pozycje przemysłowe, więc temat nie jest całkiem nowy.</p>
+      <p>Różnica między zwrotem a kosztem kapitału stawiałaby secunet w górnej trzeciej części spółek z tej serii: wyżej niż większość posiadanych pozycji, niżej niż producenci sprzętu do fabryk półprzewodników. Solidnie, nie wyjątkowo.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">&#9660;</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead">secunet jest dostawcą niemieckiego państwa w kwestiach, w których państwo nie może kupić od kogokolwiek &mdash; i to jest trwała przewaga. Dopuszczenie do przetwarzania danych niejawnych zdobywa się latami audytów, nie lepszym produktem. W pierwszym półroczu 2026 ta pozycja zaczęła się realnie opłacać: <strong>wpływy z zamówień wyższe o około 80%</strong>, rekordowy portfel zleceń, sektor publiczny w górę o 29,4% i podniesiona prognoza roczna. Popyt nie zależy tu od koniunktury ani od cyklu AI, a od decyzji budżetowych rozpisanych na lata.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Dwie liczby każą jednak zostać przy ocenie neutralnej. Pierwsza to <strong>marża brutto 21,99%</strong> &mdash; najniższa ze wszystkiego, co liczyłem w tym tygodniu, i dowód, że to integrator systemów, nie producent oprogramowania, mimo klasyfikacji sektorowej. Przy takiej ekonomice mnożnik zysku powyżej trzydziestu ośmiu jest ceną pełną, a prognoza zarządu pokazuje zysk operacyjny rosnący <em>wolniej</em> niż przychód. Druga to <strong>spadek segmentu komercyjnego o blisko połowę</strong>: spółka nie dywersyfikuje się w miarę wzrostu, lecz staje się coraz bardziej dostawcą jednego rodzaju odbiorcy. Dochodzi do tego ryzyko wykonania &mdash; mały obrót, trzech analityków i właściciel, który może zdecydować o wykupie mniejszości bez pytania.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck yes">&#10003;</span><span><strong>Wpływy z zamówień rosną.</strong> Spełnione i mocno &mdash; około 80% wzrostu w półroczu, rekordowy portfel.</span></li>
+          <li><span class="ck wait">!</span><span><strong>Czwarty kwartał dowozi ponad cztery piąte całorocznego zysku operacyjnego.</strong> To normalna sezonowość tej spółki, ale w tym roku skala jest większa niż zwykle.</span></li>
+          <li><span class="ck no">&times;</span><span><strong>Segment komercyjny przestaje się kurczyć.</strong> Niespełnione &mdash; spadek o blisko połowę w półroczu.</span></li>
+          <li><span class="ck no">&times;</span><span><strong>Marża operacyjna rośnie wraz ze skalą.</strong> Niespełnione &mdash; prognoza zarządu implikuje marżę płaską lub niższą.</span></li>
+          <li><span class="ck yes">&#10003;</span><span><strong>Bilans finansuje wzrost bez długu i emisji.</strong> Spełnione &mdash; gotówka netto, nakłady poniżej dwóch procent przychodów.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>12 listopada 2026</strong></td><td>Wyniki za trzy kwartały</td><td>Pokażą tempo konwersji portfela i stan segmentu komercyjnego, ale nie czwartego kwartału</td></tr>
+            <tr><td>styczeń&ndash;luty 2027</td><td>Wstępne wyniki całego roku</td><td><strong>Moment prawdy</strong> &mdash; czy prognoza wykonana</td></tr>
+            <tr><td>marzec 2027</td><td>Raport roczny, decyzja o dywidendzie, prognoza na 2027</td><td>Pierwszy test uznaniowej polityki dywidendowej</td></tr>
+            <tr><td>cały okres</td><td>Decyzje budżetowe w Niemczech i UE</td><td>Realne źródło popytu &mdash; ważniejsze od decyzji zarządu</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Udział sektora publicznego</td><td>94,1% w H1</td><td>Powyżej 95% przy dalszym spadku segmentu komercyjnego</td><td><span class="mon-dot r"></span>alarm</td></tr>
+            <tr><td>Wpływy z zamówień</td><td>silny wzrost</td><td>Ujemna dynamika w dwóch kwartałach z rzędu</td><td><span class="mon-dot g"></span>dobrze</td></tr>
+            <tr><td>Marża brutto</td><td>ok. 22%</td><td>Zejście pod 20%</td><td><span class="mon-dot y"></span>obserwuj</td></tr>
+            <tr><td>Wolne przepływy roczne</td><td>dodatnie, ok. 12% przychodu</td><td>Ujemne w pełnym roku, jak w 2022</td><td><span class="mon-dot y"></span>obserwuj</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <p><strong>Wielkość pozycji:</strong> bardzo mała, jeśli w ogóle &mdash; nie z powodu jakości spółki, a z powodu płynności. Pozycja, której nie da się zlikwidować w jednej sesji, nie powinna ważyć tyle, co taka, którą da się.</p>
+        <p><strong>Transze:</strong> wyłącznie zleceniami z limitem ceny, po cofnięciu w stronę wsparcia z sekcji 12, nigdy przy dziennym maksimum. <strong>Realizacja zysków:</strong> pierwszy próg w okolicy celu analityków, drugi przy szczycie rocznym, trzeci przy górnej granicy wartości godziwej. <strong>Warunek wyjścia z tezy:</strong> ujemna dynamika wpływów z zamówień przez dwa kwartały albo całoroczna marża operacyjna pod dziesięć procent &mdash; wtedy zostaje mnożnik oprogramowania zapłacony za biznes dostawy sprzętu.</p>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p>To dobra spółka z trudną do podrobienia przewagą i z wiatrem w plecy, który nie pochodzi z mody inwestycyjnej, a z ustaw budżetowych. Gdyby handlowała się po dwudziestu pięciu razy zysk, pisałbym o kupnie. Handluje się po trzydziestu ośmiu, przy marży brutto integratora, z zyskiem operacyjnym rosnącym wolniej niż przychód i segmentem komercyjnym w rozpadzie &mdash; a kurs już odreagował sierpniowe dobre wieści. <strong>To definicja oceny neutralnej: nic nie jest zepsute, nic nie jest tanie.</strong></p>
+        <p>Dwie rzeczy mówię wprost na koniec. Pierwsza: <strong>ta analiza jest mniej pewna niż większość w tym katalogu</strong>, bo źródło danych obsługuje ten ticker nierówno &mdash; kurs jest z 18 września, wskaźniki bilansowe z 26 czerwca, a średnich kroczących i RSI nie użyłem wcale, bo byłyby fałszywe. Druga: <strong>przy obrocie rzędu miliona euro dziennie i właścicielu z 79-procentowym pakietem ocena spółki i szansa na zarobek to dwie różne rzeczy.</strong> Można mieć rację co do secunetu i nie zamienić tego na wynik, bo nie kontroluje się ani wejścia, ani wyjścia.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">NEUTRALNA</b></div>
+          <div><span>Fair value 12&ndash;18 mies.</span><b>&euro;130 &ndash; &euro;300</b></div>
+          <div><span>Scenariusz negatywny</span><b>ok. &euro;130</b></div>
+          <div><span>Scenariusz pozytywny</span><b>ok. &euro;300</b></div>
+          <div><span>Sugerowana pozycja</span><b>Bardzo mała lub żadna</b></div>
+          <div><span>Najbliższy katalizator</span><b>Wyniki listopadowe</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="footer">
+  <div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+  <p>Analiza: 24 września 2026 | Cena: <strong>&euro;203,50</strong> (notowanie 18.09.2026, 17:35 CET &mdash; <strong>nie z dnia analizy</strong>, patrz sekcja 1) | <strong>Pierwsza analiza tej spółki</strong> &mdash; spoza portfela, obserwowana | <strong>Zastrzeżenie do danych:</strong> wskaźniki bilansowe, zwrot z kapitału, marże i średnie kroczące ze stanu na 26.06.2026; przepływy z pełnego roku 2025; ocena Altmana niedostępna, ocena Piotroskiego odrzucona jako artefakt; średnie kroczące i RSI pominięte jako nieaktualne | Dane: StockAnalysis / S&amp;P Global Market Intelligence i Fiscal.ai, komunikaty secunet Security Networks AG (wyniki roczne 30.03.2026, Q1 05.05.2026, <strong>H1 13.08.2026</strong>, polityka dywidendowa 27.03.2026), dane o akcjonariacie z serwisów finanzen.net i MarketScreener &mdash; <strong>stan danych na 24.09.2026</strong> | Nie stanowi porady inwestycyjnej</p>
+</div>
+
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

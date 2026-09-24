@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MARA — MARA Holdings | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-uwaga); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:12.5px; color:var(--text-muted); font-style:italic; margin-top:-4px; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: MARA</div>
+    <div class="company-name">MARA Holdings, Inc.</div>
+    <div class="company-sub">Wydobycie bitcoina i zasilone grunty pod centra danych AI · Hallandale Beach, Floryda · 266 pracowników</div>
+    <div class="header-meta">
+      <span class="meta-tag">W portfelu — 4,33%</span>
+      <span class="meta-tag">+20,6% od analizy z 17.09</span>
+      <span class="meta-tag">Zmieniam uzasadnienie, nie ocenę</span>
+      <div class="price-display">
+        <div class="price-main">$13,28</div>
+        <div class="price-sub">zamknięcie 21.09.2026, 16:00 EDT (+0,30%)</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Bitcoin i kopalnie</span><span class="temat">Moc obliczeniowa dla AI</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-uwaga" data-ocena="NEUTRALNA — cztery pi&#261;te ostatniego rajdu to przecena biznesu AI, nie bitcoina; kurs sta&#322; dok&#322;adnie w moim scenariuszu bazowym">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">NEUTRALNA</span><span class="rb-qual">utrzymana, ale z innego powodu ni&#380; 17.09</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$7 &ndash; $21</b></div>
+    <div class="rb-item"><span>Potencja&#322;</span><b style="color:var(--ocena-uwaga)">-47% do +58%</b></div>
+    <div class="rb-kal"><span>Najbli&#380;sze wyniki</span><b>3 listopada 2026</b><em>Q3 2026</em></div>
+    <div class="rb-right">Horyzont 12&ndash;18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Skarbiec</a><a class="nav-link" onclick="goSec('s5')">Biznes</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Mar&#380;e</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a><a class="nav-link" onclick="goSec('s16')">Korekta</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$13,28</div><div class="metric-detail">-27,39% w 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Od analizy z 17.09</div><div class="metric-value green">+20,6%</div><div class="metric-detail">Cztery sesje &mdash; <strong>bitcoin wyja&#347;nia ok. jedn&#261; pi&#261;t&#261;</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Bitcoin</div><div class="metric-value green">ok. $85,9 tys.</div><div class="metric-detail">Szczyt od o&#347;miu miesi&#281;cy</div></div>
+    <div class="metric-card"><div class="metric-label">Biznes operacyjny w cenie</div><div class="metric-value">$10,66 / akcj&#281;</div><div class="metric-detail">Tyle rynek p&#322;aci <strong>poza skarbcem i d&#322;ugiem</strong></div></div>
+    <div class="metric-card"><div class="metric-label">JPMorgan, 14.09</div><div class="metric-value red">podw&oacute;jne ci&#281;cie</div><div class="metric-detail">Overweight &rarr; <strong>Underweight</strong>, cel $11</div></div>
+    <div class="metric-card"><div class="metric-label">Liczba akcji</div><div class="metric-value green">-5,03%</div><div class="metric-detail"><strong>Skup, nie emisja</strong> &mdash; finansowany bitcoinem</div></div>
+    <div class="metric-card"><div class="metric-label">Kr&oacute;tka sprzeda&#380;</div><div class="metric-value red">28,50%</div><div class="metric-detail">Bez zmian przez ca&#322;y rajd</div></div>
+    <div class="metric-card"><div class="metric-label">Altman Z-Score</div><div class="metric-value red">-1,64</div><div class="metric-detail">Piotroski 3 &mdash; bilans pod presj&#261;</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL I CO SI&#280; ZMIENI&#321;O W CZTERY DNI</div></div><div class="section-toggle open" id="s1-toggle">&#9660;</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Cztery sesje od poprzedniej analizy wystarczy&#322;y, &#380;eby kurs poszed&#322; w g&oacute;r&#281; o jedn&#261; pi&#261;t&#261;. Odruchowe wyja&#347;nienie brzmi &bdquo;bo bitcoin&rdquo; &mdash; i jest w wi&#281;kszo&#347;ci nieprawdziwe, co jest g&#322;&oacute;wnym ustaleniem tego raportu i wraca w sekcji 6. MARA wydobywa bitcoina i przekszta&#322;ca si&#281; w dostawc&#281; zasilonych grunt&oacute;w pod centra danych AI. <strong>Nie buduje ich sama</strong> &mdash; wnosi dzia&#322;ki z moc&#261; do sp&oacute;&#322;ki celowej ze Starwood Digital Ventures. To rozr&oacute;&#380;nienie sta&#322;o si&#281; w tym tygodniu najwa&#380;niejsz&#261; rzecz&#261; w ca&#322;ej tezie.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>11.09</td><td>H.C. Wainwright podejmuje pokrycie: <strong>Buy, cel $20</strong></td><td>Najwy&#380;szy cel na rynku</td></tr>
+          <tr><td><strong>14.09</strong></td><td><strong>JPMorgan: Overweight &rarr; Underweight</strong>, cel z $13 na $11. Tego samego dnia podnosi <strong>IREN do Overweight z celem $65</strong></td><td>Ci&#281;cie o dwa stopnie, zarzut strukturalny &mdash; opisuj&#281; go w sekcji 10. Kurs spad&#322; wtedy o 3,9%</td></tr>
+          <tr><td>16.09</td><td>Zakup <strong>1 292 BTC</strong> za ok. $98,64 mln przez FalconX</td><td>Najwi&#281;kszy zakup od blisko roku</td></tr>
+          <tr><td>18.09</td><td>Morgan Stanley: cel z $6 na $11, <strong>utrzymuje Underweight</strong></td><td>Drugi wielki bank z celem <em>poni&#380;ej</em> kursu</td></tr>
+          <tr><td>21.09</td><td>Bitcoin na szczycie od o&#347;miu miesi&#281;cy</td><td>Wymuszone zamykanie kr&oacute;tkich pozycji rz&#281;du $300 mln na rynku kryptowalut</td></tr>
+        </tbody>
+      </table></div>
+      <p>Q2 2026 (6 sierpnia) zamkn&#261;&#322; si&#281; strat&#261; przy s&#322;abym bitcoinie, ale z finansowaniem przej&#281;&#263; pozyskanym bez rozwodnienia akcjonariuszy. Strata dwunastomiesi&#281;czna: <strong>-$3,46 mld</strong>, czyli <strong>-$9,32</strong> na akcj&#281;.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT &mdash; DWA BIZNESY O ODWROTNYCH CECHACH</div></div><div class="section-toggle" id="s2-toggle">&#9660;</div></div>
+    <div class="section-body" id="s2-body">
+      <p><strong>Wydobycie bitcoina</strong> nie ma &#380;adnej fosy: produkt jest identyczny u wszystkich, cena zewn&#281;trzna, przewag&#261; jest wy&#322;&#261;cznie koszt energii. Nie ma kosztu zmiany dostawcy ani przychodu powracaj&#261;cego &mdash; ka&#380;dy blok trzeba wykopa&#263; od nowa.</p>
+      <p><strong>Zasilone grunty pod AI</strong> maj&#261; cechy odwrotne: wieloletnie umowy, wiarygodnych kredytowo najemc&oacute;w, przewidywalny przych&oacute;d i realn&#261; barier&#281; wej&#347;cia, bo przy&#322;&#261;czy o mocy setek megawat&oacute;w nie da si&#281; wyprodukowa&#263; ani kupi&#263; &mdash; trzeba je wystoja&#263; w kolejce regulacyjnej. Aktywa, kt&oacute;re realnie istniej&#261;: przejmowana elektrownia <strong>Long Ridge (505 MW)</strong> przy kampusie Hannibal w Ohio, ponad <strong>1 200 akr&oacute;w w Matagorda County</strong> z prawami do <strong>2 GW</strong> i partnerstwo ze Starwood z lutego 2026. Moc pod kontrol&#261; wzros&#322;a z 0,5 GW na pocz&#261;tku 2024 roku do <strong>1,9 GW</strong>; plan m&oacute;wi o <strong>4,8 GW</strong>, a pierwszy gigawat ma by&#263; gotowy w <strong>pa&#378;dzierniku 2027</strong>.</p>
+      <div class="alert alert-warning"><strong>Czego wci&#261;&#380; nie ma:</strong> podpisanego najemcy. Long Ridge czeka na zgod&#281; FERC, Matagorda na przy&#322;&#261;czenie w ERCOT. W&#261;skim gard&#322;em jest regulator, nie brak popytu &mdash; ale dop&oacute;ki nie ma umowy, druga noga biznesu jest obietnic&#261;, nie produktem.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK &mdash; DWA CYKLE, KT&Oacute;RE SI&#280; ROZJECHA&#321;Y</div></div><div class="section-toggle" id="s3-toggle">&#9660;</div></div>
+    <div class="section-body" id="s3-body">
+      <p>Wydobycie to rynek o sta&#322;ej poda&#380;y nagr&oacute;d dzielonej mi&#281;dzy rosn&#261;c&#261; moc sieci: ka&#380;dy megawat konkurencji obni&#380;a przych&oacute;d pozosta&#322;ych. Rynek mocy pod AI zachowuje si&#281; odwrotnie &mdash; popyt ro&#347;nie szybciej ni&#380; poda&#380; przy&#322;&#261;czy, wi&#281;c w&#322;a&#347;ciciel zasilonego gruntu ma si&#322;&#281; cenow&#261;. Dlatego <em>spos&oacute;b</em> wej&#347;cia decyduje o wszystkim.</p>
+      <p>Kontekst makro: bitcoin ok. <strong>$85,9 tys.</strong>, najwy&#380;ej od o&#347;miu miesi&#281;cy, po pierwszym tygodniowym zamkni&#281;ciu nad &#347;redni&#261; 50-tygodniow&#261; od 45 tygodni. Rajd nap&#281;dzi&#322;y trzy rzeczy: spadek cen ropy, mocne zamkni&#281;cie tygodnia i przymusowe zamykanie pozycji kr&oacute;tkich. &#379;adna z nich nie dotyczy MARA jako sp&oacute;&#322;ki.</p>
+      <div class="alert alert-info"><strong>Ruch sektorowy, nie sp&oacute;&#322;kowy.</strong> Rajd wywo&#322;any nastrojem wobec ca&#322;ej klasy aktyw&oacute;w odwraca si&#281; tak szybko, jak przyszed&#322;. Gdyby sta&#322; za nim podpisany kontrakt na moc, m&oacute;wi&#322;bym o zmianie warto&#347;ci. Tu m&oacute;wi&#281; o zmianie nastroju.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">SKARBIEC &mdash; SPRZEDALI WI&#280;CEJ, NI&#379; DZI&#346; MAJ&#260;</div></div><div class="section-toggle" id="s4-toggle">&#9660;</div></div>
+    <div class="section-body" id="s4-body">
+      <p>Tu jest najwa&#380;niejsza liczba raportu. Zestawienia niezale&#380;nych serwis&oacute;w &#347;ledz&#261;cych skarbce korporacyjne pokazuj&#261; na wrzesie&#324; <strong>ok. 35 577 BTC</strong>. Jednocze&#347;nie w 2026 roku sp&oacute;&#322;ka sprzeda&#322;a:</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Okres</th><th>BTC</th><th>Kwota</th><th>Na co posz&#322;y pieni&#261;dze</th></tr></thead>
+        <tbody>
+          <tr><td>wcze&#347;niej w 2026</td><td>-23 093</td><td>ok. $1,63 mld</td><td>Finansowanie projekt&oacute;w</td></tr>
+          <tr><td>4&ndash;25 marca 2026</td><td><strong>-15 133</strong></td><td>ok. $1,1 mld</td><td><strong>Wykup $1,0 mld obligacji zamiennych 0,00% z terminami 2030 i 2031</strong></td></tr>
+          <tr><td>16 wrze&#347;nia 2026</td><td>+1 292</td><td>ok. $98,64 mln</td><td>Odbudowa pozycji po p&oacute;&#322;roczu sprzeda&#380;y</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px">&#377;r&oacute;d&#322;a: komunikaty MARA Investor Relations, zestawienia bitcointreasuries.net i The Block. Liczba monet pochodzi z serwis&oacute;w zewn&#281;trznych, nie z pobranej strony statystyk &mdash; wymaga potwierdzenia w raporcie za Q3.</p></div>
+      <p>Suma sprzeda&#380;y w 2026 roku to ok. <strong>38,2 tys. BTC</strong> &mdash; wi&#281;cej, ni&#380; sp&oacute;&#322;ka posiada dzisiaj. To skarbiec nie akumulowany, a <em>przetapiany</em> na wykupiony d&#322;ug i odkupione akcje.</p>
+      <p>Wykup obligacji zerokuponowych to najlepsza decyzja finansowa, jak&#261; widzia&#322;em u tej sp&oacute;&#322;ki: papier o zerowym oprocentowaniu jest niemal darmowym finansowaniem, wi&#281;c wykupuje si&#281; go przedterminowo tylko wtedy, gdy notowany jest wyra&#378;nie pod nomina&#322;em. To dzia&#322;anie tworz&#261;ce warto&#347;&#263;, nie desperacja.</p>
+      <div class="alert alert-warning"><strong>Ale teza si&#281; przez to zmienia.</strong> Nazwa&#322;em MARA lewarowanym sposobem na posiadanie bitcoina. Zarz&#261;d robi odwrotn&#261; rzecz &mdash; systematycznie zamienia t&#281; ekspozycj&#281; na mniejszy d&#322;ug i mniejsz&#261; liczb&#281; akcji. Kto kupuje MARA dla d&#378;wigni na bitcoinie, kupuje co&#347;, co w&#322;a&#347;ciciel rozmontowuje.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">BIZNES I PRZEP&#321;YWY</div></div><div class="section-toggle" id="s5-toggle">&#9660;</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja (12 mies.)</th><th>Warto&#347;&#263;</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Przychody</td><td><strong>$804,22 mln</strong></td><td>+0,7% r/r &mdash; p&#322;asko</td></tr>
+          <tr><td>Zysk brutto na sprzeda&#380;y</td><td>$322,67 mln</td><td>Wydobycie jest rentowne na poziomie brutto</td></tr>
+          <tr><td>Wynik operacyjny</td><td><strong>-$2,54 mld</strong></td><td>Ginie tu ok. $2,86 mld przy 266 pracownikach</td></tr>
+          <tr><td>Amortyzacja</td><td>$660,64 mln</td><td>Wyja&#347;nia mniej ni&#380; czwart&#261; cz&#281;&#347;&#263; luki</td></tr>
+          <tr><td>Przep&#322;ywy operacyjne</td><td>-$895,05 mln</td><td>Strata jest g&#322;&oacute;wnie ksi&#281;gowa, ale got&oacute;wka wycieka</td></tr>
+          <tr><td>Nak&#322;ady inwestycyjne</td><td>-$395,96 mln</td><td>49% przychod&oacute;w (obliczenie w&#322;asne)</td></tr>
+          <tr><td><strong>Wolne przep&#322;ywy</strong></td><td><strong>-$1,29 mld</strong></td><td><strong>-$3,34 na akcj&#281;</strong>; pokrywane sprzeda&#380;&#261; bitcoina</td></tr>
+          <tr><td>Zad&#322;u&#380;enie netto zaci&#261;gni&#281;te</td><td>-$117,20 mln</td><td>Ujemne, czyli sp&oacute;&#322;ka <strong>sp&#322;aca</strong> d&#322;ug</td></tr>
+          <tr><td>Liczba akcji</td><td><strong>-5,03% r/r</strong></td><td>386,30 mln; +0,37% kw/kw &mdash; skup wyhamowa&#322;</td></tr>
+        </tbody>
+      </table></div>
+      <p>Struktura wynika z tego rachunku jednoznacznie: <strong>wydobycie wytwarza $322,67 mln mar&#380;y brutto, a wszystko poni&#380;ej tej linii niszczy blisko $3,8 mld</strong>. Wi&#281;kszo&#347;&#263; luki to przecena aktyw&oacute;w cyfrowych i odpisy sprz&#281;tu przechodz&#261;ce przez rachunek wyniku, nie koszty operacyjne &mdash; dlatego wska&#378;niki oparte na zysku s&#261; tu bezu&#380;yteczne. Instytucje trzymaj&#261; <strong>72,51%</strong> akcji: to sp&oacute;&#322;ka zarz&#261;dzana jak fundusz aktyw&oacute;w, co potwierdza klasyfikacja sektorowa S&amp;P.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA &mdash; ROZK&#321;AD KURSU NA CZ&#280;&#346;CI</div></div><div class="section-toggle" id="s6-toggle">&#9660;</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wska&#378;nik</th><th>Warto&#347;&#263;</th><th>Interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$5,13 mld</td><td>Warto&#347;&#263; przedsi&#281;biorstwa $7,17 mld</td></tr>
+          <tr><td>Cena / sprzeda&#380;</td><td><strong>6,48</strong></td><td>Wysoko dla biznesu bez si&#322;y cenowej</td></tr>
+          <tr><td><strong>Cena / sprzeda&#380; prognozowana</strong></td><td><strong>7,32</strong></td><td><strong>Wy&#380;sza od bie&#380;&#261;cej &mdash; rynek zak&#322;ada spadek przychod&oacute;w</strong></td></tr>
+          <tr><td>Cena / warto&#347;&#263; ksi&#281;gowa</td><td>3,04</td><td>Przy warto&#347;ci ksi&#281;gowej $4,35 na akcj&#281;</td></tr>
+          <tr><td>Warto&#347;&#263; przedsi&#281;biorstwa / sprzeda&#380;</td><td>9,02</td><td>Wy&#380;sza od ceny do sprzeda&#380;y wskutek d&#322;ugu netto</td></tr>
+          <tr><td>Cena / zysk, cena / przep&#322;ywy, PEG</td><td>nie dotyczy</td><td>Strata na akcji <strong>-$9,32</strong>, przep&#322;ywy ujemne</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px">&#377;r&oacute;d&#322;o: StockAnalysis / S&amp;P Global Market Intelligence.</p></div>
+
+      <h3>Forward P/E &mdash; wycena zysku przysz&#322;ego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wska&#378;nik</th><th>Warto&#347;&#263;</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>nie dotyczy</td><td>Sp&oacute;&#322;ka ze strat&#261;: <strong>-$9,32</strong> na akcj&#281; przy przychodach $804,22 mln</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>nie dotyczy</strong></td><td>Analitycy nie prognozuj&#261; dodatniego zysku w horyzoncie prognozy</td></tr>
+          <tr><td><strong>PEG</strong></td><td><strong>nie dotyczy</strong></td><td>&lt; 1,0 = wzrost ta&#324;szy ni&#380; mno&#380;nik sugeruje; bez zysku nie do policzenia</td></tr>
+          <tr><td>Miara zast&#281;pcza</td><td>Cena / sprzeda&#380; i rozk&#322;ad na cz&#281;&#347;ci</td><td>Prognoza wzrostu przychod&oacute;w na 3 lata: <strong>-12,58% rocznie</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czyta&#263;:</strong> brak mno&#380;nika zysku jest tu informacj&#261;, nie drobiazgiem &mdash; zysk zaburza przecena aktyw&oacute;w cyfrowych, przep&#322;ywy s&#261; ujemne, wi&#281;c jedyn&#261; uczciw&#261; metod&#261; jest rozk&#322;ad kursu na cz&#281;&#347;ci. Sygna&#322; ostrzegawczy: <strong>mno&#380;nik prognozowany przewy&#380;sza bie&#380;&#261;cy</strong>, czyli ci sami analitycy z rekomendacj&#261; kupuj spodziewaj&#261; si&#281; kurcz&#261;cej sprzeda&#380;y. Sp&oacute;&#322;ka jest przy tym cykliczna &mdash; niski mno&#380;nik na szczycie cyklu bywa pu&#322;apk&#261;.</p>
+
+      <h3>Rozk&#322;ad kursu na cz&#281;&#347;ci &mdash; obliczenie w&#322;asne</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Sk&#322;adnik</th><th>Na akcj&#281;</th><th>Dzia&#322;anie</th></tr></thead>
+        <tbody>
+          <tr><td>Skarbiec bitcoinowy</td><td><strong>$7,91</strong></td><td>35 577 BTC &times; ok. $85,9 tys. / 386,30 mln akcji</td></tr>
+          <tr><td>Got&oacute;wka minus d&#322;ug</td><td><strong>-$5,29</strong></td><td>Z pobranej strony statystyk</td></tr>
+          <tr><td>Aktywa finansowe netto</td><td>$2,62</td><td>$7,91 - $5,29</td></tr>
+          <tr><td><strong>Reszta &mdash; biznes operacyjny</strong></td><td><strong>$10,66</strong></td><td><strong>$13,28 - $2,62</strong>; to 5,1&times; przychody</td></tr>
+        </tbody>
+      </table></div>
+      <p>Cztery dni temu, przy kursie $11,01, ta sama rachuba dawa&#322;a biznesowi $8,85 na akcj&#281;. Aktywa finansowe netto wzros&#322;y od tamtej pory o <strong>$0,46</strong>, a kurs o <strong>$2,27</strong>.</p>
+      <div class="alert alert-warning"><strong>Bitcoin wyja&#347;nia ok. jedn&#261; pi&#261;t&#261; rajdu</strong> ($0,46 z $2,27; obliczenie w&#322;asne). Pozosta&#322;e cztery pi&#261;te to przecena biznesu, kt&oacute;ry nie ma ani jednego najemcy &mdash; i kt&oacute;ry tydzie&#324; wcze&#347;niej zosta&#322; &#347;ci&#281;ty o dwa stopnie. Co wi&#281;cej, warto&#347;&#263; skarbca na akcj&#281; ros&#322;a <em>s&#322;abiej</em> ni&#380; bitcoin, bo spad&#322;a raportowana liczba monet.</div>
+
+      <h3>Scenariusze i warto&#347;&#263; godziwa</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Za&#322;o&#380;enia</th><th>Wynik</th></tr></thead>
+        <tbody>
+          <tr><td>Negatywny</td><td>Bitcoin $60 tys., brak najemcy, przychody schodz&#261; &#347;cie&#380;k&#261; konsensusu; biznes na 3,2&times; sprzeda&#380;</td><td><strong>ok. $7</strong></td></tr>
+          <tr><td>Bazowy</td><td>Bitcoin utrzymuje dzisiejszy poziom, sp&oacute;&#322;ka celowa post&#281;puje, rynek utrzymuje dzisiejszy mno&#380;nik</td><td><strong>ok. $13</strong></td></tr>
+          <tr><td>Pozytywny</td><td>Bitcoin $120 tys., pierwszy gigawat zakontraktowany; biznes na 7,3&times; sprzeda&#380;</td><td><strong>ok. $21</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Warto&#347;&#263; godziwa 12&ndash;18 mies.: $7 &ndash; $21.</strong> Przedzia&#322; jest szerszy ni&#380; poprzedni ($8&ndash;17) celowo: wcze&#347;niej zak&#322;ada&#322;em jedn&#261; zmienn&#261; decyduj&#261;c&#261;, teraz s&#261; dwie niezale&#380;ne. Sam rynek przetorgowa&#322; w dwana&#347;cie miesi&#281;cy przedzia&#322; niemal identycznej szeroko&#347;ci (sekcja 12).</p>
+      <div class="alert alert-info"><strong>Sk&#261;d si&#281; bierze cel $11 obu wielkich bank&oacute;w.</strong> Wystarczy przyj&#261;&#263; dla biznesu operacyjnego mno&#380;nik 4,0&times; sprzeda&#380;y: $8,33 na akcj&#281; plus aktywa finansowe netto daje <strong>ok. $11</strong> (obliczenie w&#322;asne). Oba banki nie zak&#322;adaj&#261; wi&#281;c katastrofy ani spadku bitcoina &mdash; po prostu nie zgadzaj&#261; si&#281; na premi&#281; za biznes bez kontraktu.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MAR&#379;E I ZWROT Z KAPITA&#321;U</div></div><div class="section-toggle" id="s7-toggle">&#9660;</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Warto&#347;&#263;</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Mar&#380;a brutto</td><td><strong>40,12%</strong></td><td>Jedyna dodatnia w tabeli &mdash; wydobycie samo w sobie dzia&#322;a</td></tr>
+          <tr><td>Mar&#380;a operacyjna</td><td>-315,76%</td><td rowspan="2">Obie zniekszta&#322;cone przecen&#261; aktyw&oacute;w cyfrowych w rachunku wyniku &mdash; odrzucam je jako miary jako&#347;ci</td></tr>
+          <tr><td>Mar&#380;a EBITDA</td><td>-233,61%</td></tr>
+          <tr><td><strong>Zwrot z kapita&#322;u (ROIC)</strong></td><td><strong>-62,80%</strong></td><td rowspan="3"><strong>R&oacute;&#380;nica -86,04 pp</strong> (obliczenie w&#322;asne). Poprzednio -84,58 pp &mdash; luka si&#281; pog&#322;&#281;bi&#322;a, bo wzr&oacute;s&#322; koszt kapita&#322;u</td></tr>
+          <tr><td>Koszt kapita&#322;u (WACC)</td><td>23,24%</td></tr>
+          <tr><td>Zwrot z kapita&#322;u w&#322;asnego</td><td>-105,57%</td></tr>
+          <tr><td>Rotacja aktyw&oacute;w</td><td>0,13</td><td>Ci&#281;&#380;ki bilans wobec skali sprzeda&#380;y</td></tr>
+        </tbody>
+      </table></div>
+      <p>Mar&#380;a brutto jest jedynym miejscem, w kt&oacute;rym wida&#263; realny biznes: kopalnia dzia&#322;a. Wszystko ni&#380;ej to odpisy, amortyzacja i koszt d&#322;ugu &mdash; dlatego mar&#380;a operacyjna nie mierzy tu sprawno&#347;ci zarz&#261;du, a mierzy kurs bitcoina w oknie sprawozdawczym.</p>
+      <p>Luki mi&#281;dzy zwrotem z kapita&#322;u a jego kosztem <strong>nie da si&#281; jednak wyt&#322;umaczy&#263; ksi&#281;gowo&#347;ci&#261;</strong> &mdash; przy tej r&oacute;&#380;nicy ka&#380;dy dolar wch&#322;oni&#281;ty przez biznes niszczy warto&#347;&#263;, dop&oacute;ki nie zacznie generowa&#263; przychodu kontraktowego. To arytmetyczny sens transformacji: nie jest ambicj&#261;, jest konieczno&#347;ci&#261;.</p>
+      <p class="ptr">Poprzedni raport nazwa&#322; t&#281; r&oacute;&#380;nic&#281; najgorsz&#261; w portfelu &mdash; to by&#322;o nieprawd&#261;; szczeg&oacute;&#322;y w sekcji 16.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS &mdash; NAJSILNIEJSZE OGRANICZENIE</div></div><div class="section-toggle" id="s8-toggle">&#9660;</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Warto&#347;&#263;</th><th>Pr&oacute;g, przy kt&oacute;rym to boli</th></tr></thead>
+        <tbody>
+          <tr><td>Got&oacute;wka</td><td>$421,27 mln</td><td>Poni&#380;ej kwarta&#322;u wyp&#322;yw&oacute;w</td></tr>
+          <tr><td>D&#322;ug ca&#322;kowity</td><td>$2,47 mld</td><td>D&#322;ug / kapita&#322; w&#322;asny <strong>1,40</strong></td></tr>
+          <tr><td>Kapita&#322; w&#322;asny</td><td>$1,76 mld</td><td>$4,35 na akcj&#281;</td></tr>
+          <tr><td>Wska&#378;nik bie&#380;&#261;cy</td><td><strong>0,89</strong></td><td>Zobowi&#261;zania kr&oacute;tkie przewy&#380;szaj&#261; aktywa obrotowe</td></tr>
+          <tr><td>Kapita&#322; obrotowy</td><td><strong>-$64,63 mln</strong></td><td>Ujemny</td></tr>
+          <tr><td>Pokrycie odsetek</td><td>-59,63</td><td>Ujemne, bo wynik operacyjny jest ujemny</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td><strong>-1,64</strong></td><td>Poni&#380;ej 3,0 = podwy&#380;szone ryzyko niewyp&#322;acalno&#347;ci</td></tr>
+          <tr><td>Piotroski F-Score</td><td>3</td><td>Na 9 mo&#380;liwych</td></tr>
+        </tbody>
+      </table></div>
+      <p>Trzeba to przeczyta&#263; razem, nie wiersz po wierszu. Sp&oacute;&#322;ka ma wska&#378;nik bie&#380;&#261;cy pod jedno&#347;ci&#261;, ujemny kapita&#322; obrotowy, ujemne wolne przep&#322;ywy i ocen&#281; Altmana w strefie ostrzegawczej &mdash; a jednocze&#347;nie <em>sp&#322;aca d&#322;ug i skupuje akcje</em>. Da si&#281; to pogodzi&#263; tylko w jeden spos&oacute;b: skarbiec jest realnym &#378;r&oacute;d&#322;em p&#322;ynno&#347;ci i jest w tej roli zu&#380;ywany.</p>
+      <p>St&#261;d przeformu&#322;owanie ryzyka: ocena Altmana nie znaczy, &#380;e grozi upad&#322;o&#347;&#263; w nast&#281;pnym kwartale, bo sp&oacute;&#322;ka ma po sprzeda&#380;y czym p&#322;aci&#263;. Znaczy, &#380;e <strong>przy trwale niskim bitcoinie obs&#322;uga zobowi&#261;za&#324; zale&#380;y od ceny aktywa, na kt&oacute;re sp&oacute;&#322;ka nie ma wp&#322;ywu</strong> &mdash; a cz&#281;&#347;&#263; monet jest zastawiona, wi&#281;c dost&#281;pna wolniej i taniej. Po stronie pozytywnej <strong>ryzyko rozwodnienia jest odwr&oacute;cone</strong>, cho&#263; skup wyhamowa&#322; w ostatnim kwartale.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE</div></div><div class="section-toggle" id="s9-toggle">&#9660;</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Podpisany najemca na moc AI.</strong> Jedyny katalizator, kt&oacute;ry zmieni&#322;by kategori&#281; sp&oacute;&#322;ki, a nie tylko jej kurs. Umowa na cho&#263;by cz&#281;&#347;&#263; Long Ridge przenios&#322;aby przych&oacute;d z kategorii &bdquo;zmienny, bez si&#322;y cenowej&rdquo; do &bdquo;kontraktowy, wieloletni&rdquo; &mdash; i dopiero wtedy mno&#380;nik ze sprzeda&#380;y mia&#322;by fundament.</div>
+      <div class="alert alert-success"><strong>2. Kontynuacja hossy na bitcoinie.</strong> D&#378;wignia dzia&#322;a: przy sta&#322;ym d&#322;ugu netto ruch bitcoina o 10% przesuwa aktywa finansowe netto o ok. jedn&#261; pi&#261;t&#261; ich wielko&#347;ci. Realne, ale ilo&#347;ciowo skromne wobec dzisiejszej ceny.</div>
+      <div class="alert alert-info"><strong>3. Wymuszone zamykanie kr&oacute;tkich pozycji.</strong> Blisko trzy dziesi&#261;te akcji w obrocie s&#261; kr&oacute;tko sprzedane, a poziom nie drgn&#261;&#322; przez ca&#322;y rajd. To mechanika rynku, nie argument o warto&#347;ci &mdash; ale dzia&#322;a gwa&#322;townie.</div>
+      <div class="alert alert-success"><strong>4. Dalszy wykup d&#322;ugu z dyskontem.</strong> Zarz&#261;d pokaza&#322; w marcu, &#380;e umie zamieni&#263; aktywo o zmiennej wycenie na umorzone zobowi&#261;zanie taniej ni&#380; po nominale. Ka&#380;de powt&oacute;rzenie poprawia bilans bez pro&#347;by o pieni&#261;dze od akcjonariuszy.</div>
+      <div class="alert alert-info"><strong>5. Zgody regulacyjne.</strong> FERC dla Long Ridge i przy&#322;&#261;czenie w ERCOT to zdarzenia binarne o konkretnych terminach, kt&oacute;rych dzisiejsza wycena cz&#281;&#347;ciowo ju&#380; oczekuje.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGRO&#379;ENIA</div></div><div class="section-toggle" id="s10-toggle">&#9660;</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Sp&oacute;&#322;ka celowa oddaje po&#322;ow&#281; warto&#347;ci &mdash; zarzut JPMorgana.</strong> Najpowa&#380;niejszy punkt tego raportu i nie mia&#322;em go cztery dni temu. MARA wybra&#322;a model lekki kapita&#322;owo: wnosi zasilone grunty do sp&oacute;&#322;ki celowej ze Starwood Digital Ventures, zamiast budowa&#263; i eksploatowa&#263; centra danych samodzielnie. Konsekwencja jest arytmetyczna: <strong>u akcjonariusza zostaje po&#322;owa wytworzonej warto&#347;ci</strong>. Model lekki zmniejsza ryzyko wykonawcze, ale rynek p&#322;aci jak za ca&#322;o&#347;&#263;. Pr&oacute;g zmiany tezy: warunki podzia&#322;u inne ni&#380; p&oacute;&#322; na p&oacute;&#322;.</div>
+      <div class="alert alert-danger"><strong>2. Prognoza kurcz&#261;cych si&#281; przychod&oacute;w.</strong> Konsensus zak&#322;ada spadek sprzeda&#380;y o 12,58% rocznie przez trzy lata &mdash; i ten sam konsensus wystawia rekomendacj&#281; kupuj. Pr&oacute;g alarmowy: kolejny kwarta&#322; bez zakontraktowanego megawata przy spadaj&#261;cym przychodzie z wydobycia.</div>
+      <div class="alert alert-danger"><strong>3. Po&#322;&oacute;wkowanie 2028.</strong> Nagroda za blok spadnie o po&#322;ow&#281;. To data w kalendarzu, nie ryzyko probabilistyczne &mdash; a pierwszy gigawat ma powsta&#263; zaledwie rok wcze&#347;niej. Margines na po&#347;lizg jest cienki.</div>
+      <div class="alert alert-danger"><strong>4. Zmienno&#347;&#263; i p&#322;ynno&#347;&#263; bilansu.</strong> Beta ponad pi&#281;&#263; przy ujemnym kapitale obrotowym oznacza, &#380;e spadek bitcoina uderza jednocze&#347;nie w wycen&#281; i w zdolno&#347;&#263; p&#322;acenia. Pr&oacute;g: bitcoin trwale poni&#380;ej $60 tys. przy wci&#261;&#380; ujemnych przep&#322;ywach.</div>
+      <div class="alert alert-danger"><strong>5. Odwr&oacute;cenie nastroju sektorowego.</strong> Cztery pi&#261;te ostatniego ruchu to przecena biznesu, a nie nap&#322;yw got&oacute;wki. Nastr&oacute;j odwraca si&#281; bez zmiany jakiejkolwiek liczby w sprawozdaniu. Pr&oacute;g: utrata &#347;redniej 50-sesyjnej z sekcji 12.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA &mdash; TRZY DROGI WYJ&#346;CIA Z KOPALNI</div></div><div class="section-toggle" id="s11-toggle">&#9660;</div></div>
+    <div class="section-body" id="s11-body">
+      <p>Ca&#322;a bran&#380;a pr&oacute;buje uciec od wydobycia w stron&#281; mocy obliczeniowej. R&oacute;&#380;ni&#261; si&#281; sposobem, a spos&oacute;b decyduje o tym, ile z wytworzonej warto&#347;ci zostanie u akcjonariusza.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Sp&oacute;&#322;ka</th><th>Model wej&#347;cia w AI</th><th>ROIC minus WACC</th><th>Kto p&#322;aci za budow&#281;</th></tr></thead>
+        <tbody>
+          <tr><td><strong>MARA</strong></td><td>Wnosi zasilone grunty do sp&oacute;&#322;ki celowej</td><td>-86,04 pp</td><td>Partner &mdash; i bierze po&#322;ow&#281; warto&#347;ci</td></tr>
+          <tr><td><strong>IREN</strong></td><td>Buduje i eksploatuje samodzielnie</td><td>-26,44 pp</td><td>Sp&oacute;&#322;ka &mdash; nak&#322;ady przekraczaj&#261;ce roczne przychody</td></tr>
+          <tr><td><strong>MSTR</strong></td><td>Nie wchodzi &mdash; czysty skarbiec bitcoinowy</td><td>-93,38 pp</td><td>Nie dotyczy</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px">R&oacute;&#380;nice ROIC-WACC z w&#322;asnego katalogu analiz TP Corp; obliczenie w&#322;asne z danych S&amp;P dla ka&#380;dej sp&oacute;&#322;ki osobno.</p></div>
+      <p><strong>MARA siedzi dok&#322;adnie pomi&#281;dzy</strong>: nie ma dyscypliny kapita&#322;owej sp&oacute;&#322;ki, kt&oacute;ra buduje sama i zatrzymuje ca&#322;o&#347;&#263;, ani czysto&#347;ci sp&oacute;&#322;ki, kt&oacute;ra jest wy&#322;&#261;cznie skarbcem.</p>
+      <div class="alert alert-info"><strong>JPMorgan postawi&#322; te dwie sp&oacute;&#322;ki przeciw sobie tego samego dnia</strong> &mdash; obni&#380;y&#322; MARA i podni&#oacute;s&#322; IREN, wprost por&oacute;wnawczo: inne sp&oacute;&#322;ki w pokryciu daj&#261; bardziej bezpo&#347;redni udzia&#322; we wzro&#347;cie z centr&oacute;w danych. Konsekwencje dla portfela w sekcji 14.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">&#9660;</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Warto&#347;&#263;</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Kurs zamkni&#281;cia</td><td><strong>$13,28</strong></td><td>+0,30% w sesji</td></tr>
+          <tr><td>Otwarcie / maksimum / minimum</td><td>$13,94 / $13,98 / $13,16</td><td><strong>Otwarcie wy&#380;ej od zamkni&#281;cia &mdash; odwr&oacute;cenie w trakcie sesji</strong></td></tr>
+          <tr><td>Zakres 52 tygodni</td><td>$6,66 &ndash; $23,45</td><td>Kurs +99% nad do&#322;kiem, -43% pod szczytem</td></tr>
+          <tr><td>Zmiana 52-tygodniowa</td><td>-27,39%</td><td>Wci&#261;&#380; ujemna mimo rajdu</td></tr>
+          <tr><td>&#346;rednia 50 sesji</td><td>$11,20</td><td>Kurs +18,6% powy&#380;ej (obliczenie w&#322;asne)</td></tr>
+          <tr><td>&#346;rednia 200 sesji</td><td>$10,96</td><td>Kurs +21,2% powy&#380;ej; uk&#322;ad dodatni, ale w&#261;ski</td></tr>
+          <tr><td>RSI</td><td>63,02</td><td>Podwy&#380;szony, ale <strong>nie wykupiony</strong></td></tr>
+          <tr><td>Beta</td><td><strong>5,33</strong></td><td>Najwy&#380;sza w ca&#322;ym katalogu TP Corp</td></tr>
+          <tr><td>Kr&oacute;tka sprzeda&#380;</td><td>28,50% akcji</td><td>110,11 mln, nieruszona przez ca&#322;y rajd przy pokryciu 2,34 dnia obrotu. Skoro zamkni&#281;cie by&#322;oby &#322;atwe, a nikt tego nie zrobi&#322; &mdash; gr&#281; kr&oacute;tk&#261; prowadz&#261; inwestorzy z tez&#261;, nie spekulanci</td></tr>
+          <tr><td>Wolumen</td><td>51,59 mln</td><td>Powy&#380;ej &#347;redniej 20-sesyjnej 48,75 mln</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warning"><strong>&#346;wieca z 21 wrze&#347;nia jest ostrzegawcza.</strong> W dniu o&#347;miomiesi&#281;cznego szczytu bitcoina MARA otwar&#322;a si&#281; luk&#261; w g&oacute;r&#281; o ok. 5%, dotkn&#281;&#322;a maksimum i odda&#322;a niemal ca&#322;y ruch, zamykaj&#261;c si&#281; ledwo nad poprzednim zamkni&#281;ciem &mdash; przy wolumenie powy&#380;ej &#347;redniej. Podwy&#380;szony obr&oacute;t przy oddanym wzro&#347;cie oznacza, &#380;e kto&#347; wykorzysta&#322; si&#322;&#281; do wyj&#347;cia. Jedna &#347;wieca nie tworzy trendu, ale ta stoi w sprzeczno&#347;ci z narracj&#261; dnia.</div>
+      <p><strong>Opory:</strong> maksimum sesji, okr&#261;g&#322;e $15, konsensus z sekcji 13, szczyt roczny. <strong>Wsparcia:</strong> minimum sesji, potem strefa obu &#347;rednich krocz&#261;cych &mdash; jej utrata cofn&#281;&#322;aby obraz do trendu bocznego.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">&#9660;</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td>Kr&oacute;tki (1&ndash;3 mies.)</td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Trend nietkni&#281;ty, RSI z zapasem, ale &#347;wieca odwrotu i nieruszona kr&oacute;tka sprzeda&#380; ka&#380;&#261; poczeka&#263; na potwierdzenie</td></tr>
+          <tr><td>&#346;redni (6&ndash;18 mies.)</td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Kurs stan&#261;&#322; praktycznie na scenariuszu bazowym. Rozstrzygnie podpis najemcy albo jego brak, nie cena bitcoina</td></tr>
+          <tr><td>D&#322;ugi (3&ndash;5 lat)</td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Po&#322;&oacute;wkowanie 2028 i po&#322;owiczny udzia&#322; w warto&#347;ci sp&oacute;&#322;ki celowej to dwa trwa&#322;e obci&#261;&#380;enia przy zwrocie pod kosztem kapita&#322;u</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Konsensus, kt&oacute;ry nie jest konsensusem</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Instytucja</th><th>Rekomendacja</th><th>Cel</th></tr></thead>
+        <tbody>
+          <tr><td>H.C. Wainwright (11.09)</td><td>Buy</td><td><strong>$20</strong></td></tr>
+          <tr><td>JPMorgan (14.09)</td><td><strong>Underweight</strong>, z Overweight</td><td>$11</td></tr>
+          <tr><td>Morgan Stanley (18.09)</td><td><strong>Underweight</strong>, cel podniesiony z $6</td><td>$11</td></tr>
+          <tr><td><em>&#346;rednia z 14 analityk&oacute;w</em></td><td><em>Buy</em></td><td><em>$17,99</em></td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px">&#377;r&oacute;d&#322;a: StockAnalysis (konsensus), doniesienia TheFly, TipRanks i Investing.com o poszczeg&oacute;lnych rekomendacjach.</p></div>
+      <p>&#346;rednia arytmetyczna jest tu myl&#261;ca. <strong>Dwa najwi&#281;ksze banki maj&#261; cele o ok. 17% poni&#380;ej bie&#380;&#261;cego kursu i rekomendacj&#281; sprzedaj</strong>, a &#347;rednia z czternastu opinii sugeruje kilkudziesi&#281;cioprocentowy potencja&#322;. To nie rozk&#322;ad wok&oacute;&#322; jednej tezy, a dwie niezgodne tezy u&#347;rednione do liczby, kt&oacute;rej nikt nie broni.</p>
+      <p><strong>Strategia.</strong> Kurs nie oferuje marginesu bezpiecze&#324;stwa &mdash; stoi na warto&#347;ci bazowej. Przy pozycji posiadanej: nie powi&#281;ksza&#263;. Przy nieposiadanej: nie zaczyna&#263; przed listopadowymi wynikami.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA TP CORP</div></div><div class="section-toggle" id="s14-toggle">&#9660;</div></div>
+    <div class="section-body" id="s14-body">
+      <p>MARA wa&#380;y <strong>4,33%</strong> portfela przy &#347;redniej cenie wej&#347;cia <strong>$9,95</strong>. Wynik pozycji to dzi&#347; <strong>+33,5%</strong> &mdash; wobec +11,2% w eksporcie z 17 wrze&#347;nia. Cztery sesje praktycznie potroi&#322;y zysk na tej pozycji.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Powi&#261;zanie</th><th>Waga</th><th>Na czym polega</th></tr></thead>
+        <tbody>
+          <tr><td>MARA + MSTR</td><td><strong>6,35% (suma dwu pozycji)</strong></td><td>Bezpo&#347;rednia ekspozycja na cen&#281; bitcoina &mdash; dwie r&oacute;&#380;ne konstrukcje tego samego zak&#322;adu</td></tr>
+          <tr><td>MARA + IREN + CRWV</td><td><strong>10,65% (suma trzech pozycji)</strong></td><td>Zasilone grunty i moc obliczeniowa pod AI &mdash; ten sam temat, trzy modele biznesowe</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-warning"><strong>Bank postawi&#322; dwie Twoje pozycje przeciw sobie.</strong> 14 wrze&#347;nia JPMorgan w jednym ruchu obni&#380;y&#322; MARA i podni&#oacute;s&#322; IREN &mdash; a Ty masz obie. To rzadka sytuacja, w kt&oacute;rej zewn&#281;trzna analiza m&oacute;wi nie &bdquo;temat jest dobry albo z&#322;y&rdquo;, ale &bdquo;w tym temacie jeden spos&oacute;b wykonania bije drugi&rdquo;. Nie trzeba si&#281; zgadza&#263;, trzeba mie&#263; odpowied&#378;, bo dotyczy dw&oacute;ch pozycji naraz.</div>
+      <p>To powt&oacute;rzenie wzorca z tej serii analiz: wsp&oacute;lny temat nie oznacza wsp&oacute;lnej jako&#347;ci wykonania. Trzy sp&oacute;&#322;ki mog&#261; budowa&#263; pod ten sam popyt i rozej&#347;&#263; si&#281; wynikiem, bo r&oacute;&#380;ni je to, ile warto&#347;ci zatrzymuj&#261;.</p>
+      <p>Drugi wniosek dotyczy jako&#347;ci: r&oacute;&#380;nica mi&#281;dzy zwrotem z kapita&#322;u a jego kosztem stawia MARA na <strong>drugim od ko&#324;ca miejscu w&#347;r&oacute;d posiadanych pozycji</strong> &mdash; gorzej wypada tylko MSTR. Obie s&#261; w niewielkiej wadze i to w&#322;a&#347;ciwa proporcja: pozycja spekulacyjna ma by&#263; ma&#322;a, a nie usprawiedliwiana.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">&#9660;</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead">Cztery dni temu napisa&#322;em, &#380;e MARA jest lewarowanym sposobem na posiadanie bitcoina i &#380;e jej wycena odpowiada kursowi kryptowaluty, nie jako&#347;ci sp&oacute;&#322;ki. Dane z 21 wrze&#347;nia mnie z tego wybi&#322;y. Kurs wzr&oacute;s&#322; o jedn&#261; pi&#261;t&#261;, ale <strong>bitcoin odpowiada tylko za oko&#322;o jedn&#261; pi&#261;t&#261; tego ruchu</strong> &mdash; reszta to przecena biznesu zasilonych grunt&oacute;w, kt&oacute;ry nie ma jeszcze ani jednego podpisanego najemcy. Tydzie&#324; wcze&#347;niej ten sam biznes &#347;ci&#261;&#322; o dwa stopnie JPMorgan, z zarzutem, kt&oacute;rego nie mia&#322;em w poprzedniej analizie i kt&oacute;ry uwa&#380;am za trafny: model lekki kapita&#322;owo oddaje po&#322;ow&#281; wytworzonej warto&#347;ci partnerowi.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Cz&#281;&#347;&#263; obrazu wygl&#261;da jednak lepiej, ni&#380; brzmi. Zarz&#261;d nie rozwadnia akcjonariuszy, ale ich odkupuje, sp&#322;aca d&#322;ug netto i wykupi&#322; miliard obligacji zerokuponowych z dyskontem &mdash; decyzje wy&#380;szej klasy ni&#380; przeci&#281;tna w tej bran&#380;y. Tylko finansuje je sprzeda&#380;&#261; skarbca, kt&oacute;ry mia&#322; by&#263; ca&#322;&#261; tez&#261;. Wychodzi z tego portret nie kopalni i nie funduszu, lecz <strong>przedsi&#281;biorstwa w po&#322;owie przeprowadzki, finansuj&#261;cego j&#261; sprzeda&#380;&#261; dotychczasowego maj&#261;tku</strong>. Taki stan da si&#281; obroni&#263;, dop&oacute;ki przeprowadzka ma termin. Termin nazywa si&#281; pa&#378;dziernik 2027 i zale&#380;y od dwu regulator&oacute;w.</p>
+
+      <div class="sum-block">
+        <h4>Co musi si&#281; wydarzy&#263;, &#380;eby teza zadzia&#322;a&#322;a</h4>
+        <ul class="check-list">
+          <li><span class="ck no">&times;</span><span><strong>Podpisany najemca na moc AI.</strong> Warunek konieczny, wci&#261;&#380; niespe&#322;niony. Bez niego mno&#380;nik ze sprzeda&#380;y nie ma podstawy.</span></li>
+          <li><span class="ck wait">!</span><span><strong>Zgoda FERC i przy&#322;&#261;czenie w ERCOT.</strong> W toku, terminy poza kontrol&#261; sp&oacute;&#322;ki.</span></li>
+          <li><span class="ck wait">!</span><span><strong>Ujawnienie warunk&oacute;w podzia&#322;u w sp&oacute;&#322;ce celowej.</strong> Je&#347;li s&#261; korzystniejsze ni&#380; p&oacute;&#322; na p&oacute;&#322;, zarzut JPMorgana traci ostro&#347;&#263;.</span></li>
+          <li><span class="ck yes">&#10003;</span><span><strong>Brak rozwodnienia i skarbiec jako &#378;r&oacute;d&#322;o p&#322;ynno&#347;ci.</strong> Oba spe&#322;nione &mdash; ale spe&#322;nianie drugiego zu&#380;ywa aktywo, a skup wyhamowa&#322;.</span></li>
+          <li><span class="ck no">&times;</span><span><strong>Przychody przestaj&#261; si&#281; kurczy&#263;.</strong> Nowy biznes musi zast&#261;pi&#263; stary szybciej, ni&#380; stary maleje.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizator&oacute;w</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>3 listopada 2026</strong></td><td>Wyniki Q3 2026</td><td>Potwierdzenie liczby monet i tempa skupu akcji</td></tr>
+            <tr><td>Q4 2026 &ndash; Q1 2027</td><td>Decyzja FERC dla Long Ridge</td><td>Zdarzenie binarne dla harmonogramu</td></tr>
+            <tr><td><strong>pa&#378;dziernik 2027</strong></td><td>Planowany pierwszy gigawat</td><td>Test wiarygodno&#347;ci harmonogramu zarz&#261;du</td></tr>
+            <tr><td>2028</td><td>Po&#322;&oacute;wkowanie nagrody za blok</td><td>Data w kalendarzu, nie ryzyko &mdash; obetnie przych&oacute;d z wydobycia o po&#322;ow&#281;</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wska&#378;niki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wska&#378;nik</th><th>Stan obecny</th><th>Pr&oacute;g alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Liczba bitcoin&oacute;w w skarbcu</td><td>ok. 35,6 tys.</td><td>Spadek pod 30 tys. bez wykupu d&#322;ugu w zamian</td><td><span class="mon-dot y"></span>obserwuj</td></tr>
+            <tr><td>Zakontraktowane megawaty pod AI</td><td>zero</td><td>Zero po wynikach za Q4 2026</td><td><span class="mon-dot r"></span>alarm</td></tr>
+            <tr><td>Liczba akcji</td><td>spadek w skali roku</td><td>Powr&oacute;t do emisji nowych akcji</td><td><span class="mon-dot g"></span>dobrze</td></tr>
+            <tr><td>Przep&#322;ywy operacyjne</td><td>ujemne</td><td>Pogorszenie przy bitcoinie powy&#380;ej $85 tys.</td><td><span class="mon-dot y"></span>obserwuj</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan dzia&#322;ania</h4>
+        <p><strong>Wielko&#347;&#263; pozycji:</strong> obecna waga jest w&#322;a&#347;ciwa dla aktywa o tej zmienno&#347;ci i tej jako&#347;ci bilansu. Nie powi&#281;ksza&#263;. <strong>Transze wej&#347;cia przy braku pozycji:</strong> pierwsza w strefie &#347;rednich krocz&#261;cych z sekcji 12, druga dopiero po podpisaniu najemcy &mdash; nawet je&#347;li b&#281;dzie dro&#380;ej, bo dopiero wtedy wycena ma fundament.</p>
+        <p><strong>Realizacja zysk&oacute;w:</strong> pierwszy pr&oacute;g w okolicy g&oacute;rnego celu rynkowego z sekcji 13, drugi przy g&oacute;rnej granicy warto&#347;ci godziwej; przy tej becie transzami, nie w jednym punkcie. <strong>Warunek wyj&#347;cia z tezy:</strong> brak zakontraktowanych megawat&oacute;w po wynikach za Q4 2026 przy jednoczesnym spadku przychod&oacute;w z wydobycia &mdash; wtedy zostaje sam skarbiec, a za sam skarbiec nie warto p&#322;aci&#263; premii.</p>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt ko&#324;cowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-uwaga)">NEUTRALNA</div>
+        <p>Utrzymuj&#281; ocen&#281; neutraln&#261;, ale jej tre&#347;&#263; jest inna ni&#380; cztery dni temu i to jest g&#322;&oacute;wna informacja tego raportu. Wtedy by&#322;a neutralna, bo uzna&#322;em wycen&#281; za odbicie ceny bitcoina. Dzi&#347; jest neutralna, bo <strong>rynek zacz&#261;&#322; wycenia&#263; biznes zasilonych grunt&oacute;w tak, jakby kontrakt by&#322; ju&#380; podpisany</strong>, a kurs stan&#261;&#322; na scenariuszu bazowym &mdash; cena godziwa przy wysokim rozrzucie wynik&oacute;w.</p>
+        <p>Nie schodz&#281; do sprzeda&#380;y z jednego powodu: robi&#322;bym to cztery dni po ocenie neutralnej wy&#322;&#261;cznie dlatego, &#380;e kurs wzr&oacute;s&#322;. To gonienie ceny, nie analiza. Argumenty za ci&#281;ciem s&#261; jednak prawdziwe: zwrot z kapita&#322;u g&#322;&#281;boko pod jego kosztem, ocena Altmana w strefie ostrzegawczej, prognoza kurcz&#261;cych si&#281; przychod&oacute;w, dwa wielkie banki z celem pod kursem i &#347;wieca odwrotu w dniu o&#347;miomiesi&#281;cznego szczytu bitcoina. Je&#347;li do listopada nie pojawi si&#281; zakontraktowany megawat, ocena spadnie &mdash; z powodu braku wykonania, nie wykresu.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-uwaga)">NEUTRALNA</b></div>
+          <div><span>Fair value 12&ndash;18 mies.</span><b>$7 &ndash; $21</b></div>
+          <div><span>Scenariusz negatywny</span><b>ok. $7</b></div>
+          <div><span>Scenariusz pozytywny</span><b>ok. $21</b></div>
+          <div><span>Sugerowana pozycja</span><b>Bez zmian, nie powi&#281;ksza&#263;</b></div>
+          <div><span>Najbli&#380;szy katalizator</span><b>Wyniki 3 listopada</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-header" onclick="toggleSection('s16')"><div class="section-title-wrap"><div class="section-num">16</div><div class="section-title">KOREKTA POPRZEDNIEJ ANALIZY</div></div><div class="section-toggle" id="s16-toggle">&#9660;</div></div>
+    <div class="section-body" id="s16-body">
+      <p>Cztery dni to kr&oacute;tko, ale wystarczy&#322;o, by wysz&#322;o na jaw kilka brak&oacute;w poprzedniego raportu &mdash; w tym dwa publicznie dost&#281;pne <em>przed</em> jego napisaniem.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Co by&#322;o</th><th>Co jest poprawnie</th><th>Waga b&#322;&#281;du</th></tr></thead>
+        <tbody>
+          <tr><td>Brak wzmianki o rekomendacjach bank&oacute;w</td><td><strong>JPMorgan &#347;ci&#261;&#322; MARA o dwa stopnie 14 wrze&#347;nia</strong>, trzy dni przed moim raportem, z konkretnym zarzutem wobec modelu sp&oacute;&#322;ki celowej. Tego samego dnia podni&#oacute;s&#322; IREN &mdash; drug&#261; pozycj&#281; z tego portfela</td><td><strong>Du&#380;y.</strong> Pomin&#261;&#322;em podwa&#380;enie dok&#322;adnie tej tezy, kt&oacute;r&#261; opisywa&#322;em jako stron&#281; pozytywn&#261;</td></tr>
+          <tr><td>Brak wzmianki o podj&#281;ciu pokrycia przez H.C. Wainwright</td><td>Rekomendacje rozchodzi&#322;y si&#281; skrajnie &mdash; i ten rozjazd sam by&#322; informacj&#261; (sekcja 13)</td><td><strong>&#346;redni.</strong> Nie pokaza&#322;em, &#380;e rynek jest podzielony</td></tr>
+          <tr><td>&bdquo;R&oacute;&#380;nica ROIC minus WACC &mdash; <strong>najgorsza w Twoim portfelu</strong>&rdquo;</td><td>Nieprawda. MSTR ma luk&#281; wyra&#378;nie szersz&#261;; MARA jest <strong>druga od ko&#324;ca</strong></td><td><strong>&#346;redni.</strong> Superlatyw bez policzenia &mdash; dok&#322;adnie ten b&#322;&#261;d, przed kt&oacute;rym ostrzega w&#322;asna procedura</td></tr>
+          <tr><td>Teza: &bdquo;lewarowany spos&oacute;b na posiadanie bitcoina&rdquo;</td><td>Mechanizm nazwany niedok&#322;adnie: bitcoin odpowiada za ok. jedn&#261; pi&#261;t&#261; ruchu, a zarz&#261;d t&#281; d&#378;wigni&#281; <em>zmniejsza</em></td><td><strong>&#346;redni.</strong> Kierunek dobry, ale nie ta zmienna dominuje</td></tr>
+          <tr><td>&bdquo;Bitcoin w skarbcu ok. 36 900&rdquo;</td><td>Serwisy zewn&#281;trzne podaj&#261; ok. 35 577 &mdash; i to <em>po</em> zakupie 1 292 monet</td><td><strong>Ma&#322;y, nierozstrzygni&#281;ty.</strong> Do potwierdzenia w raporcie za Q3</td></tr>
+          <tr><td>Koszt kapita&#322;u 21,78%</td><td>Dane S&amp;P: 23,24%. Luka pog&#322;&#281;bi&#322;a si&#281; do -86,04 pp</td><td><strong>Brak b&#322;&#281;du</strong> &mdash; aktualizacja danych</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert alert-info"><strong>Co si&#281; obroni&#322;o.</strong> Przedzia&#322; $8&ndash;17 obj&#261;&#322; kurs przez ca&#322;y okres. Utrzyma&#322;a si&#281; teza, &#380;e ujemne wolne przep&#322;ywy s&#261; finansowane sprzeda&#380;&#261; bitcoina &mdash; a teraz znam jej skal&#281;: ok. 38,2 tys. monet w 2026 roku, wi&#281;cej ni&#380; sp&oacute;&#322;ka dzi&#347; posiada. Obroni&#322;o si&#281; te&#380; wskazanie skupu akcji jako wyr&oacute;&#380;nika oraz diagnoza, &#380;e w&#261;skim gard&#322;em jest regulator, nie popyt. Ocena neutralna by&#322;a w&#322;a&#347;ciwa jako ocena, przy myl&#261;cym uzasadnieniu.</div>
+      <p>Wniosek na przysz&#322;o&#347;&#263;: <strong>przy sp&oacute;&#322;ce spekulacyjnej trzeba sprawdza&#263; zmiany rekomendacji z ostatnich dwu tygodni, nie tylko dane sprawozdawcze</strong>. Ci&#281;cie o dwa stopnie z uzasadnieniem strukturalnym jest informacj&#261; o modelu, nie o cenie.</p>
+    </div>
+  </div>
+
+</main>
+
+<div class="footer">
+  <div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+  <p>Analiza: 21 wrze&#347;nia 2026 | Cena: <strong>$13,28</strong> (zamkni&#281;cie 21.09.2026, 16:00 EDT) | <strong>Aktualizacja analizy z 17 wrze&#347;nia 2026 &mdash; ocena neutralna utrzymana, uzasadnienie zmienione</strong> | <strong>Dziennik korekt (pe&#322;ny wykaz w sekcji 16):</strong> warto&#347;&#263; godziwa $8&ndash;17 &rarr; $7&ndash;21, bo o wycenie decyduj&#261; dwie niezale&#380;ne zmienne, nie jedna; dodano podw&oacute;jne obni&#380;enie rekomendacji przez JPMorgan (14.09) i podj&#281;cie pokrycia przez H.C. Wainwright (11.09), pomini&#281;te w poprzedniej wersji; skorygowano twierdzenie, &#380;e r&oacute;&#380;nica ROIC-WACC jest najgorsza w portfelu &mdash; MSTR ma luk&#281; szersz&#261;; koszt kapita&#322;u 21,78% &rarr; 23,24%; dodano rozk&#322;ad ruchu kursu pokazuj&#261;cy, &#380;e bitcoin odpowiada za ok. jedn&#261; pi&#261;t&#261; wzrostu | Dane: StockAnalysis / S&amp;P Global Market Intelligence, MARA Investor Relations, zestawienia bitcointreasuries.net i The Block, doniesienia TheFly, TipRanks, Reuters i CNBC &mdash; <strong>stan danych na 21.09.2026</strong> | Nie stanowi porady inwestycyjnej</p>
+
+</div>
+
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>

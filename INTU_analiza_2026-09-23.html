@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INTU — Intuit Inc. | Analiza Inwestycyjna 2026</title>
+<link rel="stylesheet" href="tp.css">
+<style id="tp-tematy">
+  .tp-tematy { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+  .tp-tematy .lab { font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px; }
+  .temat { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:.4px;
+    padding:5px 12px; border-radius:20px; background:rgba(52,211,153,.10); color:var(--accent2);
+    border:1px solid rgba(52,211,153,.28); text-decoration:none; }
+  .rb-kal { display:flex; flex-direction:column; }
+  .rb-kal span { font-size:9px; letter-spacing:1.3px; text-transform:uppercase; color:var(--text-muted); }
+  .rb-kal b { font-size:14px; font-weight:800; color:var(--ocena-kupno); }
+  .rb-kal em { font-style:normal; font-size:10.5px; color:var(--text-muted); }
+  .ptr { font-size:12.5px; color:var(--text-muted); font-style:italic; margin-top:-4px; }
+</style>
+</head>
+<body>
+<div class="tp-wm" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"><defs><pattern id="tpwm" width="360" height="230" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)"><text x="0" y="60" fill="currentColor" opacity="0.030">TP CORP</text><text x="180" y="170" fill="currentColor" opacity="0.030">TP CORP</text></pattern></defs><rect width="100%" height="100%" fill="url(#tpwm)" style="color:var(--accent,#34d399)"/></svg></div>
+
+<div class="header">
+  <div class="header-content">
+    <div class="tp-header-brand"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div><div class="tp-tag">Analiza własna · do użytku wewnętrznego</div></div>
+    <div class="ticker-badge">NASDAQ: INTU</div>
+    <div class="company-name">Intuit Inc.</div>
+    <div class="company-sub">TurboTax, QuickBooks, Credit Karma, Mailchimp · Mountain View, Kalifornia · 18 600 pracowników · rok obrotowy sierpień–lipiec</div>
+    <div class="header-meta">
+      <span class="meta-tag">Spoza portfela — obserwowana</span>
+      <span class="meta-tag">Pierwsza analiza tej spółki</span>
+      <span class="meta-tag">-58,99% w 52 tygodnie</span>
+      <div class="price-display">
+        <div class="price-main">$288,26</div>
+        <div class="price-sub">notowanie 23.09.2026, 15:26 EDT (-1,40%)</div>
+      </div>
+    </div>
+    <div class="tp-tematy"><span class="lab">Tematy</span><span class="temat">Oprogramowanie i SaaS</span><span class="temat">Fintech</span></div>
+  </div>
+</div>
+
+<div class="rating-bar rb-kupno" data-ocena="KUPNO — rynek wycenia trwały spad&#101;k przepływów w spółce, w której zagrożony produkt to jedna czwarta przychodów">
+  <div class="rb-in">
+    <div class="rb-main"><span class="rb-dot"></span><span class="rb-label">KUPNO</span><span class="rb-qual">teza na 2–3 lata, nie na kwartał</span></div>
+    <div class="rb-sep"></div>
+    <div class="rb-item"><span>Fair value</span><b>$205 &ndash; $560</b></div>
+    <div class="rb-item"><span>Potencjał</span><b style="color:var(--ocena-kupno)">-29% do +94%</b></div>
+    <div class="rb-kal"><span>Ostatnie wyniki</span><b>25 sierpnia 2026</b><em>Q4 FY26 · Dzień Inwestora 17.09</em></div>
+    <div class="rb-right">Horyzont 12–18 mies.</div>
+  </div>
+</div>
+
+<nav class="nav-sticky">
+  <div class="nav-inner">
+    <a class="nav-link" onclick="goSec('s1')">Profil</a><a class="nav-link" onclick="goSec('s2')">Produkt</a><a class="nav-link" onclick="goSec('s3')">Rynek</a><a class="nav-link" onclick="goSec('s4')">Klienci</a><a class="nav-link" onclick="goSec('s5')">Segmenty</a><a class="nav-link" onclick="goSec('s6')">Wycena</a><a class="nav-link" onclick="goSec('s7')">Marże</a><a class="nav-link" onclick="goSec('s8')">Bilans</a><a class="nav-link" onclick="goSec('s9')">Bull</a><a class="nav-link" onclick="goSec('s10')">Bear</a><a class="nav-link" onclick="goSec('s11')">Konkurencja</a><a class="nav-link" onclick="goSec('s12')">Technicals</a><a class="nav-link" onclick="goSec('s13')">Ocena</a><a class="nav-link" onclick="goSec('s14')">Portfel</a><a class="nav-link" onclick="goSec('s15')">Podsumowanie</a>
+  </div>
+</nav>
+
+<div class="summary-wrapper">
+  <div class="summary-grid">
+    <div class="metric-card"><div class="metric-label">Cena</div><div class="metric-value">$288,26</div><div class="metric-detail">-58,99% w 52 tygodnie</div></div>
+    <div class="metric-card"><div class="metric-label">Cena / wolne przepływy</div><div class="metric-value green">8,88</div><div class="metric-detail"><strong>Rentowność przepływów 11,26%</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Marża wolnych przepływów</div><div class="metric-value green">40,39%</div><div class="metric-detail">Przy nakładach <strong>0,82% przychodów</strong></div></div>
+    <div class="metric-card"><div class="metric-label">TurboTax: jednostki</div><div class="metric-value red">-2,3%</div><div class="metric-detail"><strong>Cena za sztukę +10,0%</strong> — sekcja 4</div></div>
+    <div class="metric-card"><div class="metric-label">Udział TurboTaxa</div><div class="metric-value">24,7%</div><div class="metric-detail">Zagrożony produkt to <strong>ćwierć przychodów</strong></div></div>
+    <div class="metric-card"><div class="metric-label">Rdzeń online rośnie</div><div class="metric-value green">+19,5%</div><div class="metric-detail">QuickBooks Online +22,6%</div></div>
+    <div class="metric-card"><div class="metric-label">Zwrot vs koszt kapitału</div><div class="metric-value green">+13,99 pp</div><div class="metric-detail">Altman 6,82 · Piotroski 7</div></div>
+    <div class="metric-card"><div class="metric-label">Konsensus (34 analityków)</div><div class="metric-value">$405,60</div><div class="metric-detail">+40,71% · kupno</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection('s1')"><div class="section-title-wrap"><div class="section-num">1</div><div class="section-title">PROFIL &mdash; SPÓŁKA, KTÓREJ RYNEK PRZESTAŁ WIERZYĆ</div></div><div class="section-toggle open" id="s1-toggle">&#9660;</div></div>
+    <div class="section-body open" id="s1-body">
+      <p>Intuit sprzedaje oprogramowanie finansowe: <strong>TurboTax</strong> do rozliczeń podatkowych, <strong>QuickBooks</strong> do księgowości małych i średnich firm, <strong>Credit Karma</strong> jako rynek pośrednictwa kredytowego i <strong>Mailchimp</strong> do marketingu. Dwa segmenty sprawozdawcze: Global Business Solutions i Consumer. Notowana od 1993 roku.</p>
+      <p>Rok obrotowy 2026 zakończony w lipcu był dobry: przychody <strong>$21,45 mld</strong> (+13,90%), zysk netto <strong>$4,57 mld</strong> (+18,01%), zysk na akcję <strong>$16,46</strong> (+20,4%). Kurs jest niżej o <strong>59%</strong> w skali roku. Ta rozbieżność jest całą treścią tej analizy.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Data</th><th>Zdarzenie</th><th>Znaczenie</th></tr></thead>
+        <tbody>
+          <tr><td>maj 2026</td><td>Redukcja zatrudnienia o <strong>17%</strong></td><td>Pozycja obronna, nie ofensywna &mdash; przy 18 600 pracownikach dziś</td></tr>
+          <tr><td><strong>25.08.2026</strong></td><td>Wyniki Q4 FY26 <em>powyżej</em> oczekiwań, ale <strong>prognoza na FY27: wzrost przychodów 9&ndash;10%</strong> wobec 13,90% w FY26. Odpis restrukturyzacyjny <strong>$293 mln</strong></td><td>Kurs spadł o ok. 11&ndash;12% następnego dnia. Ten dzień ściągnął w dół także Adobe i ServiceNow</td></tr>
+          <tr><td>26.08.2026</td><td>Prezes Sasan Goodarzi: <strong>&bdquo;cena jest dziś głównym powodem, dla którego klienci odchodzą od TurboTaxa&rdquo;</strong>; spółka <em>świadomie akceptuje niższy początkowy przychód na klienta</em></td><td>Najważniejsze zdanie całego kwartału &mdash; przyznanie utraty siły cenowej</td></tr>
+          <tr><td><strong>17.09.2026</strong></td><td>Dzień Inwestora: <strong>prognoza potwierdzona</strong>. FY27 nazwany <em>rokiem resetu</em> &mdash; 9&ndash;10% wzrostu przychodów, wzrost zysku na akcję w okolicy wysokich kilkunastu procent. &bdquo;Duże zakłady&rdquo; to <strong>30% przychodów, każdy rośnie ponad 30%</strong></td><td>Sześć dni temu i bez dalszego pogorszenia &mdash; to istotne przy takiej przecenie</td></tr>
+        </tbody>
+      </table></div>
+      <p>Etap: <strong>dojrzała spółka wzrostowa w fazie obrony rdzenia</strong>, nie turnaround &mdash; zarabia, rośnie i płaci dywidendę czternasty rok z rzędu. Ale rynek wycenia ją jak spółkę schyłkową i trzeba sprawdzić, czy nie ma racji.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection('s2')"><div class="section-title-wrap"><div class="section-num">2</div><div class="section-title">PRODUKT &mdash; DWIE FOSY O RÓŻNEJ GRUBOŚCI</div></div><div class="section-toggle" id="s2-toggle">&#9660;</div></div>
+    <div class="section-body" id="s2-body">
+      <p>Rynek traktuje Intuita jako jedną spółkę. Pod spodem są dwa różne modele odporności. <strong>TurboTax to transakcja raz w roku.</strong> Fosą był koszt zmiany: dane z zeszłego roku, znajomość interfejsu i lęk przed pomyłką wobec urzędu &mdash; wszystkie trzy podatne na model, który przeczyta dokumenty i wypełni formularz. Klient co roku decyduje od nowa, a raz utracony nie wraca sam.</p>
+      <p><strong>QuickBooks to system zapisu.</strong> Fosą nie jest interfejs, tylko <em>grawitacja danych</em>: lata uzgodnionych transakcji, podłączone rachunki bankowe, listy płac, integracje z bramkami płatniczymi i &mdash; najważniejsze &mdash; dostęp księgowego, który zna ten jeden system i nie chce się uczyć innego. Agent AI potrafi streścić księgi. Nie potrafi <em>być</em> księgami, dopóki ktoś nie przeniesie do niego historii i nie przełączy wszystkich integracji.</p>
+      <p><strong>Intuit Enterprise Suite</strong> wypycha ofertę w stronę średnich firm, gdzie nabywcą jest kontroler finansowy &mdash; a koszt zmiany rośnie z liczbą osób, które muszą się przestawić. Zarząd podaje, że <strong>75% klientów korporacyjnych uruchamia agenty AI co miesiąc</strong>.</p>
+      <div class="alert alert-warning"><strong>Uczciwie o słabym punkcie:</strong> QuickBooks Desktop to produkt schyłkowy. Liczba jednostek spada, a to wciąż istotna część segmentu biznesowego &mdash; liczby w sekcji 5. Mailchimp z kolei działa w marketingu automatycznym, czyli w kategorii wyjątkowo łatwej do podmiany przez model generatywny.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection('s3')"><div class="section-title-wrap"><div class="section-num">3</div><div class="section-title">RYNEK &mdash; REGULACJA JAKO OSŁONA I JAKO RYZYKO</div></div><div class="section-toggle" id="s3-toggle">&#9660;</div></div>
+    <div class="section-body" id="s3-body">
+      <p>Rozliczenia podatkowe w Stanach istnieją dzięki złożoności przepisów: dopóki odpowiedzialność za błąd spada na podatnika, gotowość do zapłaty za pewność pozostaje. To osłona warunkowa &mdash; państwowy darmowy system rozliczeń zdejmuje część rynku bez udziału konkurencji.</p>
+      <p>Księgowość małych firm jest rynkiem znacznie trwalszym: obowiązek sprawozdawczy jest ciągły, a nie roczny, i wymaga śladu audytowego. Tu Intuit konkuruje z Xero, Sage i FreshBooks, a nie z modelem językowym &mdash; bo produktem nie jest odpowiedź, tylko rejestr.</p>
+      <p>Trend zmieniający obie kategorie jest ten sam: <strong>koszt wytworzenia oprogramowania spadł</strong>, więc bariera wejścia dla konkurenta cenowego jest niższa niż kiedykolwiek. To nie strach abstrakcyjny &mdash; skutek Intuit już raportuje.</p>
+      <div class="alert alert-info"><strong>Cykliczność:</strong> minimalna w sensie gospodarczym, ale ekstremalna sezonowo. Sezon podatkowy w Stanach to styczeń&ndash;kwiecień, więc kwartał kończący się w kwietniu odpowiada za nieproporcjonalną część rocznego wyniku. <strong>Najbliższy sezon jest jedynym prawdziwym testem tezy</strong> i wypada w pierwszej połowie 2027 roku.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection('s4')"><div class="section-title-wrap"><div class="section-num">4</div><div class="section-title">KLIENCI &mdash; LICZBA, KTÓRA ROZSTRZYGA SPÓR</div></div><div class="section-toggle" id="s4-toggle">&#9660;</div></div>
+    <div class="section-body" id="s4-body">
+      <p>Tu jest najważniejsze ustalenie tego raportu i nie pochodzi z komentarza zarządu, tylko z jego własnych wskaźników operacyjnych.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Jednostki TurboTax w USA</th><th>FY 2026</th><th>FY 2025</th><th>Zmiana</th></tr></thead>
+        <tbody>
+          <tr><td>Online</td><td>34,90 mln</td><td>35,50 mln</td><td style="color:var(--ocena-sprzedaz)">-1,7%</td></tr>
+          <tr><td>Desktop</td><td>4,10 mln</td><td>4,40 mln</td><td style="color:var(--ocena-sprzedaz)">-6,8%</td></tr>
+          <tr><td><strong>Razem</strong></td><td><strong>39,00 mln</strong></td><td><strong>39,90 mln</strong></td><td style="color:var(--ocena-sprzedaz)"><strong>-2,3%</strong></td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Źródło: wskaźniki operacyjne Intuit za FY2026 (Fiscal.ai), stan na 25.08.2026.</p></div>
+      <p>Przychód TurboTaxa wzrósł w tym samym czasie o <strong>7,5%</strong>. Skoro jednostek było o 2,3% mniej, to przychód na klienta wzrósł o <strong>ok. 10,0%</strong> (obliczenie własne: iloraz przychodu i jednostek w obu latach). Wniosek jest jednoznaczny:</p>
+      <div class="alert alert-danger"><strong>Cały wzrost TurboTaxa pochodził z podniesienia ceny &mdash; a zarząd mówi wprost, że cena jest głównym powodem odchodzenia klientów.</strong> Spółka podniosła cenę o jedną dziesiątą i straciła 2,3% bazy. To nie jest zagrożenie przyszłe opisane w prognozie; to zdarzenie, które już się wykonało i jest policzalne. Prognoza wzrostu jednostek na FY27 o 2&ndash;3% wymaga odwrócenia tego trendu, dlatego zarząd obniża cenę wejścia &mdash; czyli świadomie oddaje tę dziesiątą część.</div>
+      <p>Po drugiej stronie stoi zaleta, o której łatwo zapomnieć: <strong>koncentracja odbiorców praktycznie nie istnieje</strong> &mdash; przy trzydziestu dziewięciu milionach rozliczeń żaden klient nie ma znaczenia. Osobnym aktywem jest kanał księgowych: księgowy obsługujący kilkudziesięciu klientów na QuickBooks jest jednocześnie kanałem sprzedaży i barierą wyjścia, bo jego koszt przesiadki jest wielokrotnością kosztu jednego przedsiębiorcy.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection('s5')"><div class="section-title-wrap"><div class="section-num">5</div><div class="section-title">SEGMENTY &mdash; CO WŁAŚCIWIE JEST ZAGROŻONE</div></div><div class="section-toggle" id="s5-toggle">&#9660;</div></div>
+    <div class="section-body" id="s5-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Linia przychodów</th><th>FY 2026</th><th>FY 2025</th><th>Wzrost</th><th>Udział</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Global Business Solutions</strong></td><td><strong>$12,86 mld</strong></td><td>$11,08 mld</td><td style="color:var(--ocena-kupno)">+16,1%</td><td>60,0%</td></tr>
+          <tr><td>&nbsp;&nbsp;&nbsp;QuickBooks Online (księgowość)</td><td>$5,05 mld</td><td>$4,12 mld</td><td style="color:var(--ocena-kupno)"><strong>+22,6%</strong></td><td>23,5%</td></tr>
+          <tr><td>&nbsp;&nbsp;&nbsp;Usługi online (płatności, płace, Mailchimp)</td><td>$4,87 mld</td><td>$4,18 mld</td><td style="color:var(--ocena-kupno)">+16,5%</td><td>22,7%</td></tr>
+          <tr><td>&nbsp;&nbsp;&nbsp;<em>Cały ekosystem online</em></td><td><em>$9,92 mld</em></td><td><em>$8,30 mld</em></td><td style="color:var(--ocena-kupno)"><strong>+19,5%</strong></td><td><em>46,2%</em></td></tr>
+          <tr><td>&nbsp;&nbsp;&nbsp;Ekosystem Desktop</td><td>$2,95 mld</td><td>$2,78 mld</td><td>+6,1%</td><td>13,8%</td></tr>
+          <tr><td><strong>Consumer</strong></td><td><strong>$8,58 mld</strong></td><td>$7,75 mld</td><td>+10,7%</td><td>40,0%</td></tr>
+          <tr><td>&nbsp;&nbsp;&nbsp;<strong>TurboTax</strong></td><td><strong>$5,30 mld</strong></td><td>$4,93 mld</td><td style="color:var(--ocena-uwaga)"><strong>+7,5%</strong></td><td><strong>24,7%</strong></td></tr>
+          <tr><td>&nbsp;&nbsp;&nbsp;Credit Karma</td><td>$2,64 mld</td><td>$2,20 mld</td><td style="color:var(--ocena-kupno)"><strong>+20,0%</strong></td><td>12,3%</td></tr>
+          <tr><td>ProTax (dla doradców)</td><td>$647 mln</td><td>$621 mln</td><td>+4,2%</td><td>3,0%</td></tr>
+          <tr><td><strong>Razem</strong></td><td><strong>$21,45 mld</strong></td><td>$18,83 mld</td><td>+13,90%</td><td>100%</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Źródło: podział segmentowy Intuit za FY2026 (Fiscal.ai). Udziały liczone przez mnie od sumy przychodów; linie zagnieżdżone nie sumują się do stu procent, bo część pozycji jest rozbiciem szczebla wyżej.</p></div>
+      <p>To zestawienie jest sednem sporu z rynkiem. <strong>Produkt, o który toczy się cała dyskusja, daje 24,7% przychodów i rośnie najsłabiej poza Desktopem.</strong> Najszybciej rosnące linie są najmniej wystawione na tezę &bdquo;model zrobi to za darmo&rdquo;:</p>
+      <p>QuickBooks Online rośnie o <strong>22,6%</strong>, bo jest rejestrem, a nie odpowiedzią. Credit Karma o <strong>20,0%</strong>, bo jest rynkiem pośrednictwa, w którym lepsze modele oznaczają wyższą prowizję &mdash; tu AI działa <em>na korzyść</em> spółki.</p>
+      <p>Struktura zysku operacyjnego przesuwa akcent jeszcze wyraźniej: segment biznesowy wykazał <strong>$9,89 mld</strong> zysku operacyjnego, konsumencki <strong>$6,31 mld</strong> (przed nierozliczonymi kosztami korporacyjnymi, dlatego suma przewyższa wynik skonsolidowany).</p>
+    </div>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection('s6')"><div class="section-title-wrap"><div class="section-num">6</div><div class="section-title">WYCENA &mdash; ILE SPADKU JEST JUŻ W CENIE</div></div><div class="section-toggle" id="s6-toggle">&#9660;</div></div>
+    <div class="section-body" id="s6-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>Kapitalizacja</td><td>$77,03 mld</td><td>Wartość przedsiębiorstwa $78,25 mld</td></tr>
+          <tr><td>Cena / zysk</td><td><strong>17,76</strong></td><td>Dla spółki z marżą brutto powyżej 80% to poziom przemysłowy</td></tr>
+          <tr><td><strong>Cena / wolne przepływy</strong></td><td><strong>8,88</strong></td><td><strong>Rentowność 11,26%</strong>; wartość przedsiębiorstwa do przepływów 9,02</td></tr>
+          <tr><td>Cena / sprzedaż</td><td>3,59</td><td>Prognozowana 3,29</td></tr>
+          <tr><td>Wartość przedsiębiorstwa / EBITDA</td><td>11,41</td><td>EV/EBIT 12,65</td></tr>
+          <tr><td>Cena / wartość księgowa</td><td>4,13</td><td>Do aktywów materialnych <strong>208,51</strong> &mdash; patrz sekcja 8</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Źródło: StockAnalysis / S&amp;P Global Market Intelligence, stan na 23.09.2026.</p></div>
+
+      <h3>Forward P/E &mdash; wycena zysku przyszłego</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Wskaźnik</th><th>Wartość</th><th>Odniesienie / interpretacja</th></tr></thead>
+        <tbody>
+          <tr><td>P/E trailing (TTM)</td><td>17,76</td><td>Zysk na akcję <strong>$16,46</strong>, stawka podatkowa 24,12% &mdash; zysk nie jest zaburzony zdarzeniami jednorazowymi</td></tr>
+          <tr><td><strong>Forward P/E</strong></td><td><strong>12,21</strong></td><td><strong>Niższy od bieżącego</strong> &mdash; rynek zakłada dalszy wzrost zysku, mimo narracji o rozpadzie modelu</td></tr>
+          <tr><td><strong>PEG</strong></td><td><strong>0,92</strong></td><td>&lt; 1,0 = wzrost tańszy niż mnożnik sugeruje</td></tr>
+          <tr><td>Prognoza konsensusu na 3 lata</td><td>przychody +9,21%, zysk +7,51%</td><td>Zysk wolniej niż sprzedaż, czyli oczekiwana kompresja marży</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Jak to czytać:</strong> mnożnik prognozowany niższy od bieżącego przy jednoczesnej prognozie wolniejszego wzrostu zysku niż przychodów to układ sprzeczny tylko pozornie &mdash; rynek widzi rosnący zysk nominalny przy malejącej marży. Kluczowe zastrzeżenie: konsensus zakłada, że zysk rośnie <em>wolniej</em> niż sprzedaż, czyli świadome obniżanie ceny wejścia zadziała na wolumen, ale zabierze rentowność.</p>
+
+      <h3>Ile spadku przepływów wycenia rynek &mdash; obliczenie własne</h3>
+      <p>Przy wolnych przepływach <strong>$32,42 na akcję</strong> i koszcie kapitału <strong>8,90%</strong> model renty wieczystej daje wprost implikowane tempo wzrostu: <em>koszt kapitału minus rentowność przepływów</em>, czyli 8,90% &minus; 11,25% =</p>
+      <div class="alert alert-danger"><strong>Rynek wycenia trwały spadek wolnych przepływów o ok. 2,35% rocznie &mdash; w nieskończoność.</strong> Dla porównania: przy przepływach zamrożonych na dzisiejszym poziomie i zerowym wzroście na zawsze wartość wynosi <strong>ok. $364</strong> (32,42 / 0,089), a przy skromnym wzroście 3% rocznie <strong>ok. $549</strong>. Kurs $288,26 nie zakłada więc stagnacji &mdash; zakłada erozję.</div>
+      <p class="ptr">Zastrzeżenie metodologiczne: wolne przepływy liczone są przed wynagrodzeniami w akcjach, które w spółkach tej klasy są istotne, więc powyższe kwoty są górnym oszacowaniem. Rozwodnienie jest jednak ujemne &mdash; liczby w sekcji 8.</p>
+
+      <h3>Scenariusze i wartość godziwa</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Scenariusz</th><th>Założenia</th><th>Wynik</th></tr></thead>
+        <tbody>
+          <tr><td>Negatywny</td><td>Przychód TurboTaxa zaczyna spadać, obniżka ceny nie kupuje wolumenu, segment biznesowy hamuje do 10%; przepływy na akcję schodzą do ok. $27, rynek płaci 7,5×</td><td><strong>ok. $205</strong></td></tr>
+          <tr><td>Bazowy</td><td>Reset częściowo działa, jednostki się stabilizują, przepływy utrzymują dzisiejszy poziom; rynek przestaje wyceniać erozję i płaci ok. 11,5×</td><td><strong>ok. $390</strong></td></tr>
+          <tr><td>Pozytywny</td><td>Jednostki reagują na niższą cenę, ekosystem online trzyma tempo, skup podnosi przepływy na akcję do ok. $40 do FY28; mnożnik 14×</td><td><strong>ok. $560</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Wartość godziwa 12&ndash;18 mies.: $205 &ndash; $560.</strong> Przedział jest szeroki, bo rozstrzygnięcie jest binarne i zależy od jednego sezonu podatkowego. Ale rozkład jest asymetryczny: kurs stoi <strong>29% nad dołem przedziału i 94% pod jego górą</strong>, a scenariusz negatywny wymaga spadku przepływów, którego jeszcze ani razu nie zaraportowano. Konsensus 34 analityków ($405,60) leży powyżej mojego scenariusza bazowego.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection('s7')"><div class="section-title-wrap"><div class="section-num">7</div><div class="section-title">MARŻE I ZWROT Z KAPITAŁU</div></div><div class="section-toggle" id="s7-toggle">&#9660;</div></div>
+    <div class="section-body" id="s7-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Komentarz</th></tr></thead>
+        <tbody>
+          <tr><td>Marża brutto</td><td><strong>80,98%</strong></td><td>Najwyższa z całej tej trójki spółek &mdash; klasyczne oprogramowanie</td></tr>
+          <tr><td>Marża operacyjna</td><td>28,80%</td><td>EBITDA 31,93%</td></tr>
+          <tr><td>Marża netto</td><td>21,29%</td><td>Przy efektywnej stawce podatku 24,12%</td></tr>
+          <tr><td><strong>Marża wolnych przepływów</strong></td><td><strong>40,39%</strong></td><td>Wyższa od operacyjnej &mdash; przedpłaty abonamentowe i amortyzacja przejęć</td></tr>
+          <tr><td><strong>Nakłady do przychodów</strong></td><td><strong>0,82%</strong></td><td>$175 mln na $21,45 mld (obliczenie własne). Model praktycznie bezkapitałowy</td></tr>
+          <tr><td>Zwrot z kapitału (ROIC)</td><td>22,89%</td><td rowspan="2"><strong>Różnica +13,99 pp</strong> (obliczenie własne). Solidnie, ale poniżej spółek sprzętowych &mdash; bo w kapitale siedzi wartość firmy z przejęć</td></tr>
+          <tr><td>Koszt kapitału (WACC)</td><td>8,90%</td></tr>
+          <tr><td>Zwrot z kapitału własnego</td><td>23,60%</td><td>Przychód na pracownika $1,15 mln</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Źródło: StockAnalysis / S&amp;P Global Market Intelligence. Różnica ROIC-WACC i nakłady do przychodów policzone przeze mnie z pozycji tej tabeli.</p></div>
+      <p>Trzy rzeczy do podkreślenia. <strong>Przepływy przewyższają zysk netto niemal dwukrotnie</strong> &mdash; $8,66 mld wobec $4,57 mld &mdash; co jest normalną cechą abonamentu płaconego z góry, nie sztuczką. <strong>Nakłady poniżej procenta przychodów</strong> znaczą, że wzrost nie zjada gotówki. A różnica między zwrotem a kosztem kapitału jest dodatnia o blisko czternaście punktów &mdash; spółka tworzy wartość, a nie tylko rośnie.</p>
+      <p>Uczciwy kontrapunkt: <strong>zwrot z kapitału jest niższy niż u producentów sprzętu z tej serii</strong> nie dlatego, że biznes jest słabszy, a dlatego, że mianownik zawiera kilkanaście miliardów wartości firmy po przejęciach. To kapitał realnie wydany, więc odjęcie go byłoby oszukiwaniem siebie.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection('s8')"><div class="section-title-wrap"><div class="section-num">8</div><div class="section-title">BILANS, DYWIDENDA I JAKOŚĆ ZYSKU</div></div><div class="section-toggle" id="s8-toggle">&#9660;</div></div>
+    <div class="section-body" id="s8-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Pozycja</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Gotówka</td><td>$7,20 mld</td><td>Dług całkowity $8,42 mld</td></tr>
+          <tr><td>Dług netto</td><td><strong>-$1,22 mld</strong></td><td>-$4,57 na akcję &mdash; poziom nieistotny wobec przepływów</td></tr>
+          <tr><td>Dług / wolne przepływy</td><td><strong>0,97</strong></td><td>Całe zadłużenie spłacalne z rocznych przepływów</td></tr>
+          <tr><td>Pokrycie odsetek</td><td>24,13</td><td>Dług / EBITDA 1,20</td></tr>
+          <tr><td>Kapitał obrotowy</td><td>$5,15 mld</td><td>Wskaźnik bieżący 1,51</td></tr>
+          <tr><td><strong>Altman Z-Score</strong></td><td><strong>6,82</strong></td><td>Piotroski 7 &mdash; powyżej 3,0 znaczy brak ryzyka niewypłacalności</td></tr>
+          <tr><td>Cena / aktywa materialne</td><td><strong>208,51</strong></td><td><strong>Realna pozycja ryzyka</strong> &mdash; omówienie niżej</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Źródło: StockAnalysis / S&amp;P Global Market Intelligence, stan na 23.09.2026.</p></div>
+      <p>Przy spadku kursu o niemal sześćdziesiąt procent odruchowo szuka się kłopotów finansowych. Nie ma ich: <strong>całe zadłużenie da się spłacić z jednorocznych przepływów</strong>, ocena Altmana jest wysoko w strefie bezpiecznej, a spółka płaci dywidendę i skupuje akcje jednocześnie.</p>
+      <p><strong>Jedna pozycja jest realnym ryzykiem:</strong> cena do aktywów materialnych powyżej dwustu oznacza, że kapitał własny to prawie wyłącznie wartość firmy po przejęciach Credit Karma i Mailchimpa. Przepływów to nie dotyczy, ale odpis na Mailchimpie skasowałby dużą część raportowanej wartości księgowej. Ryzyko księgowe, nie gotówkowe &mdash; i warto go nie mieszać z wypłacalnością.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Zwrot dla akcjonariusza</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Dywidenda na akcję</td><td>$5,52</td><td>Rentowność 1,92%; dzień ustalenia prawa 8.10.2026</td></tr>
+          <tr><td>Wzrost dywidendy</td><td>+15,28% r/r</td><td><strong>Czternasty rok wzrostu z rzędu</strong></td></tr>
+          <tr><td>Pokrycie dywidendy</td><td>33,54% zysku</td><td><strong>17,03% wolnych przepływów</strong> &mdash; zapas jest ogromny</td></tr>
+          <tr><td>Skup akcji</td><td>2,12%</td><td>Kwartalnie <strong>-1,45%</strong> &mdash; tempo przyspiesza przy niskim kursie</td></tr>
+          <tr><td><strong>Łączny zwrot dla akcjonariusza</strong></td><td><strong>4,03%</strong></td><td>Dywidenda plus skup</td></tr>
+        </tbody>
+      </table></div>
+      <p>Przyspieszający skup jest sam w sobie informacją: zarząd mający najlepszą wiedzę o bazie klientów odkupuje akcje szybciej niż wcześniej. Nie dowód &mdash; zarządy mylą się co do własnych spółek &mdash; ale sygnał zgodny z tezą.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection('s9')"><div class="section-title-wrap"><div class="section-num">9</div><div class="section-title">SZANSE</div></div><div class="section-toggle" id="s9-toggle">&#9660;</div></div>
+    <div class="section-body" id="s9-body">
+      <div class="alert alert-success"><strong>1. Rynek wycenia erozję, której jeszcze nie było.</strong> Implikowane tempo zmiany przepływów jest ujemne, a spółka właśnie zaraportowała wzrost przychodów o blisko czternaście procent i zysku na akcję o ponad dwadzieścia. Nie trzeba zakładać przyspieszenia, żeby zarobić &mdash; wystarczy, żeby przepływy przestały spadać w oczach rynku.</div>
+      <div class="alert alert-success"><strong>2. Trzy czwarte przychodów rośnie dwucyfrowo i nie jest przedmiotem sporu.</strong> Ekosystem online przyrasta o blisko jedną piątą, a księgowość online jeszcze szybciej. Rynek wycenia całość mnożnikiem właściwym dla zagrożonej ćwiartki.</div>
+      <div class="alert alert-info"><strong>3. Credit Karma jest beneficjentem, nie ofiarą AI.</strong> To rynek pośrednictwa, w którym lepsze dopasowanie ofert kredytowych oznacza wyższą prowizję. Wzrost o jedną piątą w roku, w którym narracja mówiła o rozpadzie modelu.</div>
+      <div class="alert alert-success"><strong>4. Reset ceny jest decyzją, nie przymusem.</strong> Obniżenie ceny wejścia to zamiana marży na wolumen, wykonana z pozycji spółki generującej ponad osiem miliardów dolarów wolnej gotówki rocznie przy nakładach poniżej procenta przychodów. Konkurent cenowy tego zapasu nie ma.</div>
+      <div class="alert alert-info"><strong>5. Przyspieszający skup i czternasty rok wzrostu dywidendy.</strong> Zwrot dla akcjonariusza powyżej czterech procent pokryty jednym szóstym przepływów oznacza, że przy braku jakiegokolwiek wzrostu wyceny akcjonariusz nadal dostaje wypłatę &mdash; i że jest miejsce na jej podnoszenie.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggleSection('s10')"><div class="section-title-wrap"><div class="section-num">10</div><div class="section-title">ZAGROŻENIA</div></div><div class="section-toggle" id="s10-toggle">&#9660;</div></div>
+    <div class="section-body" id="s10-body">
+      <div class="alert alert-danger"><strong>1. Liczba klientów TurboTaxa już spada.</strong> To nie prognoza, a zaraportowany fakt &mdash; i najpoważniejszy argument przeciw. Model utrzymał przychód wyłącznie ceną, a zarząd sam mówi, że cena jest głównym powodem odejść. Próg, przy którym teza pada: kolejny sezon podatkowy z ujemnym wzrostem jednostek <em>po</em> obniżce ceny. Wtedy obniżka była zniszczeniem wartości, nie inwestycją.</div>
+      <div class="alert alert-danger"><strong>2. Rok resetu ma zwyczaj się przedłużać.</strong> Prognoza 9&ndash;10% wzrostu zamiast 13,90% jest pierwszym takim krokiem od lat. Historia spółek programistycznych mówi, że po pierwszym roku resetu często przychodzi drugi. Próg: prognoza na FY28 z tempem poniżej dziewięciu procent.</div>
+      <div class="alert alert-danger"><strong>3. Zysk ma rosnąć wolniej niż sprzedaż.</strong> Konsensus na trzy lata zakłada kompresję marży. Przy modelu, którego wartość opiera się na wyjątkowej rentowności przepływów, to właśnie ta rentowność jest zagrożona &mdash; a segment konsumencki, który traci siłę cenową, ma najwyższą marżę w spółce. Próg: marża wolnych przepływów pod 35%.</div>
+      <div class="alert alert-danger"><strong>4. Redukcja zatrudnienia o 17% to postawa obronna.</strong> Odpis restrukturyzacyjny i cięcie co szóstego stanowiska nie są działaniami spółki, która widzi przed sobą otwarte pole. Trzeba to czytać jako sygnał od zarządu, nawet jeśli poprawia krótkoterminową marżę.</div>
+      <div class="alert alert-danger"><strong>5. Ryzyko odpisu na aktywach niematerialnych.</strong> Kapitał własny to niemal wyłącznie wartość firmy z przejęć, a Mailchimp działa w kategorii najbardziej podatnej na generatywną podmianę. Próg: pierwszy komunikat o testach na utratę wartości. Nie dotknie to gotówki, ale uderzy w nastrój i we wskaźniki księgowe.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-header" onclick="toggleSection('s11')"><div class="section-title-wrap"><div class="section-num">11</div><div class="section-title">KONKURENCJA &mdash; DWA RÓŻNE POLA WALKI</div></div><div class="section-toggle" id="s11-toggle">&#9660;</div></div>
+    <div class="section-body" id="s11-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Konkurent</th><th>Kierunek ataku</th><th>Jak groźny</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Rozliczenia podatkowe oparte na AI</strong></td><td>Ten sam efekt taniej &mdash; model czyta dokumenty i wypełnia formularz</td><td><strong>Najgroźniejszy.</strong> Atakuje ceną w kategorii, w której klient decyduje raz w roku i nic go nie trzyma</td></tr>
+          <tr><td>H&amp;R Block</td><td>Marka i sieć oddziałów, segment z doradcą</td><td>Umiarkowanie &mdash; konkurent z tego samego pokolenia, z tym samym problemem</td></tr>
+          <tr><td>Xero, Sage, FreshBooks</td><td>Księgowość małych firm, agresywniej poza Stanami</td><td>Realny, ale powolny &mdash; walka toczy się o rejestr, a rejestru się nie przenosi lekką ręką</td></tr>
+          <tr><td>Państwowy darmowy system rozliczeń</td><td>Zdejmuje najprostsze przypadki z rynku bez walki cenowej</td><td>Ryzyko regulacyjne, nie konkurencyjne &mdash; poza kontrolą spółki</td></tr>
+          <tr><td>Microsoft, pakiety ERP</td><td>Wchodzą od góry, gdy firma rośnie</td><td>Ogranicza pułap segmentu średnich firm, ale nie podstawę</td></tr>
+        </tbody>
+      </table></div>
+      <p>Rozróżnienie jest warte więcej niż tabela. <strong>W podatkach Intuit walczy o transakcję, w księgowości o rejestr.</strong> Transakcję da się odebrać niższą ceną i właśnie jest odbierana. Rejestru nie &mdash; przenosiny wymagają przeniesienia historii, przełączenia integracji bankowych i przekonania księgowego. Rynek wycenia obie odporności jedną stawką.</p>
+      <p>Dzień po wynikach przecena rozlała się z Intuita na Adobe i ServiceNow &mdash; znak, że rynek gra tezą sektorową, a nie oceną pojedynczego modelu.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-header" onclick="toggleSection('s12')"><div class="section-title-wrap"><div class="section-num">12</div><div class="section-title">ANALIZA TECHNICZNA</div></div><div class="section-toggle" id="s12-toggle">&#9660;</div></div>
+    <div class="section-body" id="s12-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Miara</th><th>Wartość</th><th>Odczyt</th></tr></thead>
+        <tbody>
+          <tr><td>Kurs</td><td><strong>$288,26</strong></td><td>-1,40% w sesji; zakres dnia $286,20&ndash;$294,20</td></tr>
+          <tr><td>Zakres 52 tygodni</td><td>$252,84 &ndash; <strong>$703,96</strong></td><td><strong>-59,1% pod szczytem, +14,0% nad dołkiem</strong></td></tr>
+          <tr><td>Zmiana 52-tygodniowa</td><td>-58,99%</td><td>Kapitalizacja spadła o 59,8%</td></tr>
+          <tr><td>Średnia 50 sesji</td><td>$325,10</td><td>Kurs -11,3% poniżej (obliczenie własne)</td></tr>
+          <tr><td>Średnia 200 sesji</td><td>$407,32</td><td>Kurs <strong>-29,2% poniżej</strong> &mdash; trend spadkowy nietknięty</td></tr>
+          <tr><td>RSI</td><td><strong>33,12</strong></td><td>Blisko wyprzedania, ale jeszcze nie skrajnie</td></tr>
+          <tr><td>Beta</td><td>0,98</td><td>Zmienność jak rynek &mdash; spadek nie wynika z ryzyka systematycznego</td></tr>
+          <tr><td>Krótka sprzedaż</td><td>2,98% akcji</td><td>7,95 mln, <strong>spadek z 9,16 mln</strong> miesiąc wcześniej &mdash; grający na spadki wychodzą</td></tr>
+          <tr><td>Instytucje</td><td>92,52%</td><td>Średni obrót 3,93 mln akcji</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:8px">Źródło: StockAnalysis / S&amp;P Global Market Intelligence oraz notowania CBOE, stan na 23.09.2026.</p></div>
+      <div class="alert alert-warning"><strong>Obraz techniczny jest jednoznacznie zły i trzeba to powiedzieć wprost.</strong> Kurs jest pod obiema średnimi kroczącymi, a sama średnia 50-sesyjna leży głęboko pod 200-sesyjną. Nie ma tu żadnego sygnału odwrócenia trendu &mdash; jest wycena, która stała się tania, i wykres, który nie daje na to potwierdzenia. Kto potrzebuje zgody wykresu, ten musi poczekać na odbicie kursu nad $325.</div>
+      <p><strong>Wsparcia:</strong> dołek roczny $252,84, wcześniej okrągłe $270. <strong>Opory:</strong> średnia 50-sesyjna, potem okolice $365 z rachunku w sekcji 6, dalej konsensus. Element sprzyjający: <strong>spadająca krótka sprzedaż</strong> &mdash; nie ma tu tłumu czekającego na zamknięcie, więc odbicie musiałoby przyjść z popytu, nie z przymusu.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-header" onclick="toggleSection('s13')"><div class="section-title-wrap"><div class="section-num">13</div><div class="section-title">OCENA INWESTYCYJNA</div></div><div class="section-toggle" id="s13-toggle">&#9660;</div></div>
+    <div class="section-body" id="s13-body">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Horyzont</th><th>Ocena</th><th>Uzasadnienie</th></tr></thead>
+        <tbody>
+          <tr><td>Krótki (1&ndash;3 mies.)</td><td style="color:var(--ocena-uwaga)"><strong>NEUTRALNA</strong></td><td>Wykres nie daje żadnego potwierdzenia, a najbliższy sezon podatkowy dopiero przed nami. Nie ma katalizatora do końca roku</td></tr>
+          <tr><td>Średni (6&ndash;18 mies.)</td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Sezon styczeń&ndash;kwiecień 2027 rozstrzyga, czy obniżka ceny kupuje wolumen. Wycena zakłada, że nie kupi</td></tr>
+          <tr><td>Długi (3&ndash;5 lat)</td><td style="color:var(--ocena-kupno)"><strong>KUPNO</strong></td><td>Rejestr księgowy rośnie dwucyfrowo, jest odporny na podmianę i stanowi większość spółki. Zwrot z kapitału trwale nad jego kosztem</td></tr>
+        </tbody>
+      </table></div>
+      <p>Konsensus <strong>34 analityków</strong> to cel <strong>$405,60</strong> przy rekomendacji kupuj, czyli powyżej mojego scenariusza bazowego. Nie opieram na tym oceny &mdash; po doświadczeniu z tego tygodnia, gdy uśredniony cel maskował dwie niezgodne tezy, traktuję konsensus jako informację o nastroju, nie o wartości. Tu jest jednak spójny z kierunkiem, a nie przeciw.</p>
+      <h3>Strategia wejścia</h3>
+      <p>Pozycja <strong>mała na start, budowana transzami</strong>, bo rozstrzygnięcie jest binarne i zależy od jednego sezonu. Pierwsza transza możliwa na obecnym poziomie &mdash; asymetria już jest. Druga po <strong>potwierdzeniu wzrostu jednostek TurboTaxa</strong>, nawet jeśli będzie drożej, bo to jedyny moment, w którym teza przestaje być zakładem. Trzecia wyłącznie na dołku rocznym, przy niezmienionych fundamentach.</p>
+      <p>Czego <strong>nie</strong> robić: nie budować dużej pozycji przed sezonem i nie traktować taniej wyceny jako substytutu dowodu.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-header" onclick="toggleSection('s14')"><div class="section-title-wrap"><div class="section-num">14</div><div class="section-title">WNIOSKI DLA PORTFELA TP CORP</div></div><div class="section-toggle" id="s14-toggle">&#9660;</div></div>
+    <div class="section-body" id="s14-body">
+      <p><strong>Intuita nie masz &mdash; jest spółką obserwowaną, spoza portfela.</strong> To pierwsza analiza tej spółki w tym katalogu, więc nie ma poprzedniej tezy do skorygowania.</p>
+      <p>Powiązanie z portfelem jest jednak mocne i idzie przez ryzyko, nie przez produkt. Dzień po wynikach Intuita przecena rozlała się na ServiceNow &mdash; a <strong>ServiceNow masz</strong> i jest to Twoja druga pozycja pod względem wagi. To ta sama teza rynkowa: agenty AI odbierają wartość oprogramowaniu abonamentowemu. Warto to zobaczyć jako jedno ryzyko wspólne, a nie dwa osobne.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Powiązanie</th><th>Status</th><th>Na czym polega</th></tr></thead>
+        <tbody>
+          <tr><td>ServiceNow</td><td><strong>masz</strong></td><td>Ta sama teza o zagrożeniu abonamentu przez agenty. Spadła tego samego dnia o ok. 3%</td></tr>
+          <tr><td>SAP</td><td><strong>masz</strong></td><td>Trzeci wariant tego samego ryzyka &mdash; oprogramowanie dla przedsiębiorstw wyceniane mnożnikiem abonamentowym</td></tr>
+          <tr><td>Intuit</td><td>obserwowana</td><td>Dodanie zwiększyłoby ekspozycję na ryzyko, które już jest w portfelu w dwóch miejscach</td></tr>
+        </tbody>
+      </table></div>
+      <p>To argument przeciw, którego nie wolno pominąć: <strong>kupno Intuita nie dywersyfikuje, ale pogłębia koncentrację tematyczną</strong> na jednym ryzyku, które już dwa razy w portfelu występuje. Jeśli teza &bdquo;agenty zjedzą abonament&rdquo; okaże się prawdziwa, trzy pozycje ucierpią razem.</p>
+      <p>Argument za dotyczy jakości: różnica między zwrotem a kosztem kapitału stawia Intuita w górnej trzeciej części spółek z tej serii &mdash; za producentami sprzętu do fabryk, ale przed większością posiadanych pozycji &mdash; przy najmniej kapitałochłonnym modelu w katalogu.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-header" onclick="toggleSection('s15')"><div class="section-title-wrap"><div class="section-num">15</div><div class="section-title">PODSUMOWANIE INWESTYCYJNE</div></div><div class="section-toggle" id="s15-toggle">&#9660;</div></div>
+    <div class="section-body" id="s15-body">
+      <p class="sum-lead">Intuit jest dziś wyceniany jak spółka w trwałym schyłku: przy <strong>8,88-krotności wolnych przepływów</strong> i rentowności przepływów przekraczającej jedenaście procent rynek zakłada, że gotówka będzie <em>malała</em> o ok. 2,35% rocznie w nieskończoność. Tymczasem spółka właśnie zamknęła rok wzrostem przychodów o 13,90% i zysku na akcję o ponad dwadzieścia procent, przy marży brutto powyżej osiemdziesięciu procent i nakładach inwestycyjnych na poziomie <strong>0,82% przychodów</strong>. Rozbieżność jest tak duża, że albo rynek widzi coś, czego nie widzę ja, albo wycenia całą spółkę ryzykiem jednej jej czwartej.</p>
+      <p class="sum-lead" style="border-color:var(--text-muted)">Uważam, że chodzi o to drugie &mdash; ale nie dlatego, że ryzyko jest zmyślone. Jest bardzo realne i policzalne: <strong>TurboTax stracił 2,3% klientów, utrzymując przychód wyłącznie podwyżką ceny o ok. jedną dziesiątą</strong>, a prezes sam nazwał cenę głównym powodem odejść. To jest prawdziwe uszkodzenie siły cenowej w produkcie dającym 24,7% przychodów. Rzecz w tym, że pozostałe trzy czwarte rośnie dwucyfrowo, a jego najszybsza część &mdash; księgowość online przy <strong>+22,6%</strong> &mdash; jest rejestrem, którego model językowy nie zastąpi, dopóki ktoś nie przeniesie do niego historii transakcji i nie przekona księgowego. Transakcję odbiera się ceną. Rejestru nie.</p>
+
+      <div class="sum-block">
+        <h4>Co musi się wydarzyć, żeby teza zadziałała</h4>
+        <ul class="check-list">
+          <li><span class="ck no">&times;</span><span><strong>Liczba jednostek TurboTaxa przestaje spadać.</strong> Warunek najważniejszy i dziś niespełniony. Rozstrzyga sezon styczeń&ndash;kwiecień 2027.</span></li>
+          <li><span class="ck yes">&#10003;</span><span><strong>Ekosystem online trzyma dwucyfrowe tempo.</strong> Spełnione &mdash; blisko jedna piąta wzrostu, z księgowością online na czele.</span></li>
+          <li><span class="ck yes">&#10003;</span><span><strong>Przepływy pozostają wysokie przy minimalnych nakładach.</strong> Spełnione &mdash; marża przepływów powyżej czterdziestu procent.</span></li>
+          <li><span class="ck wait">!</span><span><strong>Obniżka ceny kupuje wolumen, a nie tylko zabiera marżę.</strong> W toku. Konsensus zakłada, że zysk urośnie wolniej niż sprzedaż, czyli częściowo nie kupi.</span></li>
+          <li><span class="ck wait">!</span><span><strong>Brak odpisu na aktywach po przejęciach.</strong> Nierozstrzygnięte &mdash; kapitał własny to niemal wyłącznie wartość firmy.</span></li>
+        </ul>
+      </div>
+
+      <div class="sum-block">
+        <h4>Kalendarz katalizatorów</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Termin</th><th>Wydarzenie</th><th>Dlaczego ma znaczenie</th></tr></thead>
+          <tbody>
+            <tr><td>listopad 2026</td><td>Wyniki Q1 FY27</td><td>Pierwszy kwartał po resecie &mdash; pokaże koszt obniżki ceny, jeszcze nie jej efekt</td></tr>
+            <tr><td><strong>styczeń&ndash;kwiecień 2027</strong></td><td><strong>Sezon podatkowy w Stanach</strong></td><td>Jedyny prawdziwy test tezy. Tu widać, czy tańsze wejście odzyskuje klientów</td></tr>
+            <tr><td>maj 2027</td><td>Wyniki Q3 FY27</td><td>Kwartał, w którym raportowana jest większość sezonu &mdash; moment rozstrzygnięcia</td></tr>
+            <tr><td>sierpień 2027</td><td>Wyniki roczne i prognoza na FY28</td><td>Drugi rok resetu albo powrót do dwucyfrowego tempa</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Wskaźniki do monitorowania</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Wskaźnik</th><th>Stan obecny</th><th>Próg alarmowy</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Jednostki TurboTax w USA</td><td>39,00 mln, spadek r/r</td><td>Kolejny rok spadku <em>po</em> obniżce ceny</td><td><span class="mon-dot r"></span>alarm</td></tr>
+            <tr><td>Wzrost księgowości online</td><td>ponad 20%</td><td>Zejście pod 15%</td><td><span class="mon-dot g"></span>dobrze</td></tr>
+            <tr><td>Marża wolnych przepływów</td><td>powyżej 40%</td><td>Spadek pod 35%</td><td><span class="mon-dot g"></span>dobrze</td></tr>
+            <tr><td>Liczba akcji</td><td>spada kwartalnie</td><td>Zatrzymanie skupu</td><td><span class="mon-dot g"></span>dobrze</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="sum-block">
+        <h4>Plan działania</h4>
+        <p><strong>Wielkość pozycji:</strong> mała &mdash; nie z powodu jakości biznesu, a z powodu binarnego rozstrzygnięcia i tego, że portfel ma już dwie pozycje wystawione na to samo ryzyko. <strong>Transze:</strong> pierwsza na obecnym poziomie, druga po potwierdzeniu wzrostu jednostek, trzecia wyłącznie przy dołku rocznym bez pogorszenia fundamentów.</p>
+        <p><strong>Realizacja zysków:</strong> pierwszy próg w okolicy wartości z rachunku renty wieczystej przy zerowym wzroście, drugi przy celu konsensusu, ostatni przy górnej granicy przedziału wartości godziwej. <strong>Warunek wyjścia z tezy:</strong> spadek jednostek TurboTaxa w sezonie 2027 przy jednoczesnym zejściu wzrostu księgowości online pod piętnaście procent &mdash; wtedy erozja przestaje dotyczyć jednej czwartej spółki i zaczyna dotyczyć całej.</p>
+      </div>
+
+      <div class="verdict-final">
+        <h4>Werdykt końcowy</h4>
+        <div class="vf-rating" style="color:var(--ocena-kupno)">KUPNO</div>
+        <p>To dopiero druga ocena kupna, jaką wystawiam w tej serii analiz, i wystawiam ją z tego samego powodu co poprzednią: <strong>dobry biznes wyceniany jak zły</strong>. Różnica polega na tym, że tutaj zarzut rynku jest konkretny i częściowo słuszny &mdash; siła cenowa TurboTaxa faktycznie pękła i widać to w liczbie klientów, nie w opinii analityka. Kupuję nie dlatego, że uważam to zagrożenie za przesadzone, ale dlatego, że <strong>wycena traktuje jedną czwartą spółki jak całość</strong>, a pozostałe trzy czwarte rosną blisko dwudziestu procent i są zbudowane na rejestrze, nie na transakcji.</p>
+        <p>Największe ryzyko tej oceny nazywam wprost: to jest kształt pułapki wartości. Wysoka marża, tani mnożnik, malejąca baza klientów &mdash; tak wyglądały spółki, które później nigdy nie wróciły. Zabezpieczeniem jest wyłącznie struktura przychodów i bilans: <strong>całe zadłużenie spłacalne z rocznych przepływów</strong>, dywidenda pokryta jedną szóstą gotówki i czternasty rok jej wzrostu. Przy takim zapasie spółka ma czas, żeby się mylić i poprawiać, a akcjonariusz dostaje ponad cztery procent zwrotu w trakcie czekania. Rozstrzygnie sezon podatkowy 2027 i do tego momentu pozycja ma być mała.</p>
+        <div class="vf-meta">
+          <div><span>Ocena</span><b style="color:var(--ocena-kupno)">KUPNO</b></div>
+          <div><span>Fair value 12&ndash;18 mies.</span><b>$205 &ndash; $560</b></div>
+          <div><span>Scenariusz negatywny</span><b>ok. $205</b></div>
+          <div><span>Scenariusz pozytywny</span><b>ok. $560</b></div>
+          <div><span>Sugerowana pozycja</span><b>Mała, transzami</b></div>
+          <div><span>Najbliższy katalizator</span><b>Sezon podatkowy 2027</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="footer">
+  <div class="tp-foot"><div class="tp-logo"><div class="tp-logo-mark">TP</div><div class="tp-logo-text"><b>TP CORP</b><span>Equity Research</span></div></div></div>
+  <p>Analiza: 23 września 2026 | Cena: <strong>$288,26</strong> (notowanie 23.09.2026, 15:26 EDT) | <strong>Pierwsza analiza tej spółki</strong> &mdash; spółka spoza portfela, obserwowana | Dane: StockAnalysis / S&amp;P Global Market Intelligence, wskaźniki segmentowe i operacyjne Fiscal.ai, komunikaty Intuit Investor Relations (wyniki Q4 FY26 z 25.08.2026, Dzień Inwestora 17.09.2026), doniesienia Reuters, WSJ, Invezz i PYMNTS &mdash; <strong>stan danych na 23.09.2026</strong> | Nie stanowi porady inwestycyjnej</p>
+</div>
+
+<script>
+function toggleSection(id){const b=document.getElementById(id+'-body');const t=document.getElementById(id+'-toggle');if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);b.style.display=o?'none':'block';t.classList.toggle('open',!o);}
+function goSec(id){var e=document.getElementById(id);if(!e)return;var b=document.getElementById(id+"-body");var t=document.getElementById(id+"-toggle");if(b&&(b.style.display==="none"||!b.classList.contains("open"))){b.style.display="block";b.classList.add("open");if(t)t.classList.add("open");}e.scrollIntoView({behavior:"smooth",block:"start"});}
+document.addEventListener('DOMContentLoaded',()=>{['s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15'].forEach(id=>{const b=document.getElementById(id+'-body');if(b)b.style.display='none';});const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.nav-link[onclick="goSec('${e.target.id}')"]`);if(a)a.classList.add('active');}});},{threshold:0.3});document.querySelectorAll('.section').forEach(s=>o.observe(s));});
+</script>
+</body>
+</html>
